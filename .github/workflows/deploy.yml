@@ -1,4 +1,5 @@
-name: deploy
+name: Zola
+
 on:
   push:
     branches: [ main ]
@@ -11,13 +12,12 @@ concurrency:
 
 jobs:
   build:
-    name: Publish site
     runs-on: ubuntu-latest
-    steps:
-        - name: Checkout main
-          uses: actions/checkout@v3.0.0
 
-        - name: Build and deploy
-          uses: shalzz/zola-deploy-action@v0.17.2
-          env:
-            TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Build and deploy
+      uses: shalzz/zola-deploy-action@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
