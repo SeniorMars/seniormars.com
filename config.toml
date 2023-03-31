@@ -1,0 +1,42 @@
+# The URL the site will be built for
+base_url = "https://seniormars.com"
+title = "SeniorMars"
+build_search_index = false
+generate_feed = true
+compile_sass = true
+minify_html = true
+default_language = "en"
+feed_filename = "rss.xml"
+theme = "apollo"
+
+[markdown]
+highlight_code = true
+highlight_theme = "ayu-dark"
+external_links_target_blank = true
+external_links_no_follow = true
+smart_punctuation = false
+
+[extra]
+theme = "auto"
+mathjax = true
+mathjax_dollar_inline_enable = true
+
+menu = [
+    { name = "/posts", url = "/posts", weight = 1 },
+    { name = "/projects", url = "/projects", weight = 2 },
+    { name = "/about", url = "/about", weight = 3 },
+]
+
+socials = [
+    { name = "github", url = "https://github.com/seniormars/", icon = "github" },
+    { name = "youtube", url = "https://www.youtube.com/seniormarstries", icon = "youtube" },
+    { name = "reddit", url = "https://www.reddit.com/user/SeniorMars/", icon = "reddit" },
+    { name = "email", url = "mailto:cjh16@rice.edu", icon = "email" },
+    { name = "rss", url = "https://seniormars.com/rss.xml", icon = "rss" },
+]
+
+custom_css = []
+
+[extra.analytics]
+enabled = true
+goatcounter_user = "seniormars"
