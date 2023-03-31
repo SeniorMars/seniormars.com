@@ -1,11 +1,10 @@
 # The URL the site will be built for
 base_url = "https://seniormars.com"
 title = "SeniorMars"
+default_language = "en"
 build_search_index = false
 generate_feed = true
-compile_sass = true
 minify_html = true
-default_language = "en"
 feed_filename = "rss.xml"
 theme = "apollo"
 
@@ -32,7 +31,7 @@ socials = [
     { name = "youtube", url = "https://www.youtube.com/seniormarstries", icon = "youtube" },
     { name = "reddit", url = "https://www.reddit.com/user/SeniorMars/", icon = "reddit" },
     { name = "email", url = "mailto:cjh16@rice.edu", icon = "email" },
-    { name = "rss", url = "https://seniormars.com/rss.xml", icon = "rss" },
+    # { name = "rss", url = "https://seniormars.com/rss.xml", icon = "rss" },
 ]
 
 custom_css = []
