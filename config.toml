@@ -31,7 +31,6 @@ menu = [
 socials = [
     { name = "github", url = "https://github.com/seniormars/", icon = "github" },
     { name = "youtube", url = "https://www.youtube.com/seniormarstries", icon = "youtube" },
-    { name = "email", url = "mailto:cjh16@rice.edu", icon = "email" },
     { name = "rss", url = "/rss.xml", icon = "rss" },
     # { name = "rss", url = "https://seniormars.com/rss.xml", icon = "rss" },
 ]
