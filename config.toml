@@ -1,6 +1,6 @@
 # The URL the site will be built for
 # base_url = "https://seniormars.com"
-base_url = "https://seniormars.github.io"
+base_url = "https://seniormars.com"
 title = "SeniorMars"
 
 # settings
@@ -32,9 +32,8 @@ menu = [
 socials = [
     { name = "github", url = "https://github.com/seniormars/", icon = "github" },
     { name = "youtube", url = "https://www.youtube.com/seniormarstries", icon = "youtube" },
-    { name = "reddit", url = "https://www.reddit.com/user/SeniorMars/", icon = "reddit" },
     { name = "email", url = "mailto:cjh16@rice.edu", icon = "email" },
-    { name = "rss", url = "https://seniormars.github.io/rss.xml", icon = "rss" },
+    { name = "rss", url = "/rss.xml", icon = "rss" },
     # { name = "rss", url = "https://seniormars.com/rss.xml", icon = "rss" },
 ]
 
