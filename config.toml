@@ -34,7 +34,8 @@ socials = [
     { name = "youtube", url = "https://www.youtube.com/seniormarstries", icon = "youtube" },
     { name = "reddit", url = "https://www.reddit.com/user/SeniorMars/", icon = "reddit" },
     { name = "email", url = "mailto:cjh16@rice.edu", icon = "email" },
-    { name = "rss", url = "https://seniormars.com/rss.xml", icon = "rss" },
+    { name = "rss", url = "https://seniormars.github.io/rss.xml", icon = "rss" },
+    # { name = "rss", url = "https://seniormars.com/rss.xml", icon = "rss" },
 ]
 
 custom_css = []
