@@ -31,5 +31,5 @@ Github: [https://github.com/seniormars](https://github.com/seniormars)
 Youtube: [https://www.youtube.com/seniormarstries](https://www.youtube.com/seniormarstries)  
 Email: cjh16@rice.edu  
 Discord: seniormars#2916  
-<!-- Resume: [here!](https://seniormars.com/assets/old_resume.pdf)   -->
-<!-- RSS: [subscribe!](https://seniormars.com/rss.xml) -->
+Resume: [here!](https://seniormars.com/assets/old_resume.pdf)  
+RSS: [subscribe!](https://seniormars.com/rss.xml)
