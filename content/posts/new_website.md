@@ -1,8 +1,10 @@
 +++
 title = "New Website!"
 date = "2023-03-31"
-+++
 
+# [taxonomies]
+# tags=["meta"]
++++
 
 So, I guess I have a blog now! It uses [Zola](https://www.getzola.org/) and based on the [Apollo theme](https://github.com/not-matthias/apollo). Plus Ayu-dark for codeblocks.
 
