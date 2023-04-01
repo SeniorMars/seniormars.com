@@ -7,7 +7,7 @@ At this point, I've seen Puss In Boots: The Last Wish at least seven times. Once
 the rest at home with the company of my nephew and niece. Now, let me tell you, I was originally
 late to the party: the first time I saw it was in theaters in late January, but I immediately fell
 in love with the movie. It simply reminded me of the first time I saw Spider-verse: a thrilling ride
-with a sweet story. Now, to me, Spider-verse is still the better film, however, this it is
+with a sweet story. Now, to me, Spider-verse is still the better film, however, it is
 undoubtedly in my top five animated films. Now with that preface out of the way, let me detail why I
 decided to write this little blog.
 
@@ -15,7 +15,7 @@ The Last Wish was a great representation of people with mental disabilities. In 
 many hardcore emotions that I'm familiar with that I almost felt myself experiencing those same
 emotions in those critical moments that Puss had. Specifically, when Puss had a panic attack, I
 almost cried. Partly due to the aforementioned emotions, but mostly because the way the film
-captured Puss' anxiety had me remember all the times I've felt the same. The short breath, your
+captured Puss' anxiety had me remember all the times I've felt the same emotions. The short breath, your
 heart racing, and your vision tunneling. Honestly, I always had time explaining what it's like to
 have a panic attack, but now I'm glad I have this film to show as reference—allowing people to
 understand the impact of these disabilities in everyday life. I'm so glad this film exists.
