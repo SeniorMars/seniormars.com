@@ -34,7 +34,7 @@ incredibly biased against people who act 'nice'. With Jack Horner, we understand
 are psychopaths that have no sense of morality, which is why I believe our guts are fine with him
 being a “pure-blood-down-right-evil villain”, but with Perrito? It was almost the opposite. My
 mind refused to accept that such a good-hearted soul existed. I believe the reason for this is our
-prejudice, with us believing that nobody has "pure" motives. But just like there are psychopaths,
+prejudice, with us believing that nobody has “pure” motives. But just like there are psychopaths,
 I know that there are 'pure-hearted souls', the person who needs to change is me.
 
 Overall, I'm convinced that Puss and Boots is more or less a metaphor for mental issues. In that

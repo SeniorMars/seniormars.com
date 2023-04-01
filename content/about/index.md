@@ -11,25 +11,30 @@ the Rust programming language.
 I'm interested in:
 - Mathematics
     - Category Theory
+    - Lambda Calculus
     - Logic
     - Discrete Mathematics
     - Combinatorics
     - Optimization
-- Computer Science
-    - Programming Languages Theory
-    - Algorithms
-    - Systems Programming
 - Cultural Linguistics
 - Human Languages
     - German
     - Mandarin
     - Korean
     - Spanish
+- Duolingo if I ever go back to it…
 - Teaching
 - Genetics and systems biology
+- Computer Science
+    - Complexity Theory
+    - Programming Language Theory
+    - Algorithms
+    - Systems Programming
+    - Computer Graphics
+- Neovim
 - Social Rights
 - Reading
-- Tattoos
+- Tattoos and piercings!
 
 # Classes
 - [COLL 128: The Art of Lazy Programming](https://lazy.rice.edu/)
