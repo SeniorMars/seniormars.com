@@ -1,5 +1,5 @@
 +++
-title = "A Terminal Email Client As An Alternative To Gmail: Neomutt"
+title = "A Terminal Email Client As An Alternative To Gmail: The Old Dog Neomutt"
 date = "2023-04-02"
 +++
 
