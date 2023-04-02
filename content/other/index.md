@@ -51,4 +51,4 @@ title = "Other"
 - [https://booksdrive.org/wp-content/uploads/2022/03/The-Pragmatic-Programmer-by-Andrew-Hunt-David-Hurst-Thomas.pdf](https://booksdrive.org/wp-content/uploads/2022/03/The-Pragmatic-Programmer-by-Andrew-Hunt-David-Hurst-Thomas.pdf)
 - [https://jsomers.net/i-should-have-loved-biology/](https://jsomers.net/i-should-have-loved-biology/)
 
-Many more links can be found on here [SeniorMars/links-i-find-interesting](https://github.com/SeniorMars/links-i-find-interesting)
+Many more links can be found here [SeniorMars/links-i-find-interesting](https://github.com/SeniorMars/links-i-find-interesting)
