@@ -262,7 +262,7 @@ Let's break this down:
 - `set spoolfile` is your home inbox. This is the inbox that you see when you log into Gmail. You
   can change this to whatever you want. i.e., `set spoolfile = "+Important"`. I like to see all my
   emails, so I use `+All Mail`.
-- `set postponed`, `set record`, and `set trash` are the folders that Neomutt will use to store
+- `set record`, `set postponed`, and `set trash` are the folders that Neomutt will use to store
   emails that you have sent, drafts, and trash respectively in Gmail.
 - `mailboxes` is a list of mailboxes that you want to access. You can add as many as you want, but I
   keep it simple with just the ones I use.
