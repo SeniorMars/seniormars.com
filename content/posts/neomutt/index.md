@@ -209,6 +209,10 @@ set smtp_pass = "your_app_specific_password"
 set ssl_starttls = yes
 set ssl_force_tls = yes
 ```
+Note:
+<center>
+    Plain text for passwords is a bad idea. See the encryption section of this blog.
+</center>
 
 Let's break down this section:
 First, it's pretty self-explanatory for the first few lines, but for `set smtp*`, we need to
@@ -565,10 +569,10 @@ You can add your Google contacts to your MacBook contacts by linking your Google
 
 ### Encrypt
 
-I use `gpg` to encrypt my emails. This is very useful for GitHub, and other services that require security. This is especially useful on mailing lists  where you need to verify information. I find that everyone in the Arch Linux Mailing list uses it!
+I use `gpg` to encrypt my emails. This is very useful for GitHub, and other services that require security. This is especially useful on mailing lists where you need to verify information. I find that everyone in the Arch Linux Mailing list uses it!
 
 1. We already installed `gpg` in the beginning, so we are good to go!
-2. Create a key and follow that are prompted:
+2. Create a key and follow the instructions that are prompted:
 ```bash
 $ gpg --full-generate-key
 ```
@@ -613,6 +617,32 @@ set crypt_opportunistic_encrypt = no
 # So you can view encrypted emails automatically
 auto_view application/pgp-encrypted
 ```
+5. Plaintext is a bad idea, which is why we are going to use GPG to encrypt our passwords.
+
+In your `muttrc` delete the following lines:
+```conf
+set imap_pass = "my_app_specific_password"
+set smtp_pass = "my_app_specific_password"
+```
+Now go to your terminal and create a file called `passwords` in your `muttrc` directory and add
+the lines you just deleted.
+Now, encrypt the file:
+```bash
+$ gpg --encrypt --sign  -r YOUR_GPG_KEY passwords
+```
+
+You should end up with a file called `passwords.gpg` in your `muttrc` directory.
+
+Now, add the following to your `muttrc` file:
+```conf
+source "gpg -dq $XDG_CONFIG_HOME/passwords.gpg |"
+```
+
+Remove the plaintext `passwords` file.
+```bash
+$ shred -u passwords
+```
+Now, you have encrypted your passwords!
 
 Image below (notice the `Good signature` and ` The following data is signed`):
 ![GPG](gpg.png)
