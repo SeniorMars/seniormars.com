@@ -628,7 +628,7 @@ Now go to your terminal and create a file called `passwords` in your `muttrc` di
 the lines you just deleted.
 Now, encrypt the file:
 ```bash
-$ gpg --encrypt --sign  -r YOUR_GPG_KEY passwords
+$ gpg --encrypt -r YOUR_GPG_KEY passwords
 ```
 
 You should end up with a file called `passwords.gpg` in your `muttrc` directory.
