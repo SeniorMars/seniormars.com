@@ -2,9 +2,13 @@
 title = "About"
 +++
 
+
+
 # General
+<img src="/images/me.jpg" style="max-width: 25%; max-height: 25%;"/>
+
 Guten Tag! My name is SeniorMars, and I'm studying Mathematics and Linguistics at [Rice
-University](https://www.rice.edu/). I may also be pursuing a minor in German Studies. In my spare
+University](https://www.rice.edu/). I may also be pursuing a minor in Creative Writing. In my spare
 time, I enjoy making videos, contributing to open source, and reading papers… I'm a massive fan of
 the Rust programming language. 
 
@@ -46,7 +50,7 @@ I'm interested in:
 # Contact
 Github: [https://github.com/seniormars](https://github.com/seniormars)  
 Youtube: [https://www.youtube.com/seniormarstries](https://www.youtube.com/seniormarstries)  
-Email: cjh16@rice.edu  
-Discord: seniormars#2916  
+Email: seniormars@riseup.net
+Discord: seniormars
 Resume: [here!](/assets/old_resume.pdf)  
 RSS: [subscribe](/rss.xml)
