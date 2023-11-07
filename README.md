@@ -1,3 +1,3 @@
-# seniormars.github.io
+# seniormars.com
 
-Website link: [seniormars.github.io](https://seniormars.github.io)
+Website link: [seniormars.com](https://seniormars.com)
