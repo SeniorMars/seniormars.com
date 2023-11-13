@@ -11,9 +11,9 @@ Here is the main PDF:
 
 <embed src="/classes/math354/notes/template.pdf" type="application/pdf" width="500" height="375">
 
-In case you don't have the best browser (firefox!), then here is the <a src="/classes/math354/notes/template.pdf">link</a>.
+In case you don't have the best browser (firefox!), then here is the <a href="/classes/math354/notes/template.pdf">link</a>.
 
-If you want to check the source code (and report errors), you can do so here:
+If you want to check the source code (and report errors), you can do so here: <a href="https://github.com/SeniorMars/seniormars.github.io/tree/main/static/classes/math354/notes">Math354/notes</a>.
 
 
 
