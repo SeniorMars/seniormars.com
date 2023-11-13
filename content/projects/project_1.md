@@ -1,5 +1,5 @@
 +++
-title = "dotfiles"
+title = "Dotfiles"
 description = "My personal rice setup"
 weight = 1
 
