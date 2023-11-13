@@ -5,7 +5,6 @@ title = "SeniorMars"
 # settings
 default_language = "en"
 build_search_index = false
-minify_html = true
 generate_feed = true
 feed_filename = "rss.xml"
 compile_sass = true

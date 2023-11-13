@@ -2,6 +2,18 @@
 title = "Other"
 +++
 
+# Friends!
+
+If you have time, please, please, please check these people out!
+
+1. [Ahmed](https://alcassab.net/)
+2. [Amit Prasad](https://amit.prasad.me/)
+3. [Clayton](https://claytonwramsey.github.io/)
+4. [commandblockguy](https://commandblockguy.xyz/)
+5. [Shreyas Minocha](https://shreyasminocha.me/)
+6. [Thomas Kaldahl](https://thomaskaldahl.com/)
+7. [Wisha W.](https://wisha.page/)
+
 # Quotes I like
 
 > "The enjoyment of one's tools is an essential ingredient of successful work."
