@@ -10,9 +10,10 @@ If you have time, please, please, please check these people out!
 2. [Amit Prasad](https://amit.prasad.me/)
 3. [Clayton](https://claytonwramsey.github.io/)
 4. [commandblockguy](https://commandblockguy.xyz/)
-5. [Shreyas Minocha](https://shreyasminocha.me/)
-6. [Thomas Kaldahl](https://thomaskaldahl.com/)
-7. [Wisha W.](https://wisha.page/)
+5. [ei5uke](https://ei5uke.github.io/)
+6. [Shreyas Minocha](https://shreyasminocha.me/)
+7. [Thomas Kaldahl](https://thomaskaldahl.com/)
+8. [Wisha W.](https://wisha.page/)
 
 # Quotes I like
 
