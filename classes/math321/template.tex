@@ -1,0 +1,3647 @@
+\documentclass{report}
+
+\input{preamble}
+\input{macros}
+\input{letterfonts}
+
+\title{\Huge{Math 321}\\Notes}
+\author{\huge{Charlie Cruz}}
+\date{}
+
+\begin{document}
+
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{toc}
+\tableofcontents
+\pagebreak
+
+\chapter{Day 1}
+
+\mclm{Dedekind Cuts}{
+
+	Assume:
+
+	\begin{enumerate}[label=(\roman*)]
+		\item \(\NN = 1, 2, 3, \ldots\)
+		\item \(\ZZ = 0, -1, 1, -2, 2, \ldots\)
+		\item \(\QQ = \left\{ \frac{a}{b} \mid a, b \in \ZZ, b \neq 0 \right\}\)
+	\end{enumerate}
+
+	What is \(\RR\)
+}
+
+\thm{\(\sqrt{2}\) is not in \(\QQ\) }{
+
+	\pf{Proof}{
+		First, assume \(\sqrt{2} = \frac{p}{q}\)
+
+		\begin{align*}
+			p, q \in \ZZ, q \neq 0, \gcd(p, q) = 1
+		\end{align*}
+
+		Where gcd stands for greatest common divisor at \(p\) and \(q = 1\).
+
+		\begin{align*}
+			2 = \left( \frac{p}{q} \right)^{2} = \frac{p^{2}}{q^{2}} \\
+			2q^{2} = p^{2}                                           \\
+			2 \text{ divides } p^{2} \text{ i.e. \(2 \mid p^{2}\)}   \\
+			2 \mid p                                                 \\
+			4 \mid p^{2}                                             \\
+			p^{2} = 4a                                               \\
+			2q^{2} = 4a                                              \\
+			q^{2} = 2a                                               \\
+			2 \mid q^{2}                                             \\
+		\end{align*}
+
+		This is absurd, since we assumed that \(\gcd(p, q) = 1\). Therefore, \(\sqrt{2} \notin \QQ\).
+	}
+
+	Here we can see that there are "holes in \(\QQ\)".
+
+}
+
+\dfn{Dedekind cuts}{
+
+	A cut in the \(\QQ\) is a pair of subsets \((A, B)\) of \(\QQ\) such that:
+
+	\begin{enumerate}[label=(\roman*)]
+		\item \(A \cup B = \QQ\), \(A \cap B = \emptyset\)
+		\item if \(a \in A, b \in B, a < b\)
+		      \if \(A\) contains no largest element ie. \(\nexists a_{o} \in A \text{ such as }\)
+		      \(\forall a \in  A, a_{o} \geqq a\).
+	\end{enumerate}
+
+	We write \(x = A \mid B\).
+}
+
+\dfn{Real number}{
+	A real number is a cut in \(\QQ\).
+
+	Examples:
+
+	\begin{enumerate}[label=(\roman*)]
+		\item \(A \mid B = \left\{ r \in \QQ, r < 2 \mid \left\{ r \in \QQ, r \geqq 2 \right\} : = 2 \right\} \)
+		\item \(A \mid B = \left\{ r \in \QQ, r^{2} < 2 \mid \left\{ r \in \QQ, r^{2} \geqq 2, r > 0 \right\} : = \sqrt{2}  \right\} \)
+	\end{enumerate}
+
+	We call a cut rational if it is as in (i) where 2 is replaced by \(\frac{p}{q} = \QQ\).
+
+	Equivalently, a cut is rational if \(B\)  contains a smallest element (prove this).
+
+	If \(C \in \QQ \quad A \mid B = \left\{ r \in \QQ, r < C \right\} \mid \{r \in Q : r \geqq C\} \)
+
+	Let's call \(C^{*} = A \mid B\) this identifies as \(\QQ\) as a subset of \(\RR\).
+}
+
+\dfn{}{
+
+	If \(x = A \mid B\) and \(y = C \mid D\), then if \(A \subset C\) we say \(x \leq y\) and if \(A \nsubseteq C\) we say \(x \nsubseteq y\).
+
+}
+
+\nt{Key fact: The least upper bound property holds in \(\RR\)
+
+	Given a set \(S \subset \RR\), we say \(M \in \RR\), is an upper bound for \(S\) if \(\forall s \in S, s \leq M\).
+
+	Thus, \(M\) is a least upper bound for \(S\) if given any other upper bound \(M^{*}\) for \(S\), \(M \leq M^{*}\).
+}
+
+\thm{Upper bound property}{
+	If \(S \subset \RR\) is non-empty and bounded above (ie. if it has some upper bound), then it has a least upper bound.
+
+	\pf{Proof}{
+		Let \(\sC \in \RR\) be any non-empty subset of \(\RR\) which is bounded above, say by \(X \mid Y\).
+
+		Let \(C = \left\{ a \in  \QQ \mid \text{ for some } A \mid B \in \sC \text{ we have } a \in A\right\} \)
+
+		define \(D = C^{c}\) (meaning the complement of \(C\)).
+
+		then \(Z = C \mid D\)  is a cut (check).
+
+		\(z\)  is an upper bound for \(\sC\) since for any \(A \mid B \in \sC\), \(A \subset C\).
+
+		Now, let \(Z\prime = C\prime \mid D\prime\), any other upper bound for \(\sC\) since \(A \mid B \leq C\prime \mid D\prime, \forall  A \mid B \in \sC\), meaning that \(A \subset C\prime\) for every \(A \mid B \in \sC\).
+
+		Thus, \(C \subset C\prime\), so \(Z \leq Z\prime\)
+	}
+}
+
+\nt{
+
+	We have some problems now.
+
+	\begin{enumerate}[label=(\roman*)]
+		\item It's annoying to think of real numbers as pairs of subsets at \(\QQ\) (should ignore later)
+		\item Arithmetic ie, how do we add/multiply/subtract/divide real numbers if they are cuts?
+	\end{enumerate}
+}
+
+\ex{}{
+
+\begin{align*}
+	A \mid B + C \mid D = E \mid F                      \\
+	\text{what is \(E \mid F\)?}                        \\
+	E = \left\{ x + y \colon x \in A, y \in  C \right\} \\
+	F = E^{c}                                           \\
+\end{align*}
+
+Exercise: check \(E \mid F\) is a cut.
+
+Now let's check.
+
+\begin{align*}
+	0^{*} + A \mid                  & B = A \mid B.                                                                                                                  \\
+	x = A \mid B                    & \text{ what is \(-x = -(A \mid B)\)?}                                                                                          \\
+	-x = C \mid D, \text{ where } C & = \left\{ r \in \QQ \colon \exists b \in  B \text{ s.t. } -r = b \text{ and \(b\) is not the smallest element of B } \right\}.
+	D = C^{c}
+\end{align*}
+
+check \(x + -x = 0^{*}\)
+
+\begin{align*}
+	x = A \mid B, y = C \mid D                                                                                                                \\
+	xy = E \mid F                                                                                                                             \\
+	\text{assume such that } x, y \ge 0^{*}                                                                                                   \\
+	E = \left\{ r \in \QQ \colon r \leq 0 \text{ or } \exists a \in A \text{ and } \exists c \in C \text{ s.t. } a > 0, c > 0, r = ac\right\} \\
+	F = E^{c}
+\end{align*}
+
+if \(x > 0, y < 0\), then \(xy < -(x(-y))\)
+
+if \((x, y < 0)\), then \(xy > (-x)(-y)\)
+
+Finally, \(0^{*} \cdot x = x \cdot 0^{*} = 0^{*}\).
+
+		Exercise (long and dull): Check this really defines standard arithmetic on \(\RR\).
+
+	}
+
+\dfn{Field}{
+	A field \(\FF\) is a set \(F\) with two operations \(+\) and \(\cdot\) such that:
+
+	\begin{enumerate}[label=(\roman*)]
+		\item \(\forall \alpha, \beta, \lambda \in F\quad (\alpha + \beta) + \lambda = \alpha + (\beta + \lambda)\)
+		\item \(\forall \alpha, \beta \in F\quad \alpha + \beta = \beta + \alpha\)
+		\item \(\exists 0 \in F \text{ s.t. } \forall \alpha \in F \quad \alpha + 0 = \alpha\)
+		\item \(\forall \alpha \in F \exists -\alpha \in F \text{ s.t. } \alpha + (-\alpha) = 0\). We sometimes write \(\beta = -\alpha\)
+		\item \(\forall \alpha, \beta, \lambda \in F\quad (\alpha \cdot \beta) \cdot \lambda = \alpha \cdot (\beta \cdot \lambda)\)
+		\item \(\forall \alpha, \beta \in F\quad \alpha \cdot \beta = \beta \cdot \alpha\)
+		\item \(\exists 1 \in F \text{ s.t. } \forall \alpha \in F \quad \alpha \cdot 1 = \alpha\)
+		\item \(\forall \alpha \neq 0, \beta \in F \text{ s.t. } \alpha \cdot \beta = 1\). We sometimes write \(\beta = \alpha^{-1}\)
+		\item \(\forall \alpha, \beta, \lambda \in F\quad \alpha \cdot (\beta + \lambda) = \alpha \cdot \beta + \alpha \cdot \lambda\)
+	\end{enumerate}
+}
+
+\dfn{Total Order}{
+	A total order on a set \(\Omega\) is a relation \(\leq\) such that
+
+	\begin{enumerate}[label=(\roman*)]
+		\item \(\forall \alpha, \beta \in \Omega\quad\) if \(\alpha \neq \beta\), then either \(\alpha < \beta\)  or \(\beta < \alpha\)
+		\item \(\forall \alpha \in \Omega, \alpha \nsubset \alpha\).
+		\item if \(\alpha \subset \beta\)  and \(\beta < \lambda\), then \(\alpha < \lambda\)
+	\end{enumerate}
+}
+
+\dfn{Field}{
+
+	A field \(\FF\) is an ordered field if \(F\) has a total order such that
+
+	\begin{enumerate}[label=(\roman*)]
+		\item \(\alpha > \beta\), then \(\forall \lambda \in F\), \(\alpha + \lambda > \beta + \lambda\)
+		\item \(\alpha > 0 \in F\) and \(\beta > 0 \in F\), then \(\alpha \cdot \beta > 0 \in F\)
+	\end{enumerate}
+}
+
+\thm{\(\RR\) is an ordered field}{
+	\(\RR = \left\{ \text{Dedekind cuts in } \QQ\right\} \)
+
+	\(\QQ \subset \RR\)  is an ordered field.
+
+	\nt{We haven't proved that axioms on ordered fields hold in \(\RR\).}
+
+	Thus, \(\RR\) is complete but not \(\QQ\). This is because \(\RR\)  has the least upper bound property.
+}
+
+\nt{
+	Magnitude or absolute value
+
+	\begin{align*}
+		\abs{\alpha} = \begin{cases}
+			               \alpha  & \text{ if } \alpha \geqq 0 \\
+			               -\alpha & \text{ if } \alpha < 0
+		               \end{cases}
+	\end{align*}
+}
+
+\thm{Triangle Inequality}{
+	\(\forall x, y \in \RR\), then
+	\[
+		\abs{x + y} \leq \abs{x} + \abs{y}
+	\]
+
+	\pf{Proof}{
+		We know from previous knowledge that \(x \leq \abs{x}\)  and \(-x \leq \abs{x}\).
+
+		Now,
+
+		\begin{align*}
+			x + y & \leq \abs{x} + y       \\
+			      & \leq \abs{x} + \abs{y}
+		\end{align*}
+
+		and
+
+		\begin{align*}
+			-x - y & \leq \abs{x} - y       \\
+			       & \leq \abs{x} + \abs{y}
+		\end{align*}
+
+		Thus, \(\abs{x + y} = x + y \) or \(= -x -y\)
+	}
+}
+
+\section{Day 2}
+Why don't we take the Dedekind cuts in \(\RR\)? I.e. A subset \(A\)  and \(B\) of \(\RR\)
+
+\begin{enumerate}[label=(\roman*)]
+	\item \(a < b\) if \(a \subset A\), \(b \subset B\)
+	\item \(A \cup B = \RR\) and \(A \cap B = \emptyset\)
+	\item \(A\)  has no greatest element
+\end{enumerate}
+
+\mprop{Process above just gives \(\RR\) }{
+
+	\pf{Proof}{
+		\(x = A \mid B\)  is a cut is \(\RR\).
+
+		We know \(\forall a \in A\)  and any \(b \in B\), thus \(a < b\).
+
+		So, \(b\) is an upper bound for \(A\).
+
+		So, \(A\) has a least upper bound (lub).
+
+		Since \(\RR\) has the lub property.
+
+		let \(y = lub(A)\) and notice
+
+		\[
+			a < y \leq b \text{ for every } a \in A, b \in B
+		\]
+
+		Now, RH \(\leq\) is \(y\) is a least upper bound.
+
+		And LH \(<\) is that \(y\) is an upper bound and \(A\) has no greatest element.
+
+		\[
+			A \mid B = \left\{ x \in \RR \colon x < y \right\}  \mid \left\{ x \in \RR \colon x \geqq y \right\}
+		\]
+
+		As such, \(\RR^{*} \subset \left\{ \text{cuts in } \RR\right\} \) is everything. This means that \(\left\{ \text{cuts in } \RR\right\} \) is the same as \(\RR^{*}\) and is the same as \(\RR\)
+	}
+}
+
+\thm{}{
+	There is a unique complete ordered field containing \(\QQ\) as an ordered subfield.
+
+	\mclm{Remark}{
+		There are plenty of complete fields containing \(\QQ\) that aren't ordered.
+	}
+}
+
+\parinf
+Now, let's try a different approach of completeness.
+\parinn
+
+\dfn{Delta-epsilon}{
+	Let \((a_{n})\) be a sequence of real numbers, then we say \((a_{n})\) converges to \(b\) or \(a_{n} \rightarrow b\) or \(\lim_{n \rightarrow \infty} a_{n} = b\) if \(\forall \epsilon > 0 \exists N \in \NN \text{ s.t. } \forall n \geqq N, \abs{a_{n} - b} < \epsilon\)
+}
+
+\mclm{Cauchy condition}{
+
+	A sequence \(a_{n}\) is a Cauchy if \(\forall \epsilon > 0 \exists N \in \NN \text{ s.t. } \forall n, k \geqq N, \abs{a_{n} - a_{k}} < \epsilon\)
+
+	\mclm{Remark}{
+		Convergent sequences are Cauchy.
+	}
+}
+
+\thm{}{
+	Every Cauchy sequence in \(\RR\) is convergent.
+
+	\mclm{Remark}{
+		Eventually, Cauchy sequences being convergent will be the definition of completeness in general metric spaces.
+	}
+
+	\pf{Proof}{
+
+		First, let's start with some claims.
+
+		\mclm{Claim 1}{
+
+			\((a_{n})\) is bounded.
+
+			Let \(\epsilon = 1\), then \(\exists N \in \NN \text{ s.t. } \forall n, k \geqq N, \abs{a_{n} - a_{k}} < 1\). In particular, \(\abs{a_{k} - a_{N}} < 1\) for all \(k \geqq N\).
+
+			Let's pick \(M\) such that
+
+			\[
+				-M < a_1, \ldots, a_{n} < M
+			\]
+
+			Then, \(\forall k \geqq N\), we have \(-m -1 < a_{k} < m + 1\).
+
+			Let \(x = \left\{ x \in \RR \colon \exists \text{ infinitely many } n \text{ with } a_{n} \geqq x \right\} \)
+
+			Now \(-M - 1\)  is in \(X\)  since every \(a_{n} \geq -m - 1\) and \(m+1\)  is not in \(x\) since \(a_{n} < m + 1\) for all \(n\).
+
+			So x is a non-empty set that is bounded above.
+
+			Thus, \(x\) has a least upper bound \(b\).
+		}
+
+		\mclm{Claim 2}{
+			We want to prove \(a_{n} \to b\)  as \(n \to \infty\).
+
+			\pf{Proof}{
+				Given some \(\epsilon > 0\), we want to find \(N \in \NN\) such that \(\forall n \geqq N\), \(\abs{a_{n} - b} < \epsilon\).
+
+				Since \(b - \frac{\epsilon}{2} < b\), so there exists infinitely many \(n\) such that \(a_{n} > b - \frac{\epsilon}{2}\) (by the definition of x).
+
+				Now, choose an \(N\) and an \(a_{n}\) for \(n \geq N\) and \(a_{n} > b - \frac{\epsilon}{2}\).
+
+				So that, \(\forall k \in  N\), we have
+
+				\[
+					\abs{a_{k} - a_{n}} < \frac{\epsilon}{2}
+				\]
+
+				so in particular for all \(k \geq N\), \(a_{k} > b - \epsilon\)
+
+				Now, \(b + \frac{\epsilon}{2}\) is not in x, so at most finitely many \(a_{n}\) are greater than \(b + \frac{\epsilon}{2}\).
+
+				Let \(N_0\) be the largest \(n\)  for which \(a_{n} > b + \frac{\epsilon}{2}\) (or \(b + \epsilon\))
+
+				then if \(k \geq \max\left\{ N, N_0 + 1 \right\} \), thus \(a_{k} - b < \epsilon\)
+			}
+		}
+
+		And we are done.
+	}
+}
+
+\nt{
+	Some notation on intervals:
+
+	\begin{align*}
+		(a, b) = \left\{ x \in \RR \colon a < x < b \right\}       \\
+		[a, b] = \left\{ x \in \RR \colon a \leq x \leq b \right\} \\
+		(a, b] = \left\{ x \in \RR \colon a < x \leq b \right\}    \\
+		[a, b) = \left\{ x \in \RR \colon a \leq x < b \right\}
+	\end{align*}.
+}
+
+\thm{}{
+	Every interval \((a, b)\) has infinitely many rationals and infinitely many irrationals.
+
+	\pf{Proof}{
+		Let \(a = A \mid A\prime\) and \(b = B \mid B\prime\) be cuts.
+
+		Additionally, we now that \(a < b\)  and \(B \setminus A \neq \emptyset\).
+
+		Now, choose \(r \in B \setminus A\) to be rational, then since \(B\) has no largest element there is also
+
+		\[
+			s \in B \setminus A \text{ with } a < r < s < b
+		\]
+
+		Consider \(T \colon [0, 1] \to [r, s]\) and \(t \to r + (s - r)t\) is linear so it is injective and onto.
+
+		Now check that since \(s,r\)  are in \(\QQ\), then \(T\) takes rationals to rationals and irrationals to irrationals.
+
+		So it is enough to find infinitely many rationals in \([0, 1]\) and infinitely many irrationals in \([0, 1]\).
+	}
+}
+
+\dfn{Archimedian property of \(\RR\) }{
+
+	\(\forall x \in \RR\). There is an \(n \in \NN\) such that \(n > x\).
+
+	\pf{Proof}{
+		Let \(x \in \QQ\) and \(x = \frac{p}{q}\) and \(\abs{p} > x\).
+
+		If \(x = A \mid B\), \(r \in B\) is rational, \(x < r = \frac{p}{q}\), and \(x < \abs{p}\).
+
+		\mclm{Remark}{
+			There exists non-Archimedian fields like \(\QQ_{p}\)
+		}
+
+		\mclm{Remark}{
+			Usually, the Archimedian property is \(\forall x \in \RR, x > 0, \exists \frac{1}{n} x\).
+		}
+	}
+}
+
+\thm{\(a, b \in \RR\)}{
+	\begin{enumerate}[label=(\roman*)]
+		\item If \(\forall \epsilon > 0\), and \(a < + \epsilon\), then \(a \leq b\)
+		\item If \(x, y \in \RR\), and \(\forall \epsilon > 0\), \(\abs{x - y} \leq \epsilon\), then \(x = y\)
+	\end{enumerate}
+
+	\mclm{Upshot}{
+		\begin{enumerate}[label=(\roman*)]
+			\item To prove sharp inequalities we often prove infinitely many not sharp inequalities.
+			\item To prove equities, we often prove infinitely many inequalities.
+		\end{enumerate}
+	}
+
+	\pf{Proof}{
+		Either \(a \leq b\) or \(a > b\).
+
+		If \(a > b\) then \(\exists \epsilon > 0\)  with \(0 < \epsilon < a - b\).
+
+		Then, \(\epsilon < a -b < \epsilon\), which is absurd.
+	}
+}
+
+\dfn{Euclidean space}{
+	Cartesian products of sets:
+
+	\[
+		A \times B = \left\{ (a,b) \colon a \in A, b \in  B \right\}
+	\]
+
+	\mclm{Examples}{
+		\begin{enumerate}[label=(\roman*)]
+			\item \(\RR \times \RR = \RR^{2}\)
+			\item \(\RR \times \RR \times \RR = \RR^{3}\)
+			\item \(\RR^{n} = \RR \times \RR \times \ldots \times \RR\), \(n\) times
+		\end{enumerate}
+	}
+}
+
+\dfn{Vector Spaces}{
+
+	Vectors such as \(\vec{x} = (x_1, \ldots, x_{n})\), where addition vectors and you can multiply by scalars.
+}
+
+\dfn{Inner Product}{
+\(\vec{x} = (x_1, \ldots, x_{m})\) and \(\vec{y} = (y_1, \ldots, y_{m})\), then
+
+We can define:
+
+\[
+	\left< \vec{x}, \vec{y} \right> = x_1 y_1 + \ldots + x_{m} y_{m} = \sum_{i=1}^{m} x_{i} y_{i}
+\]
+
+And
+
+\[
+	\sqrt{\left< \vec{x}, \vec{x} \right>} = \sqrt{x_1^{2} + \ldots + x_{m}^{2}} = \abs{\vec{x}}
+\]
+
+What is \(\left< \vec{x}, \vec{y} \right>\)  geometrically?
+
+Let's assume \(\abs{\vec{x}} = 1\). Now, let's rotate \(\vec{x}\) to be \((1, 0, \ldots, 0)\).
+
+With \(\vec{x}  = (1, 0, \ldots, 0)\), then \(\left< \vec{x}, \vec{y} \right> = y_1\).
+
+\nt{Draw pic charlie}
+
+\(\left< \vec{x}, \vec{y} \right>\) if \(\abs{\vec{x}} = 1\) is the length of the projection of \(\vec{y}\) onto the direction spanned by \(\vec{x}\).
+
+To make this a proof, we should check rotation preserves inner products.
+
+In general, \(\abs{\vec{x}} = c\)  where
+
+\[
+	\left< \vec{x}, \vec{y} \right> = c \left< \frac{\vec{x}}{c} \text{length of 1}, \vec{y} \right>
+\]
+
+Which is equals \(C \cdot \) (length of projection of \(\vec{y}\) onto the direction spanned by \(\frac{\vec{x}}{c}\)).
+
+Which is equals to (length of \(\vec{x} \) ) times (length of projection of \(\vec{y}\) onto the direction spanned by \(\frac{\vec{x}}{c}\)).
+}
+
+\mclm{Cauchy-Schwarz inequality}{
+	Let's define \(\left< \vec{x}, \vec{y}\right> \leq \abs{\vec{x}} \abs{\vec{y}}\)
+
+	\pf{Proof}{
+
+		The LHS is the product of the length of \(\vec{x} \) and the length of the projection of \(\vec{y} \) to the direction spanned by \(\vec{x} \).
+
+		RHS is the product of the lengths. Projections decrease length.
+
+	}
+
+	\nt{Equality in Cauchy-Schwarz inequality happens if and only if \(\vec{x} = c \vec{y} \) }
+}
+
+\mclm{Triangle Inequality}{
+
+	\[
+		\abs{\vec{x} + \vec{y}} \leq \abs{\vec{x}} + \abs{\vec{y}}
+	\]
+
+	\pf{Proof}{
+
+		\begin{align*}
+			\left< \vec{x} + \vec{y}, \vec{x} + \vec{y} \right> & = \left< \vec{x}, \vec{x} \right> + 2\left< \vec{x}, \vec{y} \right> + \left< \vec{y}, \vec{y} \right> \\
+			                                                    & \le= \abs{\vec{x}}^{2} + 2\left< \vec{x}, \vec{y} \right> + \abs{\vec{y}}^{2}                          \\
+			                                                    & = \left( \abs{\vec{x}} + \abs{\vec{y}} \right)^{2}
+		\end{align*}
+
+		Take square roots of both sides.
+	}
+}
+
+\dfn{Distance in \(\RR^{n}\)}{
+	Let's make a function, \(d\).
+
+	\[
+		d(\vec{x}, \vec{y}  ) = \abs{\vec{x} - \vec{y}}
+	\]
+
+	Triangle inequality in terms of distance:
+
+	\[
+		\abs{\vec{x} - \vec{y}} \leq \abs{\vec{x} - \vec{z}} + \abs{\vec{z} - \vec{y}}, \forall \vec{x}, \vec{y}, \vec{z} \in \RR^{m}
+	\]
+}
+
+\dfn{Balls}{
+	Let's defined a Ball around the origin of radius \(r\) as just:
+
+	\[
+		B(0, r) = \left\{ \vec{x} \in \RR^{m} \colon \abs{\vec{x}} \leq  r \right\}
+	\]
+}
+
+\dfn{Sphere}{
+	A sphere is:
+	\[
+		S(0, r) = \left\{ \vec{x} \in \RR^{m} \colon \abs{\vec{x}} = r \right\}
+	\]
+}
+
+\dfn{Convex}{
+	A set \(S\)  in \(\RR\)  is convex if \(\forall \vec{x}, \vec{y}  \in S\) and every \(s, t \in [0, 1]\), then
+
+	\[
+		s \vec{x} + t \vec{y} \in S
+	\]
+
+	In words: \(S\) is convex if when \(\vec{x}, \vec{y} \in S \), then so is the line segment between \(\vec{x}\) and \(\vec{y}\).
+
+	\ex{}{
+		\begin{enumerate}[label=(\roman*)]
+			\item \(S(0, r)\) is not convex. For example, \(\vec{0} \in S(0, r)\), but \((r, 0, \ldots, 0)\) are \((-r, 0, \ldots, 0)\)
+			\item \mclm{\(B(0, r)\) is convex.}{
+
+				      Let's define \(\vec{x}, \vec{y} \in B(0, r)\), and \(\vec{z} = sx + ty\) where \(s + t = 1\).
+
+				      Now, let's start
+
+				      \begin{align*}
+					      \left< \vec{z}, \vec{z} \right> & = \left< s \vec{x} + t \vec{y}, s \vec{x} + t \vec{y} \right>                                                         \\
+					                                      & = s^{2} \left< \vec{x}, \vec{x} \right> + 2st \left< \vec{x}, \vec{y} \right> + t^{2} \left< \vec{y}, \vec{y} \right> \\
+					                                      & \leq s^{2} \left< x, x \right> + 2st \abs{\vec{x}} \abs{\vec{y}} + t^{2} \left<y, y \right>                           \\
+				      \end{align*}
+
+				      Notice, \(\left< x, x\right>, \left<y, y \right>, \abs{\vec{x}} \abs{\vec{y}} \leq r^{2}\) as \(\vec{x}, \vec{y} \in B(0, r)\).
+
+				      Thus
+
+				      \begin{align*}
+					       & \leq r^{2}(s^{2} + 2st + t^{2})        \\
+					       & = r^{2}(s + t)^{2}                     \\
+					       & = r^{2} \quad \text{ since } s + t = 1
+				      \end{align*}
+
+				      As such, \(\abs{\vec{z}} \leq r\), so \(\vec{z} \in B(0, r)\).
+
+				      \nt{
+					      Exercises you can do.
+
+					      Consider \(\vec{z} \in \RR^{m}\)
+
+					      \begin{enumerate}[label=(\alph*)]
+						      \item define \(B(\vec{z}, r )\)
+						      \item show that \(B(\vec{z}, r)\) is convex.
+					      \end{enumerate}
+				      }
+			      }
+		\end{enumerate}
+	}
+}
+
+\dfn{Sets, functions}{
+	Let's define \(f\colon A \to B\) be a map, function, or mapping. Where \(A\) is the domain, \(B\) is the codomain, and \(f\) is the map.
+
+	Let's also define \(\operatorname{range}\left(t \right) = \left\{ b \in B \colon \exists a \in A \text{ s.t. } f(a) = b \right\} \)
+
+	There is also \(image(t)\).
+
+}
+
+\dfn{Injective}{
+	We also say that \(f\) is one to one or injective or an injection.
+
+	If \(f(a) = f(b)\), then \(a = b\).
+}
+
+\dfn{Surjective}{
+	We also say that \(f\) is onto or surjective or a surjection.
+
+	If \(\forall b \in B \exists a \in A \text{ s.t. } f(a) = b\). This is also means that the range of \(f\) is \(B\).
+}
+
+\dfn{Bijection}{
+	We also say that \(f\) is a bijection.
+
+	If \(f\) is both injective and surjective.
+
+	Bijections have inverses.
+
+	For instance,
+
+	\[
+		f \colon A \to B, g \colon B \to C
+	\]
+
+	\(g \circ f\) is injective and surjective if \(f\) and \(g\) are both injective and surjective.
+}
+
+\dfn{Cardinality}{
+	\(A\)  and \(B\)  have the same cardinality if there is a bijection \(f \colon A \to B\).
+
+	We say a set \(A\) is (countable?) denumerable if there is a bijection \(f \colon \NN \to A\).
+
+	% We say 
+}
+
+\dfn{Finite and Infinite}{
+	\(S\) is finite if it is bijective to \(\left\{ 1, \ldots, n \right\} \) for some \(n \in \NN\).
+
+	\(S\) is infinite if it is not finite.
+
+	\(S\) is countable if it is finite or denumerable.
+
+	\(S\) is uncountable if it is not countable.
+
+	For instance, \(\NN, \ZZ, \QQ\) are denumerable or countable.
+
+	\(\RR\) is uncountable.
+}
+
+\mprop{}{
+	Every infinite set contains a countable or denumerable subset.
+
+	\pf{Proof}{
+		\(S\) is infinite.
+
+		Pick \(s_1 \in S\).
+
+		Then pick \(s_2 \in S \setminus \left\{ s_1 \right\} \).
+
+		So given \(s_1, \ldots, s_{k}\) pick \(s_{k+1} \in S \setminus \left\{ s_1, \ldots, s_{k} \right\} \).
+
+		This is always possible because \(S\) is infinite.
+	}
+}
+
+\thm{}{
+	An infinite subset \(A\) of a denumerable set \(S\) is denumerable.
+
+	\pf{Proof}{
+		Assume \(S \colon \NN \to B\) exists.
+
+		So \(B = \left\{ f(1), f(2), \ldots, f(k), \ldots \right\} \).
+
+		Let's define \(g \colon \NN \to  A\)  by letting \(g(1) = a\)  such that \(a = f(i)\). but for \(j < i, f(j) \neq a\).
+
+		If \(g(1), \ldots, g(k)\) are defined.
+
+		Then we can define \(g(k+1)\) by letting \(g(k) = a_{k} = f(n_{k})\) and \(g(k+1) = a_{k+1} = f(n_{k+1})\), where \(n_{k+1} > n_{k}\) and \(n_{k} < i < n_{k+1}\), then \(f(i) \neq A\) and \(f(n_{k+1}) \in A\).
+	}
+}
+
+\cor{}{
+	Even numbers are denumerable. Also, primes are denumerable.
+}
+
+\mclm{Fact}{
+	\(\ZZ\) is countable.
+}
+
+\thm{\(\NN \times \NN\) is denumerable}{
+	\pf{Proof}{
+		Proof by snake snakey in a diagonal.
+	}
+}
+
+\cor{}{
+	If \(A\) and \(B\) are countable, then \(A \times B\) is countable.
+
+	\pf{Proof}{
+		Let's define \(N \to \NN \times \NN \overbrace{\to}^{(g_1, g_2)} A \times B\).
+
+		Let \(g_1 \colon N \to A\)  and \(g_2 \colon N \to B\) exists by assumption, and all maps are bijections.
+	}
+}
+
+\thm{}{
+
+	If \(f \colon \NN \to B\) is surjective and \(B\) is infinite, then \(B\) is denumerable.
+
+	\pf{Proof}{
+		We have \(f \colon \NN \to B\). Now define \(h \colon B \to \NN\) for \(b \in B\).
+
+		Define \(S_{b} = \left\{ k \in \NN \colon f(k) = b \right\} \neq \emptyset\)
+
+		Pick the least element of \(S_{b}\), call it \(k\), and then \(h \colon B \to  N\) by \(h(b) = k\) is injective.
+
+		\(B\) is infinite, and \(h(B)\) is infinite, and so \(h(B)\) (and therefore \(B\)) are denumerable.
+
+	}
+
+}
+
+\thm{}{
+	If \(\NN \to B\) is surjective and \(B\) is infinite, then \(B\) is denumerable.
+}
+
+\cor{}{
+	A denumerable union of denumerable sets is denumerable.
+
+	\pf{Proof}{
+
+		Let \(A_1, A_2, A_3, \ldots\) be a denuerable list of denumerable sets.
+
+		Define \(A_{i}\) list \(\left\{ a_{i,1}, a_{i,2}, \ldots \right\} \)
+
+		Now let \(f \colon \NN \times \NN \to \bigcup_{i=1}^{\infty} A_{i} = A\) be defined by \(f(i, j) = a_{i,j}\).
+
+		This function is surjective, and \(A_{1} \subset A\) so \(A\) is inifite, so \(A = \cup A_{i}\) is denumerable by the previous theorem.
+
+		In addition, \(\NN \times \NN ~ \NN\) is denumerable, so \(A\) is denumerable.
+
+		Furthermore,
+
+		\[
+			\NN \overbrace{\to}^{g} \to \NN \times  \NN \overbrace{\to}^{f} \bigcup_{i=1}^{\infty} A_{i}
+		\]
+
+	}
+}
+
+\cor{}{
+
+	\(\QQ\) is denumerable.
+
+	\pf{Proof}{
+
+		Let \(A_{g} = \left\{ \frac{p}{q} \colon p \in \ZZ \right\} \) with any fixed \(g \in \NN\).
+
+		Then \(\QQ = \bigcup A_{q}\) is denumerable.
+
+	}
+
+}
+
+\cor{}{
+	\(\QQ^{m}\) is denumerable.
+
+	\pf{Proof}{
+		We proofed by induction on \(m\).
+
+		\mclm{Base Case}{
+			\(\QQ^{1}\) is denumerable. Simple.
+		}
+
+		\mclm{Induction Step}{
+			Assume \(\QQ^{m - 1}\) is denumerable.
+
+			Then we have \(\QQ^{m - 1} \times \QQ\) is denumerable through the previous proposition from last time on products.
+
+		}
+	}
+}
+
+\ex{}{
+	If \(A_{i}\) is denumerable for all \(i \in I\), then \(A_1 \times  A_2 \times  \ldots \times A_{k} \) is also denumerable for every \(k\)
+}
+
+\thm{}{
+\(\RR\) is uncountable.
+
+\pf{Proof}{
+
+Write real numbers as decimal expansions not ending in repeated 9s.
+
+\[
+	x = N.x_{1}x_{2}x_{3}\ldots, 0 \le x_{i} \le 9
+\]
+
+Actually prove \([0, 1]\) is already uncountable.
+
+if \(\RR\) is a countable list, then we can order
+
+\begin{align*}
+	x_{1,1} x_{1,2} x_{1,3} \ldots \\
+	x_{2,1} x_{2,2} x_{2,3} \ldots \\
+	x_{3,1} x_{3,2} x_{3,3} \ldots \\
+\end{align*}
+
+For each \(i\), we define \(y_{i}\) to be \(0 \le  y_{i} \le  8\)  and assume \(y_{i} \neq x_{ii}\)
+
+Then \(y = 0.y_{1}y_{2}y_{3}\ldots\) is not in the list through diagonalization.
+
+If it is the \(k\)th number in the list, then \(y \neq x_{k}\) since \(y_{k} \neq x_{kk}\) by construction.
+
+Thus, \(\RR\) is uncountable.
+
+}
+}
+
+\cor{}{
+	\([a, b]\) and \((a, b)\) is also uncountable.
+
+	\pf{Proof}{
+		We already wrote down a linear map from \([0, 1]\) to \([a, b]\).
+
+		Which we define as \(f \to a + (b-a)t\). Thus, all we have to is this is a bijection.
+	}
+}
+
+\mclm{Skeleton of Calculus}{
+	First students of calculus. Elementary properties of continuous functions.
+
+	Recall \(f \colon [a, b] \to \RR\) is continuous at \(c \in [a, b]\) if \(\forall e > 0, \exists \delta > 0\)
+
+	such that if \(t \in [a, b]\) and \(\abs{t - c} < \delta\), then \(\abs{f(t) - f(c)} < \epsilon\).
+
+	Say \(f\) is continuous on \([a, b]\) if \(f\) is continuous at every point \(c \in [a, b]\).
+
+	\thm{}{
+		A continuous function on a closed bounded interval is bounded above and below. i.e.
+
+		There exists \(m, M \in \RR\)  such that
+		\[
+			m \le  f(x) \le  M \quad \forall x \in [a, b]
+		\]
+
+		\pf{Proof}{
+			For \(x \in [a, b]\). Let \(V_{x}\) be the values \(f(t)\) for \(a \le t \le x\).
+
+			\[
+				V_{x} = \left\{ y \in \RR \colon \exists t \in [a, x] \text{ s.t. } f(t) = y \right\}
+			\]
+
+			Now set \(X = \left\{  x \colon V_{x} \text{ is bounded}\right\} \)
+
+			Our goal is to who \(b \in X\) since \(V_{x}\) is bounded, which is equivalent to \(f\) being bounded.
+
+			\mclm{Observe}{
+				\(X\) is non-empty since \(a \in X\) since \(V_{a} = \left\{ f(a) \right\} \) is bounded.
+
+			}
+
+			Meaning, that \(X\) is bounded above by \(b\).
+
+			Therefore, \(X\) has a least upper bound \(c\), and \(c \le b\) since \(b\) is an upper bound.
+
+			Now assume for a contradiction that \(c < b\).
+
+			Use that \(f\) is continuous at \(c\). Now let \(\epsilon = 1\), then \(\exists \delta > 0\) such that
+
+			\[
+				\abs{x - c} < \delta \implies \abs{f(x) - f(c)} < 1
+			\]
+
+			This means in \(x \in (c - \delta, c + \delta)\), then \(f(x) \in (f(c) - 1, f(c) + 1)\).
+
+			Now we know there is \(x \in X\) with \(x \in (c - \delta, c)\) as \(c = lub(x)\).
+
+			Otherwise, then \(c - \delta < c\) is an upper bound of \(X\), which is a contradiction.
+
+			Now, let's \(V_{x}\) for any \(x \in [a, c + \delta]\).
+
+			Then, \(V_{x} \subset V_{c} \cup [f(c) - 1, f(c) + 1]\), and so \(V_{x}\) is bounded.
+
+			So \(x \in [c, c + s]\) that is in \(X\), which is a contradiction.
+		}
+	}
+}
+
+\thm{Intermediate Value Theorem}{
+	A continuous function \(f \colon [a, b] \to \RR\) attains a maximum and minimum values.
+
+	Meaning, there exists some \(x_0\) and \(x_1\) in \([a, b]\) such that
+
+	\[
+		f(x_0) \le  f(x) \le  f(x_1) \quad \forall x \in [a, b]
+	\]
+
+	No uniqueness is guaranteed.
+
+	\pf{Proof}{
+		let \(M = lub(\left\{  f(x) \colon x \in [a, b]\right\})\).
+
+		This exists since \(f\) is bounded.
+
+		This means that \(m = glb(\left\{ f(x) \colon x in [a, b]\right\} )\) also exists because \(f\) is bounded.
+
+		\nt{
+			We're only going to find \(x\), finding \(x_{0}\) is similar using lower bounds.
+
+			Every where we use upper bounds here.
+		}
+
+		Our goal is to find \(x\)  such that \(f(x_{1}) = M\)
+
+		Consider \(X = \left\{ x \in  [a,b] \colon lub(V_{x}) < M \right\} \)
+
+		Define \(V_{x} = \left\{ t \colon f(y) = t \text{ for some } y \in [a, x]\right\} \)
+
+		Now case time!
+
+		\begin{enumerate}[label=(\roman*)]
+			\item Case 1: \(f(a) = M\), and we are done
+			\item Case 2: \(f(a) < M\), then \(a \in X\) since \(V_{a} = \left\{ f(a) \right\} \) and \(f(a) < M\).
+
+			      Thus, \(X\) is non-empty, so \(X\) has a least upper bound \(c\) by the least upper bound property.
+
+			      Unless we're already done \(f(x) < M\).
+
+			      Choose \(\epsilon > 0\) such that \(\epsilon < M - f(c)\).
+
+			      By continuity of \(f\) at \(c\), there exists \(\delta > 0\) such that if \(\abs{t - c} < \delta\), then \(\abs{f(t) - f(c)} < \epsilon\).
+
+			      Thus, for all \(x \in [c - \delta, c + \delta]\), we have \(f(x) < M\).
+
+			      And there is some \(x \in (c - \delta, c)\) that is in \(X\).
+
+			      So there is an \([a, x]\), \(f(x) < M\), and on \((c - \delta, c + \delta)\) we have \(f(x) < M\).
+
+			      As such \(f(x) < m\)  on \([a, c + \delta]\).
+
+			      Then there exists points \(x\) to the right of \(c\) where \(lub(V_{x}) < M\).
+
+			      Any \(x \in [c, c + \frac{\delta}{2}]\). This contradicts that \(c = lub(V_{x})\).
+
+			      Unless \(c = b\).
+
+			      If \(c = b\) then \(lub(V_{b}) = lub(\left\{ f(x) \colon a \le x \le b \right\} < m)\).
+
+			      BUT, \(m \le M\), thus we've proved that \(f(c) = m\)
+
+			      Where \(x_{1} = c\)
+			\item Case 3 is simlar to 2
+		\end{enumerate}
+	}
+}
+
+Second version of proof.
+
+\mclm{Intermediate Value theorem}{
+	A continuous function on \([a, b]\)  takes on all intermediate values.
+
+	This means that \(f(a) = \alpha\) and \(f(b) = \beta\) and other \(\alpha \le \gamma \le \beta\) or \(\beta \le \gamma \le \alpha\), then there exists \(c \in [a, b]\) such that \(f(c) = \gamma\).
+
+	\pf{Proof}{
+		Assume \(a \le  \gamma \le  beta\), and set \(X = \left\{ x \in [a,b] \colon lub(V_{x} < \gamma)\right\} \).
+
+		Where \(V_{x} =\left\{ f(t) \colon t \in [a, x] \right\} \).
+
+		Now let \(c = lub(x)\).
+
+		\mclm{Claim}{
+			Prove by showing you can have \(f(x) < \gamma\) or \(f(x) > \gamma\).
+
+			Suppose \(f(c) < \gamma\). Let \(\epsilon = \gamma - f(c)\) continuity at \(c\) gives \(\exists  \gamma > 0\).
+
+			Such that \(\abs{t - c} < \delta \implies \abs{f(t) - f(c)} < \epsilon\).
+
+			This means that \(t \in (c - \delta, c + \delta)\) then \(f(t) < \gamma\).
+
+			So \(c + \frac{\delta}{2} \in X\) (by definition of \(X\) and \(V_{x}\) ) contradicts that \(c = lub(X)\).
+
+			So \(f(c) \nleq \gamma\).
+
+			Suppose \(f(c) > \gamma\) and \(\epsilon = f(c) - \gamma\). Continuity at \(c\) gives \(\exists \delta > 0\) such that \(\abs{t - c} < \delta \implies \abs{f(t) - f(c)} < \epsilon\).
+
+			This means that \(t \in (c - \delta, c + \delta) \implies f(t) > \gamma\), then \(c - \frac{\gamma}{2}\) is an upper bound for \(X\), contradicting that \(c = lub(X)\).
+		}
+	}
+}
+
+\chapter{Metric Spaces and topology}
+
+\dfn{Metric Spaces}{
+	Let \(X, d\) be a set and a function \(d \colon X \times X \to \RR\) such that
+
+	\begin{enumerate}[label=(\roman*)]
+		\item \(d(x, y) \ge 0\) and \(d(x, y) = 0 \iff x = y\) (positive definite)
+		\item \(d(x, y) = d(y, x)\) (symmetric)
+		\item \(d(x, z) \le d(x, y) + d(y, z)\) (triangle inequality)
+	\end{enumerate}
+
+	Then, \((X, d)\) is a metric space.
+}
+
+\ex{}{
+	Examples of Metric Spaces
+
+	\begin{enumerate}[label=(\roman*)]
+		\item \(\RR, d(x, y) = \abs{x - y}\)
+		\item \(\RR^{n}, d(x, y) = \abs{x - y} = \sqrt{\sum_{i=1}^{\RR} (X_{i} - Y_{i})^{2}}\)
+		\item \(X \subset \RR^{\gamma} (\RR)\)  or \(X \subset  M\)  metric space then the restriction of \(d\) to \(X\) is a metric on \(X\).
+		\item \(C([0,1])\) continuous function on \([0,1]\):
+
+		      \[
+			      d(f, g) = \sup_{x \in [0,1]} \abs{f(x) - g(x)}
+		      \]
+
+		      This is also a metric space
+	\end{enumerate}
+}
+
+\dfn{Sequences and consequences}{
+	Let \(f \colon \NN \to  X\) is called a sequence
+
+	\(f(n) = p_{n}\) or \(a_{n}\)
+
+	\((p_{n})\) converges to \(p\) if \(\forall \epsilon > 0, \exists K \in \NN\) such that for all \(n \ge K\) we have \(d(p_{n}, p) < \epsilon\).
+
+	If a seqence converges to a limit, that limit is unique.
+
+	\[
+		p_{n} \to p \text{ and } (p_{n}) \to  p`
+	\]
+
+	We want to show that \(p = p`\).
+
+	\pf{Proof}{
+		Given \(\epsilon > 0\) there exists \(k, k`\)  such that \(n > k\)  then \(d(p_{n}, p) < \epsilon\) and it \(n > k`\) then \(d(p_{n}, p`) < \epsilon\).
+
+		So for \(n > max(k, k`)\) we get
+
+		\[
+			d(p, p`) \le d(p, p_{n}) + d(p_{n}, p`) < 2 \epsilon
+		\]
+
+		is true \(\forall \epsilon\) , so \(d(p, p`) = 0\)
+
+		In \(\QQ\) , 1, 1.4, 1.41, 1.412, etc, doesn't converge in \(\RR\) it converges to \(\sqrt{2}\) .
+
+	}
+}
+
+\dfn{Subsequences}{
+	If I pick \(n_{1} < n_2 < n_3 < \ldots\) of an inifite colleciton, then set \(g_{k} = p_{n_{k}}\) then \(q_{k}\) is a Subsequence of \(p_{n}\)
+
+	Pugh calls \(p_{n}\) the "mother sequence" of the subsequence \(q_{k}\)
+}
+
+\mprop{}{
+	Every subseqeunce of a convergent sequence converges and converges to the limit of the mother sequence.
+
+	\pf{Proof}{
+		Let \(g_{k}\) be a subseqeunce of \(p_{n}\) to \(q_{k} = p_{n_{k}}\).
+
+		\nt{Notice that \(n_{k} \ge k\).}
+
+		Assuming \(p_{n}\) converges so \(\forall \epsilon \exists N\) such that \(n \ge N\) then \(d(p_1, p) < \epsilon\).
+
+		For all \(k\)  if \(k \ge N\) , then \(n_{k} \ge k \ge N\) so \(d(q_{k, p}) < \epsilon\) so \(q_{k} \to p\).
+	}
+
+	\nt{Converse is false.
+
+		Let \((-1)^{n}\)  doesn't converge.
+
+		FOr instance, take \(n_{k} = 2k + 1\) or \(n_{k} = 2k\), with their subsequence being
+
+		\((-1)^{2k+1} = -1\) and \((-1)^{2k} = 1\)
+
+		Both are constant sequences, and both converge to \(-1\) and \(1\) respectively.
+	}
+
+}
+
+\dfn{}{
+	A function \(f \colon (M, d_{m}) \to (N, d_{n})\) between metrics spaces is called continuous.
+
+	If it preserves sequential convergence, i.e. if \(\exists  (p_{n}) \in M\)  such that \(p_{n} \to  p\)
+
+	then \(f_{p_{n}} \in N\)  has \(f(p_{n}) \to f(p)\) in \(N\) .
+
+	\nt{
+		Paugh writes \(f_{p}\) for \(f(p)\)
+	}
+}
+
+\thm{}{
+	A composition of continuous functions is continuous.
+
+	\pf{Proof}{
+		In pugh or rudin you can do this exercise.
+	}
+}
+
+\ex{}{
+
+	WE have examples
+	\begin{enumerate}[label=(\roman*)]
+		\item \(d = M \to M\) is always continuous where \(d(m) = m\)
+		\item \(d \colon M \to N\) such that \(\exists n_{0}\) fixed and \(f(m) = n_0\) for all \(m\), i.e. \(f\) is constant, then \(f\) is continuous.
+	\end{enumerate}
+}
+
+\dfn{homeomorphism}{
+	A map \(f \colon m \to  W\) is called a homeomorphism if
+
+	\begin{enumerate}[label=(\roman*)]
+		\item \(f\) is bijective
+		\item \(f\) is continuous
+		\item \(f^{-1}\) is continuous
+	\end{enumerate}
+}
+
+\ex{}{
+For instance \(f \colon [0, 2\pi) \to S` \subset \RR^{2}\) by \(f(t) = (\cos t, \sin t)\) is a homeomorphism.
+
+\(f\) is bijective and continuous.
+
+Now, \(f\) isn't a homeomorphism from \([0, 2\pi)\) to \(S\) because \(f^{-1}\) isn't continuous.
+}
+
+\section{\(\epsilon - \delta\) definitions of continuity}
+
+\thm{}{
+	Let \(f \colon M \to N\) is continuous if and only if for every \(\epsilon > 0\) there exists \(\delta > 0\) such that if \(x \in  M\) and \(d_{M}(x, p) < \delta\) then \(d_{N}(f(x), f(p)) < \epsilon\).
+
+	\pf{Proof}{
+		Suppose \(f\) is continuous i.e., preserves sequential convergence.
+
+		Now assume \((\epsilon, \delta)\) conditions fails at some \(p \in M\)
+
+		i.e., \(\exists \epsilon > 0\) so that \(\forall \delta > 0\) there exists \(x \in (x_{n})\) such that \(d(x, p) < \delta\) and \(d(f_{x}, f_{p}) \ge \epsilon\).
+
+		Now take \(\delta = \frac{1}{n}\) lets us pick \(x_{n}\) with \(d(x_n, p) < \frac{1}{\delta}\) and \(d(f_{x_{n}}, f_{p}) \ge \epsilon\)
+
+		This means \(x_{n} \to  p\)  but \(f_{x_{n}} \not\to f_{p}\) contradicting sequential continuity.
+
+		Therefore, \((\epsilon, \delta)\) conditions must hold for continuous maps
+
+		Conversely if \(f\) satisfies \((\epsilon, \delta)\) conditions
+
+		suppose \(x_{n} \in M\) has \(x_{n} \to p \in M\)
+
+		we want to show that \(f \colon x_{n} \to f_{p}\) in \(N\).
+
+		Given \(\epsilon > 0\) there exists \(\delta > 0\) such that \(d_{M}(x_{n}, p) < \delta\) implies \(d_{N}(f_{x_{n}}, f_{p}) < \epsilon\).
+
+		And \(x_{n} \to p\) means that for all \(\delta >0\), there exists \(K\) such that if \(n \ge k\) then \(d_{M}(x_{n}, p) < \delta\).
+
+		Therefore, if \(n \ge k\) then \(d_{N}(f_{x_{n}}, f_{p}) < \epsilon\) so \((f_{x_{n}}, f_{p}) < \epsilon\)
+
+		so for every \(\epsilon > 0\), we have found our \(k\) to prove sequential continuity.
+	}
+}
+
+\dfn{Metric Space}{
+	A metric space, \(M\), \(S \subset M\) is a subset. we say that \(p \in M\) is a limit point of \(S\) if \(\exists  (p_{n}) < s\) such that \(p_{n} \to p\)
+}
+
+\dfn{Closed}{
+	A set \(S\) is closed if it contains all of its limit points.
+}
+
+\dfn{Open}{
+	A set \(S\) is open if \(\forall p \in S\) there exists \(\epsilon > 0\) such that if \(d(p, q) < \epsilon\) then \(q \in S\).
+
+	i.e., contains some open ball around every point.
+}
+
+\thm{}{
+	The complement of a closed set is open, and the complement of a closed set is open.
+
+	\nt{Plenty of sets are neither open nor closed.
+
+		A set is called clopen if it is both open and closed in \(\RR\) and only \(\RR\) and \(\emptyset\) are clopen in \(\RR\).
+
+		In \(\QQ\), lots of clopen sets.
+	}
+
+	\pf{Proof}{
+		Suppose \(S \subset M\) open, we want to show that \(S^{c}\) is closed.
+
+		If \(p_{n} \subset S^{c}\) a sequence and assume \(p_{n} \to p\) in \(m\).
+
+		We want to shw that \(p \in S^{c}\).
+
+		So we'll assume \(p \in S\) and set a contradiction.
+
+		If \(p \in S\), there exists \(\r > 0\) such that any \(q\) with \(d(p, q) < r\) is in \(S\).
+
+		Given \(r > 0\) there exists \(K\) interger such that if \(n \ge K\) then \(d(p_{n}, p) < r\).
+
+		This implies that \(\forall n \ge k\), \(p_{n} \in S\) but we assumed \(p_{n} \in S^{c}\) so we have a contradiction.
+
+		Now assume that \(S\) is closed, we want to show \(S^{c}\) is open.
+
+		Take \(p \in  S^{c}\).
+
+		If \(S^{c}\) isn't open then for every \(r > 0\) there is a \(q\) such that \(d(p, q) < r\) and \(q \notin S^{c}\).
+
+		Thus, \(q \in S\).
+
+		Let us set \(r \approx \frac{1}{n}\), we pick \(q_{n}\) such that \(d(p, q_{n}) < \frac{1}{n}\) and \(q_{n} \in S\).
+
+		So \(q_{n} \to p\), but \(S\) is closed so this means \(p in S\),
+
+		but we assumed \(p \in S^{c}\) so we have a contradiction.
+
+	}
+
+}
+
+\dfn{Topology}{
+	The topology on \(M\) is the collection of open sets in \(M\), denote it by \(\mathcal{T}\).
+}
+
+\thm{}{
+	If \(m, d\) is a metric space,the collection of open sets, \(\mathcal{T}\) at \(M\) satisfy:
+
+	\begin{enumerate}[label=(\roman*)]
+		\item Every union of open sets is open.
+		\item Finite intersections of open sets are open.
+		\item \(\emptyset\) and \(M\) are open.
+	\end{enumerate}
+
+	\pf{Proof}{
+		We have three thingw we want to prove:
+
+		\begin{enumerate}[label=(\roman*)]
+			\item If \(\left\{ U_{\alpha} \right\} \) are open sets in \(M\).
+
+			      \[
+				      V = \bigcup_{\alpha} U_{\alpha}
+			      \]
+
+			      Then \(V\) is open.
+
+			      If \(x \in  V\), then \(x in U_{a}\) for some \(\alpha\).
+
+			      So \(U_{\alpha}\) is open, so there exists \(r 0\) such that for every \(q\) with \(d(p, q) < r\) we have \(q \in U_{\alpha}\).
+
+			      but \(U_{\alpha} \subset V\) so \(q \in V\).
+
+			      So all points within \(r\) of \(p\) are in \(V\), so \(V\) is open.
+
+			\item Let \(U_1, \ldots, U_{n}\) are open sets.
+
+			      Let \(W = U_{1} \cap \ldots \cap U_{n}\).
+
+			      For each \(k = 1, \ldots, n\), then there exists \(r_{k} > 0\) such that if \(d(p, q) < r_{k}\) then \(q \in U_{k}\).
+
+			      Let \(r = min\left\{ r_1, \ldots, r_{n} \right\} \) and notice that if
+
+			      \(d(p, q) < r\) then \(q \in U_{k}\) for every \(k\) and so in \(W\).
+
+			\item Infinite intersections of open sets aren't necessarily open.
+
+			      For instance, \(\bigcap_{n=1}^{\infty} (-\frac{1}{n}, \frac{1}{n}) = \left\{ 0 \right\} \) is not open.
+
+		\end{enumerate}
+
+	}
+}
+
+\cor{}{
+	Intersections of infinitely many closed sets are closed, finite unions of closed sets are closed.
+
+	\(M, \emptyset\) are closed.
+
+	\pf{Proof}{
+		De Morgan's laws.
+
+		Which means
+
+		\[
+			\left( U \cap V \right)^{c} = U^{c} \cup V^{c}
+		\]
+	}
+
+	\nt								{
+
+		Infinite unions of closed sets aren't necessarily closed.
+
+		\[
+			U [\frac{1}{n}, 1] = (0, 1]
+		\]
+	}
+}
+
+\mclm{Two sets}{
+
+	We have \(lim S = \left\{ s \in M \colon p \text{ is a limit of points in } S\right\} \).
+
+	Meaning, that \(S \subset  lim S\) since \(p\) is the limit of \(p, p, p, \ldots\)
+
+	in other words
+
+	\begin{align*}
+		M_{r}p & = N_{r}p = B_{r}p                            \\
+		       & = \left\{ q \in M \colon d(p, q) < r\right\} \\
+	\end{align*}
+
+	where \(p\) is a point, and \(r > 0 \) is a real number
+
+	Thus, \(N_{r}S = \left\{ q \in  M \colon \exists p \in S \text{ such that } d(p, q) < r\right\} \)
+}
+
+\thm{}{
+	\(lim S\) is closed, and \(M_{r}p\) is open.
+
+	\pf{Proof}{
+		If \(p` \in  M_{r}p\), and we let \(d = d(p, p`)\).
+
+		For any \(q\) with \(d(p`, q) < r - d\), we have \(d(p, q) \le d(p, p`) + d(p`, q) < r - d + d = r\).
+
+		So this shows that \(M_{r-d}p` \subset M_{r}p\).
+
+		Thus, proof is green ball is contained in the black ball (we have a picture).
+
+		So \(M_{r}p\) is open.
+
+		Now we want to show that \(lim S\) is closed.
+
+		Suppose that \(P_{n}\) in \(lim S\), and \(p_{n} \to p\).
+
+		Goal is to show that \(p\) a limit of sequence in \(S\).
+
+		\(p_{n}\) is \(lim S\) so \((p_{n,k})\) in \(S\).
+
+		So \(p_{n, k} \to p_{n}\) as \(k \to \infty\).
+
+		Then there exists \(q_{n} = p_{n}, k_{n} \in S\) such that \(d(p_{n}, q_{n}) < \frac{1}{n}\).
+
+		Now we check \(q_{n} \to p\).
+
+		Meaning that \(d(p, q_{n}) \leq d(p, p_{n}) + d(p_{n}, q_{n}) \le d(p, p_{n}) + \frac{1}{n}\).
+
+		And goes to \(0\) as \(n \to \infty\).
+
+		Because \(p_{n} \to p\) and \(\frac{1}{n} \to 0\), so \(q_{n} \to p\).
+	}
+
+}
+
+\cor{}{
+	\(lim S\) is the smallest closed subset of \(M\) containing \(S\).
+
+	i.e., if \(S \subset k\) and \(k\) is closed in \(M\) , then \(lim S \subset k\).
+
+	\pf{Proof}{
+		If \(k\) is closed it means \(k\) contains all of its limits by definitions, so if
+
+		\(S \subset k\), all the limits of \(S\) are in \(k\), so \(lim S \subset k\).
+	}
+}
+
+\nt{Notation
+	\(lim S =\overline{S}\) and call it the closure of \(S\).
+}
+
+\dfn{Maps}{
+	Let \(f \colon M \to N\) be a map between metric spaces.
+
+	Given \(V \subset  N\), the preimage of \(V\)
+
+	\[
+		f^{-1}(V) = f^{\text{pre}}(V) = \left\{ p \in M \colon f(p) \in V\right\}
+	\]
+
+	Note, that \(f^{-1}(V)\) does not mean the inverse of \(f\).
+}
+
+\thm{}{
+	Let \(f \colon M \to N\) be a map between metric spaces. The following are equivalent:
+
+	\begin{enumerate}[label=(\roman*)]
+		\item We know that \(\epsilon-\delta\) definition of continuity.
+		\item sequential definition of continuity.
+		\item the pre-image of any closed set is closed
+		\item the preimage of any open set is open
+	\end{enumerate}
+
+	\pf{Proof}{
+
+		Already saw \(1\) and \(2\) are equivalent.
+
+		Moreover, we see that \(3\) and \(4\) are equivalent by taking complements.
+
+		Now, we need to show that \(2 \implies 3\).
+
+		If \(k \subset N\) is closed and we pick up \(p_{n} \in f^{\text{pre}}(k)\) converging to \(p \in N\).
+
+		We claim that \(p \in f^{\text{pre}}(k)\).
+
+		We're assuming that \(f\) preservers sequential convergence, so \(f(p_{n}) \to f(p)\).
+
+		And we're assuming \(k\) is closed \(f(p_{n}) \subset k\) by definition of \(p_{n}\)
+
+		This implies that \(f(p) \in k\), so \(p \in f^{\text{pre}}(k)\) by definition of preimage.
+
+		Now we want to do \(4 \implies 1\)
+
+		Proof by picture. JK.
+
+		Let \(p \in  M\), there exists \(\epsilon > 0\). Now take \(M_{\epsilon}f(p)\) which is open.
+
+		So \(U = f^{\text{pre}}(M_{\epsilon}f(p))\) is open by assumption.
+
+		Now, \(p \in U\) so \(U\) being open means there exists \(\delta > 0\) such that \(M_{\delta}p \subset U\), and
+
+		\[
+			f(M_{\delta}p) \subset  M_{\epsilon}f(p)
+		\]
+
+		i.e., exactly if \(d(p, q) < \delta\) then \(d(f(p), f(q)) < \epsilon\).
+
+	}
+}
+
+\cor{}{
+	If \(f \colon M \to N\) is a homeomorphism, then it defines a bijection between open sets of \(M\) and open sets of \(N\).
+}
+
+\dfn{Completeness}{
+
+	A Cauchy sequence in a metric space, \(M, d\), is a sequence \((p_{n})\) such that for every \(\epsilon > 0\) there exists \(K\) such that if \(n, m \ge K\) then \(d(p_{n}, p_{m}) < \epsilon\).
+}
+
+\nt{
+	Here is an exercise (done with \(M = \RR\) ).
+
+	Any convergent sequence is Cauchy.
+
+	\(M\) is called complete if all Cauchy sequences in \(M\) converge.
+}
+
+\mprop{}{
+	\(\RR\) is complete, and \(\RR^{d}\) is complete.
+
+	\mclm{Proof sketch}{
+		We already saw this for \(\RR\). For \(\RR^{d}\) check everything one coordinate at a time.
+	}
+}
+
+\thm{}{
+	Closed subsets of complete metric spaces are complete.
+}
+
+\cor{}{
+	Closed subsets of \(\RR^{d}\) are complete.
+}
+
+\dfn{Compactness}{
+	A subset \(A\) of a metric space \(M\) is (sequentially) compact if
+
+	every sequence \(a_{n}\) in \(A\) has a subsequence \((a_{n_{k}})\) that converges to a limit in \(A\).
+
+	You saw if a sequence \(a_{n}\) converges to a limit \(L\) than any subsequence of \(a_{n}\) converges to \(L\).
+
+	\ex{}{
+		\(a_{1} = 0, a_{2} = 1, a_{3} = 0, a_{4} = 1, \ldots\) is a sequence in \([0, 1]\).
+
+		If I choose \(n_1\ = 1, n_{2} = 3, n_{3} = 5, \ldots\) and \(a_{n_{1}} = 0, a_{n_{2}} = 0, a_{n_{3}} = 0, \ldots\) then \(a_{n_{j}} \to 0\).
+	}
+}
+
+\thm{}{
+	Any finite set \(A\) in a metric space \(M\) is compact.
+
+	\pf{Proof}{
+		We want to show any sequence in \(A\) has a convergent subsequence. We show this by using the pigeonhole principle
+	}
+}
+
+\mclm{Pigeonhole Principle}{
+	If \(n\) pigeons come to roost in \(n-1\) holes than at least one hole has more than pigeon.
+}
+
+\mclm{Infinite pigeonhole principle}{
+	If infinite many pigeons come to roost in finitely many holes, then at least one hole has infinitely many pigeons.
+
+	\pf{Proof}{
+		A finite \(A\) is the set of holes:
+
+		\(a_1, a_2, a_3, a_4, \ldots\)
+
+		And our pigeonhole says that there has to be \(a \in A\) which appears infinitely many often in the sequence.
+
+		Let \(n_1\) be the smallest number \(a_{n_{1}} = a\).
+
+		Let \(n_{2}\) be the next number and so on.
+
+		Then \(a_{n_{1}} = a\) and \(a_{n_{2}} = a\) and so on.
+
+		Thus, \(a_{n_{j}} = a\) for all \(j\).
+	}
+}
+
+\nt{
+	If \(x\) is a real number, then we want \(\left\{ x \right\} \) to denote fractional part of \(x\).
+
+	In other words \(\left\{ x \right\} = x - \lfloor x \rfloor\), where \(\lfloor x \rfloor\) is the greatest integer less than or equal to \(x\).
+}
+
+\ex{}{
+	Let \(\alpha\) be your favorite irrational number.
+
+	Let \(a_{n} = \left\{ n\alpha \right\} \)
+
+	Also let \(\beta\) be your second favorite irrational number.
+
+	\mclm{Claim}{
+		We can find a subsequence of \(a_{n}\) of \(\left\{ n \alpha \right\} \) which converges to \(\left\{ \beta \right\} \).
+
+		Idea: Let \(n_1\) be the first integer so \(\left\{ n_1 \alpha \right\} \) is close to \(\left\{ \beta \right\} \).
+
+		Let \(n_{2}\) be \(\left\{ n_2\alpha \right\} \) is really close to \(\left\{ \beta \right\} \).
+
+		Let \(n_{3}\) be \(\left\{ n_3 \alpha \right\} \) is really really close to \(\left\{ \beta \right\} \).
+
+		And so on.
+
+		In fact, this claim is related to how well you approximate irrationals by rationals.
+
+		If you have a favorite denominator \(q\),
+
+		then you will find the fractional part of \(\left\{ \alpha \right\} \).
+
+		In such a way that \(\abs{\left\{ a \right\} - \frac{p}{q}} < \frac{1}{q}\)
+	}
+}
+
+\thm{Dirichlet}{
+	If \(\alpha\) is an irrational number, then there are infinitely many rationals \(\frac{p}{q}\) so that there is a \(p\) with \((p, 1) = 1\)
+
+	So that
+
+	\[
+		\abs{\alpha - \frac{p}{q}} \le \frac{1}{q^{2}}
+	\]
+
+	\mclm{Proof}{
+		First, we look for a denominator not bigger than \(N\) in the interval \([0, 1]\).
+
+		We will divide this into \(N\) subintervals of length \(\frac{1}{N}\).
+
+		In other words there are \(N\) holes, which look like \(\left\{ 0\alpha \right\}, \left\{ 1\alpha \right\}, \ldots, \left\{ (N)\alpha \right\} \).
+
+		Moreover, there exists \(j, k\) such that \(\left\lvert \left\{ j\alpha \right\} - \left\{ k\alpha \right\} \right\rvert \le \frac{1}{N}\).
+
+		Which is equivalent to \(\left\lvert \left\{ (j - k)\alpha \right\} \right\rvert \le \frac{1}{N}\).
+
+		As such, we know that \((j-k)\alpha =  \ell + \left\{ (j - k) \alpha\right\} \) integer.
+
+		\begin{align*}
+			\alpha = \frac{\ell}{j - k}                          & + \frac{\left\{ (j - k)\alpha \right\}}{j - k}                            \\
+			\left\lvert \alpha - \frac{\ell}{j - k} \right\rvert & \le \left\lvert \frac{\left\{ (j - k)\alpha \right\}}{j - k} \right\rvert \\
+			                                                     & \le \frac{1}{\left\lvert j - k \right\rvert N}                            \\
+			\left\lvert \alpha - \frac{p}{q} \right\rvert        & \le \frac{1}{q^{2}}                                                       \\
+			\intertext{and if \(n\), on integer  \(1 \le n \le q\) }
+		\end{align*}
+
+		Thus,
+
+		\[
+			\left\lvert n\alpha - \frac{np}{q} \right\rvert \le \frac{n}{q^{2}} \le \frac{1}{q}
+		\]
+
+		If \((p,q) = 1\), meaning they are relatively prime, then
+
+		\(1 * p, 2 * p, 3 * \vec{p} .., q *p\) take up all equivalence classes:
+
+		\[
+			\left\lvert n\alpha - \beta \right\rvert \le \frac{2}{q}
+		\]
+	}
+}
+
+\thm{}{
+
+	A compact set \(A\) in a metric space is closed and bounded.
+
+	\pf{Proof of closed}{
+		Let's proceed by contradiction.
+
+		Suppose \(A\), for the sake of contradiction, that it is not closed in \(M\) .
+
+		Then there is a sequence \(a_{n}\) in \(A\) which converges to \(p \in M\) with \(p \notin A\).
+
+		Compactness says \((a_{n})\) has a subsequence \(a_{n_{k}}\) converging to something in \(A\).
+
+		But \((a_{n_{k}})\) converges to \(p\) not in \(A\), which is a contradiction.
+
+	}
+
+	\pf{Proof of bounded}{
+
+		Suppose \(A\) is not bounded, we can find \(p \in A\) .
+
+		Let's find a sequence \((a_{n})\) , where \(d(a_{n}, p) > 2^{n}\).
+
+		Thus, \((a_{n})\) is unbounded, and \(a_{n_{k}}\) is also unbounded.
+
+		Therefore, \(a_{n_{k}}\) doesn't converge, which is a contradiction.
+
+	}
+
+	As such, we have shown that \(A\) has to be closed and bounded.
+}
+
+\mprop{}{
+	If \(a < b\) reals, then \([a, b]\) is compact.
+
+	\mclm{Rough idea of proof}{
+		Let \((a_{n})\) be a sequence in \([a, b]\), where \((a_{n})\) is bounded above by \(b\).
+
+		Pugh's also defines \[
+			\lim \sup(a_{n}) = \inf_{j} \lim_{k > j} b (a_{k})
+		\]
+	}
+
+	\pf{Proof}{
+		Let \([a, b] = I_{0}\) be two halves \([a, \frac{a+b}{2}]\) and \([\frac{a+b}{2}, b]\) be \(I_{L}\) and \(I_{R}\) recursively.
+
+		Whichever has infinite many terms of sequence we call \(I_{1}\) .
+
+		We call \(I_{2}\) a half with infinite many terms as well
+
+		\[
+			\ldots \subset I_{3} \subset I_{2} \subset I_{1} \subset I
+		\]
+
+		Thus, \(\left\lvert I_{j} \right\rvert = \frac{b - a}{2^{j}}\).
+
+		Let \(a_{n_{1}}\) be first term in sequence in \(I_{1}\), \(a_{n_{2}}\) be first term after \(n_1\) in \(I_{2}\), and so on.
+
+		Then \(\left\{ a_{n_{j}} \right\}, a_{n_{j}} \in I_{j}\).
+
+		Now fix \(\epsilon > 0\), then there exists \(j\) so \(\frac{a-b}{2^{j}} < \epsilon\)  when \(k_1, k_2 > j\) then
+
+		\(a_{k_{1}}, a_{k_{2}} \in I_{j}\).
+
+		Thus,
+
+		\[
+			\left\lvert a_{k_{1}} - a_{k_{2}} \right\rvert = \frac{b - a}{2^{j}} < \epsilon
+		\]
+	}
+}
+
+\dfn{}{
+	Remember, a subset \(A\) of \(M\), a metric space is compact if every sequence in \(A\), \(a_{n}\) has a subsequence \(a_{n_{k}}\) converging to a limit in \(A\).
+}
+
+\thm{}{
+	The Cartesian product:
+
+	\[
+		A \times B \text{of two compact sets is compact}
+	\]
+
+	\pf{Proof}{
+		Let \((a_{n}, b_{n})\) a sequence in \(A \times B\).
+
+		Because we know that \(A\) is compact we can find a subsequence \(a_{n_{k}}\) converging to \(a \in A\).
+
+		That doesn't mean that \((a_{n_{k}}, b_{n_{k}})\) converges.
+
+		However, \((b_{n_{k}})\) is a sequence (indexed by \(k\) )in \(B\) which is compact.
+
+		That means there exists a subsequence \(b_{n_{k_{j}}}\) converging to \(b \in B\).
+
+		This means that \((a_{n_{k_{j}}}, b_{n_{k_{j}}})\) converges to in \(A \times B\).
+
+		This is because \((a_{n_{k_{j}}})\) converges because subsequence of convergent sequence converges to the same limit.
+
+		By the same reason \((b_{n_{k_{j}}})\) converges in \(B\) because that's how we choose it.
+
+		Thus, we are done.
+	}
+}
+
+\cor{}{
+	Cartesian product \(A_{1} \times \ldots \times A_{m}\), where \(m \in \NN\) of \(m\) compact sets \(A_{1}, \ldots, A_{m}\) is compact.
+
+	\pf{Proof}{
+
+		\[A_{1}\times \ldots \times A_{m} = \underbrace{A_{1}}_{\text{compact}} \times \underbrace{\left( A_{2} \times \ldots \times A_{m} \right) }_{\text{compact}}\]
+	}
+}
+
+\thm{}{
+
+	Given, \[
+		[a_{1}, b_{1}] \times [a_{2}, b_{2}] \times \ldots \times [a_{m}, b_{m}] \in \RR^{m}
+	\]
+
+	is compact.
+}
+
+\thm{Bolzano-Weisterstrass}{
+
+	Any bounded sequence in \(\RR^{m}\) has a convergent subsequnce.
+
+	\pf{Proof}{
+		A bounded sequence is contained in a box.
+
+		\((c_{n})\) is contained in \([a_{1}, b_{1}] \times \ldots \times [a_{m}, b_{m}]\).
+
+		Apply compactness of the box.
+
+	}
+}
+
+\thm{}{
+	Every closed subset of a compact set is compact.
+
+	\pf{Proof}{
+
+		Let \(B^{\text{closed}} \subset A\) compact.
+
+		Let \((b_{n})\) be a sequence.
+
+		We can use compactness of \(A\) and get a subsequence \((b_{n_{k}})\) which converges in \(A\).
+
+		However, \(B\) is closed
+
+		So \(b_{n_{k}}\) must converge in \(B\).
+
+		Therefore, \(B\) is compact.
+
+	}
+}
+
+\thm{Heine-Borel}{
+	Every closed and bounded set in \(\RR^{m}\) is compact.
+
+	\pf{Proof}{
+		Let \(A\) be a closed and bounded set in \(\RR^{m}\).
+
+		\[
+			A \subset [a_{1}, b_{1}] \times \ldots \times [a_{m}, b_{m}] \text{ is compact}
+		\]
+
+		We know that \(A\) is closed and bounded, so \(A\) is compact.
+
+	}
+}
+
+\ex{}{
+	Let \(M\) be any infinite set under discrete metric.
+
+	Pick a sequence \(a_1, a_2, \ldots, a_{n}, \ldots\) distinct points of \(M\).
+
+	No convergent subsequence.
+
+	Let \(M\) be the set of continuous real-valued functions on \([0, 1]\)
+
+	Now, \(d(f, g) = max \abs{f(x) - g(x)}, x \in [0, 1]\)
+
+	Consider \(\left\{ x^{n} \right\} \), where \(\left\{ x^{n} \right\} \subset B(0,1)\)
+
+	Where \(B(0,1)\) is the set of continuous functions at distance at most \(1\) from \(0\) function.
+
+	However, no subsequence converges.
+
+	How do I know that \(\left\{ x^{n_{j}} \right\} \).
+
+	These functions pointwise converge to \(0\) on \([0, 1]\).
+
+	Pointwise converge to \(1\) at \(1\)
+
+	\nt{
+		A sequence of functions converges in this metric if it converges uniformly.
+	}
+}
+
+\ex{Pugh}{
+
+	\begin{enumerate}[label=(\roman*)]
+		\item Finite sets are compact
+		\item Closed subsets of compact sets
+		\item A union of finitely many compact sets is compact
+		\item Cartesian product of finitely many compact sets is compact
+		\item The intersection of arbitrarily many compact sets is compact
+
+		      Let \(\left\{ A_{\alpha} \right\}_{\alpha \in A} \) be the family of compact sets.
+
+		      Thus, \[
+			      \bigcap A_{\alpha} = \left\{ p \colon p \in A_{\alpha} \text{ for all } \alpha \in A\right\}
+		      \]
+
+		      Closed subset of any \(A_{\alpha}\).
+		\item The closed unit ball in \(\RR^{d}\). Closed in a box or use Heine-Borel closed unit ball closed and bounded.
+		\item The boundary of a compact set.
+
+		      \(jA = A \setminus \inf(A)\) closed
+
+		\item \(\left\{ \frac{1}{n} \colon n \in \NN\right\} \cup \left\{ 0 \right\} \)
+		\item Hawaiian earring union of circles in the plane with radii \(\frac{1}{n}\) and centers \(\pm \frac{1}{n}\)
+		\item Cantor set is the intersection of closed sets. And it is bounded, thus compact. We talked in class about how to show this with base 3, but I'm too lazy to write it down.
+	\end{enumerate}
+}
+\dfn{}{
+	A sequence \((A_{n})\) of sets is called nested if \(A_1 \subset A_2 \subset \ldots \subset A_{n} \subset \ldots\)
+}
+
+\thm{}{
+	The intersection of a nested sequence of nonempty compact sets is compact and nonempty.
+
+	\pf{proof}{
+		Write a sequence \(a_{1}, a_{2}, \ldots, a_{n}, \ldots\) of nonempty compact sets.
+
+		Where \(a_{i} \in A_{i}\).
+
+		There is a subsequence \(a_{n_{1}}, a_{n_{2}}, \ldots, a_{n_{k}}, \ldots\) converging to \(a \in A_{1}\).
+
+		\(a\) must also be in \(A_{2}\) because \(A_{2}\) is closed.
+
+		Similarly, \(a \in A_{3}\) and so on. Or \(a \in A_{j}\) for all \(j\).
+
+		That means \(a \in \bigcap_{j=1}^{\infty} A_{j}\)
+
+		This implies intersection is nonempty.
+	}
+}
+
+\thm{}{
+	If \(A_1 \subset A_2 \subset \ldots \subset A_{n} \subset \ldots\) are nested nonempty compact sets and \(diam(A_{j})\) converges to \(0\), then \(\bigcap_{j=1}^{\infty} A_{j}\) is a singleton. i.e., consists of a single point.
+
+	\pf{Proof}{
+		\(\bigcap_{j=1}^{\infty} A_{j} \subset A_{j}\)
+
+		And \(diam(\bigcap_{j=1}^{\infty} A_{j}) \le diam(A_{j})\)
+
+		This implies that \(diam(\bigcap_{j=1}^{\infty} A_{j}) = 0\)
+	}
+}
+
+\thm{}{
+
+	Let \(f \colon M \to N\) be continuous.
+
+	\(A \subset M\) is compact then \(fA\) is compact.
+
+	I.e., The continuous images of compact sets are compact.
+
+	\pf{Proof}{
+		Let \((b_{n})\) be a sequence in \(fA\).
+
+		For each \(n\), we pick \(a_{n}\) in \(A\) such that \(f(a_{n}) = b_{n}\).
+
+		By compactness of \(A\) there exits a subsequnce \((a_{n_{k}})\) which converges to some \(a \in A\)
+
+		By continuity of \(f\), \(b_{n_{k}} = f(a_{n_{k}})\) converges to \(f(a) \in fA\).
+
+		i.e., given \((b_{n})\) we found \((b_{n_{k}})\) that converges in \(fA\).
+
+		So \(fA\) is compact.
+
+	}
+}
+
+\cor{}{
+	A continuous real valued function on a compact set is bounded and assumes it is minimum and maximum.
+
+	\pf{Proof}{
+		Let \(f \colon M \to \RR\) be continuous.
+
+		Let \(A \subset M\) be compact.
+
+		By the previous theorem, \(fA \subset \RR\) is compact.
+
+		So closed and bounded.
+
+		By the definition of bounded, it implies that there
+
+		exists \(V lub\) and \(v glb\) of \(A\) and closed means that \(v, V \in fA\).
+
+		We worked really hard to prove these facts about \(f \colon [a, b] \to \RR\)
+	}
+}
+
+\thm{}{
+	If \(M\) is homeomorphic to \(N\) then \(M\) is compact if and only if \(N\) is compact.
+
+	\pf{Proof}{
+		\(f \colon M \to N\) bicontinuous bijection.
+
+		Also let \(M\) compact implies \(f(M)\) compact and bijective means \(f(M) = N\)
+
+		\(N\) compact implies \(f^{-1}(N)\) compact and bijective means \(f^{-1}(N) = M\)
+	}
+}
+
+\cor{}{
+	\([a, b]\) is never homeomorphic to \(\RR\).
+
+	\pf{Proof}{
+		We know that \([a, b]\) be compact, but \(\RR\) is not compact.
+	}
+}
+
+\thm{}{
+	If \(M\) is compact then a continuous bijection \(f \colon M \to N\) is a homeomorphism.
+
+	i.e., the inverse \(f^{-1}\) is continuous.
+
+	\pf{Proof}{
+		We prove this by sharing that pre-images of closed sets are closed for \(f^{-1}\) .
+
+		\[
+			f^{-1} \colon N \to M
+		\]
+
+		If \(C \subset M\) then \(f^{-1}(C) = f(C)\).
+
+		Note if \(C\) is closed in \(M\) , then \(C\) is compact.
+
+		Because closed subsets of compacts sets are compact.
+
+		Therefore \(f(x)\) compact by last theorem.
+
+		Therefore \(f(C) = (f^{-1})^{-1}(C)\) is closed.
+	}
+}
+
+\dfn{}{
+	Say \(h \colon M \to N\) is an embedding if \(h\) is a homeomorphism onto its image.
+
+	\nt{
+		We say \(M\) is absolutely closed in \(N\) if for every embedding \(h \colon M \to N\) , \(h(M)\) is closed in \(N\).
+
+		We say \(M\) is absolutely open in \(N\) if for every embedding \(h \colon M \to N\) , \(h(M)\) is open in \(N\).
+	}
+}
+
+\thm{}{
+	A compact space is absolutely closed and absolutely bounded and absolutely compact.
+	\pf{Proof}{
+
+		\(M\) compact implies \(h(M)\) compact.
+
+		This implies \(h(M)\) closed and bounded.
+	}
+}
+
+\dfn{}{
+	Uniform continuity and compactness.
+
+	\(f \colon M \to N\) is uniformly continuous if for every \(\epsilon > 0\) there exists \(\delta > 0\) such that for all \(p, q \in M\) with \(d_{M}(p, q) < \delta\), we have \(d_{N}(f(p), f(q)) < \epsilon\).
+}
+
+\thm{}{
+	Every continuous function on a compact space is uniformly continuous.
+
+	\nt{
+		Prove this using finite subcovers of compactness.
+	}
+
+	\pf{Proof}{
+
+		Suppose not \(f \colon M \to N\) is continuous, where \(M\) is compact.
+
+		Moreover, \(f\) is not uniformly continuous.
+
+		Then there exits \(\epsilon\) such that for every \(\delta > 0\) there exists \(p, q \in M\) with \(d_{M}(p, q) < \delta\), but \(d_{N}(f(p), f(q)) \ge \epsilon\).
+
+		Let \(\delta = \frac{1}{n}\), which gives us \(p_{n}, q_{n} \text{ sequences }\in M\)
+
+		such that \(d_{M}(p_{n}, q_{n}) < \frac{1}{n}\) but \(d_{N}(f(p_{n}), f(q_{n})) \ge \epsilon\).
+
+		By compactness there exists a subsequence \(p_{n_{k}}\) converging to \(p \in M\).
+
+		Further subsequnce \(n_{\ell} \subset n_{k}\) such that \(q_{n_{\ell}}\) converges to \(q \in M\).
+
+		and \(p_{n_{\ell}} \to p\).
+
+		Now, \(d_{M}(p_{n_{\ell}}, q_{n_{\ell}}) < \frac{1}{n_{\ell}}\), so \(d_{M}(p, q) = 0\) so \(p = q\).
+
+		Thus, \(p_{n_{\ell}}, q_{n_{\ell}} \to p\).
+
+		But if \(\ell\) is big enough continuously at \(p\) implies:
+
+		\[
+			d_{N}(f(p_{n_{\ell}}), f(q_{n_{\ell}})) < d_{N}(f(p_{n_{\ell}}), f(p)) + d_{N}(f(p), f(q_{n_{\ell}})) < \epsilon
+		\]
+
+		But this contradicts the fact that \(d_{N}(f(p_{n_{\ell}}), f(q_{n_{\ell}})) \ge \epsilon\).
+	}
+}
+
+\dfn{Proper}{
+	\(A \subset M\) subset
+
+	\(A\) is proper if \(A \neq M\) and \(A \neq \emptyset\).
+
+	A is clopen i.e., open and closed.
+
+	Proper clopen subsets.
+}
+
+\dfn{}{
+	If \(M\) has a proper clopen subset, then \(M\) is disconnected.
+
+	If \(A \subset M\) is a proper clopen subset, then \(A^{c}\) is also a proper clopen subset.
+
+	Then we have a separation of \(M\) into two disjoint nonempty open sets.
+
+	\[
+		M = A \sqcup  A^{c}
+	\]
+
+	We say \(M\) is connected if it is not disconnected.
+}
+
+\thm{}{
+	The continuous image of a connected set is connected.
+
+	i.e., if \(f \colon M \to N\) is continuous and onto
+
+	with \(M\) connected, then \(N\) is connected.
+
+	\pf{Proof}{
+		Let's make some remarks
+
+		\nt{
+			If \(A\) is clopen then \(f^{pre}(A)\) is clopen.
+		}
+
+		If \(A\) is proper then since \(f\) is onto, then \(f^{pre}(A)\) is proper.
+
+		\(A \neq 0\) as \(f\) onto means \(f^{pre}(A) \neq \emptyset\).
+
+		Ditto, \(f^{pre}(A) \neq M\) into if it has \(A = N\) by onto.
+
+		Therefore, \(f^{pre}(A)\) is a proper clopen subset in \(M\).
+
+		so \(M\) is disconnected which is a contradiction.
+
+		So \(A\) didn't exist.
+
+	}
+}
+
+\cor{}{
+
+	If \(M\) is connected and \(M\) is homeomorphic to \(N\) then \(N\) is connected.
+}
+
+\cor{}{
+	Every continuous real-valued function on a connected domain \(M\) has the intermediate value property.
+
+	i.e., if \(a, b \in M\) then
+
+	\begin{align*}
+		f(a) < \gamma \subset f(b)\text{ or } \\
+		f(b) < \gamma \subset f(a)
+	\end{align*}
+
+	then there exists \(c \in M\) such that \(f(c) = \gamma\).
+
+	\pf{Proof}{
+		Assume \(f \colon M \to \RR\) is continuous.
+
+		Assume \(f\) takes values \(\alpha, \beta\) and assume \(\alpha < \gamma < \beta\).
+
+		And \(c\) doesn't exist, i.e. \(\gamma\) is not in the range.
+
+		\[
+			M = \left\{ x \subset M \colon f(x) < \gamma \right\} \sqcup \left\{ x \subset M \colon f(x) > \gamma \right\}
+		\]
+
+		is a separation of \(M\) into two disjoint nonempty open sets.
+
+		Both obviously open and they are complements of each other.
+	}
+}
+
+\nt{I missed something}
+
+\thm{}{
+	\(\RR\) is connected
+}
+
+\pf{Proof}{
+	Let \(U \subset \RR\) be nonempty and clopen and we'll prove from this that \(U = \RR\) .
+
+	Chose \(p \in U\) and let \(p -a, p + a\) the largest open interval at this kind in \(U\) .
+
+	Why is there a biggest one?
+
+	Take all such intervals \(U\) and take their union.
+
+	If \(a = \infty\), then we're done.
+
+	Assume \(a \neq \infty\)
+
+	Then \((p - a, p + a) \in U\)
+
+	\(U\) is clopen so \([p - a, p + a] \subset U\)
+
+	U is clopen, then there are open neighborhoods around \(p - a\) and \(p + a\) in \(U\).
+
+	So, there exists \([p - a - \epsilon, p - a + \epsilon] \subset U\)
+
+	and \([p + a - \epsilon, p + a + \epsilon] \subset U\).
+
+	So therefore,
+
+	\[
+		(p - a, p + a) \cup (p - a - \epsilon, p - a + \epsilon) \cup (p + a - \epsilon, p + a + \epsilon) \in U
+	\]
+
+	Thus, \((p - a - \epsilon, p + a + \epsilon) \in U\)
+
+	This contradicts the fact that we chose \(p - a, p + a\) to be the largest interval of this kind in \(U\).
+
+	So \(a = \infty\) and \(U = \RR\).
+
+}
+
+\cor{}{
+	Intermediate value theorem on \(\RR\)
+}
+
+\cor{}{
+	\((a, b), [a, b], S`\) are connected.
+	Use that the continuous images of connected sets are connected.
+
+	\pf{Proof}{
+
+		\((a, b)\) is homomorphic to \(\RR\)
+
+		\([a, b]\) is the image of \(\RR\) under the map:
+
+		\[
+			f(x) = \begin{cases}
+				a & \text{if } x \le a                          \\
+				x & \text{if } a \le x \le b \text{ continuous} \\
+				b & \text{if } x \ge b
+			\end{cases}
+		\]
+
+		We know that \(S`\) is the image of \(\RR\) under the map:
+
+		\[
+			t \to (\cos(t), \sin(t))
+		\]
+
+		Not connected sets:
+
+		\[
+			A = (1, 2) \cup (3, 4)
+		\]
+
+		So \(A\) is not homomorphic to \(\RR, [a, b]\) or \(S`\) .
+	}
+}
+
+\ex{}{
+\([a, b]\) not homomorphic to \(S`\) .
+
+One point can disconnect \([a, b]\), but one point can't disconnect \(S`\) .
+
+If \(h: [a, b] \to S`\) is a homeomorphism, then:
+
+\begin{align*}
+	h \colon [a, b] \setminus c \to S` \setminus \left\{ h(c) \right\} \\
+	[a, c] \sqcup [c, b] \to S` \setminus \left\{ h(c) \right\}        \\
+\end{align*}
+
+We know that the lhs is disconnected, but the rhs is connected.
+
+}
+
+\thm{}{
+	The closure of a connected set is connected.
+
+	\(S\) connected and \(T\) is such that \(S \subset T \subset \overline{S}\)
+
+	where \(\overline{S}\) is the closure of \(S\).
+
+	Then \(T\) is connected.
+
+	\pf{Proof}{
+		Let \(T\) disconnected imply that \(S\) is disconnected.
+
+		\(T\) be disconnected implies that there exists \(A, B\) sets in \(T\) such that \(A \sqcup B = T\).
+
+		Where \(A, B\) are clopen and proper.
+
+		Look at \(K = A \cap S\) and \(L = B \cap S\).
+
+		Then \(S = K \sqcup L\) by definition.
+
+		\(K, L\) are disjoint, clopen in \(S\) due to the inheritance principle.
+
+		Are \(K, L\) proper?
+
+		We're worrying about say \(A \cap S = \emptyset\).
+
+		Let \(K = \emptyset\), then \(A \cap S^{c}\)
+
+		Since \(A \subset T\) is proper there is a point \(p \in A\).
+
+		Since \(A\) is open there is an open neighborhood \(M_{r}(p)\)
+
+		such that \(T \cap M_{r}(p) \subset A \subset S^{c}\).
+
+		Since \(p\) is in \(\overline{S}\), there is some point in \(S\) in \(T \cap M_{r}(p)\).
+
+		However, this contradicts that \(A \subset S^{c}\)
+
+		Similarly, in the case of \(L\).
+
+		Then \(B \subset S^{c}\).
+
+		We are argue exactly the same way that \(L\) is proper.
+
+		Thus, \(K, L\) are proper and clopen in \(S\).
+	}
+}
+
+\mclm{Sin curve}{
+
+	Let \(M = G \cup Y\)
+
+	where \(G = \left\{ (x, y) \in \RR \colon y = \sin \frac{1}{x}, 0 < x \le \frac{1}{\pi} \right\} \)
+
+	and \(Y = \left\{ (0, y) \colon -1 \le y \le 1 \right\} \)
+
+	Thus, \(G, Y\) connected as \(M = G \cup Y = \overline{G}\) is connected.
+}
+
+\thm{}{
+
+	The union of connected sets sharing a common point is connected.
+
+	\pf{Proof}{
+		Let \(S = \bigcup_{\alpha} S_{\alpha}\) where \(S_{\alpha}\) is connected and \(p \in S_{\alpha}\) for all \(\alpha \in A\).
+
+		If \(S\) were disconnected, then there exists \(A, A^{c}\) clopen in \(S\) such that \(A \sqcup A^{c} = S\).
+
+		Where \(A\) is clopen and proper.
+
+		Assume (up to relabeling) that \(p \in A\).
+
+		Then \(p \in A \cap S_{\alpha} \neq \emptyset\) for all \(\alpha\)
+
+		Since \(S_{\alpha}\) is connected, \(A \cap S_{\alpha} = S_{\alpha}\).
+
+		Therefore \(S_{\alpha} \subset A\) for all \(\alpha\).
+
+		Thus, \(A = S\) which is a contradiction.
+	}
+
+}
+
+\mclm{}{
+	\(S^{2}\) is connected.
+
+	Let \(S^{2} = \left\{ \text{longitudes} \right\} \).
+
+	Longitudes is a copy of \(S`\) passing through the north and south poles.
+
+}
+
+\ex{}{
+	Let \(C \subset  \RR^{n}\) be convex.
+
+	Choose any point \(p \in C\)
+
+	Then each \(q \in C\) lies on the connected set \(\overline{pq} \subset C\).
+
+	Thus,
+	\[
+		C = \bigcup_{q \in C} \overline{pq}
+	\]
+}
+
+\dfn{}{
+
+	\(M\) be a metric space, where \(p, q \in M\).
+
+	A path joining \(p\) to \(q\) is a continuous function \(f \colon [0, 1] \to M\)
+
+	such that \(f(0) = p\) and \(f(1) = q\).
+
+	If every pair \(p, q \in M\) are joined by a path, then we say \(M\) is path connected.
+
+}
+
+\thm{}{
+	Path connected spaces are connected.
+
+	\ex{}{
+		The topologist sine curve is connected but not path connected.
+	}
+}
+
+\thm{}{
+	Path connected implies connected.
+
+	\pf{Proof}{
+		Assume \(M\) is path conntected, and assume for a contradiction it isn't connected.
+
+		So \(M = A \sqcup A^{c} \), where \(A, A^{c}\) are clopen and proper.
+
+		Now pick \(p \in A\) and \(q \in A^{c}\), then by path connectedness
+
+		there exists an \(f \colon [a, b] \to M\), where
+
+		\begin{align*}
+			f(a) = p \\
+			f(b) = q
+		\end{align*}
+
+		Thus,
+
+		\begin{enumerate}[label=(\roman*)]
+			\item \(f([a, b])\) is connected
+			\item \(f([a, b]) \in p \cap A\) and \(f([a, b]) \in q\cap A^{c}\) sepearates \(f([a, b])\) since both are proper.
+		\end{enumerate}
+
+		This is a contradiction.
+	}
+}
+
+\nt{
+
+	We know two things:
+
+	\begin{enumerate}[label=(\roman*)]
+		\item Connected subsets of \(\RR\) are path connected.
+		\item Open connected sets in \(\RR^{n}\) are path connected.
+	\end{enumerate}
+}
+\ex{}{
+Topologists sine curves:
+
+\(M = G \cup Y\)
+
+Where:
+
+\begin{align*}
+	G & = \left\{ (x,y) \in \RR^{2} \colon y = \sin \frac{1}{x}, 0 < x \le \frac{1}{\pi} \right\} \\
+	Y & = \left\{ (0, y) \in \RR^{2} \colon -1 \le y \le 1 \right\}
+\end{align*}
+
+\(G\) is a graph so it is connected.
+
+Thus, \(M = \overline{G}\) is connected.
+
+\(M\) is not path connected.
+
+pick \(p \in G, q \in Y\), with \(f \colon [a, b] \to M\)
+
+\begin{align*}
+	f(a) = p \\
+	f(b) = q
+\end{align*}
+
+We'll show \(f\) can't be continuous.
+
+Let \(G \subset M\) open, connected so \(f^{-1}(G)\) is open and conntected in \([a,b]\).
+
+So \(f^{-1}(G) = [a, c]\)
+
+What is \(c\) as \(lim_{x \to b} f(x)\)
+
+Since \(f\) is continuous, \(f \colon [a, c] \to G\) must follow
+
+the curve \(\sin \frac{1}{x}\) and therefore oscillates as \(x \to b\).
+
+So \(lim_{x \to c} f(x)\) doesn't exist, so \(f\) is not continuous.
+}
+
+\cor{}{
+	The closure of a path connected set isn't necessarily path connected.
+}
+
+\mclm{Recall}{
+	\(\overline{S}\) is the samllest closed set containing \(S\).
+
+	Where \(\overline{S} = lim S\)
+
+	\(int S\) largest open set contained in \(S\).
+
+	Boundary of \(S\) is \(\partial S = \overline{S} - int S\)
+}
+
+\dfn{Clustering and condensing}{
+	\(p\) is a cluster point of \(S\) if every \(M_{r}p\) contains
+
+	infinitely many points in \(S\).
+
+	Also say \(s\) clusters at \(p\) .
+
+	\(p\) is a condensing point of \(S\) if every \(M_{r}(p)\) contains uncontably many points in \(S\).
+
+	We also say \(S\) condenses at \(p\).
+}
+
+\thm{}{
+	The following are equivalent for \(p \in S\)
+
+	\begin{enumerate}[label=(\roman*)]
+		\item There exists a sequence \(\left\{ p_{n} \right\} \subset S\) such that \(p_{n} \to p\)
+
+		      and \(p_{n}\) are distinct for all \(n\).
+		\item (Cluster Point): Every neighborhood of \(p\) contains infinitely many points of \(S\).
+		\item Every neighborhood of \(p\) contains at least two points in \(S\).
+		\item Every neighbored of \(p\) contains at least one point in \(S\) distinct from \(p\).
+	\end{enumerate}
+
+	\pf{Proof}{
+
+		We will do the following:
+
+		\((1) \implies (2) \implies (3) \implies (4)\) are all clear.
+
+		Now, we just want to show that \((4) \implies (1)\) .
+
+		Assuming every neighbored at \(p\) contains a point different from \(p\).
+
+		Let \(r_{1} = 1\). Choose \(p_{1} \in M_{1}(p)\) such that \(p_{1} \neq p\).
+
+		Let \(r_{2} = min(\frac{1}{2}, d(p_{1}, p))\).
+
+		Pick \(p_{2} \in M_{r_{2}}(p)\) such that \(p_{2} \neq p\).
+
+		And notice that \(p_{1} \neq p_{2}\) since \(d(p_{2}, p) < d(p_{1}, p)\).
+
+		Continue inductively, given \(p_{1}, \ldots, p_{n}\) and \(r_{1}, \ldots, r_{n}\)
+
+		Choose, \(r_{n+1} = min(\frac{1}{n}, d(p_{n}, p))\)
+
+		Pick \(p_{n+1} \in M_{r_{n+1}}(p)\) such that \(p_{n+1} \neq p\).
+
+		Now we have a sequence \(\left\{ p_{n} \right\} \subset S\) such that \(p_{n} \to p\)
+
+		Since \(d(p_{n}, p) < \frac{1}{n}\) for all \(n\).
+
+		And \(d(p, p_1) > d(p, p_2) > \ldots > d(p, p_{n})\).
+
+		So \(p_{n}\) are distinct for all \(n\).
+
+		Thus, \((4) \implies (1)\) .
+
+	}
+
+}
+
+\mprop{}{
+	Let \(S`\) be the set of cluster points then \(\overline{S} = S\cup S`\)
+
+	\pf{Proof}{
+		\(S` \subset lim S = \overline{S}\)
+		So \(S \cup S` \subset \overline{S}\)
+
+		And if \(p \in \overline{S}\) then either \(p \in S\) or else \(p \in S^{c}\) .
+
+		Then every neighborhood of \(p\) contains a point in \(S\) .
+
+		Because \(p\) is in the closure of \(S\).
+
+		So \(\overline{S} \subset S \cup S`\)
+	}
+}
+
+\cor{}{
+	\(S\)  is closed if and only if \(S` \subset S\)
+
+	\pf{Proof}{
+		\(S\) is closed if and only if \(S = \overline{S}\)
+
+		Since \(\overline{S} = S \cup S`\), then \(S = \overline{S}\) if and only if \(S` \subset S\)
+	}
+}
+
+\dfn{Perfect}{
+	A metric space \(M\) is perfect if every point in \(M\) is a cluster point at \(M\).
+}
+
+\ex{}{
+	\(\RR\) is perfect, \([a,b]\) perfect, \((a, b)\) perfect, \(\QQ\) perfect as well.
+
+	\nt{
+		\(\NN\) and \(\ZZ\) are not perfect.
+
+		Any discrete metric space is not perfect.
+	}
+}
+
+\thm{}{
+	Every non-empty, perfect, complete metric space is uncountable.
+
+	\pf{Proof}{
+		Assume no, \(M \neq \emptyset\) perfect, complete, and some \(M\)
+
+		consists of cluster points, and it's not finite.
+
+		So \(M\) is denummerable.
+
+		So \(M = \left\{ x_1, x_2, \ldots \right\} \)
+
+		\mclm{Goal}{
+			Find \(p \in M\), not on the list for a contradiction
+		}
+
+		Let \(\overline{M_{r}p} = \left\{ q \in M \colon d(p, q) \le r \right\} \)
+
+		The closed \(r\) neighborhood.
+
+		Choose \(y_1 \neq x_1\) and \(r_1\) such that \(y_1 = \overline{M_{r_1}y_1} \) doesn't contain \(x_1\), and assume \(r_1 < 1\).
+
+		\(M\) clusters at \(y_1\), infinitely many points of \(M\) in \(M_{r_1}(y_1)\).
+
+		Now pick \(y_2 \in M_{r_1}(y_1)\) such that \(y_2 \neq x_2\) and \(r_2\).
+
+		With \(y_2 = \overline{M_{r_2}(y_2)} \) doesn't contain \(x_2\).
+
+		With \(x_2\) and \(r_2 < \frac{1}{2}\) and \(y_2 \subset y_1\)
+
+		Continue inductively, so we'll have picked:
+
+		\begin{align*}
+			y_1, y_2, \ldots, y_n \\
+			Y_1 \supset Y_2 \supset \ldots \supset Y_n
+		\end{align*}
+
+		For all \(i\), \(Y_i = \overline{M_{r_i}(y_i)} \) doesn't contain \(x_i\).
+
+		And \(y_{n}\) doesn't contain \(x_{n}\) for all \(n\).
+
+		Now, pick \(y_{n+1}\) and \(r_{n+1}\), \(M\) clusters at \(y_{n}\) so that \(y_{n+1} \neq x_{n+1}\)
+
+		And \(Y_{n+1} = \overline{M_{r_{n+1}}(y_{n+1})} \) doesn't contain \(x_{n+1}\).
+
+		Thus, \(y_{n+1} \subset y_{n}\) and \(r_{n+1} < \frac{1}{2^{n}}\).
+
+		We know that \(y_{n} \to y\) by completeness because \(\left\{ y_{n} \right\} \) is a Cauchy sequence.
+
+		Since \(y_{n}\) are nested \(y\) is contained for all of them.
+
+		So \(y \neq x_{j}\) for all \(j\), since \(y \in Y_{j}\) and \(Y_{j}\) doesn't contain \(x_{j}\).
+
+		Thus, we have a contradiction as \(y \in M\) and \(y \neq x_{j}\) for all \(j\).
+	}
+}
+
+\cor{}{
+	\(\RR\) or \([a, b]\) are uncountable.
+}
+
+\cor{}{
+	Every non-empty, perfect, complete metric space is locally uncountable.
+
+	i.e., ecery \(M_{r}p\) is already uncountable.
+
+	\pf{Proof}{
+		Let \(\overline{M_{\frac{r}{2}}(p) \subset M_{r}(p)} \)
+
+		So \(M_{\frac{r}{2}}(p)\) clusteres at each of its points.
+
+		Therefore \(\overline{M_{\frac{r}{2}}(p)}\) clusters at each of its points by early point of \(\overline{S} = S \cup S`\)
+
+		So \(\overline{M_{\frac{r}{2}}(p)}\) is closed and perfect, and closed subsets of complete spaces are complete spaces.
+
+		So \(\overline{M_{\frac{r}{2}}(p)}\) is complete, perfect, and non-empty.
+
+		So uncountable by previous theorem.
+
+		So \(M_{r}(p) \supset \overline{M_{\frac{r}{2}}(p)}\) and is also uncountable.
+	}
+}
+
+\mclm{Arithmetic is continuous}{
+	\begin{enumerate}[label=(\roman*)]
+		\item \(+\): \(f \colon \RR^{2} \to \RR\) continuous
+		      \((a, b) \to a + b\)
+		\item \(\cdot\): \(f \colon \RR^{2} \to \RR\) continuous
+		      \((a, b) \to a \cdot b\)
+		\item \(-\): \(f \colon \RR \to \RR\) continuous
+		      \(a \to -a\)
+		\item \(-\): \(f \colon \RR^{2} \to \RR\) continuous
+		      \((a, b) \to a - b\)
+	\end{enumerate}
+}
+
+\dfn{Boundindness}{
+
+	Let \(S \subseteq M\) be a subset of a metric space. \(S\) is bounded if
+
+	there exists \(p \in M\) and a \(r > 0\) such that \(S \subseteq M_{r}(p) = B(p, r)\).
+
+	If \(S\) is not bounded we call unbounded.
+
+	That means \((0, 1)\) is homeomorphic to \(\RR\)
+
+	\(\RR\) is unbounded, \((0, 1)\) bounded so boundedness is not a topological property.
+
+	Let \(f \colon M \to N\), with \(M, N\) metric spaces.
+
+	Then \(f\) is bounded if \(f(M) \subset N\) is bounded.
+}
+
+\dfn{Coverings}{
+
+	A collection \(X\) of sets in \(M\) covers \(A \subset M\) if
+
+	\(A\) is contained in the union of the sets in \(X\), i.,e \(A \subset \bigcup_{U \in X} u\).
+
+	\(X\) is called a cover or covering of \(A\).
+
+	If \(Y, X\) are both coverings of \(A\) and \(Y \subset X\) (i.e., if \(V \in Y\), then \(V \in X\)  )
+
+	then we say \(X\) reduces to \(Y\) or \(Y\) is a subcover of \(X\).
+
+}
+
+\dfn{}{
+	If all the sets in a covering \(X\) are open, we call \(X\) an open cover.
+}
+
+\dfn{}{
+	If every open covering \(X\) of \(A\) reduces to a finite subcover \(Y\). Then
+
+	we call \(A\) covering compact.
+
+	A covering \(Y\) is called finite if \(Y\) consists of finitely many subsets of \(M\) .
+
+	Let \(A = (0,1)\). Then \(A\) is not covering compact.
+
+	Let \(X = \left\{ U_{n} \colon U_{n} = \left( \frac{1}{n}, 1 \right)  \right\} \).
+
+	We see \((0, 1) \in \bigcup U_{n}\) is clear and also \((0, 1)\) isn't contained in any finite subcover.
+
+	\[
+		(\frac{1}{n}, 1), (\frac{1}{n_{2}}, 1), \ldots, (\frac{1}{n_{k}}, 1)
+	\]
+
+	Thus, \(\alpha = \min\left\{ \frac{1}{n}, \frac{1}{n_{2}}, \ldots, \frac{1}{n_{k}} \right\} \)
+
+	Then, \(\frac{\alpha}{2} \in (0, 1)\) but not covered.
+}
+
+\thm{}{
+	\(M\) is a metric space. Let \(A \subset M\) then the following are equivalent:
+
+	\begin{enumerate}[label=(\roman*)]
+		\item \(A\) is covering compact.
+		\item \(A\) is sequentially compact.
+	\end{enumerate}
+
+	\pf{Proof \(1 \implies 2\)  }{
+		Suppose \(A\) is covering compact but not sequentially compact.
+
+		Then there exists a sequence \(\left\{ p_{n} \right\} \subset A\) with no convergent subsequence.
+
+		Therefore for each \(a \in A\) there is some \(r >0 (r = r(a))\) with \(M_{r}(a)\) containing only finitely many points of \(\left\{ p_{n} \right\} \) .
+
+		Notice that \(\left\{ M_{r_{n}}(a) \colon a \in A\right\} \) is an open cover of \(A\).
+
+		Therefore, there is a finite subcover i.e., \(a_1, \ldots, a_k\)
+
+		such that \(A \subset M_{r_{1}}(a_1) \cup \ldots \cup M_{r_{k}}(a_k)\).
+
+		but by the pigeonhole principle, \(\left\{ p_{n} \right\} \) has to visit (at least) one of these neighborhoods infinitely many times.
+
+		Which is a contradiction that there are only finitely many points in each neighborhood.
+	}
+
+	\mclm{Prep for \(2 \implies 1\) }{
+		The Lebesgue number of a cover \(X\)  of \(A\) is a nonnegative \(\lambda\) real number such that for each \(a \in A\)
+
+		Then there exists \(U \in X\) such that \(M_{\lambda}(a) \subset U\).
+
+		For instance, let \(\lambda = 0\) and \(A = (0, 1)\) cover \(A\) by \(X = \left\{ A \right\} \).
+
+		or Let \(\lambda = 1\) and \(A = (0, 1) \subset  \RR\) cover \(A\) by \(X = \left\{ (a - 1, a +1) \colon a \in A \right\} \).
+
+		We show later the proof a lemma.
+	}
+
+	\pf{Proof of \(2 \implies 1\) }{
+		Let \(X\) be an open cover of \(A\) which is sequentially compact.
+
+		We want to show that \(X\) reduces to a finite subcover.
+
+		Let's use that \(X\) has a Lebesgue number \(\lambda > 0\) by the lemma.
+
+		Choose \(a_{i} \in A\) and \(u_{i} \in X\) such that \(M_{\lambda}(a_{1}) \subset u_1\)
+
+		If \(A \subset u_1\), we're done with finite cover \(Y = \left\{ u_1 \right\} \) .
+
+		If \(A \subsetneq u_1\) then pick \(a_2 \in A, a_2 \notin u_1\)
+
+		And \(u_2 \in X\) such that \(M_{\lambda}(a_2) \subset u_2\)
+
+		Either \(A \subset u_1 \cup u_2\) and we're done or
+
+		there exits \(a_3 \in A, a_3 \notin u_1 \cup u_2\) and \(u_3 \in X\) such that \(M_{\lambda}(a_3) \subset u_3\).
+
+		If no \(u_1, \ldots, u_{n}\) picked this way covers \(A\), then we've picked
+
+		a sequence \(\left\{ a_{n} \right\} \subset A\) with \(M_{\lambda}(a_{n}) \subset u_{n}\)
+
+		and \(a_{n+1} \notin u_1 \cup \ldots \cup u_{n}\) for all \(n\).
+
+		by sequential compactness, there is a subsequence \(\left\{ a_{n_{k}} \right\} \) converging to \(p \in A\)
+
+		For a \(k\) much larger than \(1\), we have \(d(a_{n_{k}}, p) < \lambda\)
+
+		Where \(a_{n_{k}} \to p\) means for all \(k > k_{0}\) so it holds.
+
+		Therefore, \(p \in M_{\lambda}(a_{n_{k}}) \subset u_{n_{k}}\) from the definition of \(u_{n_{k}}\) using the Lebesgue number \(\lambda\) .
+
+		Now, fix any such \(k\), then for all \(\ell > k\) we've picked \(a_{n_{\ell}} \notin u_{n_{k}}\)
+
+		SO \(a_{n_{\ell}}\) can't converge to \(p\) since \(u_{n_{k}}\) is open and \(p \in u_{n_{k}}\) .
+
+		Which is a contradiction.
+	}
+}
+
+\mlenma{Lebesgue number lemma}{
+
+	Every open cover of a sequentially compact set has positive Lebesgue number.
+
+	\pf{Proof}{
+		Suppose not.
+
+		\(X\) is an open covering of a sequentially compact set \(A\) and yet for each \(\lambda > 0\)
+
+		there exists \(a \in A\) such that no \(u \in X\) contains \(M_{\lambda}(a)\).
+
+		Take \(\lambda_{n} = \frac{1}{n}\) and let \(a_{n}\) be a point where
+
+		no \(u \in X\) contains \(M_{\lambda_{n}}(a_{n})\).
+
+		then sequentially compactness tell us that there exists a subsequence \(\left\{ a_{n_{k}} \right\} \)
+
+		such that \(a_{n_{k}} \to p \in A\).
+
+		Since \(X\) covers \(A\) there is \(u \in X\) with \(p \in u\) and since
+
+		\(u\) is open there is \(r > 0\) such that \(M_{r}(p) \subset u\).
+
+		Now if \(k\) is large enough compared to 1 (i.e., there exits \(k_{0}\) such that for every \(k \ge k_{0}\) )
+
+		We have \(d(a_{n_{k}}, p) < \frac{r}{2}\) and \(\frac{1}{n_{k}} < \frac{r}{2}\)
+
+		By the triangle inequality,
+
+		\[
+			M_{\frac{1}{n_{k}}}(a_{n_{k}}) \subset M_{r}(p) \subset u \in X
+		\]
+
+		Which contradicts our assumption.
+	}
+}
+
+\dfn{Totally bounded}{
+	Let \(A \subset  M\) is called totally bounded if for every \(\epsilon > 0\)
+
+	there exists a finite cover of \(A\) by open balls of radius \(\epsilon\) (\(\epsilon-\)balls )
+
+	\mclm{Remember}{
+		Example: \(C([0, 1], \RR) = \left\{ \text{continuous functions } f \colon [0, 1] \to \RR\right\} \)
+
+		with the metric \(d(f, g) = \max_{x \in [0, 1]}\left\{ \abs{f(x) - g(x)} \right\} \)
+
+		Let \(f_{n} = x^{n}\) this is sequence inside \(M, 0\) where \(0\) is the zero function.
+
+		That has no convergent subsequence.
+	}
+
+	\mclm{Recall}{
+		Compact implies closed, bounded.
+
+		In \(\RR^{n}\) compact implies closed and bounded.
+
+		In \(C[0, 1], \RR\) closed and bounded does not imply compact.
+	}
+}
+
+\thm{}{
+	A subset of a complete metric space is compact if and only if it closed and totally bounded.
+
+	\pf{Proof}{
+		Assume \(A \subset M\) compact this implies that \(A\) is closed.
+
+		To see it is totally bounded.
+
+		Let \(\epsilon > 0\) be fixed and let \(X\) be an open cover of \(A\) by \(\epsilon-\)balls.
+
+		i.e., \(\left\{ B_{\epsilon}(a) : a \in A \right\} \)
+
+		by compactness there is a finite subcover \(Y\) of \(X\).
+
+		By finitely many \(\epsilon-\)balls cover \(A\).
+
+		Conversely assume \(A\) is totally bounded and closed, want to show \(A\) is compact.
+
+		We'll show sequential compactness by pigeonhole principle.
+
+		let \(\left\{ a_{n} \right\} \) be a sequence in \(A\).
+
+		We want a convergent subsequence.
+
+		Since \(M\) is complete and \(A\) is closed, we'll find a cauchy subsequence.
+
+		Let \(\epsilon_{k} = \frac{1}{k}\)
+
+		A is totally bounded, so there is a finite cover of \(A\) by \(\epsilon_{k}-\)balls.
+
+		\[
+			B_{\epsilon_{1}}(p_1), \ldots, B_{\epsilon_{k}}(p_k) \text{ cover } A
+		\]
+
+		Note that \(p_{i}\) may not be in \(A\), let alone in \(a_{n}\).
+
+		By pigeonholing, there exists some \(p_{i}\) and infinitely many \(a_{n}\) such that \(a_{n} \in B_{\epsilon_{i}}(p_{i})\).
+
+		Notice: any subset of a totally bounded set is totally bounded (restrict the cover).
+
+		So \(A_{1}\) is totally bounded so covered by finitely many \(\epsilon_{2}-\)balls.
+
+		\[
+			B_{\epsilon_{2}}(q_{1}), \ldots, B_{\epsilon_{2}}(q_{k_{2}}) \text{ cover } A_{1}
+		\]
+
+		Pigeonhole again, find a subsubsequence of \(\left\{ a_{n_{\ell}} \right\} \subset \left\{ a_{n} \right\} \)
+
+		with all \(a_{n_{\ell}} \in B_{\epsilon_{2}}(q_{i})\) for some \(i\).
+
+		Let \(A_{2} = B_{\epsilon_{2}}(q_{i}) \cap A_{1}\)
+
+		We procced inductively:
+
+		To build \(A_{n} = B_{q_{n}}(X_{n}) \cap A_{n-1}\)
+
+		Where one infinite subsequence of \(\left\{ a_{n} \right\} \) is contained in \(A_{n}\).
+
+		Choose \(a_{n_{k}} \in A_{k} = A_{k-1} \cap M_{\epsilon_{k}}(p_{k})\)
+
+		Gives a subsequence \(\left\{ a_{n_{k}} \right\} \) which I claim is cauchy.
+
+		For every \(\epsilon > 0\) there exists \(N\), where \(\ell, k \ge N\) then \(d(a_{n_{\ell}}, a_{n_{k}}) < \epsilon\).
+
+		Given, \(\epsilon > 0\) choose \(N\) such that \(2k < \epsilon\) .
+
+		Then if \(k, \ell\ \ge N\) then
+
+		\[
+			a_{n_{\ell}}, a_{n_{k}} \in A_{N} \subset B_{\frac{1}{N}}(X_{N})
+		\]
+
+		Then, \(d(a_{n_{\ell}}, a_{n_{k}}) < diam(B_{\frac{1}{N}}(X_{N})) < \frac{1}{N} < \epsilon\)
+
+		Since, \(\left\{ a_{n_{k}} \right\} \) is cauchy, it converges to some \(p \in M\)
+
+		And since \(A\) is closed, the limit is closed in \(A\).
+
+	}
+}
+
+\cor{}{
+	A metric space is compact if and only if it is complete and totally bounded.
+
+	\pf{Proof}{
+		A metric space is always closed in itself.
+	}
+}
+
+\mclm{The standard cantor set}{
+	Let \(C \subset  [0, 1]\), and be built as follows:
+
+	\begin{align*}
+		C_1   & = [0, 1]                                                                                                 \\
+		C_2   & = [0, \frac{1}{3}] \cup [\frac{2}{3}, 1] = [0, 1] \setminus \left( \frac{1}{3}, \frac{2}{3} \right)      \\
+		C_3   & = [0, \frac{1}{9}] \cup [\frac{2}{9}, \frac{3}{9}] \cup [\frac{6}{9}, \frac{7}{9}] \cup [\frac{8}{9}, 1] \\
+		      & = C_2 \setminus \left( \frac{1}{9}, \frac{2}{9} \right) \cup \left( \frac{7}{9}, \frac{8}{9} \right)     \\
+		C_{n} & = C_{n-1} \setminus \bigcup_{k=1}^{3^{n-2}} \left( \frac{3k-1}{3^{n-1}}, \frac{3k}{3^{n-1}} \right)      \\
+		      & = C_{n-1} \setminus \text{open middle third of each closed interval in } C_{n-1}
+	\end{align*}
+
+	\nt{
+		Exercise: find some notation heavy way to write this.
+
+		Hint: \(C_{n}\) is a union of \(2^{n-1}\) closed intervals, what are the endpoints?
+	}
+
+	Thus, \(C = \bigcap_{n=1}^{\infty} C_{n}\) is a closed subset of \([0, 1]\).
+
+	\mclm{Remark}{
+		\(\frac{1}{3}\) is arbitrary, if we take any fixed fraction, the resulting set are homeomorphic.
+
+		\(C\) is in some sense "the first" fractal.
+	}
+}
+
+\dfn{}{
+	\(M\) is totally disconnected if each point \(p \in M\) has arbitrarily small open neighborhoods
+
+	i.e., given \(\epsilon > 0\) and \(p \in M\) there exists \(U \subset M\) open such that \(p \in U \subset B_{\epsilon}(p)\)
+
+	\mclm{Examples}{
+		\begin{enumerate}[label=(\roman*)]
+			\item Discrete metric spaces are totally disconnected.
+			\item \(\QQ\) is totally disconnected.
+		\end{enumerate}
+	}
+}
+
+\thm{}{
+	The Cantor set \(C\) is compact, non-empty, perfect, and totally disconnected.
+
+	\pf{Proof}{
+
+		Note: \(C \subset \RR\) so \(x, y \in C\), \(d(x, y) = \abs{x - y}\)
+
+		Let \(C = \bigcap_{n=1}^{\infty} C_{n}\) where \(C_{n}\) is the \(n\)th stage of the construction.
+
+		And \(C_{n}\) compact so \(C\) is compact.
+
+		Points in \(C\) ? end points of intervals in each \(C_{n}\)
+
+		\[
+			E = \left\{ 0, 1, \frac{1}{3}, \frac{2}{3}, \frac{1}{9}, \frac{2}{9}, \frac{7}{9}, \frac{8}{9}, \ldots \right\}
+		\]
+
+		\(E\) denumerable, since \(E \subset \QQ\) and infinite.
+
+		And \(E \subset C\) so \(C\) is non-empty and infinite.
+
+		To show perfect and disconnected, pick \(x \in C\) and any \(\epsilon > 0\).
+
+		Fix \(n\) such that \(\frac{1}{3^{n}} < \epsilon\)
+
+		Then \(x \in C_{n}\) means \(x\) is one of the endpoints of the \(2^{n-1}\) closed intervals in \(C_{n}\).
+
+		Call the interval \(I\), then \(E \cap I\) is a infinite and
+
+		contained in \((x - \epsilon, x + \epsilon)\)  infinite because \(I \cap C_{n+1} = I_{1} \cup I_{2}\)
+
+		and has \(4\) endpoints, which means that \(I \cap C_{n+2}\) has 8 endpoints etc.
+
+		Therefore, \(x\) is a cluster point of \(C\), so \(C\) is perfect.
+
+		notice: \(I \subset C_{n}\) is closed.
+
+		so \(J = C_{n} \setminus I = C_{n} - I\) is closed in \(C_{n}\)
+
+		SO \(I, J\) clopen in \(C_{n}\)
+
+		So \(C \cap I, C \cap J\) are clopen in \(C\)
+
+		and \(x \in C \cap I \subset B_{\epsilon}(x)\), so \(C\) is totally disconnected.
+	}
+}
+
+\cor{}{
+	\(C\) is uncountable.
+
+	\pf{Proof}{
+		Perfect sets are uncountable.
+	}
+}
+
+\mclm{Coding proof of uncountably}{
+	Canter set in base 3 arithmetic.
+
+	\begin{align*}
+		x & \in C                                                     \\
+		x & \in C_1, 0                                                \\
+		x & \in C_2 = I_0 \cup I_2,
+		\begin{cases}
+			0.0 & \text{ if } x \in I_0 \\
+			0.2 & \text{ if } x \in I_2
+		\end{cases}                                   \\
+		x & \in C_3 = J_{0.0} \cup J_{0.2} \cup J_{0.2} \cup J_{0.22} \\
+	\end{align*}
+
+	Thus, we can write
+
+	\[
+		\begin{cases}
+			0.00 & \text{ if } x \in J_{0.0} \\
+			0.02 & \text{ if } x \in J_{0.2} \\
+			0.20 & \text{ if } x \in J_{2.0} \\
+			0.22 & \text{ if } x \in J_{2.2}
+		\end{cases}
+	\]
+
+	Keep going we set a trecimal expansion for \(x \in C\).
+
+	We can write any \(Y\) in \([0, 1]\) as a trecimal expansion.
+
+	\[
+		Y = 0.120022\ldots
+	\]
+
+	\(y \in C\) if and only if \(1\) never appears in the trecimal expansion of \(y\).
+
+	Decimals in \([0, 1]\) with no \(5\)'s define another cantor set or no \(3\)s, \(5\)s , or \(7\)s
+
+}
+
+\dfn{}{
+	If \(S \subset M\) and \(\overline{S} = M\) then we say \(S\) is dense in \(M\).
+	\ex{}{
+		\begin{enumerate}[label=(\roman*)]
+			\item \(\QQ\) is dense in \(\RR\)
+			\item \(\QQ \cap [0, 1]\) is dense in \([0, 1]\)
+			\item Rational numbers whose denominators are powers of \(2\) are dense in \(\RR\)
+		\end{enumerate}
+	}
+}
+
+\dfn{}{
+	\(S\) is somewhere dense in \(M\) if there exists an open set \(u \subset M\) and \(\overline{u \cap S} = \overline{u}\)
+
+	Thus, \(\QQ \cap (0, 1)\) isn't dense in \(\RR\) but it is dense in \((0, 1)\), thus somewhere dense in \(\RR\)
+
+	\mclm{Equivalently}{
+		Let \(S \subset M\) is somewhere dense if \(\overline{S} \supset u\) which is open and non-empty
+	}
+}
+
+\dfn{}{
+	A set \(S\) is nowhere dense if it is not somewhere dense.
+}
+
+\thm{}{
+	The cantor set \(C\) does not contain an internal and is nowhere dense in \(\RR\) or \([0, 1]\).
+
+	\pf{Proof of interval}{
+		Suppose not and \(C\) contains an interval.
+
+		Assume \((a, b) \subset  C \subset C_{n}\) for all \(n\).
+
+		Pick \(n\) such that \(\frac{1}{3^{n}} < b - a\)
+
+		Look at \(C_{n}\) and notice that \(C_{n}\) is a union of \(2^{n-1}\) closed intervals.
+
+		Disjoint connected intervals and since \((a, b)\) is connected it lies entirely in one of them call it \(I\).
+
+		\[
+			\left\lvert I \right\rvert = \frac{1}{3^{n}}
+		\]
+
+		Thus, \((a, b) \subsetneq I\) since it's larger than \(I\).
+
+		Thus, we've reached a contradiction.
+	}
+
+	\pf{Proof of nowhere dense}{
+		If \(C\) is somewhere dense in \(\RR\) then there exists an open set \(u \subset \RR\) such that:
+
+		\[
+			C = \overline{C} \supset \overline{c \cap u} \supset u \supset (a, b)
+		\]
+
+		For some \(a, b \in \RR\), which contradicts the previous proof.
+	}
+
+	\mclm{Remark}{
+		\(C\) is "measure zero", i.e,.  it has zero length or volume.
+
+		\(C \subset C_{n}\) what is the total length of \(C_{n}\) .
+
+		\(C_{n}\) is a union of \(2^{n-1}\) closed intervals of length \(\frac{1}{3^{n-1}}\)
+
+		So has total length \((\frac{2}{3})^{n-1} \frac{1}{3} \to 0\) as \(n \to \infty\)
+
+		So \(C \subset C_{n}\) which as a collection of intervals of arbitrarily small depending on \(n\).
+
+		In any reasonable notion of length or volume:
+
+		\[
+			\ell(C) \le \ell(C_{n}) \text{ so } \ell(C) = 0
+		\]
+	}
+
+	\mclm{Remark}{
+		If instead of deleting middle \(3's\) (or \(5's\), \(7\)'s  )
+
+		we omitted the "middle" interval of length \(\frac{1}{3n!}\)
+
+		Then we'd get a "fat cantor set" which contains an interval
+
+		\[
+			f(n) \to \frac{1}{f(n)}
+		\]
+	}
+}
+
+\thm{}{
+	Given a compact, non-empty metric space \(M\) with the cardinality of \(\RR\),
+
+	then there exists a continuous surjection \(f \colon C \to M\).
+
+	\pf{Proof (kinda)}{
+		Let \(C \to I\) onto and continuous.
+
+		Let \(C = \left\{ 0.20022\ldots \text{ trecimals with only } 0 \text{ and } 2 \right\} \) i.e., no \(1\)'s.
+
+		Now map:
+
+		\begin{align*}
+			0 & \to 0 \\
+			2 & \to 1
+		\end{align*}
+
+		Meaning our \(I = \left\{ 0.10011\ldots \text{bicimals with no omitted digits} \right\} \)
+
+	}
+}
+
+\thm{}{
+	There exists a piano curve i.e., there exists a continuous curve which is space-filling, i.e.,
+
+	the image has non-empty interior.
+
+	In fact there exists \(c_{\ell} \colon [0, 1] \to B^{2} = \overline{B(0, 1)} \subset \RR^{2}\)
+
+	that is continuous and onto.
+
+	We will prove that any \(B \subset \RR^{n}\) that is compact and convex has a curve \(C_{\ell} \colon [0, 1] \to B\) that surjective and continuous.
+
+	\pf{Proof}{
+		There the last theorem:
+
+		\[
+			\sigma \colon C \to B
+		\]
+
+		\[
+			c_{\ell}(x) = \begin{cases}
+				\sigma(x)                     & \text{ if } x \in C                                              \\
+				(1 - t)\sigma(a) + t\sigma(b) & \text{ if } x \in (a, b)                                         \\
+				                              & \text{ gap interval in } C_{\ell} \text{ and } x = (1 - t)a + tb
+			\end{cases}
+		\]
+
+		We know that \(C^{c}\) is open so its a union of disjoint, open intervals so if \(x \notin C \)
+
+		\(x\) is not in \(C\), so it has to be in some interval \((a, b)\) where endpoints in \(C\).
+
+		Meaning that \(x \in [0, 1]\) or \(x \in (0, 1)\)
+
+		i.e.,  off of \(C\) we extend the map linearly or convexly on each open interval.
+
+		\(C_{\ell}\) is onto because \(\sigma\) is onto.
+
+		\(C_{\ell}\) is continuous because \(\sigma\) is continuous and lines are.
+
+		In other words:
+	}
+}
+
+\dfn{Differentiation}{
+	\(f: (a, b) \to \RR\) is differentiable at \(x \in (a, b)\) if:
+
+	\[
+		\lim_{t \to x} \frac{f(t) - f(x)}{t - x} = L \text{ exists }
+	\]
+
+	We call \(L\) the derivative of \(f\) at \(x\) \(\dot{f}(x) = f'(x) = \frac{df}{dx}(x) = L\)
+
+	Intuition: \(f'(x)\) is the 'best' linear approximation of \(f\) at \(x\).
+
+	\mclm{Rules of Differentiation}{
+		We should prove all of these:
+		\begin{enumerate}[label=(\alph*)]
+
+			\item Differentiability at \(x\) implies continuity at \(x\)
+			\item \(f, g\) differentiable at \(x\), then so is \(f + g\) and \((f + g)'(x) = f'(x) + g'(x)\)
+			\item \(f, g\) differentiable at \(x\), then so is \(f \cdot g\) and \((f \cdot g)'(x) = f'(x)g(x) + f(x)g'(x)\)
+
+			      Other wise known as Leibniz's rule.
+
+			\item the derivative of a constant function is zero
+			\item \(f, g\) differentiable at \(x\), \(g(x) \neq 0\), then \(\frac{f}{g}\) is differentiable at \(x\) and:
+
+			      \[
+				      \left( \frac{f}{g} \right)'(x) = \frac{f'(x)g(x) - f(x)g'(x)}{g(x)^{2}}
+			      \]
+
+			\item The chain rule: \(f\) differentiable at \(x\) and \(g\) differentiable at \(f(x)\) then \(g \circ f\) is differentiable at \(x\) and:
+
+			      \[
+				      (g \circ f)'(x) = g'(f(x))f'(x)
+			      \]
+		\end{enumerate}
+	}
+}
+
+\pf{Proof of \(a\) }{
+	Continuity is \(f(x) - f(t) \to 0\) as \(x - t \to 0\), \(x \neq t\)
+
+	Point is if \(\lim_{t \to x} \frac{f(x) - f(t)}{x - t} = L\)
+
+	this says that \(f(x) - f(t)\) goes to zero at same rate as \(x - t\).
+
+	Thus,
+
+	\[
+		\lim_{t \to x} \left( f(x) - f(t) \right) = L < \infty
+	\]
+
+	Means there exists an \(\epsilon\) such that if \(\left\lvert x - t \right\rvert < \delta\), then
+
+	\[
+		L - \epsilon < \frac{f(x) - f(t)}{x - t} < L + \epsilon
+	\]
+
+	Thus if \(x > t\):
+
+	\begin{align*}
+		(L - \epsilon)(x - t) & < f(x) - f(t) < (L + \epsilon)(x - t)        \\
+		(L - \epsilon)\delta  & < f(x) - f(t) < (L + \epsilon)\delta (\star)
+	\end{align*}
+
+	for continuity for \(\eta > 0\) we want \(\xi\) such that:
+
+	\[
+		(t - x ) < \xi \implies \left\lvert f(t) - f(x) \right\rvert < \eta
+	\]
+
+	Exercise: use \((\star)\) to compute \(\eta = \frac{\xi}{L}\) and \(\xi = h(n)\) will work.
+}
+
+\pf{Proof of \(b\) }{
+	\begin{align*}
+		(f + g)'(x) & = \lim_{t \to x} \frac{f(x) + g(x) - (f(t) + g(t))}{x - t}                            \\
+		            & = \lim_{t \to x} \frac{(f(x) - f(t)) + (g(x) - g(t))}{x - t}                          \\
+		            & = \lim_{t \to x} \frac{f(x) - f(t)}{x - t} + \lim_{t \to x} \frac{g(x) - g(t)}{x - t} \\
+		            & = f'(x) + g'(x)
+	\end{align*}
+}
+
+\pf{Proof of \(d\) }{
+	Let constant function \(c\) then:
+
+	\[
+		C(x) = C(T) = C
+	\]
+
+	so \(c(x) - c(t) = 0\), then:
+
+	\[
+		\lim_{t \to x} \frac{0}{t - x} = lim_{t \to x} 0 = 0
+	\]
+}
+
+\nt{
+	\[
+		\lim_{t \to x} h(t) =h(x)
+	\].
+}
+
+\dfn{}{
+       \[
+       \lim_{t \to x} f(t) = C
+       \] 
+
+       For every \(\epsilon > 0\) there exists \(\delta > 0\) such that if \(0 < \left\lvert t - x \right\rvert < \delta\):
+
+       then \(\left\lvert f(t) - f(x) \right\rvert < \epsilon\)
+}
+
+\pf{Proof of \(e\) }{
+	We know that \(e\) is equivalent to the product plus knowing a formula for:
+
+	\[
+		(\frac{1}{g})' \text{ in terms of \(g'\) }
+	\] 
+
+	We know that \((\frac{1}{g})'(x) = \frac{g'(x)}{g(x)^{2}}\).
+}
+
+\pf{Proof of \(c\) }{
+	\begin{align*}
+		( f \cdot g )'(x) &= \lim_{t \to x} \frac{f(t)g(t) - f(x)g(x)}{t - x} \\
+		&= \lim_{t \to x} \frac{f(t)g(t) - f(x)g(t) + g(x)f(t) - g(x)f(x)}{t - x} \\
+		&= \lim_{t \to x} \frac{f(t)(g(t) - f(t)g(x))}{t - x} + \lim_{t \to x} \frac{g(x)(f(t) - g(x)f(x))}{t - x} \\
+		&= \lim_{t \to x} f(t) \lim_{t \to x} \frac{g(t) - g(x)}{t - x} + \lim_{t \to x} g(x) \lim_{t \to x} \frac{f(t) - f(x)}{t - x} \\
+		&= f(x)g'(x) + g(x)f'(x)
+	\end{align*}
+}
+
+\pf{Proof of \(f\) }{
+	\mclm{Preamble}{
+		If \(f'(x)\) exists then:
+
+		\[
+		f(t) - f(x) = (t - x)(f'(x) + u(t))
+		\] 
+
+		The above formula is one meaning of 'best linear approximation':
+
+		i.e., \(f(t) = f(x) + (t - x)f'(x) + (t - x)u(t)\) where \(\lim_{t \to x} u(t) = 0\).
+
+		And the \((t-x)u(t)\) is really small when \(t\) is small.
+	}
+
+	\pf{Proof of preamble }{
+		If:
+
+		\[
+		u(t) = \left( \frac{f(t) - f(x)}{t - x} - f'(x) \right)
+		\] 
+
+		Then:
+
+		\[
+			\lim_{t \to x} u(t) = 0 = \lim_{t \to x} \left( \frac{f(t) - f(x)}{t - x} - f'(x) \right)
+		\] 
+		Thus, \(u(t)\) is small when \(t\) is small.
+	}
+
+	Now, let's proceed with the chain rule.
+
+	\(y = f(x)\) 
+
+	\begin{enumerate}
+		\item \(f(t) - f(x) = (t - x)(f'(x) + u(t))\), \(\lim_{t \to x} u(t) = 0\)
+		\item \(g(s) - g(y) = (s - y)(g'(y) + v(s))\), \(\lim_{s \to y} v(s) = 0\)
+	\end{enumerate}
+
+	Let \(s = f(t)\) as \(t \to x\):
+
+	\begin{align*}
+		s = f(t) &\to f(x) = y\\
+		s \to y
+	\end{align*}
+
+	So \(h = g \circ t\) and:
+
+	\[
+		\lim_{t \to x} \frac{h(t) - h(x)}{t - x} = (g \circ f)'(x)
+	\] 
+
+	\begin{align*}
+		h(t)- h(x) &= g(f(t)) - g(f(x)) \\
+		&= (f(t) - f(x))(g'(y) + v(s)) \quad \text{ by (2)} \\
+		&= (t - x)(f'(x) + u(t))(g'(y) + v(s)) \quad \text{ by (1)} \\
+		&= \lim_{t \to x} \frac{(t - x)(f'(x) + u(t))(g'(y) + v(s))}{t - x} \\
+		&= \lim_{t \to x} (f'(x) + u(t))(g'(y) + v(s)) \\
+		&= \lim_{t \to x} (f'(x)g'(y) + f'(x)v(s) + g'(y)u(t) + v(s)u(t)) \\
+		&= f'(x)g'(f(x)) + 0
+	\end{align*}
+}
+
+\cor{}{
+	Any polynomial \(p(x) = a_{0} + a_{1}x + \ldots + a_{n}x^{n}\) is differentiable at every \(x \in \RR\).
+
+	\[
+	p'(x) = a_{1} + 2a_{2}x + \ldots + na_{n}x^{n-1}
+	\] 
+
+	\pf{proof}{
+		Apply our various rules,
+
+		Need: \(f(x) = x\) and \(f'(x) = 1\).
+	}
+}
+
+\thm{Mean value theorem}{
+
+	A continuous \(f: [a, b] \to \RR\) that is differentiable on \((a, b)\) 
+
+	then there exists \(c \in (a, b)\) such that:
+
+	\[
+	f(b) - f(a) = f'(c)(b - a)
+	\] 
+}
+
+\mlenma{}{
+	\(f : (a, b) \to \RR\) is differentiable and achieves a minimum or maximum at \(x \in (a, b)\)
+
+	then \(f'(x) = 0\).
+}
+
+I missed a day LOL.
+
+\mclm{We did this before}{
+	\begin{align*}
+		f(x) &= \begin{cases}
+			x^{2}\sin\frac{1}{x} & \text{ if } x > 0 \\
+			0                    & \text{ if } x = 0
+		\end{cases}\\
+		f`(0) &= 2x\sin\frac{1}{x} - \cos\frac{1}{x} \text{ for } x > 0
+		f_1(0) &= 0
+	\end{align*}
+}
+
+\dfn{}{
+	\(f\) is Darboux continuous if it has the intermediate value property.
+
+	\(f: (a, b) \to \RR\),
+
+	\begin{align*}
+		x, y \in (a, b), &f(x) \alpha, f(y) \beta, \alpha < \beta \\
+		\exists z \in (a, b), &f(z) = \gamma, \alpha < \gamma < \beta
+	\end{align*}
+}
+
+\thm{}{
+	If \(f\) is differentiable on \((a, b)\) then \(f\prime\) is Darboux continuous on \((a, b)\).
+
+	\pf{Proof}{
+		Suppose \(a < x_1 < x_2 < b\) and \(\alpha = f\prime(x_1)\) and \(\beta = f\prime(x_2)\).
+
+		Goal: Given \(\delta\) between \(\alpha\) and \(\beta\), find \(\theta \in (x_1, x_2)\) with \(f\prime(\theta) = \delta\).
+
+		Fix a small \(\mu\) with \(0 < \mu < x_2 - x_1\), then 
+
+		define \(\sigma_{n}(x)\) to be the secent line to \(f\) through the points \(x, f(x)\) and \(x + \mu, f(x + \mu)\).
+
+		"\(\sigma_{n(x)}\) is continuous in \(x\)"
+
+		I am not typing this out, he didn't prove the theorem completely.
+	}
+}
+
+\mclm{Higher derivatives}{
+	\begin{align*}
+		f(x) &= f`(x), \text{ if } f` \text{ is differentiable} \\
+		(f`)`(x) &= \lim_{h \to 0}  \frac{f`(x + h) - f`(x)}{h} = L\\
+		f``(x) &= L = \frac{d^{2}f}{dx^{2}} = \ddot{f}(x) \\
+	\end{align*}
+
+	We can do this again if \(f``\) is differentiable:
+
+	\begin{align*}
+		f```(x) &= f^{(3)}(x)\\
+		f^{(n)}(x) &= \frac{d^{n}f}{dx^{n}}(x)
+	\end{align*}
+}
+
+\dfn{}{
+	\(f^{(r)}(x)\) is the \(r\) derivative of \(f^{(n-1)}(x)\) where it exists.
+}
+
+\thm{}{
+	If \(f^{(r)}(x)\) exists then \(f^{(r - 1)}(x)\) is continuous and \(f^{(r)}(x)\) is Darboux continuous.
+}
+
+\dfn{}{
+	\(f\) is smooth if \(f^{(r)}(x)\) exists for all \(r \in \NN\).
+
+	\ex{}{
+		All polynomial functions, \(\sin(x), \cos(x), e^{x}\) 
+	}
+}
+
+\dfn{}{
+	\(f\) is continuously differentiable or \(C`\) if \(f`\) exists and is continuous.
+
+	\(f\) is \(C^{r}\) if the first \(r\) derivatives exist and are continuous.
+
+	\nt{
+		\(C^{0}\) continuous functions:
+
+		\[
+		C^{0} \supsetneq C^{1} \supsetneq C^{2} \supsetneq \ldots
+		\] 
+
+		is an infinite chain of proper inclusions.
+
+		
+	}
+	\ex{}{
+		\(f(x) = \left\lvert x \right\rvert \) is \(C^{0}\) but not \(C^{1}\).
+
+		\(f(x) = x \left\lvert x \right\rvert \) is \(C^{1}\) but not \(C^{2}\).
+	}
+}
+
+\mclm{To come}{
+
+	Analytic functions:
+
+	\[
+	f(x) = \sum_{n=0}^{\infty} a_{n}x^{n}
+	\] 
+
+	converges on some open interval.
+}
+
+\mclm{Something}{
+	A strictly monotone increasing continuous function \(f: (a, b) \to \RR\) 
+
+	bijects \((a, b)\) into some \((c, d)\) where:
+
+	\begin{align*}
+		c &= \lim_{x \to a} f(x) \\
+		d &= \lim_{x \to b} f(x)
+	\end{align*}
+
+	these exist, but might be \(c = -\infty\) or \(d = \infty\).
+
+	If \(x < y\), then \(f(x) < f(y)\) in particular \(f(x_1) = f(x_2) \implies x_1 = x_2\).
+
+	\(f^{-1}\) is also continuous.
+
+	happens because \(f\) of an open interval is an open interval.
+
+	so \(f : \text{ open sets} \to \text{ open sets}\), so \(f^{-1}\) is continuous.
+
+	So monotone increasing continuous functions are homeomorphisms.
+
+	\(f\) homeomorphism and \(f\) is differentiable, is \(f^{-1}\) is differentiable.
+
+
+	Not always: \(f(x) = x^{3}\) strictly monotone increasing, 
+
+	inverse = \(y = x^{\frac{1}{3}}\). This is not differentiable at \(0\).
+
+	Where \(f`(0) = 0, f(0) = 0\)
+}
+
+\thm{Inverse function theorem}{
+
+	If \(f: (a, b) \to (c, d)\) is a differentiable function
+
+	and \(f'(x) \neq 0\) for all \(x \in (a, b)\)
+
+	then \(f\) is a homeomorphism with \(f^{-1}\) differentiable and
+
+	\(f^{-1}(y), y \in (c, d)\) is \(f^{-1}(y) = \frac{1}{f\prime(f^{-1}(y))}\)
+}
+
+\thm{}{
+	The dertivative of \(f: (0, 1) \to \RR\) is Darboux continuous.
+
+	\pf{Proof}{
+		Take points \(a < a` < b` < b\) .
+
+		For any \(\gamma\) between \(f\prime(a`)\) and \(f\prime(b`)\) there is a \(t\) such that:
+
+		\[
+		a` < t < b` \text{ and } f\prime(t) = \gamma
+		\] 
+
+		Let's assume that \(f`(a`) <\gamma < f`(b`)\).
+
+		Let \(c = \frac{1}{2}(a` + b`)\) 
+
+		define \(\alpha, \beta: [a`, b`] \to \RR\) 
+
+		by if \(a` \le x c\) then:
+
+		\[
+		\alpha(t) = a` \text{ and } \beta(t) = 2t - a`
+		\] 
+
+		if \(c \le x \le b`\) then:
+
+		\[
+		\alpha(t) = 2t - b` \text{ and } \beta(t) = b`
+		\] 
+
+		Thus, \(\alpha, \beta\) are continuous on \([a`, b`]\).
+
+		For if \(x \in (a`, b`)\) 
+	}
+}
+
+\dfn{}{
+	\[
+		\int_{a}^{b} f(x)dx = \text{ Area of \(U\) }
+	\] 
+
+	Where \(U\) is the undergraph of \(f\) over \([a, b]\).
+
+	\[
+	u = \left\{ (x, y): a \le x \le b, 0 \le y \le f(x) \right\}
+	\] 
+}
+
+
+\end{document}
