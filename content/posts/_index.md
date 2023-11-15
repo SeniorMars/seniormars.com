@@ -1,6 +1,8 @@
++++ 
+path = "posts" 
+title = "Posts" 
+transparent = true 
+sort_by = "date"
 +++
-title = ":|"
-+++
-<!-- no -->
-<!-- transparent = true -->
-<!-- sort_by = "date" -->
+
+

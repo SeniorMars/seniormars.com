@@ -29,16 +29,16 @@ mathjax_dollar_inline_enable = true
 # favicon = "/icon/favicon.png"
 
 menu = [
-    # { name = "/posts", url = "/posts", weight = 1 },
-    # { name = "/projects", url = "/projects", weight = 2 },
-    # { name = "/about", url = "/about", weight = 3 },
-    # { name = "/other", url = "/other", weight = 4 },
+    { name = "/posts", url = "/posts", weight = 1 },
+    { name = "/projects", url = "/projects", weight = 2 },
+    { name = "/about", url = "/about", weight = 3 },
+    { name = "/other", url = "/other", weight = 4 },
 ]
 
 socials = [
-#     { name = "github", url = "https://github.com/seniormars/", icon = "github" },
-#     { name = "youtube", url = "https://www.youtube.com/seniormarstries", icon = "youtube" },
-#     { name = "rss", url = "/rss.xml", icon = "rss" },
+    { name = "github", url = "https://github.com/seniormars/", icon = "github" },
+    { name = "youtube", url = "https://www.youtube.com/seniormarstries", icon = "youtube" },
+    { name = "rss", url = "/rss.xml", icon = "rss" },
 ]
 
 custom_css = []
