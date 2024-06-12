@@ -20,10 +20,10 @@ highlight_theme = "ayu-dark"
 [extra]
 toc = true
 use_cdn = false
-comment = false
-theme = "toggle"
+comment = true
 mathjax = true
 mathjax_dollar_inline_enable = true
+theme = "toggle"
 
 menu = [
     { name = "/posts", url = "/posts", weight = 1 },
