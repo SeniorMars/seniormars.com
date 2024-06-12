@@ -8,10 +8,7 @@ build_search_index = false
 generate_feed = true
 feed_filename = "rss.xml"
 compile_sass = true
-
-# taxonomies = [
-#     { name = "tags", feed = true, paginate_by = 10 },
-# ]
+taxonomies = [{ name = "tags", feed = true, paginate_by = 10 } ]
 
 # theme
 theme = "apollo"
@@ -23,10 +20,10 @@ highlight_theme = "ayu-dark"
 [extra]
 toc = true
 use_cdn = false
+comment = false
 theme = "toggle"
 mathjax = true
 mathjax_dollar_inline_enable = true
-# favicon = "/icon/favicon.png"
 
 menu = [
     { name = "/posts", url = "/posts", weight = 1 },

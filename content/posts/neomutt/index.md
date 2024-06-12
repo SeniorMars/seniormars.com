@@ -1,6 +1,9 @@
 +++
 title = "A Terminal Email Client As An Alternative To Gmail: The Old Dog Neomutt"
 date = "2023-04-02"
+
+[taxonomies]
+tags=["post", "educational"]
 +++
 
 # Motivation

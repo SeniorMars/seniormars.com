@@ -1,6 +1,9 @@
 +++
 title = "Don't forget about New York! A crucial ingredient to a GREAT Spider-Man movie!"
 date = "2023-06-20"
+
+[taxonomies]
+tags=["review"]
 +++
 
 After watching Spider-Man: Across the Spider-Verse (ATSV) for the fifth time in theaters today, I finally

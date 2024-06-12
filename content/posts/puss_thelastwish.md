@@ -1,6 +1,9 @@
 +++
 title = "The Last Wish, Mental Health, and Hesitation"
 date = "2023-04-01"
+
+[taxonomies]
+tags=["review"]
 +++
 
 At this point, I've seen Puss In Boots: The Last Wish at least seven times. Once in the theater, and
