@@ -1,0 +1,3 @@
+[submodule "themes/redux"]
+	path = themes/redux
+	url = https://github.com/seniormars/redux
