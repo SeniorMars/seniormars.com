@@ -23,6 +23,7 @@ use_cdn = false
 comment = false
 mathjax = true
 mathjax_dollar_inline_enable = true
+codeblock_clipboard = true
 theme = "toggle"
 
 menu = [
