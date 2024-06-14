@@ -2,6 +2,9 @@
 title = "Don't forget about New York! A crucial ingredient to a GREAT Spider-Man movie!"
 date = "2023-06-20"
 
+[extra]
+comment = true
+
 [taxonomies]
 tags=["review"]
 +++

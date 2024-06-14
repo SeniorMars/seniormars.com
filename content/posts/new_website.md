@@ -2,6 +2,9 @@
 title = "New Website!"
 date = "2023-03-31"
 
+[extra]
+comment = true
+
 [taxonomies]
 tags=["meta"]
 +++

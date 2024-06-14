@@ -2,6 +2,9 @@
 title = "The Last Wish, Mental Health, and Hesitation"
 date = "2023-04-01"
 
+[extra]
+comment = true
+
 [taxonomies]
 tags=["review"]
 +++
