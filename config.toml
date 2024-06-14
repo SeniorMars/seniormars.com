@@ -1,10 +1,11 @@
 # The URL the site will be built for
 base_url = "https://seniormars.com"
 title = "SeniorMars"
+description = "A blog about math, extremely niche interests, and a guy having fun."
 
 # settings
 default_language = "en"
-build_search_index = false
+build_search_index = false # do want to fix this
 generate_feed = true
 feed_filename = "rss.xml"
 compile_sass = true
