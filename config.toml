@@ -4,14 +4,15 @@ title = "SeniorMars"
 description = "A blog about math, extremely niche interests, and a guy having fun."
 
 # settings
+author = "SeniorMars"
 default_language = "en"
+feed_filename = "rss.xml"
 build_search_index = false # do want to fix this
 generate_feed = true
-feed_filename = "rss.xml"
 compile_sass = true
-taxonomies = [{ name = "tags", feed = true, paginate_by = 10 } ]
 render_emoji = true
 smart_punctuation = true
+taxonomies = [{ name = "tags", feed = true, paginate_by = 10 } ]
 
 # theme
 theme = "redux"
@@ -29,6 +30,8 @@ mathjax_dollar_inline_enable = true
 codeblock_clipboard = true
 dynamic_note = true
 theme = "toggle"
+favicon = "/icons/favicon.ico"
+favicon_extra = true
 
 menu = [
     { name = "/posts", url = "/posts", weight = 1 },
