@@ -11,6 +11,7 @@ feed_filename = "rss.xml"
 compile_sass = true
 taxonomies = [{ name = "tags", feed = true, paginate_by = 10 } ]
 render_emoji = true
+smart_punctuation = true
 
 # theme
 theme = "redux"
