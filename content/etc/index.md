@@ -1,5 +1,5 @@
 +++
-title = "Other"
+title = "Etc"
 +++
 
 # Friends!
@@ -18,31 +18,31 @@ If you have time, please, please, please check these people out!
 # Quotes I like
 
 > "The enjoyment of one's tools is an essential ingredient of successful work."
-- Donald Knuth
+> - <cite>Donald Knuth</cite>
 
 > "The imagination of nature is far, far greater than the imagination of man."
-- Richard Feynman
+> - <cite>Richard Feynman</cite>
 
 > “I am, somehow, less interested in the weight and convolutions of Einstein’s brain than in the near certainty that people of equal talent have lived and died in cotton fields and sweatshops.”
-- Stephen Jay Gould, The Panda's Thumb: More Reflections in Natural History 
+> - <cite>Stephen Jay Gould, The Panda's Thumb: More Reflections in Natural History</cite>
 
 > '"human imagination has no limits" mfs when i tell them to imagine a set with cardinality greater than the naturals but less than the reals'
-- u/UndisclosedChaos
+> - <cite>u/UndisclosedChaos</cite>
 
 > "What happens in the left subtree, stays in the left subtree."
-- Andrew Tolmach
+> - <cite>Andrew Tolmach</cite>
 
 > "First, there was Pope John. Then, there was Pope Paul. Then, John Paul. Naturally, the next guy should have been Paul John Paul; unfortunately he called himself John Paul II instead and broke the Fibonacci sequence."
-- Gary Peterson
+> - <cite>Gary Peterson</cite>
 
 > "The question of whether computers can think is like the question whether submarines can swim."
-- Edsger Dijkstra
+> - <cite>Edsger Dijkstra</cite>
 
 > “There are two major products that come out of Berkeley: LSD and UNIX.  We don’t believe this to be a coincidence.”
-- Jeremy S. Anderson
+> - <cite>Jeremy S. Anderson</cite>
 
 > “There are only two kinds of programming languages: those people always bitch about and those nobody uses.”
-- Bjarne Stroustrup
+> - <cite> Bjarne Stroustrup </cite>
 
 # Books I'm currently reading!
 - Gödel, Escher, Bach

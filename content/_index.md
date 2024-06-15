@@ -1,6 +1,18 @@
 +++
-description = "A blog from SeniorMars"
-
-[extra]
-section_path = "posts/_index.md"
+title= "Welcome To My Blog!"
+description = "A blog about math, extremely niche interests, and a guy having fun."
+date = "2024-06-15"
 +++
+
+Heyo! SeniorMars here. It's honestly weird to think that people will spend their time reading things I wrote (I'm usually on the other side), but I hope you enjoy your stay here. You can learn more about me [here](/about) or explore the links up top. Frankly, I'm not sure what I want to make this site about--I like countless things, so I guess we'll see where this goes. In either case, this is a blog about math, extremely niche interests, and a guy having fun!
+
+
+# News
+
+- <time>2024-06-15</time>: Site is up! I'm still working on it, but I'm excited to see where this goes.
+- <time>2024-06-14</time>: Decided to work on a book!
+- <time>2024-06-01</time>: Started to work on some videos for SOME!
+- <time>2024-05-06</time>: First day back at gym in a while. We are aiming high!
+
+# Meme of the Week!
+![Meme of the Week](https://preview.redd.it/7oxqtby67c5d1.jpeg?auto=webp&s=823b14d3440286b409cc3d34e7495aed20ecee63)

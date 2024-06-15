@@ -10,6 +10,7 @@ generate_feed = true
 feed_filename = "rss.xml"
 compile_sass = true
 taxonomies = [{ name = "tags", feed = true, paginate_by = 10 } ]
+render_emoji = true
 
 # theme
 theme = "redux"
@@ -32,7 +33,7 @@ menu = [
     { name = "/posts", url = "/posts", weight = 1 },
     { name = "/projects", url = "/projects", weight = 2 },
     { name = "/about", url = "/about", weight = 3 },
-    { name = "/etc", url = "/other", weight = 4 },
+    { name = "/etc", url = "/etc", weight = 4 },
 ]
 
 socials = [
