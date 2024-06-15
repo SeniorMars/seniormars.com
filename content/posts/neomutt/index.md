@@ -4,6 +4,7 @@ date = "2023-04-02"
 
 [extra]
 comment = true
+modified = "2024-06-14"
 
 [taxonomies]
 tags=["post", "educational"]
@@ -22,11 +23,7 @@ rid of Google, but it will teach you how to set up a terminal alternative to Gma
 this blog is for college students that are forced to use Google's email platform).
 
 
-Note: 
-
-<center>
-This blog assumes basic terminal maturity
-</center>
+{{ note(clickable=true, header="Note", text="This blog assumes basic terminal maturity") }}
 
 # Neomutt
 
@@ -77,7 +74,8 @@ you are using Windows, I recommend using WSL2, and you can follow along with the
 
 I'll be using Homebrew to install Neomutt:
 
-Note: `$` is the prompt for a user without root access. You don't need to type it.
+{{note(clickable=true, header="Note", text="`$` is the prompt for a user without root access. You don't need to type it.")}}
+
 ```bash
 $ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 $ # wait for the installation to finish and put homebrew in your path
@@ -132,12 +130,7 @@ We are going to take configuration step by step. I will explain what each sectio
 The first we need to do is make a `muttrc` file. This file is where we will store all of our configuration.
 By default, Neomutt will look for a file called `muttrc` in the following location: `XDG_CONFIG_HOME/mutt/muttrc`.
 
-Note:
-<center>
-XDG_CONFIG_HOME is an environment variable that points to the location of your configuration files. 
-
-Read more about it [here](https://wiki.archlinux.org/title/XDG_Base_Directory).
-</center>
+{{note(clickable=true, header="Note", text="`$XDG_CONFIG_HOME` is an environment variable that points to the location of your configuration files. Read more about it <a href='https://wiki.archlinux.org/title/XDG_Base_Directory'>here</a>.")}}
 
 For example, on my machine, the location of my `muttrc` file is `~/.config/mutt/muttrc`.
 
@@ -154,11 +147,7 @@ Let's put a hold on this to introduce the next section:
 As I said before, this blog is intended for students that are forced to use Google's email platform. Which
 means I'll be detailing how to configure Neomutt to work with Gmail. Thus, before we move any further, it is important to get an "app-specific password" from Google.
 
-Note:
-<center>
-An app-specific password is a password for applications that do not support 2-factor authentication
-or are considered "unsecure". Google wants you to use Gmail >:(
-</center>
+{{note(clickable=true, header="Note", text="An app-specific password is a password for applications that do not support 2-factor authentication or are considered 'unsecure'. Google wants you to use Gmail >:(")}}
 
 
 To get an app-specific password, follow these steps:
@@ -215,10 +204,7 @@ set smtp_pass = "your_app_specific_password"
 set ssl_starttls = yes
 set ssl_force_tls = yes
 ```
-Note:
-<center>
-    Plain text for passwords is a bad idea. See the encryption section of this blog.
-</center>
+{{note(clickable=true, header="Note", text="Plain text for passwords is a bad idea. See the encryption section of this blog.")}}
 
 Let's break down this section:
 First, it's pretty self-explanatory for the first few lines, but for `set smtp*`, we need to
@@ -383,10 +369,7 @@ The editor is the program that you use to compose emails. By default, Neomutt us
 set editor = "nvim"
 ```
 
-Note:
-<center>
-In (Neo)Vim with patch 6e649224926b and partial 113cb513f76d now include mail.vim, which is a filetype plugin for mail. This plugin provides syntax highlighting, indentation, and other features for mail files.
-</center>
+{{note(clickable=true, header="Note", text="In (Neo)Vim with patch 6e649224926b and partial 113cb513f76d now include mail.vim, which is a filetype plugin for mail. This plugin provides syntax highlighting, indentation, and other features for mail files.")}}
 
 ### (N)vim and Mail
 
@@ -455,10 +438,7 @@ application/pdf; firefox %s; test=test -n "$display"; needsterminal;
 Of course, you can change the browser, and pdf viewer to whatever you want. On Mac, you might want
 `open -a firefox %s` or `open -a Preview %s`.
 
-Note: 
-<center>
-Firefox now supports editing PDFs!
-</center>
+{{note(clickable=true, header="Note", text="Firefox now supports editing PDFs!")}}
 
 3. Now install `lynx`
 
@@ -567,11 +547,7 @@ bind editor <Tab> complete-query
 
 Now, when you press `<Tab>` in the editor when prompted for an email, you will be able to search your MacBook contacts!
 
-Note:
-
-<center>
-You can add your Google contacts to your MacBook contacts by linking your Google account to your MacBook contacts. Which is not great, but I still did it.
-</center>
+{{note(clickable=true, header="Note", text="You can add your Google contacts to your MacBook contacts by linking your Google account to your MacBook contacts. Which is not great, but I still did it.")}}
 
 ### Encrypt
 

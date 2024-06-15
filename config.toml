@@ -25,13 +25,14 @@ comment = false
 mathjax = true
 mathjax_dollar_inline_enable = true
 codeblock_clipboard = true
+dynamic_note = true
 theme = "toggle"
 
 menu = [
     { name = "/posts", url = "/posts", weight = 1 },
     { name = "/projects", url = "/projects", weight = 2 },
     { name = "/about", url = "/about", weight = 3 },
-    { name = "/other", url = "/other", weight = 4 },
+    { name = "/etc", url = "/other", weight = 4 },
 ]
 
 socials = [
