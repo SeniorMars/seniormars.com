@@ -1,10 +1,10 @@
 +++
 title = "A Terminal Email Client As An Alternative To Gmail: The Old Dog Neomutt"
 date = "2023-04-02"
+updated = "2024-06-14"
 
 [extra]
 comment = true
-modified = "2024-06-14"
 
 [taxonomies]
 tags=["post", "educational"]
