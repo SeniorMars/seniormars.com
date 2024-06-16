@@ -5,9 +5,11 @@ updated = "2024-06-14"
 
 [extra]
 comment = true
+repo_view = true
+read_time = true
 
 [taxonomies]
-tags=["post", "educational"]
+tags=["tutorial", "educational"]
 +++
 
 # Motivation
@@ -22,8 +24,7 @@ opt out of the default settings. Now, this blog post won't teach how to petition
 rid of Google, but it will teach you how to set up a terminal alternative to Gmail (most notably
 this blog is for college students that are forced to use Google's email platform).
 
-
-{{ note(clickable=true, header="Note", text="This blog assumes basic terminal maturity") }}
+{{ note(clickable=true, header="Note", text="This blog assumes basic terminal maturity. <br><br> Moreover, this blog has now been <strong>updated</strong> to cover isync and more. See the <a href='#update'>update section</a> near the end!") }}
 
 # Neomutt
 
@@ -631,6 +632,16 @@ Image below (notice the `Good signature` and ` The following data is signed`):
 
 
 And that's it! You should now have a fully functional email client!
+
+# Update
+
+## New Tools
+Recently, I have changed my setup to use `isync` and `msmtp` to handle my email. Before this (and the original blog), we needed to have an open connection to Gmail to check for new emails. This was not ideal, as it would prevent us from reaching the speeds that neomutt can reach. Now, with `isync` and `msmtp`, I can browse my emails locally and only connect to Gmail when I want to send an email. This is awesome if you aim to limit your connection to Gmail.
+
+
+## Updated Config
+
+I need to write this. Give me a bit.
 
 # Conclusion
 

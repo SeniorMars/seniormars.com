@@ -27,11 +27,12 @@ use_cdn = false
 comment = false
 mathjax = true
 mathjax_dollar_inline_enable = true
-codeblock_clipboard = true
+fancy_code = true
 dynamic_note = true
 theme = "toggle"
 favicon = "/icons/favicon.ico"
 favicon_extra = true
+repo_url = "https://github.com/SeniorMars/seniormars.com/blob/main/content/"
 
 menu = [
     { name = "/posts", url = "/posts", weight = 1 },
