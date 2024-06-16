@@ -24,7 +24,7 @@ opt out of the default settings. Now, this blog post won't teach how to petition
 rid of Google, but it will teach you how to set up a terminal alternative to Gmail (most notably
 this blog is for college students that are forced to use Google's email platform).
 
-{{ note(clickable=true, header="Note", text="This blog assumes basic terminal maturity. <br><br> Moreover, this blog has now been <strong>updated</strong> to cover isync and more. See the <a href='#update'>update section</a> near the end!") }}
+{{ note(clickable=true, header="Note", body="This blog assumes basic terminal maturity. <br><br> Moreover, this blog has now been <strong>updated</strong> to cover isync and more. See the <a href='#update'>update section</a> near the end!") }}
 
 # Neomutt
 
@@ -75,7 +75,7 @@ you are using Windows, I recommend using WSL2, and you can follow along with the
 
 I'll be using Homebrew to install Neomutt:
 
-{{note(clickable=true, header="Note", text="`$` is the prompt for a user without root access. You don't need to type it.")}}
+{{note(clickable=true, header="Note", body="`$` is the prompt for a user without root access. You don't need to type it.")}}
 
 ```bash
 $ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -131,7 +131,7 @@ We are going to take configuration step by step. I will explain what each sectio
 The first we need to do is make a `muttrc` file. This file is where we will store all of our configuration.
 By default, Neomutt will look for a file called `muttrc` in the following location: `XDG_CONFIG_HOME/mutt/muttrc`.
 
-{{note(clickable=true, header="Note", text="`$XDG_CONFIG_HOME` is an environment variable that points to the location of your configuration files. Read more about it <a href='https://wiki.archlinux.org/title/XDG_Base_Directory'>here</a>.")}}
+{{note(clickable=true, header="Note", body="`$XDG_CONFIG_HOME` is an environment variable that points to the location of your configuration files. Read more about it <a href='https://wiki.archlinux.org/title/XDG_Base_Directory'>here</a>.")}}
 
 For example, on my machine, the location of my `muttrc` file is `~/.config/mutt/muttrc`.
 
@@ -148,7 +148,7 @@ Let's put a hold on this to introduce the next section:
 As I said before, this blog is intended for students that are forced to use Google's email platform. Which
 means I'll be detailing how to configure Neomutt to work with Gmail. Thus, before we move any further, it is important to get an "app-specific password" from Google.
 
-{{note(clickable=true, header="Note", text="An app-specific password is a password for applications that do not support 2-factor authentication or are considered 'unsecure'. Google wants you to use Gmail >:(")}}
+{{note(clickable=true, header="Note", body="An app-specific password is a password for applications that do not support 2-factor authentication or are considered 'unsecure'. Google wants you to use Gmail >:(")}}
 
 
 To get an app-specific password, follow these steps:
@@ -205,7 +205,7 @@ set smtp_pass = "your_app_specific_password"
 set ssl_starttls = yes
 set ssl_force_tls = yes
 ```
-{{note(clickable=true, header="Note", text="Plain text for passwords is a bad idea. See the encryption section of this blog.")}}
+{{note(clickable=true, header="Note", body="Plain text for passwords is a bad idea. See the encryption section of this blog.")}}
 
 Let's break down this section:
 First, it's pretty self-explanatory for the first few lines, but for `set smtp*`, we need to
@@ -370,7 +370,7 @@ The editor is the program that you use to compose emails. By default, Neomutt us
 set editor = "nvim"
 ```
 
-{{note(clickable=true, header="Note", text="In (Neo)Vim with patch 6e649224926b and partial 113cb513f76d now include mail.vim, which is a filetype plugin for mail. This plugin provides syntax highlighting, indentation, and other features for mail files.")}}
+{{note(clickable=true, header="Note", body="In (Neo)Vim with patch 6e649224926b and partial 113cb513f76d now include mail.vim, which is a filetype plugin for mail. This plugin provides syntax highlighting, indentation, and other features for mail files.")}}
 
 ### (N)vim and Mail
 
@@ -439,7 +439,7 @@ application/pdf; firefox %s; test=test -n "$display"; needsterminal;
 Of course, you can change the browser, and pdf viewer to whatever you want. On Mac, you might want
 `open -a firefox %s` or `open -a Preview %s`.
 
-{{note(clickable=true, header="Note", text="Firefox now supports editing PDFs!")}}
+{{note(clickable=true, header="Note", body="Firefox now supports editing PDFs!")}}
 
 3. Now install `lynx`
 
@@ -548,7 +548,7 @@ bind editor <Tab> complete-query
 
 Now, when you press `<Tab>` in the editor when prompted for an email, you will be able to search your MacBook contacts!
 
-{{note(clickable=true, header="Note", text="You can add your Google contacts to your MacBook contacts by linking your Google account to your MacBook contacts. Which is not great, but I still did it.")}}
+{{note(clickable=true, header="Note", body="You can add your Google contacts to your MacBook contacts by linking your Google account to your MacBook contacts. Which is not great, but I still did it.")}}
 
 ### Encrypt
 
@@ -636,16 +636,426 @@ And that's it! You should now have a fully functional email client!
 # Update
 
 ## New Tools
-Recently, I have changed my setup to use `isync` and `msmtp` to handle my email. Before this (and the original blog), we needed to have an open connection to Gmail to check for new emails. This was not ideal, as it would prevent us from reaching the speeds that neomutt can reach. Now, with `isync` and `msmtp`, I can browse my emails locally and only connect to Gmail when I want to send an email. This is awesome if you aim to limit your connection to Gmail.
+Recently, I have changed my setup to use `isync` and `msmtp` to handle my email. Before this (and the original blog), we needed to have an open connection to Gmail to check for new emails. This was not ideal, as it would prevent us from reaching the speeds that neomutt can reach. Now, with `isync` and `msmtp`, I can browse my emails locally and only connect to Gmail when I want to send an email. This is awesome if you aim to limit your connection to Gmail. 
 
+## isync
 
-## Updated Config
+`isync` is a command-line tool that synchronizes your mailbox in a local directory with a remote IMAP server, allowing you to manage your email locally. This is particularly beneficial for users who prefer not to maintain a constant connection to their email server. 
 
-I need to write this. Give me a bit.
+### Installation
+
+As isync requires a constant connection to your email server, you need to again create an app-specific password from google. If you need a reminder on how to do this, see the [Google, Gmail, and App-specific passwords](#google-gmail-and-app-specific-passwords) section.
+
+#### macOS
+
+```bash
+$ brew install isync # or at least we hope this would work
+```
+
+{% note(clickable=true, header="Correct Mac Installation") %}
+All of this info comes from the [com4](https://github.com/moriyoshi/cyrus-sasl-xoauth2/issues/9#issuecomment-2161796043). 
+
+```bash
+$ brew install cyrus-sasl libtool
+$ # Build this xoauth2 plugin against cyrus-sasl
+$ git clone https://github.com/moriyoshi/cyrus-sasl-xoauth2.git
+$ cd cyrus-sasl-xoauth2
+$ vim autogen.sh
+```
+
+Change `libtoolize` to `glibtoolize`, otherwise you'll get a libtoolize not found error. I'm unsure if this warrants a patch.
+
+```diff
+1c1
+< libtoolize
+---
+> glibtoolize
+```
+
+Then we run the command as normal:
+
+```bash
+$ ./autogen.sh \
+  && ./configure --with-cyrus-sasl=/opt/homebrew/opt/cyrus-sasl \
+  && make \
+  && make install 
+```
+
+Now we need to install isync properly.  Add `, "--with-sasl=/opt/homebrew/opt/cyrus-sasl"` to the `./configure` line in the def install section.  Add a depends_on `"cyrus-sasl"` below `depends_on "openssl@3"` but I'm unsure if this is required since it was manually installed. Here is the diff to isync.rb
+
+```diff
+29a30
+>   depends_on "cyrus-sasl"
+35c36
+<     system "./configure", *std_configure_args, "--disable-silent-rules"
+---
+>     system "./configure", *std_configure_args, "--disable-silent-rules", "--with-sasl=/opt/homebrew/opt/cyrus-sasl"
+```
+
+Finally, we can install isync:
+
+```bash
+$ HOMEBREW_NO_INSTALL_FROM_API=1 brew install -s isync
+```
+
+Or if you are using fish:
+
+```fish
+$ env HOMEBREW_NO_INSTALL_FROM_API=1 brew install -s isync
+```
+
+This should work! I know this is a mess but it works!
+{% end %}
+
+#### Arch Linux
+```bash
+$ sudo pacman -Syu isync
+$ # or
+$ paru -Syu isync
+```
+
+#### Gentoo
+
+```bash
+$ sudo emerge --ask net-mail/isync
+```
+
+#### Ubuntu and WSL2 using Ubuntu
+
+```bash
+$ sudo apt install isync
+```
+
+### Configuring isync
+
+To start, you need to create a configuration file for `isync`, typically named `.mbsyncrc` in your home directory:
+
+```bash
+$ touch ~/.mbsyncrc
+```
+
+Here's an example configuration that you might use for Gmail (note that `isync.gpg` is a file that contains your GPG-encrypted password for isync):
+
+```conf
+IMAPAccount Gmail
+Host imap.gmail.com
+User your_email@gmail.com
+PassCmd "gpg -dq ~/.config/mutt/isync.gpg"
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+IMAPStore Gmail-remote
+Account Gmail
+
+MaildirStore Gmail-local
+Path ~/Mail/Gmail/
+Inbox ~/Mail/Gmail/INBOX
+
+Channel Gmail
+Master :Gmail-remote:
+Slave :Gmail-local:
+Patterns "INBOX"
+Expunge Both
+SyncState *
+```
+
+Here is my configuration:
+
+```conf
+IMAPAccount gmail
+Host imap.gmail.com
+Port 993
+User cjh16@rice.edu
+PassCmd "gpg -dq --for-your-eyes-only --no-tty ~/.config/mutt/isync.gpg"
+SSLType IMAPS
+CertificateFile  /opt/homebrew/Cellar/ca-certificates/2024-03-11/share/ca-certificates/cacert.pem
+
+IMAPStore gmail-remote
+Account gmail
+
+MaildirStore gmail-local
+Subfolders Verbatim
+Path ~/.local/share/email/cjh16/
+INBOX ~/.local/share/email/cjh16/INBOX
+Flatten .
+
+Channel gmail
+Far :gmail-remote:
+Near :gmail-local:
+Patterns *
+# Automatically create missing mailboxes, both locally and on the server
+Create Both
+# Sync the movement of messages between folders and deletions, add after making sure the sync works
+Expunge Both
+# Save the synchronization state files in the relevant directory
+SyncState *
+MaxMessages 0
+```
+
+This configuration tells `isync` to sync your Gmail's INBOX to a local directory. It uses GPG to decrypt your password securely.
+
+### Running isync
+
+To sync your mail, simply run:
+
+```bash
+$ mbsync -a # or `mbsync gmail`
+```
+
+This command will sync all channels defined in your `.mbsyncrc` file and download your emails to your local machine.
+
+{{note(clickable=true, header="Note", body="Homebrew provides a service to run mbsync every 15 minutes. 
+
+You can enable this by running `brew services start isync`.")}}
+
+### Neomutt integration
+
+Now that you have `isync` set up, you can configure Neomutt to use the local mail directory to read your emails. To do this, you need to modify your `muttrc` file:
+
+```conf
+# My mailboxes
+set mbox_type = Maildir
+set folder = "~/.local/share/email/cjh16"
+set spoolfile = "+[Gmail].All Mail"
+set postponed = "+[Gmail].Drafts"
+set record = "+[Gmail].Sent Mail"
+set trash = "+[Gmail].Trash"
+mailboxes ="[Gmail].All Mail" ="[Gmail].Starred" ="[Gmail].Important" ="[Gmail].Drafts" ="[Gmail].Sent Mail" ="[Gmail].Trash" ="[Gmail].Spam" =INBOX
+```
+
+Notice that we changed the `mbox_type` to `Maildir` and set the `folder` to the path where `isync` stores your emails. This will allow Neomutt to read your emails from the local directory. Now, the next time you open Neomutt, it will be a bit slow, but after that, it will be lightning fast!
+
+## msmtp
+
+`msmtp` is a simple SMTP client that allows you to send emails from your local computer. When paired with `isync`, it handles the sending of emails, completing your email setup to work both offline and online. Additionally, you can set up `msmtp` for multiple email accounts, making it a versatile tool for managing your emails.
+
+### Installation
+
+#### macOS
+
+```bash
+$ brew install msmtp
+```
+
+#### Arch Linux
+
+```bash
+$ sudo pacman -Syu msmtp
+$ # or
+$ paru -Syu msmtp
+```
+
+#### Gentoo
+
+```bash
+$ sudo emerge --ask mail-mta/msmtp
+```
+
+#### Ubuntu and WSL2 using Ubuntu
+
+```bash
+$ sudo apt install msmtp
+```
+
+### Configuring msmtp
+
+Create a configuration file for `msmtp` in your home directory:
+
+```bash
+$ touch ~/.msmtprc # or $XDG_CONFIG_HOME/msmtprc/config
+```
+
+Here’s a basic configuration for Gmail (note that `msmtp.gpg` is a file that contains your GPG-encrypted password for Gmail):
+
+```conf
+defaults
+auth on
+tls on
+tls_trust_file /etc/ssl/certs/ca-certificates.crt
+
+account gmail
+host smtp.gmail.com
+port 465
+from your_email@gmail.com
+user your_email@gmail.com
+password_eval "gpg -dq ~/.config/mutt/msmtp.gpg"
+
+account default : gmail
+```
+
+This is my configuration:
+
+```conf
+# Set default values for all following accounts.
+defaults
+auth           on
+tls on
+tls_starttls on
+tls_trust_file /opt/homebrew/Cellar/ca-certificates/2024-03-11/share/ca-certificates/cacert.pem
+logfile        ~/.config/msmtp/msmtp.log
+
+# Gmail
+account        gmail
+host           smtp.gmail.com
+port           465
+tls_starttls   off
+from           cjh16@rice.edu
+user           cjh16@rice.edu
+passwordeval   "gpg -dq ~/.config/mutt/msmtp.gpg"
+
+# Set a default account
+account default: gmail
+```
+
+This configuration will use your Gmail account to send emails through SMTP, using a password fetched securely using GPG.
+
+### Using msmtp
+
+To send an email using `msmtp`, you can pipe the content of an email file like so:
+
+```bash
+$ cat email.txt | msmtp -a default recipient@example.com
+```
+
+To test you can run:
+
+```bash
+$  echo "hello there username." | msmtp -a default random_person@example.com
+```
+
+You should email me for fun: `$ echo "Hi SeniorMars!" | msmtp -a default cjh16@rice.edu`
+
+### Neomutt integration
+
+To integrate `msmtp` with Neomutt, you need to modify your `muttrc` file:
+
+```conf
+set sendmail = "msmtp -a cjh16@rice.edu"
+```
+
+That's it! Now, when you send an email in Neomutt, it will use `msmtp` to send the email.
+
+## notmuch
+
+`notmuch` is an email indexing tool that provides fast searching capabilities. It is useful when dealing with large volumes of email, helping you to quickly find exactly what you need. Especially when paired with Neomutt and isync, `notmuch` can significantly improve your email workflow.
+
+### Installation
+
+#### macOS
+
+```bash
+$ brew install notmuch
+```
+
+#### Arch Linux
+
+```bash
+$ sudo pacman -Syu notmuch
+$ # or
+$ paru -Syu notmuch
+```
+
+#### Gentoo
+
+```bash
+$ sudo emerge --ask mail-filter/notmuch
+```
+
+#### Ubuntu and WSL2 using Ubuntu
+
+```bash
+$ sudo apt install notmuch
+```
+
+### Configuring notmuch
+
+First, initialize notmuch:
+
+```bash
+$ notmuch setup
+```
+
+Follow the prompts to set up your email directory (for me it is `~/.local/share/email/cjh16`). Then, you can start searching your emails by using:
+
+```bash
+$ notmuch search "from:example@example.com"
+```
+
+Notmuch will index your emails located in the directory specified during setup, allowing you to use powerful search queries to navigate your mail efficiently.
+
+### Neomutt integration
+
+To integrate `notmuch` with Neomutt, you need to modify your `muttrc` file:
+
+```conf
+macro index S "<shell-escape>mbsync -V gmail<enter><shell-escape>notmuch new<enter>" "sync email"
+macro index \Cf "<enter-command>unset wait_key<enter><shell-escape>read -p 'Enter a search term to find with notmuch: ' x; echo \$x >~/.cache/mutt_terms<enter><limit>~i \"\`notmuch search --output=messages \$(cat ~/.cache/mutt_terms) | head -n 600 | perl -le '@a=<>;s/\^id:// for@a;$,=\"|\";print@a' | perl -le '@a=<>; chomp@a; s/\\+/\\\\+/ for@a;print@a' \`\"<enter>" "show only messages matching a notmuch pattern"
+```
+
+This will allow us to sync our emails and search our emails using `notmuch` directly from Neomutt. Pretty cool!
+
+## Things left desired
+
+Honestly, I love my setup, but there could always be improvements. Notably:
+
+1. I want to not use app-specific passwords. I would like to use OAuth2, but my school blocks us from doing anything technical.
+2. I would like to auto complete email addresses from my contacts. I have a lot of contacts, and I don't remember all of their emails.
+3. Sometimes I want images lmao! I've been trying to mess around with Kitty but macos is a pain.
+```
+# text/html; kitty @ launch --type overlay --title neomutt-html w3m -I %{charset} -T text/html -graph -F -no-cookie -o confirm_qq=FALSE -o use_wide=TRUE -o display_link=TRUE -o display_link_number=TRUE -o color=TRUE -o auto_image=TRUE -o display_image=TRUE -o max_load_image=20 -o inline_img_protocol=4  %s; nametemplate=%s.html
+text/html; open -a Firefox %s; test=test -n "$DISPLAY"; needsterminal;
+text/html; lynx -assume_charset=%{charset} -display_charset=utf-8 -dump -width=1024 %s; nametemplate=%s.html; copiousoutput;
+text/plain; cat %s; copiousoutput;
+image/*; icat.sh '%s'; test=test -n "$DISPLAY"; needsterminal;
+video/*; setsid mpv --quiet %s &; copiousoutput
+audio/*; mpv %s ;
+application/pdf; open -a Firefox %s; test=test -n "$DISPLAY"; needsterminal;
+application/pgp-encrypted; gpg -d '%s'; copiousoutput;
+application/pgp-keys; gpg --import '%s'; copiousoutput;
+application/x-subrip; $EDITOR %s ;
+application/octet-stream; icat.sh '%s'; test=test -n "$DISPLAY"; needsterminal;
+```
+4. I want to fix cache contact with `lbdbq` and `notmuch`. I have tried, but I can't get it to work.
+```bash
+#!/bin/bash
+# Query lbdbq and save results to Mutt alias file
+
+set -e
+
+# Mutt aliases file to save results to
+ALIASES="$HOME/.cache/mutt/aliases"
+
+# Only save email addresses from $DOMAIN. Leave empty to save all email addresses
+DOMAIN="rice.edu"
+
+query_and_cache() {
+    results=$(lbdbq "$@" 2>/dev/null)
+
+    printf '%s\n' "$results"
+
+    # Remove first line from results
+    results=$(sed '1d' <<< "$results")
+
+    # Format results like mutt aliases
+    sed -E $'s/^([[:alnum:]_.]+)@([[:alnum:]_.]+)\t([[:alnum:] -]+)/alias \\1 \\1@\\2 (\\3)/' <<< "$results" | awk -v domain="$DOMAIN" '$3 ~ domain {$2=tolower($2);print}' >> "$ALIASES"
+
+    # Sort and remove duplicates
+    sort -u -o "$ALIASES" "$ALIASES"
+
+}
+
+query_and_cache "$@"
+```
+
+That being said, I am happy with my setup. I can send and receive emails, and I can search my emails quickly. I can also encrypt my emails, which is a plus. 
 
 # Conclusion
 
 I hope you enjoyed this tutorial! If you have any questions, don't ask /s.
+
+[Here is my final configuration](https://github.com/SeniorMars/dotfiles/blob/182ad5717def463abcc0aebbe0062c48824c3532/.config/mutt/muttrc). And again, here is how my email client looks (lol taxes with github now):
+
+![Final](neomutt2.png)
 
 I am going to upload a talk I gave on setting up Neovim for non-programmers soon. This talks about
 grammar checking, spell keybinds, and more. So stay tuned!
