@@ -10,8 +10,6 @@ feed_filename = "rss.xml"
 build_search_index = false # do want to fix this
 generate_feed = true
 compile_sass = true
-render_emoji = true
-smart_punctuation = true
 taxonomies = [{ name = "tags", feed = true, paginate_by = 10 } ]
 
 # theme
@@ -20,6 +18,8 @@ theme = "redux"
 [markdown]
 highlight_code = true
 highlight_theme = "ayu-dark"
+render_emoji = true
+smart_punctuation = true
 
 [extra]
 toc = true
