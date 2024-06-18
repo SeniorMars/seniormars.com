@@ -1,6 +1,7 @@
 +++
 title = "The Last Wish, Mental Health, and Hesitation"
 date = "2023-04-01"
+description = "A guy decides a movie is dedicated to him."
 
 [extra]
 comment = true
@@ -44,4 +45,4 @@ prejudice, with us believing that nobody has “pure” motives. But just like t
 I know that there are 'pure-hearted souls', the person who needs to change is me.
 
 Overall, I'm convinced that Puss and Boots is more or less a metaphor for mental issues. In that
-sense, it's a good movie to fit adult-centric issues into a family friend movie. Truly a 9.5/10.
+sense, it's a good movie to fit adult-eccentric issues into a family friend movie. Truly a 9.5/10.

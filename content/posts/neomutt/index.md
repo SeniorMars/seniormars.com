@@ -1,6 +1,7 @@
 +++
 title = "A Terminal Email Client As An Alternative To Gmail: The Old Dog Neomutt And Pals"
 date = "2023-04-02"
+description = "A guy decides that his email workflow is worth writing about."
 updated = "2024-06-14"
 
 [extra]

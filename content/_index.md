@@ -10,7 +10,7 @@ Heyo! SeniorMars here. It's honestly weird to think that people will spend their
 # News
 
 - <time>2024-06-15</time>: Site is up! I'm still working on it, but I'm excited to see where this goes.
-- <time>2024-06-14</time>: Decided to work on a book!
+- <time>2024-06-05</time>: Decided to work on a book!
 - <time>2024-06-01</time>: Started to work on some videos for SOME!
 - <time>2024-05-06</time>: First day back at gym in a while. We are aiming high!
 

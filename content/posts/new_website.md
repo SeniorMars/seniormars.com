@@ -1,6 +1,7 @@
 +++
 title = "New Website!"
 date = "2023-03-31"
+description = "A guy writes a blog about how his new website looks."
 updated = "2024-06-15"
 
 [extra]
