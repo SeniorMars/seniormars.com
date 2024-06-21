@@ -13,6 +13,7 @@ tags=["math", "rust", "educational"]
 +++
 
 # Motivation
+
 A few days ago, I was working on a UI framework (in rust btw) for a personal project; abruptly, I decided to check my group chat and noticed a screenshot of a question from our university's anonymous forum, Fizz. As it so happened, the question was a math problem--instantly, it became clear to me that I was [nerd sniped](https://xkcd.com/356/) (as any math major would). The question was simple and one you have probably thought about at some point in your life:
 
 > Do yall think there is a person at rice for every birthday in the year? Like
