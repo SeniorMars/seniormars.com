@@ -1,7 +1,7 @@
 +++
 title = "Every day is an Owl's Birthday! A rigorous exploration to a classic problem through math and rust"
 date = "2024-06-20"
-description = "A guy decides to overthink a simple question from his university's anonymous forum"
+description = "A guy decides to overthink a simple question from his university's anonymous forum."
 
 [extra]
 comment = true
@@ -56,7 +56,7 @@ $$
 
 {% end %}
 
-Now, we would be done here, but notice that the last summation is the $n^{th}$ [harmonic number](https://en.wikipedia.org/wiki/Harmonic_number), $H_n$. This summation is known to be $\ln(n) + \gamma + \epsilon(n)$, where $\gamma$ is the Euler-Mascheroni constant and $\epsilon(n)$ is the error term. Hence, we can approximate the expected number of students needed to see all birthdays as $365 H_{365} \approx 365 \ln(365) + 365 \gamma + \epsilon(365)$. If we let $\gamma \approx 0.5772156649$ and the error bound be bounded by $\frac{1}{n} + \mathcal{O}(\frac{1}{n})$, then we can calculate this as approximately $2364$ students needed!
+Now, we would be done here, but notice that the last summation is the $n^{th}$ [harmonic number](https://en.wikipedia.org/wiki/Harmonic_number), $H_n$. This summation is known to be $\ln(n) + \gamma + \epsilon(n)$, where $\gamma$ is the Euler-Mascheroni constant and $\epsilon(n)$ is the error term. Hence, we can approximate the expected number of students needed to see all birthdays as $365 H_{365} \approx 365 \ln(365) + 365 \gamma + \epsilon(365)$. If we let $\gamma \approx 0.5772156649$ and the error bound be bounded by $\frac{1}{2} + \mathcal{O}(\frac{1}{n})$, then we can calculate this as approximately $2364$ students needed!
 
 ## Exploring leap days through our lead
 
@@ -71,7 +71,7 @@ $$
  \frac{365}{365.25} \times \frac{364}{364.25} \times \frac{363}{363.25} \times \cdots \times \frac{1}{1.25} = \frac{365!}{365.25^{365}} = \prod_{i=1}^{365} \frac{i}{i + 0.25}
 $$ 
 
-While this might look complicated (it is!) -- thankfully, this looks like the [gamma function](https://en.wikipedia.org/wiki/Gamma_function)! The gamma function is a generalization of the factorial function to the $\mathbb{R}^+$, and it is defined as $\Gamma(n) = (n - 1)!$. This allows us to deal with some non-integer values, and in our case, we can use the gamma function to calculate the probability of seeing all birthdays in a group of 365.25 students. Hence, 
+While this might look complicated (it is!) -- thankfully, this looks like the [gamma function](https://en.wikipedia.org/wiki/Gamma_function)! The gamma function is a generalization of the factorial function to the $\mathbb{C}^+$, and it is defined as $\Gamma(n) = (n - 1)!$. This allows us to deal with some non-integer values, and in our case, we can use the gamma function to calculate the probability of seeing all birthdays in a group of 365.25 students. Hence, 
 
 $$
 \prod_{i=1}^{365} \frac{i}{i + 0.25} = \frac{\Gamma(366)\Gamma(1.25)}{\Gamma(366.25)} 
@@ -227,7 +227,7 @@ Combining both directions, we have shown $F - E = \{ \{k+1\} \} \cup \{ \{k+1\} 
 Equivalently, we can express $J'$ as $J' = (J \cup \{ \\{k+1\\} \} \cup \\{ \\{k+1\\} \cup x \mid x \in J \\})$ through our claim. This completes the inductive step; thus, through the principle of induction, we have proven the Inclusion-Exclusion Principle, $p(n)$ for $n \in \mathbb{N}$. $$\tag*{$\blacksquare$}$$ 
 {% end %}
 
-That took a bit, but now we can use it freely :sunglasses:! Fix $n$, the number of students, and let $m$ be a set of birthdays. Clearly, for a set of $m$ days, the probability that nobody has a birthday on those days is $(1 - \frac{m}{365})^n)$. Now to tie this to the Inclusion-Exclusion Principle, we need to state a corollary 🙃:
+That took a bit, but now we can use it freely :sunglasses:! Fix $n$, the number of students, and let $m$ be a set of birthdays. Clearly, for a set of $m$ days, the probability that nobody has a birthday on those days is $(1 - \frac{m}{365})^n$. Now to tie this to the Inclusion-Exclusion Principle, we need to state a corollary 🙃:
 
 {% note(clickable=true, center=true, header="Corollary of IEP") %}
 **Corollary**: In the probabilistic version of the inclusion-exclusion principle, the probability of the intersection $A_i, i \in I$ only depends on the cardinality of $I$, meaning for every $k \in \{1, \ldots, n\}$, there exists $a_k$ such that

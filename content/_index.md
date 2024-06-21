@@ -15,4 +15,17 @@ Heyo! SeniorMars here. It's honestly weird to think that people will spend their
 - <time>2024-05-06</time>: First day back at gym in a while. We are aiming high!
 
 # Meme of the Week!
-![Meme of the Week](https://preview.redd.it/7oxqtby67c5d1.jpeg?auto=webp&s=823b14d3440286b409cc3d34e7495aed20ecee63)
+
+![Meme of the Week](https://i.redd.it/kcwdh5q3qy7d1.jpeg)
+
+<details>
+<summary>Previous Memes</summary>
+<p>
+<ul>
+    <li>
+    Week of 06-[16-22]:<br>
+    <img src="https://preview.redd.it/7oxqtby67c5d1.jpeg?auto=webp&amp;s=823b14d3440286b409cc3d34e7495aed20ecee63" alt="Meme of the Week">
+    </li>
+</ul>
+</p>
+</details>
