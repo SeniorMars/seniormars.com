@@ -771,8 +771,7 @@ impl Simulation for Flajolet {
 }
 
 impl Flajolet {
-    fn flajolet(&self, days: u16, probabilities: HashMap<u32, f64>) -> (f64, Duration) {
-        let now = Instant::now();
+    fn flajolet(&self, days: u16, probabilities: HashMap<u32, f64>) -> f64 {
 
         let total_coupons = days as usize;
         let mut expected_value = 0.0;
@@ -823,7 +822,7 @@ impl Flajolet {
             expected_value += sign * subset_sum;
         }
 
-        (expected_value, now.elapsed())
+        expected_value
     }
 }
 ```
