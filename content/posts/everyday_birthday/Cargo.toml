@@ -1,0 +1,13 @@
+[package]
+name = "everyday_birthday"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+chrono = "0.4.38"
+csv = "1.3.0"
+itertools = "0.13.0"
+num-bigint = "0.4.5"
+num-integer = "0.1.46"
+rand = "0.8.5"
+rayon = "1.10.0"
