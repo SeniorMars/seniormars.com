@@ -23,24 +23,24 @@ Not only that, but it was a classic problem in probability theory! Unfortunately
 
 # The Problem and possible leads
 
-In all honestly, this question is fun and can be approached in many ways. Clearly, a trivial solution would involve me, a rice student, having 365 (.25?) friends and checking if each of them has a different birthday. Best case, the answer is yes; worst case, the answer is no. Unfortunately, I spend most of my time at the library, so such a method would be infeasible; a more rigorous approach is desirable. Now, as a math major, I have found abstraction to be often easier to work with than a specific case. Naturally, we'll start by abstracting the problem to a more general form and then working our way back to the original problem.
+In all honestly, this question is fun and can be approached in many ways. Clearly, a trivial solution would involve me, a rice student, having 365 (.25?) friends and checking if each has a different birthday. In the best case, the answer is yes; in the worst case, the answer is no. Unfortunately, I spend most of my time at the library, so such a method would be infeasible; a more rigorous approach is desirable. As a math major, I have found abstraction often easier to work with than a specific case. Naturally, we'll start by abstracting the problem to a more general form and then returning to the original problem.
 
-If you are familiar with continuous probability theory, then perhaps you've heard about the Birthday Paradox. The paradox states that for a random group of 23 people, there is a 50% chance that two people share the same birthday (suprising, I know). While this is not the same problem as our question, they are tangentially related! Hence, we will be using some of the same techniques (most notably counting :sob:). Let's rephrase the question with some assumptions for our first lead! 
+If you are familiar with continuous probability theory, perhaps you've heard about the Birthday Paradox. The paradox states that for a random group of 23 people, there is a 50% chance that two people share the same birthday (surprising, I know). While this is not the same problem as our question, they are tangentially related! Hence, we will use some of the same techniques (notably counting :sob:). Let's rephrase the question with some assumptions for our first lead! 
 
-> "Do you think it's likely that a collection of Rice University students would include at least one student with each possible birthday? Assuming each birthday is equally likely, how many students would be needed to expected that every day of the year, 365 days, is someone's birthday?" <br>
+> "Do you think it's likely that a collection of Rice University students would include at least one student with each possible birthday? Assuming each birthday is equally likely, how many students would be needed to expect that every day of the year, 365 days, is someone's birthday?" <br>
 > --- Problem 1.1
 
-The most important part of this rephrasing are the assumptions (a restriction which we will remove later) of equally likely birthdays and number of days. Moreover, while the rephrasing is a bit awkward to some -- to others it may remind them of another problem: The Coupon Collector!
+The most important part of this rephrasing is the assumption (a restriction which we will remove later) of equally likely birthdays and the number of days. Moreover, while the rephrasing is a bit awkward to some, to others, it may remind them of another problem: The Coupon Collector!
 
 # The Coupon Collector Problem and Expected Value
 
-Now, I'm not a computer scientist, so I won't simply "reduce" the problem and call it a day. First, the goal of the coupon collector problem is to determine the expected number of coupons needed to collect all coupons, i.e., instead of coupons we deal with birthdays, and quantify the number of students needed to ensure having all birthdays. In other words, we are trying to calculate the expected number of students needed to have all birthdays, which is precisely Problem 1.1!
+Now, I'm not a computer scientist, so I won't simply "reduce" the problem and call it a day. First, the goal of the coupon collector problem is to determine the expected number of coupons needed to collect all coupons. Instead of coupons, we deal with birthdays and quantify the number of students needed to ensure having all birthdays. In other words, we are trying to calculate the expected number of students required to have all birthdays, which is precisely Problem 1.1!
 
-The idea is simple: keep adding students one by one until you have all birthdays. As you follow this process, you notice that the first student is guaranteed to have a unique birthday. Moreover, each new student has a probability of $\frac{x}{365}$ of having a new birthday, where $x$ is the number of unique birthdays left. In contrast, the expected probability of how many students you have to go through until you see a new birthday is the reciprocal of the probability of seeing a new birthday, i.e., $\frac{365}{x}$. We derive this as if $k$ birthdays are already taken, the probability of $P_{\text{new}}$ is given by $P_{\text{new}} = \frac{365 - k}{365}$; hence, geometric distribution (proof: [^1]) tell us that the probability to counter an event with probability $P_{\text{new}}$ is $\frac{1}{P_{\text{new}}}$---which is $\frac{365}{365 - k}$. Finally, from our assumptions we know that the birthday is equally likely (independent), which means a new birthday does not depend on the previous birthdays. Therefore, I claim we can sum the expected number of students needed to see a new birthday for each $k$ unique birthday multiplied by the number of birthdays. Let's prove this:
+The idea is simple: keep adding students one by one until you have all birthdays. Following this process, you notice that the first student is guaranteed a unique birthday. Moreover, each new student has a probability of $\frac{x}{365}$ of having a new birthday, where $x$ is the number of unique birthdays left. In contrast, the expected probability of how many students you have to go through until you see a new birthday is the reciprocal probability of seeing a new birthday, i.e., $\frac{365}{x}$. We derive this as if $k$ birthdays are already taken, the probability of $P_{\text{new}}$ is given by $P_{\text{new}} = \frac{365 - k}{365}$; hence, geometric distribution (proof: [^1]) tell us that the probability to counter an event with probability $P_{\text{new}}$ is $\frac{1}{P_{\text{new}}}$---which is $\frac{365}{365 - k}$. Finally, from our assumptions, we know that the birthday is equally likely (independent), which means a new birthday does not depend on the previous birthdays. Therefore, I claim we can sum the expected number of students needed to see a new birthday for each $k$ unique birthday multiplied by the number of birthdays. Let's prove this:
 
 {% note(clickable=true, center=true, header="Proof of claim") %}
 
-**Proof**: Let $T$ be the number of students needed for all birthdays to be seen and let $T_k$ be the number of students needed to see a new birthday given that $k - 1$ birthdays are already taken. As we have noted before, the probability of seeing a new birthday is $P_k = \frac{365 - k}{365}$, which means the expected number of students needed to see a new birthday is $\frac{1}{p_k} = \frac{365}{365 - k}$. Now, let's readjust the sum to avoid diving by zero and we see:
+ **Proof**: Let $T$ be the number of students needed for all birthdays to be seen, and let $T_k$ be the number of students needed to see a new birthday, given that $k - 1$ birthdays are already taken. As we have noted before, the probability of seeing a new birthday is $P_k = \frac{365 - k}{365}$, which means the expected number of students needed to see a new birthday is $\frac{1}{p_k} = \frac{365}{365 - k}$. Now, let's readjust the sum to avoid diving by zero, and we see:
 
 $$
 \begin{align*}
@@ -55,16 +55,16 @@ $$
 
 {% end %}
 
-Now, we would be done here, but notice that the last summation is the $n^{th}$ [harmonic number](https://en.wikipedia.org/wiki/Harmonic_number), $H_n$. summation is known to be $\ln(n) + \gamma + \epsilon(n)$, where $\gamma$ is the Euler-Mascheroni constant and $\epsilon(n)$ is the error term. Hence, we can approximate the expected number of students needed to see all birthdays as $365 H_{365} \approx 365 \ln(365) + 365 \gamma + \epsilon(365)$. If we let $\gamma \approx 0.5772156649$ and the error bound be bounded by $\frac{1}{n} + \mathcal{O}(\frac{1}{n})$, then we can calculate this as approximately $2364$ students needed!
+Now, we would be done here, but notice that the last summation is the $n^{th}$ [harmonic number](https://en.wikipedia.org/wiki/Harmonic_number), $H_n$. This summation is known to be $\ln(n) + \gamma + \epsilon(n)$, where $\gamma$ is the Euler-Mascheroni constant and $\epsilon(n)$ is the error term. Hence, we can approximate the expected number of students needed to see all birthdays as $365 H_{365} \approx 365 \ln(365) + 365 \gamma + \epsilon(365)$. If we let $\gamma \approx 0.5772156649$ and the error bound be bounded by $\frac{1}{n} + \mathcal{O}(\frac{1}{n})$, then we can calculate this as approximately $2364$ students needed!
 
 ## Exploring leap days through our lead
 
-However, an astute reader would notice that this is still the expected number of students needed to see all birthdays, not the number of students needed to ensure all birthdays are seen. For now, however, we will explore this setup a bit more. For instance, what if we account for leap days, i.e., someone is born on February 29th? Let's rephrase the problem with this in mind:
+However, an astute reader would notice that this is still the expected number of students needed to see all birthdays, not the number required to ensure all birthdays are seen. For now, however, we will explore this setup more. For instance, what if we account for leap days, i.e., someone is born on February 29th? Let's rephrase the problem with this in mind:
 
 > "Do you think it's likely that a collection of Rice University students would include at least one student with each possible birthday? Assuming each birthday is equally likely, how many students would be needed to expected that every day of the year, including leap days, is someone's birthday?" <br>
 > --- Problem 1.15
 
-Easily, we can change our sum to $365.25$ instead of $365$ and the expected number of students needed to see all birthdays would be $\frac{365.25}{365} \cdot 2364 \approx 2366$ students, but this is *without* our error bound i.e., the probabilities of the event happening adjusting for leap days. In fact, to get the error bound we have to multiple all the probability of covering all possible birthdays in a random group process such that each day has a slightly different probability due to our leap day. Using the logic described previously, we to calculate such a risk we can multiply:
+Easily, we can change our sum to $365.25$ instead of $365$, and the expected number of students needed to see all birthdays would be $\frac{365.25}{365} \cdot 2364 \approx 2366$ students, but this is *without* our error bound, i.e., the probabilities of the event happening to adjust for leap days. In fact, to get the error bound, we have to multiply the likelihood of covering all possible birthdays in a random group process such that each day has a slightly different probability due to our leap day. Using the logic described previously, to calculate such a risk, we can multiply:
 
 $$
  \frac{365}{365.25} \times \frac{364}{364.25} \times \frac{363}{363.25} \times \cdots \times \frac{1}{1.25} = \frac{365!}{365.25^{365}} = \prod_{i=1}^{365} \frac{i}{i + 0.25}
@@ -76,20 +76,20 @@ $$
 \prod_{i=1}^{365} \frac{i}{i + 0.25} = \frac{\Gamma(366)\Gamma(1.25)}{\Gamma(366.25)} 
 $$ 
 
-Now, thanks to wolfram alpha, we can calculate this:
+Now, thanks to Wolfram Alpha, we can calculate this:
 
 ```wolframscript
 result = (Gamma[366] * Gamma[1.25]) / Gamma[366.25]
 result
 ```
 
-But, we are on an exploration, so let's calculate this by hand! Honestly, without wikipedia I would have been stuck, but it turns out that we have a general formula for the gamma function in the form of $\Gamma(n + \frac{1}{4}) = \Gamma(\frac{1}{4}) \frac{(4n - 3)!!!!}{4^n}$. However, what's even nicer is that we can approximate: $\frac{\Gamma(n + \frac{1}{4})}{\Gamma(n)}$ by using $\frac{\Gamma(a + \epsilon)}{\Gamma(a)} \approx \left(a + \frac{\epsilon}{2} - \frac{1}{2}\right)^{\epsilon}$. Hence, we get: 
+But we are exploring, so let's calculate this by hand! Honestly, without Wikipedia, I would have been stuck, but it turns out that we have a general formula for the gamma function in the form of $\Gamma(n + \frac{1}{4}) = \Gamma(\frac{1}{4}) \frac{(4n - 3)!!!!}{4^n}$. However, what's even nicer is that we can approximate: $\frac{\Gamma(n + \frac{1}{4})}{\Gamma(n)}$ by using $\frac{\Gamma(a + \epsilon)}{\Gamma(a)} \approx \left(a + \frac{\epsilon}{2} - \frac{1}{2}\right)^{\epsilon}$. Hence, we get: 
 
 $$
 \frac{\Gamma(366.25)}{\Gamma(366)} \approx \left(366 + \frac{0.25}{2} - \frac{1}{2}\right)^{0.25} = \left(366 + 0.125 - 0.5\right)^{0.25} = \left(365.625\right)^{0.25}
 $$ 
 
-Which means, the original expression can then be approximated as:
+This means the original expression can then be approximated as:
 
 $$
 \frac{\Gamma(366) \Gamma(1.25)}{\Gamma(366.25)} \approx \Gamma(1.25) \left(365.625\right)^{-0.25}
@@ -102,28 +102,29 @@ $$
 $$ 
 
 
-Now, thanks to the work of [others](https://oeis.org/A068466), we find that $\Gamma(\frac{1}{4}) = 3.6256099082219083119$. Which means, we can calculate the probability of seeing all birthdays in a group of 365.25 students as:
+Now, thanks to the work of [others](https://oeis.org/A068466), we find that $\Gamma(\frac{1}{4}) = 3.6256099082219083119$. This means we can calculate the probability of seeing all birthdays in a group of 365.25 students as:
 
 $$
 \frac{\Gamma(366)\Gamma(1.25)}{\Gamma(366.25)} \approx 0.20728
 $$ 
 
-Hell ya! Finally, we can calculate the expected number of students needed to see all birthdays in a group of 365.25 students as:
+Hell ya! Finally, we can calculate the expected number of students needed to see all birthdays in a group of 365.25 students as follows:
 
 $$
 2366 + 0.20728 \cdot \frac{365.25}{0.25} \approx 2669
 $$ 
 
-We can actually continue with this lead, but I want to explore another lead that I have in mind for now -- we'll return to this later!
+We can continue with this lead, but I want to explore another lead I have in mind for now -- we'll return to this later!
 
 # The Inclusion-Exclusion Principle
 
-So far, we've tackled the problem using the Coupon Collector approach, which gave us a great starting point. However, there's another powerful method in combinatorics that can provide us with more insight: the Inclusion-Exclusion Principle. This was the method that the person who responded on Fizz used! Now, this principle is particularly useful for counting the number of elements in the union of several sets, especially when those sets are not disjoint.
+
+So far, we've explored the Coupon Collector approach, which is a solid starting point. But now, let's delve into a more powerful tool in combinatorics: the Inclusion-Exclusion Principle. This is the very method that the person who responded on Fizz used! It's a fascinating approach, particularly useful for counting the number of elements in the union of several sets, even when those sets are not disjoint.
 
 > "Do you think it's likely that a collection of Rice University students would include at least one student with each possible birthday? How can we calculate the probability that every birthday is represented assuming uniform distribution?" <br>
 > --- Problem 1.2
 
-In other words, we want to find the probability that at least one student has each birthday. In fact, this is reverse of asking if nobody has a birthday on those days, which is easier to calculate (I'll explain in a bit). We can use the Inclusion-Exclusion Principle to calculate the probability that nobody has a birthday on a particular day! The inclusion principle states that if we have events $A_i, i = \{ 1, 2, \ldots, n\}$ and $\mathcal{P}(A_i)$ is the probability of event $A_i$, then the probability of the union of their union (i.e., the probability that at least one of the events occurs) is given by:
+In other words, we want to find the probability that at least one student has each birthday. In fact, this is the reverse of asking if nobody has a birthday on those days, which is easier to calculate (I'll explain in a bit). We can use the Inclusion-Exclusion Principle to calculate the probability that nobody has a birthday on a particular day! The inclusion principle states that if we have events $A_i, i = \{ 1, 2, \ldots, n\}$ and $\mathcal{P}(A_i)$ is the probability of event $A_i$. The probability of the union of their union (i.e., the likelihood that at least one of the events occurs) is given by:
 
 $$
 \begin{align*}
@@ -136,6 +137,7 @@ $$
 The intuitive way to think about the Inclusion-Exclusion Principle is as a method for correcting overcounts when calculating the probability of at least one of several events occurring. In the context of our problem with Rice University students, each event $A_i$ can be thought of as the event that no student has their birthday on day $i$. Since these events overlap (students can share birthdays or not have birthdays on multiple specific days), we need to adjust for the overlap to avoid double-counting the probabilities. Now, before we use it, however, let's prove it and a claim that will be useful for our proof.
 
 {% note(clickable=true, center=true, header="Proof of Inclusion-Exclusion Principle") %}
+
 **Proof**: We proceed by the principle of induction. Let's denote the principle as
 
 $$
@@ -164,7 +166,7 @@ $$
 \end{align*}
 $$
 
-Notice, that the first and last terms are $n-$unions, thus the inductive hypothesis holds:
+Notice that the first and last terms are $n-$unions, thus the inductive hypothesis holds:
 
 
 $$
@@ -224,7 +226,7 @@ Combining both directions, we have shown $F - E = \{ \{k+1\} \} \cup \{ \{k+1\} 
 Equivalently, we can express $J'$ as $J' = (J \cup \{ \\{k+1\\} \} \cup \\{ \\{k+1\\} \cup x \mid x \in J \\})$ through our claim. This completes the inductive step; thus, through the principle of induction, we have proven the Inclusion-Exclusion Principle, $p(n)$ for $n \in \mathbb{N}$. $$\tag*{$\blacksquare$}$$ 
 {% end %}
 
-That took a bit, but now we can use it freely :sunglasses:! Fix $n$, the number of students, and let $m$ be a set of birthdays. Clearly, for a set of $m$ days, the probability that nobody has a birthday on those days is $(1 - \frac{m}{365})^n)$. Now in order to tie this to the Inclusion-Exclusion Principle, we need to state a corollary 🙃:
+That took a bit, but now we can use it freely :sunglasses:! Fix $n$, the number of students, and let $m$ be a set of birthdays. Clearly, for a set of $m$ days, the probability that nobody has a birthday on those days is $(1 - \frac{m}{365})^n)$. Now to tie this to the Inclusion-Exclusion Principle, we need to state a corollary 🙃:
 
 {% note(clickable=true, center=true, header="Corollary of IEP") %}
 **Corollary**: In the probabilistic version of the inclusion-exclusion principle, the probability of the intersection $A_i, i \in I$ only depends on the cardinality of $I$, meaning for every $k \in \{1, \ldots, n\}$, there exists $a_k$ such that
@@ -277,7 +279,7 @@ This result arises due to the combinatorial interpretation of the binomial coeff
 {% end %}
 
 
-Using the corollary, we can now finally calculate the probability our question asks for! Let $A_i$ be the event that nobody has a birthday on day $i$, then the probability that at least one student has each birthday is given by:
+Using the corollary, we can finally calculate the probability our question asks for! Let $A_i$ be the event that nobody has a birthday on day $i$, then the probability that at least one student has each birthday is given by:
 
 
 $$
@@ -297,13 +299,13 @@ s2366 = s[2366]
 s2669 = s[2669]
 ```
 
-We end up with $n = 2366$ having a probability of $0.573$ and $n = 2669$ having a probability of $0.785$.  This is a bit surprising, as the expected number of students needed to see all birthdays was $2366$ students, but the probability of seeing all birthdays was only $57.3\%$ using that number. This is due to the fact that the expected number of students needed to see all birthdays is the average number of students needed to see all birthdays, but the probability of seeing all birthdays is the one minus the probability of not seeing all birthdays. This is a subtle but important distinction, and shows the power of different methods (and leads) in probability theory!
+We end up with $n = 2366$ having a probability of $0.573$ and $n = 2669$ having a probability of $0.785$. This is a bit surprising, as the expected number of students needed to see all birthdays was $2366$ students, but the likelihood of seeing all birthdays was only $57.3\%$ using that number. This is because the expected number of students needed to see all birthdays is the average number of students needed to see all birthdays. Still, the probability of seeing all birthdays is one minus the probability of not seeing all birthdays. This subtle but essential distinction shows the power of different probability theory methods (and leads)!
 
 # Monte Carlo Simulation
 
-Now, that we came up with two different methods to solve similar problems, I want to explore another lead: Monte Carlo Simulation (honestly, so this blog has pictures lol). Monte Carlo simulations are particularly useful when dealing with complex probability problems. Instead of solving the problem analytically, we simulate the scenario many times and observe the outcomes. In our case, we will simulate the assignment of birthdays to students repeatedly and count how often all 365 days are represented. Unfortunately, we need to move to the `computing` land and code it up. I wanted a easy, fast, and clean language to prototype this, so of course I choose [rust](https://www.rust-lang.org/) :crab:.
+Now that we have come up with two different methods to solve similar problems, I want to explore another lead: Monte Carlo Simulation (honestly, so this blog has pictures, lol). Monte Carlo simulations are beneficial when dealing with complex probability problems. Instead of solving the problem analytically, we often simulate the scenario and observe the outcomes. In our case, we will simulate the assignment of birthdays to students repeatedly and count how often all 365 days are represented. Unfortunately, we must move to the computing land and code it up. I wanted an easy, fast, and clean language to prototype this, so, of course, I chose [rust](https://www.rust-lang.org/) :crab:
 
-This is suppose to be math blog, so I'll try to keep the code to a minimum. The idea is simple: we generate a random birthday for each student and check if all 365 days are represented. We repeat this process many times and calculate the probability of seeing all birthdays. I want to create different models to optimize them for the problem, so I decided to have an interface for our simulations (or a trait in Rust land):
+Since this is a math blog, I'll keep the code to a minimum. The concept is straightforward: we assign a random birthday to each student and check if all 365 days are represented. We repeat this process numerous times and calculate the probability of seeing all birthdays. To optimize our models for the problem, I've decided to create an interface for our simulations (or a trait in Rust land):
 
 ```rust
 pub trait Simulation {
@@ -325,7 +327,7 @@ pub trait Simulation {
 
 ```
 
-This will allow us to create different models for our simulations, such as a simple model that assigns birthdays randomly to students, and two more two more I have in mind. Here is our first model:
+This will allow us to create different models for our simulations, such as a simple model randomly assigning birthdays to students and two more I have in mind. Here is our first model:
 
 ```rust
 pub struct BasicModel{}
@@ -361,7 +363,7 @@ impl Simulation for BasicModel {
 }
 ```
 
-In this model, we generate a random birthday for each student and check if all 365 days are represented through a hashset. We repeat this process many times and calculate the probability of seeing all birthdays. We then get the probability of seeing all birthdays for each number of students in our `students` array. Now, we simply run the code with `cargo run --release`:
+In this model, we generate a random birthday for each student and check if all 365 days are represented through a hash set. We repeat this process many times and calculate the probability of seeing all birthdays. We then get the likelihood of seeing all birthdays for each number of students in our `students` array. Now, we run the code with `cargo run --release`:
 
 ```rust
 fn main() {
@@ -392,7 +394,7 @@ Num Students: 9000, Probability: 1
 Elapsed: 6.503436542s
 ```
 
-Anyway, I wanted to make this fast to run more simulations so here is a slightly optimized version of the model where we parallelize the simulation. Parallelizing is a technique that allows us to run multiple computations simultaneously, which can be useful when we have a large number of simulations to run as in this case!
+Anyway, I wanted to make this fast enough to run more simulations, so here is a slightly optimized version of the model where we parallelize the simulation. Parallelizing is a technique that allows us to run multiple computations simultaneously, which can be useful when we have a large number of simulations to run, as in this case!
 
 ```rust
 impl Simulation for ParModel {
@@ -463,7 +465,7 @@ fn main() {
 }
 ```
 
-This surprisingly only took `2m 40s` for both models to run $100000$ simulations, which is pretty fast! Here are the results again:
+Surprisingly, it only took `2m 40s` for both models to run $100000$ simulations, which is pretty fast! Here are the results again:
 
 ```bash
 $ cargo run --release
@@ -493,11 +495,11 @@ Num Students: 9000, Probability: 1
 Elapsed: 12.1203835s
 ```
 
-Clearly, paralleling the model was worth it. In either case, we see that using a monte carlo simulation, we can get a good approximation of the probability of seeing all birthdays in a group of students. I don't like computation but you gotta admit, this is cool as it matches our work so far! But now, let's move on to---the proof of[^3]---jk the third model and pretty pictures!
+Clearly, paralleling the model was worth it. In either case, we see that using a Monte Carlo simulation, we can get a good approximation of the probability of seeing all birthdays in a group of students. I don't like computation, but you gotta admit, this is cool as it matches our work so far! But now, let's move on to the proof of[^3]---jk the third model and pretty pictures!
 
 # The IEP model and plots!
 
-Let's move on to the third model, which will simply use the Inclusion-Exclusion Principle. Since the IEP is deterministic, we don't need to run simulations. Instead, we can calculate the probability of seeing all birthdays in a group of students directly. Here is the code for the model:
+Let's move on to the third model, which uses the Inclusion-Exclusion Principle. Since the IEP is deterministic, we don't need to run simulations. Instead, we can calculate the probability of seeing all birthdays in a group of students directly. Here is the code for the model:
 
 ```rust
 impl Simulation for IEPModel {
@@ -561,7 +563,7 @@ Num Students: 9000, Probability: 0.999999993098
 Elapsed: 73.884958ms
 ```
 
-WOW, the IEP model is super fast and accurate! I mean it makes sense since it's a formula, but still, I did not expect $73$ms. With that being said, let's make some pretty graphs :). First, since this is an exploration, I'll show the trace graphs of the models (I think it's really cool). To make these graphs I used `env CARGO_PROFILE_RELEASE_DEBUG=true cargo flamegraph --root -o flamegraph.svg` with the [flamegraph crate](https://github.com/flamegraph-rs/flamegraph). You can right-click and open these images in a new tab to explore their traces!
+WOW, the IEP model is super fast and accurate! It makes sense since it's a formula, but I expected something other than $73$ms. With that being said, let's make some pretty graphs :). First, since this is an exploration, I'll show the trace graphs of the models (I think it's really cool). To make these graphs, I used `env CARGO_PROFILE_RELEASE_DEBUG=true cargo flamegraph --root -o flamegraph.svg` with the [flamegraph crate](https://github.com/flamegraph-rs/flamegraph). You can right-click and open these images in a new tab to explore their traces!
 
 The basic model:
 ![flamegraph basic](./flamegraph0.svg)
@@ -572,10 +574,10 @@ The parallel model:
 The IEP model:
 ![flamegraph iep](./flamegraph2.svg)
 
-Now, let's plot the results[^4] of the parallel and IEP model to see how they compare. To make these graphs more prettier, I decided to map over a range of number of students, 0 to 9,000, and to only run 10,000 simulations.
+Now, let's plot the results[^4] of the parallel and IEP model to see how they compare. To make these graphs prettier, I decided to map over a range of students, 0 to 9,000, and to run only 10,000 simulations.
 
 {% note(clickable=true,hidden=true, header="Code to generate plots") %}
-First, here is the rust code I used to write the data I wanted to python:
+First, here is the rust code I used to write the data.
 ```rust
 for model in models {
     let title = format!("{:?}.csv", model);
@@ -590,6 +592,9 @@ for model in models {
     }
 }
 ```
+
+Here is the python code to generate the plots.
+
 ```python
 import pandas as pd
 import seaborn as sns
@@ -684,15 +689,15 @@ Now, here are our plots:
 
 ![scatter](./scatter.png)
 
-I like graphs because they help us visualize the data and see patterns that might not be immediately obvious from the numbers. In this case, we can see that the IEP model is much faster than the parallel model, and that the probability of seeing all birthdays increases as the number of students increases. The violin plot also shows the distribution of probabilities for each model, with the IEP model having a narrower distribution than the parallel model. Finally, we can see that IEP scales linearly with the number of students, while the parallel model scales exponentially. Now, let's move on to our final section and last model!
+I like graphs because they help us visualize the data and see patterns that might not be immediately obvious from the numbers. In this case, we can see that the IEP model is much faster than the parallel model and that the probability of seeing all birthdays increases as the number of students increases. The violin plot also shows the distribution of probabilities for each model, with the IEP model having a narrower distribution than the parallel model. Finally, we can see that IEP scales linearly with the number of students, while the parallel model scales exponentially. Now, let's move on to our final section and last model!
 
 # I read a paper and found...
 
-Honestly, I was going to call it a day because although I said we would explore the original question, I didn't know how to account for the fact that the birthdays are not uniformly distributed. I had an idea on how to get the actual probabilities, and the last model (soon btw) was going to implement this based on data I got, but it felt like a cop out. Or at least it was until I found a paper!
+Honestly, I was going to call it a day because although I said we would explore the original question, I didn't know how to account for the fact that birthdays are not uniformly distributed. I had an idea on how to get the actual probabilities, and the last model (soon btw) was going to implement this based on data I got, but it felt like a cop-out. Or at least it was until I found a paper!
 
-First, let's talk about the assumptions we made. The most important thing to note is that birthdays are not uniformly distributed. The most famous blog about this can be found [here](https://www.panix.com/~murphy/bday.html) by Roy Murphy. For instance, according to the data he collected, August is the most common month to have a birthday.  This means that the probability of seeing all birthdays in a group of students is not simply $1 - \frac{m}{365}$, but rather a more complex function that depends on the distribution of birthdays. Moreover, Rice is a specific group of the general population, so it could have a different distribution of birthdays than the general population. It might be possible to answer the question well if I got specific data like zipcode and birthdate, but due to ethical reasons, I totally don't have that data. So that was a dead end --- until, I found this [paper](https://doi.org/10.1016/0166-218X(92)90177-C), <cite> Birthday paradox, coupon collectors, caching algorithms and self-organizing search by Philippe Flajolet</cite>.
+First, let's talk about the assumptions we made. The most important thing to note is that birthdays are not uniformly distributed. The most famous blog about this can be found [here](https://www.panix.com/~murphy/bday.html) by Roy Murphy. For instance, according to the data he collected, August is the most common month to have a birthday. This means that the probability of seeing all birthdays in a group of students is not simply $1 - \frac{m}{365}$, but rather a more complex function that depends on the distribution of birthdays. Moreover, Rice is a specific group of the general population, so it could have a different distribution of birthdays than the general population. It might be possible to answer the question well if I got specific data like zip code and birthdate, but due to ethical reasons, I totally don't have that data. So that was a dead end --- until I found this [paper](https://doi.org/10.1016/0166-218X(92)90177-C), <cite> Birthday paradox, coupon collectors, caching algorithms and self-organizing search by Philippe Flajolet</cite>.
 
-So I read the paper (I totally didn't just read the part that was relevant to my problem 🤧) and it turns out the Coupon Collector's Problem can be generalized to non-uniform distributions. Specifically, in Theorem $4.1$, Dr. Flajolet gives us the equation:
+So I read the paper (I totally didn't just read the part that was relevant to my problem 🤧), and it turns out the Coupon Collector's Problem can be generalized to non-uniform distributions. Specifically, in Theorem $4.1$, Dr. Flajolet gives us the equation:
 
 $$
 E(T) = \int_0^\infty \left(1 - \prod_{i=1}^m (1 - e^{-p_i t}) \right) dt.
@@ -704,17 +709,18 @@ $$
 E(T) = \sum_{q=0}^{m-1} (-1)^{m-1-q} \sum_{|J|=q} \frac{1}{1 - P_J},
 $$
 
-where $ m $ denotes the number of coupons to be collected and $ P_J $ denotes the probability of getting any coupon in the set of coupons $ J $. Let's prove this!
+Where $ m $ denotes the number of coupons to be collected, and $ P_J $ denotes the probability of getting any coupon in the set of coupons $ J $. Let's prove this!
 
 {% note(clickable=true, hidden=true, center=true, header="Proof of Theorem 4.1") %}
 
-I lied to you. While I did understand the general proof Dr. Flajolet provided, I am not confident in providing a proof here. However, I will say that he used generating functions to generalize the Coupon Collector's Problem to non-uniform distributions, and it's actually pretty cool! In either case if you want a proof, please read the paper!
+I lied to you. While I did understand Dr. Flajolet's general proof, I am not confident I can provide a great proof here. However, he used generating functions to generalize the Coupon Collector's Problem to non-uniform distributions, and it's pretty cool! In either case, if you want proof, please read the paper!
 
 {% end %}
 
-With the proof finished 😎, we will allow ourselves to use the theorem. Moreover, we will implement this as our last model. Let's first talk about the data to generate the probabilities. The SSA (Social Security Administration) has a record of birthdays in the US. Since we want to talk about Rice students, I decided to get the data for the years 2002 to 2005 (sorry super seniors). I found this data [here](https://github.com/fivethirtyeight/data/blob/master/births/US_births_2000-2014_SSA.csv). Calculating the probabilities for each day was easy:
+With the proof finished 😎, we will allow ourselves to use the theorem. Moreover, we will implement this as our last model. Let's first talk about the data to generate the probabilities. The SSA (Social Security Administration) records birthdays in the US. Since we want to talk about Rice students, I got the data for 2002 to 2005 (sorry super seniors). I found this data [here](https://github.com/fivethirtyeight/data/blob/master/births/US_births_2000-2014_SSA.csv). Calculating the probabilities for each day was easy:
 
 {% note(clickable=true, hidden=true, header="Code to calculate probabilities") %}
+
 ```rust
 use chrono::{Datelike, NaiveDate};
 use std::{collections::HashMap, fs::File, path::PathBuf};
@@ -753,6 +759,7 @@ pub fn get_probabilities(file_path: PathBuf) -> Option<HashMap<u32, f64>> {
     Some(birth_counts)
 }
 ```
+
 {% end %}
 
 Now, we just gotta implement the formula to get the expected number of students needed to see all birthdays given the data from 2002 to 2005:
@@ -839,11 +846,11 @@ fn main() {
 }
 ```
 
-After, I ran it, I found the actual expected number of Rice Owls needed to see all birthdays including leap days and real birthday distributions was:
+After I ran it, I found the actual expected number of Rice Owls needed to see all birthdays, including leap days and real birthday distributions, was:
 
 {% note(clickable=true, hidden=true, center=true, header="Final Answer") %}
 
-I lied naturally as I breathe. Look, honestly, I ran the model, but there is a **huge** problem! Let's take a look:
+ I lied naturally as I breathed. Look, honestly, I ran the model, but there is a **huge** problem! Let's take a look:
 
 ```rust
 for subset in probabilities.keys().combinations(curr_coupons) {...}
@@ -855,15 +862,15 @@ $$
 \sum_{|J|=q} \frac{1}{1 - P_J}
 $$
 
-If you know anything about computational complexity, you will immediately realize the problem: combinatorial explosion. The number of subsets of a set of size $n$ is $2^n$, so the number of subsets of a set of size $366$ is $2^{366}$. This is a huge number, and even after my all my smart optimizations (I tried really), the model won't ever end. I tried it for small number of days, and it works as per my calculations; however, the universe will end before I get the answer for $366$ days. So, I am sorry, but I can't give you the final answer because I will die before I get it. In a way, that's motivation, honestly. If the $P = NP$ problem is solved, then we can come back to this problem knowing there might be a polynomial time solution. But until then, we need to be content with an approximation.
+If you know anything about computational complexity, you will immediately realize the problem: combinatorial explosion. The number of subsets of a set of size $n$ is $2^n$, so the number of subsets of a set of size $366$ is $2^{366}$. This is a huge number, and even after all my clever optimizations (I tried, really), the model won't ever end. I tried it for a small number of days, and it worked as per my calculations; however, the universe would end before I got the answer for $366$ days. So, I am sorry, but I can't give you the final answer because I will die before I get it. In a way, that's motivation, honestly. If the $P = NP$ problem is solved, then we can come back to this problem knowing there might be a polynomial time solution. But until then, we need to be content with an approximation.
 
 {% end %}
 
-With that we finally have a good enough answer to our original question 😉! I hope you enjoyed this exploration, and I hope you learned something new. Now before we conclude, I wanted to compare an informed monte carlo simulation with the parallel model assuming equally probabilities for 366 days. I will use the probabilities we calculated from the data to run the simulation. 
+With that, we finally have a good enough answer to our original question 😉! I hope you enjoyed this exploration, and I hope you learned something new. Before we conclude, I wanted to compare an informed Monte Carlo simulation with the parallel model assuming equal probabilities for 366 days. I will use the probabilities we calculated from the data to run the simulation. 
 
 # One Last Time: Informed Monte Carlo Simulation
 
-Since we have the data, we can simply use the probabilities to make a more informed monte carlo simulation. I will use the same model as the parallel model, but instead of assuming equal probabilities for each day, I will use the probabilities we calculated from the data. Here is the code for the model:
+Since we have the data, we can use the probabilities to make a more informed Monte Carlo simulation. I will use the same model as the parallel model, but instead of assuming equal probabilities for each day, I will use the probabilities we calculated from the data. Here is the code for the model:
 
 ```rust
 impl Simulation for InformedModel {
@@ -1075,11 +1082,11 @@ plt.savefig('last_pairplot.png')
 ```
 {% end %}
 
-With that all being said, we are at the end of our journey. I really hope everything was clear, I tried my best. If you see any mistakes: just know it's not me who made a mistake, it's you who needs a check up /s (email me at seniormars@rice.edu or write a comment below). Have a great year!
+That said, we are at the end of our journey. In the end, we found a formula that works, but the power of today's computation is holding me back 😔. While that may disappoint you, the reader, I know how to fix it: give me a polynomial time equation, and I'll be back with an exact answer 😎. Anyways, I hope everything was clear; I tried my best. If you see any mistakes, know it's not me who made a mistake; it's you who needs a check-up/s (email me at seniormars@rice.edu or write a comment below). Have a great year!
 
 # Conclusion
 
-Throughout this article, I came to realize that I hate stats. Thank you fizz, I'll probably deregister from MATH 412: Probability Theory now. On a serious note, writing for a public audience -- especially for math -- is incredibly hard. If you read up to this point, then I hope you enjoyed it.
+Throughout this article, I came to realize that I hate stats. Thank you fizz, I'll probably deregister from MATH 412: Probability Theory now. On a serious note, writing for a public audience -- especially for math -- is incredibly hard. If you read up to this point, I hope you enjoyed it.
 
 ---
 
