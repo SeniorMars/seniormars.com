@@ -11,9 +11,10 @@ If you have time, please, please, please check these people out!
 3. [Clayton](https://claytonwramsey.github.io/)
 4. [commandblockguy](https://commandblockguy.xyz/)
 5. [ei5uke](https://ei5uke.github.io/)
-6. [Shreyas Minocha](https://shreyasminocha.me/)
-7. [Thomas Kaldahl](https://thomaskaldahl.com/)
-8. [Wisha W.](https://wisha.page/)
+6. [Nat Hill](https://www.nathill.me/)
+7. [Shreyas Minocha](https://shreyasminocha.me/)
+8. [Thomas Kaldahl](https://thomaskaldahl.com/)
+9. [Wisha W.](https://wisha.page/)
 
 # Quotes I like
 
