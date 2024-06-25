@@ -52,4 +52,6 @@ custom_css = []
 
 [extra.analytics]
 enabled = true
-goatcounter_user = "seniormars"
+
+[extra.analytics.goatcounter]
+user = "seniormars"
