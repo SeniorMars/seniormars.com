@@ -428,6 +428,31 @@ local get_current_mode = function()
     end
 end
 
+-- Get file type and shorten it if the window is too small
+local file_type = function()
+    local ft = vim.bo.filetype
+    if ft == "" then return "[None]" end
+
+    local width = vim.api.nvim_win_get_width(0)
+
+    if width > 80 then
+        return string.format("[%s]", ft)
+    else
+        local buf_name = vim.api.nvim_buf_get_name(0)
+        if buf_name == "" and ft == "" then
+            return "[*]"
+        elseif buf_name == "" then
+            return string.format("[%s]", ft)
+        else
+            local ext = vim.fn.fnamemodify(buf_name, ":e")
+            local len = string.len
+            local shorter = (len(ft) < len(ext)) and ft or ext
+
+            return string.format("[%s]", shorter)
+        end
+    end
+end
+
 ---@diagnostic disable-next-line: lowercase-global
 -- Get status line
 function status_line()
@@ -443,7 +468,7 @@ function status_line()
         word_count(), -- word count
         "[%-3.(%l|%c]", -- line number, column number
         human_file_size(), -- file size
-        "[%{strlen(&ft)?&ft[0].&ft[1:]:'None'}]" -- file type
+        file_type() -- file type
     })
 end
 
@@ -976,7 +1001,6 @@ This allows me to use copilot to generate boilerplate code and test cases. Moreo
 
 I use coc.nvim for completion, but I have customized almost every single thing:
 
-```lua
 ```lua
 {"neoclide/coc.nvim", branch = "release", build = ":CocUpdate"}, -- auto complete
 {"honza/vim-snippets"}, -- Snippets are separated from the engine so coc can use
