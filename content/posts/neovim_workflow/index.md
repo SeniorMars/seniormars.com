@@ -608,10 +608,6 @@ keyset({"n", "x", "o"}, "T", ts_repeat_move.builtin_T)
 
 require("nvim-treesitter.configs").setup({
     highlight = {enable = true, disable = {"latex"}},
-    playground = {
-        enable = true,
-        updatetime = 25 -- Debounced time for highlighting nodes in the playground from source code
-    },
     indent = {enable = true, disable = {"python"}},
     textobjects = {
         move = {
@@ -760,35 +756,26 @@ os:
 git:
   branchLogCmd: "git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium --oneline {{branchName}} --"
   commitPrefixes:
-    my_project: # This is repository folder name
+    my_project:
       pattern: "^\\w+\\/(\\w+-\\w+).*"
       replace: '[$1] '
   paging:
     colorArg: always
     pager: delta --dark --paging=never
-    # useConfig: use
   commit:
     signOff: false
   merging:
-    # only applicable to unix users
     manualCommit: false
-    # extra args passed to `git merge`, e.g. --no-ff
     args: ''
   log:
-    # one of date-order, author-date-order, topo-order.
-    # topo-order makes it easier to read the git log graph, but commits may not
-    # appear chronologically. See https://git-scm.com/docs/git-log#_commit_ordering
     order: 'topo-order'
-    # one of always, never, when-maximised
-    # this determines whether the git graph is rendered in the commits panel
     showGraph: 'when-maximised'
-    # displays the whole git graph by default in the commits panel (equivalent to passing the `--all` argument to `git log`)
     showWholeGraph: false
   skipHookPrefix: WIP
   autoFetch: true
   autoRefresh: true
   allBranchesLogCmd: 'git log --graph --all --color=always --abbrev-commit --decorate --date=relative  --pretty=medium'
-  overrideGpg: false # prevents lazygit from spawning a separate process when using GPG
+  overrideGpg: false 
   disableForcePushing: false
   parseEmoji: false
   diffContextSize: 3 # how many lines of context are shown around a change in diffs
@@ -933,6 +920,8 @@ Together, I can move around my codebase with ease and preview files without slow
 
 {{ gif(sources=["tele.mp4"]) }}
 
+Note: I wish I could set a default theme for telescope, but I can't. I have to set it for each picker.
+
 ## Completion
 
 Just a fair warning, I still use `coc.nvim`, but it works well for me!
@@ -1005,6 +994,38 @@ function _G.check_back_space()
     return col == 0 or has_backspace
 end
 
+
+local opts = {silent = true, noremap = true, expr = true}
+vim.api.nvim_set_keymap("i", "<TAB>",
+                        'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()',
+                        opts)
+vim.api.nvim_set_keymap("i", "<S-TAB>",
+                        [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], opts)
+vim.api.nvim_set_keymap("i", "<cr>",
+                        [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]],
+                        opts)
+keyset("i", "<c-j>", "<Plug>(coc-snippets-expand-jump)")
+keyset("i", "<c-space>", "coc#refresh()", {silent = true, expr = true})
+
+--- more keymaps 
+
+keyset("n", "K", function()
+    local cw = vim.fn.expand("<cword>")
+    if vim.fn.index({"vim", "help"}, vim.bo.filetype) >= 0 then
+        vim.api.nvim_command("h " .. cw)
+    elseif vim.api.nvim_eval("coc#rpc#ready()") then
+        vim.fn.CocActionAsync("doHover")
+    else
+        vim.api.nvim_command(string.format("!%s %s", vim.o.keywordprg, cw))
+    end
+end, {silent = true})
+```
+
+I know that nvim-lsp is the new hotness, but coc.nvim just has everything I need. I can use it to format my code, check diagnostics, and use snippets. Moreover, I can use it to check the documentation of a function or keyword. I can also use it to check the definition of a function or keyword. Finally, I can use it to check the references of a function or keyword. I can do all of this with a single plugin. 
+
+Moreover, I am able to combine it with the quickfix list:
+
+```lua
 function _G.diagnostic()
     vim.fn.CocActionAsync("diagnosticList", "", function(err, res)
         if err == vim.NIL then
@@ -1038,37 +1059,6 @@ function _G.diagnostic()
     end)
 end
 
-local opts = {silent = true, noremap = true, expr = true}
-vim.api.nvim_set_keymap("i", "<TAB>",
-                        'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()',
-                        opts)
-vim.api.nvim_set_keymap("i", "<S-TAB>",
-                        [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], opts)
-vim.api.nvim_set_keymap("i", "<cr>",
-                        [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]],
-                        opts)
-keyset("i", "<c-j>", "<Plug>(coc-snippets-expand-jump)")
-keyset("i", "<c-space>", "coc#refresh()", {silent = true, expr = true})
-
---- more keymaps 
-
-keyset("n", "K", function()
-    local cw = vim.fn.expand("<cword>")
-    if vim.fn.index({"vim", "help"}, vim.bo.filetype) >= 0 then
-        vim.api.nvim_command("h " .. cw)
-    elseif vim.api.nvim_eval("coc#rpc#ready()") then
-        vim.fn.CocActionAsync("doHover")
-    else
-        vim.api.nvim_command(string.format("!%s %s", vim.o.keywordprg, cw))
-    end
-end, {silent = true})
-```
-
-I know that nvim-lsp is the new hotness, but coc.nvim just has everything I need. I can use it to format my code, check diagnostics, and use snippets. Moreover, I can use it to check the documentation of a function or keyword. I can also use it to check the definition of a function or keyword. Finally, I can use it to check the references of a function or keyword. I can do all of this with a single plugin. 
-
-Moreover, I am able to combine it with the quickfix list:
-
-```lua
 vim.api.nvim_create_augroup("CocGroup", {})
 
 autocmd("User", {
