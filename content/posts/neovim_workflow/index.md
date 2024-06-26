@@ -676,7 +676,7 @@ Together, I am able to swap function parameters, select text objects, and move b
 
 ## Better terminal
 
-Neovim has `:Term`, but I prefer a terminal that persists can open other TUI apps and is customizable. 
+Neovim has `:Term`, but I prefer a terminal that persists, can open other TUI apps, and is customizable. 
 
 ```lua
 {"akinsho/toggleterm.nvim"}, -- for smart terminal
