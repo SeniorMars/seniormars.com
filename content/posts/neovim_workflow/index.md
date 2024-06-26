@@ -1105,6 +1105,117 @@ For instance, Coc makes it easy to use random LSPs like ltex, which I use for gr
 
 {{ gif(sources=["coc.mp4"]) }}
 
+Finally, here is my config:
+
+```json
+{
+  "suggest.noselect": true,
+  "coc.preferences.jumpCommand": "drop",
+  "coc.preferences.messageLevel": "warning",
+  "coc.preferences.maxFileSize": "1MB",
+  "coc.preferences.enableMarkdown": true,
+  "ltex.language": "en-US",
+  "ltex.additionalRules.motherTongue": "en-US",
+  "ltex.completionEnabled": true,
+  "ltex.sentenceCacheSize": 6000,
+  "ltex.languageToolHttpServerUri": "https://api.languagetoolplus.com",
+  "ltex.checkFrequency": "save",
+  "ltex.enabled": [
+    "bibtex",
+    "context",
+    "context.tex",
+    "html",
+    "latex",
+    "markdown",
+    "org",
+    "restructuredtext",
+    "rsweave",
+    "mail",
+    "norg",
+    "help",
+  ],
+  "ltex.diagnosticSeverity": {
+    "CONFUSED_WORDS": "warning",
+    "UPPERCASE_SENTENCE_START": "warning",
+    "DATE_WEEKDAY": "warning",
+    "MORFOLOGIK_RULE_EN_US": "error",
+    "EN_CONTRACTION_SPELLING": "error",
+    "EN_A_VS_AN": "error",
+    "IN_A_X_MANNER": "hint",
+    "PASSIVE_VOICE": "hint",
+    "EN_SPECIFIC_CASE": "hint",
+    "APOS_AR": "hint",
+    "DOUBLE_HYPHEN": "hint",
+    "AI_EN_LECTOR_MISSING_PUNCTUATION_COMMA": "hint",
+    "SENT_START_CONJUNCTIVE_LINKING_ADVERB_COMMA": "hint",
+    "default": "information"
+  },
+  "ltex.configurationTarget": {
+    "dictionary": "userExternalFile",
+    "disabledRules": "userExternalFile",
+    "hiddenFalsePositives": "userExternalFile",
+  },
+  "ltex.additionalRules.enablePickyRules": true,
+  "diagnostic.hintSign": "✹",
+  "diagnostic.errorSign": "✘",
+  "diagnostic.warningSign": "",
+  "diagnostic.infoSign": "",
+  "codeLens.enable": false,
+  "codeLens.separator": " ",
+  "codeLens.subseparator": " | ",
+  "notification.disabledProgressSources": ["*"],
+  "diagnostic.virtualText": true,
+  "diagnostic.virtualTextCurrentLineOnly": false,
+  "diagnostic.virtualTextLineSeparator": ". ",
+  "diagnostic.virtualTextPrefix": " ",
+  "diagnostic.checkCurrentLine": true,
+  "diagnostic.messageTarget": "float",
+  "semanticTokens.enable": true,
+  "semanticTokens.highlightPriority": 4096,
+  "sumneko-lua.enableNvimLuaDev": true,
+  "Lua.semantic.enable": true,
+  "Lua.hint.enable": true,
+  "Lua.hint.arrayIndex": "Disable",
+  "Lua.hint.paramName": "Literal",
+  "Lua.hint.setType": true,
+  "coc.source.word.filetypes": [
+    "norg",
+    "text",
+    "mail"
+  ],
+  "suggest.snippetIndicator": " \ue796",
+  "suggest.completionItemKindLabels": {
+    "keyword": "\uf1de",
+    "variable": "\ue79b",
+    "value": "\uf89f",
+    "operator": "\u03a8",
+    "function": "\u0192",
+    "reference": "\ufa46",
+    "constant": "\uf8fe",
+    "method": "\uf09a",
+    "struct": "\ufb44",
+    "class": "\uf0e8",
+    "interface": "\uf417",
+    "text": "\ue612",
+    "enum": "\uf435",
+    "enumMember": "\uf02b",
+    "module": "\uf40d",
+    "color": "\ue22b",
+    "property": "\ue624",
+    "field": "\uf9be",
+    "unit": "\uf475",
+    "event": "\ufacd",
+    "file": "\uf723",
+    "folder": "\uf114",
+    "snippet": "\ue60b",
+    "typeParameter": "\uf728",
+    "default": "\uf29c"
+  },
+  "snippets.ultisnips.enable": true,
+  "snippets.ultisnips.pythonPrompt": false,
+}
+```
+
 ## Latex
 
 Finally, as a Math major, I use LaTeX a lot. I use the following plugins to make my LaTeX experience better:
@@ -1112,15 +1223,14 @@ Finally, as a Math major, I use LaTeX a lot. I use the following plugins to make
 ```lua
 {"lervag/vimtex"}, -- LaTeX
 -- Vimtex config
-vim.g.tex_flavor = "latex"
-vim.g.tex_conceal = "abdmgs"
-vim.g.vimtex_quickfix_mode = 0
+vim.g.vimtex_quickfix_mode = 2
 vim.g.vimtex_compiler_latexmk_engines = {["_"] = "-lualatex -shell-escape"}
 vim.g.vimtex_indent_on_ampersands = 0
 vim.g.vimtex_view_method = 'sioyek'
 vim.g.matchup_override_vimtex = 1
-vim.g.latexindent_opt = "-m"
 
+-- Other settings
+vim.g.latexindent_opt = "-m" -- for neoformat, I use latexindent
 ```
 
 Together with `sioyek`, I can compile my LaTeX documents and view them in a pdf viewer. Moreover, I can use `vimtex` to compile my LaTeX documents and view them in a pdf viewer. 
