@@ -439,9 +439,7 @@ local file_type = function()
         return string.format("[%s]", ft)
     else
         local buf_name = vim.api.nvim_buf_get_name(0)
-        if buf_name == "" and ft == "toggleterm" then
-            return "[*]"
-        elseif buf_name == "" then
+        if buf_name == "" then
             return string.format("[%s]", ft)
         else
             local ext = vim.fn.fnamemodify(buf_name, ":e")
