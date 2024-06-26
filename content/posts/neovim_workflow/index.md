@@ -1123,7 +1123,7 @@ vim.g.latexindent_opt = "-m"
 
 ```
 
-Together with `sioyek`, I can compile my LaTeX documents and view them in a pdf viewer. Moreover, I can use `vimtex` to compile my LaTeX documents and view them in a pdf viewer. Finally, I can use `vimtex` to compile my LaTeX documents and view them in a pdf viewer. 
+Together with `sioyek`, I can compile my LaTeX documents and view them in a pdf viewer. Moreover, I can use `vimtex` to compile my LaTeX documents and view them in a pdf viewer. 
 
 {{ gif(sources=["latex.mp4"]) }}
 
