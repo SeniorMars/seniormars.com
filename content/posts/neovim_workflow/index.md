@@ -1245,7 +1245,7 @@ vim.g.matchup_override_vimtex = 1
 vim.g.latexindent_opt = "-m" -- for neoformat, I use latexindent
 ```
 
-Together with `sioyek`, I can compile my LaTeX documents and view them in a pdf viewer. Moreover, I can use `vimtex` to compile my LaTeX documents and view them in a pdf viewer. 
+Together with `sioyek`, I can compile my LaTeX documents and view them in a pdf viewer automatically. Moreover, I can use `latexindent` to format my LaTeX documents.
 
 {{ gif(sources=["latex.mp4"]) }}
 
