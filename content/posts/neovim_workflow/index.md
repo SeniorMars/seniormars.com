@@ -22,6 +22,8 @@ I cannot, in good faith, teach you how to debug every issue you will encounter (
 
 {% note(header="Dotfiles") %}
 I know people will ask, so here they are: [SeniorMars' Dotfiles](https://github.com/SeniorMars/dotfiles). Moreover, I will be assuming you are using Neovim 0.10!
+
+Moreover, throughout this I use lua to configure my Neovim, and use [lazy.nvim](https://github.com/folke/lazy.nvim) to install and mange my plugins. 
 {% end %}
 
 # Improving the (Neo)Vim Experience
@@ -30,7 +32,7 @@ Although, I stated this was not for beginners, I still need to point out the fun
 
 ## Search and Replace
 
-Let's first start with something simple, so you get a taste on what kind of tips I will be giving you. Let's start with search and replace. 
+Let's first start with something simple, so you get a taste on what kind of tips I will be giving you. 
 
 ```lua
 vim.opt.ignorecase = true -- search case insensitive
@@ -461,17 +463,30 @@ end
 local modes = setmetatable({
     ["n"] = {"NORMAL", "N"},
     ["no"] = {"N·OPERATOR", "N·P"},
+    ["nov"] = {"O·PENDING", "O·P"},
+    ["noV"] = {"O·PENDING", "O·P"},
+    ["no\22"] = {"O·PENDING", "O·P"},
+    ["niI"] = {"NORMAL", "N"},
+    ["niR"] = {"NORMAL", "N"},
+    ["niV"] = {"NORMAL", "N"},
+    ["nt"] = {"NORMAL", "N"},
+    ["ntT"] = {"NORMAL", "N"},
     ["v"] = {"VISUAL", "V"},
     ["V"] = {"V·LINE", "V·L"},
-    [""] = {"V·BLOCK", "V·B"},
-    [""] = {"V·BLOCK", "V·B"},
+    ["\22"] = {"V·BLOCK", "V·B"},
+    ["\22s"] = {"V·BLOCK", "V·B"},
     ["s"] = {"SELECT", "S"},
     ["S"] = {"S·LINE", "S·L"},
-    [""] = {"S·BLOCK", "S·B"},
+    ["\19"] = {"S·BLOCK", "S·B"},
     ["i"] = {"INSERT", "I"},
     ["ic"] = {"INSERT", "I"},
+    ["ix"] = {"INSERT", "I"},
     ["R"] = {"REPLACE", "R"},
     ["Rv"] = {"V·REPLACE", "V·R"},
+    ["Rc"] = {"REPLACE", "R"},
+    ["Rx"] = {"REPLACE", "R"},
+    ["Rvc"] = {"V·REPLACE", "V·R"},
+    ["Rvx"] = {"V·REPLACE", "V·R"},
     ["c"] = {"COMMAND", "C"},
     ["cv"] = {"VIM·EX", "V·E"},
     ["ce"] = {"EX", "E"},
@@ -572,7 +587,7 @@ vim.wo.fillchars = "eob:~" -- fillchars of windows
 
 ```
 
-This is my status line. It shows the current mode, language, branch name, file path, git status, word count, line number, column number, file size, and file type. It is a lot, but I hope my documentation helps you understand what each part does. It is extremely minimum but provides me with all the information I need depending on my current state.
+This is my status line. It shows the current mode, language, branch name, file path, git status, word count, line number, column number, file size, and file type. It is a lot, but I hope my documentation helps you understand what each part does. It is extremely minimum but provides me with all the information I require depending on my current state.
 
 ![Status Line](status1.png)
 
