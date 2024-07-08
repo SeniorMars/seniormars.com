@@ -123,6 +123,7 @@ Well, it's hard to define specifically, but below are a few examples:(note: this
 3. Academic related expenses (textbooks, course supplies, etc.)
 4. Health related expenses such as co-pays
 5. Replacing broken technology needed for school
+
 *That sounds good to me, but what if my needs aren't on this list...*
 That's ok - apply anyway - we know needs vary and somethings are hard to categorize, but ultimately, we'd rather be in a position to help than not know that a student is in need. We have funded requests as varied as pod storage and car parts, so please don't hesitate to ask.
 *Wonderful - is there a cap or a range that a request should fall within?
@@ -131,6 +132,7 @@ The annual budget for the SEI fund is \\$1500, so to ensure the fund lasts, most
 *What is the process..?*
 Fill out this form, and we will  get back to you in 24-48 hours let you know the status and, if approved, information on how to receive funds. If it's your first time requesting, we might ask to meet with you for a couple of minutes, just to make sure we know exactly what you need and how best to fund your request. Our goal is to provide it quickly and discreetly. We have had a few issues with timeliness in the past, but are now notified immediately when a request is made. If it is something really important and urgent, feel free to come knock on our door.
 *What if I ask for too much? What if my needs exceed $150?*
+
 Request anyway!!! - if the ask exceeds what we can provide, we will do our best help you connect with other resources at Rice and act on your behalf.
 {% end %}
 
@@ -226,16 +228,7 @@ Request anyway!!! - if the ask exceeds what we can provide, we will do our best 
     * U1lib.org
     * B-ok
     * archive.org
-- Here are some notes for Rice classes:
-    * [Comp 182](https://rice.box.com/s/jx7z3ne4qrikxa6oofrbcohk17mplhgk)
-    * [Comp 411](https://rice.box.com/s/u92noh2osfrunzorjoyem49iadq4tzyf)
-    * [Comp 412](https://rice.app.box.com/s/08nygvlng5fi2leuomkcsd7oxqm14cqp/folder/166268623928)
-    * [Comp 540](https://rice.app.box.com/s/ibpmxxjes94678xvpn5ktmm0ybuyc6ll)
-    * [Comp 409](https://www.cs.rice.edu/~vardi/comp409/)
-    * [Comp 480](https://www.cs.rice.edu/~as143/COMP480_580_Spring19/index.html)
-    * [Comp 450](https://rice.app.box.com/s/qdrrq14yp9zzj7mlhaxkjwxcbig6w1wr/folder/209795858465)
-    * [Comp 382](https://rice.box.com/s/etj5ec8o0337q55yk2b4b6ewzf2qm799)
-- Here are the textbooks that Rice uses: [Textbooks](https://rice.box.com/s/rnpyo0nehbglj34608ackbniqs92w6es).
+- Here are some textbooks that Rice uses for classes: [Textbooks](https://rice.box.com/s/rnpyo0nehbglj34608ackbniqs92w6es).
 
 
 # FAQ
