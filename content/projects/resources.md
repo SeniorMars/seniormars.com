@@ -201,7 +201,7 @@ Request anyway!!! - if the ask exceeds what we can provide, we will do our best 
         - (If you need someone to drive you, reach out to me and I will find a way to the locations (yes even the ones 4 hours away), dental health is so important and should be more accessible)
     * UT Dental School Clinics [https://dentistry.uth.edu/patients/student-clinics/](https://dentistry.uth.edu/patients/student-clinics/)
         - A bit of a waitlist, get on it ASAP
-    * Fresh Dental Care Houston [https://www.freshdentalcare.com/] (https://www.freshdentalcare.com/)
+    * Fresh Dental Care Houston [https://www.freshdentalcare.com/](https://www.freshdentalcare.com/)
         - Free consultations for wisdom teeth estimates)
     * Sliding Scale based healthcare (including vision and dental) based on income:
         - Legacy Community health: [https://www.legacycommunityhealth.org/patient-center/eligibility/](https://www.legacycommunityhealth.org/patient-center/eligibility/)
@@ -237,7 +237,7 @@ Request anyway!!! - if the ask exceeds what we can provide, we will do our best 
 - I didn’t get a 1098-T but have to file taxes. What do I do? You can email the Cashier’s office (cashier@rice.edu) and ask for a breakdown of what would’ve been on the form.
 - Do I have to report my scholarship money on my taxes? (for ~legal~ reasons, these are just student suggestions and not official solutions) If you report your scholarship, anything that covers more than tuition and fees, including money for room and board, you may be taxed on. The money that exceeds tuition and fees is considered taxable income. Some students choose to not file taxes, which is an option if you make less than the cut-off requirements for annual income from any jobs you may have had. Some students choose to file taxes and just report their W2s from their jobs and not their scholarships.
 - I wasn’t able to use the IRS data retrieval tool so I have to submit my tax return instead. Where do I submit that?: Emailed financial aid (fina@rice.edu) and they will add a section for you to upload it on Esther
-- Check out the Questbridge finance page! https://www.questbridge.org/resources/finances
+- Check out the Questbridge finance page! [https://www.questbridge.org/resources/finances](https://www.questbridge.org/resources/finances)
 
 ## General Questions
 
@@ -246,8 +246,10 @@ Request anyway!!! - if the ask exceeds what we can provide, we will do our best 
     Simply take a screenshot of your billing in Esther. Email fina@rice.edu, with the subject as "Allen insurance scholarship Waiver", and ask ask to apply for the Allen scholarhip with your screenshot attached.
 
 * Does fin-aid cover parking?
+
     No
 * Does Rice cover dental?
+
     No
 * Are summer classes covered?
 
