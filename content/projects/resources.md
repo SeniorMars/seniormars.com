@@ -1,6 +1,6 @@
 +++
 title = "Resources For Students"
-description = "I hate when people can't succeed. Here are general resources for college students -- particularly those who lack a voice or first-generation low-income."
+description = "I hate when people can't succeed. Here are general resources for college students -- particularly those who lack a voice or are first-generation low-income."
 weight = 1
 
 [extra]
@@ -269,9 +269,9 @@ Request anyway!!! - if the ask exceeds what we can provide, we will do our best 
 
 * How much is the stipend?
 
-The stipend is around 2.7k, however, for first semester freshies it is around 2k to over o-week
+    The stipend is around 2.7k, however, for first semester freshies it is around 2k to over o-week
 
-Note that this amount may change based on your grants, parking, and insurance
+    Note that this amount may change based on your grants, parking, and insurance
 
 * What about meal plans?
 
