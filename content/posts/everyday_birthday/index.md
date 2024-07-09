@@ -2,6 +2,7 @@
 title = "Every day is an Owl's Birthday! A rigorous exploration to a classic problem through math and rust"
 date = "2024-06-20"
 description = "A guy decides to overthink a simple question from his university's anonymous forum."
+updated = "2024-06-29"
 
 [extra]
 comment = true
@@ -37,7 +38,7 @@ The most important part of this rephrasing is the assumption (a restriction whic
 
 Now, I'm not a computer scientist, so I won't simply "reduce" the problem and call it a day. First, the goal of the coupon collector problem is to determine the expected number of coupons needed to collect all coupons. Instead of coupons, we deal with birthdays and quantify the number of students needed to ensure having all birthdays. In other words, we are trying to calculate the expected number of students required to have all birthdays, which is precisely Problem 1.1!
 
-The idea is simple: keep adding students one by one until you have all birthdays. Following this process, you notice that the first student is guaranteed a unique birthday. Moreover, each new student has a probability of $\frac{x}{365}$ of having a new birthday, where $x$ is the number of unique birthdays left. In contrast, the expected probability of how many students you have to go through until you see a new birthday is the reciprocal probability of seeing a new birthday, i.e., $\frac{365}{x}$. We derive this as if $k$ birthdays are already taken, the probability of $P_{\text{new}}$ is given by $P_{\text{new}} = \frac{365 - k}{365}$; hence, geometric distribution (proof: [^1]) tell us that the probability to counter an event with probability $P_{\text{new}}$ is $\frac{1}{P_{\text{new}}}$---which is $\frac{365}{365 - k}$. Finally, from our assumptions, we know that the birthday is equally likely (independent), which means a new birthday does not depend on the previous birthdays. Therefore, I claim we can sum the expected number of students needed to see a new birthday for each $k$ unique birthday multiplied by the number of birthdays. Let's prove this:
+The idea is simple: keep adding students one by one until you have all birthdays. Following this process, you notice that the first student is guaranteed a unique birthday. Moreover, each new student has a probability of $\frac{x}{365}$ of having a new birthday, where $x$ is the number of unique birthdays left. In contrast, the expected probability of how many students you have to go through until you see a new birthday is the reciprocal probability of seeing a new birthday, i.e., $\frac{365}{x}$. We derive this as if $k$ birthdays are already taken, the probability of $P_{\text{new}}$ is given by $P_{\text{new}} = \frac{365 - k}{365}$; hence, geometric distribution (proof:[^1]) tell us that the probability to counter an event with probability $P_{\text{new}}$ is $\frac{1}{P_{\text{new}}}$---which is $\frac{365}{365 - k}$. Finally, from our assumptions, we know that the birthday is equally likely (independent), which means a new birthday does not depend on the previous birthdays. Therefore, I claim we can sum the expected number of students needed to see a new birthday for each $k$ unique birthday multiplied by the number of birthdays. Let's prove this:
 
 {% note(clickable=true, center=true, header="Proof of claim") %}
 
@@ -722,12 +723,26 @@ With the proof finished 😎, we will allow ourselves to use the theorem. Moreov
 
 {% note(clickable=true, hidden=true, header="Code to calculate probabilities") %}
 
+Note that the original version of this had an error, I have corrected it here. The error was in the `day_of_year` function, which was not correctly calculating the day of the year standardly. 
+
 ```rust
 use chrono::{Datelike, NaiveDate};
 use std::{collections::HashMap, fs::File, path::PathBuf};
 
-fn day_of_year(year: u32, month: u32, day: u32) -> Option<u32> {
-    NaiveDate::from_ymd_opt(year as i32, month, day).map(|d| d.ordinal() - 1)
+/// standarized day of year
+fn standarized_doy(year: u32, month: u32, day: u32) -> Option<u32> {
+    NaiveDate::from_ymd_opt(year as i32, month, day).map(|d| {
+        let is_leap = d.leap_year();
+        let day = d.ordinal();
+
+        // to keep it standarized if it's not a leap year
+        // otherwise the ranges will be off
+        if !is_leap && day >= 60 {
+            day + 1
+        } else {
+            day
+        }
+    })
 }
 
 pub fn get_probabilities(file_path: PathBuf) -> Option<HashMap<u32, f64>> {
@@ -745,7 +760,7 @@ pub fn get_probabilities(file_path: PathBuf) -> Option<HashMap<u32, f64>> {
 
         total_births += births as usize;
 
-        let day_index = day_of_year(year as u32, month, day)?;
+        let day_index = standarized_doy(year as u32, month, day)?;
 
         birth_counts
             .entry(day_index)
@@ -753,8 +768,8 @@ pub fn get_probabilities(file_path: PathBuf) -> Option<HashMap<u32, f64>> {
             .or_insert(births as f64);
     }
 
-    for (_, count) in birth_counts.iter_mut() {
-        *count /= total_births as f64;
+    for (_, prob) in birth_counts.iter_mut() {
+        *prob /= total_births as f64;
     }
 
     Some(birth_counts)
@@ -1085,17 +1100,25 @@ plt.savefig('last_pairplot.png')
 
 That said, we are at the end of our journey. In the end, we found a formula that works, but the power of today's computation is holding me back 😔. While that may disappoint you, the reader, I know how to fix it: give me a polynomial time equation, and I'll be back with an exact answer 😎. Anyways, I hope everything was clear; I tried my best. If you see any mistakes, know it's not me who made a mistake; it's you who needs a check-up/s (email me at seniormars@rice.edu or write a comment below). Have a great year!
 
+# And then, the Physicst attacked
+
+Sometimes, theory can only get us so far (please imagine me saying this while sobbing 😭😭😭). As a math major, I have always been told to pursue the idea of rigorousness, but we NEED an answer. I can't provide that; however, I know someone who can. A physicist -- one that is armed with computational tricks and pragmatism. [Enter Wisha, a rising senior, a rustacean, and Rice's best physicist](https://wisha.page/)[^5]. Overhearing my frustration with the birthday problem, he decided to take matters into his own hands. He has given me a solution, and now it is my job to wrap his argument into a neat little package!
+
+## Revisiting our formula
+
+Remember, we found that a generalized Coupon Collector's Problem that assumes non-uniform distributions, however, for large $m$ ($366$ in our case), the formula Dr. Flajolet gave us is computationally infeasible. That being said, let's take a closer look at the the first version of the formula:
+
+$$
+E(T) = \int_0^\infty \left(1 - \prod_{i=1}^m (1 - e^{-p_i t}) \right) \textrm{dt}.
+$$ 
+
+To be finished...
+
 # Conclusion
 
 Throughout this article, I came to realize that I hate stats. Thank you fizz, I'll probably deregister from MATH 412: Probability Theory now. On a serious note, writing for a public audience -- especially for math -- is incredibly hard. If you read up to this point, I hope you enjoyed it.
 
----
-
-{% note(clickable=true, header="Footnotes") %}
-
-[^1]: This is a very easy proof, so let's do it. Let $X$ be a random variable, that has a probability between $[0,1]$, then
-
-$$
+[^1]: This is a very easy proof, so let's do it. Let $X$ be a random variable, that has a probability between $[0,1]$, then $$
 \begin{align*}
 \mathbb{E}[X] &= \sum_i^\infty i p_x(i) = \sum_i^\infty i (1 - p_x)^{x - 1} p = p \sum_i^\infty i (1 - p)^{i - 1}& & \\\\
 &= p \sum_i^\infty -\frac{d(1 - p)^i}{dp} & &\text{taking the derivative and } x = 1-p\\\\
@@ -1111,4 +1134,4 @@ $$
 
 [^4]: I was going to plot these graphs in Rust, but I do have a life...
 
-{% end %}
+[^5]: He is also my cool ass friend 😎😎😎. I know, it's hard to believe, but I HAVE friends!
