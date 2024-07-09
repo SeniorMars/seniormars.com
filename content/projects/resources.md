@@ -44,7 +44,7 @@ Welcome! Thank you for coming to Rice — your presence matters and enriches Ric
 # FGLI Resources For Rice Students
 
 {% note(header="Note") %}
-This section is specifically for Rice students. If you are not a Rice student, you can still use these resources, but some may not be applicable to you. Additionally, I copied most resources here from a private google document;
+This section is specifically for Rice students. If you are not a Rice student, you can still use these resources, but some may not be applicable to you. Additionally, I copied most resources here from a private google document.
 {% end %}
 
 
@@ -53,8 +53,6 @@ This section is specifically for Rice students. If you are not a Rice student, y
 - Rice Mutual Aid: [https://linktr.ee/ricemutualaid/](https://linktr.ee/ricemutualaid/])
 - Mutual aid houston: [https://www.mutualaidhou.com/](https://www.mutualaidhou.com/)
 - Not a fund, but you can ask OIT for a loaner device like a laptop or tablet, as well as request a tablet with a hotspot if you don’t have consistent WiFi connection
-
-
 
 ## General Resources:
 - Rice AOP: [https://aop.rice.edu/application](https://aop.rice.edu/application):
@@ -83,7 +81,6 @@ This section is specifically for Rice students. If you are not a Rice student, y
     * [https://aop.rice.edu/sites/g/files/bxs3226/files/inline-files/SSI%20AOP%20Textbook%20Form.pdf](https://aop.rice.edu/sites/g/files/bxs3226/files/inline-files/SSI%20AOP%20Textbook%20Form.pdf)
     * Textbooks and course pack purchases
 
-
 ## Dean of undergraduates emergency funds:
 - [https://aop.rice.edu/dou-emergency-funding](https://aop.rice.edu/dou-emergency-funding)
 - Emergency Funding Requests should be made to the Dean of Undergraduates office for those financial needs which require urgent, immediate attention and in which the undergraduate student requesting support is actively in crisis. Because these requests will be reviewed immediately upon receipt, only those requests requiring same day resolution will be considered. Although not an exhaustive list, requests that could be considered to be an emergency and eligible for funding include:
@@ -99,7 +96,6 @@ This section is specifically for Rice students. If you are not a Rice student, y
     “We define an emergency as an unplanned expense that puts significant financial pressure on QuestBridge Scholars or Alumni, and threatens their health, security, or ability to continue attending school. 
     * A non-exhaustive list of emergency expenses includes: urgent medical expenses not covered by insurance; eyeglass replacement; hearing aids; transportation for emergency (medical or domestic), transportation to travel to an immediate family member in a dire situation; insurance deductibles; emergency childcare; replacing or replenishing basic necessities due to natural disaster, fire, flood or theft; safety related costs due to domestic violence or natural disaster.”
 Other FAQs: [https://www.questbridge.org/emergency-fund/faq#Q10](https://www.questbridge.org/emergency-fund/faq#Q10)
-
 
 ## College Magister’s Fund/Residential college accessibility funds: 
 - Dependent on your college, but here’s the general description:
@@ -169,7 +165,6 @@ Request anyway!!! - if the ask exceeds what we can provide, we will do our best 
     * [https://www.dfshouston.org/](https://www.dfshouston.org/)
     * Free professional attire for job interviews, job fairs, or just jobs in general
 
-
 ## Research/Fellowships: 
 - SER Scholars [https://ouri.rice.edu/ser](https://ouri.rice.edu/ser)
     * For freshman and sophomores in STEM
@@ -180,7 +175,6 @@ Request anyway!!! - if the ask exceeds what we can provide, we will do our best 
     * Will pay for you to do summer internships
 - Biosciences opportunities canvas - research and fellowship opportunities are often posted: [https://catalog.rice.edu/browse/biosciences-opportunities/courses/biosciences-opportunities](https://catalog.rice.edu/browse/biosciences-opportunities/courses/biosciences-opportunities)
 - Fellowships resources canvas - literally a compiled canvas of available fellowships and their requirements and deadlines: [https://ccl.rice.edu/fellowships-overview](https://ccl.rice.edu/fellowships-overview)
-
 
 ## Work study:
 - CCD has an explanation of how to find on campus jobs here: [https://ccd.rice.edu/students/on-campus_employment](https://ccd.rice.edu/students/on-campus_employment)
@@ -202,7 +196,7 @@ Request anyway!!! - if the ask exceeds what we can provide, we will do our best 
     * UT Dental School Clinics [https://dentistry.uth.edu/patients/student-clinics/](https://dentistry.uth.edu/patients/student-clinics/)
         - A bit of a waitlist, get on it ASAP
     * Fresh Dental Care Houston [https://www.freshdentalcare.com/](https://www.freshdentalcare.com/)
-        - Free consultations for wisdom teeth estimates)
+        - Free consultations for wisdom teeth estimates
     * Sliding Scale based healthcare (including vision and dental) based on income:
         - Legacy Community health: [https://www.legacycommunityhealth.org/patient-center/eligibility/](https://www.legacycommunityhealth.org/patient-center/eligibility/)
             - You’ll need to do an eligibility appointment, and the waitlist can be long, so get on the waitlist ASAP
@@ -213,23 +207,19 @@ Request anyway!!! - if the ask exceeds what we can provide, we will do our best 
         - [https://www.houstonmethodist.org/pay-your-bill/new-policies/](https://www.houstonmethodist.org/pay-your-bill/new-policies/)
         - (Any hospital that receives federal funding should offer financial assistance, this one is just one that is nearby that I am familiar with)
 
-
 ## Mental Health: 
 - wellbeing + counseling - FREE SERVICE
 - Montrose Center (specialize in LGBTQ+ care but anyone is welcome to use their services)
 - [https://openpathcollective.org/city/houston/](https://openpathcollective.org/city/houston/)
 - With aetna student health, online psychiatrists and therapists are an option and should be around $20 through MDLive. This won't work for controlled substances (so some anxiety medication, ADHD meds) but can be helpful for other things
 
-
 # Textbooks
-
 - Torrent book sites
     * Libgen.is
     * U1lib.org
     * B-ok
     * archive.org
 - Here are some textbooks that Rice uses for classes: [Textbooks](https://rice.box.com/s/rnpyo0nehbglj34608ackbniqs92w6es).
-
 
 # FAQ
 ## Tax Questions (should talk to a tax professional, but here are some student suggestions):)
@@ -291,7 +281,6 @@ Request anyway!!! - if the ask exceeds what we can provide, we will do our best 
     Yes! You need to talk to the OAA office and they will help you out, but yes!
 
     I got verbal confirmation from the office of financial aid that we are allowed to appeal for more aid even after 8 semester. This is granted you go to the office of academic advising and get a plan approved! This is very cool for people who had a medical leave!
-
 
 # Conclusion
 
