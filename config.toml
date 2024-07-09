@@ -4,6 +4,7 @@ title = "SeniorMars"
 description = "A blog about math, extremely niche interests, and a guy having fun."
 
 # settings
+theme = "redux"
 author = "SeniorMars"
 default_language = "en"
 feed_filenames = ["rss.xml"]
@@ -12,21 +13,20 @@ generate_feeds = true
 compile_sass = true
 taxonomies = [{ name = "tags", feed = true, paginate_by = 10 } ]
 
-# theme
-theme = "redux"
-
 [markdown]
 highlight_code = true
-highlight_theme = "ayu-dark"
 render_emoji = true
 smart_punctuation = true
+highlight_theme = "ayu-dark"
+external_links_no_referrer = true
+bottom_footnotes = true
 
 [extra]
 toc = true
 use_cdn = false
 comment = false
 mathjax = true
-mathjax_dollar_inline_enable = true
+mathjax_extra = true
 fancy_code = true
 dynamic_note = true
 theme = "toggle"
