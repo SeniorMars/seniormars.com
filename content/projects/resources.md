@@ -12,9 +12,17 @@ repo_view = true
 
 I hate when people who want to try their best are held back by a lack of resources or accessibility. Unfortunately, I am unable to hold everyone's hand, but I can at least provide some resources that may help you move forwards.
 
-I enabled comments on this page, so if you have any questions or need help, feel free to ask. I also implore anyone who knows more resources to share them with me so I can add them here. I hope this page helps and is seen as a resource for those who need it.
+I enabled comments on this page, so if you have any questions or need help, feel free to ask. I also implore anyone who knows more resources to share them with me, so I can add them here. I hope this page helps and is considered a resource for those who require it.
 
-Please help me break the cycle!
+Please help me break the cycle! Here is my email: seniormars@rice.edu.
+
+# My favorite video
+
+This is my favorite video - it is very short, so please watch it: [Best video in the world](https://www.youtube.com/watch?v=LAmKEstKwvc).
+
+{{ youtube(id="LAmKEstKwvc") }}
+
+I love this video. Even if there is a tint of fakeness and hypocrisy, the power and emotions of these rules lead me to envision an idealism that makes me feel at peace. Sometimes, we must let go of our flaws to advance; that is my definition of the path to happiness.
 
 # For New Students
 
@@ -212,6 +220,12 @@ Request anyway!!! - if the ask exceeds what we can provide, we will do our best 
 - Montrose Center (specialize in LGBTQ+ care but anyone is welcome to use their services)
 - [https://openpathcollective.org/city/houston/](https://openpathcollective.org/city/houston/)
 - With aetna student health, online psychiatrists and therapists are an option and should be around $20 through MDLive. This won't work for controlled substances (so some anxiety medication, ADHD meds) but can be helpful for other things
+
+## Undocumented students:
+- REU programs: [Programs for undocumented students](https://reufinder.com/research-programs-for-undocumented-students/)
+- Rice’s FAQ: [https://daca.rice.edu/undocumented-students-faq](https://daca.rice.edu/undocumented-students-faq)
+- Undocumented Students Support Services (USSS) Task Force. Please email me at cjh16@rice.edu.
+- Beyond Daca: [More resources](https://www.higheredimmigrationportal.org/effective_practice/beyond-daca-a-directory-of-resources-for-undocumented-students-individuals/)
 
 # Textbooks
 - Torrent book sites

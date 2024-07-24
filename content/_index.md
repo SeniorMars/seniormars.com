@@ -18,12 +18,16 @@ Heyo! SeniorMars here. It's honestly weird to think that people will spend their
 
 # Meme of the Week!
 
-![Meme of the Week](https://i.redd.it/ry2qxsjtt5cd1.jpeg)
+![Meme of the week](https://i.redd.it/qjo442jc9jt91.jpg)
 
 <details>
 <summary>Previous Memes</summary>
 <p>
 <ul>
+    <li>
+        Week of 7-[14-20]:<br>
+        <img src="https://i.redd.it/ry2qxsjtt5cd1.jpeg" alt="Meme of the Week">
+    </li>
     <li>
         Week of 7-[06-13]:<br>
         <img src="https://i.redd.it/g2nvq2b8ck7d1.png" alt="Meme of the Week">

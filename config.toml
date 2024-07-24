@@ -7,10 +7,10 @@ description = "A blog about math, extremely niche interests, and a guy having fu
 theme = "redux"
 author = "SeniorMars"
 default_language = "en"
-feed_filenames = ["rss.xml"]
 build_search_index = false # do want to fix this
 generate_feeds = true
 compile_sass = true
+feed_filenames = ["rss.xml"]
 taxonomies = [{ name = "tags", feed = true, paginate_by = 10 } ]
 
 [markdown]
