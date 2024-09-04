@@ -8,6 +8,7 @@ Heyo! SeniorMars here. It's honestly weird to think that people will spend their
 
 # News
 
+- <time>2024-08-26</time>: I started my junior year of college! New projects are coming soon.
 - <time>2024-07-06</time>: Started working on music. Terrible, but I'm having fun!
 - <time>2024-06-25</time>: Can now hold a handstand for 3 seconds! I'm aiming for 10.
 - <time>2024-06-20</time>: Did an open mic night! It was a lot of fun, and I'm excited to do more.

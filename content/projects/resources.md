@@ -1,7 +1,8 @@
 +++
 title = "Resources For Students"
-description = "I hate when people can't succeed. Here are general resources for college students -- particularly those who lack a voice or are first-generation low-income."
+description = "I hate when people can't succeed. Here are general resources for college students-particularly those who lack a voice or are first-generation low-income."
 weight = 1
+updated = "2024-09-04"
 
 [extra]
 comment = true
@@ -18,7 +19,7 @@ Please help me break the cycle! Here is my email: seniormars@rice.edu.
 
 # My favorite video
 
-This is my favorite video - it is very short, so please watch it: [Best video in the world](https://www.youtube.com/watch?v=LAmKEstKwvc).
+This is my favorite video---it is very short, so please watch it: [Best video in the world](https://www.youtube.com/watch?v=LAmKEstKwvc).
 
 {{ youtube(id="LAmKEstKwvc") }}
 
@@ -38,15 +39,15 @@ I can't imagine what challenges you faced to arrive here, but let me assure you,
 have to use them as Rice will challenge you. It might not be academics; it might be due to living far from home, dealing with friends, or
 finding your place. College is a new experience and will present new challenges; fortunately, you will overcome them. You've already proven
 that by getting this far. It will be difficult, but as a Questie, I assure you that Rice will benefit from having you more than you'll help
-them, so take every resource available. I know you'll do great things here, but remember, it's okay to ask for help -- you don't have to do it alone anymore.
+them, so take every resource available. I know you'll do great things here, but remember, it's okay to ask for help---you don't have to do it alone anymore.
 
 ## To undocumented students at Rice:
 
-I can't start without acknowledging your challenges—I'm glad you're here. I can't begin to understand how hard you have tried, and precisely because of this, I'll assure you: Rice will help. We are still establishing resources to support you, but know that Rice does not represent Texas; you'll find peers who can understand your challenges. I won't sugarcoat it; it will be demanding, but you've already overcome so much and will continue to do so. Rice will allow you to grow skills and connections that will help you in the future. Taking advantage of them will be up to you, but I know you will do great things here, so stand proud.
+I can't start without acknowledging your challenges---I'm glad you're here. I can't begin to understand how hard you have tried, and precisely because of this, I'll assure you: Rice will help. We are still establishing resources to support you, but know that Rice does not represent Texas; you'll find peers who can understand your challenges. I won't sugarcoat it; it will be demanding, but you've already overcome so much and will continue to do so. Rice will allow you to grow skills and connections that will help you in the future. Taking advantage of them will be up to you, but I know you will do great things here, so stand proud.
 
 ## To members of a minority group who haven't been addressed:
 
-Welcome! Thank you for coming to Rice — your presence matters and enriches Rice. It's hard to be the first or one of the few, but remember, there is power in your voice — use it with care. You might feel alone, but trust me, people can be understanding. You'll find support in unexpected places and be surprised by how much you can learn from others. It's okay to feel overwhelmed and isolated but remember; you can be the one who starts a community and forms a place you belong. You'll do great things here, and I can't wait to see what you'll accomplish.
+Welcome! Thank you for coming to Rice---your presence matters and enriches Rice. It's hard to be the first or one of the few, but remember, there is power in your voice---use it with care. You might feel alone, but trust me, people can be understanding. You'll find support in unexpected places and be surprised by how much you can learn from others. It's okay to feel overwhelmed and isolated but remember; you can be the one who starts a community and forms a place you belong. You'll do great things here, and I can't wait to see what you'll accomplish.
 
 
 # FGLI Resources For Rice Students
@@ -59,7 +60,7 @@ This section is specifically for Rice students. If you are not a Rice student, y
 ## Financial (Aid around campus):
 
 - Rice Mutual Aid: [https://linktr.ee/ricemutualaid/](https://linktr.ee/ricemutualaid/])
-- Mutual aid houston: [https://www.mutualaidhou.com/](https://www.mutualaidhou.com/)
+- Mutual aid Houston: [https://www.mutualaidhou.com/](https://www.mutualaidhou.com/)
 - Not a fund, but you can ask OIT for a loaner device like a laptop or tablet, as well as request a tablet with a hotspot if you don’t have consistent WiFi connection
 
 ## General Resources:
@@ -76,7 +77,7 @@ This section is specifically for Rice students. If you are not a Rice student, y
     * Medical/Dental/Health-Professions School application fees
     * Secondary application fees
     * Interview travel and accommodations
-    * Professional attire for employment or graduate school interviews not covered by outside organizations like Dress for Success or Career Gear
+    * Professional attire for employment or graduate school interviews not covered by outside organizations like Dress for Success or Career Gear: The [Rice CCD](https://ccd.rice.edu/) runs a photoshoot usually in September and they have partnership with Dress for Success to get you stuff for interviews
     * Travel and parking costs for a variety of experiences including off-campus interviews, externships, professional conferences
     * Career assessments such as the MBTI and the Strong Interest Inventory (offered through the Center for Career Development)
     * Fee for the Business Etiquette Lunch hosted by the Center for Career Development
@@ -235,7 +236,77 @@ Request anyway!!! - if the ask exceeds what we can provide, we will do our best 
     * archive.org
 - Here are some textbooks that Rice uses for classes: [Textbooks](https://rice.box.com/s/rnpyo0nehbglj34608ackbniqs92w6es).
 
+## Guide on how to find books for your classes:
+
+1) using Anna's archive. The largest online library.
+
+- Go to amazon or wherever you can find the book.
+- Copy the ISBN 13 or not. Anna usually tags them in the same book.
+- Paste it to the 'Full Database' input box. Click Search.
+- Click slow downloads. Wait until it is done.
+- Enjoy your book.
+
+2) Using google.
+
+- Go to amazon or wherever you can find the book.
+- use google or duckduckgo and type in "filetype:pdf X" where X is the name of the book you want.
+- try to find the book
+- enjoy your book.
+
+3) Rice library:
+
+- Email for the link. You can find a lot of books here.
+
+4) Ask AOP for the book. [https://aop.rice.edu/making-textbook-aop-request](https://aop.rice.edu/making-textbook-aop-request)
+
+# Research and Academic Tips
+
+I am pre-grad, and I'm sure many of you are too. Here are some resources to help you get started on your research journey.
+
+- If you are interested in research, *COLD EMAIL* professors. It is the best way to get started. You will get rejected, but you will definitely get a response. Rice professors are really nice and will help you out.
+    - I did this in my freshman year and got a research position in the summer in late APRIL. That was extremely late, but I still got a position.
+- It is best to note what you are interested in and what you want to do. Professors are more likely to respond if you have a clear idea of what you want to do. Even if you don't know exactly what you want to do---it's ok to say you are eager to learn.
+- If you are STEM, then it's very likely you will get paid for your research or at the very least you should get summer credit hours. 
+- If you want to go to a conference, then the AOP will pay for you to go. Apply for fellowships! Don't worry about cost, just apply.
+- If you are STEM, then it's likely you won't have to take the GRE---this does not apply to social sciences or humanities. 
+- If you want to take classes you do not have the prerequisites for, then email the professor. They will likely let you in if you show interest.
+    - In my freshman year, I took 400 level COMP classes without any prerequisites. I just emailed the professor and they let me in.
+    - If you do this, I would highly recommend not saying you are a freshman. Just say you are interested in the class and tell them your work.
+- Look for REUs. They are a great way to get started in research. 
+    - Specifically, apply to this: [SURF](https://ouri.rice.edu/research-programs/surf). I did not know about this my Freshman year and I missed the deadline. I highly recommend applying.
+    - There is also, the [NSF search](https://www.nsf.gov/crssprgm/reu/reu_search.jsp). This is a great way to find REUs.
+    - [Math REUs](https://sites.google.com/view/mathreu)
+    - [MATH Freshman apply!](https://math.williams.edu/small/)
+- Getting a first-year internship is hard, but it's a big plus. Often times, there
+are programs targeted directly at underclassmen from minority groups. For example, here is a list on
+[tech internships](https://careerservices.fas.harvard.edu/resources/technology-internships-for-first-years-and-sophomores/). And we have some for [sophomores](https://managementconsulted.com/sophomore-summer-internships-consulting/).
+If you are a junior or senior, then you should apply to the [Rusp: Rice Undergraduate Scholars Program](https://ouri.rice.edu/research-programs/rusp).
+- Programs are more receptive to touching narratives. You should unapologetically describe how your personal challenges motivate your passion. 
+- Get to know your peers! Sometimes they can help you find opportunities you never knew existed.
+- More links:
+    - [How to prep for Grad school if you are poor](https://docs.google.com/document/d/1WfoMVkEbsn03Xz0Q2_YQPlWy2YrS0m4R2vK2nsekvcQ/edit).
+    - [Alex Leng's NSF fellowship](https://www.alexhunterlang.com/nsf-fellowship)
+    - [Google Research Mentorship](https://research.google/programs-and-events/csrmp/)
+    - [https://graduate.dartmouth.edu/student-support/career-services/interview-practice-techniques/interviewing-academic-job](https://graduate.dartmouth.edu/student-support/career-services/interview-practice-techniques/interviewing-academic-job)
+    - [Tips for Writing Technical Papers](https://cs.stanford.edu/people/widom/paper-writing.html)
+    - [https://shomir.net/advice.html](https://shomir.net/advice.html)
+    - [https://www.cs.jhu.edu/~jason/advice/](https://www.cs.jhu.edu/~jason/advice/)
+    - [https://github.com/TheShadow29/research-advice-list](https://github.com/TheShadow29/research-advice-list)
+    - [https://homes.cs.washington.edu/~mernst/advice/](https://homes.cs.washington.edu/~mernst/advice/)
+    - [https://www.cs.cmu.edu/~harchol/gradschooltalk.pdf](https://www.cs.cmu.edu/~harchol/gradschooltalk.pdf)
+    - [https://benhoyt.com/writings/how-to-apply/](https://benhoyt.com/writings/how-to-apply/)
+    - [https://sites.northwestern.edu/causeway/about/](https://sites.northwestern.edu/causeway/about/)
+    - [http://www.cs.ucr.edu/~eamonn/public/SDM_How_to_do_Research_Keogh.pdf](http://www.cs.ucr.edu/~eamonn/public/SDM_How_to_do_Research_Keogh.pdf)
+    - [Resources for Students & Scholars ](https://people.csail.mit.edu/fredo/student.html)
+    - [https://github.com/SimplifyJobs/Summer2025-Internships](https://github.com/SimplifyJobs/Summer2025-Internships)
+    - [https://ouri.rice.edu/research-and-campus-resources/for-students](https://ouri.rice.edu/research-and-campus-resources/for-students)
+- TALK TO ME ABOUT MORE TIPS LOL
+- My friend made this notion Template: [https://incominvalkyrie.notion.site/w-e-e-k-l-y-copy-c48a5890bfdb42689002f6eccef2cd14](https://incominvalkyrie.notion.site/w-e-e-k-l-y-copy-c48a5890bfdb42689002f6eccef2cd14)
+- TAing is a great way to get involved in research. You can ask your professors if they need a TA. This is a great way to get involved in research and get paid for it.
+- There are so tutoring opportunities on campus. 
+
 # FAQ
+
 ## Tax Questions (should talk to a tax professional, but here are some student suggestions):)
 - What’s a 1098-T?: a 1098-T is a tax form that the university provides to students who paid the university for tuition and fees that breaks down how to report college related expenses for taxes. If you have a full scholarship (don’t pay anything to Rice for tuition, room, or board), they don’t have to/won’t provide one to you.
 - I didn’t get a 1098-T but have to file taxes. What do I do? You can email the Cashier’s office (cashier@rice.edu) and ask for a breakdown of what would’ve been on the form.
