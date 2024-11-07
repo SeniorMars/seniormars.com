@@ -1,0 +1,668 @@
+\chapter{Determinants and Traces}
+
+\section{Determinants and Permutations}
+\label{sec:det}
+
+\dfn{Determinants}{
+
+	\(\det : \FF^{n, n} \implies \FF\)
+
+	\begin{enumerate}[label=(\alph*)]
+		\item If \(n = 1\), then \(\det (a) = a\).
+		\item If \(n = 2\), then \(\det \begin{pmatrix} a & b \\ c & d \end{pmatrix} = ad - bc\).
+		\item If \(n \ge 3\), then we need a recursive definition.
+
+		      If \(A \in \FF^{n, n}\), then the \(ij\)-th minor of \(A\) is \(A_{i,j}\).
+
+		      Where \(A_{i,j}\) means you take \(A\) and delete the \(i\)th row and \(j\)th column.
+
+		      \ex{}{
+
+			      Let \[A = \begin{pmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9 \end{pmatrix}\].
+
+			      Then:
+
+			      \[
+				      A_{2,1} = \begin{pmatrix} 2 & 3 \\ 8 & 9 \end{pmatrix}
+			      \]
+
+		      }
+
+		      Thus, given \(A \in \FF^{n, n}\), define its determinant as:
+
+		      \[
+			      \det A = \sum_{i = 1}^{n} (-1)^{i + 1} a_{i,1} \cdot \det A_{i,1}
+		      \]
+	\end{enumerate}
+}
+
+\newpage
+\ex{}{
+	Let:
+
+	\[
+		A = \begin{pmatrix} 1 & 0 & 3 \\ 2 & 1 & 2 \\ 0 & 5 & 1 \end{pmatrix} = \begin{pmatrix} a_{11} & a_{12} & a_{13} \\ a_{21} & a_{22} & a_{23} \\ a_{31} & a_{32} & a_{33} \end{pmatrix}
+	\]
+
+	Thus,
+
+	\begin{align*}
+		\det A & = a_{1,1} \cdot \det A_{1,1} - a_{2, 1} \cdot \det A_{2,1} + a_{3,1} \cdot \det A_{3,1}                                                                                             \\
+		       & = 1 \cdot \det \begin{pmatrix} 1 & 2 \\ 5 & 1 \end{pmatrix} - 2 \cdot \det \begin{pmatrix} 0 & 3 \\ 5 & 1 \end{pmatrix} + 0 \cdot \det \begin{pmatrix} 0 & 3 \\ 1 & 2 \end{pmatrix} \\
+		       & = 1 \cdot (-9) - 2 \cdot (-15) + 0 \cdot (-3)                                                                                                                                       \\
+		       & = 21
+	\end{align*}
+}
+
+\thm{Det 1}{
+	There exists a unique function \(\delta : \FF^{n, n} \to \FF\) with the following properties:
+
+	\begin{enumerate}
+		\item \(\delta(I_{n}) = 1\)
+		\item \(\delta\) is row-linear.
+		\item If \(A\) has two identical rows, then \(\delta(A) = 0\).
+	\end{enumerate}
+
+	Point: we will show that \(\det = \delta\).
+
+	\mclm{Row-linear}{
+		This means that:
+
+		\[
+			\delta \left( \begin{pmatrix}  1 & 2 & 3\\ 4\lambda + 2\mu & 5\lambda + 5\mu & 6\lambda + 8\mu \\ 7 & 8 & 9 \end{pmatrix} \right) = \lambda \cdot \delta \begin{pmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9 \end{pmatrix}  + \mu \cdot \delta  \begin{pmatrix} 1 & 2 & 3 \\ 2 & 5 & 8 \\ 7 & 8 & 9 \end{pmatrix}
+		\]
+
+		Assume the previous theorem is true for now.
+
+		What is the value of \(\delta\) on elementary matrices?
+	}
+}
+
+\thm{Det 2}{
+
+	\(E\) elementary matrix. Then:
+
+	\[
+		\delta(E \cdot A) = \begin{cases}
+			\delta(A)         & \text{ if } E \text{ is type (i)}   \\
+			-\delta(A)        & \text{ if } E \text{ is type (ii)}  \\
+			c \cdot \delta(A) & \text{ if } E \text{ is type (iii)}
+		\end{cases}
+	\]
+
+	\(S\) is determined on elementary matrices.
+}
+
+\cor{Related to thm 2}{
+
+	\[
+		\delta(E) = \begin{cases}
+			+1 & \text{ if } E \text{ is type (i)}   \\
+			-1 & \text{ if } E \text{ is type (ii)}  \\
+			c  & \text{ if } E \text{ is type (iii)}
+		\end{cases}
+	\]
+
+	\pf{Proof}{
+		Take \(A = I_{n}\) in theorem 2.
+	}
+
+}
+
+\newpage
+
+\pf{Proof to det 2}{
+
+	For \(E\) of type \((iii)\) this is jut row-linearity of \(\delta\).
+
+	Let \(A_{i}\) be the \(i\)th row of \(A\).
+
+	\[
+		\delta \left( \begin{pmatrix} 1 & & & & \\ & \ddots & & & \\ & & c & & \\ & & & \ddots & \\ & & & & 1 \end{pmatrix} \cdot \begin{pmatrix} -- & A_1 & -- \\ -- & A_2 & -- \\  & \vdots &  \\ -- & A_n & -- \end{pmatrix} \right) = \delta \begin{pmatrix} -- & A_1 & -- \\  & \vdots &  \\ -- & cA_i & -- \\  & \vdots &  \\ -- & A_n & -- \end{pmatrix} = c \cdot \delta \begin{pmatrix} -- & A_1 & -- \\  & \vdots &  \\ -- & A_i & -- \\  & \vdots &  \\ -- & A_n & -- \end{pmatrix} = c \cdot \delta(A) \begin{pmatrix} 1 & & & & \\ & \ddots & & & \\ & & c & & \\ & & & \ddots & \\ & & & & 1 \end{pmatrix}
+	\]
+
+	Since we did not require \(c \neq 0\), then this is true for all \(c \in \FF\).
+
+	Thus, \(\delta(E \cdot A) = c \cdot \delta(A)\) for all \(c \in \FF\).
+
+	If a row contains only zeros, then \(\delta(A) = 0\).
+
+	For types \((i)\) and \((ii)\), we do the special case when \(E\) acts on consecutive rows.
+
+	\begin{enumerate}[label=(Type: \roman*):, wide]
+		\item
+
+		      \[
+			      E \cdot A = \begin{pmatrix} 1 & & & & \\ & \ddots & & a_{i,j} & \\ & & \ddots & & \\ & & & \ddots & \\ & & & & 1\end{pmatrix} \cdot \begin{pmatrix} -- & A_1 & -- \\ -- & A_2 & -- \\  & \vdots &  \\ -- & A_i & -- \\ -- & A_{i+1} & -- \\  & \vdots &  \\ -- & A_n & -- \end{pmatrix} = \begin{pmatrix} -- & A_1 & -- \\ -- & A_2 & -- \\  & \vdots &  \\ -- & a_{i,j} A_i + A_{j} & -- \\ -- & A_{i+1} & -- \\  & \vdots &  \\ -- & A_n & -- \end{pmatrix}
+		      \]
+
+		      Special case, \(j = i + 1\)
+
+		      \[
+			      \delta(E \cdot A) = \delta\begin{pmatrix} -- & A_1 & -- \\ -- & A_2 & -- \\  & \vdots &  \\ -- & A_{i+1} & -- \\ -- & aA_i + A_{i+1} & -- \\   & \vdots &  \\ -- & A_n & -- \end{pmatrix} = a \cdot \delta \begin{pmatrix} -- & A_1 & -- \\ -- & A_2 & -- \\  & \vdots &  \\ -- & A_i & -- \\ -- & A_i & -- \\  & \vdots &  \\ -- & A_n & -- \end{pmatrix} + \delta \begin{pmatrix} -- & A_1 & -- \\ -- & A_2 & -- \\  & \vdots &  \\ -- & A_i & -- \\ -- & A_{i+1} & -- \\  & \vdots &  \\ -- & A_n & -- \end{pmatrix}
+		      \]
+
+		      But, the first matrix's determinant is \(0\) since it has two identical rows.
+
+		      Thus, \(\delta(E \cdot A) = a \cdot 0 + \delta(A) = \delta(A)\).
+		\item Swap rows.
+
+		      Again, this assumes theorem \(1\).
+
+		      Let's assume that we swap row \(i\) with row \(i + 1\)
+
+		      {\allowdisplaybreaks
+				      \begin{align*}
+					      \delta(A) & = \delta \begin{pmatrix} -- & A_1 & -- \\ & \vdots &  \\ -- & A_i & -- \\ -- & A_{i+1} & -- \\  & \vdots &  \\ -- & A_n & -- \end{pmatrix}                                                                                                                                              \\
+					                & \text{ by part one:}                                                                                                                                                                                                                                                                    \\
+					                & = \delta \begin{pmatrix} -- & A_1 & -- \\ & \vdots &  \\ -- & A_{i} - A_{i+1} & -- \\ -- & A_{i+1} & -- \\  & \vdots &  \\ -- & A_n & -- \end{pmatrix}                                                                                                                                  \\
+					                & \text{ by part one again:}                                                                                                                                                                                                                                                              \\
+					                & = \delta \begin{pmatrix} -- & A_1 & -- \\ & \vdots &  \\ -- & A_{i} - A_{i+1} & -- \\ -- & A_{i + 1} + \left(A_{i} - A_{i+1}\right) & -- \\  & \vdots &  \\ -- & A_n & -- \end{pmatrix}                                                                                                 \\
+					                & = \delta \begin{pmatrix} -- & A_1 & -- \\ & \vdots &  \\ -- & A_{i} - A_{i+1} & -- \\ -- & A_{i} & -- \\  & \vdots &  \\ -- & A_n & -- \end{pmatrix}                                                                                                                                    \\
+					                & \text{ by row linearity:}                                                                                                                                                                                                                                                               \\
+					                & = \delta \begin{pmatrix} -- & A_1 & -- \\ & \vdots &  \\ -- & A_{i} & -- \\ -- & A_{i} & -- \\  & \vdots &  \\ -- & A_n & -- \end{pmatrix} - \delta \begin{pmatrix} -- & A_1 & -- \\ & \vdots &  \\ -- & A_{i+1} & -- \\ -- & A_{i} & -- \\  & \vdots &  \\ -- & A_n & -- \end{pmatrix} \\
+					                & \text{but for the first matrix is zero since it has two identical rows:}                                                                                                                                                                                                                \\
+					                & = -\delta \begin{pmatrix} -- & A_1 & -- \\ & \vdots &  \\ -- & A_{i+1} & -- \\ -- & A_{i} & -- \\  & \vdots &  \\ -- & A_n & -- \end{pmatrix}                                                                                                                                           \\
+					                & = - \delta(E \cdot A)
+				      \end{align*}
+
+				      Thus, \(\delta(A) = - \delta(E \cdot A)\), which implies
+
+				      \[
+					      \delta(E \cdot A) = - \delta(A)
+				      \]
+			      }
+	\end{enumerate}
+
+	In general, for part \(2\), we want to swap \(i\) with row \(j\).
+
+	Assume \(i < j\).
+
+	\begin{enumerate}[label=(\roman*), wide]
+		\item We bubble down row \(i\) to row \(j\) indices \(j-1\) exchanges.
+
+		      Thus, row \(i\) is in the right place.
+
+		      But Row \(j\) is row in Row \(j - 1\).
+		\item Bubble up row \(j\) (in position \(j -1\)  right now) to row \(i\).
+
+		      This involves \((j - 1) - i\) exchanges.
+
+		      Which means that the total number of exchanges is:
+
+		      \[
+			      j - 1 + (j - 1) - i = 2(j - i) - 1
+		      \]
+
+		      Which is odd!
+
+		      This means that \(\delta(E \cdot A) = (-1)^{2(j - i) - 1} \cdot \delta(A) = - \delta(A)\).
+	\end{enumerate}
+
+	\nt{
+		We can also do this for part \(1\).
+
+		Do this an exercise.
+	}
+
+	As such, we have proven theorem \(2\).
+}
+
+\cor{}{
+	\(\delta(S \cdot B) = \delta(A) \cdot \delta(B)\) for any \(A, B \in \FF^{n, n}\).
+
+	We know that \(\delta(E) \cdot \delta(A) = \delta(E \cdot A)\) if \(E\) is an elementary matrix.
+
+	Let \(A^{\prime} = E_{k} \cdots E_{1} \cdot A\)  be a reduced row echelon form of \(A\).
+
+	Then either:
+
+	\begin{enumerate}[label=(\roman*), wide]
+		\item \(A^{\prime} = I_{n}\) or
+		\item the last row of \(A^{\prime}\) is all zeros. (could be more than the last row)
+	\end{enumerate}
+
+	Then:
+
+	\begin{enumerate}[label=(\roman*)]
+		\item If \(A^{\prime} = I_{n}\),
+
+		      \begin{align*}
+			      A^{\prime} = I_{n} & \implies A = E_{1}^{-1} \cdots E_{k}^{-1} \cdot I_{n}             \\
+			                         & \implies \delta(A) = \delta(E_{1}^{-1}) \cdots \delta(E_{k}^{-1})
+		      \end{align*}
+
+		      On the other hand:
+
+		      \begin{align*}
+			      \delta(A \cdot B) & = \delta(E^{-1}_{1}) \cdots \lambda(E^{-1}_{k}) \cdot \delta(B) \\
+			                        & = \delta(A) \cdot \delta(B)
+		      \end{align*}
+		\item If \(A^{\prime}\) has a row of zeros, then:
+
+		      \(\delta(A^{\prime}) = 0\), which implies that \(\delta(A) = 0\).
+
+		      Since \(\delta(A^{\prime}) = \delta(E_{k}) \cdots \delta(E_{1}) \cdot \delta(A)\).
+
+		      Where \(\delta(E_{i}) \neq 0\) for all \(i\).
+
+		      This implies that \(\delta(A) = 0\).
+
+		      And exercise: \(\delta(A \cdot B) = 0\) as well.
+	\end{enumerate}
+
+}
+
+\pf{Proof of det 1}{
+
+	\pf{Proof of uniqueness}{
+		Suppose there are functions \(\delta: \FF^{n, n} \to \FF\) and \(\delta^{\prime} : \FF^{n, n} \to \FF\).
+
+		Each satisfying the three desired properties.
+
+		Let \(A \in \FF^{n, n}\) such that \(A^{\prime} = E_{k} \cdots E_{1} \cdot A\) is a reduced row echelon form of \(A\).
+
+		Either we get \(A^{\prime} = I_{n}\) or its last row is all zeros.
+
+		In either case, \(\delta(A^{\prime}) = \delta^{\prime}(A^{\prime}) = 1\).
+
+		Or \(\delta(A^{\prime}) = \delta^{\prime}(A^{\prime}) = 0\).
+
+		That means that \(\delta(E_{k} \cdots E_{1} \cdot A)  = \delta^{\prime}(E_{k} \cdots E_{1} \cdot A)\) in either case.
+
+		Thus,
+		\[
+			\delta(E_{k}) \cdots \delta(E_{1}) \cdot \delta(A) = \delta^{\prime}(E_{k}) \cdots \delta^{\prime}(E_{1}) \cdot \delta^{\prime}(A)
+		\]
+
+		But by theorem \(2\), we get \(\delta(E_{i}) = \delta^{\prime}(E_{i})\).
+
+		Which means that \(\delta(A) = \delta^{\prime}(A)\) for all \(A \in \FF^{n, n}\).
+	}
+
+	\pf{Proof of existence}{
+		We'll show \(\det : \FF^{n,n} \to \FF\) satisfies the three properties to be \(\delta\).
+
+		Let's proceed by induction on \(n \in \NN\)
+
+		\mclm{Base Case}{
+			Let \(n\) be \(1\).
+
+			Then \(\det : \FF^{1,1} \to \FF\) is defined by \(\det(a) = a\).
+
+			Thus, \(\det(I_{1}) = 1\).
+
+			Now, for row linear:
+
+			\[
+				\det(\lambda a + \mu b) = \lambda \cdot \det(a) + \mu \cdot \det(b)
+			\]
+
+			Part \(3\) is trivial since there is only one row.
+		}
+
+		\mclm{Inductive Step}{
+			Assume that \(\det : \FF^{n - 1, n - 1} \to \FF\) satisfies the three properties.
+
+			We show the \(n \times n\) case!
+
+			We need to show the three properties.
+
+			\begin{enumerate}[label=(\roman*),wide]
+				\item \(I_{n}\).
+
+				      \begin{align*}
+					      \delta(I_{n}) & = \delta \begin{pmatrix} 1 & & & & \\ & \ddots & & & \\ & & 1 & & \\ & & & \ddots & \\ & & & & 1 \end{pmatrix} \\
+					                    & = 1 \cdot \delta(I_{n-1})                                                                                      \\
+					                    & = 1 \cdot 1 \quad \text{ by inductive hypothesis}                                                              \\
+					                    & = 1
+				      \end{align*}
+				\item Let \(A, B, D \in \FF^{n,n}\) be identical matrices except for row \(k\).
+
+				      Where \(D_{k} = \lambda A_{k} + \mu B_{k}\).
+
+				      We want to show that \(\delta(D) = \lambda \cdot \delta(A) + \mu \cdot \delta(B)\).
+
+				      \clm{}{}{
+
+					      \(d_{i,1} \cdot \det(D_{i,1}) = \lambda \cdot a_{i,1} \cdot \det(A_{i,1}) + \mu \cdot b_{i,1} \cdot \det(B_{i,1})\) is true for all \(i \in \left\{ 1, \ldots, n \right\}\).
+
+					      If claim is true then we can:
+
+					      \begin{enumerate}
+						      \item Multiply equation by \((-1)^{i + 1}\)
+						      \item Add from \(i = 1\) to \(n\) to get \(\delta(D) = \lambda \cdot \delta(A) + \mu \cdot \delta(B)\).
+					      \end{enumerate}
+
+					      \pf{Proof of claim}{
+						      We have two cases:
+
+						      \begin{enumerate}[label=Case (\roman*), wide]
+							      \item  \(i = k\), then
+							            The minors \(A_{k,1}, B_{k,1}\) and \(D_{k, 1}\) are equal.
+
+							            I.e., the \(k\)th row of \(A, B, D\) is deleted.
+
+							            Which means:
+
+							            Claim is true \(\iff d_{i,1} = \lambda \cdot a_{i,1} + \mu \cdot b_{i,1}\).
+
+							            This is true by our construction of \(D\).
+
+							      \item \(i \neq k\), then
+
+							            \(A^{\prime}, B^{\prime}, D^{\prime}\) rows with \(n - 1\) entries after deleting the \(k\)th row.
+
+
+							            Then \(D^{\prime}_{k} = \lambda \cdot A^{\prime}_{k} + \mu \cdot B^{\prime}_{k}\).
+
+							            All other rows of \(A^{\prime}, B^{\prime}, D^{\prime}\) are equal.
+
+							            Thus, by inductive hypothesis:
+
+							            \[
+								            \det D_{i,1} = \lambda \cdot \det A_{i,1} + \mu \cdot \det B_{i,1}
+							            \]
+
+							            But also if \(i \neq k\), \( a_{i,1} = b_{i,1} = d_{i,1}\).
+
+							            Thus,
+
+							            \[
+								            d_{i,1} \cdot \det D_{i,1} = \lambda \cdot a_{i,1} \cdot \det A_{i,1} + \mu \cdot b_{i,1} \cdot \det B_{i,1}
+							            \]
+
+							            Thus, the claim is true in this case as well.
+						      \end{enumerate}
+					      }
+				      }
+				\item Moved a bit ahead in these notes, you can see the final part of the proof.
+			\end{enumerate}
+
+
+
+
+		}
+	}
+
+
+}
+
+\nt{
+	On Mondays' class we showed that:
+
+	\begin{enumerate}[label=(\alph*)]
+		\item \(\delta\) is unique, if it exists
+		\item \(\det : \FF^{m, n} \to \FF\) such that: \(A \mapsto \sum_{i=1}^{n} (-1)^{i + 1} a_{i,1} \cdot \det A_{i,1}\) is row-linear and \(\det I_{n} = 1\).
+
+		      We showed this by induction on \(n\).
+
+
+	\end{enumerate}
+}
+
+\pf{Proof of Det 1.3}{
+	Let's proceed by induction on \(n\).
+
+	Suppose rows \(k\) and \(k + 1\) of \(A\) are equal.
+
+	Then if \(i \neq k\) or \(k + 1\), then
+
+	\((n - 1) \times (n - 1)\) minor \(A_{i,1}\) has two consecutive equal rows.
+
+	By inductive hypothesis, \(\det A_{i,1} = 0\). Then:
+
+	\[
+		\det (A) = (-1)^{k+1} \cdot a_{k,1} \cdot \det A_{k,1} + (-1)^{k+2} \cdot a_{k+1,1} \cdot \det A_{k+1,1}
+	\]
+
+	Since \(A_{k} = A_{k+1}\) have \(a_{k,1} = a_{k+1, 1}\) and \(A_{k,1} = A_{k+1, 1}\)
+
+	This implies that:
+
+	\[
+		\det A = (-1)^{k+1} \left[ a_{k,1} \cdot \det A_{k,1} + (-1) \cdot a_{k,1} \cdot \det A_{k,1} \right] = 0
+	\]
+
+	Thus, \(\det A = 0\).
+
+	Therefore, by the principle of mathematical induction, \(\det A = 0\) for all \(A\) with two identical rows.
+}
+
+
+\cor{}{
+	These are given free by the theorem of det 1:
+
+	\begin{enumerate}[label=(\alph*)]
+		\item \(\det(A \cdot B) = \det(A) \cdot \det(B)\)
+		\item \(\det(A) = 0\) if \(A\) has a row of zeros.
+		\item \(\det(A) = 0\) if \(A_{j} = \lambda \cdot A_{i}\) for some \(i \neq j\) and \(\lambda \in \FF\).
+	\end{enumerate}
+}
+
+\mclm{Other formulas}{
+	\begin{enumerate}[label=(\alph*)]
+		\item General column expansion:
+
+		      This lands among the \(j\)th column:
+		      \[
+			      \det(A) = \sum_{i=1}^{n} (-1)^{i+j} \cdot a_{i,j} \cdot \det(A_{i,j})
+		      \]
+		\item General row expansion:
+
+		      This expands along the \(i\)th row:
+		      \[
+			      \det(A) = \sum_{j=1}^{n} (-1)^{i+j} \cdot a_{i,j} \cdot \det(A_{i,j})
+		      \]
+	\end{enumerate}
+}
+
+\dfn{Permutations}{
+	A permutation of \(S\) is a bijection \(\sigma: S \xrightarrow{\sim} S\).
+
+	e.g. \(S = \left\{ 1, 2, 3, 4, 5 \right\}\).
+
+	\[
+		\begin{array}{c|c c c c c}
+			S         & 1 & 2 & 3 & 4 & 5 \\
+			\hline
+			\sigma(S) & 3 & 5 & 1 & 4 & 2
+		\end{array}
+	\]
+
+	Then:
+
+	\[
+		S_{n} \coloneq \left\{ \text{permutations } \sigma : \left\{ 1, \ldots, n \right\} \xrightarrow{\sim} \left\{ 1, \ldots, n \right\} \right\}
+	\]
+
+	Notice that this is the symmetric group on \(n\) elements.
+
+	We can see that size is:
+
+	\[
+		\left| S_{n} \right| = n!
+	\]
+
+	Can compare permutations:
+
+	\begin{align*}
+		\tau : \left\{ 1, \ldots, n \right\}   & \xrightarrow{\sim} \left\{ 1, \ldots, n \right\} \\
+		\sigma : \left\{ 1, \ldots, n \right\} & \xrightarrow{\sim} \left\{ 1, \ldots, n \right\} \\
+	\end{align*}
+
+	Then \(\tau \circ \sigma\) is also a bijection ("group law").
+}
+
+\mclm{Cycle Notation}{
+	Take the explicit \(\sigma\) above.
+
+	Given: \(1 \mapsto 3 \mapsto 4 \mapsto 1\)
+
+	draw a 3-cycle
+
+	% \begin{tikzcd}
+	% 	1 \arrow[r] & 3 \arrow[r] & 4 \arrow[r] & 1
+	% \end{tikzcd}
+
+	And \(2 \mapsto 5 \mapsto 2\)
+
+	draw a 2-cycle
+
+	We can write:
+	\begin{align*}
+		\sigma & = (1, 3, 4)(2, 5) \text{ this is cycle notation.} \\
+		       & = (52)(341) \text{ cycle notation is not unique}
+	\end{align*}
+
+	Example:
+
+	\[
+		\begin{array}{c|c c c c}
+			S         & 1 & 2 & 3 & 4 \\
+			\hline
+			\sigma(S) & 4 & 1 & 3 & 2
+		\end{array}
+	\]
+
+	Thus:
+
+	\begin{align*}
+		\sigma & = (142)(3) \\
+		       & = (142)    \\
+	\end{align*}
+
+	Where \((3)\) is a fixed point.
+
+	Thus, we can notice the composition in cycle notation:
+
+	\begin{align*}
+		\sigma                 & = (134)(25)                                                                                      \\
+		\tau                   & = (1452)                                                                                         \\
+		\tau \circ \sigma      & = \underbrace{[(1452)]}_{\text{then this}} \circ \underbrace{[(134)(25)]}_{\text{first do this}} \\
+		                       & = (135)(2)(4)                                                                                    \\
+		                       & = (135)                                                                                          \\
+		(\tau \circ \sigma)(1) & = \tau(\sigma(1)) = \tau(3) = 5                                                                  \\
+	\end{align*}
+}
+
+\qs{}{
+Problem 5. The trace of a square matrix \(A\) is the sum of its diagonal entries:
+\[
+	\operatorname{tr}(A):=a_{11}+a_{22}+\cdots+a_{n n}
+\]
+Show that
+
+(a) \(\operatorname{tr}(A+B)=\operatorname{tr}(A)+\operatorname{tr}(B)\);
+
+(b) \(\operatorname{tr}(A B)=\operatorname{tr}(B A)\);
+
+(c) if \(B\) is invertible, then \(\operatorname{tr}(A)=\operatorname{tr}\left(B A B^{-1}\right)\).
+}
+
+\pf{Proof of \(a\) }{
+	Let \(A, B\) be two matrices size \(n \times n\) with entries in \(\FF\).
+
+	Let \(C = A + B\), which means that it looks like:
+
+	\[
+		C = \begin{pmatrix}
+			a_{11} + b_{11} & a_{12} + b_{12} & \cdots & a_{1n} + b_{1n} \\
+			a_{21} + b_{21} & a_{22} + b_{22} & \cdots & a_{2n} + b_{2n} \\
+			\vdots          & \vdots          & \ddots & \vdots          \\
+			a_{n1} + b_{n1} & a_{n2} + b_{n2} & \cdots & a_{nn} + b_{nn} \\
+		\end{pmatrix}
+	\]
+
+	Let's take the trace of \(C\):
+
+	\begin{align*}
+		tr(C) & = \sum_{i=1}^n c_{ii}                                   \\
+		      & = (a_{1,1} + b_{11}) + \ldots + (a_{n,n} + b_{n,n})     \\
+		      & = a_{11} + \ldots + a_{n,n} + b_{11} + \ldots + b_{n,n} \\
+	\end{align*}
+
+	Now let's take the trace of \(A\) and \(B\) separately:
+
+	\begin{align*}
+		tr(A) + tr(b) & = \sum_{i=1}^n a_{ii} + \sum_{i=1}^n b_{ii}             \\
+		              & = a_{11} + \ldots + a_{n,n} + b_{11} + \ldots + b_{n,n} \\
+	\end{align*}
+
+	As both sides are equal, we have shown that \(tr(A + B) = tr(A) + tr(B)\).
+}
+
+\pf{Proof of \(b\) }{
+
+	Let \(A, B\) be two matrices size \(n \times n\) with entries in \(\FF\).
+
+	If they are not of the same size, then we cannot multiply them.
+
+	So, let's assume they are both matrices of size \(n \times n\).
+
+	\nt{Don't worry, I have a program that generates these matrices for me.}
+
+	Let \(C = AB\), which means that it looks like:
+
+	\begin{align*}
+		C       & = \begin{pmatrix}
+			            \sum_{k=1}^n a_{1k}b_{k1} & \sum_{k=1}^n a_{1k}b_{k2} & \cdots & \sum_{k=1}^n a_{1k}b_{kn} \\
+			            \sum_{k=1}^n a_{2k}b_{k1} & \sum_{k=1}^n a_{2k}b_{k2} & \cdots & \sum_{k=1}^n a_{2k}b_{kn} \\
+			            \vdots                    & \vdots                    & \ddots & \vdots                    \\
+			            \sum_{k=1}^n a_{nk}b_{k1} & \sum_{k=1}^n a_{nk}b_{k2} & \cdots & \sum_{k=1}^n a_{nk}b_{kn} \\
+		            \end{pmatrix} \\
+		C_{i,j} & = \sum_{k=1}^n a_{ik}b_{kj}                                                                  \\
+	\end{align*}
+
+	Let \(D = BA\), which means that it looks like:
+
+	\begin{align*}
+		D       & = \begin{pmatrix}
+			            \sum_{k=1}^n b_{1k}a_{k1} & \sum_{k=1}^n b_{1k}a_{k2} & \cdots & \sum_{k=1}^n b_{1k}a_{kn} \\
+			            \sum_{k=1}^n b_{2k}a_{k1} & \sum_{k=1}^n b_{2k}a_{k2} & \cdots & \sum_{k=1}^n b_{2k}a_{kn} \\
+			            \vdots                    & \vdots                    & \ddots & \vdots                    \\
+			            \sum_{k=1}^n b_{nk}a_{k1} & \sum_{k=1}^n b_{nk}a_{k2} & \cdots & \sum_{k=1}^n b_{nk}a_{kn} \\
+		            \end{pmatrix} \\
+		D_{i,j} & = \sum_{k=1}^n b_{ik}a_{kj}                                                                  \\
+	\end{align*}
+
+	Let's take the trace of \(C\) and show it is equal to the trace of \(D\):
+
+	\begin{align*}
+		tr(C) & = \sum_{i=1}^n c_{ii} \\
+		             & = \sum_{i=1}^n \sum_{k=1}^n a_{ik}b_{ki} \\
+			     &= \sum_{i=1}^n (a_{i1}b_{1i} + \ldots + a_{in}b_{ni}) \\
+			     &= \sum_{i=1}^n (b_{1i}a_{i1} + b_{2i}a_{i2} + \ldots + b_{ni}a_{in}) \text{ by commutativity of \(\cdot\) in } \FF \\
+			     &= (b_{11}a_{11} + \ldots + b_{n1}a_{1n}) + \ldots + (b_{1n}a_{n1} + \ldots + b_{nn}a_{nn}) \\
+			     &= (b_{11}a_{11} + b_{12}a_{21} + \ldots + b_{1n}a_{n1}) + \ldots + (b_{n1}a_{1n} + \ldots + b_{nn}a_{nn}) \\
+			     &= \sum_{i=1}^n (b_{i1}a_{1i} + b_{i2}a_{2i} + \ldots + b_{in}a_{ni}) \\
+			     &= \sum_{i=1}^n \sum_{k=1}^n b_{ik}a_{ki} \\
+			     &= \sum_{i=1}^n d_{ii} \\
+			     &= tr(D)
+	\end{align*}
+
+	Thus, we have shown that \(tr(AB) = tr(BA)\).
+}
+
+\pf{Proof of \(c\)}{
+
+	This follows directly from part \(b\).
+
+	Let \(A, B\) be two matrices size \(n \times n\) with entries in \(\FF\).
+
+	Remember that we prove in part \(b\), that \(tr(AB) = tr(BA)\). Thus:
+
+	\[
+		tr(BAB^{-1}) = tr(AB^{-1}B) = tr(AI), \text{ as } BB^{-1} = I
+	\] 
+
+	Remember that multiplying a matrix by the identity matrix does not change the matrix.
+
+	Thus, 
+
+	\[
+	       tr(BAB^{-1}) = tr(AI) = tr(A)
+	\] 
+
+	This means that \(tr(A) = tr(BAB^{-1})\), as desired.
+}
