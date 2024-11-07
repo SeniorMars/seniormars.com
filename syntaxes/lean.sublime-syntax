@@ -1,0 +1,91 @@
+%YAML 1.2
+---
+# Lean 4 syntax definition for Sublime Text
+name: Lean 4
+file_extensions:
+  - lean
+scope: source.lean
+contexts:
+  main:
+    - include: comments
+    - include: keywords
+    - include: sorts
+    - include: tactics
+    - include: symbols
+    - include: strings
+    - include: numbers
+
+  comments:
+    - include: block_comment
+    - include: line_comment
+
+  keywords:
+    - match: '\b(?<!\.)(inductive|structure|theorem|axiom|lemma|def|instance|class|abbrev|example|mutual|abstract|constant|constants|variable|variables|parameter|parameters|import|export|prelude|theory|open|axioms|coinductive|with|universe|universes|macro|macro_rules|syntax|where|rec|deriving|fun|function|let|in|calc|have|show|suffices|by|begin|end|set_option|extends|namespace|section|local|include|omit|override|renaming|hiding|this|using|using_well_founded|run_cmd|initialize|builtin_initialize|precedence|reserve|declare_trace|add_key_equivalence|alias|help|as|raw|replacing)\b'
+      scope: keyword.other.lean
+    - match: '\b(?<!\.)(if|then|else|match|nomatch|return|do|for|unless|try|catch|finally|continue|break|forall|Pi|exists|assume|obtain|from)\b'
+      scope: keyword.control.lean
+    - match: '\b(?<!\.)(private|protected|noncomputable|partial|unsafe|mutual|meta)\b'
+      scope: storage.modifier.lean
+    - match: '\b(?<!\.)(infix|infixl|infixr|postfix|prefix|notation)\b'
+      scope: keyword.operator.lean
+
+  sorts:
+    - match: '\b(Prop|Type|Sort)\b'
+      scope: storage.type.lean
+
+  tactics:
+    - match: '\b(assumption|apply|intro|intros|allGoals|generalize|clear|revert|done|exact|refine|repeat|cases|rewrite|rw|simp|simp_all|contradiction|constructor|injection|induction)\b'
+      scope: support.function.tactic.lean
+
+  symbols:
+    - match: '(α|β|γ|δ|ε|ζ|η|θ|ι|κ|μ|ν|ξ|π|ρ|σ|τ|φ|χ|ψ|ω|Γ|Δ|Θ|Λ|Σ|Φ|Ξ|Ψ|Ω|ℵ)'
+      scope: constant.other.math.greek.lean
+    - match: '(≤|≥|≠|≈|≡|≃|∂|∆|∫|∑|Π|⊥|∞|∓|±|×|⊕|⊗|⊞|∇|√|⬝|•|∘|⁻|▸|∧|∨|¬|⊢|⟨|⟩|↦|←|→|↔|⇒|⟹|⇐|⟸|∩|∪|⊂|⊆|⊄|⊈|⊃|⊇|⊅|⊉|∈|∉|∋|∌|∅|∖|†)'
+      scope: constant.other.math.operator.lean
+    - match: '(ℕ|ℤ|ℝ|ℚ|ℂ)'
+      scope: constant.other.math.set.lean
+    - match: '(⌞|⌟|⦃|⦄|‖)'
+      scope: constant.other.math.bracket.lean
+    - match: '(₁|₂|₃|₄|₅|₆|₇|₈|₉|₀|ᵢ|ⱼ|ₐ|¹|ₙ|ₘ|ₚ)'
+      scope: constant.other.math.subscript.lean
+    - match: '(↑|↓)'
+      scope: constant.other.math.arrow.lean
+    - match: '(\.\.\.|·)'
+      scope: constant.other.math.dots.lean
+    - match: '(∀|∃|λ)'
+      scope: constant.other.math.quantifier.lean
+    - match: '(:=|=|<\|>|<\$>|\+|\*)'
+      scope: keyword.operator.lean
+
+  strings:
+    - match: '"'
+      scope: punctuation.definition.string.begin.lean
+      push:
+        - meta_scope: string.quoted.double.lean
+        - match: '"'
+          scope: punctuation.definition.string.end.lean
+          pop: true
+        - match: '\\(x[0-9A-Fa-f]{2}|u[0-9A-Fa-f]{4}|.)'
+          scope: constant.character.escape.lean
+
+  numbers:
+    - match: '\b([0-9]+|0x[0-9A-Fa-f]+)\b'
+      scope: constant.numeric.lean
+
+  block_comment:
+    - match: '/-'
+      scope: punctuation.definition.comment.lean
+      push:
+        - meta_scope: comment.block.lean
+        - match: '-/'
+          scope: punctuation.definition.comment.lean
+          pop: true
+        - include: block_comment
+
+  line_comment:
+    - match: '--'
+      scope: punctuation.definition.comment.lean
+      push:
+        - meta_scope: comment.line.double-dash.lean
+        - match: $
+          pop: true

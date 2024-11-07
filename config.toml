@@ -20,6 +20,7 @@ smart_punctuation = true
 highlight_theme = "ayu-dark"
 external_links_no_referrer = true
 bottom_footnotes = true
+extra_syntaxes_and_themes = ["syntaxes"]
 
 [extra]
 toc = true
