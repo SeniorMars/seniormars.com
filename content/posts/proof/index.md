@@ -1,7 +1,7 @@
 +++
 title = "A Critique Of The Mathematical Proof: What Happens Now?"
 description = "A guy describes the fallacy of proofs in mathematics."
-date = "2024-09-18"
+date = "2024-11-06"
 
 [extra]
 comment = true
@@ -701,5 +701,5 @@ insights.
 [^16]: The mathlib Community. (2020). The lean mathematical library. Proceedings of the 9th ACM SIGPLAN International Conference on Certified Programs and Proofs, 367–381. [https://doi.org/10.1145/3372885.3373824](https://doi.org/10.1145/3372885.3373824)
 [^17]: van Doorn, F., Ebner, G., & Lewis, R. Y. (2020). Maintaining a Library of Formal Mathematics. Intelligent Computer Mathematics: 13th International Conference, CICM 2020, Bertinoro, Italy, July 26–31, 2020, Proceedings, 251–267. [https://doi.org/10.1007/978-3-030-53518-6_16](https://doi.org/10.1007/978-3-030-53518-6_16)
 [^18]: Hirai, Y. (2017). Defining the Ethereum Virtual Machine for Interactive Theorem Provers. In M. Brenner, K. Rohloff, J. Bonneau, A. Miller, P. Y. A. Ryan, V. Teague, A. Bracciali, M. Sala, F. Pintore, & M. Jakobsson (Eds.), Financial Cryptography and Data Security (pp. 520–535). Springer International Publishing. [https://doi.org/10.1007/978-3-319-70278-0_33](https://doi.org/10.1007/978-3-319-70278-0_33)
-[^19]: Undergrad math not in mathlib. (n.d.). Retrieved August 20, 2024, from [
+[^19]: Undergrad math not in mathlib. (n.d.). Retrieved August 20, 2024
 [^20]: Bayer, J., Benzmüller, C., Buzzard, K., David, M., Lampert, L., Matiyasevich, Y., Paulsen, L., Schleicher, D., Stock, B., & Zelmanov, E. (2024). Mathematical Proof Between Generations. Notices of the American Mathematical Society, 71(01), 1. https://doi.org/10.1090/noti2860
