@@ -71,6 +71,7 @@ Consider a basic equation like \(2 + 2 = 4\). In UEB, each operator (like "+" an
 ![Another UEB Example](./ueb2.png)
 
 ## The U.S. Approach: A Dual-System Landscape  
+
 In the United States, students are not strictly bound to one system. Educational institutions often let students and educators choose between Nemeth and UEB, depending on factors such as:  
 - The student’s prior exposure to Braille math systems.  
 - Academic aspirations (Nemeth is generally preferred for advanced STEM fields).  
@@ -80,6 +81,7 @@ In the United States, students are not strictly bound to one system. Educational
 Think of it like programming languages: Nemeth is Python – concise, specialized, and efficient for math-heavy environments. UEB, on the other hand, is Java – verbose but consistent, allowing integration across different domains.  
 
 ## Handling Spatial Relationships in Braille Math  
+
 One of the most remarkable challenges in Braille math is conveying spatial relationships. In print, superscripts, subscripts, and fractions are visually obvious. Braille, being linear, can't rely on visual positioning. Instead, both Nemeth and UEB use special markers and indicators to show spatial concepts.  
 
 For example:  
@@ -89,6 +91,7 @@ For example:
 This ensures that mathematical structure isn't lost – a crucial aspect of learning math tactilely.  
 
 ## The Choice: A Story of Trade-offs
+
 The existence of both systems in the U.S. isn't just about providing options – it's about recognizing the deeply personal nature of mathematical understanding. Some students thrive with Nemeth's efficient specialization, while others prefer UEB's consistent approach across all subjects. This choice mirrors broader debates in education about specialization versus integration, efficiency versus accessibility.
 
 What makes this narrative particularly compelling is how it challenges our assumptions about mathematical notation. For sighted readers, mathematical symbols are visual shortcuts, but in Braille, they become tactile pathways to understanding. Whether through Nemeth's elegant efficiency or UEB's systematic consistency, these codes demonstrate that mathematics isn't just about what we see – it's about how we think.
@@ -99,16 +102,18 @@ Let’s talk about something that often flies under the radar: how do blind and 
 
 Take this Type Theory proof tree, for instance:  
 
+
 \begin{prooftree}
-\AxiomC{f : A \rightarrow B}
-\AxiomC{g : \neg B = B \rightarrow \bot}
-\AxiomC{x : A}
-\UnaryInfC{f(x) : B}
-\UnaryInfC{g(f(x)) : \bot}
-\UnaryInfC{h : A \rightarrow \bot}
-\BinaryInfC{h \in \neg A}
-\BinaryInfC{f \rightarrow g \rightarrow \neg A}
+\AxiomC{$f : A \rightarrow B$}
+\AxiomC{$g : \neg B = B \rightarrow \bot$}
+\AxiomC{$x : A$}
+\UnaryInfC{$f(x) : B$}
+\UnaryInfC{$g(f(x)) : \bot$}
+\UnaryInfC{$h : A \rightarrow \bot$}
+\BinaryInfC{$h \in \neg A$}
+\BinaryInfC{$f \rightarrow g \rightarrow \neg A$}
 \end{prooftree}
+
 
 Or this theorem: *Theorem:* Let $f: [a, b] \rightarrow \mathbb{R}$ be a continuous function such
 that $f(a)$ and $f(b)$ have opposite signs (i.e., $ f(a) \cdot f(b) < 0 $).
@@ -127,6 +132,7 @@ The flexibility is remarkable – the same equation that appears visually stunni
 ![Another MathJax](./mathjax2.png)
 
 ## The Role of Screen Readers: JAWS and Math Navigation  
+
 MathJax isn’t alone in this effort. JAWS (Job Access With Speech), one of the leading screen readers, has developed impressive math capabilities. When encountering equations in Microsoft Word or MathML on web pages, JAWS activates its Math Viewer – essentially an interactive tool that breaks down equations into manageable components.  
 
 Users can navigate equations piece by piece using keyboard shortcuts, with tactile feedback via Braille displays. It’s like dissecting an equation step-by-step, mirroring how sighted users might “scan” an equation visually.  
@@ -134,6 +140,7 @@ Users can navigate equations piece by piece using keyboard shortcuts, with tacti
 Even more exciting is JAWS’s Braille Math Editor. This feature allows users to input equations in Nemeth Braille directly from a Braille display. As they type, the system generates a visual preview for teachers or collaborators, fostering seamless interaction between sighted and visually impaired mathematicians.  
 
 ## Math Isn't Just Visual – It's Multimodal  
+
 The real significance of these tools extends beyond accessibility. They challenge the assumption that mathematics is inherently visual. When complex spatial relationships (like fractions, superscripts, and matrices) are translated into linear Braille sequences, new insights into mathematical structure and logic emerge.  
 
 This shift highlights something profound: mathematics is about relationships and patterns, not just symbols on a page. By adapting to tactile and auditory forms, math becomes a richer, more inclusive experience.  
