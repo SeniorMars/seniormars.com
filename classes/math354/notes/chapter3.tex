@@ -1,0 +1,2294 @@
+\chapter{Linear Transformations}
+
+\section{Linear Maps}
+
+\dfn{Linear Maps}{
+Let \(V, W\) be vector spaces over the same field \(F (= \RR V \CC)\).
+
+Meaning that \(V = (V, \FF, +_{V}, \cdot_{V})\) and \(W = (W, \FF, +_{W}, \cdot_{W})\).
+
+A linear map: \(T \colon V \to W\) is a function such that:
+
+\begin{enumerate}[label=(\roman*)]
+	\item \(T(u +_{v} v) = T(u) +_{w} T(v)\) for all \(u, v \in V\)
+	\item \(T(\lambda \cdot_{v} v) = \lambda \cdot_{w} T(v)\) for all \(v \in V\) and \(\lambda \in \FF\)
+\end{enumerate}
+
+In other words, they preserve the vector space structure.
+
+\nt{
+Observation: \(T(\vec{0_v}) = \vec{0_w}\).
+
+Reason:
+
+\[
+	T(\vec{0_v}) = T(\vec{0}_{v} +_{v} \vec{0}_{v}) = T(\vec{0}_{v}) +_{w} T(\vec{0}_{v})
+\]
+
+Adding \(-T(\vec{0}_{v})\) to both sides, we get:
+
+\[
+	\vec{0}_{w} = T(\vec{0}_{v})
+\]
+
+}
+}
+
+\ex{}{
+	We will be showing a lot of examples today!
+	\begin{enumerate}[label=(\roman*)]
+		\item Zero map:
+		      \begin{align*}
+			      0 \colon V & \to W         \\
+			      v          & \mapsto 0_{w}
+		      \end{align*}
+
+		\item Identity map:
+		      \begin{align*}
+			      \text{id}_{V} \colon V & \to V     \\
+			      v                      & \mapsto v
+		      \end{align*}
+		      \nt{ Notation \(\sL (V, W) = \left\{ T \colon V \to W \mid T \text{ is linear} \right\} \). }
+		\item Differentiation map: \(D \in \sL (P(\RR), P(\RR))\)
+		      \begin{align*}
+			      D \colon P(\RR) & \to P(\RR)         \\
+			      p(x)            & \mapsto p\prime(x)
+		      \end{align*}
+
+		      Let's check!
+
+		      Linear:
+
+		      \begin{enumerate}
+			      \item \(D(p(x) + q(x)) = (p(x) + q(x))\prime = p\prime(x) + q\prime(x) = D(p(x)) + D(q(x))\)
+			      \item \(D(\lambda p(x)) = (\lambda p(x))\prime = \lambda p\prime(x) = \lambda D(p(x))\)
+		      \end{enumerate}
+		\item Integration: \(I \in \sL(P(\RR), P(\RR))\)
+		      \begin{align*}
+			      I \colon P(\RR) & \to P(\RR)                   \\
+			      p(x)            & \mapsto \int_{0}^{1} p(x) dx
+		      \end{align*}
+
+		      Let's check!
+
+		      Linear:
+
+		      \begin{enumerate}
+			      \item \(I(p(x) +_{P(\RR)} q(x)) = \int_{0}^{1} (p(x) + q(x)) dx = \int_{0}^{1} p(x) dx + \int_{0}^{1} q(x) dx = I(p(x)) +_{\RR} I(q(x))\)
+			      \item \(I(\lambda \cdot_{P(\RR)} p(x)) = \int_{0}^{1} (\lambda p(x)) dx = \lambda \int_{0}^{1} p(x) dx = \lambda I(p(x))\)
+		      \end{enumerate}
+		\item Shift: \(S \in \sL(\FF^{\infty}, \FF^{\infty})\)
+		      \begin{align*}
+			      S \colon \FF^{\infty}  & \to \FF^{\infty}                  \\
+			      (x_{1}, x_{2}, \ldots) & \mapsto (0, x_{1}, x_{2}, \ldots)
+		      \end{align*}
+		\item \(T \colon \RR^{3} \to \RR^{2}\)
+		      \begin{align*}
+			      T \colon \RR^{3}      & \to \RR^{2}                  \\
+			      (x_{1}, x_{2}, x_{3}) & \mapsto (5x + 7y - z, 2x -y)
+		      \end{align*}
+	\end{enumerate}
+}
+
+\mclm{Properties}{
+
+	Remember our notation:
+
+	\[
+		\sL(V, W) = \left\{ T \colon V \to W \mid T \text{ is linear} \right\}
+	\]
+
+	The set \(\sL(V, W)\) can be given the structure of a vector space over \(\FF\).
+
+	\begin{enumerate}[label=(\roman*)]
+		\item Addition: Let \(T, S \in \sL(V, W)\). Where \(T \colon V \to W\) and \(S \colon V \to W\).
+
+		      \begin{align*}
+			      (T + S) \colon V & \to W                   \\
+			      v                & \mapsto T(v) +_{W} S(v)
+		      \end{align*}
+
+		      if and only if \((S + T)(v) = S(v) +_{W} T(v)\) for all \(v \in V\).
+		\item Multiplication: Let \(T \in \sL(V, W)\) and \(\lambda \in \FF\). With \(T \colon V \to W\).
+
+		      \begin{align*}
+			      (\lambda T) \colon V & \to W                          \\
+			      v                    & \mapsto \lambda \cdot_{W} T(v)
+		      \end{align*}
+
+		      If and only if \((\lambda T)(v) = \lambda \cdot_{W} T(v)\) for all \(v \in V\).
+		\item Bonus structure!
+
+		      We can also multiply linearly maps using function composition:
+
+		      \[
+			      U \overbrace{\to}^{T} V \overbrace{\to}^{S} W
+		      \]
+
+		      Thus, we can define \((S \cdot T)(u) = S(T(u))\).
+
+		      Propositions of composition:
+		      \begin{enumerate}
+			      \item Associativity: \(U \overbrace{\to}^{T_1} V \overbrace{\to}^{T_2} W \overbrace{\to}^{T_3} X\)
+
+			            \[
+				            T_3 \cdot (T_2 \cdot T_1) = (T_3 \cdot T_2) \cdot T_1
+			            \]
+			      \item Identities: \(T \colon V \to W\)
+
+			            \begin{align*}
+				            \text{id}_{V} \colon V & \to V     \\
+				            v                      & \mapsto v \\
+				            \text{id}_{W} \colon W & \to W     \\
+				            w                      & \mapsto w
+			            \end{align*}
+
+			            Thus, \(\text{id}_{W} \cdot T = T = T \cdot \text{id}_{V}\).
+			      \item Distributivity: \(S_1, S_2 \colon V \to W\) and \(T \colon W \to X\)
+
+			            \[
+				            T \cdot (S_1 + S_2) = T \cdot S_1 + T \cdot S_2
+			            \]
+
+		      \end{enumerate}
+
+	\end{enumerate}
+}
+
+\mclm{Important}{
+	Say \(V\) is a finite dimensional vector space over \(\FF_{1}\), and \(\vec{v_1}, \ldots, \vec{v_n} \) is a basis for \(V\) .
+
+	Then a linear map \(T \colon V \to W\) is determined by the values \(T(\vec{v_1}), \ldots, T(\vec{v_n})\).
+
+	\mclm{Reason}{
+		Let \(\vec{v}  \in V = \operatorname{span}\left( \vec{v_1}, \ldots, \vec{v_n}  \right) \).
+
+		This implies that \(\vec{v} = \lambda_1 \vec{v_1} + \cdots + \lambda_n \vec{v_n} \) for some and unique \(\lambda_1, \ldots, \lambda_n \in \FF\).
+
+		Then:
+
+		\begin{align*}
+			T(\vec{v} ) & = T(\lambda_1 \vec{v_1} + \cdots + \lambda_n \vec{v_n} )   \\
+			            & = T(\lambda_1 \vec{v_1}) + \cdots + T(\lambda_n \vec{v_n}) \\
+			            & = \lambda_1 T(\vec{v_1}) + \cdots + \lambda_n T(\vec{v_n})
+		\end{align*}
+	}
+}
+
+\thm{Axler 3.5}{
+
+	Now suppose that \(\vec{w_1}, \ldots, \vec{w_n} \in  W\), not necessarily a basis.
+
+	Then there is exactly one linear map \(T \colon V \to W\) mapping
+
+	the basis \(\vec{v_1}, \ldots, \vec{v_n} \) to the vectors \(\vec{w_1}, \ldots, \vec{w_n} \) respectively.
+
+	Meaning that \(T(\vec{v_i}) = \vec{w_i}\) for all \(i = 1, \ldots, n\).
+
+	Again: \(\vec{v} \in V, \vec{v} = \lambda_1 \vec{v_1} + \cdots + \lambda_n \vec{v_n} \).
+
+	Then:
+
+	\[
+		T(\vec{v} ) = T(\lambda_1 \vec{v_1} + \cdots + \lambda_n \vec{v_n} ) = \lambda_1 T(\vec{v_1}) + \cdots + \lambda_n T(\vec{v_n}) = \lambda_1 \vec{w_1} + \cdots + \lambda_n \vec{w_n}
+	\]
+}
+
+\section{Null spaces and Ranges}
+
+\dfn{Kernels or null spaces}{
+	Let \(T \colon V \to W\) be a linear map.
+
+	The kernel (null spaces) of \(T\) is \(\ker T \coloneq \left\{ \vec{v}  \in V \colon T(\vec{v} ) = \vec{0}_{W}  \right\} \)
+
+	\nt{The image on our canvas page is this definition.}
+
+	\nt{
+		We know that \(T(\vec{0}_{V}) = \vec{0}_{W}\), so \(\vec{0}_{V} \in \ker T\).
+	}
+
+}
+
+\ex{}{
+	\begin{enumerate}[label=(\alph*)]
+		\item \(\ker(0) = V\)
+
+		      \begin{align*}
+			      0 \colon V & \to W         \\
+			      v          & \mapsto 0_{W}
+		      \end{align*}
+		\item \(\ker(\text{id}_{V}) = \left\{ \vec{0}_{V} \right\} \)
+
+		      \begin{align*}
+			      \text{id}_{V} \colon V & \to V     \\
+			      v                      & \mapsto v
+		      \end{align*}
+		\item
+		      \begin{align*}
+			      D \colon P(\RR) & \to P(\RR)         \\
+			      p(x)            & \mapsto p\prime(x)
+		      \end{align*}
+
+		      Then:
+
+		      \begin{align*}
+			      \ker D & = \left\{ p(x) \in P(\RR) \colon p\prime(x) = 0 \right\} \\
+			             & = \left\{ p(x) \in P(\RR) \colon p(x) = a_{0} \right\}   \\
+			             & = \left\{ a_{0} \colon a_{0} \in \RR \right\}            \\
+			             & = \RR
+		      \end{align*}
+		\item Shift
+
+		      \begin{align*}
+			      S \colon \FF^{\infty}  & \to \FF^{\infty}           \\
+			      (x_{1}, x_{2}, \ldots) & \mapsto (x_2, x_3, \ldots)
+		      \end{align*}
+
+		      Then:
+
+		      \begin{align*}
+			      \ker S & = \left\{ (x_{1}, x_{2}, \ldots) \in \FF^{\infty} \mid (x_{2}, x_3, \ldots) = \vec{0}_{\FF^{\infty}} \right\} \\
+			             & = \left\{ (x_1, 0, 0, \ldots) \in \FF^{\infty} \mid x_1 \in \FF \right\}
+		      \end{align*}
+	\end{enumerate}
+}
+
+\mprop{}{
+	In general, \(\ker T\) is a subspace of \(V\).
+
+	\pf{Proof}{
+		Let \(T \colon V \to W\) be a linear map.
+
+		Now we want to check 1.34:
+
+		\begin{enumerate}[label=(\roman*)]
+			\item \(T(\vec{0}_{V}) \in \ker T\) as \(T(\vec{0}_{V}) = \vec{0}_{W}\).
+
+			\item Closed under addition: Let \(\vec{u}, \vec{v} \in \ker T \subseteq V\).
+
+			      We want to show that \(\vec{u} +_{V} \vec{v} \in \ker T\).
+
+			      \begin{align*}
+				      T(\vec{u} +_{V} \vec{v} ) & = T(\vec{u} ) +_{W} T(\vec{v} ) \\
+				                                & = \vec{0}_{W} +_{W} \vec{0}_{W} \\
+				                                & = \vec{0}_{W}
+			      \end{align*}
+
+			      Thus, \(\vec{u} +_{V} \vec{v} \in \ker T\).
+			\item Closed under scalar multiplication: Let \(\vec{u} \in \ker T\) and \(\lambda \in \FF\).
+
+			      We want to show that \(\lambda \cdot_{V} \vec{u} \in \ker T\).
+
+			      \begin{align*}
+				      T(\lambda \cdot_{V} \vec{u} ) & = \lambda \cdot_{W} T(\vec{u} ) \\
+				                                    & = \lambda \cdot_{W} \vec{0}_{W} \\
+				                                    & = \vec{0}_{W}
+			      \end{align*}
+
+			      Thus, \(\lambda \cdot_{V} \vec{u} \in \ker T\).
+		\end{enumerate}
+
+		Therefore, \(\ker T\) is a subspace of \(V\).
+
+	}
+
+}
+
+\dfn{Injective}{
+A linear map is injective if:
+
+\[
+	\underbrace{T(\vec{u} )}_{\text{equal outputs}} = T(\vec{v} ) \underbrace{\implies}_{\text{must come from}} \underbrace{u = v}_{\text{equal inputs}}
+\]
+
+The cont appositive:
+
+\[
+	\underbrace{u \neq v}_{\text{unequal inputs}} \implies \underbrace{T(\vec{u} ) \neq T(\vec{v} )}_{\text{unequal outputs}}
+\]
+}
+
+\mprop{}{
+	Let \(T \colon V \to W\) be a linear map.
+
+	Then T is injective if and only if \(\ker T = \left\{ \vec{0}_{V} \right\} \).
+
+	\pf{Proof of \(\implies\) }{
+		Assume \(T \colon V \to W\) is injective.
+
+		We know that \(\vec{0}_{V} \in \ker T\).
+
+		We want to show that \(\ker T \subseteq \left\{ \vec{0}_{V} \right\} \).
+
+		Let \(\vec{v} \in \ker T\).
+
+		Then \(T(\vec{v} ) = T(\vec{0}_{V} + \vec{0}_{V}) = T(\vec{0}_{V} ) + T(\vec{0}_{V} ) = \vec{0}_{W} + \vec{0}_{W} = \vec{0}_{W}\).
+	}
+
+	\pf{Proof of \(\impliedby\) }{
+
+		We are given that \(\ker T = \left\{ \vec{0}_{V} \right\} \).
+
+		We want to show that \(T\) is injective.
+
+		Suppose \(T(\vec{u} ) = T(\vec{v} )\).
+
+		Then \(T(\vec{u} ) - T(\vec{v} ) = \vec{0}_{W}\).
+
+		By linearity, \(T(\vec{u} - \vec{v} ) = \vec{0}_{W}\).
+
+		Thus, \(\vec{u} - \vec{v} \in \ker T\).
+
+		This means that \(\vec{u} - \vec{v} = \vec{0}_{V}\).
+
+		Therefore, \(\vec{u} - \vec{v} = \vec{0}_{V} \implies \vec{u} = \vec{v}\).
+
+	}
+
+	As we have proven both directions, we have proven the proposition.
+}
+
+\dfn{Images}{
+	Let \(T \in \sL(V, W)\). Then the image of \(T\) is \(Im(T) = \left\{ w \in W \mid w = T(v) \text{ for some } v \in V \right\} \).
+
+	Also denoted as \(\operatorname{Range}\left( T \right) \).
+
+	It is a subspace of \(W\) (Axle 3.19)
+}
+
+\ex{}{
+	\begin{enumerate}[label=(\roman*)]
+		\item \(Im(0) = \left\{ \vec{0}_{W} \right\} \)
+
+		      \begin{align*}
+			      0 \colon V & \to W               \\
+			      v          & \mapsto \vec{0}_{W}
+		      \end{align*}
+		\item \(Im(\text{id}_{V}) = V\)
+
+		      \begin{align*}
+			      \text{id}_{V} \colon V & \to V     \\
+			      v                      & \mapsto v
+		      \end{align*}
+		\item \(Im(D) = P(\RR)\)
+
+		      \begin{align*}
+			      D \colon P(\RR) & \to P(\RR)         \\
+			      p(x)            & \mapsto p\prime(x)
+		      \end{align*}
+		\item An example of polynomials with \(m = 5\)
+
+		      \begin{align*}
+			      D \colon P_{5}(\RR) & \to P_{5}(\RR)                          \\
+			                          & \text{Note: \(x^{5} \notin Im(D_{5})\)}
+		      \end{align*}
+	\end{enumerate}
+}
+
+\dfn{Surjective}{
+
+	A map \(T \colon V \to W\) is surjective if
+
+	for any \(w \in  W\) there is a \(v \in  V\) such that \(T(v) = w\).
+
+	i.e., \(T\) is surjective if (and only if) \(Im(T) = W\).
+}
+
+\thm{Rank-nullity Theorem (Fundamental Theorem of linear Maps)}{
+
+	Let \(V\) be a finite dimensional vector space over \(\FF\) and \(T \colon V \to W\) be a linear map.
+
+	Then \(Im(T)\) is a finite dimensional vector space, and
+
+	\[
+		\dim V = \dim \ker T + \dim Im(T)
+	\]
+
+	\pf{Proof}{
+
+		Let \(V\) be a finite dimensional vector space over \(\FF\) and \(\ker T \subseteq V\) be a subspace.
+
+		This means that \(\ker T\) is finite dimensional.
+
+		Let \(\vec{u_1}, \ldots, \vec{u_m} \) be a basis for \(\ker T\).
+
+		Which means that \(\vec{u_1}, \ldots, \vec{u_n} \) is linearly independent in \(\ker T\).
+
+		Therefore, it also linearly independent in \(V\).
+
+		We can extend this list to a full basis \(\vec{u_1}, \ldots, \vec{u_n}, \vec{v_1}, \ldots, \vec{v_m} \) for \(V\).
+
+		Then \(\dim V = n + m\), and \(\dim \ker T = n\)
+
+		\mclm{Claim}{
+			\(T(\vec{v_1}), \ldots, T(\vec{v_m} )\) is a basis for \(Im(T)\).
+		}
+
+		Thus, if the claim is true, then \(Im(T)\) is finite dimensional and \(\dim Im(T) = m\).
+
+		Thus, \(\dim V = \dim \ker T + \dim Im(T)\).
+
+		\pf{Proof of claim}{
+
+			We need to show that \(T(\vec{v_1}), \ldots, T(\vec{v_m} )\) is linearly independent
+
+			in \(Im(T)\) and spans \(Im(T)\).
+
+			\begin{enumerate}[label=(\roman*)]
+				\item \(Im(T) = \operatorname{span}\left( T(\vec{v_1} ) \ldots, T(\vec{v_m} ) \right) \colon \supseteq \text{ definition of span}\)
+				\item We want to prove \(\subseteq\).
+
+				      Let \(w \in Im(T)\).
+
+				      Then there is a \(v \in V\) such that \(T(v) = w\).
+
+				      We know that \(v = a_{1} \vec{u_1} + \cdots + a_{n} \vec{u_n} + b_{1} \vec{v_1} + \cdots + b_{m} \vec{v_m} \) for some \(a_{1}, \ldots, a_{n}, b_{1}, \ldots, b_{m} \in \FF\).
+
+				      Then:
+
+				      \begin{align*}
+					      T(v) = T(a_1 \vec{u_1} + \cdots + a_n \vec{u_n} + b_1 \vec{v_1} + \cdots + b_m \vec{v_m} ) & = T(a_1 \vec{v_1}) + \cdots + T(a_n \vec{v_n}) + T(b_1 \vec{v_1}) + \cdots + T(b_m \vec{v_m}) \\
+					                                                                                                 & = a_1 T(\vec{v_1}) + \cdots + a_n T(\vec{v_n}) + b_1 T(\vec{v_1}) + \cdots + b_m T(\vec{v_m}) \\
+					                                                                                                 & \text{we know that \(T(\vec{u_1}) = \cdots = T(\vec{u_n}) = \vec{0}_{W}\)}                    \\
+					                                                                                                 & = b_1 T(\vec{v_1}) + \cdots + b_m T(\vec{v_m})                                                \\
+					                                                                                                 & \in \operatorname{span}\left( T(\vec{v_1}), \ldots, T(\vec{v_m}) \right)
+				      \end{align*}
+
+				      Thus, this shows that \(Im(T) \subseteq \operatorname{span}\left( T(\vec{v_1}), \ldots, T(\vec{v_m}) \right)\).
+
+				\item \(T(\vec{v_1}), \ldots, T(\vec{v_m} )\) are linearly independent in \(Im(T)\) :
+
+				      Suppose that \(c_1 T(\vec{v_1}) + \cdots + c_m T(\vec{v_m}) = \vec{0}_{W}\) for some \(c_1, \ldots, c_m \in \FF\).
+
+				      Thus, \(T(c_1 \vec{v_1}) + \cdots + T(c_m \vec{v_m}) = \vec{0}_{W}\).
+
+				      Then \(T(c_1 \vec{v_1} + \cdots + c_m \vec{v_m}) = \vec{0}_{W}\).
+
+				      Hence, \(c_1 \vec{v_1} + \cdots + c_m \vec{v_m} \in \ker T = \operatorname{span}\left( \vec{u_1}, \ldots, \vec{u_n} \right)\).
+
+				      Thus, \(c_1 \vec{v_1} + \cdots + c_m \vec{v_m} = d_1 \vec{u_1} + \cdots + d_n \vec{u_n}\) for some \(d_1, \ldots, d_n \in \FF\).
+
+				      Then \(d_1 \vec{u_1} + \cdots + d_n \vec{u_n} - c_1 \vec{v_1} - \cdots - c_m \vec{v_m} = \vec{0}_{V}\).
+
+				      Since \(\vec{u_1}, \ldots, \vec{u_n}, \vec{v_1}, \ldots, \vec{v_m}\) are linearly independent in \(V\),
+
+				      it follows that \(d_1 = \cdots = d_n = c_1 = \cdots = c_m = 0\).
+
+				      Thus, \(T(\vec{v_1}), \ldots, T(\vec{v_m})\) are linearly independent in \(Im(T)\).
+			\end{enumerate}
+
+			As we have shown that \(T(\vec{v_1}), \ldots, T(\vec{v_m})\) are linearly independent in \(Im(T)\) and span \(Im(T)\), we have proven the claim.
+
+		}
+
+		Thus, we have proven the theorem.
+	}
+}
+
+\mclm{Application}{
+
+Suppose we have a system of linear equations:
+
+Variables \(x_1, \ldots, x_n\), \(a_{i,j} \in \RR\)
+
+Then we can write this as a matrix equation:
+
+\[
+	\begin{bmatrix}
+		a_{1,1} x_1 + \cdots + a_{1,n} x_n = 0_{\RR} \\
+		\vdots                                       \\
+		a_{m,1} x_1 + \cdots + a_{m,n} x_n = 0_{\RR}
+	\end{bmatrix}
+\]
+
+Thus, there are \(m\) equations.
+
+\mclm{One solution}{
+	Let \(x_1 = \cdots = x_n = 0_{\RR}\).
+
+	Then the system is satisfied.
+
+	But are there others?
+}
+
+\mclm{Rephrase}{
+	Let's rephrase this in terms of linear maps:
+
+	\[
+		T \colon \RR^{n} \to \RR^{m}
+	\]
+
+	\[
+		\begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix} \mapsto \begin{bmatrix} a_{1,1} x_1 + \cdots + a_{1,n} x_n \\ \vdots \\ a_{m,1} x_1 + \cdots + a_{m,n} x_n \end{bmatrix}
+	\]
+
+	We can check \(T\) is linear!
+
+	Thus, \(x_1 = \cdots = x_n = 0\) is \(\vec{0}_{\RR} \in \ker T\).
+
+}
+
+\mclm{Rank-nullity}{
+	By the theorem, we know that \(\underbrace{\dim \RR^{n}}_{n} = \dim \ker T + \underbrace{\dim Im(T)}_{\le m}\).
+
+	Thus, \(n \le \dim \ker T + m\).
+
+	As such, \(\dim \ker T \ge n - m\)
+
+	Suppose that \(n - m > 0\) (more variables than equations).
+
+	Therefore, \(\dim \ker T > 0\).
+
+	Meaning that there are non-zero solutions to the system of equations.
+
+}
+
+\nt{
+Is \(\ker T = \left\{ \vec{0}_{\RR^{n}}  \right\}  = \left\{ \begin{bmatrix} 0 \\ \vdots \\ 0 \end{bmatrix} \right\} \)?
+
+Or is there something else?
+}
+}
+
+\thm{}{
+	Let \(V, W\) be a finite dimensional vector space over \(\FF\) and \(\dim V > \dim W\).
+
+	Then any linear map \(T \colon V \to W\) is not injective, i.e., \(\ker T \neq \left\{ \vec{0}_{V} \right\} \).
+
+	\pf{Proof}{
+
+		\begin{align*}
+			\dim \ker T & = \dim V - \dim Im(T) \quad\text{By Rank-nullity}                                       \\
+			            & \ge \dim V - \dim W \quad\text{Since } Im(T) \subseteq W \implies \dim Im(T) \le \dim W \\
+			            & > 0 \quad\text{by hypothesis}
+		\end{align*}
+
+		Thus, \(\ker T \neq \left\{ \vec{0}_{V}  \right\} \).
+	}
+
+	\nt{
+		Going back to systems of linear equations:
+
+		\begin{align*}
+			\text{Theorem } & \implies \text{if } n > m \text{ then } T \colon \RR^{n} \to \RR^{m} \text{ is not injective} \\
+			                & \implies \ker T \neq \left\{ \vec{0}_{\RR^{n}}  \right\}                                      \\
+			                & \implies \text{there are non-zero solutions to the system of equations}
+		\end{align*}
+
+		Look at Axler 3.24 and 3.27 for more information.
+
+	}
+}
+
+\section{Matrix of a linear map}
+
+\dfn{Matrix of a linear map}{
+	Let \(V, W\) be finite dimensional vector spaces over \(\FF\), and \(T \in \sL(V, W)\).
+
+	Choose basis:
+
+	\begin{align*}
+		\vec{v_1}, \ldots, \vec{v_n} & \text{ for } V \\
+		\vec{w_1}, \ldots, \vec{w_m} & \text{ for } W
+	\end{align*}
+
+	Now, we can write:
+
+	\begin{align*}
+		T(\vec{v_1}) \in W = \operatorname{span}\left( \vec{w_1}, \ldots, \vec{w_m} \right) & \implies T(\vec{v_1}) = a_{1,1} \vec{w_1} + \cdots + a_{m,1} \vec{w_m}, a_{i,1} \in \FF \\
+		                                                                                    & \vdots                                                                                  \\
+		T(\vec{v_n}) \in W = \operatorname{span}\left( \vec{w_1}, \ldots, \vec{w_m} \right) & \implies T(\vec{v_n}) = a_{1,n} \vec{w_1} + \cdots + a_{m,n} \vec{w_m}, a_{i,n} \in \FF
+	\end{align*}
+
+	\mclm{Recall}{
+		A linear map is determined by what it does to a basis.
+	}
+
+	This implies that the array of coefficients in \(\FF\) determines \(T\):
+
+	\[
+		\begin{bmatrix}
+			a_{1,1} & \cdots & a_{1,n} \\
+			\vdots  & \ddots & \vdots  \\
+			a_{m,1} & \cdots & a_{m,n}
+		\end{bmatrix}
+	\]
+
+	This is called the matrix of \(T\), with respect to the bases \(\vec{v_1}, \ldots, \vec{v_n}\) and \(\vec{w_1}, \ldots, \vec{w_m}\).
+
+	Where, the above is an \(m \times n\) matrix, where \(m\) is the number of rows and \(n\) is the number of columns.
+
+	\nt{
+		Notation:
+
+		\begin{align*}
+			\mcM(T, (\vec{v_1}, \ldots, \vec{v_n} ), & (\vec{w_1}, \ldots, \vec{w_m} )) \text{ or } \\
+			                                         & \mcM(T)
+		\end{align*}
+	}
+}
+
+\ex{}{
+
+	Let \(T \colon \RR^{2} \to \RR^{3}\) be a linear map.
+
+	With \((x, y) \mapsto (x + 3y, 2x + 5y, 7x + 9y)\).
+
+	Choose standard bases:
+
+	\begin{align*}
+		\underbrace{(1,0)}_{V_1} \text{ and } \underbrace{(0, 1)}_{V_2}                    & \text{ for } \RR^{2} \\
+		\underbrace{(1,0,0)}_{W_1}, \underbrace{(0,1,0)}_{W_2}, \underbrace{(0,0,1)}_{W_3} & \text{ for } \RR^{3}
+	\end{align*}
+
+	Then, we can write:
+
+	\begin{align*}
+		T(v_1) = T((1,0)) = (1,2,7) & = 1 \cdot_{\RR} w_1 + 2 \cdot_{\RR} w_2 + 7 \cdot_{\RR} w_3 \\
+		T(v_2) = T((0,1)) = (3,5,9) & = 3 \cdot_{\RR} w_1 + 5 \cdot_{\RR} w_2 + 9 \cdot_{\RR} w_3
+	\end{align*}
+
+	Thus, \(\mcM(T) = \begin{bmatrix} 1 & 3 \\ 2 & 5 \\ 7 & 9 \end{bmatrix}\).
+}
+
+\ex{}{
+	Differentiation:
+
+	\begin{align*}
+		D \in \sL(P_{3}(\RR), P_{2}(\RR)) \\
+		D(p(x)) = p`(x)
+	\end{align*}
+
+	Check bases:
+
+	\begin{align*}
+		\underbrace{1, x, x^{2}, x^{3}}_{V_1, V_2, V_3, V_4} & \text{ for } P_{3}(\RR) \\
+		\underbrace{1, x, x^{2}}_{W_1, W_2, W_3}             & \text{ for } P_{2}(\RR)
+	\end{align*}
+
+	Then:
+
+	\begin{align*}
+		D(v_1) = D(1) = 0          & = 0 \cdot_{\RR} 1 + 0 \cdot_{\RR} x + 0 \cdot_{\RR} x^{2} \\
+		D(v_2) = D(x) = 1          & = 1 \cdot_{\RR} 1 + 0 \cdot_{\RR} x + 0 \cdot_{\RR} x^{2} \\
+		D(v_3) = D(x^{2}) = 2x     & = 0 \cdot_{\RR} 1 + 2 \cdot_{\RR} x + 0 \cdot_{\RR} x^{2} \\
+		D(v_4) = D(x^{3}) = 3x^{2} & = 0 \cdot_{\RR} 1 + 0 \cdot_{\RR} x + 3 \cdot_{\RR} x^{2}
+	\end{align*}
+
+	Thus,
+
+	\[
+		\mcM(D) = \begin{bmatrix} 0 & 1 & 0 & 0 \\ 0 & 0 & 2 & 0 \\ 0 & 0 & 0 & 3 \end{bmatrix}
+	\]
+}
+
+\mclm{Addition of Matrices}{
+Let \(V, W\) be finite dimensional vector spaces over \(\FF\).
+
+If \(S, T \in \sL(V, W)\), then define \(S + T \in \sL(V, W)\) by:
+
+\[
+	(S + T)(v) \coloneq S(v) + T(v)
+\]
+
+What is the matrix of \(S + T\)?
+
+Choose bases \(\vec{v_1}, \ldots, \vec{v_n} \) for \(V\) and \(\vec{w_1}, \ldots, \vec{w_m} \) for \(W\).
+
+Then:
+
+\begin{align*}
+	T(v_{k}) & = a_{1,k} \vec{w_1} + \cdots + a_{m,k} \vec{w_m}\quad 1 \le k \le n \\
+	S(v_{k}) & = b_{1,k} \vec{w_1} + \cdots + b_{m,k} \vec{w_m}\quad 1 \le k \le n
+\end{align*}
+
+Thus,
+
+\[
+	\mcM(T, \left\{ v\text{'s} \right\}, \left\{ w\text{'s} \right\}) = \begin{bmatrix} a_{1,1} & \cdots & a_{1,n} \\ \vdots & \ddots & \vdots \\ a_{m,1} & \cdots & a_{m,n} \end{bmatrix}
+\]
+
+And,
+
+\[
+	\mcM(S, \left\{ v\text{'s} \right\}, \left\{ w\text{'s} \right\}) = \begin{bmatrix} b_{1,1} & \cdots & b_{1,n} \\ \vdots & \ddots & \vdots \\ b_{m,1} & \cdots & b_{m,n} \end{bmatrix}
+\]
+
+Therefore:
+
+\begin{align*}
+	(S + T)(v_{k}) & = S(v_{k}) + T(v_{k})                                                                                 \\
+	               & = (b_{1,k} \vec{w_1} + \cdots + b_{m,k} \vec{w_m}) + (a_{1,k} \vec{w_1} + \cdots + a_{m,k} \vec{w_m}) \\
+	               & = (a_{1,k} + b_{1,k}) \vec{w_1} + \cdots + (a_{m,k} + b_{m,k}) \vec{w_m}
+\end{align*}
+
+Thus,
+
+\[
+	\mcM(S + T, \left\{ v\text{'s} \right\}, \left\{ w\text{'s} \right\}) = \begin{bmatrix} a_{1,1} + b_{1,1} & \cdots & a_{1,n} + b_{1,n} \\ \vdots & \ddots & \vdots \\ a_{m,1} + b_{m,1} & \cdots & a_{m,n} + b_{m,n} \end{bmatrix}
+\]
+
+So we define addition of matrices so that:
+
+\[
+	\mcM(S) \underbrace{+}_{\text{we defined this!}} \mcM(T) \coloneq \mcM(S +_{\sL(V, W)} T)
+\]
+}
+
+\mclm{Scalar Multiplication}{
+	Let \(T \in \sL(V, W)\) with bases \(\vec{v_1}, \ldots, \vec{v_n} \) for \(V\) and \(\vec{w_1}, \ldots, \vec{w_m} \) for \(W\).
+
+	Remember that \(M(T) = M(T, (\vec{v_1}, \ldots, \vec{v_n} ), (\vec{w_1}, \ldots, \vec{w_m} ))\).
+
+	This looks like:
+
+	\[
+		\begin{bmatrix} a_{1,1} & \cdots & a_{1,n} \\ \vdots & \ddots & \vdots \\ a_{m,1} & \cdots & a_{m,n} \end{bmatrix}
+	\]
+
+	i.e,. \(T(\vec{v_{k}}) = a_{1,k} \vec{w_1} + \cdots + a_{m,k} \vec{w_m}\).
+
+	Then, for \(\lambda \in \FF\), we define \(\lambda T \in \sL(V, W)\) by:
+
+	\[
+		\lambda \cdot M(T) \coloneq M(\lambda T)
+	\]
+
+	We compute:
+
+	\begin{align*}
+		(\lambda \cdot T)(\vec{v_k} ) & \coloneq \lambda \cdot T(\vec{v_k} )                                                                                                                                              \\
+		                              & = \lambda \cdot (a_{1,k} \vec{w_1} + \cdots + a_{m,k} \vec{w_m})                                                                                                                  \\
+		                              & \implies M(\lambda \cdot  T) = \begin{bmatrix} \lambda a_{1,1} & \cdots & \lambda a_{1,n} \\ \vdots & \ddots & \vdots \\ \lambda a_{m,1} & \cdots & \lambda a_{m,n} \end{bmatrix}
+	\end{align*}
+
+	In other words:
+
+	\[
+		\lambda \cdot \begin{bmatrix} a_{1,1} & \cdots & a_{1,n} \\ \vdots & \ddots & \vdots \\ a_{m,1} & \cdots & a_{m,n} \end{bmatrix} = \begin{bmatrix} \lambda \lambda a_{1,1} & \cdots & \lambda a_{1,n} \\ \vdots & \ddots & \vdots \\ \lambda a_{m,1} & \cdots & \lambda a_{m,n} \end{bmatrix}
+	\]
+}
+
+\mclm{Notational shift}{
+	Let \(F^{m,n} \coloneq \left\{ m\times n \text{ matrices with entries in } \FF\right\} \)
+
+	Having addition + scalar multiplication implies that \(F^{m,n}\) is a vector space over \(\FF\).
+
+	Soon: \(F^{m,n} \cong \sL(\FF^{n}, \FF^{m})\).
+}
+
+\mclm{Composition of maps}{
+
+	\[
+		U \xrightarrow{S} V \xrightarrow{T} Z
+	\]
+
+	Now pick bases: \(\vec{u_1}, \ldots, \vec{u_p} \) for \(U\), \(\vec{v_1}, \ldots, \vec{v_n} \) for \(V\), and \(\vec{w_1}, \ldots, \vec{w_m} \) for \(W\).
+
+	Let \(j = 1, \ldots, p\) and \(k = 1, \ldots, n\).
+
+	Then:
+
+	\begin{align*}
+		S(\vec{u_j} ) & = b_{1,j} \vec{v_1} + \cdots + b_{n,j} \vec{v_n} \\
+		T(\vec{v_k} ) & = a_{1,k} \vec{w_1} + \cdots + a_{m,k} \vec{w_m}
+	\end{align*}
+
+	Now remember, \(M(S, (\vec{u_1}, \ldots, \vec{u_p} ), (\vec{v_1}, \ldots, \vec{v_n} )) = M(S)\)
+
+	\[
+		M(S) = \begin{bmatrix} b_{1,1} & \cdots & b_{1,p} \\ \vdots & \ddots & \vdots \\ b_{n,1} & \cdots & b_{n,p} \end{bmatrix}
+	\]
+
+	And \(M(T, (\vec{v_1}, \ldots, \vec{v_n} ), (\vec{w_1}, \ldots, \vec{w_m} )) = M(T)\)
+
+	\[
+		M(T) = \begin{bmatrix} a_{1,1} & \cdots & a_{1,n} \\ \vdots & \ddots & \vdots \\ a_{m,1} & \cdots & a_{m,n} \end{bmatrix}
+	\]
+
+	Now, let's define \(M(T) \cdot M(S) \coloneq M(T \circ S)\)
+
+	What is \(M(T \circ S)\)?
+
+	We know that \(T \circ S \in \sL(U, W)\) with bases \(\vec{u_1}, \ldots, \vec{u_p} \) for \(U\) and \(\vec{w_1}, \ldots, \vec{w_m} \) for \(W\).
+
+	Let's look how the \(j^{\text{th}}\) column of \(M(T \circ S)\) is determined by \(M(S)\) and \(M(T)\).
+
+	\begin{align*}
+		(T \circ S)(\vec{u_j} ) & = T(S(\vec{u_j} ))                                                                                                                                 \\
+		                        & = T(b_{1,j} \vec{v_1} + \cdots + b_{n,j} \vec{v_n})                                                                                                \\
+		                        & = b_{1,j} T(\vec{v_1} ) + \cdots + b_{n,j} T(\vec{v_n} ) \quad\text{by linearity}                                                                  \\
+		                        & = b_{1,j} (a_{1,1} \vec{w_1} + \cdots + a_{m,1} \vec{w_m}) + \cdots + b_{n,j} (a_{1,n} \vec{w_1} + \cdots + a_{m,n} \vec{w_m})                     \\
+		                        & = (a_{1,1} \cdot b_{1,j} + \cdots + a_{1,n} \cdot b_{n,j}) \vec{w_1} + \cdots + (a_{m,1} \cdot b_{1,j} + \cdots + a_{m,n} \cdot b_{n,j}) \vec{w_m}
+	\end{align*}
+
+	All told:
+
+	\[
+		(T \circ S)(\vec{u_{j}} ) = \left( \sum_{k=1}^{n} a_{1,k} \cdot b_{k,j} \right) \vec{w_1} + \left( \sum_{k=1}^{n} a_{2,k} \cdot b_{k,j} \right) \vec{w_2} + \cdots + \left( \sum_{k=1}^{n} a_{m,k} \cdot b_{k,j} \right) \vec{w_m}
+	\]
+
+	So for the \(j^{\text{th}}\) column of \(M(T \circ S)\), we have:
+
+	\[
+		M(T \circ S, (\vec{u_1}, \ldots, \vec{u_p} ), (\vec{w_1}, \ldots, \vec{w_m} )) = \begin{bmatrix} \sum_{k=1}^{n} a_{1,k} \cdot b_{k, j}\\ \sum_{k=1}^{n} a_{2,k} \cdot b_{k, j}\\ \vdots \\ \sum_{k=1}^{n} a_{m,k} \cdot b_{k, j} \end{bmatrix}
+	\]
+
+	Thus, the \(ij\)-th entry of \(M(T \circ S)\) is \(\sum_{k=1}^{n} a_{i,k} \cdot b_{k,j}\).
+
+	So the matrix multiplication looks like:
+
+	\[
+		\underbrace{\left[ a_{i,j}\right]}_{m\times n \text{ matrix}} \cdot \underbrace{\left[ b_{i,j}\right]}_{n\times p \text{ matrix}} = \underbrace{\left[ \sum_{k=1}^{n} a_{i,k} \cdot b_{k,j}\right]}_{m\times p \text{ matrix}}
+	\]
+}
+
+\thm{Matrix multiplication is associative}{
+	Let \(A = \begin{pmatrix} a_{1,1} & \cdots & a_{1,n} \\ \vdots & \ddots & \vdots \\ a_{m,1} & \cdots & a_{m,n} \end{pmatrix} \), where \(a_{i,j} \in \RR\).
+
+	\begin{align*}
+		T_{A}                                                                       & \colon \RR^{n}                                                        \to \RR^{m} \\
+		e_{k} = \underbrace{(0, \ldots, 1, \ldots, 0)}_{k^{\text{th}}\text{ place}} & \mapsto (a_{1,k}, a_{2,k}, \ldots, a_{m,k})                                       \\
+		A = M(T_{A}, \text{standard basis of }                                      & \RR^{2}, \text{standard basis of } \RR^{m})
+	\end{align*}
+
+	Let \(A, B, C\) be matrices with \(m \times n, n \times p, p \times r\) dimensions respectively with entries in \(\RR\).
+
+	Then:
+
+	\[
+		A \cdot (B \cdot C) = (A \cdot B) \cdot C
+	\]
+
+	\pf{Proof}{
+		Let
+
+		\begin{align*}
+			T_{A} & \colon \RR^{m} \to \RR^{n} \\
+			A     & = M(T_{A})                 \\
+			T_{B} & \colon \RR^{n} \to \RR^{p} \\
+			B     & = M(T_{B})                 \\
+			T_{C} & \colon \RR^{p} \to \RR^{r} \\
+			C     & = M(T_{C})
+		\end{align*}
+
+		Then:
+
+		\begin{align*}
+			A \cdot (B \cdot C) & = M(T_{A}) \cdot (M(T_{B}) \cdot M(T_{C})) \\
+			                    & = M(T_{A}) \cdot M(T_{B} \circ T_{C})      \\
+			                    & = M(T_{A} \circ (T_{B} \circ T_{C}))       \\
+			                    & = M((T_{A} \circ T_{B}) \circ T_{C})       \\
+			                    & = M(T_{A} \circ T_{B}) \cdot  M(T_{C})     \\
+			                    & = (M(T_{A}) \cdot M(T_{B})) \cdot M(T_{C}) \\
+			                    & = (A \cdot B) \cdot C
+		\end{align*}
+	}
+
+}
+
+\section{Invertible Linear Maps}
+
+\dfn{Invertible}{
+	\(T\) is invertible if there is a \(S \in \sL(W, V)\) such that \(T \circ S = Id_{W}\) and \(S \circ T = Id_{V}\).
+
+	Then we declare \(S \coloneq\) the inverse of \(T\), and write \(S = T^{-1}\).
+
+	Inverses if they exist are unique.
+
+	\mclm{Reason}{
+		Say \(S_1, S_2 \in \sL(W, V)\) are inverses for \(T \in \sL(V, W)\).
+
+		Then:
+
+		\begin{align*}
+			S_1 & = S_1 \circ Id_{W} \underbrace{=}_{\text{since \(S_{2}\) is an inverse }} S_1 \circ (T \circ S_2) \\
+			    & = (S_1 \circ T) \circ S_2 \underbrace{=}_{\text{since \(S_{1}\) is an inverse }} Id_{V} \circ S_2 \\
+			    & = S_2
+		\end{align*}
+
+	}
+}
+
+\thm{}{
+	Let \(T \in \sL(V, W)\) is invertible if and only if \(T\) is bijective (injective and surjective).
+
+	\pf{Proof of \(\implies\) }{
+
+		Say that \(T \in \sL(V, W)\) is invertible. Let \(T^{-1} \colon W \to V\) be the inverse.
+
+		\begin{enumerate}[label=(\roman*)]
+			\item \(T\) is injective: Suppose that for some \(u, v \in V\), we have \(T(u) = T(v)\).
+
+			      Then:
+
+			      \[
+				      u = T^{-1}(T(u)) = T^{-1}(T(v)) = v
+			      \]
+
+			\item \(T\) is surjective: Let \(w \in W\) be arbitrary.
+
+			      \[
+				      w = T(T^{-1}(w)) \implies w \in Im(T)
+			      \]
+
+			      So \(W \subseteq Im(T)\).
+		\end{enumerate}
+
+		Thus, \(T\) is bijective.
+
+	}
+
+	\pf{Proof of \(\impliedby\) }{
+
+		Say that \(T \in \sL(V, W)\) is bijective i.e., \(T\) is injective and surjective.
+
+		Let's construct an inverse:
+
+		\begin{align*}
+			S \colon W                             & \to V                       \\
+			w          \text{ the unique } v \in V & \text{ such that } T(v) = w
+		\end{align*}
+
+		Thus, the existence of \(v\) is guaranteed by surjectivity.
+
+		And the uniqueness of \(v\) is guaranteed by injectivity.
+
+		\mclm{Check}{
+			We have three things to check:
+
+			\begin{enumerate}[label=(\roman*)]
+				\item \(T \circ S = Id_{W}\) i.e., \(T(S(w)) = w\) for all \(w \in W\).
+
+				      Then \(T(S(w)) = T(v)\) where \(v \in V\) is the unique vector such that \(T(v) = w\).
+
+				      Thus, \(T(S(w)) = w\).
+				\item \(S \circ T = Id_{v}\). We want \(S(T(v)) = v\) for all \(v \in V\).
+
+				      \begin{align*}
+					      T(S(T(v))) & = (T \circ (S \circ T))(v) \quad\text{\(T\)  injective} \\
+					                 & = ((T \circ S) \circ T)(v) \quad \implies S(T(v)) = v   \\
+					                 & = (T \circ S)(T(v))                                     \\
+					                 & = Id_{W}(T(v))                                          \\
+					                 & = T(v)
+				      \end{align*}
+				\item We need to check that \(S\) is linear.
+
+				      \begin{enumerate}[label=(\alph*)]
+					      \item Additivity:
+
+					            One on hand we have:
+
+					            \begin{align*}
+						            T(S(w_1) + S(w_2)) & = T(S(w_1)) + T(S(w_2)) \quad\text{\(T\) is linear} \\
+						                               & = Id_{W}(w_1) + Id_{W}(w_2)                         \\
+						                               & = w_1 + w_2
+					            \end{align*}
+
+					            On the other hand:
+
+					            \begin{align*}
+						            T(S(w_1) + S(w_2)) & = (T \circ S)(w_1 + w_2) \\
+						                               & = Id_{W}(w_1 + w_2)      \\
+						                               & = w_1 + w_2
+					            \end{align*}
+
+					            As \(T\) is injective, we know that \(S(w_1) + S(w_2) = S(w_1 + w_2)\).
+
+					      \item Homogeneity:
+					            So on one hand we have:
+
+					            \begin{align*}
+						            T(\lambda \cdot S(w)) & = \lambda \cdot T(S(w))        \\
+						                                  & = \lambda \cdot (T \circ S)(w) \\
+						                                  & = \lambda \cdot Id_{W}(w)      \\
+						                                  & = \lambda \cdot w
+					            \end{align*}
+
+					            On the other hand:
+
+					            \begin{align*}
+						            T(S(\lambda \cdot w)) & = (T \circ S)(\lambda \cdot w) \\
+						                                  & = Id_{W}(\lambda \cdot w)      \\
+						                                  & = \lambda \cdot w
+					            \end{align*}
+
+					            Since \(T\) is injective, we know that \(S(\lambda \cdot w) = \lambda \cdot S(w)\).
+
+				      \end{enumerate}
+
+			\end{enumerate}
+		}
+	}
+
+	As we have proven both directions, we have proven the theorem.
+
+}
+
+\dfn{}{
+	An invertible linear map \(T \in \sL(V, W)\) is called an isomorphism between \(V\) and \(W\).
+
+	Notation: \(V \cong W\).
+}
+
+\mprop{}{
+	Say \(V, W\) are finite dimensional vector spaces over \(\FF\), and \(V \cong W\).
+
+	Then \(\dim V = \dim W\).
+
+	\pf{Proof}{
+		If \(V \cong W\), then there is an invertible linear map \(T \colon V \to W\).
+
+		By the rank-nullity theorem, we know that:
+
+		\begin{align*}
+			\dim V & = \dim \ker T + \dim Im(T)                                              \\
+			       & \text{ Since \(T\) is invertible, we know that \(\dim \ker T = 0\)}     \\
+			       & = 0 + \dim Im(T)                                                        \\
+			       & \text{ Since \(T\) is surjective, we know that \(\dim Im(T) = \dim W\)} \\
+			       & = 0 + \dim W                                                            \\
+			       & = \dim W
+		\end{align*}
+	}
+
+}
+
+\mclm{Converse is also true (Axler 3.5)}{
+
+	If \(V, W\) are finite dimensional vector spaces over \(\FF\) and \(\dim V = \dim W\), then \(V \cong W\).
+
+	\pf{Proof}{
+		Let \(\vec{v_1}, \ldots, \vec{v_n} \) be a basis for \(V\).
+
+		And let \(\vec{w_1}, \ldots, \vec{w_n} \) be a basis for \(W\).
+
+		Define a linear map \(T \colon V \to W\) by setting \(T(\vec{v_i} ) = \vec{w_i}, 1 \le i \le n\).
+
+		\mclm{\(T\) is surjective}{
+			Let \(\vec{w} \in W\) be arbitrary.
+
+			Then:
+
+			\begin{align*}
+				\vec{w} & = a_{1} \vec{w_1} + \cdots + a_{n} \vec{w_n}, a_{i} \in \FF \\
+				        & = a_1 T(\vec{v_1} ) + \cdots + a_n T(\vec{v_n} )            \\
+				        & = T(a_1 \vec{v_1}) + \cdots + T(a_n \vec{v_n})              \\
+				        & = T(a_1 \vec{v_1} + \cdots + a_n \vec{v_n})                 \\
+			\end{align*}
+
+			This implies that \(w \in Im T\), so \(W \subseteq Im T\).
+
+			Thus, \(T\) is surjective.
+		}
+
+		\mclm{\(T\) is injective}{
+
+			By rank-nullity, we know that:
+
+			\begin{align*}
+				\dim V & = \dim \ker T + \dim Im(T)                                                \\
+				       & = \text{ since \(T\) is surjective, we know that \(\dim Im(T) = \dim W\)} \\
+				       & \implies \dim \ker T = 0 \quad\text{ since \(\dim V = \dim W\)}           \\
+				       & \implies \ker T = \left\{ \vec{0}_{V}  \right\}
+			\end{align*}
+
+			Thus, \(T\) is injective.
+		}
+
+		Thus, we have shown that \(T\) is bijective, and thus \(T\) is an isomorphism.
+
+	}
+}
+
+\ex{}{
+	We know that \(P_{3}(\CC)\) and \(\CC^{4}\) are isomorphic.
+
+	\mclm{Proof gives us}{
+		\begin{align*}
+			T \colon  1 & \mapsto (1, 0, 0, 0) \\
+			x           & \mapsto (0, 1, 0, 0) \\
+			x^{2}       & \mapsto (0, 0, 1, 0) \\
+			x^{3}       & \mapsto (0, 0, 0, 1)
+		\end{align*}
+
+		Under this map, for some \(a_0, a_1, a_2, a_3 \in \CC\), we have:
+
+		\begin{align*}
+			T(a_0 + a_1 x + a_2 x^{2} + a_3 x^{3}) & = a_0 T(1) + a_1 T(x) + a_2 T(x^{2}) + a_3 T(x^{3})                                                 \\
+			                                       & = a_0 \cdot (1, 0, 0, 0) + a_1 \cdot (0, 1, 0, 0) + a_2 \cdot (0, 0, 1, 0) + a_3 \cdot (0, 0, 0, 1) \\
+			                                       & = (a_0, a_1, a_2, a_3)
+		\end{align*}
+	}
+}
+
+\ex{}{
+
+	Let \(V, W\) be finite dimensional vector spaces over \(\FF\).
+
+	Choose bases \(\vec{v_1}, \ldots, \vec{v_n} \) for \(V\) and \(\vec{w_1}, \ldots, \vec{w_m} \) for \(W\).
+
+	Let's define:
+
+	\begin{align*}
+		M: \sL(V, W) & \to F^{m,n}                                                                    \\
+		T            & \mapsto M(T, (\vec{v_1}, \ldots, \vec{v_n} ), (\vec{w_1}, \ldots, \vec{w_m} ))
+	\end{align*}
+
+	Now, recall that \(M\) is linear since:
+
+	\begin{align*}
+		M(T +_{\sL(V, W)} S)           & = M(T) +_{\FF^{m,n}} M(S)        \\
+		M(\lambda \cdot_{\sL(V, W)} T) & = \lambda \cdot_{\FF^{m,n}} M(T)
+	\end{align*}
+
+	Now, by Axler 3.60, \(M\) is an isomorphism.
+
+	By PSET \(6\), \(\dim F^{m,n} = mn\).
+
+	This implies that \(\dim \sL(V, W) = \dim V \cdot \dim W\).
+
+}
+
+\dfn{Endomorphisms (Linear opeartions)}{
+	A linear map: \(T \colon V \to V\) is called an endomorphism or a linear operation of \(V\).
+
+	\mclm{Notation}{
+		\(\sL(V) \coloneq \sL(V, V)\)
+	}
+
+}
+
+\ex{}{
+	Here are some examples:
+	\begin{enumerate}[label=(\roman*)]
+		\item \begin{align*}
+			      T: P(\RR) & \to P(\RR)         \\
+			      p(x)      & \mapsto x^{2} p(x)
+		      \end{align*}
+
+		      Note, that this map is injective but not surjective.
+		\item
+		      \begin{align*}
+			      S \colon \CC^{\infty}   & \to \CC^{\infty}           \\
+			      (x_1, x_2, x_3, \ldots) & \mapsto (x_2, x_3, \ldots)
+		      \end{align*}
+
+		      Note, that this map is surjective but not injective.
+	\end{enumerate}
+}
+
+\thm{}{
+	Let \(V\) be a finite dimensional vector space over \(\FF\).
+
+	Let \(T \in \sL(V)\).
+
+	Then the following are equivalent:
+
+	\begin{enumerate}[label=(\roman*)]
+		\item \(T\) is injective
+		\item \(T\) is surjective
+		\item \(T\) is invertible
+	\end{enumerate}
+
+	We are going to prove \((i) \implies (ii) \implies (iii) \implies (i)\).
+
+	\pf{Proof of \((iii) \implies (i)\) }{
+		We have already proven this in class.
+
+	}
+
+	\pf{Proof of \((i) \implies (ii)\) }{
+
+		Assume that \(T\) is injective.
+
+		Then, we know that \(\ker T = \left\{ \vec{0}_{V}  \right\} \)
+
+		By rank-nullity, we know that \(\dim V = \dim \ker T + \dim Im(T)\).
+
+		Thus, \(\dim V = 0 + \dim Im(T)\), so \(\dim V = \dim Im(T)\).
+
+		Since \(T \in \sL(V)\), we know that \(Im(T) \subseteq V\).
+
+		By Axler 2.C.1, we know that \(Im(T) = V\).
+
+		Thus, \(T\) is surjective.
+	}
+
+	\pf{Proof of \((ii) \implies (iii)\) }{
+
+		Now assume that \(T\) is surjective.
+
+		Then \(Im(T) = V\)
+
+		By rank-nullity, we know:
+
+		\begin{align*}
+			\dim V & = \dim \ker T + \dim Im(T)                                                                       \\
+			       & = \dim \ker T + \dim V                                                                           \\
+			       & \implies \dim \ker T = 0                                                                         \\
+			       & \implies \ker T = \left\{ \vec{0}_{V}  \right\}                                                  \\
+			       & \implies T \text{ is injective} \implies T \text{ is bijective} \implies T \text{ is invertible}
+		\end{align*}
+
+		Thus, \(T\) is invertible as desired.
+
+	}
+
+	As we have proven all three directions, we have proven the theorem.
+}
+
+\cor{}{
+
+	If \(T : \RR^{n} \to \RR^{n}\) is linear, then:
+
+	\[
+		T \text{ is invertible } \iff T \text{ is injective } \iff T \text{ is surjective}
+	\]
+}
+
+\qs{}{
+
+	Show that, given \(q(x) \in P(\RR)\), there exists another polynomial \(p(x)\) such that:
+
+	\[
+		q(x) = \left[ \left( x^{2} + 2x + 3 \right) \cdot p(x) \right]^{\prime\prime}
+	\]
+}
+
+\sol{
+	First, make everything finite-dimensional. Say \(q(x)\) has degree \(m\).
+
+	Now let's define:
+
+	\begin{align*}
+		T \colon P_{m}(\RR) & \to P_{m}(\RR)                                                                 \\
+		p(x)                & \mapsto \left[ \left( x^{2} + 2x + 3 \right) \cdot p(x) \right]^{\prime\prime}
+	\end{align*}
+
+	Exercise: Show that \(T\) is linear.
+
+	We want to show that \(T\) is surjective.
+
+	\mclm{Claim}{
+		\(T\) is injective
+
+		\pf{Proof of claim}{
+			The kernel consists of \(p(x)\) such that \(\left[ \left( x^{2} + 2x + 3 \right) \cdot p(x) \right]^{\prime\prime} = 0\).
+
+			Thus, it must have the form \(\left[ ax + b \right]^{\prime}\).
+
+			Thus, we need \(\left( x^{2} + 2x + 3 \right) \cdot p(x)\) to have the form \(ax + b\).
+
+			\begin{align*}
+				\deg((x^{2} + 2x + 3) \cdot p(x)) & \geq 2 \text{ as long as } p(x) \neq 0 \\
+				\deg(ax + b)                      & \le 1
+			\end{align*}
+
+			Thus, the only way for this to be true is if \(\ker T = \left\{ 0_{P_{m}(\RR)} \right\}\).
+
+			This implies that \(T\) is injective.
+
+			Then, by the previous theorem, we know that if \(T\) is injective, then \(T\) is surjective.
+
+			Thus, given \(q(x) \in P(\RR)\), there exists another polynomial \(p(x)\) such that \(T(p(x)) = q(x)\).
+
+			Therefore, \(\left[ \left( x^{2} + 2x + 3 \right) \cdot p(x) \right]^{\prime\prime} = q(x)\).
+
+		}
+	}
+
+}
+
+\mclm{Linear Maps as Matrix multiplication}{
+
+	Let \(V\) be a finite dimensional vector space over \(\FF\).
+
+	Let \(\vec{v_1}, \ldots, \vec{v_n} \) be a basis for \(V\).
+
+	Now for any \(v \in V\), we can write for some scalars \(c_1, \ldots, c_n \in \FF\):
+
+	\[
+		v = c_1 \vec{v_1} + \cdots + c_n \vec{v_n}
+	\]
+
+	Let's define:
+
+	\[
+		M(v) \coloneq \begin{bmatrix} c_1 \\ \vdots \\ c_n \end{bmatrix}
+	\]
+
+	\ex{}{
+		Let \(V = P_{3}(\RR)\) with basis \(1, x, x^{2}, x^{3}\).
+
+		Then,
+
+		\[
+			v = 2 - 7x + 5x^{3} = 2 \cdot 1 - 7 \cdot x + 0 \cdot x^{2} + 5 \cdot x^{3}
+		\]
+
+		Or in other words:
+
+		\[
+			M(v) = \begin{bmatrix} 2 \\ -7 \\ 0 \\ 5 \end{bmatrix}
+		\]
+
+	}
+
+	Note: \(M(v_{0} + w_{0}) = M(v_{0}) + M(w_{0})\) and \(M(\lambda v) = \lambda M(v)\).
+
+	Say that \(T \in \sL(V, W)\).
+
+	Let \(\vec{w_1}, \ldots, \vec{w_m} \) be a basis for \(W\).
+
+	Then, for any \(v \in V\), we can write:
+
+	\[
+		M(T(u)) = M(T) \cdot M(u)
+	\]
+
+	In other words, linear maps act like matrix multiplication.
+
+	We can say:
+
+	\[
+		M(T, (\vec{v_1}, \ldots, \vec{v_n} ), (\vec{w_1}, \ldots, \vec{w_m} )) = \begin{bmatrix}  a_{1,1} & \cdots & a_{1,n} \\ \vdots & \ddots & \vdots \\ a_{m,1} & \cdots & a_{m,n} \end{bmatrix}
+	\]
+
+	Then:
+
+	\begin{align*}
+		T(v) & = T(c_1 \vec{v_1} + \cdots + c_{n} \vec{v_n})    \\
+		     & = c_1 T(\vec{v_1}) + \cdots + c_{n} T(\vec{v_n}) \\
+	\end{align*}
+
+	Which implies \(M(T(v)) = c_1 M(T(\vec{v_1})) + \cdots + c_{n} M(T(\vec{v_n}))\).
+
+	On the other hand, we have:
+
+	\[
+		T(v_{k}) = a_{1,k} \vec{w_1} + \cdots + a_{m,k} \vec{w_m}
+	\]
+
+	Now, \(M(T(v_{k})\) is the \(k^{\text{th}}\) column of \(M(T)\).
+
+	\[
+		\begin{bmatrix} a_{1,k} \\ \vdots \\ a_{m,k} \end{bmatrix}
+	\]
+
+	Thus, we have:
+
+	\[
+		M(T(v)) = \begin{bmatrix} c_1 a_{1,1} \\ \vdots \\ c_1 a_{m,1} \end{bmatrix} + \cdots + \begin{bmatrix} c_{n} a_{1,n} \\ \vdots \\ c_{n} a_{m,n} \end{bmatrix} = \begin{bmatrix} c_1 a_{1,1} + \cdots + c_{n} a_{1,n} \\ \vdots \\ c_1 a_{m,1} + \cdots + c_{n} a_{m,n} \end{bmatrix} = M(T) \cdot M(v)
+	\]
+}
+
+\mclm{Row Reduction \(I\)  over \(\FF\) }{
+System of \(m\) linear equations with \(n\) unknowns: \(x_1, \ldots, x_{n}\)
+
+\[
+	\begin{bmatrix} a_{1,1}x_1 + \ldots + a_{1,n}x_n = b_1 \\ \vdots \\ a_{m,1}x_1 + \ldots + a_{m,n}x_n = b_m \end{bmatrix}, \quad a_{i,j}, b_{k} \in \FF
+\]
+
+Which can be written as a Matrix:
+
+\[
+	\underbrace{\begin{bmatrix} a_{1,1} & \ldots & a_{1,n} \\ \vdots & \ddots & \vdots \\ a_{m,1} & \ldots & a_{m,n} \end{bmatrix} }_{A \in \FF^{m,n}} \underbrace{\begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix}}_{\vec{x} \in \FF^{n,1}} = \underbrace{\begin{bmatrix} b_1 \\ \vdots \\ b_m \end{bmatrix}}_{\vec{b} \in \FF^{m,1}}
+\]
+
+Then we can define:
+
+\begin{align*}
+	T_{A}: \FF^{n} & \mapsto \FF^{m} \quad\text{linear map} \\
+	\vec{x}        & \mapsto A\vec{x} = \vec{b}
+\end{align*}
+
+Question is: \(I\)s \(\begin{pmatrix} b_1 \\ \vdots \\ b_m \end{pmatrix} \in \operatorname{image}(T_A)\)?
+
+Row operations are used on the augmented matrix:
+
+\[
+	\left[ A \mid B \right] = \left[ \begin{array}{cccc|c} a_{1,1} & a_{1,2} & \ldots & a_{1,n} & b_1 \\ \vdots & \vdots & \ddots & \vdots & \vdots \\ a_{m,1} & a_{m,2} & \ldots & a_{m,n} & b_m \end{array} \right] \in \FF^{m, n+1}
+\]
+
+to simplify the original systems of equations.
+
+Need elementary matrices to express row operations: \(E \in \FF^{m, m}\)
+
+Thus, we get three types:
+
+\begin{enumerate}[label=(\roman*)]
+	\item Where \(a \in \FF\) is in position \(i,j\)
+	      \[
+		      E = \begin{bmatrix} 1 & & \\ & \ddots & a \\ & & 1 \end{bmatrix} \text{ or } \begin{bmatrix} 1 & & \\ & \ddots & \\ & a & 1 \end{bmatrix}
+	      \]
+
+	      Which means \(E \cdot A\) : modify \(A\) by adding \(a \cdot \left( \text{row } j\right) \) to row \(i\).
+	\item
+
+	      Given:
+
+	      \begin{align*}
+		      a_{i,i} & \mapsto 0 & a_{i,j} & \mapsto 1 \\
+		      a_{j,j} & \mapsto 0 & a_{j,i} & \mapsto 1 \\
+	      \end{align*}
+
+	      Then:
+	      \[
+		      E = \begin{bmatrix} 1 & & & & & & \\ & \ddots & & & & & \\ & & 0 & & 1 & & \\ & & & \ddots & & & \\ & & 1 & & 0 & & \\ & & & & & \ddots & \\ & & & & & & 1 \end{bmatrix}
+	      \]
+
+	      Thus, \(E \cdot A\): modify \(A\) by exchanging rows \(i\) and \(j\).
+
+	\item Given: \(a_{i,i} \mapsto c \in \FF, c \neq 0\)
+
+	      Thus,
+
+	      \[
+		      E = \begin{bmatrix} 1 & & & & \\ & \ddots & & & \\ & & c & & \\ & & & \ddots & \\ & & & & 1 \end{bmatrix}
+	      \]
+
+	      Meaning, \(E \cdot A\): modify \(A\) by multiplying row \(i\) by \(c\).
+\end{enumerate}
+}
+
+\ex{}{
+	\begin{enumerate}[label=(\roman*)]
+		\item
+
+		      \[
+			      \underbrace{\begin{bmatrix} 1 & 7 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}}_{E_{(i)}} \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9 \end{bmatrix} = \begin{bmatrix} 29 & 37 & 45 \\ 4 & 5 & 6 \\ 7 & 8 & 9 \end{bmatrix}
+		      \]
+		\item
+
+		      \[
+			      \underbrace{\begin{bmatrix} 0 & 0 & 1 \\ 0 & 1 & 0 \\ 1 & 0 & 0 \end{bmatrix}}_{E_{(ii)}} \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9 \end{bmatrix} = \begin{bmatrix} 7 & 8 & 9 \\ 4 & 5 & 6 \\ 1 & 2 & 3 \end{bmatrix}
+		      \]
+		\item
+
+		      \[
+			      E = \underbrace{\begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 3 \end{bmatrix}}_{E_{(iii)}} \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9 \end{bmatrix} = \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 21 & 24 & 27 \end{bmatrix}
+		      \]
+	\end{enumerate}
+}
+
+\mlenma{}{
+Elementary matrices are invertible:
+
+if \(E\) is an elementary matrix, then there exists a matrix \(E^{-1}\) such that \(E \cdot E^{-1} = E^{-1} \cdot E = I\).
+
+\pf{Proof}{
+By EXAMPLES LOl:
+
+\[
+	\begin{bmatrix} 1 & 7 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}^{-1} = \begin{bmatrix} 1 & -7 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}
+\]
+\[
+	\begin{bmatrix}  0 & 0 & 1 \\ 0 & 1 & 0 \\ 1 & 0 & 0 \end{bmatrix}^{-1} = \begin{bmatrix} 0 & 0 & 1 \\ 0 & 1 & 0 \\ 1 & 0 & 0 \end{bmatrix}
+\]
+
+\[
+	\begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 3\end{bmatrix}^{-1} = \begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & \frac{1}{3} \end{bmatrix}
+\]
+}
+}
+
+\mclm{Upshot}{
+Elementary row operations \(\xLeftrightarrow{\text{1-1}}\) Elementary matrices.
+
+\ex{}{
+\begin{align*}
+	A = \begin{bmatrix} 1 & 1 & 2 & 1 & 5 \\ 1 & 1 & 2 & 6 & 10 \\ 1 & 2 & 5 & 2 & 7 \end{bmatrix} & \xrightarrow{-R_{1} + R_{2} \mapsto R_{2}} \begin{bmatrix} 1 & 1 & 2 & 1 & 5 \\ 0 & 0 & 0 & 5 & 5 \\ 1 & 2 & 5 & 2 & 7 \end{bmatrix}                \\
+	                                                                                               & \xrightarrow{-R_{1} + R_{3} \mapsto R_{3}} \begin{bmatrix} 1 & 1 & 2 & 1 & 5 \\ 0 & 0 & 0 & 5 & 5 \\ 0 & 1 & 3 & 1 & 2 \end{bmatrix}                \\
+	                                                                                               & \xrightarrow{R_2 \leftrightarrow R_3} \begin{bmatrix} 1 & 1 & 2 & 1 & 5 \\ 0 & 1 & 3 & 1 & 2 \\ 0 & 0 & 0 & 5 & 5 \end{bmatrix}                     \\
+	                                                                                               & \xrightarrow{\frac{1}{5}R_3 \mapsto R_3} \begin{bmatrix} 1 & 1 & 2 & 1 & 5 \\ 0 & 1 & 3 & 1 & 2 \\ 0 & 0 & 0 & 1 & 1 \end{bmatrix}                  \\
+	                                                                                               & \xrightarrow{-R_2 + R_1 \mapsto R_1} \begin{bmatrix} 1 & 0 & -1 & 0 & 3 \\ 0 & 1 & 3 & 1 & 2 \\ 0 & 0 & 0 & 1 & 1 \end{bmatrix}                     \\
+	                                                                                               & \xrightarrow{-R_3 + R_2 \mapsto R_2} \begin{bmatrix} 1 & 0 & -1 & 0 & 3 \\ 0 & 1 & 3 & 0 & 1 \\ 0 & 0 & 0 & 1 & 1 \end{bmatrix} \coloneq A^{\prime}
+\end{align*}
+
+In other words:
+
+\[
+	A^{\prime} = \begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & -1 & 0 & 0 & 1 \end{bmatrix} \cdot \underbrace{\begin{bmatrix} 1 & -1 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1\end{bmatrix}}_{-R_2 + R_1 \mapsto R_1}
+\]
+
+\nt{
+	I didn't finish the above but therey are equal
+}
+
+Solving systems of linear equations:
+
+\[
+	\underbrace{A}_{\FF^{m,m}} \cdot  \underbrace{\vec{x} }_{\FF^{n}} = \underbrace{B_{\FF^{m}}}
+\]
+
+Meaning that the augmented matrix \(M = \left[ A \mid B \right]\)
+
+\begin{align*}
+	M^{\prime} & = \underbrace{E_{k} \cdot \ldots \cdot E_{1}}_{\text{elementary matrices } (m \times m)} \cdot M                                                                                                                                                                                                              \\
+	           & = \left[ A^{\prime} \mid B^{\prime} \right] = \left[ \begin{array}{cccc|c} a_{1,1}^{\prime} & a_{1,2}^{\prime} & \ldots & a_{1,n}^{\prime} & b_1^{\prime} \\ \vdots & \vdots & \ddots & \vdots & \vdots \\ a_{m,1}^{\prime} & a_{m,2}^{\prime} & \ldots & a_{m,n}^{\prime} & b_m^{\prime} \end{array} \right]
+\end{align*}
+
+Important: \(\star \left\{ \vec{x} \in \FF^{n} \mid A \cdot \vec{x} = B\right\}  = \left\{ \vec{x} \in \FF^{n} \mid A^{\prime} \cdot \vec{x} = B^{\prime}\right\} \)
+
+Meaning, the solutions to our original system of equations are the same as the solutions to our modified system of equations.
+
+\pf{Proof}{
+Let \(P = E_{k} \cdot \ldots \cdot E_{1}\) is invertible.
+
+Where, \(P^{-1} = E_{1}^{-1} \cdot \ldots \cdot E_{k}^{-1}\)
+
+And \(I = P^{-1} \cdot P = E_{1}^{-1} \cdot \ldots \cdot E_{k}^{-1} \cdot E_{k} \cdot \ldots \cdot E_{1}\)
+
+Say \(\vec{x} \in \text{LHS of } \star\):
+
+Where \(M^{\prime} = P \cdot M = \left[ \underbrace{P * A}_{A^{\prime}}  \mid \underbrace{P * B}_{B^{\prime}}\right] \)
+
+\begin{align*}
+	A \cdot \vec{x}          & = B                              \\
+	P \cdot A \cdot \vec{x}  & = P \cdot B                      \\
+	A^{\prime} \cdot \vec{x} & = B^{\prime}                     \\
+	                         & \implies \vec{x} \in \text{RHS.}
+\end{align*}
+
+Use \(P^{-1}\) to show the other direction.
+}
+}
+}
+
+\mclm{(Reduced) Row-Echelon form}{
+	Notation: \(M \in \FF^{m, n}\), write \(M_{i}\) for the \(i\)th row of \(M\).
+}
+
+\dfn{}{
+	\(M \in \FF^{m, n}\) is in (reduced ) row-echelon form if:
+
+	\begin{enumerate}[label=(\roman*)]
+		\item If \(M_{i} = (0, \ldots, 0)\) then \(M_{j} = (0, \ldots, 0)\) for all \(j > i\).
+		\item If \(M_{i} \neq (0, \ldots, 0)\), then the left most nonzero entry is a \(1\) (pivot).
+		\item If \(M_{i + 1} \neq (0, \ldots, 0)\) as well, then the pivot in \(M_{i + 1}\) is to the right of the pivot in \(M_{i}\).
+		\item The entries above and below a pivot are \(0\).
+	\end{enumerate}
+}
+
+\ex{}{
+	Think \(\FF = \QQ, \RR, \text{or } \CC\).
+	\[
+		\begin{bmatrix} 1 & 0 & -1 & 0 & 3 \\ 0 & 1 & 3 & 0 & 1 \\ 0 & 0 & 0 & 1 & 1 \\ 0 & 0 & 0 & 0 & 0 \end{bmatrix}
+	\]
+}
+
+\thm{}{
+	Let \(M \in \FF^{m, n}\). There is a sequence of elementary row operations, \(E_{k}, \ldots, E_{1}\),
+
+	such that \(M' = E_{k} \cdot \ldots \cdot E_{1} \cdot M\) is in row-echelon form.
+
+	\(M'\) is unique.
+}
+
+\mclm{Solving systems of linear equations using Row-Echelon matrices }{
+
+Sat \(A \cdot  \vec{x}  = B \implies M = \left[ A \mid B \right]\)
+
+Suppose that the row-echelon form of \(M\) is:
+
+\[
+	M^{\prime} = [A' \mid B'] = \left[ \begin{array}{cccc|c} 1 & 6 & 0 & 1 & 3 \\ 0 & 0 & 2 & 0 & 0 \\ 0 & 0 & 0 & 0 & 1  \end{array} \right]
+\]
+
+This would imply that:
+
+\begin{align*}
+	A' \cdot  \vec{x} = & B' \\
+	x_1 + 6x_2 + x_4 =  & 0  \\
+	x_{3} + 2x_{4} =    & 0  \\
+	0 =                 & 1
+\end{align*}
+
+Thus, there are no solutions.
+
+If instead we had:
+
+\[
+	M^{'} = [A' \mid B'] = \left[ \begin{array}{cccc|c} 1 & 6 & 0 & 1 & 1 \\ 0 & 0 & 1 & 2 & 3 \\ 0 & 0 & 0 & 0 & 0  \end{array} \right]
+\]
+
+Thus would imply that:
+
+\begin{align*}
+	x_1 + 6x_2 + x_4 = & 1 \\
+	x_3 + 2x_4 =       & 3 \\
+	0 =                & 0
+\end{align*}
+
+Thus, we have solutions!
+
+Let \(x_{2} = a\) and \(x_{4} = b\) be constants. Solve for pivot variables:
+
+\begin{align*}
+	x_1              & = 1 - 6a - b                                        \\
+	x_3              & = 3 - 2b                                            \\
+	\implies \vec{x} & = (x_1, x_2, x_3, x_4) = (1 - 6a - b, a, 3 - 2b, b)
+\end{align*}
+
+In general:
+
+Let \(M' = [A' \mid B']\) be in row-echelon form.
+
+\begin{enumerate}[label=(\roman*)]
+	\item \(A' \cdot \vec{x}  = B'\) has no solutions \(B\) contains a pivot.
+	\item If \(B'\) has no pivot:
+	      \begin{enumerate}[label=(\alph*)]
+		      \item Give the non=pivotal variables constant values.
+		      \item Solve for pivot variables.
+	      \end{enumerate}
+\end{enumerate}
+}
+
+\mlenma{}{
+
+	Let \(\vec{x_{s}}\) be a solution to \(T(\vec{x}) = \vec{b} \).
+
+	Where \(T\) is a linear map that maps \(\vec{x} \in \RR^{n}\) to \(\vec{b} \in \RR^{m}\) by a matrix \(A\): \(T(\vec{x}) = A \cdot \vec{x}\).
+
+	Then, if there are other solutions, \(\vec{x_{\star}}\), to \(T(\vec{x}) = \vec{b} \),
+
+	Then there exists an \( \vec{x_{k}} \in \ker T\) such that every other solution is given by:
+
+	\[
+		\vec{x_{\star}} = \vec{x_{s}} + \vec{x_{k}}
+	\]
+
+	\pf{Proof}{
+
+		We know \(T(\vec{x_{s}}) = \vec{b}\) and \(T(\vec{x_{\star}}) = \vec{b}\) as they are solutions to \(T(\vec{x}) = \vec{b}\). Consider, \(T(\vec{x_{\star}} - \vec{x_{s}})\).
+
+		Then, by the fact that \(T\) is a linear map, the following is true:
+
+		\[
+			T(\vec{x_{\star}} - \vec{x_{s}}) = T(\vec{x_{\star}}) - T(\vec{x_{s}}) = \vec{b} - \vec{b} = \vec{0}\].
+
+		Therefore, \(\vec{x_{\star}} - \vec{x_{s}} \in \ker T\).
+
+		Thus, there exists \(\vec{x_{k}} \in \ker T\) such that \(\vec{x_{k}} = \vec{x_{\star}} - \vec{x_{s}}\).
+
+		By definition, \(T(\vec{x_{k}}) = 0\), meaning it is a solution to \(T(\vec{x}) = \vec{0}\).
+
+		Thus, every other solution to \(T(\vec{x}) = \vec{b}\) is given by a solution, \(\vec{x_{s}}\) plus a solution to \(T(\vec{x}) = \vec{0}\), \(\vec{x_{k}}\).
+	}
+
+}
+
+
+\mclm{Connection to linear maps}{
+
+	Let \(A \in \RR^{m, n}\).
+
+	Then:
+
+	\begin{align*}
+		T_{A} \colon \RR^{n} & \to \RR^{m}             \\
+		\vec{x}              & \mapsto A \cdot \vec{x}
+	\end{align*}
+
+	Remember:
+	\begin{align*}
+		e_1, \ldots, e_n & \text{ standard basis for } \RR^{n}  \\
+		f_1, \ldots, f_m & \text{ standard basis for } \RR^{m}  \\
+		f_1              & = \underbrace{(1, 0, \ldots, 0)}_{m}
+	\end{align*}
+
+	We can write:
+
+	\(A = M(T_{A}, (e_1, \ldots, e_n), (f_1, \ldots, f_m))\)
+
+	\begin{align*}
+		\ker T_{A} & = \left\{ \vec{x} \in \RR^{n} \mid A \cdot \vec{x} = \vec{0}_{\RR^{m}} \right\}                                                   \\
+		           & = \left\{ \vec{x} \in \RR^{n} \mid A' \cdot \vec{x} = \vec{0}_{\RR^{m}} \right\} \text{ where } A' \text{ is in row-echelon form} \\
+		           & = \ker T_{A'}
+	\end{align*}
+
+	\ex{}{
+		Let:
+
+		\[
+			A' = \begin{bmatrix} 1 & 6 & 0 & 1 \\ 0 & 0 & 1 & 2 \\ 0 & 0 & 0 & 0 \end{bmatrix} \in \RR^{3, 4}
+		\]
+
+		This implies:
+
+		\begin{align*}
+			A' \cdot \vec{x} & = \vec{0}_{\RR^{3}} \\
+			x_1 + 6x_2 + x_4 & = 0                 \\
+			x_3 + 2x_4       & = 0                 \\
+			0                & = 0
+		\end{align*}
+
+		Non-pivot variables \(x_2\) and \(x_4\) are free variables.
+
+		Say \(x_{2} = a\) and \(x_{4} = b\) are constants.
+
+		Then solve for pivot variables:
+
+		\begin{align*}
+			x_1 = -6a - b \\
+			x_3 = -2b     \\
+		\end{align*}
+
+		Solutions:
+
+		\[
+			(x_1, x_2, x_3, x_4) = (-6a - b, a, -2b, b) = a(-6, 1, 0, 0) + b(-1, 0, -2, 1)
+		\]
+
+		So \(\ker T_{A'} = \ker T_{A} = \left\{ (-6a - b, a, -2b, b) \mid a, b \in \RR \right\} \subseteq \RR^{4}\).
+
+		\begin{align*}
+			a = 1, b = 0 & \implies (-6, 1, 0, 0)  \\
+			a = 0, b = 1 & \implies (-1, 0, -2, 1)
+		\end{align*}
+
+		Thus:
+
+		\begin{align*}
+			T_{A} & = \operatorname{span}\left( (-6, 1, 0, 0), (-1, 0, -2, 1) \right)   \\
+			      & = \operatorname{span}\left( -6e_1 + e_2, -e_1 - 2e_3 + e_4 \right).
+		\end{align*}
+	}
+}
+
+\mclm{Images}{
+	Given \(T_{A} : \RR^{n} \to \RR^{m}\).
+
+	Compute a basis \(\vec{v_1}, \ldots, \vec{v_r} \) for the kernel.
+
+	Let \(i_1, \ldots, i_{n-r}\)be the indices of the pivot columns of \(A'\)
+
+	\mclm{Claim}{
+		\(\vec{v_1}, \ldots, \vec{v_n}, e_{i}, \ldots, e_{n - r}\) is a basis for \(\RR^{n}\) (see notes).
+	}
+
+	Assume claim.
+
+	Proof of rank-nullity shows that \( T(e_{i}), \ldots T(e_{n - r})\) is a basis for \(Im(T_{A})\).
+
+	\ex{}{
+		\[
+			A = \begin{bmatrix} 1 & 1 & 2 & 1 \\ 1 & 1 & 2 & 6 \\ 1 & 2 & 5 & 2 \end{bmatrix}
+		\]
+		This implies: \(T_{A} : \RR^{4} \to \RR^{3}\).
+
+		Row-echelon form of \(A\) is:
+
+		\[
+			A' = \begin{bmatrix} 1 & 0 & -1 & 0 \\ 0 & 1 & 3 & 0 \\ 0 & 0 & 0 & 1 \end{bmatrix}, i_{1} = 1, i_{2} = 2, i_{3} = 4
+		\]
+
+		\begin{align*}
+			Im_{T} & = \operatorname{span}\left( T_{A}(e_1), T_{A}(e_{2}), T_{A}(e_{4})\right)                                                                                                       \\
+			       & = \operatorname{span}\left( 1 \cdot f_{1} + 1 \cdot f_{2} + 1 \cdot f_{3}, 1 \cdot f_{1} + 1 \cdot f_{2} + 2 \cdot f_{3}, 1 \cdot f_{1} + 6 \cdot f_{2} + 2 \cdot f_{3} \right)
+		\end{align*}
+	}
+
+}
+
+\dfn{Elementary matrices + invertibility}{
+	\(A \in \FF^{m,n}\) is invertible if there is a \(B \in \FF^{n,m}\) such that:
+
+	\[
+		A \cdot B = B \cdot A = I_{n} = \begin{bmatrix} 1 & & \\ & \ddots & \\ & & 1 \end{bmatrix}
+	\]
+
+	Notation: \(B = A^{-1}\).
+
+	\nt{
+		\(A \in \FF^{n,n}\) implies:
+
+		\begin{align*}
+			T_{A} \colon \FF^{n} & \to \FF^{n}             \\
+			\vec{x}              & \mapsto A \cdot \vec{x}
+		\end{align*}
+
+		\begin{enumerate}[label=(\alph*)]
+			\item \(A\) is invertible \(\iff\) \(T_{A}\) is an isomorphism.
+
+			      In this case: \((T_{A})^{-1} = T_{A^{-1}}\).
+			\item Elementary matrices are invertible.
+		\end{enumerate}
+	}
+}
+
+\thm{}{
+	Let \(A \in \FF^{n,n}\). The following are equivalent (TFAE):
+
+	\begin{enumerate}
+		\item The reduced row-echelon form of \(A\) is \(I_{n}\).
+		\item \(A = E_{k} \cdot \ldots \cdot E_{1}\) where \(E_{1}, \ldots, E_{k}\) are elementary matrices.
+		\item \(A\) is invertible.
+	\end{enumerate}
+
+	\pf{Proof of \(1 \implies 2\)}{
+		Let \(I_{n} = A' = E_{k} \cdot \ldots \cdot E_{1} \cdot A\).
+
+		Since elementary matrices are invertible: \((E_{k} \cdot \ldots \cdot E_{1})^{-1} = E_{1}^{-1} \cdot \ldots \cdot E_{k}^{-1}\).
+
+		Then, \(A = E_{1}^{-1} \cdot \ldots \cdot E_{k}^{-1}\).
+
+		But \(E_{i}^{-1}\) is elementary for \(1 \le i \le k\) are also elementary matrices.
+
+		Thus, \(A\) is a product of elementary matrices.
+	}
+
+	\pf{Proof of \(2 \implies 3\) }{
+		If \(A = E_1 \cdot \ldots \cdot E_{k}\), then \(A^{-1} = E_{k}^{-1} \cdot \ldots \cdot E_{1}^{-1}\).
+
+		Since:
+
+		\[
+			E_1 \cdot \ldots \cdot E_{k}  = A
+		\]
+		\[
+			E_{k}^{-1} \cdot \ldots \cdot E_{1}^{-1} = B = A^{-1}
+		\]
+
+		Thus:
+
+		\[
+			A \cdot B = E_1 \cdot \ldots \cdot E_{k} \cdot E_{k}^{-1} \cdot \ldots \cdot E_{1}^{-1} = I_{n}
+		\]
+
+		Thus, \(A\) is invertible.
+	}
+
+	\pf{Proof of \(3 \implies 1\) }{
+
+		Assume \(A\) is invertible.
+
+		Let \(A' = E_{k} \cdot \ldots \cdot E_{1} \cdot A\) be the row-echelon form of \(A\).
+
+		Either \(A' = I_{n}\) or the bottom row of \(A'\) is \((0, \ldots, 0)\).
+
+		If the bottom row of \(A'\) has all zeros, then:
+
+		\[
+			T_{A'} \colon \FF^{n} \to \FF^{n} \text{ is not surjective.}
+		\]
+
+		Thus, \(T_{A'}\) is not an isomorphism.
+
+		Meaning, \(A'\) is not invertible.
+
+		Therefore, \(A\) is not invertible.
+	}
+
+	\mclm{Consequence}{
+		If \(A\) is invertible, then row-reduce it to reduced row-echelon form.
+
+		Then, \(I_{n} = E_{k} \cdot \ldots \cdot E_{1} \cdot A\).
+
+		Where \(E_{k}, \ldots, E_{1} = A^{-1}\).
+	}
+}
+
+\nt{
+	Notice that we started to talk about determinants after section 3.C.
+
+	I've moved this to chapter 10 to correspond with the textbook.
+
+	Click here to go to the determinants section: \hyperref[sec:det]{Determinants}
+}
+
+\section{Products and quotients of Vector Spaces}
+
+\dfn{}{
+	Let \(V_1, \ldots, V_{m}\) be vector spaces over \(\FF\).
+
+	The the product of \(V_1, \ldots, V_{m}\) is:
+
+	\[
+		V_1 \times \ldots \times V_{m} = \left\{ (v_1, \ldots, v_{m}) \mid v_{i} \in V_{i} \text{ for } 1 \le i \le m \right\}
+	\]
+
+	I.e., think of this in terms of a cartesian product.
+}
+
+\ex{}{
+	Elements of \(\RR^{2} \times \RR^{3}\) look like:
+
+	\[
+		((3,5), (1, 0, -7.2)) \in \RR^{2} \times \RR^{3}
+	\]
+
+}
+
+\ex{}{
+	Vectors in \(P_{2}(\RR) \times \RR\) looks like:
+
+	\[
+		(-3 + x - x^{2}, (2, 7))
+	\]
+}
+
+\dfn{}{
+	Let's define vector addition + scalar multiplication on \(V_1 \times \ldots \times V_{m}\).
+
+	They are defined component-wise:
+
+	\begin{align*}
+		(v_1, \ldots, v_{m}) + (w_1, \ldots, w_{m}) & = (v_1 + w_1, \ldots, v_{m} + w_{m})               \\
+		\lambda \cdot (v_1, \ldots, v_{m})          & = (\lambda \cdot v_1, \ldots, \lambda \cdot v_{m})
+	\end{align*}
+
+	Thus, the product of \(V_1, \ldots, V_{m}\) is a vector space over \(\FF\).
+}
+
+\mprop{}{
+	If \(V_1, \ldots, V_{m}\) are finite dimensional over \(\FF\), then so is \(V_1 \times \ldots \times V_{m}\).
+
+	In fact, the dimension of \(V_1 \times \ldots \times V_{m}\) is:
+
+	\[
+		\dim(V_1 \times \ldots \times V_{m}) = \dim(V_1) + \ldots + \dim(V_{m})
+	\]
+
+	\pf{Sketch of Proof}{
+		Say \(V_{i}\) has basis \(\left\{ v_{i,1}, \ldots, v_{i, m} \right\}\) for \(1 \le i \le m\).
+
+		Then \(V_1 \times \ldots \times V_{m}\) has basis:
+
+		\[
+			\left\{ (v_{1,1}, 0, \ldots, 0), \ldots, (v_{1, m}, 0, \ldots, 0), (0, v_{2,1}, 0, \ldots, 0), \ldots, (0, v_{m, m}) \right\}
+		\]
+
+	}
+}
+
+\ex{}{
+	\(P_2(\RR) \times \RR^{2}\):
+
+	\begin{enumerate}[label=(\roman*)]
+		\item \(P_2(\RR)\) has basis \(\left\{ 1, x, x^{2} \right\}\).
+		\item \(\RR^{2}\) has basis \(\left\{ (1, 0), (0, 1) \right\}\).
+	\end{enumerate}
+
+	Which means that \(P_2(\RR) \times \RR^{2}\) has basis:
+
+	\[
+		\left\{ (1, (0, 0)), (x, (0, 0)), (x^{2}, (0, 0)), (0, (1, 0)), (0, (0, 1)) \right\}
+	\]
+}
+
+\mclm{Connection between products and direct sums}{
+	Let \(U_1, \ldots, U_{m}\) be subspaces of \(V\) over \(\FF\).
+
+	Let's define:
+
+	\[
+		\upGamma \colon U_1 \times \ldots \times U_{m} \to U_1 + \ldots + U_{m}
+	\]
+
+	So, \(\upGamma(u_1, \ldots, u_{m}) = u_1 + \ldots + u_{m}\).
+
+	Is \(\upGamma\) a linear map?
+
+	\pf{Proof of linear map}{
+		Vector addition:
+
+		\begin{align*}
+			\upGamma((v_1, \ldots, v_{m}) + (u_1, \ldots, u_{m})) & = \upGamma((v_1 + u_1, \ldots, v_{m} + u_{m}))                    \\
+			                                                      & = (v_1 + u_1) + \ldots + (v_{m} + u_{m})                          \\
+			                                                      & = (v_1 + \ldots + v_{m}) + (u_1 + \ldots + u_{m})                 \\
+			                                                      & = \upGamma((v_1, \ldots, v_{m})) + \upGamma((u_1, \ldots, u_{m}))
+		\end{align*}
+
+		Thus, it is additive.
+
+		Now, we check for homogeneity:
+
+		\begin{align*}
+			\upGamma(\lambda \cdot (v_1, \ldots, v_{m})) & = \upGamma((\lambda \cdot v_1, \ldots, \lambda \cdot v_{m})) \\
+			                                             & = \lambda \cdot v_1 + \ldots + \lambda \cdot v_{m}           \\
+			                                             & = \lambda \cdot (v_1 + \ldots + v_{m})                       \\
+			                                             & = \lambda \cdot \upGamma((v_1, \ldots, v_{m}))
+		\end{align*}
+
+		Thus, it is homogeneous.
+
+		Therefore, \(\upGamma\) is a linear map as desired.
+	}
+
+	Moreover:
+
+	\begin{enumerate}[label=(\roman*), wide]
+		\item \(\Gamma\) is surjective:
+
+		      if \(u_1 + \ldots + u_{m} \in U_1 + \ldots + U_{m}\), then \(\Gamma((u_1, \ldots, u_{m})) = u_1 + \ldots + u_{m}\).
+
+		\item \(\Gamma\) is injective \(\iff \ker(\Gamma) = \left\{ 0 \right\}\)
+
+		      If \(\Gamma((u_1, \ldots, u_{m})) = 0\), then \(u_1 + \ldots + u_{m} = 0\).
+
+		      That means the only way to write \(0\) as a sum of vectors in \(U_1, \ldots, U_{m}\) is if \(u_1 = \ldots = u_{m} = 0\).
+
+		      Or, if the sum is a direct sum: \(U_1 \oplus \ldots \oplus U_{m}\).
+	\end{enumerate}
+}
+
+\mclm{Rank nullity}{
+	We know that:
+
+	\[
+		\dim(U_1 \times \ldots \times U_{m}) = \dim Im(\Gamma) + \dim \ker(\Gamma)
+	\]
+
+	Since we know that \(\Gamma\) is surjective, \(\dim Im(\Gamma) = \dim(U_1 + \ldots + U_{m})\).
+
+	Furthermore, we know that \(\Gamma\) is injective \(\iff \ker(\Gamma) = \left\{ 0 \right\}\).
+
+	Meaning that \(\dim(U_1 \times \ldots \times U_{m}) = \dim(U_1 + \ldots + U_{m})\)
+
+	Which means that:
+
+	\[
+		\dim(U_1) + \ldots + \dim(U_{m}) = \dim(U_1 \oplus \ldots \oplus U_{m})
+	\]
+
+	Thus, we have:
+
+	If \(U_1, \ldots, U_{m}\) are finite subspaces of \(V\) over \(\FF\), then:
+
+	\[
+		U_1 + \ldots + U_{m} = U_1 \oplus \ldots \oplus U_{m} \iff \dim(U_1 + \ldots + U_{m}) = \dim(U_1) + \ldots + \dim(U_{m})
+	\]
+}
+
+\dfn{}{
+	Let \(V\) be a vector space over \(\FF\).
+
+	With \(U \subseteq V\) is a subspace.
+
+	With \(v \in V\):
+
+	\[
+		v + U = \left\{ v + u \mid u \in U \right\} \text{ "afine subset parallel to \(U\) "}
+	\]
+
+	In other words, \(v + U\) is an affine subset parallel to \(U\).
+}
+
+\ex{}{
+	\(V = \RR^{2}, U = \left\{ (x, 2x) \mid x \in \RR \right\} \).
+
+	Then \(v + U\) is the set of all lines parallel to \(U\).
+
+	Let \(v_1 = (3, 1)\) and \(v_2 = (4, 3)\).
+
+	\begin{align*}
+		v + U & = \left\{ (3, 1) + (x, 2x) \mid x \in \RR \right\} \\
+		      & = \left\{ (3 + x, 1 + 2x) \mid x \in \RR \right\}  \\
+		      & = \left\{ (4 + x, 3 + 2x) \mid x \in \RR \right\}
+	\end{align*}
+
+	So even though \(v_1 \neq v_2\) but \(v_1 + U = v_2 + U\).
+}
+
+\mlenma{}{
+
+	\begin{enumerate}[label=(\roman*)]
+		\item \(v_1 + U = v_2 + U\)
+		\item \(v_2 -v_1 \in U\)
+		\item \((v_1 + U) \cap (v_2 + U) \neq \emptyset\)
+	\end{enumerate}
+
+	\pf{Proof of \(ii \implies i\) }{
+		Let \(v \in v_1 + U\).
+
+		So \(v = v_1 + u\) for some \(u \in U\).
+
+		\begin{align*}
+			v = v_1 + u & = v_2 - v_2 - v_1 + u               \\
+			            & = v_2 + (v_1 - v_2) + u \in v_2 + U
+		\end{align*}
+
+		Similarly, \(v_2 + U \subseteq v_1 + U\).
+
+
+	}
+
+	Last time we proved: \((ii) \implies (i)\) and \((i) \implies (iii)\). Clear
+
+	\pf{Proof of \((iii) \implies (ii)\) }{
+
+		Take \(w \in (v_1 + U) \cap (v_2 + U)\).
+
+		Then \(w = v_1 + u_1\), \(w = v_2 + u_2\) for some \(u_1, u_2 \in U\).
+
+		\begin{align*}
+			\vec{0_{V}} & = (v_1 + u_1) - (v_2 + u_2) \\
+			            & = (v_1 - v_2) + (u_1 - u_2) \\
+			\implies    & v_2 - v_1 = u_1 - u_2 \in U
+		\end{align*}
+
+		Thus, we have shown that \(v_2 - v_1 \in U\).
+
+	}
+}
+
+\ex{Quotient space}{
+
+We have \(V \setminus U \coloneq \left\{ v + U \colon v \in V \right\} \).
+
+Set of affine parallel subsets to \(U\).
+
+E.g. Let \(V = \RR^{2}, U = \left\{ (x, 2x) \colon x \in \RR \right\} \).
+
+With \(V \setminus U\) = the set of all lines parallel to \(U\).
+
+Then that means that it is the set of all lines with slope \(2\).
+
+\nt{
+	An element of \(\RR^{2} \setminus U\)  is a whole line parallel to \(U\).
+}
+
+This means that \(V \setminus U \) is an \(\FF-\)vector space!
+
+Let's check addition:
+
+\[
+	(v + U) +_{V \setminus U} (w + U) = (v +_{V} w) + U
+\]
+
+Scaler multiplication
+
+\[
+	\lambda \cdot (v + U) \coloneq \lambda \cdot v + U
+\]
+
+Have to check that, e.g, addition is well defined:
+
+Say \(v_1 + U = v_2 + U\)  and \(w_1 + U = w_2 + U\).
+
+Then we need to show that:
+
+\begin{align*}
+	(v_1 + U) + (w_1 + U) & \overbrace{=}^{?} (v_2 + U) + (w_2 + U)                                         \\
+	(v_1 + w_1) + U       & \overbrace{=}^{?} (v_2 + w_2) + U                                               \\
+	                      & \iff (v_1 + w_1) - (v_2 + w_2) \in U                                            \\
+	                      & \iff \underbrace{(v_1 - v_2)}_{\in U} + \underbrace{(w_1 - w_2)}_{ \in U} \in U
+\end{align*}
+
+Which means that \(v_1 - v_2 \in U\) and \(w_1 - w_2 \in U\).
+
+We also know that scalar multiplication is well defined:
+
+Say \(v_1 + U = v_2 + U\).
+
+\begin{align*}
+	\implies & v_1 - v_2 \in U                                   \\
+	\implies & \lambda \cdot (v_1 - v_2) \in U                   \\
+	\implies & \lambda \cdot v_1 - \lambda \cdot v_2 \in U       \\
+	\implies & \lambda \cdot v_1 + U = \lambda \cdot v_2 + U     \\
+	\implies & \lambda \cdot (v_1 + U) = \lambda \cdot (v_2 + U)
+\end{align*}
+
+Let's give an example:
+
+\ex{}{
+	Let:
+
+	\begin{align*}
+		\pi : V \setminus U \\
+		v \mapsto v + U
+	\end{align*}
+
+	Check that \(\pi\) is linear.
+
+	Say \(V\) is finite dimensional, then so is \(U\).
+
+	By rank-nullity, \(\dim V = \dim \ker \pi + \dim Im(\pi)\).
+
+	\(\pi\) is surjective, which means that \(\dim Im(\pi) = \dim V \setminus U\).
+
+	But \(Im(\pi)\) is finite dimensional, which means that \(V \setminus U\) is also finite dimensional.
+
+	Let's prove it.
+
+	\begin{align*}
+		\ker \pi & = \left\{ v \in V : \pi(v) = \left\{ \vec{0_{V \setminus U}} \right\}  \right\} \\
+		         & = \left\{ v \in V \colon \pi(v) = \vec{0_{v}} + U \right\}                      \\
+		         & = \left\{ v \in V \colon v + U = U \right\}                                     \\
+		         & = \left\{ v \in V \colon v \in U \right\}                                       \\
+		         & = V \setminus U                                                                 \\
+	\end{align*}
+
+	The result follows, probably.
+}
+}
+
+\thm{1st isomorphism theorem}{
+
+	Let \(T \in \sL(V, W)\) with \(Im(T) \subseteq W\), \(\ker T \subseteq V\).
+
+	Which means that \(V \to V \setminus \ker T\).
+
+	Let's define the following:
+
+	\begin{align*}
+		\widetilde{T} : V \setminus \ker T & \to Im(T)    \\
+		v + \ker T                         & \mapsto T(v)
+	\end{align*}
+
+	\mclm{Claims}{
+		We have the following claims:
+
+		\begin{enumerate}[label=(\roman*)]
+			\item \(\widetilde{T}\) is well defined.
+
+			      If \(v_1 + \ker T = v_2 + \ker T\), then we want to show that \(\widetilde{T}(v_1 + \ker T) = \widetilde{T}(v_2 + \ker T)\).
+
+			      We have:
+			      \begin{align*}
+				      v_1 - v_2 \in \ker T       \\
+				      T(v_1 - v_2) = \vec{0_{W}} \\
+				      T(v_1) - T(v_2)
+			      \end{align*}
+
+			      Thus, it is well defined.
+			\item \(\widetilde{T}\) is linear.
+
+			      e.g., \(\widetilde{T}((v + \ker T) + (w + \ker T)) = \widetilde{T}((v + w) + \ker T)\).
+
+			      This is equal to \(T(v + w) = T(v) + T(w)\)
+
+			      Meaning that \(\widetilde{T}(v + \ker T) + \widetilde{T}(w + \ker T)\).
+
+			      We leave homogeneity as an exercise.
+
+			\item \(\widetilde{T}\) is injective!
+
+			      Say \(\widetilde{T}(v + \ker T) = \vec{0_{W}}\)
+
+			      This means that \(T(v) = \vec{0_{W}}\).
+
+			      Which implies that \(v \in \ker T\).
+
+			      Hence, \(\vec{0} + \ker T = v + \ker T\).
+
+			      This is \(\vec{0_{V \setminus \ker T}} \)
+			\item \(\widetilde{T}\) is surjective!
+
+			      Let \(w \in Im(T)\).
+
+			      Then \(w = T(v)\) for some \(v \in V\).
+
+			      Which means that \(w = \widetilde{T}(v + \ker T)\).
+		\end{enumerate}
+	}
+
+	Thus, \(\widetilde{T} \in \sL(V \setminus \ker T, Im(T))\) is an isomorphism of \(\FF\) vector spaces.
+
+	i.e.,
+
+	\[
+		V \setminus \ker T \cong Im(T)
+	\]
+}
