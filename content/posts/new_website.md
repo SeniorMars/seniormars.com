@@ -17,6 +17,20 @@ Here is my fork: [Redux](https://github.com/seniormars/redux).
 
 ---
 
+# Mermaid
+
+{% mermaid() %}
+graph LR
+    A[Start] --> B[Initialize]
+    B --> C[Processing]
+    C --> D[Complete]
+    D --> E[Success]
+    
+    style A fill:#f9f,stroke:#333
+    style E fill:#9f9,stroke:#333
+{% end %}
+
+
 ## LaTeX
 
 ### Inline Math
