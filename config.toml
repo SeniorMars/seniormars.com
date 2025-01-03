@@ -26,6 +26,7 @@ extra_syntaxes_and_themes = ["syntaxes"]
 toc = true
 use_cdn = false
 comment = false
+mermaid = true
 mathjax = true
 mathjax_extra = true
 fancy_code = true

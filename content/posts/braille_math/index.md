@@ -121,9 +121,9 @@ Then, there exists a point $ c \in [a, b] $ such that $ f(c) = 0 $.
 
 To a sighted user, this renders as an elegant tree structure, with branches clearly showing logical dependencies. But for a Braille user, this same proof needs to be transformed into a linear sequence of symbols that preserves both the logical structure and the mathematical notation. This is where modern screen readers and specialized tools come into play, each taking a different approach to this complex translation problem.
 
-## MathJax 4.0: Bridging the Divide  
+## MathJax: Bridging the Divide  
 
-MathJax 4.0 (currently in beta) marks a major leap forward. Known for rendering LaTeX and MathML on web pages, MathJax now supports Braille outputs. This means users can experience equations tactilely or through screen readers, dynamically generating representations in either Nemeth or "Euro", depending on personal preference.  
+MathJax marks a major leap forward. Known for rendering LaTeX and MathML on web pages, MathJax now supports Braille outputs. This means users can experience equations tactilely or through screen readers, dynamically generating representations in either Nemeth or "Euro", depending on personal preference.  
 
 The flexibility is remarkable – the same equation that appears visually stunning to one user can be explored in tactile form by another. This multimodal approach not only enhances accessibility but also promotes deeper engagement with mathematical content.  
 
@@ -164,7 +164,7 @@ Also, there is this cool video: {{ youtube(id="94swlF55tVc") }} that shows how a
 
 Here’s what sent me down this rabbit hole: the intersection of dyscalculia and Braille mathematics. Let me back up a bit—dyscalculia, often oversimplified as "math dyslexia," is a learning disability that affects the ability to understand and process numerical concepts. Some people seem to inherently "get" numbers, while others wrestle with even basic mathematical relationships. Dyscalculia makes those struggles neurological rather than purely educational.  
 
-While taking "Ling 327: Research in Braille," I stumbled across an idea that wouldn’t let me sleep. We know dyslexia is fundamentally neurological—it persists whether someone reads print or Braille. This hit me like a mathematical proof that just clicks: if dyslexia transcends the medium, what about dyscalculia? And more importantly, what happens when these conditions intersect with visual impairment, creating what researchers term "multiple disabled" conditions?  
+While taking "Ling 327: Research on Braille," I stumbled across an idea that wouldn’t let me sleep. We know dyslexia is fundamentally neurological—it persists whether someone reads print or Braille. This hit me like a mathematical proof that just clicks: if dyslexia transcends the medium, what about dyscalculia? And more importantly, what happens when these conditions intersect with visual impairment, creating what researchers term "multiple disabled" conditions?  
 
 The academic silence on this is almost poetic in its completeness. There's extensive research on multiple disabilities in education, yet this intersection—dyscalculia and visual impairment—remains largely unexplored. Dig through papers and databases, and you'll find studies on visual impairment and learning, or on dyscalculia in sighted learners. But the overlap? It’s a void where understanding should be.  
 
