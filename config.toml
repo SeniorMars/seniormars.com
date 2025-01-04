@@ -7,11 +7,24 @@ description = "A blog about math, extremely niche interests, and a guy having fu
 theme = "redux"
 author = "SeniorMars"
 default_language = "en"
-build_search_index = false # do want to fix this
+build_search_index = true
 generate_feeds = true
 compile_sass = true
 feed_filenames = ["rss.xml"]
 taxonomies = [{ name = "tags", feed = true, paginate_by = 10 } ]
+
+[search]
+include_title = true
+include_description = true
+include_path = true
+include_content = true
+index_format = "elasticlunr_json"
+
+[link_checker]
+internal_level = "warn"
+skip_anchor_prefixes = [
+    "https://github.com/",
+]
 
 [markdown]
 highlight_code = true
@@ -35,6 +48,7 @@ theme = "toggle"
 favicon = "/icons/favicon.ico"
 favicon_extra = true
 repo_url = "https://github.com/SeniorMars/seniormars.com/blob/main/content/"
+browser_theme_color = ["#FFFFFF", "#0E1018"]
 
 menu = [
     { name = "/posts", url = "/posts", weight = 1 },
