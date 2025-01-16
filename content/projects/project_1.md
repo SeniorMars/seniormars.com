@@ -1,6 +1,6 @@
 +++
 title = "Dotfiles"
-description = "My personal rice setup"
+description = "My personal rice setup. People care about this."
 weight = 1
 
 [extra]
