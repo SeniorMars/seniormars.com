@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+      <title>SeniorMars - life</title>
+      <link>https://seniormars.com</link>
+      <description>A blog about math, extremely niche interests, and a guy having fun.</description>
+      <generator>Zola</generator>
+      <language>en</language>
+      <atom:link href="https://seniormars.com/tags/life/rss.xml" rel="self" type="application/rss+xml"/>
+      <lastBuildDate>Thu, 27 Jun 2024 00:00:00 +0000</lastBuildDate>
+      <item>
+          <title>My life&#x27;s mission</title>
+          <pubDate>Thu, 27 Jun 2024 00:00:00 +0000</pubDate>
+          <author>SeniorMars</author>
+          <link>https://seniormars.com/posts/life-misson/</link>
+          <guid>https://seniormars.com/posts/life-misson/</guid>
+          <description xml:base="https://seniormars.com/posts/life-misson/">&lt;p&gt;I consider myself lucky; I wasn’t born with many things, but when I needed help, I had people willing to help me. Truthfully, I got to where I currently am due to some luck – that’s a privilege. Unfortunately, some people haven’t been as lucky. Look, I don’t consider myself a brilliant person – and that’s okay because I can keep learning. It’s Okay to be dumb right now, but it’s not Okay to keep being dumb – that’s how I live my life. To understand my goal, you need to know that I love learning. I’m unsure how I ended up like this, but the desire for knowledge drives all my actions. In fact, if possible, I want to be hired by a rich person to be their personal research jester. I would spend my day in their basement, and they would throw me a topic, and I would spend the day researching it (ideally with a wage and a gym, though). Despite what I just said, even if such a job existed, I would never take it because there is something more important to me. See, I don’t think you understand: I &lt;strong&gt;LOVE&lt;&#x2F;strong&gt; learning. This is why I hate, despise, and am tormented when someone doesn’t have the resources to do their best. It fills me with rage that some individuals weren’t lucky enough to write their history-shattering thoughts. Think about it. We had hundreds of years of slavery, discrimination, and even now, suppression of certain groups.&lt;&#x2F;p&gt;
+&lt;p&gt;I am filled with rage when I think how many individuals who are deviations smarter than me have existed but ended up killing their passion because they didn’t have time, luck, or the resources needed to succeed. Imagine what kind of books, papers, and projects those individuals would have created. It hurts to think about it, and I refuse to let it happen anymore. I was lucky – I fell into a group currently being oppressed, but I managed to overcome it with luck. But that’s bullshit. Both my parents never completed middle school, and my sisters are way more intelligent than I am, but I was the only one blessed with luck. I refuse any reason to understand why this is the case. Anyone who wants to learn, do their best, or prove themselves should be able to. I want to read and learn from their work, but life prevents them from doing their best. I want to change that. I will ignite change so that education is genuinely seen as a basic need. Please look forward to my work and proving my words.&lt;&#x2F;p&gt;
+</description>
+      </item>
+      <item>
+          <title>I decided to write a book</title>
+          <pubDate>Wed, 05 Jun 2024 00:00:00 +0000</pubDate>
+          <author>SeniorMars</author>
+          <link>https://seniormars.com/posts/book/</link>
+          <guid>https://seniormars.com/posts/book/</guid>
+          <description xml:base="https://seniormars.com/posts/book/">&lt;p&gt;Truth be told, this is not the first time I decided this nor will it be the last, so let’s make this short in case future me reads this with shame. In the past, when I decided to do this, I mostly &lt;em&gt;didn’t&lt;&#x2F;em&gt;. Sometimes I started, and sometimes I got a chapter done, but typically, it ended with me saying, “nah, this ain’t it.” As you can guess, I’m my worst enemy.&lt;&#x2F;p&gt;
+&lt;p&gt;Writing is scary–at least to me, and every time I get an idea I brainstorm it in my head. Usually, the idea, once conceived, goes through an extra pass in my brain until I decide this is &lt;em&gt;garbage&lt;&#x2F;em&gt;. I know, I know. I should be more kind to myself, but when most of your life is spent reading books, you end up having &lt;em&gt;expectations&lt;&#x2F;em&gt; (scary, I know) about how good a piece should be. Now, there are ideas that were good enough to pass the initial pass: a book about programming languages, one about teaching, and other about code switching. Unfortunately, when I start to write I end up with two realizations: 1) someone has already written about this in a tone and format I wished I envision, 2) I need to research more, or I lack anything meaningful to add.&lt;&#x2F;p&gt;
+&lt;p&gt;Perhaps, it’s not writing I like, but the &lt;em&gt;idea&lt;&#x2F;em&gt; of writing. I’ve always felt that with how much I read, I should at least give back and contribute to this idea of a resource. The problem was that I wanted to contribute something &lt;em&gt;great&lt;&#x2F;em&gt;. I made videos, wrote research papers, and brought proofs to life, but every time I look back, I end up wishing, “damn I could’ve done that better”. Eventually, I realized this was idiotic, since I need experience to get better and to get experience I need to start. I could end up waiting for the right moment, and it could be that it will be great, but I think future me would appreciate having a funny little thing to look back on than a potential masterpiece (please future me 😭).&lt;&#x2F;p&gt;
+&lt;p&gt;In either case, while I did resolve myself into finishing something, it took a while longer to realize what I wanted to write.  That is until I recited my favorite poem at an open mic:&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Democracy will not come&lt;br &#x2F;&gt;
+Today, this year&lt;br &#x2F;&gt;
+Nor ever&lt;br &#x2F;&gt;
+Through compromise and fear.&lt;&#x2F;p&gt;
+&lt;p&gt;I have as much right&lt;br &#x2F;&gt;
+As the other fellow has&lt;br &#x2F;&gt;
+To stand&lt;br &#x2F;&gt;
+On my two feet&lt;br &#x2F;&gt;
+And own the land.&lt;&#x2F;p&gt;
+&lt;p&gt;I tire so of hearing people say,&lt;br &#x2F;&gt;
+Let things take their course.&lt;br &#x2F;&gt;
+Tomorrow is another day.&lt;br &#x2F;&gt;
+I do not need my freedom when I’m dead.&lt;br &#x2F;&gt;
+I cannot live on tomorrow’s bread.&lt;&#x2F;p&gt;
+&lt;p&gt;Freedom&lt;br &#x2F;&gt;
+Is a strong seed&lt;br &#x2F;&gt;
+Planted&lt;br &#x2F;&gt;
+In a great need.&lt;&#x2F;p&gt;
+&lt;p&gt;I live here, too.&lt;br &#x2F;&gt;
+I want freedom&lt;br &#x2F;&gt;
+Just as you.&lt;br &#x2F;&gt;
+&lt;cite&gt;– Langston Hughes&lt;&#x2F;cite&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;Perhaps, I may be a dog-shit writer, but I do have an interesting life. The only thing is that while I have resolved myself to write something, it’s kinda &lt;em&gt;embarrassing&lt;&#x2F;em&gt; to write about myself. At the end of the day, while these feelings are true, my desire to improve and write surpasses that–and well I am minoring in creative writing. I am going to write poetry. It may not be filled with pretty words or creative formats, but it will be true to myself. I hope you guys look forward to my work.&lt;&#x2F;p&gt;
+</description>
+      </item>
+    </channel>
+</rss>

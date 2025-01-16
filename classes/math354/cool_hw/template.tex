@@ -1,0 +1,1093 @@
+\documentclass{report}
+
+\input{preamble}
+\input{macros}
+\input{letterfonts}
+
+\usepackage{emoji}
+\newcommand{\memoji}[1]{\ifmmode \text{\emoji{#1}} \else \emoji{#1} \fi}
+\newcommand{\lemoji}[2]{\foreach \index in {1,...,#2}{\memoji{#1}}}
+
+\title{\Huge{Math 354}\\Homework}
+\author{\huge{Charlie Cruz}}
+\date{}
+
+
+\begin{document}
+
+\maketitle
+
+
+\pf{Proof}{
+
+	We are told to assume the result of problem 3.D.4.
+
+	Now, since this is an if and only if, we need to prove both ways:
+
+	\pf{Proof of \(\implies\) }{
+
+		We are given that there exists invertible operators \(R \in \sL(V), S \in \sL(W)\) such that \(T_1 = ST_2R\).
+
+		As \(S\) is invertible, we know that \(S^{-1}\) exists.
+
+		Thus, we can write:
+
+		\begin{align*}
+			S^{-1}T_1 & = S^{-1}ST_2R \quad \text{Multiply both sides by \(S^{-1}\)}     \\
+			          & = T_2R \quad \text{Identity property of linear maps (Axler 3.9)}
+		\end{align*}
+
+		Thus, by problem 3.D.4, we know that \(\ker T_1 = \ker T_2R\) as \(S^{-1} \in \sL(W)\)
+
+		Now we want to show that \(\ker T_2 = \ker T_2R\).
+
+		Pick an arbitrary \(\vec{v} \in \ker T_2R\), then we know that \(T_2R(\vec{v}) = \vec{0}\).
+
+		This implies that \(T_2(R(\vec{v})) = \vec{0}\), which means that \(R(\vec{v}) \in \ker T_2\).
+
+		In other words, for all \(\vec{v} \in \ker T_2R\), \(R\) maps it to \(\ker T_2\) as invertible maps are injective (Axler 3.59).
+
+		Since \(\vec{v}\) was arbitrary, we know that \(\ker T_2R \subseteq \ker T_2\).
+
+		Pick an arbitrary \(\vec{w} \in \ker T_2\), then we know that \(T_2(\vec{w}) = \vec{0}\).
+
+		Now since \(R\) is invertible, we know that \(R^{-1}\) exists.
+
+		Let \(\vec{v} = R^{-1}(\vec{w})\), then we know that \(R(\vec{v}) = \vec{w}\).
+
+		Now, consider \(T_2R(\vec{v})\), we know that \(T_2(R(\vec{v})) = T_2(\vec{w}) = \vec{0}\).
+
+		Thus, \(R(\vec{v}) \in \ker T_2R\), which is the same as \(\vec{w} \in \ker T_2R\).
+
+		Since \(\vec{w}\) was arbitrary, we know that \(\ker T_2 \subseteq \ker T_2R\).
+
+		Therefore, we have shown that \(\ker T_2 = \ker T_2R\).
+
+		Meaning that \(\ker T_1 = \ker T_2\).
+
+		Therefore, \(\dim \ker T_1 = \dim \ker T_2\) as desired.
+
+	}
+
+	\pf{Proof of \(\impliedby\) }{
+		Suppose \(\dim T_1 = \dim T_2 = m\).
+
+		Then we can construct a basis for \(\ker T_1\) and \(\ker T_2\): \((\vec{a_1}, \ldots, \vec{a_m})\) and \((\vec{u_1}, \ldots, \vec{u_m})\) respectively.
+
+		Now extend both to a basis of \(V\) respectively: \((\vec{a_1}, \ldots, \vec{a_m}, \vec{b_1}, \ldots, \vec{b_n})\) and \((\vec{u_1}, \ldots, \vec{u_m}, \vec{v_1}, \ldots, \vec{v_n})\).
+
+		By construction, we know that \((\vec{b_1}, \ldots, \vec{b_n})\) and \((\vec{v_1}, \ldots, \vec{v_n})\) are linearly independent lists in \(V\).
+
+		\mclm{Claim}{
+			Both \(T_1(\vec{b_1}), \ldots, T_1(\vec{b_n})\) and \(T_2(\vec{v_1}), \ldots, T_2(\vec{v_n})\) are linearly independent lists in \(W\).
+
+			\pf{Proof}{
+				Suppose there exists scalars \(\lambda_1, \ldots, \lambda_n\) such that:
+
+				\[
+					\lambda_1 T_1(\vec{b_1}) + \ldots + \lambda_n T_1(\vec{b_n}) = \vec{0}
+				\]
+
+				Then by linearity of \(T_1\), we know that:
+
+				\[
+					T_1(\lambda_1 \vec{b_1} + \ldots + \lambda_n \vec{b_n}) = \vec{0}
+				\]
+
+				Therefore, \(\lambda_1 \vec{b_1} + \ldots + \lambda_n \vec{b_n} \in \ker T_1\).
+
+				By our previous construction, we know that \((\vec{a_1}, \ldots, \vec{a_m})\) is a basis for \(\ker T_1\).
+
+				Thus for some scalars \(\mu_1, \ldots, \mu_m\), we have:
+
+				\begin{align*}
+					\lambda_1 \vec{b_1} + \ldots + \lambda_n \vec{b_n}          & = \mu_1 \vec{a_1} + \ldots + \mu_m \vec{a_m}           \\
+					\implies \lambda_1 \vec{b_1} + \ldots + \lambda_n \vec{b_n} & - \mu_1 \vec{a_1} - \ldots - \mu_m \vec{a_m} = \vec{0}
+				\end{align*}
+
+				Since \((\vec{a_1}, \ldots, \vec{a_m}, \vec{b_1}, \ldots, \vec{b_n})\) is a linearly independent list in \(V\), then this implies that:
+
+				\[
+					\lambda_1 = \ldots = \lambda_n = \mu_1 = \ldots = \mu_m = 0
+				\]
+
+				Thus, the only way to get a linear combination of \(T_1(\vec{b_1}), \ldots, T_1(\vec{b_n})\) to equal \(\vec{0}\) is if all the scalars are \(0\).
+
+				Hence, \(T_1(\vec{b_1}), \ldots, T_1(\vec{b_n})\) is linearly independent.
+
+				We can show that \(T_2(\vec{v_1}), \ldots, T_2(\vec{v_n})\) is linearly independent in the same way with some minor modifications.
+
+				I'll leave it as an exercise to the reader. \lemoji{smiling-face-with-sunglasses}{10}
+
+				Thus, both lists are linearly independent in \(W\) as desired.
+			}
+
+		}
+
+		Since both lists are linearly independent in \(W\), we can extend them to a basis of \(V\):
+
+		\((T_1(\vec{b_1}), \ldots, T_1(\vec{b_n}), \vec{c_1}, \ldots, \vec{c_p})\) and \((T_2(\vec{v_1}), \ldots, T_2(\vec{v_n}), \vec{w_1}, \ldots, \vec{w_p})\) respectively.
+
+		Now, let's define the following linear operators:
+
+		\begin{align*}
+			R : V & \to V, R \in \sL(V)                                                \\
+			R =   & \begin{cases}
+				        \vec{a_i} \mapsto \vec{u_i} & \quad \forall i \in \{1, \ldots, m\} \\
+				        \vec{b_j} \mapsto \vec{v_j} & \quad \forall j \in \{1, \ldots, n\}
+			        \end{cases}
+		\end{align*}
+
+		\begin{align*}
+			S : W & \to W, S \in \sL(W)                                                          \\
+			S =   & \begin{cases}
+				        T_2(\vec{v_j}) \mapsto T_1(\vec{b_j}) & \quad \forall j \in \{1, \ldots, n\} \\
+				        \vec{w_k} \mapsto \vec{c_k}           & \quad \forall k \in \{1, \ldots, p\}
+			        \end{cases}
+		\end{align*}
+
+		Notice that by construction that \(R\) maps a basis of \(V\) to a basis of \(V\).
+
+		Therefore, the image of \(R\) is \(V\), and by Axler 3.20, we know that \(R\) is surjective.
+
+		The same can be said for \(S\), as it maps a basis of \(W\) to a basis of \(W\), so \(S\) is surjective.
+
+		Thus, we have shown that \(R \in \sL(V)\) and \(S \in \sL(W)\) and are operators.
+
+		Thus, by Axler 3.69, we know that being surjective means that \(R\) and \(S\) are invertible.
+
+		Now, we want to show that \(T_1 = ST_2R\). Let's do this directly.
+
+		Let \(\vec{a}\) represent an arbitrary vector in the basis of \(\ker T_1\), \(\vec{a_1}, \ldots, \vec{a_m}\).
+
+		Thus, we know that \(T_1(\vec{a}) = \vec{0}\).
+
+		We need to show that \(ST_2R(\vec{a}) = \vec{0}\).
+
+		\begin{align*}
+			ST_2R(\vec{a}) & = ST_2(\vec{u}) \quad \text{where \(\vec{u}\) is one of the } (\vec{u_1}, \ldots, \vec{u_m}) \\
+			               & = S(\vec{0}) \quad \text{as \(\vec{u} \in \ker T_1\)}                                        \\
+			               & = \vec{0} \quad \text{as \(S\) is linear (Axler 3.11)}
+		\end{align*}
+
+		Furthermore, let \(\vec{b}\) represent an arbitrary vector in the list of \((\vec{b_1}, \ldots, \vec{b_n})\).
+
+		Let's show that \(ST_2R(\vec{b}) = T_1(\vec{b})\).
+
+		\begin{align*}
+			ST_2R(\vec{b}) & = ST_2(\vec{v}) \quad \text{where \(\vec{v}\) is one of the } (\vec{v_1}, \ldots, \vec{v_n}) \\
+			               & = S(T_2(\vec{v})) \quad \text{product of linear maps (Axler 3.8)}                            \\
+			               & = T_1(\vec{b}) \quad \text{by definition of \(S\)}
+		\end{align*}
+
+		This completes the proof but, let's do one more thing.
+
+		Let \(\vec{\memoji{smiling-face-with-sunglasses}} \in V\) be an arbitrary vector.
+
+		That means that \(\vec{\memoji{smiling-face-with-sunglasses}}\) is in the span of \((\vec{a_1}, \ldots, \vec{a_m}, \vec{b_1}, \ldots, \vec{b_n})\).
+
+		Let's show that \(T_1(\vec{\memoji{smiling-face-with-sunglasses}}) = ST_2R(\vec{\memoji{smiling-face-with-sunglasses}})\) to show my emojis.
+
+		Let's express \(\vec{\memoji{smiling-face-with-sunglasses}}\) as a linear combination of these vectors:
+		\[
+			\vec{\memoji{smiling-face-with-sunglasses}} = \sum_{i=1}^{m} \lambda_i \vec{a_i} + \sum_{j=1}^{n} \mu_j \vec{b_j}
+		\]
+
+		Using the definition of \(R\), we have:
+
+
+		\[
+			R(\vec{\memoji{smiling-face-with-sunglasses}}) = \sum_{i=1}^{m} \lambda_i \vec{u_i} + \sum_{j=1}^{n} \mu_j \vec{v_j}
+		\]
+		
+		Now, applying \(T_2\):
+
+		\[
+			T_2(R(\vec{\memoji{smiling-face-with-sunglasses}})) = \sum_{i=1}^{m} \lambda_i T_2(\vec{u_i}) + \sum_{j=1}^{n} \mu_j T_2(\vec{v_j})
+		\] 
+
+		Now, since \(\vec{u_i}\) is in the kernel of \(T_1\), \(T_1(\vec{u_i}) = \vec{0}\). 
+
+		So, the expression simplifies to:
+
+		\[
+			T_2(R(\vec{\memoji{smiling-face-with-sunglasses}})) = \sum_{j=1}^{n} \mu_j T_2(\vec{v_j})
+		\] 
+
+		Finaly, applying \(S\):
+
+		\[
+			S(T_2(R(\vec{\memoji{smiling-face-with-sunglasses}}))) = \sum_{j=1}^{n} \mu_j S(T_2(\vec{v_j})) = \sum_{j=1}^{n} \mu_j T_1(\vec{b_j})
+		\]
+
+		Now, let's check:
+
+		\[
+		T_1(\vec{\memoji{smiling-face-with-sunglasses}}) = \sum_{i=1}^{m} \lambda_i T_1(\vec{a_i}) + \sum_{j=1}^{n} \mu_j T_1(\vec{b_j}) = \sum_{j=1}^{n} \mu_j T_1(\vec{b_j})
+		\] 
+
+		Note that the first sum is zero as \(\vec{a_i}\) is in the kernel of \(T_1\).
+
+		Thus, we have shown that \(T_1(\vec{\memoji{smiling-face-with-sunglasses}}) = ST_2R(\vec{\memoji{smiling-face-with-sunglasses}})\) for an arbitrary \(\vec{\memoji{smiling-face-with-sunglasses}} \in V\).
+
+		Thus, we have shown that \(T_1 = ST_2R\).
+
+	}
+
+	\parinf
+	As we have shown both directions, the result follows.
+
+}
+
+		      \mlenma{}{
+
+			      Let \(\vec{x_{s}}\) be a solution to \(T(\vec{x}) = \vec{b} \).
+
+			      Where \(T\) is a linear map that maps \(\vec{x} \in \RR^{n}\) to \(\vec{b} \in \RR^{m}\) by a matrix \(A\): \(T(\vec{x}) = A \cdot \vec{x}\).
+
+			      Then, if there are other solutions, \(\vec{x_{\star}}\), to \(T(\vec{x}) = \vec{b} \),
+
+			      Then there exists an \( \vec{x_{k}} \in \ker T\) such that every other solution is given by:
+
+			      \[
+				      \vec{x_{\star}} = \vec{x_{s}} + \vec{x_{k}}
+			      \]
+
+			      \pf{Proof}{
+
+				      We know \(T(\vec{x_{s}}) = \vec{b}\) and \(T(\vec{x_{\star}}) = \vec{b}\) as they are solutions to \(T(\vec{x}) = \vec{b}\). Consider, \(T(\vec{x_{\star}} - \vec{x_{s}})\).
+
+				      Then, by the fact that \(T\) is a linear map, the following is true:
+
+				      \[
+					      T(\vec{x_{\star}} - \vec{x_{s}}) = T(\vec{x_{\star}}) - T(\vec{x_{s}}) = \vec{b} - \vec{b} = \vec{0}\].
+
+				      Therefore, \(\vec{x_{\star}} - \vec{x_{s}} \in \ker T\).
+
+				      Thus, there exists \(\vec{x_{k}} \in \ker T\) such that \(\vec{x_{k}} = \vec{x_{\star}} - \vec{x_{s}}\).
+
+				      By definition, \(T(\vec{x_{k}}) = 0\), meaning it is a solution to \(T(\vec{x}) = \vec{0}\).
+
+				      Thus, every other solution to \(T(\vec{x}) = \vec{b}\) is given by a solution, \(\vec{x_{s}}\) plus a solution to \(T(\vec{x}) = \vec{0}\), \(\vec{x_{k}}\).
+			      }
+		      }
+
+
+\qs{}{
+	Vandermonde Matrices.
+
+	(1) Prove that
+	\[
+		\operatorname{det}\left(\begin{array}{ccc}
+				1   & 1   & 1   \\
+				a   & b   & c   \\
+				a^2 & b^2 & c^2
+			\end{array}\right)=(a-b)(b-c)(c-a) .
+	\]
+	(b) Prove an analogous formula for \(n \times n\) matrices, using appropriate row operations to clear out the first column.
+
+	(c) Use the determinant in part (b) to prove that there is a unique polynomial \(p(x) \in\) \(\mathcal{P}_n(\mathbb{F})\) that takes arbitrary prescribed values at \(n+1\) points \(x=x_0, x_1, \ldots, x_n\).
+}
+
+\pf{Proof of \(1\)}{
+	Not going to lie. This problem is so fun compare to the other ones. I love it.
+
+	Let's begin by proving this directly.
+
+	\begin{align*}
+		\det\begin{pmatrix} 1 & 1 & 1 \\ a & b & c \\ a^2 & b^2 & c^2 \end{pmatrix} & = \sum_{i=1}^n(-1)^{i+1} a_{i 1} \cdot \det A_{i 1}                                                                                                                                                \\
+		                                                                            & = (-1)^{1 + 1} a_{1, 1} \cdot \det A_{1, 1} + (-1)^{2 + 1} a_{2, 1} \cdot \det A_{2, 1} + (-1)^{3 + 1} a_{3, 1} \cdot \det A_{3, 1}                                                                \\
+		                                                                            & = 1 \cdot \det \begin{pmatrix} b & c \\ b^2 & c^2 \end{pmatrix} + (-1) \cdot \det \begin{pmatrix} a & c \\ a^2 & c^2 \end{pmatrix} + 1 \cdot \det \begin{pmatrix} a & b \\ a^2 & b^2 \end{pmatrix} \\
+		                                                                            & = 1 \cdot (bc^2 - b^2c) + (-1) \cdot (ac^2 - a^2c) + 1 \cdot (ab^2 - a^2b)                                                                                                                         \\
+		                                                                            & = bc^2 - b^2c - ac^2 + a^2c + ab^2 - a^2b                                                                                                                                                          \\
+		                                                                            & = bc^2 - b^2c - ac^2 + a^2c + ab^2 - a^2b + (abc - abc) \text{ we can add a 0 value term}                                                                                                          \\
+		                                                                            & = (abc - b^2c - ac^2 + bc^2) - (a^2b - ab^2 - a^2c + abc)                                                                                                                                          \\
+		                                                                            & = (ab - b^2 - ac + bc)(c - a)                                                                                                                                                                      \\
+		                                                                            & = (a-b)(b-c)(c-a)
+	\end{align*}
+}
+
+\pf{Proof of \(2\)}{
+Given \(V\), a Vandermonde matrix of size \(n \times n\), then \(V\) is of the form:
+
+\[
+	V = \begin{pmatrix}
+		1      & 1      & 1      & \cdots & 1      \\
+		a      & b      & c      & \cdots & n      \\
+		a^2    & b^2    & c^2    & \cdots & n^2    \\
+		\vdots & \vdots & \vdots & \ddots & \vdots \\
+		a^{n}  & b^{n}  & c^{n}  & \cdots & n^{n}
+	\end{pmatrix}
+\]
+
+We want to prove a formula for \(\det V\).
+
+We were given the hint to use row operations to clear out the first column.
+
+But first we need to show how that would affect the determinant.
+
+Let \(\delta\) be the determinant function.
+
+By theorem 4 of the handout, we know that if there is an elementary matrix of type (i), \(E \in \RR^{n,n}\),
+
+then \(\delta(E \cdot V) = \delta(V)\), where \(E\) adds a multiple of one row to another row.
+
+That means that when we modify the first column of \(V\) through row operations,
+
+we don't change the determinant.
+
+Now, I'll show how to clear the first column.
+
+	{\allowdisplaybreaks
+
+		Let's show two specific row operation that clears the first column's second to last entry and last entry.
+
+		\begin{align*}
+			\begin{pmatrix} 1 & 1 & \cdots & 1_{n} \\ a & b & \vdots & n \\ a^2 & b^2 & \vdots & n^2 \\ \vdots & \vdots & \vdots & \vdots \\ a^{n} &  b^{n} & \cdots & n^{n} \end{pmatrix} \xrightarrow{R_{n} - aR_{n - 1} \mapsto R_{n}} & \begin{pmatrix} 1 & 1 & \cdots & 1_{n} \\ a & b & \vdots & n \\ a^2 & b^2 & \vdots & n^2 \\ \vdots & \vdots & \vdots & \vdots \\ a^{n-1} &  b^{n-1} & \cdots & n^{n-1} \\ a^{n} - a \cdot a^{n-1} &  b^{n} - a \cdot b^{n-1} & \cdots & n^{n} - a \cdot n^{n-1} \end{pmatrix}             \\
+			=                                                                                                                                                                                                                             & \begin{pmatrix} 1 & 1 & \cdots & 1_{n} \\ a & b & \vdots & n \\ a^2 & b^2 & \vdots & n^2 \\ \vdots & \vdots & \vdots & \vdots \\ a^{n-1} &  b^{n-1} & \cdots & n^{n-1} \\ 0 &  b^{n-1} (b - a) & \cdots & n^{n-1} (n - a) \end{pmatrix}                                                   \\
+			\xrightarrow{R_{n-1} - aR_{n - 2} \mapsto R_{n-1}}                                                                                                                                                                            & \begin{pmatrix} 1 & 1 & \cdots & 1_{n} \\ a & b & \vdots & n \\ a^2 & b^2 & \vdots & n^2 \\ \vdots & \vdots & \vdots & \vdots \\ a^{n-2} &  b^{n-2} & \cdots & n^{n-2} \\ 0 & b^{n-2} (b - a) & \cdots & n^{n-2} (n - a) \\ 0 &  b^{n-1} (b - a) & \cdots & n^{n-1} (n - a) \end{pmatrix} \\
+		\end{align*}
+
+		Let's now generalize this to clear the first column's \(i\)th entry for \(i \in \{n, n-1, \cdots, 2\}\).
+
+		But before we do that, let's notate the original matrix as \(V_{a}\), then apply the generalization:
+
+		\begin{align*}
+			\begin{pmatrix} 1 & 1 & \cdots & 1_{n} \\ a & b & \vdots & n \\ a^2 & b^2 & \vdots & n^2 \\ \vdots & \vdots & \vdots & \vdots \\ a^{n} &  b^{n} & \cdots & n^{n} \end{pmatrix} \xrightarrow{R_{i} - aR_{i - 1} \mapsto R_{i}} & \begin{pmatrix} 1 & 1 & \cdots & 1_{n} \\ a & b & \cdots & n \\ \vdots & \vdots & \vdots & \vdots \\ a^{i - 1} & b^{i - 1} & \cdots & n^{i - 1} \\ 0 &  b^{i - 1} (b - a) & \cdots & n^{i - 1} (n - a) \\ \vdots & \vdots & \vdots & \vdots \\ 0 &  b^{j} (b - a) & \cdots & n^{j} (n - a) \end{pmatrix}, j > i \\
+			=                                                                                                                                                                                                                             & \begin{pmatrix} 1 & 1 & \cdots & 1_{n} \\ 0 & b - a & \vdots & n - a \\ 0 & b(b - a) & \vdots & n(n - a) \\ \vdots & \vdots & \vdots & \vdots \\ 0 & b^{i - 2}(b - a) & \cdots & n^{i - 2}(n - a) \\ 0 &  b^{i-1} (b - a) & \cdots & n^{i-1} (n - a) \end{pmatrix}
+		\end{align*}
+
+	}
+
+Let's now introduce more notation:
+
+\[
+	V_{ai} = \begin{pmatrix} 1 & 1 & \cdots & 1_{n} \\ 0 & b - a & \vdots & n - a \\ 0 & b(b - a) & \vdots & n(n - a) \\ \vdots & \vdots & \vdots & \vdots \\ 0 & b^{n - 2}(b - a) & \cdots & n^{n - 2}(n - a) \\ 0 &  b^{n-1} (b - a) & \cdots & n^{n-1} (n - a) \end{pmatrix}
+\]
+
+Where \(V_{ai} = E_{n}^{ai} \cdots E_{2}^{ai} \cdot V_{a}\) where \(E_{i}^{ai}\) is the elementary matrix (EM) that clears the first column's \(i\)th entry.
+
+Let's define \(E_{V_{ai}}\) to be the list of all the EMs that clear the first column's entries i.e., \(E_{V_{ai}} = (E_{n}^{ai}, \ldots, E_{2}^{ai})\).
+
+Let's now apply the first column expansion \(\delta\) function to \(V_{ai}\):
+
+\begin{align*}
+	\det V_{ai} & = \sum_{i=1}^n(-1)^{i+1} a_{i,1} \cdot \det(A_{i,1})                                                                                                                                                                  \\
+	            & = (-1)^{1 + 1} a_{1, 1} \cdot \det(A_{1, 1}) + \cdots + (-1)^{n + 1} a_{n, 1} \cdot \det(A_{n, 1})                                                                                                                    \\
+	            & =  1 \cdot \det(A_{1, 1}) + 0 \cdot \det(A_{2, 1}) + \cdots + 0 \cdot \det(A_{n, 1})                                                                                                                                  \\
+	            & = \det(A_{1, 1}) \quad \text{\textbf{Note}: let \(A_{1, 1} = V^{a}_{M}\)}                                                                                                                                             \\
+	            & = \det \begin{pmatrix} b - a & \cdots & n - a \\ b(b - a) & \vdots & n(n - a) \\ \vdots & \vdots & \vdots \\ b^{n - 2}(b - a) & \cdots & n^{n - 2}(n - a) \\ b^{n-1} (b - a) & \cdots & n^{n-1} (n - a) \end{pmatrix}
+\end{align*}
+
+Notice that \(V^{a}_{M}\) has factorable columns in the form \((\lambda - a)\) where \(\lambda \in \left\{ b, \ldots, n \right\}\).
+
+Now, we will prove this in due time, but PSET 8 tell us that:
+
+\[
+	\det(V^{a}_{M}) = \det(V^{a}_{D^{T}}), \text{ where } V^{a}_{M^{T}} \text{ is the transpose of } V^{a}_{M}
+\]
+
+\[
+	V^{a}_{M^{T}} = \begin{pmatrix} b - a & b(b - a) & \cdots & b^{n - 1} (b - a) \\ \vdots & \vdots & \vdots & \vdots \\ n - a & n(n - a) & \cdots & n^{n - 1} (n - a) \end{pmatrix}
+\]
+
+Again, we define transpose in PSET 8, but for now let's take this operation for granted.
+
+There exists EMs of type (iii) such that we can factor out \((\lambda - a)\) from each row of \(V^{a}_{M^{T}}\), where \(\lambda \in \left\{ b, \ldots, n \right\}\).
+
+Denote this list of EMs as \(E_{V_{af}}\).
+
+Notice that there are \(n - 1\) rows, so we have \(n - 1\) EMs in this list.
+
+\nt{
+	I will not show what \(E_{V_{af}}\) is as it seems tedious and I don't want to do it.
+
+	Trust me bro.
+}
+
+Remember that for all \(E^{af}_{i} \in E_{V_{af}}\), we have \(\delta(E^{af}_{i}) = (\lambda - a)\) by corollary 5 of the handout.
+
+Let \(V_{bt}\) be the matrix where we factor out \((\lambda - a)\) from each row of \(V^{a}_{M^{T}}\).
+
+Then, we have:
+
+\[
+	V_{bt} = \begin{pmatrix} 1 & b & \cdots & b^{n - 1} \\ \vdots & \vdots & \vdots & \vdots \\ 1 & n & \cdots & n^{n - 1} \end{pmatrix}
+\]
+
+In other words we get \(V_{bt} = E^{af}_{i} \cdot V^{a}_{M^{T}}\), where \(E^{af}_{i} \in E_{V_{af}}, i = n - 1, \ldots, 1\).
+
+Combining this all together, we have:
+
+\[
+	\det(V) = \det(V_{a}) = \det(V^{a}_{M^{T}}) = \det(E^{af}_{n - 1}) \cdot \cdots \cdot \det(E^{af}_{1}) \cdot \det(V_{bt})
+\]
+
+Now, let's transpose \(V_{bt}\) and define the result as \(V_{b}\).
+
+\[
+	V_{b} = \begin{pmatrix} 1 & \cdots & 1_{n-1} \\ b & \cdots & n \\ \vdots & \vdots & \vdots \\ b^{n - 1} & \cdots & n^{n - 1} \end{pmatrix}
+\]
+
+Recall that \(\det(V_{b}) = \det(V_{bt})\), so we have:
+
+\[
+	\det(V) = \det(V_{a}) = (b - a) \cdots (n - a) \cdot \det(V_{b})
+\]
+
+Now, the value of \(\det(V) = \det(V_{a})\) is expressed in terms of \(\det(V_{b})\).
+
+However, have you noticed that \(V_{b}\) is a Vandermonde matrix but of size \((n - 1) \times (n - 1)\)?
+
+That means to find the determinant of \(V_{b}\), we can:
+
+\begin{enumerate}
+	\item Find elementary matrices that clear the first column of \(V_{b}\), \(E_{V_{bi}}\)
+	\item Apply these EM to \(V_{b}\) to get \(V_{bi}\) i.e., \(V_{bi} = E_{V_{bi}} \cdot V_{b}\)
+	\item Find the determinant of \(V_{bi}\) using first column expansion and realize only one sub-matrix is non-zero.
+	\item Denote this sub-matrix as \(V^{b}_{M}\).
+	\item Transpose \(V^{b}_{M}\) to get \(V^{b}_{M^{T}}\).
+	\item Find elementary matrices that factor out \((\lambda - b)\) from each row of \(V^{b}_{M^{T}}\), \(E_{V_{bf}}\), for \(\lambda \in \left\{ c, \ldots, n \right\}\).
+	\item Apply these EM to \(V^{b}_{M^{T}}\) to the resulting matrix \(V_{ct}\), i.e., \(V_{ct} = E_{V_{bf}} \cdot V^{b}_{M^{T}}\).
+	\item Transpose \(V_{ct}\) to get \(V_{c}\).
+	\item Now the determinant of \(V_{b}\) is expressed in terms of \(\det(V_{c})\) i.e., \(\det(V_{b}) = (c - b) \cdots (n - b) \cdot \det(V_{c})\).
+	\item Notice that \(V_{c}\) is a Vandermonde matrix but of size \((n - 2) \times (n - 2)\).
+\end{enumerate}
+
+In other words, we can repeat this process until we get to a Vandermonde matrix of size \(2 \times 2\).
+
+Let \(\star\) represent the variable before the variable \(n\).
+
+Where we end up with \(V_{\star}\) that looks like this:
+
+\[
+	V_{\star} = \begin{pmatrix} 1 & 1 \\ \star & n \end{pmatrix}
+\]
+
+The determinant of \(V_{\star}\) is:
+
+\[
+	\det(V_{\star}) = (1 \cdot n) - (1 \cdot \star) = (n - \star)
+\]
+
+Note that \(V_{n}\) is \(\begin{pmatrix} 1 \end{pmatrix}\), so \(\det(V_{n}) = 1\).
+
+Thus, we can express the determinant of a Vandermonde matrix of size \(n \times n\), \(n \in \NN\)  as:
+
+\begin{align*}
+	\det(V) & = \det(V_{a}) = \det(E_{V_{af}}) \cdot \det(V_{b})                         \\
+	        & = (b - a) \cdots (n - a) \cdot \det(V_{b})                                 \\
+	        & = (b - a) \cdots (n - a) \cdot (c - b) \cdots (n - b) \cdot \det(V_{c})    \\
+	        & = \vdots                                                                   \\
+	        & = (b-a) \cdot \ldots \cdot \det(V_{\star})                                 \\
+	        & = (b-a) \cdot \ldots \cdot \det(V_{n})                                     \\
+	        & = (b-a) \cdot \ldots \cdot  (c-b) \cdot \ldots \cdot (n - \star) \cdot (1) \\
+	        & = \prod_{a \leq i < j \leq n} (x_{j} - x_{i})
+\end{align*}
+
+Which is the formula we wanted to prove.
+
+But I wrote a nice algorithm that shows all the steps of this process. See below.
+
+\begin{algorithm}[H]
+	\KwIn{A Vandermonde matrix of size \(n\), \(V\)}
+	\KwOut{The determinant of \(V\)}
+	\vspace{5mm}
+	\SetAlgoLined{}
+	\(det \gets 1\)\;
+	\(size \gets n\)\;
+	\uIf{\(n = 1\) }{
+		\Return \(1\)\;
+	} \Else{
+		\(\star \gets V_{2, 1}\) \tcc*{the first entry of the second row}
+		\(E_{V_{i}} \gets ()\)\;
+		\ForEach{\(i \in {size, size - 1, \ldots, 2 }\) }{
+			\(rowop \gets V(i) = V(i) - \star \cdot V(i - 1)\)\;
+			\(E_i \gets\) an elementary matrix equivalent to \(rowop\)\;
+			\(E_{V_{i}} \gets (E_i) + E_{V_{i}}\)\;
+		}
+		\(V_{i} \gets E_{V_{i}} \cdot V\)\;
+		\(V_{M} \gets minor(V_{i}, {1, 1})\)\;
+		\(V_{M^{T}} \gets transpose(V_{M})\)\;
+		\(E_{V_{f}} \gets ()\)\;
+		\ForEach{\(i \in {size - 1, \ldots, 1 }\) }{
+			\(term \gets V_{M^{T}}({i, 1})\) \tcc*{term of the form (\(\lambda - \star\))}
+			\(det \gets det \cdot term\)\;
+			\(E_i \gets\) an elementary matrix that factors out \((term)\) from each row of \(V_{M^{T}}\)\;
+			\(E_{V_{f}} \gets (E_i) + E_{V_{f}}\)\;
+		}
+		\(V^{\prime}_{T} \gets E_{V_{f}} \cdot V_{M^{T}}\)\;
+		\(V^{\prime} \gets transpose(V_{T}^{\prime})\)\;
+		\Return \(det \cdot DetVa(n - 1, V^{\prime})\)\;
+
+	}
+	\caption{Determinant of a Vandermonde Matrix, \(DetVa\) }
+\end{algorithm}
+}
+
+\pf{Proof of \(c\)}{
+	Let's remind ourselves what \(\mcP_{n}(\FF)\) means:
+	\[
+		\mathcal{P}_{n}(\FF) = \left\{ p: \FF \to \FF \mid p(x) = \sum_{i=0}^n a_{i} x^{i}, a_{i} \in \mathbb{F} \right\}
+	\]
+
+	We were given that there might be a polynomial \(p(x) \in \mcP_{n}(\FF)\)
+
+	that takes arbitrary prescribed values at \(n+1\) points \(x=x_0, x_1, \ldots, x_n\).
+
+	Let's assume that the points are distinct (it wasn't clear).
+
+	Given \(n+1\) distinct points \(x_0, x_1, \ldots, x_n\) with arbitrary values, the polynomial \(p(x) \in \mathcal{P}_{n}(\mathbb{F})\) is of the form:
+
+	\[
+		p(x) = a_{0} + a_{1} x + \cdots + a_{n} x^{n}
+	\]
+
+	However, the coefficients \(a_{0}, \ldots, a_{n}\) are not known. To determine them, we can set up a system of equations:
+
+	\begin{align*}
+		p(x_0) & = a_{0} + a_{1} x_0 + \cdots + a_{n} x_0^{n} \\
+		p(x_1) & = a_{0} + a_{1} x_1 + \cdots + a_{n} x_1^{n} \\
+		       & \vdots                                       \\
+		p(x_n) & = a_{0} + a_{1} x_n + \cdots + a_{n} x_n^{n}
+	\end{align*}
+
+	This system can be expressed in matrix form as:
+
+	\[
+		\begin{pmatrix} 1 & x_0 & \cdots & x_0^{n} \\ 1 & x_1 & \cdots & x_1^{n} \\ \vdots & \vdots & \vdots & \vdots \\ 1 & x_n & \cdots & x_n^{n} \end{pmatrix} \cdot \begin{pmatrix} a_{0} \\ a_{1} \\ \vdots \\ a_{n} \end{pmatrix} = \begin{pmatrix} p(x_0) \\ p(x_1) \\ \vdots \\ p(x_n) \end{pmatrix}
+	\]
+
+	The matrix on the left is the transpose of a Vandermonde matrix.
+
+	As shown in part (b), the determinant of a Vandermonde matrix, provided the \(x_i\) values are distinct, is:
+
+	\[
+		\det(V) = \prod_{i < j} (x_{j} - x_{i})
+	\]
+
+	Since the \(x_i\) values are distinct, \(\det(V) \neq 0\) and that \(\det(V) = \det(V^{T})\),
+
+	then the matrix on the left is invertible.
+
+	Let's denote the matrix on the left by \(A\), the vector of coefficients by \(\vec{x}\),
+
+	and the vector of polynomial values by \(\vec{p}\).
+
+	Now, because the matrix is invertible, we can do the following:
+
+	\begin{align*}
+		A \cdot \vec{x}              & = \vec{p}              \\
+		A^{-1} \cdot A \cdot \vec{x} & = A^{-1} \cdot \vec{p} \\
+		\vec{x}                      & = A^{-1} \cdot \vec{p}
+	\end{align*}
+
+	Given that the determinant of \(A\) is non-zero, this system of equations has a unique solution.
+
+	This is because the determinant \(A\) is non-zero,
+
+	which means that no row is a linear combination of the other rows.
+
+	Thus, the system of linear equation will have an answer as the mapping is unique.
+
+	This means there is a unique set of coefficients \(a_i\), which in turn implies a unique polynomial.
+
+	Hence, there exists a unique polynomial \(p(x) \in \mathcal{P}_{n}(\mathbb{F})\) with the stated property.
+}
+
+
+
+\qs{Column Operations}{
+	Let \(E \in \mathbb{F}^{n, n}\) be an elementary matrix. Then the result of \(A \cdot E\) is a column operation on \(A\) (you don't have to prove this):
+
+	(i) If \(E\) is of type (i), with \(a\) in the (ij)-th position, then \(A \cdot E\) is the column operation "add \(a \cdot(\operatorname{column} i)\) of \(A\) to (column \(j\) ) of \(A\) ";
+
+	(ii) If \(E\) is of type (ii), then \(A \cdot E\) is the column operation "interchange (column \(i\) ) with (column \(j\) )";
+
+	(iii) If \(E\) is of type (iii), then \(A \cdot E\) is the column operation "multiply (column \(i\) ) by the nonzero scalar \(c\);
+
+	(a) Define a notion of "reduced column-echelon form", based on the notion of "reduced row-echelon form". Do so in such a way that if \(A\) is in reduced row-echelon form, then \(A^t\) is in reduced column-echelon form.
+
+	(b) Use induction on the number of columns of a matrix to show that every matrix has a reduced column-echelon form.
+}
+
+\thm{Column Operations}{
+
+	\nt{
+		I did not read you did not have to prove this. I'm so tired.
+	}
+
+	\begin{enumerate}
+		\item \textbf{Type I (Scalar Addition to another column):}
+
+		      Given an elementary matrix \( E \) of type (i) with \( a \) in the (i,j)-th position, and all other off-diagonal elements being zero and diagonal entries being ones. This means that the \( j \)-th column of \( E \) has the value \( a \) at the \( i \)-th row and 1 at the \( j \)-th row.
+
+		      For matrix multiplication, each entry in the product matrix \( AE \) is obtained by taking the dot product of the rows of \( A \) with the columns of \( E \).
+
+		      Let's consider the \( j \)-th column of \( AE \).
+
+		      For any row \( k \) of \( A \), the dot product of the \( k \)-th row of \( A \) with the \( j \)-th column of \( E \) is:
+
+		      \[
+			      A_{k1} \times 0 + \ldots + A_{ki} \times a + \ldots + A_{kj} \times 1 + \ldots + A_{kn} \times 0
+		      \]
+
+		      This simplifies to:
+
+		      \[
+			      A_{kj} + a \times A_{ki}
+		      \]
+
+		      This operation adds \( a \) times the \( i \)-th entry of the \( k \)-th row to the \( j \)-th entry of the same row.
+
+		      And, this holds true for every row \( k \) in matrix \( A \).
+
+		      Therefore, the \( j \)-th column of \( AE \) is the result of adding \( a \) times the \( i \)-th column of \( A \) to the \( j \)-th column of \( A \).
+
+		      Hence, \( A \cdot E \) is the column operation "add \( a \cdot \) (column \( i \)) of \( A \) to (column \( j \)) of \( A \)".
+		\item \textbf{Type II (Column Interchange):}
+
+		      Given an elementary matrix \( E \) of type (ii), such that the \( i \)-th and \( j \)-th columns are swapped. This means that the \( i \)-th column of \( E \) has 1 at the \( j \)-th position and the \( j \)-th column has 1 at the \( i \)-th position, with all other entries being zero except the diagonal ones which are 1.
+
+		      Consider the matrix product \( AE \). The \( k \)-th column of \( AE \) for \( k \neq i,j \) remains unchanged, since it will dot with columns of \( E \) filled with zeros except for the one at its own position. However, the \( i \)-th column of \( AE \) will be the \( j \)-th column of \( A \) and vice-versa.
+
+		      Thus, post-multiplying \( A \) by \( E \) effectively interchanges the \( i \)-th and \( j \)-th columns of \( A \). Therefore, \( A \cdot E \) is the column operation "interchange (column \( i \)) with (column \( j \))".
+		\item \textbf{Type III (Scalar Multiplication to a column):}
+
+		      Given an elementary matrix \( E \) of type (iii) such that its \( i \)-th column has a scalar \( c \) at the diagonal position and zeros elsewhere. This means that the \( i \)-th column of \( E \) is \( [0, \dots, 0, c, 0, \dots, 0] \).
+
+		      For the product \( AE \), every column other than the \( i \)-th column remains unchanged. However, the \( i \)-th column of \( AE \) is multiplied by \( c \).
+
+		      Thus, post-multiplying \( A \) by \( E \) effectively scales the \( i \)-th column of \( A \) by \( c \). Therefore, \( A \cdot E \) is the column operation "multiply (column \( i \)) by the nonzero scalar \( c \)".
+	\end{enumerate}
+
+}
+
+\sol{
+	Let's define a notion of ``reduced column-echelon form''.
+
+	Let's call my notation ACBAIDRCEDF:
+
+	\begin{center}
+		``Acronyms Can Be Anything I Desired: REDUCED, Column Echelon DEADASS Form.''
+	\end{center}
+
+	Trademarked, by the way.
+
+	Anyway, an \(m \times n\) matrix \(M\)  is in ACBAIDRCEDF if:
+
+	\begin{enumerate}[label=(\roman*)]
+		\item If (column \(j\) ) of \(M\) is entirely composed of zeros, then so is (column \(k\) ) for all \(k > j\).
+
+		      For example, the matrix holds the following property:
+		      \[
+			      \begin{pmatrix}
+				      1 & 0 & 0 \\
+				      0 & 0 & 0 \\
+				      0 & 0 & 0
+			      \end{pmatrix}
+		      \]
+		\item If (column \(j\) ) has a nonzero entry, then then its north most nonzero entry is 1. Let's call it a Cool Pivot.
+
+		      For example, the matrix holds the following property:
+		      \[
+			      \begin{pmatrix}
+				      1 & 0 & 0 \\
+				      0 & 1 & 0 \\
+				      0 & 0 & 0
+			      \end{pmatrix}
+		      \]
+		\item If (column \(j + 1\) ) has nonzero entries, the cool pivot in (column \(j\) ) is strictly north-west of the cool pivot in (column \(j + 1\) ).
+
+		      That is to say, the cool pivot in (column \(j\) ) is above and to the left of the cool pivot in (column \(j + 1\) ).
+
+		      For example, the matrix holds the following property:
+		      \[
+			      \begin{pmatrix}
+				      1 & 0 & 0 \\
+				      0 & 1 & 0 \\
+				      0 & 0 & 1
+			      \end{pmatrix}
+		      \]
+		\item Any row containing a cool pivot of a column has zeros everywhere else.
+
+		      For example, the matrix holds the following property:
+		      \[
+			      \begin{pmatrix}
+				      1 & 0 & 0 \\
+				      0 & 0 & 0 \\
+				      0 & 0 & 1
+			      \end{pmatrix}
+		      \]
+	\end{enumerate}
+
+	Now given a matrix \(A\) that is in row reduced echelon form, we want to show that \(A^{T}\) is in ACBAIDRCEDF.
+
+	If a matrix is in row reduced echelon form, then it looks something like this:
+
+	\[
+		A = \begin{pmatrix}
+			1 & 0 & 0 & 0 \\
+			0 & 1 & 0 & 0 \\
+			0 & 0 & 1 & 0
+		\end{pmatrix}
+	\]
+
+	Thus, once we take the transpose of \(A\), we get:
+
+	\[
+		A^{T} = \begin{pmatrix}
+			1 & 0 & 0 \\
+			0 & 1 & 0 \\
+			0 & 0 & 1 \\
+			0 & 0 & 0
+		\end{pmatrix}
+	\]
+
+	Let's go down the list of properties and show that \(A^{T}\) satisfies them.
+
+	\begin{enumerate}[label=(\roman*), wide]
+		\item No column here is entirely composed of zeros, so this property is vacuously true.
+		\item Every column has a cool pivot as the most north nonzero entry, so this property is true.
+		\item Every cool pivot is strictly north-west of the cool pivot in the column to its right, which checks out.
+		\item The entries left and right of the cool pivots are all zeros, so this property is true.
+	\end{enumerate}
+
+	\parinf
+	Thus, we have shown that \(A^{T}\) is in ACBAIDRCEDF.
+}
+
+\pf{Proof of \(b\) }{
+
+	We proceed by induction on the number of columns of a matrix \(j \in \NN\).
+
+	\mclm{Base Case}{
+		Let \(j = 1\)
+
+		Then, the matrix \(A\) is of size \(m \times 1\) for some \(m \in \NN\):
+
+		\[
+			A = \begin{pmatrix}
+				a_{1}  \\
+				a_{2}  \\
+				\vdots \\
+				a_{m}
+			\end{pmatrix}
+		\]
+
+		Let's consider the first nonzero entry \(a_{\lambda}\). Without loss of generality, let's assume that it is the first entry.
+
+		If not we can apply an elementary matrix of type (ii) to swap the first row with the row containing \(a_{\lambda}\).
+
+		We want a column operation that will make \(a_{1}\) a cool pivot i.e., equal to \(1\).
+
+		We can do this by multiplying the first column by \(\frac{1}{a_{1}}\). i.e., \(C_{1} \gets \frac{1}{a_{1}} \cdot C_{1}\).
+
+		Let \(E_1\) of type (iii) be the elementary matrix that represents this operation.
+
+		Then, \(A \cdot E_1\) looks something like this:
+
+		\[
+			A \cdot E_1 = \begin{pmatrix}
+				1                   \\
+				\frac{a_{2}}{a_{1}} \\
+				\vdots              \\
+				\frac{a_{m}}{a_{1}}
+			\end{pmatrix}
+		\]
+
+		Notice, that by our notion of reduced column-echelon form, the matrix is now in ACBAIDRCEDF.
+
+		\begin{enumerate}[label=(\roman*),wide]
+			\item The first column is not entirely composed of zeros, so we pass
+			\item The first column has a cool pivot as the most north nonzero entry
+			\item There is only one cool pivot, we can't compare it to anything, so by default it passes.
+			\item The entries left and right of the cool pivots don't exist, so this property is true.
+		\end{enumerate}
+
+		Thus, every matrix with one column has a reduced column-echelon form.
+	}
+
+	\mclm{Inductive Hypothesis}{
+
+		Assume the statement is true for every matrix with \(k \in \NN\) columns,
+
+		We want to show that matrix with \(k + 1\) columns can be reduced to a reduced column-echelon form.
+
+		Let \(A\) be an arbitrary matrix with \(k + 1\) columns of size \(m \times (k + 1)\) for some \(m \in \NN\).
+
+		By our inductive hypothesis, we know that the first \(k\) columns of \(A\),
+
+		can be reduced to a reduced column-echelon form with some elementary matrices \(E_1, \ldots, E_{\alpha}\).
+
+		Where every \(E_i\) is an elementary matrices of type (i), (ii), or (iii)
+
+		and applied to the right of \(A\). That is to say, each \(E_{i}\) apply column operations to \(A\).
+
+		Let \(B = A \cdot E_1 \cdots E_{\alpha}\).
+
+		Then, the first \(k\) columns of \(B\) are in reduced column-echelon form.
+
+		This means that due to our notion of reduced column-echelon form,
+
+		all \(k\) columns have a cool pivot as their north most nonzero entry.
+
+		Thus every row with a cool pivot has zeros in every other entry.
+
+		Now consider the \(k + 1\)-th column of \(B\).
+
+		We have two cases to consider:
+
+		\mclm{Case one: \(m \le k\)}{
+
+			If the number of rows is at most \(k\), then notice that the following holds:
+
+			If \(m = k\), there are \(k\) rows and there are \(k\) cool pivots.
+
+			By our notion, every row with a cool pivot has zeros in every other entry.
+
+			Thus, the \(k + 1\)-th column of \(B\) is entirely composed of zeros.
+
+			The same logic holds if \(m < k\).
+
+			After the \(m\) column of \(B\), the rest of the columns are entirely composed of zeros.
+
+			Thus, the matrix is in reduced column-echelon form for \(k + 1\) if \(m \le k\).
+		}
+
+		\mclm{Case Two: \(m \ge k + 1\) }{
+			If there are at least as many rows as columns,
+
+			then the \(k + 1\)-th column of \(B\) has at least one nonzero entry.
+
+			Denote this entry as \(\lambda\). It follows from our previous case that \(\lambda\) is the most north nonzero entry as \(m > k\).
+
+			Now, we want to make \(\lambda\) a cool pivot.
+
+			Let \(E_{\lambda}\) be elementary matrix of type (iii) that scales the \(k + 1\)-th column of \(B\) by \(\frac{1}{\lambda}\).
+
+			Then, \(B \cdot E_{\lambda}\) looks something like this:
+
+			\[
+				B \cdot E_{\lambda} = \begin{pmatrix}
+					1            & \cdots     & \cdots & \cdots & \cdots & \cdots     & 0                              \\
+					\vdots       &            &        &        &        &            & \vdots                         \\
+					0_{k, 1}     & 0_{k, 2}   & \cdots & \cdots & \cdots & 1_{k, k}   & 0_{k, k+1}                     \\
+					a_{k+1, 1}   & a_{k+1, 2} & \cdots & \cdots & \cdots & a_{k+1, k} & 1_{k+1,k+1}                    \\
+					a_{k + 2, 1} &            &        &        &        &            & \frac{a_{k + 2, k+1}}{\lambda} \\
+					\vdots       &            &        &        &        &            &                                \\
+					a_{m}        & \cdots     & \cdots & \cdots & \cdots & \cdots     & \frac{a_{m, k+1}}{\lambda}     \\
+				\end{pmatrix}
+			\]
+
+			Notice, that there may be elements below the \(k + 1\)-th row that are nonzero for any given column.
+
+			This is fine, and will not affect our proof as ACBAIDRCEDF only concerns itself with the first \(k + 1\) rows.
+
+			Thus, we can safely ignore the rows below the \(k + 1\)-th row (though they will change as we see later on).
+
+			Let \(C = B \cdot E_{\lambda}\).
+
+			Now, let \(D = C \cdot E_{\gamma} \cdots E_{\gamma + k - 1}\). Where \(E_{\gamma}, \ldots, E_{\gamma + k - 1}\) are type (i) elementary matrices that do the following:
+
+			\begin{align*}
+				C                  & = \begin{pmatrix}
+					                       1            & \cdots     & \cdots & \cdots     & 0                              \\
+					                       \vdots       &            &        &            & \vdots                         \\
+					                       0_{k, 1}     & 0_{k, 2}   & \cdots & 1_{k, k}   & 0_{k, k+1}                     \\
+					                       a_{k+1, 1}   & a_{k+1, 2} & \cdots & a_{k+1, k} & 1_{k+1,k+1}                    \\
+					                       a_{k + 2, 1} &            &        &            & \frac{a_{k + 2, k+1}}{\lambda} \\
+					                       \vdots       &            &        &            &                                \\
+					                       a_{m, 1}     & \cdots     & \cdots & \cdots     & \frac{a_{m, k+1}}{\lambda}     \\
+				                       \end{pmatrix} \xrightarrow{C_{k} -  a_{k+1, k} C_{k+1} = C_{k}} & \begin{pmatrix}
+					                                                                                         1            & \cdots     & \cdots & \cdots                                         & 0                             \\
+					                                                                                         \vdots       &            &        &                                                & \vdots                        \\
+					                                                                                         0_{k, 1}     & 0_{k, 2}   & \cdots & 1_{k, k}  - 0                                  & 0_{k, k+1}                    \\
+					                                                                                         a_{k+1, 1}   & a_{k+1, 2} & \cdots & a_{k+1, k} - a_{k+1, k}                        & 1_{k+1,k+1}                   \\
+					                                                                                         a_{k + 2, 1} &            &        &                                                & \frac{a_{k+ 2, k+1}}{\lambda} \\
+					                                                                                         \vdots       &            &        &                                                &                               \\
+					                                                                                         a_{m}        & \cdots     & \cdots & \cdots  - a_{k+1, k}\frac{a_{m, k+1}}{\lambda} & \frac{a_{m, k+1}}{\lambda}    \\\end{pmatrix}                                        \\
+				C \cdot E_{\gamma} & =                                                                                                       & \begin{pmatrix}
+					                                                                                                                               1            & \cdots     & \cdots & \cdots                                         & 0                              \\
+					                                                                                                                               \vdots       &            &        &                                                & \vdots                         \\
+					                                                                                                                               0_{k, 1}     & 0_{k, 2}   & \cdots & 1_{k, k}                                       & 0_{k, k+1}                     \\
+					                                                                                                                               a_{k+1, 1}   & a_{k+1, 2} & \cdots & 0                                              & 1_{k+1,k+1}                    \\
+					                                                                                                                               a_{k + 2, 1} &            &        &                                                & \frac{a_{k + 2, k+1}}{\lambda} \\
+					                                                                                                                               \vdots       &            &        &                                                &                                \\
+					                                                                                                                               a_{m, 1}     & \cdots     & \cdots & \cdots  - a_{k+1, k}\frac{a_{m, k+1}}{\lambda} & \frac{a_{m, k+1}}{\lambda}     \\\end{pmatrix}
+			\end{align*}
+
+			In other words, let \(\gamma\) be the element at the \(k + 1\)-th row and \(j\)-th column of \(C\) for some \(1 \le j \le k\)
+
+			Then, \(E_{\gamma + i}, i \in \left\{ 0, \ldots, k - 1 \right\} \) is an elementary matrix type (i) that does the following column operation:
+
+			\[
+				E_{\gamma + i} = C_{j} - \gamma C_{k + 1} = C_{j} - a_{k+1, j} C_{k + 1} \text{ for } j = k - i
+			\]
+
+			Thus, after applying \(E_{\gamma + i}\) for \(i \in \left\{ 0, \ldots, k - 1 \right\}\) to \(C\) , we get the following matrix:
+
+			\[
+				D = \begin{pmatrix}
+					1                                         & \cdots     & \cdots & \cdots                                         & 0                            \\
+					\vdots                                    &            &        &                                                & \vdots                       \\
+					0_{k, 1}                                  & 0_{k, 2}   & \cdots & 1_{k, k}                                       & 0_{k, k+1}                   \\
+					0_{k+1, 1}                                & 0_{k+1, 2} & \cdots & 0_{k+1, k}                                     & 1_{k+1,k+1}                  \\
+					a_{k+2, 1} - \frac{a_{k+2, k+1}}{\lambda} &            &        &                                                & \frac{a_{k+2, k+1}}{\lambda} \\
+					\vdots                                    &            &        &                                                &                              \\
+					a_{m, 1}- \frac{a_{m, k+1}}{\lambda}      & \cdots     & \cdots & \cdots  - a_{k+1, k}\frac{a_{m, k+1}}{\lambda} & \frac{a_{m, k+1}}{\lambda}
+					\\\end{pmatrix}
+			\]
+
+			Notice that the \(k + 1\)-th row of \(D\) is now in reduced column-echelon form.
+
+			This follows as it has a cool pivot as its most north nonzero entry with zeros elsewhere in its row.
+
+			Moreover, the \(k\) pivot is strictly north-west of the \(k + 1\)-th pivot (in fact a upward step).
+
+			Thus, with elementary matrices: \(E_{\lambda}, E_{\gamma}, \ldots, E_{\gamma + k - 1}\),
+
+			we have reduced the \(k + 1\)-th column of \(B\) to a reduced column-echelon form.
+
+			Hence, \(D = A \cdot E_1 \cdots E_{\alpha} \cdot E_{\lambda} \cdot E_{\gamma} \cdots E_{\gamma + k - 1}\) is in reduced column-echelon form.
+		}
+
+		Thus, this concludes our inductive step as we have shown that the \(k + 1\)-th column of \(B\),
+
+		can be reduced to a reduced column-echelon form for \(m \in \NN\)
+	}
+
+	\parinf
+	Thus, through the principle of mathematical induction, we have proven that every matrix has a reduced column-echelon form for any number of columns \(j \in \NN\).
+
+}
+
+\qs{}{Determinants are column-linear. We say that a function \(\delta: \mathbb{F}^{n, n} \rightarrow \mathbb{F}\) is column-linear if the following condition holds:
+
+Let \(A, B\) and \(D\) be three \(n \times n\) matrices, all of whose columns are equal, except for the \(k\)-th column, where we assume that \(D_k=\) \(\lambda \cdot A_k+\mu \cdot B_k\). Then
+\[
+	\delta(D)=\lambda \cdot \delta(A)+\mu \cdot \delta(B) .
+\]
+
+Or, more visually:
+
+\[
+	\delta \left(
+	\begin{array}{cccc}
+			\vrule & \vrule                                                   & \vrule \\
+			A_{1}  & -\quad \lambda \cdot A_{k} +  \mu \cdot B_{k}     \quad- & A_{m}  \\
+			\vrule & \vrule                                                   & \vrule
+		\end{array}
+	\right) = \lambda \cdot \delta \left(\begin{array}{cccc}
+			\vrule & \vrule                  & \vrule \\
+			A_{1}  & -\quad A_{k}     \quad- & A_{m}  \\
+			\vrule & \vrule                  & \vrule
+		\end{array}\right) + \mu \cdot \delta \left(\begin{array}{cccc} \vrule & \vrule                  & \vrule \\
+             A_{1}         & -\quad B_{k}     \quad- & A_{m}  \\
+             \vrule        & \vrule                  & \vrule
+		\end{array}\right)
+\]
+
+For example:
+\[
+	\delta\left(\begin{array}{lll}
+			1 & 2 \lambda+10 \mu & 3 \\
+			4 & 5 \lambda+11 \mu & 6 \\
+			7 & 8 \lambda+12 \mu & 9
+		\end{array}\right)=\lambda \cdot \delta\left(\begin{array}{ccc}
+			1 & 2 & 3 \\
+			4 & 5 & 6 \\
+			7 & 8 & 9
+		\end{array}\right)+\mu \cdot \delta\left(\begin{array}{lll}
+			1 & 10 & 3 \\
+			4 & 11 & 6 \\
+			7 & 12 & 9
+		\end{array}\right)
+\]
+
+Prove that the determinant function det: \(\mathbb{F}^{n, n} \rightarrow \mathbb{F}\) is column-linear. [Hint: Problem 4(a).]
+}
+
+\pf{Proof}{
+
+	Let \(A, B\) and \(D\) be three \(n \times n\) matrices, all of whose columns are equal, except for the \(k\)-th column,
+
+	where we assume that \(D_k=\) \(\lambda \cdot A_k+\mu \cdot B_k\).
+
+	We want to show that for every column \(j\), the following equality holds:
+
+	\[
+		d_{1,j} \cdot \det(D_{1,j}) = \lambda \cdot a_{1,j} \cdot \det(A_{1,j}) + \mu \cdot b_{1,j} \cdot \det(B_{1,j})
+	\]
+
+	Before, we begin, notice that the determinant function is unique,
+
+	which means that Theorem 3 of the handout holds for our \(\delta\).
+
+	That is to say that \(\delta\) holds all the properties defined in theorem 3.
+
+	Therefore, theorem 4 and corollary 5, 6, 7 hold for \(\delta\).
+
+	Specifically we can use that if if \(E\) is an elementary matrix, then:
+
+	\begin{enumerate}[label=(\alph*),wide]
+		\item If \(E\) is of type (i), then \(\delta(E) = 1\)
+		\item If \(E\) is of type (ii), then \(\delta(E) = -1\)
+		\item If \(E\) is of type (iii), then \(\delta(E) = c\)
+	\end{enumerate}
+
+	Let's proceed by induction on \(n \in \NN\) to show that \(\delta\) is column-linear.
+
+	\mclm{Base Case}{
+		Remember that the determinant of a \(1 \times 1\) matrix is just the entry of the matrix, thus:
+
+		\begin{align*}
+			\det(D) & = \lambda A_1 + \mu B_1         \\
+			        & = \lambda \det(A) + \mu \det(B)
+		\end{align*}
+
+		Thus, our base case holds for \(n = 1\).
+	}
+
+	\mclm{Inductive Step}{
+		Assume that \(\delta\) is column-linear for \(\FF^{n-1, n-1} \to \FF\).
+
+		Now, we are given that \(D, A, B\) are the same except for the \(k\)-th column.
+
+		Which means that \(D_{k}\) is a linear combination of \(A_{k}\) and \(B_{k}\): \(D_k = \lambda A_k + \mu B_k\).
+
+		Notice that by our induction hypothesis, the determinant of each \((n-1)\times (n-1)\) matrix, \(D_{1, j}^{\prime}, A_{1, j}^{\prime}, B_{1, j}^{\prime}\) is:
+
+		\begin{enumerate}[label=(\roman*),wide]
+			\item Column linear in the \(j\)-th column for all \(j < k\)
+			\item Column linear in the \(j - 1\)-th column for all \(j > k\)
+		\end{enumerate}
+
+		Thus, we can write:
+
+		\begin{align*}
+			\det(D)                & = \sum_{k = 1}^{n} (-1)^{k+1} d_{1,k} \cdot \det(D_{1,k}^{\prime})                                                                                                                              \\
+			                       & = \sum_{k = 1}^{j - 1} (-1)^{k+1} d_{1,k} \cdot \det(D_{1,k}^{\prime}) + (-1)^{j+1} d_{1,j} \cdot \det(D_{1,j}^{\prime}) + \sum_{k = j + 1}^{n} (-1)^{k+1} d_{1,k} \cdot \det(D_{1,k}^{\prime}) \\
+			                       & = \sum_{k \neq j} (-1)^{k+1} d_{1,k} \cdot \det(D_{1,k}^{\prime}) + (-1)^{j+1} d_{1,j} \cdot \det(D_{1,j}^{\prime})                                                                             \\
+			                       & = \sum_{k \neq j} (-1)^{k+1} d_{1,k} \cdot \left(\lambda \det(A^{\prime}_{1,k}) + \mu\det(B^{\prime}_{1,k})\right) + (-1)^{j+1} (\lambda A_{k} + \mu B_{k}) \cdot \det(D_{1,j}^{\prime})        \\
+			                       & = \sum_{k \neq j} \ldots + (-1)^{j+1} \lambda a_{1,j} \cdot \det(D_{1,j}^{\prime}) + (-1)^{j+1} \mu b_{1,j} \cdot \det(D_{1,j}^{\prime})                                                        \\
+			\det(D_{1,j})^{\prime} & = \det(A_{1,j})^{\prime} = \det(B_{1,j})^{\prime} \text{ by construction, as the \((j)\) column was removed}                                                                                    \\
+			                       & = \sum_{k \neq j} \ldots + (-1)^{j+1} \lambda a_{1,j} \cdot \det(A_{1,j}^{\prime}) + (-1)^{j+1} \mu b_{1,j} \cdot \det(B_{1,j}^{\prime})                                                        \\
+			                       & = \sum_{k =1}^{n} (-1)^{k+1} \lambda a_{1,k} \cdot \det(A^{\prime}_{1,k}) + (-1)^{k+1} \mu b_{1,k} \cdot \det(B^{\prime}_{1,k})                                                                 \\
+			                       & = \lambda \left(\sum_{k =1}^{n} (-1)^{k+1} a_{1,k} \cdot \det(A^{\prime}_{1,k})\right) + \mu \left(\sum_{k =1}^{n} (-1)^{k+1} b_{1,k} \cdot \det(B^{\prime}_{1,k})\right)                       \\
+			                       & = \lambda \det(A) + \mu \det(B)
+		\end{align*}
+
+		Thus \(\det(D) = \lambda \det(A) + \mu \det(B)\) for \(n\) which completes our inductive step.
+	}
+
+	Thus, through the principle of mathematical induction, we have proven that \(\delta\) is column-linear.
+
+	\nt{
+		This took me way too long, and I'm still not sure how I would use the hint.
+
+		I feel like there was an easier way, but I couldn't find it.
+	}
+}
+
+\end{document}
