@@ -238,92 +238,92 @@ Tonight, I will help my daughter with her math homework. And if she asks me abou
 
 ## Notes from a Thursday Night
 
-I sit here, cross-legged on unwashed sheets,
-surrounded by textbooks I pretend to read.
-Another night of almost-understanding,
-of reaching for thoughts that slip like smoke
-through fingers too clumsy to catch them.
+I sit here, cross-legged on unwashed sheets,  
+surrounded by textbooks I pretend to read.  
+Another night of almost-understanding,  
+of reaching for thoughts that slip like smoke  
+through fingers too clumsy to catch them.  
 
-They say college is where minds catch fire.
-Mine just smolders, giving off toxic fumes
-that smell like yesterday's coffee
-and tomorrow's disappointment.
-(God, I'm so tired of disappointing.)
-
-My roommate's out again, living what they call
-"the best years of our lives" while I
-conjugate verbs in languages I'll never speak,
-memorize formulas I'll never use,
-chase dreams I'll never catch.
-
-The library closes in twenty minutes.
-I should go – pretend I belong among
-the bright ones, the quick ones,
-those who understand on first reading,
-who raise their hands without their hearts racing.
-
-Instead, I stare at my reflection 
-in a laptop screen gone dark,
-counting the hours until dawn,
-adding them to the collection
-of nights I've wasted being almost-good.
-
-My father calls these growing pains.
-(He means well, they all mean well.)
-But what grows in these fluorescent hours
-besides the stack of half-filled notebooks
-and the weight of what I cannot grasp?
-
-Sometimes I think I feel it coming –
-that moment when it all makes sense,
-when the fog lifts and reveals
-the person I'm supposed to be.
-But it's just another false dawn.
-
-The group chat buzzes with plans:
-Friday nights and future dreams.
-I type "maybe next time" with practiced ease,
-then return to these pages
-that refuse to yield their secrets.
-
-My high school valedictorian speech
-sits in a drawer somewhere, yellowing,
-full of promises about potential
-and the future's bright horizon.
-(God, we were all so young.)
-
-Now I'm here, three years deep
-in a game I don't know how to win,
-watching others soar past
-while I remain earthbound,
-heavy with the weight of mediocrity.
-
-But still I sit, and still I try,
-and still I fill these margins
-with desperate annotations,
-as if understanding might come
-through sheer stubborn repetition.
-
-Tomorrow I'll smile in class,
-nod at all the right moments,
-pretend I'm keeping pace.
-Tonight, I'll sit with my failure,
-let it teach me what it will.
-
-Maybe that's all I'll ever be:
-The one who tried too hard
-to be what others are by nature.
-The one who loved the dream
-enough to bear the waking.
-
-So here's to another night
-of almost-understanding,
-of reaching for thoughts that slip away,
-of being less than I should be,
-but more than I was yesterday.
-
-The library's closed now.
-My coffee's gone cold.
-The words still swim before my eyes,
-but I remain here, drowning slowly,
-in the beauty of the trying.
+They say college is where minds catch fire.  
+Mine just smolders, giving off toxic fumes  
+that smell like yesterday's coffee  
+and tomorrow's disappointment.  
+(God, I'm so tired of disappointing.)  
+  
+My roommate's out again, living what they call  
+"the best years of our lives" while I  
+conjugate verbs in languages I'll never speak,  
+memorize formulas I'll never use,  
+chase dreams I'll never catch.  
+  
+The library closes in twenty minutes.  
+I should go – pretend I belong among  
+the bright ones, the quick ones,  
+those who understand on first reading,  
+who raise their hands without their hearts racing.  
+  
+Instead, I stare at my reflection   
+in a laptop screen gone dark,  
+counting the hours until dawn,  
+adding them to the collection  
+of nights I've wasted being almost-good.  
+  
+My father calls these growing pains.  
+(He means well, they all mean well.)  
+But what grows in these fluorescent hours  
+besides the stack of half-filled notebooks  
+and the weight of what I cannot grasp?  
+  
+Sometimes I think I feel it coming –  
+that moment when it all makes sense,  
+when the fog lifts and reveals  
+the person I'm supposed to be.  
+But it's just another false dawn.  
+  
+The group chat buzzes with plans:  
+Friday nights and future dreams.  
+I type "maybe next time" with practiced ease,  
+then return to these pages  
+that refuse to yield their secrets.  
+  
+My high school valedictorian speech  
+sits in a drawer somewhere, yellowing,  
+full of promises about potential  
+and the future's bright horizon.  
+(God, we were all so young.)  
+  
+Now I'm here, three years deep  
+in a game I don't know how to win,  
+watching others soar past  
+while I remain earthbound,  
+heavy with the weight of mediocrity.  
+  
+But still I sit, and still I try,  
+and still I fill these margins  
+with desperate annotations,  
+as if understanding might come  
+through sheer stubborn repetition.  
+  
+Tomorrow I'll smile in class,  
+nod at all the right moments,  
+pretend I'm keeping pace.  
+Tonight, I'll sit with my failure,  
+let it teach me what it will.  
+  
+Maybe that's all I'll ever be:  
+The one who tried too hard  
+to be what others are by nature.  
+The one who loved the dream  
+enough to bear the waking.  
+  
+So here's to another night  
+of almost-understanding,  
+of reaching for thoughts that slip away,  
+of being less than I should be,  
+but more than I was yesterday.  
+  
+The library's closed now.  
+My coffee's gone cold.  
+The words still swim before my eyes,  
+but I remain here, drowning slowly,  
+in the beauty of the trying.  
