@@ -1,0 +1,744 @@
+\chapter{Vector Spaces}
+\section{Fields}
+\dfn{Fields or "sets of scalars"}{
+	We have a lot of experience with this, in fact:
+
+	\begin{enumerate}[label=(\roman*)]
+		\item \(\QQ = \left\{ \frac{a}{b} \colon a, b \in \ZZ, b \neq 0 \right\} \) Rational Numbers
+		\item \(\RR\), the real numbers: \(\QQ \subseteq \RR\) e.g. \(\sqrt{2} \notin \QQ\)
+		\item \(\CC\), the complex numbers: \(i^{2} + 1 = 0\)
+	\end{enumerate}
+
+	A field is a set \(F\) with two operations \(+\) and \(\cdot\) such that:
+
+	\begin{enumerate}[label=(\roman*)]
+		\item Associativity: for all \(a, b, c \in F\), \(a + (b + c) = (a + b) + c\) and \(a(bc) = (ab)c\)
+		\item Commutativity: for all \(a, b \in F\), \(a + b = b + a\) and \(ab = ba\)
+		\item Identity: there are elements \(0\) and \(1\) in \(\FF\) such that for all \(a \in F\), we have: \(a + 0 = a\) and \(a \cdot 1 = a\)
+		\item Inverses: for all \(a \in F\), there is an element \(b\) such that \(a + b = 0\). We write \(b = -a\) and \(x - y \colon= x + (-y)\). Additionally, for any \(a \neq 0\) in \(F\), there is an element \(b \neq 0\) such that \(ab = 1\). We write \(b = a^{-1}\).
+		\item Distributivity: for all \(a, b, c \in F\), we have \(a(b + c) = ab + ac\)
+		\item \(0 \neq 1\)
+	\end{enumerate}
+}
+
+\ex{}{
+	\(F_2 = \left\{ 0, 1 \right\} \) is a field.
+
+	If we write the addition table:
+
+	\begin{center}
+		\label{tab:addition-table}
+		\begin{tabular}{c|cc}
+			+ & 0 & 1 \\
+			\hline
+			0 & 0 & 1 \\
+			1 & 1 & 0
+		\end{tabular}
+	\end{center}
+
+	Now for the multiplication table:
+
+	\begin{center}
+		\label{tab:multiplication-table}
+		\begin{tabular}{c|cc}
+			\(\cdot\) & 0 & 1 \\
+			\hline
+			0         & 0 & 0 \\
+			1         & 0 & 1
+		\end{tabular}
+	\end{center}
+}
+
+\ex{}{
+	Let's define \(\FF = \left\{ \triangle, \square, \circ  \right\} \)
+
+	With the addition and multiplication tables as followed:
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|}
+			\hline+              & \(\triangle\) & \(\square\)   & \(\circ\)     \\
+			\hline \(\triangle\) & \(\triangle\) & \(\square\)   & \(\circ\)     \\
+			\hline \(\square\)   & \(\square\)   & \(\circ\)     & \(\triangle\) \\
+			\hline \(\circ\)     & \(\circ\)     & \(\triangle\) & \(\square\)   \\
+			\hline
+		\end{tabular}
+		\quad
+		\begin{tabular}{|c|c|c|c|}
+			\hline \(\cdot\)     & \(\triangle\) & \(\square\)   & \(\circ\)       \\
+			\hline \(\triangle\) & \(\triangle\) & \(\triangle\) & \(\triangle\)   \\
+			\hline \(\square\)   & \(\triangle\) & \(\square \)  & \(\circ\)       \\
+			\hline \(\circ\)     & \(\triangle\) & \(\circ\)     & \(\square{}  \) \\
+			\hline
+		\end{tabular}
+	\end{center}
+
+	\(\FF\) is a field.
+
+	With \(o_{\FF} = \triangle\) and \(1_{\FF} = \square\).
+
+	Now, "\(2_{F}\)" = \(1_{\FF} + 1_{\FF} = \square + \square = \circ\).
+
+	Let's also define, \(-\square = \circ\).
+
+}
+
+\thm{ The additive identity of a field \(\FF\) is unique. }{
+
+\pf{Proof}{
+Suppose \(0_{F}, 0_{F}'\) are additive identities of \(\FF\).
+
+Then:
+
+\[
+	0_{F} \overbrace{=}^{\text{Because \(O_{F}`\) is an additive identify}} 0_{F} + 0_{F}' \underbrace{=}_{\text{Beacuse \(O_{f}\) is an additive identity}} 0_{F}'
+\]
+
+Thus, the additive identity is unique.
+
+}
+}
+
+\thm{}{
+Let \(\FF\)  be a field and let \(a \in \FF\). Then \(a \cdot O_{F} = 0_{F}\).
+
+		\nt{Don't think of zero is nothing, think of its meaning and how important it is to a field}
+
+		\pf{Proof}{
+			Let \(-a \cdot 0_{F}\) be the additive inverse of \(a \cdot 0_{F}\).
+
+			Then:
+
+			\begin{align*}
+				0_{F} + 0_{F}                                      & = 0_{F} \quad \text{as \(0_{F}\) is an additive identity} \\
+				a \cdot (0_{F} + 0_{F})                            & = a \cdot 0_{F}                                           \\
+				a \cdot 0_{F} + a \cdot 0_{F}                      & = a \cdot 0_{F} \quad \text{by distributivity}            \\
+				(a \cdot 0_{F} + a \cdot 0_{F}) + (-a \cdot 0_{F}) & = a \cdot 0_{F} + (-a \cdot 0_{F})                        \\
+				(a \cdot 0_{F} + a \cdot 0_{F}) + -a \cdot 0_{F}   & = 0_{F} \quad\text{by additive inverse}                   \\
+				a \cdot 0_{F} + (a \cdot 0_{F} + -a \cdot 0_{F})   & = 0_{F} \quad\text{by associativity}                      \\
+				a \cdot 0_{F} + 0_{F}                              & = 0_{F} \quad\text{by additive inverse}                   \\
+				a \cdot 0_{F}                                      & = 0_{F} \quad\text{by additive identity}
+			\end{align*}
+		}
+	}
+
+\thm{}{
+
+	Let \(\FF\) be a field and let \(a \in \FF\). Then \(-(-a) = a\).
+
+	\mclm{Known}{
+		Additive inverse are unique.
+
+		\[
+			(-a) + a = 0_{F}
+		\]
+
+		This says that \(a\) is an additive inverse of \(-a\).
+
+		Additive inverses are unique, so \(a\) must be the additive inverse of \(-(-a)\).
+	}
+}
+
+\nt{you can try this at home:
+\[
+	(-1_{F}) \cdot (a) = -a
+\]
+
+Where \(-1\) is the additive inverse of \(1\), and \(-a\) is the additive inverse of \(a\).
+
+Hint: \((-1) + 1 = 0_{f}\)
+}
+
+\mclm{Building \(\CC\) out of \(\RR\) }{
+	A complex number is an ordered pair \((a, b)\) of real numbers.
+
+	\[
+		\CC = \left\{ (a, b) \colon a, b \in \RR \right\}
+	\]
+
+	\begin{enumerate}[label=(\roman*)]
+		\item Addition: \((a, b) + (c, d) \colon= (a + c, b + d)\), where \((a, b) = z_{1}\) and \((c, d) = z_{2}\). As such, we use \(\RR\) addition to define \(\CC\) addition.
+		\item Multiplication: \((a, b) \cdot (c, d) \colon= (ac - bd, ad + bc)\), where \((a, b) = z_{1}\) and \((c, d) = z_{2}\)
+		      \nt{You might want to think of \((a, b)\) as \(a + bi\), where \(i^{2} = -1\). As such:
+
+			      \[
+				      (a + bi) \cdot (c + di) = (ac - bd) + (ad + bc)i
+			      \]
+		      }
+		\item Additive identity: \((0_{\RR}, 0_{\RR}) = 0_{\CC}\).
+		\item Multiplicative identity: \((1_{\RR}, 0_{\RR}) = 1_{\CC}\).
+		      \nt{
+		      We can check that \(i \colon= (0_{\RR}, 1_{\RR})\).
+
+		      Now, \((0_{\RR}, 1_{\RR}) \underbrace{\cdot}_{\CC} (0_{\RR}, 1_{\RR}) = (-1_{\RR}, 0_{\RR}) = -(1_{\RR}, 0_{\RR}) = -1_{\CC}\).
+		      }
+	\end{enumerate}
+}
+
+\dfn{Lists \(T\) tuples}{
+	Let \(F\) be a field (think: \(F_2, F_{3}, \QQ, \RR, \CC\) ).
+
+	Then we will have a list of length \(n\) that they are ordered \(x_{1}, \ldots, x_{n}, x_{i} \in \FF\).
+
+	Remember order matters! Note \((2, 3) \neq (3, 2)\)
+
+	Let's define: \(\FF^{n} = \left\{ (x_1, \ldots, x_{n}) \colon x_{i} \in \FF, i = 1, \ldots, n \right\} \). For instance \(\RR^{2} = \left\{ (x, y) \colon x, y \in \RR\right\} \)
+
+	Sometimes we write \(\underline{x}\) or \(\vec{x} \in \FF^{n}\) for \((x_1, \ldots, x_{n})\).
+
+	\(F^{n}\) is the archetype of a "finite-dimensional vector space".
+
+	This means that the following properties hold:
+
+	\begin{enumerate}[label=(\roman*)]
+		\item \(\vec{x} + \vec{y} = (x_1, \ldots, x_{n}) + (y_1, \ldots, y_{n}) \coloneq (x_1 + y_1, x_{2} + y_{2}, \ldots, x_{n} + y_{n})\). Note that we are using the addition of \(\FF\) to define the addition of \(\FF^{n}\).
+		\item Addition has a neutral element: \(\vec{0} = (0_{FF}, \ldots, 0_{FF})\), \(n\) times. Thus:
+
+		      \begin{align*}
+			      \vec{x} + \vec{0} & = (x_1, \ldots, x_{n}) + (0_{FF}, \ldots, 0_{FF}) \\
+			                        & = (x_1 + 0_{FF}, \ldots, x_{n} + 0_{FF})          \\
+			                        & = (x_1, \ldots, x_{n})                            \\
+			                        & = \vec{x}
+		      \end{align*}
+		      There are additive inverses: if \(\vec{x} = (x_1, \ldots, x_{n})\) then setting \(-\vec{x} = (-x_1, \ldots, -x_{n})\) we get
+		      \[
+			      \vec{x} + (-\vec{x}) = \vec{0}
+		      \]
+		\item Elements of \(\FF^{n}\) can be scaled by elements of \(\FF\).
+		      If \(\vec{x} = (x_1, \ldots, x_{n})\) and \(\lambda \in \FF\), then \(\lambda \cdot \vec{x} = (\lambda \cdot x_1, \ldots, \lambda \cdot x_{n})\).
+	\end{enumerate}
+
+	\nt{
+		Warning! In general, elements of \(\FF^{n}\) cannot be multiplied with each other unless we define a multiplication operation on \(\FF^{n}\).
+	}
+}
+
+\section{Vectors Spaces}
+
+\dfn{Vector Space in general}{
+Let \(F\) be a field, where \(F = (F, +_{F}, \cdot_{F})\).
+
+A vector space over \(\FF\) is a set \(V\) together with two operations:
+
+Define Addition of Vectors as
+
+\[
+	+ \colon V \times V \mapsto V, (u, v) \mapsto u + v
+\]
+
+And scalar multiplication as
+
+\[
+	\cdot \colon \FF \times V \mapsto V, (\lambda, v) \mapsto \lambda \cdot v
+\]
+
+These operations satisfy the following properties:
+
+\begin{enumerate}[label=(\roman*)]
+	\item Commutativity: \(u + v = v + u\) for all \(u, v \in V\)
+	\item Associativity of addition: \((u + v) + w = u + (v + w)\) for all \(u, v, w \in V\). Also:
+	      \[
+		      (\lambda_{1}^{\FF} \cdot \lambda_{2}^{\FF}) \cdot_{V} v = \lambda_{1}^{\FF} \cdot_{V} (\lambda_{2}^{\FF} \cdot_{V} v) \quad \text{for all } \lambda_{1}, \lambda_{2} \in \FF \text{ and } v \in V
+	      \]
+	\item Additive identity: there is a vector \(0_{V} \in V\) such that \(0_{V} + v = v\) for all \(v \in V\).
+	\item Additive inverse: for every \(v \in V\), there is a vector \(-v \in V\) such that \(v + (-v) = 0_{V}\).
+	\item Scalar Multiplicative identity: \(1_{\FF} \cdot v = v\) for all \(v \in V\).
+	\item Distributivity: \(\lambda \cdot (u + v) = \lambda \cdot u + \lambda \cdot v\) for all \(\lambda \in \FF\) and \(u, v \in V\). Also, \((\lambda_{1}^{\FF} + \lambda_{2}^{\FF}) \cdot v = \lambda_{1}^{\FF} \cdot v + \lambda_{2}^{\FF} \cdot v\) for all \(\lambda_{1}, \lambda_{2} \in \FF\) and \(v \in V\).
+\end{enumerate}
+
+\nt{
+	If \(\FF = \RR\), call \(V\) a real vector space.
+
+	If \(\FF = \CC\), call \(V\) a complex vector space.
+}
+
+\mclm{Summary}{
+To specify a vector space, we need 4 pieces of data:
+
+\begin{enumerate}[label=(\alph*)]
+	\item \(V\) - the set of vectors
+	\item \(\FF\) - the "numbers that we can scale by"
+	\item \(+_{V}\) - addition of vectors
+	\item \(\cdot_{V}\) - scalar multiplication
+\end{enumerate}
+
+For a while, we will write \((V, \FF, +, \cdot )\) for all this data.
+
+In fact, \((V, \FF, +, \cdot ) = (V, (\FF, +_{\FF}, \cdot_{\FF}), +_{V}, \cdot_{V})\).
+}
+
+For instance. Take a field \(\FF\), \((\FF^{n}, \FF, +, \cdot )\).
+
+Now given \(\vec{x}, \vec{y} \in \FF^{n}, \lambda \in \FF \). We can define:
+
+\begin{align*}
+	\vec{x} + \vec{y}     & = (x_1, \ldots, x_{n}) + (y_1, \ldots, y_{n})      \\
+	                      & = (x_1 + y_1, \ldots, x_{n} + y_{n})               \\
+	\lambda \cdot \vec{x} & = \lambda \cdot (x_1, \ldots, x_{n})               \\
+	                      & = (\lambda \cdot x_1, \ldots, \lambda \cdot x_{n})
+\end{align*}
+}
+
+\ex{}{
+
+	\begin{enumerate}[label=(\roman*)]
+		\item \begin{enumerate}[label=(\alph*)]
+			      \item \((V, \FF, +, \cdot ) = (\RR^{2}, \RR, +, \cdot )\) is a real vector space.
+			      \item \((x_{1}, y_{1}) +_{\RR^{2}} (x_{2}, y_{2}) = (x_{1} +_{\RR} x_{2}, y_{1} +_{\RR} y_{2})\).
+			      \item \(\lambda \in \RR\), \(\lambda \cdot^{\RR^{2}} (x, y) = (\lambda \cdot^{\RR} x, \lambda \cdot^{\RR} y)\).
+		      \end{enumerate}
+		\item \begin{enumerate}[label=(\alph*)]
+			      \item \((V, \FF, +, \cdot ) = (\CC^{2}, \CC, +_{\CC^{2}}, \cdot_{\CC^{2}} )\) is a complex vector space.
+			      \item \(z_{1}, z_{2} +_{\CC^{2}} (Z^{\prime}_{1}, Z^{\prime}_{2}) = (z_{1} +_{\CC} z_{1}^{\prime}, z_{2} +_{\CC} z_{2}^{\prime})\).
+			      \item \(\lambda \in \CC\), \(\lambda \cdot^{\CC^{2}} (z_{1}, z_{2}) = (\lambda \cdot^{\CC} z_{1}, \lambda \cdot^{\CC} z_{2})\).
+		      \end{enumerate}
+		\item \begin{enumerate}[label=(\alph*)]
+			      \item \((V, \FF, +, \cdot ) = (\CC^{2}, \RR, +_{\RR^{2}}, \cdot_{\RR^{2}} )\) is a complex vector space, but we are using real numbers to scale.
+			      \item Addition is the same as (ii), but \(z_{1}, z_{2} \in \CC^{2}\) i.e. \(a+bi\)
+			      \item Scalar multiplication: \(\lambda \in \RR, \lambda \cdot^{\RR^{2}} (z_{1}, z_{2}) = (\lambda \cdot^{\RR} z_{1}, \lambda \cdot^{\RR} z_{2})\).
+		      \end{enumerate}
+		\item \((V, \FF, +, \cdot) = (\FF^{n}, \FF, +, \cdot )\) is a vector space.
+		\item Let \(F\) be a field, and \(S\) be a set. Let \(V = \FF^{s} \coloneq \left\{ \text{functions } f \colon S \mapsto \FF\right\} \).
+
+		      \begin{enumerate}[label=(\roman*)]
+			      \item Addition: \(f, g \in V\), \(f \colon S \mapsto F\), and \(g \colon S \mapsto F\). Then \((f + g) \colon S \mapsto F\) is defined by \((f + g)(s) = f(s) + g(s)\) for all \(s \in S\). Or \(s \mapsto f(s) + g(s)\)
+			      \item Scalar Multiplication: \(\lambda \in F, f \in V\), \(f \colon S \mapsto F\).
+			            We need to show that \(\lambda \FF \in V\) i.e. \(\lambda \FF \colon S \mapsto F\), where \(s \to \lambda f(s)\).
+			            Also \((\lambda f)(s) = \lambda f(s)\) for all \(s \in S\).
+			      \item Additive identity: \(\vec{0}_{V} \colon S \to \FF\), \(s \to 0_{F}\).
+
+			            Check: \((f + \vec{0}_{V} )(s) = f(s) + \vec{0}_{V} (s) = f(s) + 0_{F} = f(s)\) for all \(s \in S\).
+		      \end{enumerate}
+
+		      Now, we want to talk about its relationship to \(\FF^{n}\). Take \(S = \left\{ 1, 2, \ldots, n \right\} \)
+
+		      Now, let \(V = \FF^{\left\{ 1, \ldots, n \right\} } = \left\{ \text{functions } f \colon \left\{ 1, \ldots, n \right\}  \mapsto \FF\right\} \).
+
+		      We can create a function \(F^{\left\{ 1, \ldots, n \right\} } \mapsto \FF^{n}\) by:
+
+		      \[
+			      f \colon \left\{ 1, \ldots, n \right\} \mapsto \FF \to (f(1), \ldots, f(n))
+		      \]
+
+		      \nt{This is a bijection!}
+	\end{enumerate}
+}
+
+\ex{}{
+Let \(S = [0, 1]\) and \(F = \RR\).
+
+Now set \(V = \FF^{s} = \RR^{[0, 1]} = \left\{ \text{functions } f: [0, 1] \to \RR\right\} \).
+
+Another Example.
+
+Let \(\FF = \RR\).
+
+Now \(V = \left\{ \text{polynomials of degree } \le 19 \text{ with coefficients in }\RR\right\} \).
+
+Now, \(+_{V} = \text{ usual addition of polynomials}\) and \(\cdot_{V} = \text{ usual scalar multiplication of polynomials}\).
+
+For instance,
+
+\begin{align*}
+	x^{19} + x + 1 \in V           \\
+	-x^{19} + x^{17} - x^{2} \in V \\
+	9 * (x^{2} + 2) = 9x^{2} + 18 \in V
+\end{align*}
+
+\nt{Sometimes we denote that the degree of \(0\) (the zero polynomial) is \(-\infty\).}
+}
+
+\mclm{First properties of vector spaces}{
+	Let \(V\) be a vector space over a field \(\FF\).
+
+	\begin{enumerate}[label=(\roman*)]
+		\item Additive identities are unique.
+		      Suppose \(\vec{0}, \vec{0}^{\prime} \in V \) are additive identities. Then \(\vec{0} = \vec{0} + \vec{0}^{\prime} = \vec{0}^{\prime}\).
+		\item Additive inverses are unique:
+
+		      Say \(w, w^{\prime}\) are additive inverse of \(v \in V\).
+
+		      \(w = w + \vec{0} = w + (v + w^{\prime}) = (w + v) + w^{\prime} = \vec{0} + w^{\prime} = w^{\prime}\).
+		\item \(0 \cdot v = \vec{0}, \forall v \in V \).
+
+		      \begin{align*}
+			      0_{F}                            & = 0_{F} + 0_{F}                                        \\
+			                                       & \implies 0_{F} \cdot v = (0_{F} + 0_{F}) \cdot v       \\
+			                                       & \implies 0_{F} \cdot v = 0_{F} \cdot v + 0_{F} \cdot v \\
+			      0_{F} \cdot v + (-0_{F} \cdot v) & = (0_{F} \cdot v + 0_{F} \cdot v) + (-0_{F} \cdot v)   \\
+			      \vec{0}                          & = 0_{F} \cdot v + (-0_{F} \cdot v + 0_{F} \cdot v)     \\
+			      \vec{0}                          & = 0_{F} \cdot v + \vec{0}                              \\
+			      \vec{0}                          & = 0_{F} \cdot v
+		      \end{align*}
+	\end{enumerate}
+}
+
+\section{Subspaces}
+
+\dfn{Subspaces}{
+
+Let \((V, \FF, +, \cdot )\) be a vector space. A subset \(U \subseteq V\) is a subspace if \((U, \FF, +_{u \in U}, *_{u \in U})\) is a vector space in its own right.
+
+\ex{}{
+	Let \(V = \RR^{3}\) and \(\FF = \RR\).
+	\[
+		U = \left\{ (x_1, x_2, 0) \colon x_1, x_2 \in \RR \right\} \nsubseteq \RR^{3} = V
+	\]
+}
+}
+
+\mclm{1.34 in book / conditions for a subspace}{
+
+	To check that \(U \subseteq V \) is a subspace, it is enough to check:
+
+	\begin{enumerate}[label=(\roman*)]
+		\item \(\vec{0} \in U\)
+		\item \(U\) is closed under addition: if \(u, v \in U\) then \(u + v \in U\)
+		\item \(U\) is closed under scalar multiplication: if \(u \in U\) and \(\lambda \in \FF\) then \(\lambda \cdot u \in U\)
+	\end{enumerate}
+
+	\mclm{Reason}{
+		These three conditions ensure that \(U\)  has an additive identity vector, and that addition and scalar multipliation makes sense in \(U\).
+
+		The remaining axioms for \(U\) to be a vector space are inherited from \(V\).
+
+		\ex{}{
+
+			Let's check associativity of addition: Let \(u, v, w \in U\).
+
+			But we know that \(u, v, w \in V\) as \(U \subseteq V\), so \(u + (v + w) = (u + v) + w (\star)\) in \(V\).
+
+			Since \(U\) is closed under addition, \(u + v \in U\).
+
+			Again, since \(u + v \in U\), and \(w \in U\), we know that \((u + v) + w \in U\).
+
+			Likewise, \(u + (v + w) \in U\). This means that \((\star)\) is also true in \(U\).
+
+			Ditto for the other axioms. Thus, we would be proving the same thing twice.
+		}
+
+	}
+}
+
+\ex{Charlie add the graphs}{
+	\(V = \RR^{2}\)
+
+	\begin{enumerate}[label=(\roman*)]
+		\item \(U = \left\{ (a, a,) \colon a \geq 0\right\} \) is not closed under scalar multiplication.
+		\item \(U = \left\{ (a, a) \colon a \in \RR\right\} \cup \left\{ (-a, a) \colon a \in \RR\right\} \) is not closed under addition.
+		\item \(U = \left\{ (a, a + a) \colon a \in \RR\right\} \) does not contain the additive identity of \(\RR^{2}\)
+	\end{enumerate}
+}
+
+\ex{}{
+	Let \(\FF = \RR\) and \(V = \RR^{(0, 3)} = \left\{ \text{functions } f \colon (0, 3) \to \RR\right\} \).
+
+	Let \(U \subseteq V\) be the subset \(\left\{ \text{functions } f \colon (0, 3) \to \RR \mid f \text{ is differentiable and } f\prime(2) = 0 \right\} \).
+
+	\pf{Proof}{
+		Let's check that \(U \subseteq V\) is a subspace:
+
+		\begin{enumerate}[label=(\roman*)]
+			\item Show that \(\vec{0}_{V} \in U\): \(\vec{0}_{V} \text{ is } \vec{0}_{V}\colon (0, 3) \to \RR, x \mapsto 0_{\RR}\).
+
+			      \(\vec{0}_{V}\) is differentiable and \(\vec{0}_{V}\prime(2) = 0\).
+
+			\item Show that \(U\) is closed under addition: Let \(f, g \in U\). We need to show that \(f + g \in U\).
+
+			      This means that both \(f\colon (0, 3) \to \RR\) and \(g\colon (0, 3) \to \RR\) are differentiable, and that \((f + g)\prime(2) = 0\).
+
+			      Then \(f + g \colon (0, 3) \to \RR\) is differentiable as both \(f\) and \(g\) are differentiable.
+
+			      Moreover, \((f + g)\prime(2) = f\prime(2) + g\prime(2) = 0 + 0 = 0\).
+
+			      Thus, \(f + g \in U\).
+
+			\item Show that \(U\) is closed under scalar multiplication: Let \(f \in U\) and \(\lambda \in \RR\). We need to show that \(\lambda \cdot f \in U\).
+
+			      This means that \(f\colon (0, 3) \to \RR\) is differentiable and that \((\lambda \cdot f)\prime(2) = 0\).
+
+			      Then \(\lambda \cdot f \colon (0, 3) \to \RR\) is differentiable as \(f\) is differentiable.
+
+			      Moreover, \((\lambda \cdot f)\prime(2) = \lambda \cdot f\prime(2) = \lambda \cdot 0 = 0\).
+
+			      Thus, \(\lambda \cdot f \in U\).
+
+		\end{enumerate}
+
+		All three conditions are satisfied, so \(U \subseteq V\) is a subspace.
+	}
+}
+
+% \subsection{Sums of Subsets (and then subspaces)}
+
+\dfn{Sums of Subsets}{
+	Let \((V, \FF, +, \cdot )\) be a vector space over a field \(\FF\). Let \(U, W \subseteq V\) be subsets.
+
+	Let \(U_1, \ldots, U_{m}\) be subsets of \(V\).
+
+	Where
+
+	\[
+		U_1, \ldots, U_{m} = \left\{ V_1 + V_2 + \ldots + V_{m} \colon V_i \in U_i \text{ for all } i = 1, \ldots, m \right\}
+	\]
+}
+
+\ex{}{
+	Our field will be \(\FF = \RR\), vectors space will be \(V = \RR^{3}\).
+
+	Let \(U_{1} = \left\{ (x, 0, 0) \colon x \in \RR \right\}, U_{2} = \left\{ (0, y, 0)  \colon y \in \RR \right\} \).
+
+	Let \(U_1 + U_2 = \left\{ V_{1} + V_{2} \colon V_1 \in U_1, V_2 \in U_2 \right\} \).
+
+	This means that this is equal to \(\left\{ (x, 0,0) + (0, y, 0) \colon x, y \in \RR \right\}  = \left\{ (x, y, 0) \colon x, y \in \RR \right\} \)
+}
+
+\thm{}{
+If \(U_1, \ldots, U_{m}\) are subspaces of \(V\), then \(U_1 + \ldots + U_{m}\) is the smallest subspace of \(V\) containing \(U_1, \ldots, U_{m}\).
+
+Have to prove that:
+\begin{enumerate}[label=(\roman*)]
+	\item \(U_1 + \ldots + U_{m}\) is a subspace of \(V\) (not just a subset).
+	\item \(U_1 \subseteq U_1 + \ldots, U_{m}, U_{2} \subseteq U_1 + \ldots + U_{m}, \ldots, U_{m} \subseteq U_1 + \ldots + U_{m}\).
+	\item \(U_1 + \ldots + U_{m}\) is the smallest subspace of \(V\) containing \(U_1, \ldots, U_{m}\).
+\end{enumerate}
+
+\pf{Proof}{
+We are given that each \(U_{i}\) is a subspace, meaning that \(\vec{0} \in U_{i}\), so
+
+\[
+	\vec{0} = \vec{0}_{\in u_1} + \ldots + \vec{0}_{\in U_{m}} \in U_1 + \ldots + U_{m}
+\]
+
+Thus, we have shown that the additive identity is in \(U_1 + \ldots + U_{m}\).
+
+Now, we want to show that this sum is closed under addition.
+
+Let \(\vec{v}, \vec{w} \in U_1 + \ldots + U_{m}\). We need to show that \(\vec{v} + \vec{w} \in U_1 + \ldots + U_{m}\).
+
+Then, \(\vec{V} = \vec{V_1} + \ldots + \vec{V_{m}}, \vec{W} = \vec{w_1} + \ldots + \vec{W_{m}}\)
+
+As such
+
+\begin{align*}
+	\vec{w} + \vec{v} & = \left( \vec{w_1} + \ldots + \vec{w_{m}} \right) + \left( \vec{v_1} + \ldots + \vec{v_{m}} \right) \\
+	                  & = \left( \vec{w_1} + \vec{v_1} \right) + \ldots + \left( \vec{w_{m}} + \vec{v_{m}} \right)          \\
+	                  & \in U_1 + \ldots + U_{m}
+\end{align*}
+
+Since each \(U_{i}\) is closed under addition.
+
+Now, we want to show that \(U_1 + \ldots + U_{m}\) is closed under scalar multiplication.
+
+Let \(\lambda \in \FF\) and \(\vec{v} \in U_1 + \ldots + U_{m}\). We need to show that \(\lambda \cdot \vec{v} \in U_1 + \ldots + U_{m}\).
+
+Then,
+
+\begin{align*}
+	\lambda * \vec{V} & = \lambda * \left( \vec{v_1} + \ldots + \vec{v_{m}} \right)                          \\
+	                  & = \left( \lambda * \vec{v_1} \right) + \ldots + \left( \lambda * \vec{v_{m}} \right) \\
+	                  & \in U_1 + \ldots + U_{m}
+\end{align*}
+
+Since each \(U_{i}\) is closed under scalar multiplication.
+
+Thus, \(U_1 + \ldots + U_{m}\) is a subspace of \(V\).
+
+Now, now we need to show that each \(U_{i}\) is contained in \(U_1 + \ldots + U_{m}\).
+
+Let \(u \in U_{i}\), we want to show that \(u \in U_1 + \ldots + U_{m}\).
+
+Then we can set \(\vec{0}_{u_1} + \ldots + \vec{0}_{u_{i - 1}} + u + \vec{0}_{u_{i + 1}} + \ldots + \vec{0}_{u_{m}} \in U_1 + \ldots + U_{m}\).
+
+Obviously, if we set the rest of the vectors to be \(\vec{0}\), then we get \(u \in U_1 + \ldots + U_{m}\).
+
+Finally, we want to prove that \(U_1 + \ldots + U_{m}\) is the smallest subspace of \(V\) containing \(U_1, \ldots, U_{m}\).
+
+Let \(X\) be a subspace of \(V\) such that \(U_{i} \in X\) for all \(i = 1, \ldots, m\).
+
+We want to show that \(U_1 + \ldots + U_{m} \subseteq X\).
+
+Let \(\vec{v} \in U_1 + \ldots + U_{m}\), so \(\vec{v} = \vec{v_1} + \ldots + \vec{v_{m}}\) where \(\vec{v_{i}} \in U_{i}\) for all \(i = 1, \ldots, m\).
+
+Since \(U_{i} \subseteq X\) for all \(i = 1, \ldots, m\), we know that \(\vec{v_{i}} \in X\) for all \(i = 1, \ldots, m\).
+
+Thus, \(\vec{v} = \vec{v_1} + \ldots + \vec{v_{m}} \in X\) since \(X\) is closed under vector addition.
+}
+}
+
+\dfn{Direct sum}{
+	Let \(U_{1} + \ldots + U_{M}\) is a direct sum if
+
+	for each \(\vec{v}  \in U_1 + \ldots U_{m}\), there is exactly one way to write \(\vec{v} = \vec{u_1} + \ldots + u_{\vec{m} }\) with \(\vec{u_{i}} \in U_{i}\).
+
+	\ex{}{
+		Let \(U_1 = \left\{ (x, y, 0) \colon x, y \in \RR\right\} \), \(U_2 = \left\{ (0, 0, z) \colon z \in \RR\right\} \).
+
+		\mclm{Claim}{
+			Then \(U_1 + U_2\) is a direct sum.
+		}
+
+		Let's prove our claim
+
+		\pf{Proof}{
+			Let \(\vec{v} \in U_1 + U_2\). We know \(\vec{v} = \vec{u_1} + \vec{u_2} \) for some \(\vec{u_1} \in U_1, \vec{u_2} \in U_2\).
+
+			We want to show: if \(\vec{v} = \vec{u_1} + \vec{u_2} \) for any \(\vec{u_1}  \in U_1, u_2 \in U_2\)
+
+			then \(\vec{u_1} = \vec{u_1}`\) and \(\vec{u_2} = \vec{u_2}`\).
+
+			Now we know that \(\vec{u_1} = (x, y, 0)\) and \(\vec{u_2} = (0, 0, z)\), and
+
+			the same for our primes (i.e. \(\vec{u_1}` = (x`, y`, 0)\) and \(\vec{u_2}` = (0, 0, z`)\)) for some \(x, y, z, x`, y`, z` \in \RR\).
+
+			\begin{align*}
+				\vec{v} & = \vec{u_1} + \vec{u_2} = \vec{u_1}` + \vec{u_2}`                          \\
+				        & (x, y, 0) + (0, 0, z) = (x`, y`, 0) + (0, 0, z`)                           \\
+				        & \implies (x, y, z)                                        & = (x`, y`, z`) \\
+				        & \implies \vec{u_1} = (x, y, 0) = (x`, y`, 0) = \vec{u_1}`                  \\
+				        & \implies \vec{u_2} = (0, 0, z) = (0, 0, z`) = \vec{u_2}`
+			\end{align*}
+		}
+	}
+
+	\mclm{Non-example}{
+		Let \(U_{3} = \left\{ (0, y, y) \colon y \in \RR\right\} \).
+
+		\mclm{Claim}{
+			Then \(U_1 + U_2 + U_3\) is not a direct sum.
+		}
+
+		\pf{Proof}{
+			Thus, one way to write the zero vector is as follows:
+
+			\[
+				\vec{0} = \vec{0}_{\in u_1} + \vec{0}_{\in u_2} + \vec{0}_{\in u_3} = (0, -1, 0)_{\in u_1} + (0, 0, -1)_{\in u_2} + (0, 1, 1)_{\in u_3}
+			\]
+		}
+	}
+}
+
+\thm{}{
+\(U_1 + \ldots + U_{m}\) is a direct sum if and only if
+
+\[
+	\vec{0} \text{can be written uniquely as } \vec{0} = \vec{0}_{\in u_1} + \ldots + \vec{0}_{\in u_{m}}
+\]
+
+We need to prove it both ways.
+
+\pf{Proof of \(\implies\) }{
+
+If \(U_1 + \ldots + U_{m}\) is direct, then every vector in \(\vec{v} \in U_1 + \ldots + U_{m}\) can be written uniquely as a sum of vectors from \(U_1, \ldots, U_{m}\).
+
+In particular, if \(\vec{v} = \vec{0}\), ten we can only write \(\vec{0}\) in one way as \(\vec{0} = \vec{0}_{\in u_1} + \ldots + \vec{0}_{\in u_{m}}\).
+
+And we done.
+
+}
+
+\pf{Proof of \(\impliedby\) }{
+
+Suppose \(\vec{0} \) can only be written in one way as
+
+\[
+	\vec{0} = \vec{0}_{\in u_1} + \ldots + \vec{0}_{\in u_{m}}, u_i \in U_i
+\]
+
+Let \(\vec{v} \in U_1 + \ldots + U_{m}\) be arbitrary, and suppose
+
+\[
+	\vec{v} = \vec{u_1} + \ldots + \vec{u_{m}} = \vec{u_1}` + \ldots + \vec{u_{m}}`
+\]
+
+We want to show that \(\vec{u_{i}} = \vec{u_{i}}`\) for all \(i = 1, \ldots, m\).
+
+Then,
+
+\begin{align*}
+	\vec{0} & = \vec{v} - \vec{v} = \left( \vec{u_1} + \ldots + \vec{u_{m}} \right) - \left( \vec{u_1}` + \ldots + \vec{u_{m}}` \right)           \\
+	        & \implies \vec{0} = \left( \vec{u_1} - \vec{u_1}` \right)_{\in u_1} + \ldots + \left( \vec{u_{m}} - \vec{u_{m}}` \right)_{\in u_{m}} \\
+	        & \implies \vec{u_1} - \vec{u_1}` = \vec{0}_{\in u_1}, \ldots, \vec{u_{m}} - \vec{u_{m}}` = \vec{0}_{\in u_{m}}                       \\
+\end{align*}
+
+And we are done.
+
+}
+
+Thus, we have shown that \(U_1 + \ldots + U_{m}\) is a direct sum if and only if \(\vec{0} = \vec{0}_{\in u_1} + \ldots + \vec{0}_{\in u_{m}}\) is the only way to write \(\vec{0}\) as a sum of vectors from \(U_1, \ldots, U_{m}\).
+}
+
+Alternative proof that \(U_1 + U_2\) (from our example) is direct using criterion from our prvious theorem.
+
+\pf{Alternative Proof}{
+
+	Let \(U_1 = \left\{ (x,y,0) \colon x, y \in \RR \right\} \) and \(U_2 = \left\{ (0,0,z) \colon z \in \RR \right\} \).
+
+	If \(\vec{0}  = \vec{u_1} + \vec{u_2} \) for some \(\vec{u_1} \in U_1, \vec{u_2} \in U_2\), then
+
+	\begin{align*}
+		\implies \vec{0} & = \vec{u_1} + \vec{u_2} = (x, y, 0) + (0, 0, z) = (x, y, z)                  \\
+		                 & \implies x = y = z = 0                                                       \\
+		                 & \implies \vec{u_1} = (x,y, 0) = (0, 0, 0), \vec{u_2} = (0, 0, z) = (0, 0, 0) \\
+	\end{align*}
+}
+
+\thm{}{
+	If \(U_1, U_2\) are subspaces of of a vector space \(V\), then
+
+	\[
+		(U_1 + U_2\text{ is direct}) \iff (U_1 \cap U_2 = \left\{ \vec{0} \right\} )
+	\]
+
+	\pf{Proof of \(\implies\) }{
+		Suppose \(U_1 + U_2\) is direct, then we want to show that \(U_1 \cap U_2 = \left\{ \vec{0} \right\} \).
+
+		In other words we need to prove subset inclusion in both directions.
+
+		\mclm{\(\subseteq\) }{
+
+			We have \(\left\{ 0 \right\} \subseteq U_1 \cap U_2\) since \(\vec{0} \in U_1\) and \(\vec{0} \in U_2\).
+
+		}
+
+		\mclm{\(\supseteq\) }{
+
+			Let \(\vec{v} \in U_1 \cap U_2\). We want to show that \(\vec{v} = \vec{0}\).
+
+			\begin{align*}
+				 & \implies \vec{v} \in U_1 \text{ and } \vec{v} \in U_2                                                          \\
+				 & \implies -\vec{v} \in U_1 \text{ and } -\vec{v} \in U_2 \text{ as they are closed under scalar multiplication} \\
+				 & \implies \vec{0} = \vec{v} + (-\vec{v}) \in U_1 + U_2 \text{ by our previous theorem}                          \\
+				 & \implies \vec{v} = \vec{0}, -\vec{v} = \vec{0}                                                                 \\
+			\end{align*}
+
+			Thus, \(U_1 \cap U_2 = \left\{ \vec{0} \right\} \).
+
+		}
+
+	}
+
+	\pf{Proof of \(\impliedby\) }{
+		Suppose \(U_1 \cap U_2 = \left\{ \vec{0} \right\} \), then we want to show that \(U_1 + U_2\) is direct.
+
+		Suppose \(\vec{0} = \vec{u_1} + \vec{u_2} \) for some \(\vec{u_1} \in U_1, \vec{u_2} \in U_2\).
+
+		We want to show that \(\vec{u_1} = \vec{u_2} = \vec{0}\).
+
+		\begin{align*}
+			0 = \vec{u_1} + \vec{u_2} \implies \vec{u_1} = -\vec{u_2} & \implies \vec{u_1} \in U_1 \text{ and } \vec{u_1} \in U_2                         \\
+			                                                          & \text{so } \vec{u_1} \in U_1 \cap U_2 = \left\{ \vec{0}  \right\}                 \\
+			                                                          & \implies \vec{u_1} = \vec{0} \implies \vec{u_2} = -\vec{u_1} = -\vec{0} = \vec{0} \\
+		\end{align*}
+
+		By our previous theorem, \(U_1 + U_2\) is direct because we can only write \(\vec{0}\) in one way as a sum of vectors from \(U_1\) and \(U_2\).
+	}
+
+	Thus, we have shown that \(U_1 + U_2\) is direct if and only if \(U_1 \cap U_2 = \left\{ \vec{0} \right\} \).
+}
+
+\pf{Third proof}{
+	Let \(\vec{v} = U_1 \cap U_2\), \(\vec{v} = (x, y, 0) = (0, 0, z)\).
+
+	Then \(x = y = z = 0\), so \(\vec{v} = \vec{0}\).
+
+	This means that \(U_1 \cap U_2 = \left\{ \vec{0} \right\} \).
+}

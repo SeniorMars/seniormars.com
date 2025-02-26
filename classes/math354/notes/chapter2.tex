@@ -1,0 +1,808 @@
+\chapter{Finite-Dimensional Vector Spaces}
+
+\section{Span and linear independence}
+
+\dfn{}{
+	Let \((V, F, +, \cdot)\) be a vector space.
+
+	A linear combination of \(\vec{v_1}, \vec{v_2}, \ldots, \vec{v_m} \in V\) is a vector of the form:
+
+	\[
+		\alpha \cdot \vec{v_1} + \alpha \cdot \vec{v_2} + \cdots + \alpha \cdot \vec{v_m} \text{ for some } \alpha_1, \alpha_2, \ldots, \alpha_m \in F
+	\]
+
+	\ex{}{
+		Let \(V = \RR\), and our field being \(\FF = \RR\).
+
+		\begin{align*}
+			6 \cdot (2, 1, -3) + 5 \cdot  (1, -2, 4) = (17, -4, -2) \\
+		\end{align*}
+
+		So \(17, -4, 2\) is a linear combination of \((2, 1, -3)\) and \((1, -2, 4)\).
+
+	}
+}
+
+\dfn{}{
+
+	The span of \(\vec{v_1}, \vec{v_2}, \ldots, \vec{v_m} \in V\) is the set of all linear combinations of \(\vec{v_1}, \vec{v_2}, \ldots, \vec{v_m}\).
+
+	\[
+		\operatorname{span}( \vec{v_1}, \vec{v_2}, \ldots, \vec{v_m}) = \left\{ \alpha_1 \cdot \vec{v_1} + \alpha_2 \cdot \vec{v_2} + \cdots + \alpha_m \cdot \vec{v_m} \mid \alpha_1, \alpha_2, \ldots, \alpha_m \in F \right\}
+	\]
+
+	\nt{
+		We have a few convention: \(\operatorname{span}\left(\right) \coloneq \left\{ \vec{0}_{v} \right\}\).
+	}
+
+}
+
+\mprop{}{
+	The \(\operatorname{span}\left( v_1, \ldots, v_{m} \right) \) is the smallest subspace of \(V\) that contains \(v_1, \ldots, v_{m}\).
+
+	\pf{Proof}{
+
+		We have to show three things in 1.34.
+
+		\begin{enumerate}[label=(\alph*)]
+			\item We know that \(\vec{0}_{v} = 0_{\FF} \cdot \vec{v_1} + 0_{\FF} \cdot \vec{v_2} + \cdots + 0_{\FF} \cdot \vec{v_m} \in \operatorname{span}\left( \vec{v_1}, \ldots, \vec{v_m} \right) \). Thus, we are done
+			\item Closed under addition \(+_{v}\):
+			      \[
+				      \underbrace{(a_1 \cdot  \vec{v_1} + \ldots + a_{m} \cdot \vec{v_m} )}_{\in \operatorname{span}\left( \vec{v_1}, \ldots, \vec{v_m} \right) } + \underbrace{(b_1 \cdot \vec{v_1} + \ldots + b_{m} \cdot \vec{v_m})}_{\in \operatorname{span}\left( \vec{v_1}, \ldots, \vec{v_m} \right) } = \underbrace{(a_1 + b_1) \cdot \vec{v_1} + \ldots + (a_{m} + b_{m}) \cdot \vec{v_m}}_{\in \operatorname{span}\left( \vec{v_1}, \ldots, \vec{v_m} \right) }
+			      \]
+			\item Now closed under scalar multiplication:
+			      \[
+				      \underbrace{\lambda}_{\in \FF} \underbrace{\cdot}_{\text{in } V} (\underbrace{a_1 \cdot \vec{v_1} + \ldots + a_{m} \cdot \vec{v_m}}_{\in \operatorname{span}\left( \vec{v_1}, \ldots, \vec{v_m} \right) }) = \underbrace{\lambda \cdot a_1 \cdot \vec{v_1} + \ldots + \lambda \cdot a_{m} \cdot \vec{v_m}}_{\in \operatorname{span}\left( \vec{v_1}, \ldots, \vec{v_m} \right) }
+			      \]
+
+		\end{enumerate}
+
+		Now we have to show that this span contains \(\vec{v_1}, \ldots, \vec{v_m}\):
+
+		In other words,
+
+		\[
+			\vec{v_2} = 0_{\FF} \cdot \vec{v_1} + 1_{\FF} \cdot \vec{v_2} + 0_{\FF} \cdot \vec{v_3} + \ldots + 0_{\FF} \cdot \vec{v_m} \in \operatorname{span}\left( \vec{v_1}, \ldots, \vec{v_m} \right)
+		\]
+
+		Now, we must show it is the smallest.
+
+		\nt{Draw some pics charlie}
+
+		Suppose that \(U \subseteq V\) is a subspace that contains \(\vec{v_1}, \ldots, \vec{v_m}\).
+
+		Must show that \(\operatorname{span}\left( \vec{v_1}, \ldots, \vec{v_m} \right) \subseteq U\).
+
+		Let \(v \in \operatorname{span}\left( \vec{v_1}, \ldots, \vec{v_m} \right) \), and is arbitrary.
+
+		We want to show that \(v \in U\)
+
+		We know some some things:
+
+		\begin{enumerate}
+			\item \(v = a_1 \cdot \vec{v_1} + \ldots + a_{m} \cdot \vec{v_m}\) for some \(a_1, \ldots, a_{m} \in \FF\)
+			\item \(\vec{v_1}, \ldots, \vec{v_m} \in U\).
+			      Since \(v_{i} \in U\) , then \(a_{i} \cdot \vec{v_i} \in U\) for all \(i = 1, \ldots, m\).
+
+			      This is because \(U\) is a subspace, and is closed under scalar multiplication.
+
+			      But then \(a_{1} \cdot \vec{v_1} + \ldots + a_{m} \cdot \vec{v_m} \in U\) since \(U\) is closed under addition.
+		\end{enumerate}
+
+		Therefore \(v \in U\), and we are done.
+	}
+}
+
+\mclm{Special Situation}{
+	If \(\operatorname{span}\left( v_1, \ldots, v_{m} \right) = V \), we say that \(v_1, \ldots, v_{m}\) spans \(V\).
+
+	\ex{}{
+		Let \(V = \RR^{3}\), and the field \(\FF = \RR\).
+
+		Then \(\operatorname{span}\left( (1, 0, 0), (0, 1, 0), (0, 0, 1) \right) = \RR^{3}\).
+
+		\pf{Proof}{
+			Let \((a, b, c) \in \RR^{3}\) be arbitrary.
+
+			Then, \((a, b, c) = a \cdot (1, 0, 0) + b \cdot (0, 1, 0) + c \cdot (0, 0, 1)\).
+
+		}
+	}
+}
+
+\dfn{}{
+
+	We say that \(V\) is finite-dimensional if V can be spanned by a finite list \(v_1, v_2, \ldots, v_{m}\).
+
+	\ex{}{
+		\(P_{m}(F) = \left\{ \text{Polys of degree } \le m \text{ with coefficients in } F \right\}\)
+
+		And we claim that this is spanned by \(1, x, x^2, \ldots, x^{m}\).
+
+		Because any \(p(x) \in P_{m}(F)\) has the form \(a_{m} \cdot x^{m} + \ldots + a_{1} \cdot x + a_{0}\) for some \(a_{0}, \ldots, a_{m} \in F\).
+	}
+}
+
+\mprop{}{
+	\(P(F) = \left\{ \text{Polys with coefficients in } F \right\}\) is not finite-dimensional.
+
+	\pf{Proof}{
+		We procced by contradiction.
+
+		Suppose, for a contradiction, that \(P(F)\) is finite-dimensional.
+
+		Then, there exists a finite list \(p_1(x), \ldots, p_{m}(x)\) that spans \(P(F)\).
+
+		In other words, \(\operatorname{span}\left( p_1(x), \ldots, p_{m}(x) \right) = P(F)\).
+
+		Let \(n = max\left( \deg(p_1(x)), \ldots, \deg(p_{m}(x)) \right) \).
+
+		Then, \(deg(a_{1} \cdot p_1(x) + \ldots + a_{m} \cdot p_{m}(x)) \le n\) for all \(a_{1}, \ldots, a_{m} \in F\).
+
+		So the degree of every element of \(\operatorname{span}\left( p_1(x), \ldots, p_{m}(x) \right) \) is at most \(n\).
+
+		Hence, \(1_{\FF} \cdot X^{n + 1} \notin \operatorname{span}\left( p_1(x), \ldots, p_{m}(x) \right) \).
+
+		This means that \(\operatorname{span}\left( p_1(x), \ldots, p_{m}(x) \right) \subsetneq P(F)\).
+
+		This is absurd!
+
+		So our assumption that \(P(F)\) is finite-dimensional is false.
+
+	}
+}
+
+\dfn{}{
+Linear (In)depence.
+
+Let \((V, \FF, +, \cdot )\) be a vector space.
+
+A list \(\vec{v_1}, \ldots, \vec{v_m} \in V\) is linearly independent if the only way to write
+
+\[
+	\vec{0}_{v} = \alpha_{1} \cdot \vec{v_1} + \ldots + \alpha_{m} \cdot \vec{v_m}, \alpha_{1}, \ldots, \alpha_{m} \in \FF
+\]
+
+Is to take \(a_1 = \ldots = a_{m} = 0_{\FF}\), otherwise it is linearly dependent.
+	}
+
+\ex{}{
+We want to show that \((1, 0, 0), (0, 1, 0)0, (0, 0, 1)\) are linearly independent in \(\RR^{3} = V\).
+
+because if
+
+\[
+	\vec{0}_{\RR^{3}} = (0, 0, 0) = a_{1} \cdot (1, 0, 0) + a_{2} \cdot (0, 1, 0) + a_{3} \cdot (0, 0, 1)
+\]
+
+Then, \((0, 0, 0) = (a_{1}, a_{2}, a_{3})\), so \(a_{1} = a_{2} = a_{3} = 0\).
+
+Now suppose that \(\vec{v_1}, \ldots, \vec{v_m} \in V\) is linearly independent and \(v \in  \operatorname{span}\left( \vec{v_1}, \ldots, \vec{v_n}  \right) \) .
+
+This means: \(\vec{v} = a_{1}v_1 + \ldots + a_{m}v_{m}\) for some \(a_{1}, \ldots, a_{m} \in \FF\).
+
+Now, suppose that \(V = b_1 v_1 + \ldots + b_{m} v_{m}\) for some \(b_{1}, \ldots, b_{m} \in \FF\) as well
+
+Now, let's subtract:
+
+\[
+	\vec{0}_{V} = v - v = (a_{1} - b_{1})v_1 + \ldots + (a_{m} - b_{m})v_{m}
+\]
+
+Since \(\vec{v_1}, \ldots, \vec{v_m} \) is linearly independent (L.I, we must have \(a_{i} - b_{i} = 0\) for all \(i = 1, \ldots, m\).
+
+This implies that \(a_{i} = b_{i}\) for all \(i = 1, \ldots, m\).
+
+Thus, there is exactly one way to write \(V\) as a linear combination of \(\vec{v_1}, \ldots, \vec{v_m} \)
+
+}
+
+\mclm{Key result}{
+
+	Let \((V, \FF, +, \cdot )\) be a finite-dimensional vector space.
+
+	Then the length of any-list of Linear Independence vectors is at most the length of any list of spanning vectors.
+
+}
+
+\ex{}{
+
+	We want to show that \((1, 0, 0), (0, 1, 0), (0, 0, 1)\) spans \(\RR^{3}\).
+
+	This implies that the list \((2, -1, \pi), (\sqrt{3}, -7, e ), (\sqrt{19}, -1, 7), (0, -5, \sqrt{2} + \sqrt{3}  ) \) is not linearly independent.
+
+	Since the length of the first list is 3, and the length of the second list is 4.
+
+	Thus, this list cannot be linearly independent.
+}
+
+\mlenma{Linear Dependence Lemma (LDL)}{
+
+	We want to prove this, but let's do some prep work first.
+	\mclm{Prep work}{
+		Say \(\vec{v_1}, \ldots, \vec{v_n} \in V\) is linearly dependent. Then there is a \(j \in \left\{ 1, \ldots, m \right\} \)
+
+		such that
+
+		\begin{enumerate}[label=(\roman*)]
+			\item \(v_{j} \in \operatorname{span}\left( \vec{v_1}, \ldots, \vec{v_j-1}  \right) \)
+			\item \(\operatorname{span}\left( \vec{v_1}, \ldots, \vec{v_m}  \right) = \operatorname{span}\left( v_1, \ldots, \hat{v_{j}}, \ldots, v_{m} \right) \), where \(\hat{v_{j}}\) means that we remove \(v_{j}\) from the list.
+		\end{enumerate}
+	}
+
+	Now, let's prove this.
+
+	\pf{Proof}{
+		Since \(\vec{v_1}, \ldots, \vec{v_m} \) are linearly dependent, there are \(a_1, \ldots, a_{m}\) not all zero such that
+
+		\[
+			\vec{0}_{v} = a_{1} \cdot \vec{v_1} + \ldots + a_{m} \cdot \vec{v_m}, a_{1}, \ldots, a_{m} \in \FF
+		\]
+
+		\begin{enumerate}[label=(\roman*)]
+			\item Let \(j = \max\left\{ i \mid a_{i} \neq 0\right\}\), so that \(a_1 v_1 + \ldots + a_{j} v_{j} = \vec{0}_{v}\) and \(a_{j} \neq 0\).
+
+			      \begin{align*}
+				      \implies & v_{j} = -\frac{1}{a_{j}}\left( a_1 v_1 + \ldots + a_{j-1} v_{j-1} \right) = \left(-\frac{a_1}{a_{j}}\right)v_1 + \ldots + \left(-\frac{a_{j-1}}{a_{j}}\right)v_{j-1} \\
+				      \implies & v_{j} \in \operatorname{span}\left( v_1, \ldots, v_{j-1} \right)
+			      \end{align*}
+			\item \(\operatorname{span}\left( v_1, \ldots, \hat{v_{j}}, \ldots, v_{m} \right) \subseteq \operatorname{span}\left( v_1, \ldots, v_{m} \right) \).
+
+			      \nt{We have to do the one above as well.}
+
+			      Now, we want to show the other direction as well.
+
+			      \[
+				      \operatorname{span}\left( \vec{v_1}, \ldots, \vec{v_m}  \right) \subseteq \operatorname{span}\left( v_1, \ldots, \hat{v_{j}}, \ldots, v_{m} \right)
+			      \]
+
+			      Let \(v \in \operatorname{span}\left( \vec{v_1}, \ldots, \vec{v_m} \right) \).
+
+			      Then, \(v = b_1 v_1 + \ldots + b_{m} v_{m}\) for some \(b_1, \ldots, b_{m} \in \FF\).
+
+			      \begin{align*}
+				       & \implies v = b_1 v_1 + \ldots + b_{j}\left[ \left(-\frac{a_1}{a_{j}}\right)v_1 + \ldots + \left(-\frac{a_{j-1}}{a_{j}}\right)v_{j-1} \right] + b_{j+1} v_{j+1} + \ldots + b_{m} v_{m} \quad\text{where \(v_{j}\) (from (i))} \\
+				       & \implies v \in \operatorname{span}\left( v_1, \ldots, \hat{v_{j}}, \ldots, v_{m} \right)
+			      \end{align*}
+
+			      Thus, \(\operatorname{span}\left( \vec{v_1}, \ldots, \vec{v_m}  \right) = \operatorname{span}\left( v_1, \ldots, \hat{v_{j}}, \ldots, v_{m} \right) \).
+		\end{enumerate}
+	}
+
+}
+
+\pf{Proof key result}{
+
+Let \(\vec{v_1}, \ldots, \vec{v_m} \in V\) be a linearly independence list.
+
+Let \(\vec{u_1}, \ldots, \vec{u_n} \in v\) be a spanning list, \(V = \operatorname{span}\left( \vec{u_1}, \ldots, \vec{u_n}  \right) \).
+
+We need to show that \(m \le n\) .
+
+\mclm{Step 1}{
+
+\[
+	v_1 \in \operatorname{span}\left( \vec{u_1}, \ldots, \vec{u_n}  \right) \overbrace{\implies}^{\text{PSET4}} \vec{v_1}, \vec{u_1}, \ldots, \vec{u_n} \text{ is linearly dependent}
+\]
+
+With the linear independence lemma, we know there exits \(\vec{u_{j_{1}}}\) such that
+
+\[
+	\vec{u_{j_{1}}} \in \operatorname{span}\left( \vec{v_1}, \vec{u_1}, \ldots, \vec{u_{j_{1}} - 1} \right)
+\]
+
+And
+
+\[
+	\operatorname{span}\left( \vec{v_1}, \vec{u_1}, \ldots, \vec{u_n}  \right) = \operatorname{span}\left( \vec{v_1}, \vec{u_1}, \ldots, \hat{\vec{u_{j_{1}}}}, \ldots, \vec{u_n} \right)
+\]
+
+\nt{
+	NB means nota bene, which means note well.
+
+	Notice that \(v_1\) is not plucked out from our list when we apply LDL.
+
+	If it were, then LDL would say \(v_1 \in \operatorname{span}\left(  \right) = \left\{ \vec{0}_{v}  \right\} \).
+
+	This implies that \(v_1 = \vec{0}_{v} \),
+
+	But \(\vec{v_1}, \ldots, \vec{v_m}\) is linearly independent.
+
+	As \(\vec{0}_{v} = 1_{\FF} \cdot \vec{v_1} + 0_{\FF} \cdot \vec{v_2} + \ldots + 0_{\FF} \cdot \vec{v_m}\) is the only way to write \(\vec{0}_{v}\) as a linear combination of \(\vec{v_1}, \ldots, \vec{v_m}\).
+
+	Thus, \(v_1 \neq \vec{0}_{v}\).
+}
+
+\mclm{Step 2}{
+
+	\(v_2 \in \operatorname{span}\left( \vec{u_1}, \ldots, \vec{u_n}  \right) = \operatorname{span}\left( \vec{v_1}, \vec{u_1}, \ldots, \vec{u_{n}}\right) = \operatorname{span}\left( \vec{v_1}, \vec{u_1}, \ldots, \hat{\vec{u_{j_{1}}}}, \ldots, \vec{u_n} \right) \)
+
+	Again, with the result in PSET4, we know that
+
+	\[
+		\vec{v_1}, \vec{v_2}, \vec{u_1}, \ldots, \hat{\vec{u_{j_{1}}}}, \ldots, \vec{u_n}\quad\text{is linearly dependent}
+	\]
+
+	With the linear independence lemma, we know there exits \(\vec{u_{j_{2}}}\) such that
+
+	\[
+		\operatorname{span}\left( \vec{v_1}, \vec{u_1}, \ldots, \hat{\vec{u_{j_{1}}}}, \ldots, \vec{u_n} \right) = \operatorname{span}\left( \vec{v_1}, \vec{v_2}, \vec{u_1}, \ldots, \hat{\vec{u_{j_{1}}}}, \ldots, \hat{\vec{u_{j_{2}}}}, \ldots, \vec{u_n} \right)
+	\]
+}
+
+\mclm{After \(m\) steps}{
+
+	Our list is \(\vec{v_1}, \ldots, \vec{v_m} \), some \(u\)'s implies that \(m \le n\)
+
+}
+
+Thus, we have shown that \(m \le n\).
+
+}
+
+}
+
+\section{Basis}
+
+\dfn{}{
+	Let \((V, \FF, +, \cdot )\) be a vector space.
+
+	A basis for \(V\) is a list \(\vec{v_1}, \ldots, \vec{v_n} \) that spans \(V\).
+
+	(i.e., \(V = \operatorname{span}\left( \vec{v_1}, \ldots, \vec{v_n}  \right) \)) and is linearly independent.
+
+	\ex{}{
+		\begin{enumerate}[label=(\roman*)]
+			\item Let \(V = \FF^{n}\) (think \(V = \RR^{n}\) or \(\CC^{n}\) )
+
+			      We can define the standard basis for \(\FF^{n}\) as:
+			      \begin{align*}
+				      v_1 = (1, 0, \ldots, 0) \\
+				      v_2 = (0, 1, \ldots, 0) \\
+				      \vdots                  \\
+				      v_n = (0, 0, \ldots, 1) \\
+			      \end{align*}
+
+			      e.g., \(V = \RR^{3} = \operatorname{span}\left( (1,0,0), (0,1,0), (0,0,1) \right) \). This list is linearly independent.
+			\item \(V = \RR^{2}\) The list \((1, 2), (2, 3)\) is a basis.
+
+			      \mclm{Linearly Independence}{
+				      If
+
+				      \begin{align*}
+					      a_1 (1, 2) + a_2 (2, 3) = (0, 0)_{\vec{0}_{\RR^{2}}} \\
+					      \implies (a_1 + 2a_2, 2a_1 + 3a_2) = (0, 0)          \\
+					      \implies a_1 = a_2 = 0
+				      \end{align*}
+			      }
+			\item \(V = P_{m}(\RR)\)
+
+			      Thus, the list \(1, x, x^2, \ldots, x^{m}\) is a basis for \(V\)
+		\end{enumerate}
+	}
+}
+
+\mprop{}{
+\(\vec{v_1}, \ldots, \vec{v_n} \in V\) is a bais for \(V\) if and only if every \(\vec{v} \in V\) can be written uniquely as a linear combination of \(\vec{v_1}, \ldots, \vec{v_n} \).
+
+\pf{Proof of \(\implies\) }{
+
+	Say \(\vec{v_1}, \ldots, \vec{v_n} \in V\) is a basis.
+
+	Let \(\vec{v} \in  V\). Since \(V = \operatorname{span}\left( \vec{v_1}, \ldots, \vec{v_n} \right) \),
+
+	we know that \(\vec{v} = a_1 \vec{v_1} + \ldots + a_{n} \vec{v_n}\) for some \(a_1, \ldots, a_{n} \in \FF\).
+
+	Since \(\vec{v_1}, \ldots, \vec{v_n} \) are linearly independent, we know this representation is unique.
+}
+
+\pf{Proof of \(\impliedby\) }{
+
+	Suppose that every \(\vec{v} \in V\) can be written uniquely as \(\vec{v} = a_1 \vec{v_1} + \ldots + a_{n} \vec{v_n}\) for some \(a_1, \ldots, a_{n} \in \FF\).
+
+	Then \(\vec{v} \in \operatorname{span}\left( \vec{v_1}, \ldots, \vec{v_n}  \right) \), so \(V \subseteq \operatorname{span}\left( \vec{v_1}, \ldots, \vec{v_n}  \right) \).
+
+	By the definition of span, we know that \(\operatorname{span}\left( \vec{v_1}, \ldots, \vec{v_n}  \right) \subseteq V \).
+
+	Thus, \(V = \operatorname{span}\left( \vec{v_1}, \ldots, \vec{v_n}  \right) \).
+
+	Next, let \(\vec{v} = \vec{0_v} \).
+
+	We know that \(\vec{0_v} = a_1 \vec{v_1} + \ldots + a_{n} \vec{v_n}\) for unique \(a_1, \ldots, a_{n} \in \FF\).
+
+	On the other hand (OTOH): taking \(a_1 = \ldots = a_{n} = 0\) works!
+
+	Therefore, the only way to write \(\vec{0}_{v} \) is a linearly combination of \(\vec{v_1}, \ldots, \vec{v_n} \)
+
+	is to take \(a_1 = \ldots = a_{n} = 0_{\FF}\).
+
+			The definition implies that \(\vec{v_1}, \ldots, \vec{v_n} \) is linearly independent.
+		}
+
+	Thus, we have shown that \(\vec{v_1}, \ldots, \vec{v_n} \in V\) is a basis for \(V\) if and only if every \(\vec{v} \in V\) can be written uniquely as a linear combination of \(\vec{v_1}, \ldots, \vec{v_n} \).
+}
+
+\thm{}{
+	Let \((V, \FF, +, \cdot )\) be a finite-dimensional vector space (fdvs).
+
+	Then every spanning list for \(V\) can be trimmed to a basis.
+
+	\pf{Proof}{
+
+		Say that \(\vec{v_1}, \ldots, \vec{v_n} \) is a strong list for \(V\).
+
+		\begin{algorithm}[H]
+			\vspace{5mm}
+			\SetAlgoLined{}
+			\(B = \left\{ \vec{v_1}, \ldots, \vec{v_n}  \right\} \) \tcc*{Note that \(B\) has no order.}
+			\For{\(j = 1, \ldots, n\) }{
+				\uIf{\(v_{j} \in \operatorname{span}\left( \left\{ \vec{v_1}, \ldots, \vec{v_{j-1}}  \right\}  \cap B\right) \) }{
+					Delete \(v_{j}\) from \(B\)\;
+				}
+			}
+			\caption{Trimming}
+		\end{algorithm}
+
+		When the loop is finished, the set \(B\) gives rise to a basis (any order).
+	}
+
+}
+
+\ex{}{
+	\(V = \RR^{3}\).
+
+	Let \(v_1 = (1, 0, 0)\), \(v_2 = (1, 1, 1)\), \(v_3 = (0, 1, 1)\), and \(v_4 = (0, 0, 1)\).
+
+	Let \(B = \left\{ \vec{v_1}, \vec{v_2}, \vec{v_3}, \vec{v_4}  \right\} \)
+
+	\mclm{Step 1}{
+		Is \(v_1 \in \operatorname{span}\left( \emptyset \cap B \right)  = \operatorname{span}\left(  \right) = \left\{ \vec{0}_{v}  \right\} \) ?
+
+		NO. Leave \(B\) alone.
+	}
+
+	\mclm{Step 2}{
+		Is \(v_2 \in \operatorname{span}\left( \left\{ v_1 \right\} \cap B \right) = \operatorname{span}\left( v_1 \right)\)?
+
+		Does \(v_2 = a_1 \cdot v_1\).
+
+		No!
+
+		Leave \(B\) alone.
+	}
+
+	\mclm{Step 3}{
+		Is \(v_3 \in \operatorname{span}\left( \left\{ v_1, v_2 \right\} \cap B \right) = \operatorname{span}\left( v_1, v_2 \right)\)?
+
+		Does \(v_3 = a_1 \cdot v_1 + a_{2} \cdot v_{2}\)?
+
+		Yes!
+
+		\[
+			v_3 = -v_1 + v_2
+		\]
+
+		New \(B = \left\{ v_1, v_2, v_4 \right\} \)
+	}
+
+	\mclm{Step 4}{
+		Is \(v_4 \in \operatorname{span}\left( \left\{ v_1, v_2, v_3 \right\} \cap B \right) = \operatorname{span}\left( v_1, v_2\right)\)?
+
+		Does \(v_4 = a_1 \cdot v_1 + a_{2} \cdot v_{2}\)?
+
+		No!
+
+		Leave \(B\) alone.
+
+	}
+
+	Thus, \(B = \left\{ v_1, v_2, v_4 \right\} \) is a basis for \(V\) through trimming.
+}
+
+\cor{}{
+	Any linearly independence list \(\vec{v_1}, \ldots, \vec{v_m} \) on \(V\) can be extended to a basis.
+
+	\pf{Proof}{
+		Let \(\vec{u_1}, \ldots, \vec{u_n} \) be any basis for \(V\) .
+
+		Trim the enlarged list \(\vec{v_1}, \ldots, \vec{v_m}, \vec{u_1}, \ldots, \vec{u_n} \) .
+
+		No \(\vec{v_{i}} \) is deleted during trimming (LDL).
+	}
+}
+
+\mclm{Semi-simplicity}{
+	Let \((V, \FF, +, \cdot)\) be a finite-dimensional vector space.
+
+	Let \(U \subseteq V\) be a subspace.
+
+	Then, there is a subspace \(W \subseteq V\) (not necessarily unique) such that \(V = U \oplus W\).
+
+	\mclm{Idea}{
+		Let \(\vec{u_1}, \ldots, \vec{u_n} \) be a basis for \(U\).
+
+		Complete to a spanning list of \(V\).
+
+		\(\vec{u_1}, \ldots, \vec{u_n}, \vec{w_1}, \ldots, \vec{w_m}  \).
+
+		The space \(W = \operatorname{span}\left( \vec{w_1}, \ldots, \vec{w_n}  \right)\) works!
+	}
+
+	\mclm{Claim}{
+		\(U\) itself is finite-dimensional.
+
+	}
+
+	Assume claim: Let \(\vec{u_1}, \ldots, \vec{u_n} \) be a basis for \(U\) .
+
+	This implies that \(\vec{u_1}, \ldots, \vec{u_n} \) is linearly independent in \(U\) , but also in \(V\) .
+
+	Now, extend to a basis of \(V\): \(\vec{u_1}, \ldots, \vec{u_n}, \vec{w_1}, \ldots, \vec{w_m}  \).
+
+	Take \(W = \operatorname{span}\left( \vec{w_1}, \ldots, \vec{w_m}  \right) \).
+
+	We want
+
+	\begin{enumerate}[label=(\roman*)]
+		\item \(U + W \supseteq V\), the other direciton is trivial.
+		\item \(U \cap W = \left\{ \vec{0}_{v}  \right\} \)
+	\end{enumerate}
+
+	Ok, let's start.
+
+	\begin{enumerate}[label=(\roman*)]
+		\item Let \(v \in V\). Since \(V = \operatorname{span}\left( \vec{u_1}, \ldots, \vec{u_n}, \vec{w_1}, \ldots, \vec{w_m}  \right) \), we know:
+
+		      \[
+			      v = \underbrace{a_1 \vec{u_1} + \ldots + a_{n} \vec{u_n}}_{\in U, a_{i} \in \FF} + \underbrace{b_1 \vec{w_1} + \ldots + b_{m} \vec{w_m}}_{\in W, b_{i} \in \FF} = U + W
+		      \]
+		      As such, \(V = U + W\)
+		\item Let \(v \in  U \cap W\).
+
+		      \begin{align*}
+			      v           & = a_1 \vec{u_1} + \ldots + a_{n} \vec{u_n} \quad (v in U = \operatorname{span}\left( \vec{u_1}, \ldots, \vec{u_n}  \right) ) \\
+			      v           & = b_1 \vec{w_1} + \ldots + b_{m} \vec{w_m} \quad (v in W = \operatorname{span}\left( \vec{w_1}, \ldots, \vec{w_m}  \right) ) \\
+			      \intertext{Now, let's substract}
+			      \vec{0}_{v} & = v - v = a_1 \vec{u_{1}} + \ldots + a_{n} \vec{u_n} - b_1 \vec{w_1} - \ldots - b_{m} \vec{w_m}                              \\
+		      \end{align*}
+
+		      Since \(u\)'s and \(w\)'s are linearly independent in \(V\), this forces \(a\)'s and \(b\)'s to be all \(0_{\FF}\)
+
+		      This implies that \(v = \vec{0}_{v} \)
+
+		      Thus, \(U \cap W \subseteq \left\{ \vec{0}_{v}  \right\} \).
+
+	\end{enumerate}
+
+	Thus, \(U \cap W = \left\{ \vec{0}_{v}  \right\} \) and \(U + W = V\).
+
+	Therefore, \(V = U \oplus W\).
+
+	\pf{proof of claim}{
+		If \(U = \left\{ \vec{0}_{v}  \right\} \) then we are done!
+
+		This is because \(U = \operatorname{span}\left(  \right) \)
+
+		Otherwise, there is a \(\vec{v_1} \neq \vec{0}_{v} \) in \(U\) .
+
+		If \(U = \operatorname{span}\left( \vec{v_1}  \right) \), then we are done.
+
+		This is because \(U\) is finite-dimensional.
+
+		Otherwise, there is a \(\vec{v_2} \in U\) such that \(\vec{v_2} \notin \operatorname{span}\left( \vec{v_1}  \right) \).
+
+		This implies that \((v_1, v_2)\) is a linearly independent list in \(U\) .
+
+		Which means that the list is also linearly independent in \(V\) .
+
+		If \(U = \operatorname{span}\left( \vec{v_1}, \vec{v_2}  \right) \), then we are done.
+
+		Otherwise there is a \(\vec{v_3} \in U\) such that \(\vec{v_3} \notin \operatorname{span}\left( \vec{v_1}, \vec{v_2}  \right) \).
+
+		This implies that \((v_1, v_2, v_3)\) is a linearly independent list in \(U\) .
+
+		Which means that the list is also linearly independent in \(V\) .
+
+		This process terminates:
+
+		\(V\) is finite dimensional, which implies \(V = \operatorname{span}\left( \vec{x_1}, \ldots, \vec{x_p}  \right) \)
+
+		At step \(m\) we produce a linearly independent list \(\vec{v_1}, \ldots, \vec{v_m} \) of \(V\) .
+
+		The key result we have proved in class: \(m \le p\).
+	}
+}
+
+\section{Dimension}
+
+\thm{}{
+
+	Any two bases of a finite-dimensional vector space \(V\) have the same length.
+
+	\pf{Proof}{
+		Say \(\vec{v_1}, \ldots, \vec{v_m} \) and \(\vec{u_1}, \ldots, \vec{u_n} \) are bases for \(V\) .
+
+		Let \(\vec{v_1}, \ldots, \vec{v_m} \) are linearly independent in \(V\) .
+
+		Let \(\vec{u_1}, \ldots, \vec{u_n} \) span \(V\) .
+
+		By the key result \(m \le n\). Reverse roles to get \(n \le m\).
+
+		Thus, \(m = n\).
+
+		The length of any basis for \(V\) is called the dimension of \(V\).
+
+	}
+}
+
+\ex{}{
+
+	\begin{enumerate}[label=(\roman*)]
+		\item \(V = \RR^{n}\) standard basis \(\vec{e_1}, \ldots, \vec{e_n} \) .
+
+		      These vectors look like \((0, \ldots, 0, 1, 0, \ldots, 0)\) where the \(1\) is in the \(i\)th position for each \(i = 1, \ldots, n\).
+
+		      This implies that the dimension of \(\RR^{n}\) is \(n\).
+		\item \(P_{m}(\RR)\) has basis \(1, x, x^2, \ldots, x^{m}\).
+
+		      This implies that the dimension of \(P_{m}(\RR)\) is \(m + 1\).
+	\end{enumerate}
+}
+
+\mclm{Properties}{
+	\begin{enumerate}[label=(\roman*)]
+		\item If \(U \subseteq V\) is a subspace, then \(\dim U \le \dim V\) .
+
+		      Say \(V\) is finite-dimensional, which implies that \(U\) is finite-dimensional.
+
+		      A basis \(\vec{u_1}, \ldots, \vec{u_n} \) for \(U\) is a linearly independent in \(V\) .
+
+		      This means we can extend a basis \(\vec{u_1}, \ldots, \vec{u_n}, \vec{w_1}, \ldots, \vec{w_m} \) of \(V\).
+
+		      Thus, \(\dim U = n \le n + m = \dim V\)
+		\item Say that \(\dim V = n\), and \(\vec{v_1}, \ldots, \vec{v_n} \) is a linearly independent list in \(V\),
+
+		      Then \(\vec{v_1}, \ldots, \vec{v_n} \) spans \(V\) .
+
+		      \pf{Proof}{
+			      Extend \(\vec{v_1}, \ldots, \vec{v_n} \) to a basis of \(V\).
+
+			      Result is a basis for \(V\). This basis has length \(\dim V = n\).
+
+			      This means the extension process didn't add new vectors.
+
+			      Which means that \(\vec{v_1}, \ldots, \vec{v_n} \) is already a basis.
+
+			      Thus, \(\vec{v_1}, \ldots, \vec{v_n} \) spans \(V\) .
+		      }
+		\item Say that \(\dim V = n\) and that \(\vec{v_1} \ldots \vec{v_n} \) spans \(V\).
+
+		      Then \(\vec{v_1}, \ldots, \vec{v_n} \) is a linearly independent list.
+
+		      \nt{Do this as an exercise}.
+	\end{enumerate}
+
+}
+
+\ex{}{
+	Take \(V = \left\{ p(x) \in P_{3}(\RR) \colon p`(5) = 0 \right\} \subseteq P_{3}(\RR)\)
+
+	We know that \(P_{3}(\RR)\) is 4-dimensional, with a basis \(1, x, x^2, x^3\).
+
+	\mclm{Claim}{
+		\(\dim V < 4\) and that \(V\) is 3-dimensional.
+
+		\pf{Proof}{
+
+			Since \(V \subseteq P_{3}(\RR)\), we know that \(V\) is finite-dimensional i.e, \(\dim V < 4\).
+
+			We just need to rule out that \(\dim V = 4\).
+
+			Suppose that \(\dim V = 4\).
+
+			Then \(1, x, x^2, x^3\) is a basis for \(V\).
+
+			Then \(V \subset P_{3}(\RR)\) both have dimension 4.
+
+			Let \(p_1, p_2, p_3, p_4\) be a basis for \(V\)
+
+			Then \(p_1, p_2, p_3, p_4\) are linearly independent in \(P_{3}(\RR)\).
+
+			But, the \(\dim P_{3}(\RR) = 4\), so \(p_1, p_2, p_3, p_4\) also spans \(P_{3}(\RR)\).
+
+			This means that \(V = P_{3}(\RR)\). This is as they both \(\operatorname{span}\left( p_1, \ldots, p_4 \right) \).
+
+			Let \(p(x) = x\).
+
+			Then \(p`(5) = 1\)
+
+			Thus, \(p(x) \notin V\).
+
+			Therefore, \(V \neq P_{3}(\RR)\).
+
+		}
+	}
+
+}
+
+\dfn{Dimension of a sum}{
+Let \(U_1, U_2 \subseteq V\) be finite-dimensional subspaces.
+
+Then \(\dim(U_1 + U_2) = \dim U_1 + \dim U_2 - \dim(U_1 \cap U_2)\).
+
+\pf{Proof}{
+Let \(\vec{u_1}, \ldots, \vec{u_n} \) be a basis for \(U_1 \cap U_2\) .
+
+Then, we can extend the basis in two ways:
+
+\begin{enumerate}[label=(\roman*)]
+	\item a basis \(\vec{u_1}, \ldots, \vec{u_n}, \vec{v_1}, \ldots, \vec{v_m} \) for \(U_1\)
+	\item a basis \(\vec{u_1}, \ldots, \vec{u_n}, \vec{w_1}, \ldots, \vec{w_p} \) for \(U_2\)
+\end{enumerate}
+
+\mclm{Claim}{
+
+	Let \(\vec{u_1}, \ldots, \vec{u_n}, \vec{v_1}, \ldots, \vec{v_m}, \vec{w_1}, \ldots, \vec{w_p} \) is a basis for \(U_1 + U_2\).
+}
+
+Assume claim true for now.
+
+\begin{align*}
+	\dim(U_1 + U_2) & = n + m + p \quad\text{our claim and defintion of dim}                  \\
+	                & = (n+m) + (n+p) - n \quad\text{algebra}                                 \\
+	                & = \dim U_1 + \dim U_2 - \dim(U_1 \cap U_2) \quad\text{defintion of dim} \\
+\end{align*}
+
+For the claim we need to prove:
+
+\pf{Proof of span}{
+	This is left for us.
+}
+
+\pf{Proof of linear independence}{
+Suppose there are scalars \(a_1, \ldots, a_{n}, b_1, \ldots, b_{m}, c_1, \ldots, c_{p} \in \FF\) such that:
+
+\[
+	a_1 \vec{u_1} + \ldots + a_{n} \vec{u_n} + b_1 \vec{v_1} + \ldots + b_{m} \vec{v_m} + c_1 \vec{w_1} + \ldots + c_{p} \vec{w_p} = \vec{0}_{v}
+\]
+
+We want to show that \(a_1 = \ldots = a_{n} = b_1 = \ldots = b_{m} = c_1 = \ldots = c_{p} = 0_{\FF}\).
+
+		Let's introduce sum notation:
+
+		\[
+			\underbrace{\sum_{i=1}^{n} a_i \vec{u_i} + \sum_{j=1}^{m} b_j \vec{v_j}}_{\in U_1} = \underbrace{-\sum_{k=1}^{p} c_k \vec{w_k}}_{\in U_1}
+		\]
+		This shows that \(\sum_{k=1}^{p} c_k \vec{w_k} \in U_1 \cap U_2 = \operatorname{span}\left( \vec{u_1}, \ldots, \vec{u_n}  \right) \).
+
+		The \(u\)'s are basis for \(U_1 \cap U_2\), so there are scalars \(d_1, \ldots, d_{n} \in \FF\) such that:
+
+		\[
+			\sum_{k=1}^{p} c_k \vec{w_k} = \sum_{i=1}^{n} d_i \vec{u_i}
+		\]
+
+		This impplies that \(c_1 \vec{w_1} + \ldots + c_{p} \vec{w_p} - d_1 \vec{u_1} - \ldots - d_{n} \vec{u_n} = \vec{0}_{v} \).
+
+		\(u\)'s and \(w\)'s are a basis for \(U_2\).
+
+		This implies that they are linearly independent and \(c_1 = \ldots = c_{p} = d_1 = \ldots = d_{n} = 0_{\FF}\).
+
+				This shows that \(\sum_{i=1}^{n} a_1 \vec{u_{i}} + \sum_{j=1}^{m} b_j \vec{v_j} = \vec{0}_{v} \).
+
+				Next:
+
+				\(u\)'s and \(v\)'s are a absis for \(U_1\).
+
+				This implies that they are linear independence.
+
+				Which implies that \(a_1 = \ldots = a_{n} = b_1 = \ldots = b_{m} = 0_{\FF}\).
+
+						Thus, we have proven this basis is linearly independent.
+
+					}
+
+				Thus,  we have proven the claim.
+
+				Thus, we proven the theorem.
+			}
+	}
