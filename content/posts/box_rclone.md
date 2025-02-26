@@ -11,7 +11,6 @@ read_time = true
 [taxonomies]
 tags=["tutorial"]
 +++
-
 ## Motivation
 
 As a college student, I've had my fair share of data loss nightmares. From the time my final project got corrupted right before finals week to accidentally deleting important files, I've learned the hard way that **regular backups are non-negotiable**. Fortunately, most universities provide students with cloud storage – in my case, Rice University gives each student a generous 2TB of Box storage. But how do we efficiently use this resource for automatic, reliable backups? Enter rclone, the command-line Swiss Army knife for cloud storage.
