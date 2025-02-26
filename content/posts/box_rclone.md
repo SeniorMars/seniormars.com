@@ -1,5 +1,5 @@
 +++
-title = "Automated Cloud Backups Using rclone + Box"
+title = "Automated Backups Using rclone + Box"
 date = "2025-02-25"
 description = "A guy decides to share his backup setup"
 
@@ -9,14 +9,14 @@ repo_view = true
 read_time = true
 
 [taxonomies]
-tags=["tutorial", "educational"]
+tags=["tutorial"]
 +++
 
-# Motivation
+## Motivation
 
 As a college student, I've had my fair share of data loss nightmares. From the time my final project got corrupted right before finals week to accidentally deleting important files, I've learned the hard way that **regular backups are non-negotiable**. Fortunately, most universities provide students with cloud storage – in my case, Rice University gives each student a generous 2TB of Box storage. But how do we efficiently use this resource for automatic, reliable backups? Enter rclone, the command-line Swiss Army knife for cloud storage.
 
-# What is rclone?
+## What is rclone?
 
 Rclone is a command-line program that allows you to sync files between your local machine and various cloud storage providers. Think of it as rsync for the cloud, but with Windows support built-in! It supports dozens of cloud storage systems including Box, Google Drive, Dropbox, and OneDrive. The beauty of rclone is that it's:
 
@@ -40,21 +40,21 @@ While rclone is a command-line tool, don't let that intimidate you if you're a W
 
 Let's get started with setting up your own automated backup system!
 
-# Installation
+## Installation
 
 First, we need to install rclone on your machine. The process varies slightly depending on your operating system.
 
-## Windows
+### Windows
 
 For Windows users, there are several installation methods:
 
-### Method 1: Installer (Recommended for most users)
+Method 1: Installer (Recommended for most users)
 1. Download the installer from the [rclone downloads page](https://rclone.org/downloads/)
 2. Run the `.exe` file
 3. Follow the installation wizard
 4. The installer will add rclone to your PATH automatically
 
-### Method 2: Portable zip file
+Method 2: Portable zip file
 1. Download the zip file from the [rclone downloads page](https://rclone.org/downloads/)
 2. Extract the zip file to a location of your choice (e.g., `C:\Program Files\rclone`)
 3. Add the folder to your PATH:
@@ -66,53 +66,42 @@ For Windows users, there are several installation methods:
    - Click "New" and add the path to your rclone folder
    - Click "OK" on all dialogs to save the changes
 
-### Method 3: Using Scoop
+Method 3: Using Scoop
 If you use the [Scoop](https://scoop.sh/) package manager for Windows:
 ```powershell
 scoop install rclone
 ```
 
-### Method 4: Using Chocolatey
-If you use [Chocolatey](https://chocolatey.org/):
-```powershell
-choco install rclone
-```
-
-### Method 5: WSL (Windows Subsystem for Linux)
+Method 4: WSL (Windows Subsystem for Linux)
 If you use WSL, you can follow the Linux instructions below within your WSL environment.
 
-## macOS
+### macOS
 
 If you're using macOS (as I am), the easiest way to install rclone is with Homebrew:
 
 ```bash
-$ brew install rclone
+$ brew install rclone flock
 ```
 
-## Linux
+### Linux
 
 On most Linux distributions, you can install rclone using your package manager:
 
-### Debian/Ubuntu
+Debian/Ubuntu:
 ```bash
 $ sudo apt install rclone
 ```
 
-### Arch Linux
+Arch Linux
 ```bash
 $ sudo pacman -S rclone
 ```
 
-### Fedora
-```bash
-$ sudo dnf install rclone
-```
-
-# Setting Up rclone with Box
+## Setting Up rclone with Box
 
 Now that rclone is installed, we need to configure it to work with our Box account.
 
-## Initial Configuration
+### Initial Configuration
 
 Run the following command to start the configuration process:
 
@@ -216,7 +205,7 @@ y/e/d> y
 
 Type `y` and press Enter to save the configuration.
 
-## Testing the Connection
+### Testing the Connection
 
 Let's make sure our connection works by listing the files in your Box account:
 
@@ -226,7 +215,7 @@ $ rclone ls box:
 
 This command should list all files at the root of your Box account. If you see the file listing, congratulations – your rclone configuration is working correctly!
 
-# Creating a Backup Script
+### Creating a Backup Script
 
 Now that rclone is configured, let's create a backup script to automate the process. The script will synchronize specified directories from your local machine to Box.
 
@@ -262,11 +251,11 @@ Let's break down what this script does:
   - `--exclude-from "$EXCLUDE_FILE"` - Read exclude patterns from the specified file.
   - `--delete-excluded` - Delete files from the destination that are excluded.
 
-## Creating an Exclude File
+### Creating an Exclude File
 
 The exclude file is crucial for efficient backups. It prevents unnecessary files from being backed up, saving both time and storage space.
 
-## For macOS/Linux
+For macOS/Linux:
 
 Create the exclude file:
 
@@ -275,7 +264,7 @@ $ mkdir -p ~/.config/rclone
 $ touch ~/.config/rclone/exclude_backup
 ```
 
-## For Windows
+For Windows:
 
 Create the exclude file:
 
@@ -286,7 +275,7 @@ echo. > "C:\Users\YourUsername\rclone\exclude_backup.txt"
 
 Now edit this file with your favorite text editor and add patterns for files and directories you want to exclude from your backups.
 
-### Example for macOS:
+Example for macOS:
 ```
 # Temporary files
 *.tmp
@@ -316,7 +305,7 @@ Now edit this file with your favorite text editor and add patterns for files and
 *.dmg
 ```
 
-### Example for Windows:
+Example for Windows:
 ```
 # Temporary files
 *.tmp
@@ -354,7 +343,7 @@ Feel free to customize this list according to your needs. The patterns follow th
 - `[chars]` matches any character in the set
 - `{alt1,alt2}` matches any of the alternatives
 
-## Making the Script Executable
+### Making the Script Executable
 
 Save your backup script to a file, e.g., `~/bin/backup_to_box.sh`, and make it executable:
 
@@ -365,18 +354,18 @@ $ nano ~/bin/backup_to_box.sh
 $ chmod +x ~/bin/backup_to_box.sh
 ```
 
-# Enhancing Your Backup Script
+### Enhancing Your Backup Script
 
 Let's improve our basic script with some additional features. I'll provide examples for both macOS/Linux and Windows.
 
-## For macOS/Linux:
+For macOS/Linux:
 
 ```bash
 #!/bin/bash
 
 # Configuration
 SOURCE="$HOME"
-DEST="box:keras_backup"
+DEST="box:backup"
 EXCLUDE_FILE="$HOME/.config/rclone/exclude_backup"
 LOG_FILE="$HOME/.local/share/backup/rclone_backup.log"
 LOCK_FILE="/tmp/box_backup.lock"
@@ -408,7 +397,7 @@ else
 fi
 ```
 
-## For Windows:
+For Windows:
 
 ```bat
 @echo off
@@ -468,11 +457,11 @@ This enhanced script adds:
 2. A lock mechanism to prevent multiple instances from running simultaneously
 3. Automatic saving of installed packages (in this case, Homebrew packages)
 
-# Automating Backups
+### Automating Backups
 
 Now that we have our script, let's set it up to run automatically at regular intervals.
 
-## Using cron (macOS/Linux)
+#### Using cron (macOS/Linux):
 
 On macOS and Linux, cron is the traditional way to schedule recurring tasks.
 
@@ -485,8 +474,8 @@ $ crontab -e
 Here's my personal crontab setup that runs the backup twice daily (8 AM and 8 PM) and logs the output:
 
 ```
-0 8 * * * /Users/charlie/.local/bin/keras-rclone &> /Users/charlie/.config/rclone/keras-rclone.log
-0 20 * * * /Users/charlie/.local/bin/keras-rclone &> /Users/charlie/.config/rclone/keras-rclone.log
+0 8 * * * /Users/charlie/.local/bin/backup-rclone &> /Users/charlie/.config/rclone/backup-rclone.log
+0 20 * * * /Users/charlie/.local/bin/backup-rclone &> /Users/charlie/.config/rclone/backup-rclone.log
 ```
 
 Here's what the numbers mean:
@@ -498,7 +487,7 @@ Here's what the numbers mean:
 
 {{ note(clickable=true, header="Note", body="The cron job runs in a limited environment, so you might need to use full paths to all executables in your script. Notice how I've used absolute paths in my example above.") }}
 
-## Using launchd (macOS)
+#### Using launchd (macOS)
 
 On macOS, you can also use launchd, which offers more flexibility than cron.
 
@@ -536,7 +525,7 @@ Replace `YOUR_USERNAME` with your actual username. Then load the job:
 $ launchctl load ~/Library/LaunchAgents/com.user.box-backup.plist
 ```
 
-## Using Task Scheduler (Windows)
+#### Using Task Scheduler (Windows)
 
 Windows users can use Task Scheduler for automated backups. Here's a detailed guide:
 
@@ -595,9 +584,9 @@ echo. >> "C:\Users\YourUsername\backup_logs.txt"
 
 {{ note(clickable=true, header="Note", body="Windows paths use backslashes (\\) instead of forward slashes. Make sure all your paths use the correct format. Also, if you install rclone in a non-standard location, adjust the path to rclone.exe accordingly.") }}
 
-# Advanced rclone Features
+## Advanced rclone Features
 
-## Bandwidth Limiting
+### Bandwidth Limiting
 
 If you don't want your backups to saturate your internet connection, you can limit the bandwidth:
 
@@ -613,13 +602,13 @@ rclone sync --bwlimit "08:00,512k 12:00,1M 18:00,512k 23:00,2M" ...
 
 This sets different limits throughout the day.
 
-### Windows Example:
+Windows Example:
 ```bat
 rclone sync --bwlimit "08:00,512k 12:00,1M 18:00,512k 23:00,2M" ^
   "C:\Users\YourUsername" box:backup
 ```
 
-## Encryption
+### Encryption
 
 If you're concerned about the privacy of your data in the cloud, rclone supports encryption:
 
@@ -637,7 +626,7 @@ Remote to encrypt/decrypt> box:encrypted
 
 Then use `box-crypt:` as your destination in your backup script.
 
-## Fast Listing
+### Fast Listing
 
 For large directories with many files, you can speed up operations with fast list:
 
@@ -647,16 +636,16 @@ rclone sync --fast-list ...
 
 This uses more memory but can significantly speed up the listing process.
 
-## Mount
+### Mount
 
 One of my favorite features is the ability to mount your Box storage as a local filesystem:
 
-### For macOS/Linux:
+For macOS/Linux:
 ```bash
 $ rclone mount box: ~/box --vfs-cache-mode writes &
 ```
 
-### For Windows:
+For Windows:
 ```bat
 rclone mount box: X: --vfs-cache-mode writes
 ```
@@ -665,7 +654,7 @@ This mounts your entire Box account at `~/box` on macOS/Linux or as drive `X:` o
 
 {{ note(clickable=true, header="Note", body="For Windows users, the mount command requires WinFsp to be installed. Download it from <a href='https://winfsp.dev/'>https://winfsp.dev/</a> and install it before attempting to mount.") }}
 
-## Serve
+### Serve
 
 Rclone can also serve your files over HTTP, WebDAV, FTP, or SFTP:
 
@@ -675,7 +664,7 @@ $ rclone serve http box: --addr :8080
 
 This allows you to access your Box files through a web browser at `http://localhost:8080`.
 
-## Filtering Options
+### Filtering Options
 
 Rclone offers powerful filtering beyond the exclude file:
 
@@ -685,35 +674,23 @@ rclone sync --include "*.jpg" --include "*.png" ... # Only include JPGs and PNGs
 rclone sync --exclude-if-present .norclone ... # Skip directories with .norclone file
 ```
 
-# Troubleshooting
-
-## Common Issues and Solutions
+## Troubleshooting
 
 ### Authentication Errors
 
 If you encounter authentication errors, you may need to reauthorize rclone:
 
-#### On macOS/Linux:
 ```bash
 $ rclone config reconnect box:
-```
-
-#### On Windows:
-```powershell
-rclone config reconnect box:
 ```
 
 ### Connection Timeouts
 
 For unreliable internet connections, increase the timeout values:
 
-```
+```bash
 rclone sync --contimeout 120s --timeout 600s ...
 ```
-
-### "File not found" Errors
-
-If you're getting "file not found" errors, it could be a path issue. Remember that Box is case-sensitive. Use `rclone lsd box:` to list directories and check the exact naming.
 
 ### Path Issues on Windows
 
@@ -752,23 +729,17 @@ Windows users can improve performance with:
 
 3. Disable Indexing: Disable Windows Search indexing on your backup directories.
 
-## Logging and Debugging
+### Logging and Debugging
 
 For detailed troubleshooting, add the `-vv` flag for very verbose output:
 
-#### On macOS/Linux:
 ```bash
 $ rclone sync -vv ...
 ```
 
-#### On Windows:
-```powershell
-rclone sync -vv ...
-```
-
 For even more detailed logs:
 
-```
+```bash
 rclone sync --dump headers --dump bodies ...
 ```
 
@@ -784,7 +755,7 @@ rclone sync ... --log-file=eventlog:rclone
 
 You can then view these logs in the Windows Event Viewer.
 
-# Conclusion
+## Conclusion
 
 Setting up automated backups to Box using rclone is a powerful way to ensure your important data is safely stored in the cloud. The initial setup might seem a bit technical, but once configured, your backup system will run reliably with minimal maintenance.
 
