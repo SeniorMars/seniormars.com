@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en" class="dark light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base" content="https:&#x2F;&#x2F;seniormars.com">
+
+    
+
+    
+    
+    
+    <title>
+         SeniorMars
+        
+    </title>
+
+        
+            <meta property="og:title" content="SeniorMars" />
+        
+     
+
+     
+         
+             <meta property="og:description" content="A blog about math, extremely niche interests, and a guy having fun." />
+         
+     
+
+     
+         
+             <meta name="description" content="A blog about math, extremely niche interests, and a guy having fun." />
+         
+    
+        <meta name="theme-color" media="(prefers-color-scheme: light)" content="#FFFFFF" />
+        <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0E1018" />
+    
+        <link rel="icon" type="image/png" href=&#x2F;icons&#x2F;favicon.ico />
+        
+        
+            <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+            <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+            <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+            <link rel="manifest" href="/icons/site.webmanifest">
+            <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#ff6f3c">
+            <meta name="apple-mobile-web-app-title" content="SeniorMars">
+            <meta name="application-name" content="SeniorMars">
+            <meta name="msapplication-TileColor" content="#333333">
+            <meta name="theme-color" content="#333333">
+        
+    
+
+    
+    
+        <link href=https://seniormars.com/fonts.css rel="stylesheet" />
+    
+
+    
+    
+        
+
+        
+            
+            
+
+            <script data-goatcounter="https://seniormars.goatcounter.com/count" async src="https://seniormars.com/js/count.js"></script>
+            <noscript>
+                
+                <img src="https://seniormars.goatcounter.com//count?p=&#x2F;tags&#x2F;life&#x2F;&t=SeniorMars">
+            </noscript>
+        
+    
+
+    
+    
+        <script src=https://seniormars.com/js/codeblock.js></script>
+    
+
+    
+    
+
+    
+    
+        <script src=https://seniormars.com/js/toc.js></script>
+    
+
+    
+    
+        <script src=https://seniormars.com/js/note.js></script>
+    
+
+    
+        
+        <script>
+            MathJax = {
+              loader: { load: ['input/asciimath'] },
+              output: {
+                  displayOverflow: 'linebreak',
+                      linebreaks: {
+                          inline: true,
+                          width: '100%',
+                          lineleading: .2,
+                          LinebreakVisitor: null,
+                  }
+              },
+              tex: {
+                inlineMath: [['$', '$']],
+                processEscapes: true,
+              },
+              svg: {
+                fontCache: 'global'
+              }
+            };
+        </script>
+        
+        <script type="text/javascript" id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@4.0.0-beta.7/tex-mml-chtml.js">
+        </script>
+    
+
+    
+    
+        <link rel="alternate" type="application/rss+xml" title="SeniorMars" href="https://seniormars.com/rss.xml">
+    
+
+    
+    
+        <link rel="stylesheet" type="text/css" href=https://seniormars.com/theme/light.css />
+        <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://seniormars.com/theme/dark.css" />
+    
+    
+    <!-- Set the correct theme in the script -->
+    <script src=https://seniormars.com/js/themetoggle.js></script>
+    
+        <script>setTheme(getSavedTheme());</script>
+    
+
+    
+    <link rel="stylesheet" type="text/css" media="screen" href=https://seniormars.com/main.css />
+
+    
+
+    
+    
+        <script src=https://seniormars.com/js/mermaid.js></script>
+    
+
+    
+        <script defer src="https://seniormars.com/js/searchElasticlunr.min.js?h=3626c0ef99daa745b31e"></script></head>
+
+
+<body>
+    <div class="content">
+        <header>
+    <div class="main">
+        
+            <a href=https:&#x2F;&#x2F;seniormars.com>SeniorMars</a>
+        
+
+
+        <div class="socials">
+            
+            <a rel="me" href="https:&#x2F;&#x2F;github.com&#x2F;seniormars&#x2F;" class="social">
+                <img alt=github src=https://seniormars.com/social_icons/github.svg>
+            </a>
+            
+            <a rel="me" href="https:&#x2F;&#x2F;www.youtube.com&#x2F;seniormarstries" class="social">
+                <img alt=youtube src=https://seniormars.com/social_icons/youtube.svg>
+            </a>
+            
+            <a rel="me" href="&#x2F;rss.xml" class="social">
+                <img alt=rss src=https://seniormars.com/social_icons/rss.svg>
+            </a>
+            
+        </div>
+    </div>
+
+    <nav>
+        
+            <a href=https://seniormars.com/posts class="nav-item">&#x2F;posts</a>
+        
+            <a href=https://seniormars.com/projects class="nav-item">&#x2F;projects</a>
+        
+            <a href=https://seniormars.com/about class="nav-item">&#x2F;about</a>
+        
+            <a href=https://seniormars.com/etc class="nav-item">&#x2F;etc</a>
+        
+
+        
+            <button 
+                id="search-button"
+                class="search-button"
+                title="$SHORTCUT to open search"
+            >
+                <img 
+                    src="https://seniormars.com/search.svg" 
+                    alt="Search" 
+                    class="search-icon"
+                >
+            </button>
+
+            <div id="searchModal" class="search-modal js" role="dialog" aria-labelledby="modalTitle">
+                <div id="modal-content">
+                    <h1 id="modalTitle" class="page-header">Search</h1>
+                    <div id="searchBar">
+                        <input 
+                            id="searchInput" 
+                            role="combobox" 
+                            autocomplete="off" 
+                            spellcheck="false" 
+                            aria-expanded="false" 
+                            aria-controls="results-container" 
+                            placeholder="Search..."
+                        />
+                        <button 
+                            id="clear-search" 
+                            class="clear-button"
+                            title="Clear search"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                                <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="results-container">
+                        <div id="results-info">
+                            <span id="zero_results" style="display: none;">No results</span>
+                            <span id="one_result" style="display: none;">1 result</span>
+                            <span id="many_results" style="display: none;">$NUMBER results</span>
+                        </div>
+                        <div id="results" role="listbox"></div>
+                    </div>
+                </div>
+            </div>
+        
+
+        
+            <a id="dark-mode-toggle" onclick="toggleTheme(); event.preventDefault();" href="#">
+                <img src=https://seniormars.com/feather/sun.svg id="sun-icon" style="filter: invert(1);" alt="Light" />
+                <img src=https://seniormars.com/feather/moon.svg id="moon-icon" alt="Dark" />
+            </a>
+
+            <!-- Inititialize the theme toggle icons -->
+            <script>updateItemToggleTheme()</script>
+        
+    </nav>
+</header>
+
+
+        
+        
+
+
+    
+    <div class="page-header">
+        Entries tagged :: life<span class="primary-color" style="font-size: 1.6em">.</span>
+    </div>
+    
+
+    <main class="list">
+    
+<ul>
+    <li class="list-item">
+    <section>
+        <div class="post-header">
+            <time>2024-06-27</time>
+
+            <div>
+                <h1 class="title">
+                    <a href=https://seniormars.com/posts/life-misson/>My life&#x27;s mission</a>
+
+                    
+                </h1>
+
+                <div class="meta">
+                    <div class="description">
+                        
+                        A guy assures you he will pop off and keep their promise.
+                        
+                    </div>
+
+                    
+                    <a class="readmore" href=https://seniormars.com/posts/life-misson/>Read more ⟶</a>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+  </li>
+    
+    <li class="list-item">
+    <section>
+        <div class="post-header">
+            <time>2024-06-05</time>
+
+            <div>
+                <h1 class="title">
+                    <a href=https://seniormars.com/posts/book/>I decided to write a book</a>
+
+                    
+                </h1>
+
+                <div class="meta">
+                    <div class="description">
+                        
+                        A guy &#x27;promises&#x27; to finish a book, this time.
+                        
+                    </div>
+
+                    
+                    <a class="readmore" href=https://seniormars.com/posts/book/>Read more ⟶</a>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+  </li>
+    </ul>
+
+    </main>
+
+
+
+
+        
+            
+        
+
+        
+    </div>
+</body>
+
+</html>

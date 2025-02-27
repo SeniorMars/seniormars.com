@@ -1,0 +1,1472 @@
+<!DOCTYPE html>
+<html lang="en" class="dark light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base" content="https:&#x2F;&#x2F;seniormars.com">
+
+    
+
+    
+    
+    
+    <title>
+         Every day is an Owl&#x27;s Birthday! A rigorous exploration to a classic problem through math and rust
+        
+    </title>
+
+        
+            <meta property="og:title" content="Every day is an Owl&#x27;s Birthday! A rigorous exploration to a classic problem through math and rust" />
+        
+     
+
+     
+         
+             <meta property="og:description" content="A guy decides to overthink a simple question from his university&#x27;s anonymous forum." />
+         
+     
+
+     
+         
+             <meta name="description" content="A guy decides to overthink a simple question from his university&#x27;s anonymous forum." />
+         
+    
+        <meta name="theme-color" media="(prefers-color-scheme: light)" content="#FFFFFF" />
+        <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0E1018" />
+    
+        <link rel="icon" type="image/png" href=&#x2F;icons&#x2F;favicon.ico />
+        
+        
+            <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+            <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+            <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+            <link rel="manifest" href="/icons/site.webmanifest">
+            <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#ff6f3c">
+            <meta name="apple-mobile-web-app-title" content="SeniorMars">
+            <meta name="application-name" content="SeniorMars">
+            <meta name="msapplication-TileColor" content="#333333">
+            <meta name="theme-color" content="#333333">
+        
+    
+
+    
+    
+        <link href=https://seniormars.com/fonts.css rel="stylesheet" />
+    
+
+    
+    
+        
+
+        
+            
+            
+
+            <script data-goatcounter="https://seniormars.goatcounter.com/count" async src="https://seniormars.com/js/count.js"></script>
+            <noscript>
+                
+                <img src="https://seniormars.goatcounter.com//count?p=&#x2F;posts&#x2F;everyday-birthday&#x2F;&t=Every day is an Owl&#x27;s Birthday! A rigorous exploration to a classic problem through math and rust">
+            </noscript>
+        
+    
+
+    
+    
+        <script src=https://seniormars.com/js/codeblock.js></script>
+    
+
+    
+    
+
+    
+    
+        <script src=https://seniormars.com/js/toc.js></script>
+    
+
+    
+    
+        <script src=https://seniormars.com/js/note.js></script>
+    
+
+    
+        
+        <script>
+            MathJax = {
+              loader: { load: ['input/asciimath'] },
+              output: {
+                  displayOverflow: 'linebreak',
+                      linebreaks: {
+                          inline: true,
+                          width: '100%',
+                          lineleading: .2,
+                          LinebreakVisitor: null,
+                  }
+              },
+              tex: {
+                inlineMath: [['$', '$']],
+                processEscapes: true,
+              },
+              svg: {
+                fontCache: 'global'
+              }
+            };
+        </script>
+        
+        <script type="text/javascript" id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@4.0.0-beta.7/tex-mml-chtml.js">
+        </script>
+    
+
+    
+    
+        <link rel="alternate" type="application/rss+xml" title="SeniorMars" href="https://seniormars.com/rss.xml">
+    
+
+    
+    
+        <link rel="stylesheet" type="text/css" href=https://seniormars.com/theme/light.css />
+        <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://seniormars.com/theme/dark.css" />
+    
+    
+    <!-- Set the correct theme in the script -->
+    <script src=https://seniormars.com/js/themetoggle.js></script>
+    
+        <script>setTheme(getSavedTheme());</script>
+    
+
+    
+    <link rel="stylesheet" type="text/css" media="screen" href=https://seniormars.com/main.css />
+
+    
+
+    
+    
+        <script src=https://seniormars.com/js/mermaid.js></script>
+    
+
+    
+        <script defer src="https://seniormars.com/js/searchElasticlunr.min.js?h=3626c0ef99daa745b31e"></script></head>
+
+
+<body>
+    <div class="content">
+        <header>
+    <div class="main">
+        
+            <a href=https:&#x2F;&#x2F;seniormars.com>SeniorMars</a>
+        
+
+
+        <div class="socials">
+            
+            <a rel="me" href="https:&#x2F;&#x2F;github.com&#x2F;seniormars&#x2F;" class="social">
+                <img alt=github src=https://seniormars.com/social_icons/github.svg>
+            </a>
+            
+            <a rel="me" href="https:&#x2F;&#x2F;www.youtube.com&#x2F;seniormarstries" class="social">
+                <img alt=youtube src=https://seniormars.com/social_icons/youtube.svg>
+            </a>
+            
+            <a rel="me" href="&#x2F;rss.xml" class="social">
+                <img alt=rss src=https://seniormars.com/social_icons/rss.svg>
+            </a>
+            
+        </div>
+    </div>
+
+    <nav>
+        
+            <a href=https://seniormars.com/posts class="nav-item">&#x2F;posts</a>
+        
+            <a href=https://seniormars.com/projects class="nav-item">&#x2F;projects</a>
+        
+            <a href=https://seniormars.com/about class="nav-item">&#x2F;about</a>
+        
+            <a href=https://seniormars.com/etc class="nav-item">&#x2F;etc</a>
+        
+
+        
+            <button 
+                id="search-button"
+                class="search-button"
+                title="$SHORTCUT to open search"
+            >
+                <img 
+                    src="https://seniormars.com/search.svg" 
+                    alt="Search" 
+                    class="search-icon"
+                >
+            </button>
+
+            <div id="searchModal" class="search-modal js" role="dialog" aria-labelledby="modalTitle">
+                <div id="modal-content">
+                    <h1 id="modalTitle" class="page-header">Search</h1>
+                    <div id="searchBar">
+                        <input 
+                            id="searchInput" 
+                            role="combobox" 
+                            autocomplete="off" 
+                            spellcheck="false" 
+                            aria-expanded="false" 
+                            aria-controls="results-container" 
+                            placeholder="Search..."
+                        />
+                        <button 
+                            id="clear-search" 
+                            class="clear-button"
+                            title="Clear search"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                                <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="results-container">
+                        <div id="results-info">
+                            <span id="zero_results" style="display: none;">No results</span>
+                            <span id="one_result" style="display: none;">1 result</span>
+                            <span id="many_results" style="display: none;">$NUMBER results</span>
+                        </div>
+                        <div id="results" role="listbox"></div>
+                    </div>
+                </div>
+            </div>
+        
+
+        
+            <a id="dark-mode-toggle" onclick="toggleTheme(); event.preventDefault();" href="#">
+                <img src=https://seniormars.com/feather/sun.svg id="sun-icon" style="filter: invert(1);" alt="Light" />
+                <img src=https://seniormars.com/feather/moon.svg id="moon-icon" alt="Dark" />
+            </a>
+
+            <!-- Inititialize the theme toggle icons -->
+            <script>updateItemToggleTheme()</script>
+        
+    </nav>
+</header>
+
+
+        
+        
+    
+<main>
+    <article>
+        <div class="title">
+            
+            
+    <div class="page-header">
+        Every day is an Owl&#x27;s Birthday! A rigorous exploration to a classic problem through math and rust<span class="primary-color" style="font-size: 1.6em">.</span>
+    </div>
+
+
+                <div class="meta">
+                    
+                        Posted on <time>2024-06-20</time>
+                    
+
+                    
+                        :: Updated on <time>2024-06-29</time>
+                    
+
+                    
+                        :: <time>31</time> Min Read
+                    
+
+                    
+                    
+                            <span class="tags-label"> :: Tags:</span>
+                            <span class="tags">
+                                    <a href="https://seniormars.com/tags/math/" class="post-tag">math</a>, 
+                                
+                                    <a href="https://seniormars.com/tags/rust/" class="post-tag">rust</a>, 
+                                
+                                    <a href="https://seniormars.com/tags/educational/" class="post-tag">educational</a>
+                                
+                            </span>
+                    
+
+                    
+                    
+
+                        
+                        
+                            
+                        
+
+                        
+                            
+                            :: <a href="https:&#x2F;&#x2F;github.com&#x2F;SeniorMars&#x2F;seniormars.com&#x2F;blob&#x2F;main&#x2F;content&#x2F;posts&#x2F;everyday_birthday&#x2F;index.md" target="_blank" rel="noopener noreferrer"> Source Code</a>
+                        
+                    
+
+                    
+
+                </div>
+        </div>
+
+        
+
+        
+        
+        
+            <div class="toc-container">
+                <h1 class="toc-title">Table of Contents</h1>
+                <ul class="toc-list">
+                    
+                        <li>
+                            <a href="https://seniormars.com/posts/everyday-birthday/#motivation">Motivation</a>
+                            
+                        </li>
+                    
+                        <li>
+                            <a href="https://seniormars.com/posts/everyday-birthday/#the-problem-and-possible-leads">The Problem and possible leads</a>
+                            
+                        </li>
+                    
+                        <li>
+                            <a href="https://seniormars.com/posts/everyday-birthday/#the-coupon-collector-problem-and-expected-value">The Coupon Collector Problem and Expected Value</a>
+                            
+                                <ul>
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/everyday-birthday/#exploring-leap-days-through-our-lead">Exploring leap days through our lead</a>
+                                        </li>
+
+                                        
+                                    
+                                </ul>
+                            
+                        </li>
+                    
+                        <li>
+                            <a href="https://seniormars.com/posts/everyday-birthday/#the-inclusion-exclusion-principle">The Inclusion-Exclusion Principle</a>
+                            
+                        </li>
+                    
+                        <li>
+                            <a href="https://seniormars.com/posts/everyday-birthday/#monte-carlo-simulation">Monte Carlo Simulation</a>
+                            
+                        </li>
+                    
+                        <li>
+                            <a href="https://seniormars.com/posts/everyday-birthday/#the-iep-model-and-plots">The IEP model and plots!</a>
+                            
+                        </li>
+                    
+                        <li>
+                            <a href="https://seniormars.com/posts/everyday-birthday/#i-read-a-paper-and-found">I read a paper and found…</a>
+                            
+                        </li>
+                    
+                        <li>
+                            <a href="https://seniormars.com/posts/everyday-birthday/#one-last-time-informed-monte-carlo-simulation">One Last Time: Informed Monte Carlo Simulation</a>
+                            
+                        </li>
+                    
+                        <li>
+                            <a href="https://seniormars.com/posts/everyday-birthday/#and-then-the-physicst-attacked">And then, the Physicst attacked</a>
+                            
+                                <ul>
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/everyday-birthday/#revisiting-our-formula">Revisiting our formula</a>
+                                        </li>
+
+                                        
+                                    
+                                </ul>
+                            
+                        </li>
+                    
+                        <li>
+                            <a href="https://seniormars.com/posts/everyday-birthday/#conclusion">Conclusion</a>
+                            
+                        </li>
+                    
+                </ul>
+            </div>
+        
+        
+
+        <section class="body">
+            <h1 id="motivation"><a class="zola-anchor" href="#motivation" aria-label="Anchor link for: motivation">Motivation</a></h1>
+<p>A few days ago, I was working on a UI framework (in rust btw) for a personal project; abruptly, I decided to check my group chat and noticed a screenshot of a question from our university’s anonymous forum, Fizz. As it so happened, the question was a math problem–instantly, it became clear to me that I was <a rel="noreferrer" href="https://xkcd.com/356/">nerd sniped</a> (as any math major would). The question was simple and one you have probably thought about at some point in your life:</p>
+<blockquote>
+<p>Do yall think there is a person at rice for every birthday in the year? Like
+do you think every birthday is represented in the student body?<br>
+<cite>– Anonymous</cite></p>
+</blockquote>
+<p>Not only that, but it was a classic problem in probability theory! Unfortunately, by the time I saw the question, someone had posted a pretty good answer (funnily enough, someone thought I was the one who anonymously posted the answer). Alas, my nerd-sniped brain was already in full gear, so instead, I am taking this as an opportunity to polish my writing skills 😎. Join me as I walk you through my (hopefully rigorous) exploration of this classic problem.</p>
+<h1 id="the-problem-and-possible-leads"><a class="zola-anchor" href="#the-problem-and-possible-leads" aria-label="Anchor link for: the-problem-and-possible-leads">The Problem and possible leads</a></h1>
+<p>In all honestly, this question is fun and can be approached in many ways. Clearly, a trivial solution would involve me, a rice student, having 365 (.25?) friends and checking if each has a different birthday. In the best case, the answer is yes; in the worst case, the answer is no. Unfortunately, I spend most of my time at the library, so such a method would be infeasible; a more rigorous approach is desirable. As a math major, I have found abstraction often easier to work with than a specific case. Naturally, we’ll start by abstracting the problem to a more general form and then returning to the original problem.</p>
+<p>If you are familiar with continuous probability theory, perhaps you’ve heard about the Birthday Paradox. The paradox states that for a random group of 23 people, there is a 50% chance that two people share the same birthday (surprising, I know). While this is not the same problem as our question, they are tangentially related! Hence, we will use some of the same techniques (notably counting 😭). Let’s rephrase the question with some assumptions for our first lead!</p>
+<blockquote>
+<p>“Do you think it’s likely that a collection of Rice University students would include at least one student with each possible birthday? Assuming each birthday is equally likely, how many students would be needed to expect that every day of the year, 365 days, is someone’s birthday?” <br>
+— Problem 1.1</p>
+</blockquote>
+<p>The most important part of this rephrasing is the assumption (a restriction which we will remove later) of equally likely birthdays and the number of days. Moreover, while the rephrasing is a bit awkward to some, to others, it may remind them of another problem: The Coupon Collector!</p>
+<h1 id="the-coupon-collector-problem-and-expected-value"><a class="zola-anchor" href="#the-coupon-collector-problem-and-expected-value" aria-label="Anchor link for: the-coupon-collector-problem-and-expected-value">The Coupon Collector Problem and Expected Value</a></h1>
+<p>Now, I’m not a computer scientist, so I won’t simply “reduce” the problem and call it a day. First, the goal of the coupon collector problem is to determine the expected number of coupons needed to collect all coupons. Instead of coupons, we deal with birthdays and quantify the number of students needed to ensure having all birthdays. In other words, we are trying to calculate the expected number of students required to have all birthdays, which is precisely Problem 1.1!</p>
+<p>The idea is simple: keep adding students one by one until you have all birthdays. Following this process, you notice that the first student is guaranteed a unique birthday. Moreover, each new student has a probability of $\frac{x}{365}$ of having a new birthday, where $x$ is the number of unique birthdays left. In contrast, the expected probability of how many students you have to go through until you see a new birthday is the reciprocal probability of seeing a new birthday, i.e., $\frac{365}{x}$. We derive this as if $k$ birthdays are already taken, the probability of $P_{\text{new}}$ is given by $P_{\text{new}} = \frac{365 - k}{365}$; hence, geometric distribution (proof:<sup class="footnote-reference" id="fr-1-1"><a href="#fn-1">1</a></sup>) tell us that the probability to counter an event with probability $P_{\text{new}}$ is $\frac{1}{P_{\text{new}}}$—which is $\frac{365}{365 - k}$. Finally, from our assumptions, we know that the birthday is equally likely (independent), which means a new birthday does not depend on the previous birthdays. Therefore, I claim we can sum the expected number of students needed to see a new birthday for each $k$ unique birthday multiplied by the number of birthdays. Let’s prove this:</p>
+<div class="note-container note-type-default">
+  
+    <button class="note-toggle" aria-expanded="true">
+      
+        <div class="note-center">
+          <p>Proof of claim</p>
+
+        </div>
+      
+    </button>
+    <div class="note-content" style="display: block;">
+      <p><strong>Proof</strong>: Let $T$ be the number of students needed for all birthdays to be seen, and let $T_k$ be the number of students needed to see a new birthday, given that $k - 1$ birthdays are already taken. As we have noted before, the probability of seeing a new birthday is $P_k = \frac{365 - k}{365}$, which means the expected number of students needed to see a new birthday is $\frac{1}{p_k} = \frac{365}{365 - k}$. Now, let’s readjust the sum to avoid diving by zero, and we see:</p>
+<p>$$
+\begin{align*}
+\mathbb{E}[T] &amp;= \mathbb{E}[(T_1 + T_2 + \ldots + T_{365})]&amp; &amp;\\
+&amp;= \mathbb{E}[T_1] + \mathbb{E}[T_2] + \ldots + \mathbb{E}[T_{365}]&amp; &amp;\quad\text{by linearity of expectation}\\
+&amp;= \frac{1}{p_1} + \frac{1}{p_2} + \ldots + \frac{1}{p_{365}}&amp; &amp;\quad\text{by definition of expectation}\\
+&amp;= \frac{365}{365} + \frac{365}{364} + \ldots + \frac{365}{1}&amp; &amp;\quad\text{by definition of } \frac{1}{p_k}\\
+&amp;= 365 \left( \frac{1}{365} + \frac{1}{364} + \ldots + \frac{1}{1} \right)&amp; &amp;\quad\text{by distributive property}\\
+&amp;= 365 \sum_{i=1}^{365} \frac{1}{i}&amp; &amp;\quad\text{as desired} \tag*{$\blacksquare$}
+\end{align*}
+$$</p>
+
+    </div>
+  
+</div>
+<p>Now, we would be done here, but notice that the last summation is the $n^{th}$ <a rel="noreferrer" href="https://en.wikipedia.org/wiki/Harmonic_number">harmonic number</a>, $H_n$. This summation is known to be $\ln(n) + \gamma + \epsilon(n)$, where $\gamma$ is the Euler-Mascheroni constant and $\epsilon(n)$ is the error term. Hence, we can approximate the expected number of students needed to see all birthdays as $365 H_{365} \approx 365 \ln(365) + 365 \gamma + \epsilon(365)$. If we let $\gamma \approx 0.5772156649$ and the error bound be bounded by $\frac{1}{2} + \mathcal{O}(\frac{1}{n})$, then we can calculate this as approximately $2364$ students needed!</p>
+<h2 id="exploring-leap-days-through-our-lead"><a class="zola-anchor" href="#exploring-leap-days-through-our-lead" aria-label="Anchor link for: exploring-leap-days-through-our-lead">Exploring leap days through our lead</a></h2>
+<p>However, an astute reader would notice that this is still the expected number of students needed to see all birthdays, not the number required to ensure all birthdays are seen. For now, however, we will explore this setup more. For instance, what if we account for leap days, i.e., someone is born on February 29th? Let’s rephrase the problem with this in mind:</p>
+<blockquote>
+<p>“Do you think it’s likely that a collection of Rice University students would include at least one student with each possible birthday? Assuming each birthday is equally likely, how many students would be needed to expected that every day of the year, including leap days, is someone’s birthday?” <br>
+— Problem 1.15</p>
+</blockquote>
+<p>Easily, we can change our sum to $365.25$ instead of $365$, and the expected number of students needed to see all birthdays would be $\frac{365.25}{365} \cdot 2364 \approx 2366$ students, but this is <em>without</em> our error bound, i.e., the probabilities of the event happening to adjust for leap days. In fact, to get the error bound, we have to multiply the likelihood of covering all possible birthdays in a random group process such that each day has a slightly different probability due to our leap day. Using the logic described previously, to calculate such a risk, we can multiply:</p>
+<p>$$
+\frac{365}{365.25} \times \frac{364}{364.25} \times \frac{363}{363.25} \times \cdots \times \frac{1}{1.25} = \frac{365!}{365.25^{365}} = \prod_{i=1}^{365} \frac{i}{i + 0.25}
+$$</p>
+<p>While this might look complicated (it is!) – thankfully, this looks like the <a rel="noreferrer" href="https://en.wikipedia.org/wiki/Gamma_function">gamma function</a>! The gamma function is a generalization of the factorial function to the $\mathbb{C}^+$, and it is defined as $\Gamma(n) = (n - 1)!$. This allows us to deal with some non-integer values, and in our case, we can use the gamma function to calculate the probability of seeing all birthdays in a group of 365.25 students. Hence,</p>
+<p>$$
+\prod_{i=1}^{365} \frac{i}{i + 0.25} = \frac{\Gamma(366)\Gamma(1.25)}{\Gamma(366.25)}
+$$</p>
+<p>Now, thanks to Wolfram Alpha, we can calculate this:</p>
+<pre data-lang="wolframscript" style="background-color:#0f1419;color:#bfbab0;" class="language-wolframscript "><code class="language-wolframscript" data-lang="wolframscript"><span>result = (Gamma[366] * Gamma[1.25]) / Gamma[366.25]
+</span><span>result
+</span></code></pre>
+<p>But we are exploring, so let’s calculate this by hand! Honestly, without Wikipedia, I would have been stuck, but it turns out that we have a general formula for the gamma function in the form of $\Gamma(n + \frac{1}{4}) = \Gamma(\frac{1}{4}) \frac{(4n - 3)!!!!}{4^n}$. However, what’s even nicer is that we can approximate: $\frac{\Gamma(n + \frac{1}{4})}{\Gamma(n)}$ by using $\frac{\Gamma(a + \epsilon)}{\Gamma(a)} \approx \left(a + \frac{\epsilon}{2} - \frac{1}{2}\right)^{\epsilon}$. Hence, we get:</p>
+<p>$$
+\frac{\Gamma(366.25)}{\Gamma(366)} \approx \left(366 + \frac{0.25}{2} - \frac{1}{2}\right)^{0.25} = \left(366 + 0.125 - 0.5\right)^{0.25} = \left(365.625\right)^{0.25}
+$$</p>
+<p>This means the original expression can then be approximated as:</p>
+<p>$$
+\frac{\Gamma(366) \Gamma(1.25)}{\Gamma(366.25)} \approx \Gamma(1.25) \left(365.625\right)^{-0.25}
+$$</p>
+<p>Now by expanding out the gamma function $\Gamma(\frac{5}{4}) = \frac{1}{4} \Gamma(\frac{1}{4})$, we can calculate this as<sup class="footnote-reference" id="fr-2-1"><a href="#fn-2">2</a></sup>:</p>
+<p>$$
+\frac{\Gamma(366)\Gamma(1.25)}{\Gamma(366.25)} \approx \frac{\Gamma(\frac14)}{4 \sqrt[4]{365.625}}
+$$</p>
+<p>Now, thanks to the work of <a rel="noreferrer" href="https://oeis.org/A068466">others</a>, we find that $\Gamma(\frac{1}{4}) = 3.6256099082219083119$. This means we can calculate the probability of seeing all birthdays in a group of 365.25 students as:</p>
+<p>$$
+\frac{\Gamma(366)\Gamma(1.25)}{\Gamma(366.25)} \approx 0.20728
+$$</p>
+<p>Hell ya! Finally, we can calculate the expected number of students needed to see all birthdays in a group of 365.25 students as follows:</p>
+<p>$$
+2366 + 0.20728 \cdot \frac{365.25}{0.25} \approx 2669
+$$</p>
+<p>We can continue with this lead, but I want to explore another lead I have in mind for now – we’ll return to this later!</p>
+<h1 id="the-inclusion-exclusion-principle"><a class="zola-anchor" href="#the-inclusion-exclusion-principle" aria-label="Anchor link for: the-inclusion-exclusion-principle">The Inclusion-Exclusion Principle</a></h1>
+<p>So far, we’ve explored the Coupon Collector approach, which is a solid starting point. But now, let’s delve into a more powerful tool in combinatorics: the Inclusion-Exclusion Principle. This is the very method that the person who responded on Fizz used! It’s a fascinating approach, particularly useful for counting the number of elements in the union of several sets, even when those sets are not disjoint.</p>
+<blockquote>
+<p>“Do you think it’s likely that a collection of Rice University students would include at least one student with each possible birthday? How can we calculate the probability that every birthday is represented assuming uniform distribution?” <br>
+— Problem 1.2</p>
+</blockquote>
+<p>In other words, we want to find the probability that at least one student has each birthday. In fact, this is the reverse of asking if nobody has a birthday on those days, which is easier to calculate (I’ll explain in a bit). We can use the Inclusion-Exclusion Principle to calculate the probability that nobody has a birthday on a particular day! The inclusion principle states that if we have events $A_i, i = { 1, 2, \ldots, n}$ and $\mathcal{P}(A_i)$ is the probability of event $A_i$. The probability of the union of their union (i.e., the likelihood that at least one of the events occurs) is given by:</p>
+<p>$$
+\begin{align*}
+\mathcal{P} \left( \bigcup_{i=1}^n A_i \right) &amp;= \sum_{i=1}^n \mathcal{P}(A_i)\ - \sum_{1\leq i&lt;j\leq n} \mathcal{P}(A_i \cap A_j) \\
+&amp;+ \quad \sum_{1\leq i&lt;j&lt;k\leq n}\mathcal{P}(A_i \cap A_j \cap A_k) - \cdots + (-1)^{n-1} \mathcal{P}( A_1 \cap \cdots \cap A_n) \\
+&amp;= \sum_{\emptyset \neq J\subseteq {1,2,\ldots ,n}} (-1)^{|J|-1}\mathcal{P}\left(\bigcap_{j\in J}A_{j}\right)
+\end{align*}
+$$</p>
+<p>The intuitive way to think about the Inclusion-Exclusion Principle is as a method for correcting overcounts when calculating the probability of at least one of several events occurring. In the context of our problem with Rice University students, each event $A_i$ can be thought of as the event that no student has their birthday on day $i$. Since these events overlap (students can share birthdays or not have birthdays on multiple specific days), we need to adjust for the overlap to avoid double-counting the probabilities. Now, before we use it, however, let’s prove it and a claim that will be useful for our proof.</p>
+<div class="note-container note-type-default">
+  
+    <button class="note-toggle" aria-expanded="true">
+      
+        <div class="note-center">
+          <p>Proof of Inclusion-Exclusion Principle</p>
+
+        </div>
+      
+    </button>
+    <div class="note-content" style="display: block;">
+      <p><strong>Proof</strong>: We proceed by the principle of induction. Let’s denote the principle as</p>
+<p>$$
+p(n) = \mathcal{P} \left( \bigcup_{i=1}^n A_i \right) = \sum_{\emptyset \neq J\subseteq {1,2,\ldots ,n}} (-1)^{|J|-1}\mathcal{P}\left(\bigcap_{j\in J}A_{j}\right), n \in \mathbb{N}, |A_i| = n, n \geq 2
+$$</p>
+<p><strong>Base Case</strong>: For $n = 2$, let us denote $A_1 = E$ and $A_2 = F$. Then, observe that $E$ and $F-E$ are exclusive events, which means that their union $\mathcal{P}(E \cup F) = \mathcal{P}(E \cup (F - E)) = \mathcal{P}(E) + \mathcal{P}(F - E)$. Moreover, we also know that $F-E$  and $F \cup E$ are exclusive events with their union being $F$. Hence, we can write $\mathcal{P}(F)$ $= \mathcal{P}((F - E) \cup (F \cap E)) = \mathcal{P}(F - E) + \mathcal{P}(F \cap E)$. Thus:</p>
+<p>$$
+\begin{align*}
+\mathcal{P}(E \cup F) &amp;= \mathcal{P}(E) + \mathcal{P}(F - E)\\
+&amp;= \mathcal{P}(E) + \left(\mathcal{P}(F) - \mathcal{P}(E \cap F)\right)\\
+&amp;= \sum_{\emptyset \neq J\subseteq {1,2}} (-1)^{|J|-1}\mathcal{P}\left(\bigcap_{j\in J}A_{j}\right)
+\end{align*}
+$$</p>
+<p>Where the second line follows from the fact that $E \cap F = E$ and $F - E = F$. To read the last line notice that the non-empty subsets of $J$ are $\{1, 2\}$, $\{1\}$, $\{2\}$, so the summation is $\mathcal{P}(E) + \mathcal{P}(F) - \mathcal{P}(E \cap F)$; the base case holds.</p>
+<p><strong>Inductive Step</strong>: Assume that $p(k)$ holds for some $k \in \mathbb{N}$, we show that $p(k+1)$ holds. Let $A_1, A_2, \ldots, A_{k+1}$ be events, then we can write:</p>
+<p>$$
+\begin{align*}
+\mathcal{P} \left( \bigcup_{i=1}^{k+1} A_i \right) &amp;= \mathcal{P} \left( \left[\bigcup_{i=1}^{k} A_i \right] \cup A_{k+1} \right)&amp; &amp;\text{by definition}\\
+&amp;= \mathcal{P}\left( \bigcup_{i=1}^{k} A_i \right) + \mathcal{P}(A_{k+1}) - \mathcal{P} \left( \left[\bigcup_{i=1}^{k} A_i \right] \cap A_{k+1} \right)&amp; &amp;\text{base case with } E = \bigcup_{i=1}^{k} A_i, F = A_{k+1}\\
+&amp;= \mathcal{P}\left( \bigcup_{i=1}^{k} A_i \right) + \mathcal{P}(A_{k+1}) - \mathcal{P} \left( \bigcup_{i=1}^{k} \left(A_i \cap A_{k+1}\right) \right)&amp; &amp;\text{by distributive property}
+\end{align*}
+$$</p>
+<p>Notice that the first and last terms are $n-$unions, thus the inductive hypothesis holds:</p>
+<p>$$
+\begin{align*}
+\mathcal{P} \left( \bigcup_{i=1}^{k+1} A_i \right) &amp;= \mathcal{P}\left( \bigcup_{i=1}^{k} A_i \right) + \mathcal{P}(A_{k+1}) - \mathcal{P} \left( \bigcup_{i=1}^{k} \left(A_i \cap A_{k+1}\right) \right)&amp; &amp;\\
+&amp;= \left[\sum_{\emptyset \neq J\subseteq {1,2,\ldots ,k}} (-1)^{|J|-1}\mathcal{P}\left(\bigcap_{j\in J}A_{j}\right)\right] + \mathcal{P}(A_{k+1})&amp; &amp; \\
+&amp;- \left[\sum_{\emptyset \neq J\subseteq {1,2,\ldots ,k}} (-1)^{|J|-1}\mathcal{P}\left(\bigcap_{j\in J} \left(A_{j} \cap A_{k+1}\right)\right)\right]&amp; &amp;\text{by inductive hypothesis}\\
+\end{align*}
+$$</p>
+<p>Now, observe:</p>
+<p>$$
+\mathcal{P}(A_{k+1}) = \sum_{\substack{J \subseteq {1, 2, \ldots, k+1} \ k+1 \in J, |J|=1}} (-1)^{|J|-1} \mathcal{P} \left( \bigcap_{j \in J} A_j \right)
+$$</p>
+<p>And for the terms with intersections $ A_j \cap A_{k+1} $:</p>
+<p>$$
+\mathcal{P} \left( \bigcap_{j \in J} (A_j \cap A_{k+1}) \right) = \mathcal{P} \left( \bigcap_{j \in (J \cup {k+1})} A_j \right)
+$$</p>
+<p>Thus, the equation becomes:</p>
+<p>$$
+\begin{align*}
+\mathcal{P} \left( \bigcup_{i=1}^{k+1} A_i \right) &amp;= \sum_{\emptyset \neq J \subseteq {1, 2, \ldots, k}} (-1)^{|J|-1} \mathcal{P} \left( \bigcap_{j \in J} A_j \right) \\
+&amp;\quad + \sum_{\substack{J \subseteq {1, 2, \ldots, k+1} \ k+1 \in J, |J|=1}} (-1)^{|J|-1} \mathcal{P} \left( \bigcap_{j \in J} A_j \right) \\
+&amp;\quad - \sum_{\emptyset \neq J \subseteq {1, 2, \ldots, k}} (-1)^{|J|-1} \mathcal{P} \left( \bigcap_{j \in (J \cup {k+1})} A_j \right)
+\end{align*}
+$$</p>
+<p>Combining all these terms, I claim we have $(\star)$:</p>
+<p>$$
+\mathcal{P} \left( \bigcup_{i=1}^{k+1} A_i \right) = \sum_{\emptyset \neq J’ \subseteq {1, 2, \ldots, k+1}} (-1)^{|J’|-1} \mathcal{P} \left( \bigcap_{j \in J’} A_j \right)\quad (\star)
+$$</p>
+<p>All that is left is proving $(\star)$, but it’s not that important for the reader.</p>
+<details>
+<summary>Proof of $(\star)$</summary>
+<p>
+<p>Let $E = { J \subseteq {1, 2, \ldots, k} \mid J \neq \emptyset }$ and $F = { J \subseteq {1, 2, \ldots, k+1} \mid J \neq \emptyset }$. Then, $F - E = { {k+1} } \cup { {k+1} \cup x \mid x \in E }$.</p>
+<p>To prove the claim, we need to show that every element $y$ in $F - E$ is in ${ {k+1} } \cup { {k+1} \cup x \mid x \in E }$ and vice versa. Suppose $y \in F - E$. This means $y \in F$ and $y \notin E$. Since $y \in F$, we have $y \subseteq {1, 2, \ldots, k+1}$ and $y \neq \emptyset$. Additionally, $y \notin E$ implies $y \not\subseteq {1, 2, \ldots, k}$. This means there exists an element $m \in y$ such that $m \notin {1, 2, \ldots, k}$. The only such $m$ is $k+1$, so $k+1 \in y$.</p>
+<p>Consider two cases: $y = {k+1}$ or $y \supset {k+1}$, i.e., $y = {k+1} \cup x$ for some $x \subseteq {1, 2, \ldots, k}$. In the second case, since $y \notin E$, $x \neq \emptyset$, implying $x \in E$. Thus, $y \in { {k+1} } \cup { {k+1} \cup x \mid x \in E }$.</p>
+<p>Conversely, suppose $y \in { {k+1} } \cup { {k+1} \cup x \mid x \in E }$. This means either $y = {k+1}$ or $y = {k+1} \cup x$ for some $x \in E$. In both cases, $y \subseteq {1, 2, \ldots, k+1}$ and $y \neq \emptyset$, so $y \in F$. Additionally, $y \notin E$ because if $y = {k+1}$, clearly $y \not\subseteq {1, 2, \ldots, k}$, and if $y = {k+1} \cup x$ and $x \in E$, $y$ contains $k+1$ which is not in ${1, 2, \ldots, k}$. Hence, $y \in F - E$.</p>
+<p>Combining both directions, we have shown $F - E = { {k+1} } \cup { {k+1} \cup x \mid x \in E }$. This completes the proof of $(\star)$.</p>
+</p>
+</details>
+<p>Equivalently, we can express $J’$ as $J’ = (J \cup { \{k+1\} } \cup \{ \{k+1\} \cup x \mid x \in J \})$ through our claim. This completes the inductive step; thus, through the principle of induction, we have proven the Inclusion-Exclusion Principle, $p(n)$ for $n \in \mathbb{N}$. $$\tag*{$\blacksquare$}$$</p>
+
+    </div>
+  
+</div>
+<p>That took a bit, but now we can use it freely 😎! Fix $n$, the number of students, and let $m$ be a set of birthdays. Clearly, for a set of $m$ days, the probability that nobody has a birthday on those days is $(1 - \frac{m}{365})^n$. Now to tie this to the Inclusion-Exclusion Principle, we need to state a corollary 🙃:</p>
+<div class="note-container note-type-default">
+  
+    <button class="note-toggle" aria-expanded="true">
+      
+        <div class="note-center">
+          <p>Corollary of IEP</p>
+
+        </div>
+      
+    </button>
+    <div class="note-content" style="display: block;">
+      <p><strong>Corollary</strong>: In the probabilistic version of the inclusion-exclusion principle, the probability of the intersection $A_i, i \in I$ only depends on the cardinality of $I$, meaning for every $k \in {1, \ldots, n}$, there exists $a_k$ such that</p>
+<p>$$
+a_k = \mathcal{P}(A_I) \quad \text{for every} \quad I \subseteq {1, \ldots, n} \quad \text{with} \quad |I| = k
+$$</p>
+<p>Then, the formula simplifies to</p>
+<p>$$
+\mathcal{P} \left( \bigcup_{i=1}^n A_i \right) = \sum_{k=1}^n (-1)^{k-1} \binom{n}{k} a_k
+$$</p>
+<p>This result arises due to the combinatorial interpretation of the binomial coefficient $\binom{n}{k}$ and the independence of the events $A_i$.</p>
+<details>
+<summary>Proof of Corollary</summary>
+ <p>
+<p>Let’s denote the probability of the union of $n$ events $A_i$ as $\mathcal{P} \left( \bigcup_{i=1}^n A_i \right)$. According to the inclusion-exclusion principle, we have:</p>
+<p>$$
+\mathcal{P} \left( \bigcup_{i=1}^n A_i \right) = \sum_{\emptyset \neq J \subseteq {1, 2, \ldots, n}} (-1)^{|J|-1} \mathcal{P} \left( \bigcap_{j \in J} A_j \right)
+$$</p>
+<p>Given that the probability of the intersection $A_i$ only depends on the cardinality of $I$, we let $a_k = \mathcal{P}(A_I)$ for any $I$ with $|I| = k$. We can then rewrite the inclusion-exclusion formula as:</p>
+<p>$$
+\mathcal{P} \left( \bigcup_{i=1}^n A_i \right) = \sum_{k=1}^n \sum_{\substack{J \subseteq {1, 2, \ldots, n} \ |J| = k}} (-1)^{k-1} a_k
+$$</p>
+<p>Since there are $\binom{n}{k}$ subsets $J$ of size $k$ from $n$ elements, the expression simplifies to:
+$$
+\mathcal{P} \left( \bigcup_{i=1}^n A_i \right) = \sum_{k=1}^n (-1)^{k-1} \binom{n}{k} a_k
+$$</p>
+<p>For the case where the events $A_i$ are independent and identically distributed, we have $\mathcal{P}(A_i) = p$ for all $i$, and thus $a_k = p^k$. Substituting $a_k = p^k$ into the formula, we get:</p>
+<p>$$
+\mathcal{P} \left( \bigcup_{i=1}^n A_i \right) = \sum_{k=1}^n (-1)^{k-1} \binom{n}{k} p^k
+$$</p>
+<p>Which completes the proof of the corollary. $$
+\tag*{$\blacksquare$}
+$$</p>
+</p>
+</details>
+    </div>
+  
+</div>
+<p>Using the corollary, we can finally calculate the probability our question asks for! Let $A_i$ be the event that nobody has a birthday on day $i$, then the probability that at least one student has each birthday is given by:</p>
+<p>$$
+\sum_{m=0}^{365} (-1)^m \binom{365}{m} \left(1 - \frac{m}{365}\right)^n = \frac{1}{365^n} \sum_{m=0}^{365} (-1)^m \binom{365}{m} (365 - m)^n
+$$</p>
+<p>Now, we can calculate this for $n = 2366$ and $n = 2669$ to see if our results match up!</p>
+<pre data-lang="wolframscript" style="background-color:#0f1419;color:#bfbab0;" class="language-wolframscript "><code class="language-wolframscript" data-lang="wolframscript"><span>(* Define the summation function *)
+</span><span>s[n_] := Sum[(-1)^m Binomial[365, m] (1 - m/365)^n, {m, 0, 365}]
+</span><span>
+</span><span>(* Compute the summation for n = 2366 *)
+</span><span>s2366 = s[2366]
+</span><span>
+</span><span>(* Compute the summation for n = 2669 *)
+</span><span>s2669 = s[2669]
+</span></code></pre>
+<p>We end up with $n = 2366$ having a probability of $0.573$ and $n = 2669$ having a probability of $0.785$. This is a bit surprising, as the expected number of students needed to see all birthdays was $2366$ students, but the likelihood of seeing all birthdays was only $57.3%$ using that number. This is because the expected number of students needed to see all birthdays is the average number of students needed to see all birthdays. Still, the probability of seeing all birthdays is one minus the probability of not seeing all birthdays. This subtle but essential distinction shows the power of different probability theory methods (and leads)!</p>
+<h1 id="monte-carlo-simulation"><a class="zola-anchor" href="#monte-carlo-simulation" aria-label="Anchor link for: monte-carlo-simulation">Monte Carlo Simulation</a></h1>
+<p>Now that we have come up with two different methods to solve similar problems, I want to explore another lead: Monte Carlo Simulation (honestly, so this blog has pictures, lol). Monte Carlo simulations are beneficial when dealing with complex probability problems. Instead of solving the problem analytically, we often simulate the scenario and observe the outcomes. In our case, we will simulate the assignment of birthdays to students repeatedly and count how often all 365 days are represented. Unfortunately, we must move to the computing land and code it up. I wanted an easy, fast, and clean language to prototype this, so, of course, I chose <a rel="noreferrer" href="https://www.rust-lang.org/">rust</a> 🦀</p>
+<p>Since this is a math blog, I’ll keep the code to a minimum. The concept is straightforward: we assign a random birthday to each student and check if all 365 days are represented. We repeat this process numerous times and calculate the probability of seeing all birthdays. To optimize our models for the problem, I’ve decided to create an interface for our simulations (or a trait in Rust land):</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">pub trait </span><span style="color:#59c2ff;">Simulation </span><span>{
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Number of students that will be assigned birthdays
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">students</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span>[</span><span style="color:#ff7733;">u16</span><span style="color:#bfbab0cc;">; </span><span style="color:#f29718;">10</span><span>] {
+</span><span>        [</span><span style="color:#f29718;">2366</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">2669</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">3000</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">4000</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">4500</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">5000</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">6000</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">7000</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">8000</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">9000</span><span>]
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">days</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">u16 </span><span>{ </span><span style="font-style:italic;color:#5c6773;">// Number of days in a year
+</span><span>        </span><span style="color:#f29718;">365
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">simulations</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">u16 </span><span>{ </span><span style="font-style:italic;color:#5c6773;">// Number of simulations to run
+</span><span>        </span><span style="color:#f29718;">10_000
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">run</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="color:#ff7733;">f64</span><span>&gt;</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span></code></pre>
+<p>This will allow us to create different models for our simulations, such as a simple model randomly assigning birthdays to students and two more I have in mind. Here is our first model:</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">pub struct </span><span style="color:#59c2ff;">BasicModel</span><span>{}
+</span><span>
+</span><span style="color:#ff7733;">impl </span><span>Simulation </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">BasicModel </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">run</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="color:#ff7733;">f64</span><span>&gt; {
+</span><span>        </span><span style="color:#ff7733;">let </span><span>(days</span><span style="color:#bfbab0cc;">,</span><span> simulations</span><span style="color:#bfbab0cc;">,</span><span> students) </span><span style="color:#f29668;">=
+</span><span>            (</span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">days</span><span>() </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">usize</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">simulations</span><span>()</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">students</span><span>())</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>        </span><span style="color:#ff7733;">let mut</span><span> rng </span><span style="color:#f29668;">= </span><span>rand</span><span style="color:#f29668;">::</span><span>thread_rng()</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">let mut</span><span> birthdays</span><span style="color:#bfbab0cc;">: </span><span>HashSet&lt;</span><span style="color:#f29668;">_</span><span>, RandomState&gt; </span><span style="color:#f29668;">= </span><span>HashSet</span><span style="color:#f29668;">::</span><span>with_capacity(days)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>        students
+</span><span>            </span><span style="color:#f29668;">.</span><span style="color:#f07178;">into_iter</span><span>()
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">// for each number of students
+</span><span>            </span><span style="color:#f29668;">.</span><span style="color:#f07178;">map</span><span>(|</span><span style="color:#f29718;">num</span><span>| {
+</span><span>                (</span><span style="color:#f29718;">0</span><span style="color:#f29668;">..</span><span>simulations) </span><span style="font-style:italic;color:#5c6773;">// we run the simulation
+</span><span>                    </span><span style="font-style:italic;color:#5c6773;">// for each simulation
+</span><span>                    </span><span style="color:#f29668;">.</span><span style="color:#f07178;">map</span><span>(|_| {
+</span><span>                        birthdays</span><span style="color:#f29668;">.</span><span style="color:#f07178;">clear</span><span>()</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// so we don&#39;t have to allocate each time
+</span><span>
+</span><span>                        birthdays</span><span style="color:#f29668;">.</span><span style="color:#f07178;">extend</span><span>((</span><span style="color:#f29718;">0</span><span style="color:#f29668;">..</span><span>num)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">map</span><span>(|_| {
+</span><span>                            rng</span><span style="color:#f29668;">.</span><span style="color:#f07178;">gen_range</span><span>(</span><span style="color:#f29718;">0</span><span style="color:#f29668;">..</span><span>days) </span><span style="font-style:italic;color:#5c6773;">// Generate a random day of the year
+</span><span>                        }))</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// add a random birthday to the HashSet
+</span><span>
+</span><span>                        </span><span style="color:#ff7733;">usize</span><span style="color:#f29668;">::</span><span>from(birthdays</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>() </span><span style="color:#f29668;">==</span><span> days)
+</span><span>                    })
+</span><span>                    </span><span style="color:#f29668;">.</span><span>sum</span><span style="color:#f29668;">::</span><span>&lt;</span><span style="color:#ff7733;">usize</span><span>&gt;() </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">f64 </span><span style="font-style:italic;color:#5c6773;">// sum the results of the simulations
+</span><span>                    </span><span style="color:#f29668;">/</span><span> simulations </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">f64 </span><span style="font-style:italic;color:#5c6773;">// divide by the number of simulations
+</span><span>            })
+</span><span>            </span><span style="color:#f29668;">.</span><span style="color:#f07178;">collect</span><span>()
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>In this model, we generate a random birthday for each student and check if all 365 days are represented through a hash set. We repeat this process many times and calculate the probability of seeing all birthdays. We then get the likelihood of seeing all birthdays for each number of students in our <code>students</code> array. Now, we run the code with <code>cargo run --release</code>:</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> now </span><span style="color:#f29668;">= </span><span>std</span><span style="color:#f29668;">::</span><span>time</span><span style="color:#f29668;">::</span><span>Instant</span><span style="color:#f29668;">::</span><span>now()</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// Benchmarking
+</span><span>    </span><span style="color:#ff7733;">let</span><span> model </span><span style="color:#f29668;">= </span><span>basic</span><span style="color:#f29668;">::</span><span>BasicModel {}</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> results </span><span style="color:#f29668;">=</span><span> model</span><span style="color:#f29668;">.</span><span style="color:#f07178;">run</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">for </span><span>(num</span><span style="color:#bfbab0cc;">,</span><span> result) </span><span style="color:#f29668;">in</span><span> model</span><span style="color:#f29668;">.</span><span style="color:#f07178;">students</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">zip</span><span>(results</span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter</span><span>()) {
+</span><span>        </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Num Students: </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">, Probability: </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> num</span><span style="color:#bfbab0cc;">,</span><span> result)</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Elapsed: </span><span style="color:#f29718;">{:?}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> now</span><span style="color:#f29668;">.</span><span style="color:#f07178;">elapsed</span><span>())</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Here are the results:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> cargo run</span><span style="color:#f29718;"> --release 
+</span><span style="color:#ffb454;">Num</span><span> Students: 2366, Probability: 0.5698
+</span><span style="color:#ffb454;">Num</span><span> Students: 2669, Probability: 0.7893
+</span><span style="color:#ffb454;">Num</span><span> Students: 3000, Probability: 0.9072
+</span><span style="color:#ffb454;">Num</span><span> Students: 4000, Probability: 0.9948
+</span><span style="color:#ffb454;">Num</span><span> Students: 4500, Probability: 0.9988
+</span><span style="color:#ffb454;">Num</span><span> Students: 5000, Probability: 0.9996
+</span><span style="color:#ffb454;">Num</span><span> Students: 6000, Probability: 0.9999
+</span><span style="color:#ffb454;">Num</span><span> Students: 7000, Probability: 1
+</span><span style="color:#ffb454;">Num</span><span> Students: 8000, Probability: 1
+</span><span style="color:#ffb454;">Num</span><span> Students: 9000, Probability: 1
+</span><span style="color:#ffb454;">Elapsed:</span><span> 6.503436542s
+</span></code></pre>
+<p>Anyway, I wanted to make this fast enough to run more simulations, so here is a slightly optimized version of the model where we parallelize the simulation. Parallelizing is a technique that allows us to run multiple computations simultaneously, which can be useful when we have a large number of simulations to run, as in this case!</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">impl </span><span>Simulation </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">ParModel </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">run</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="color:#ff7733;">f64</span><span>&gt; {
+</span><span>        </span><span style="color:#ff7733;">let </span><span>(days</span><span style="color:#bfbab0cc;">,</span><span> simulations</span><span style="color:#bfbab0cc;">,</span><span> students) </span><span style="color:#f29668;">=
+</span><span>            (</span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">days</span><span>() </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">usize</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">simulations</span><span>()</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">students</span><span>())</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>        students
+</span><span>            </span><span style="color:#f29668;">.</span><span style="color:#f07178;">into_par_iter</span><span>() </span><span style="font-style:italic;color:#5c6773;">// parallelize the outer loop
+</span><span>            </span><span style="color:#f29668;">.</span><span style="color:#f07178;">map_init</span><span>(
+</span><span>                </span><span style="font-style:italic;color:#5c6773;">// init set and rand generator
+</span><span>                </span><span style="color:#f29668;">|| </span><span>(HashSet</span><span style="color:#f29668;">::</span><span>with_capacity(days)</span><span style="color:#bfbab0cc;">, </span><span>rand</span><span style="color:#f29668;">::</span><span>thread_rng())</span><span style="color:#bfbab0cc;">,
+</span><span>                </span><span style="font-style:italic;color:#5c6773;">// for each number of students
+</span><span>                </span><span style="color:#f29668;">|</span><span>(birthdays</span><span style="color:#bfbab0cc;">,</span><span> rng)</span><span style="color:#bfbab0cc;">,</span><span> num</span><span style="color:#f29668;">| </span><span>{
+</span><span>                    (</span><span style="color:#f29718;">0</span><span style="color:#f29668;">..</span><span>simulations)
+</span><span>                        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">map</span><span>(|_| {
+</span><span>                            birthdays</span><span style="color:#f29668;">.</span><span style="color:#f07178;">clear</span><span>()</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// so we don&#39;t have to allocate each time
+</span><span>
+</span><span>                            birthdays</span><span style="color:#f29668;">.</span><span style="color:#f07178;">extend</span><span>((</span><span style="color:#f29718;">0</span><span style="color:#f29668;">..</span><span>num)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">map</span><span>(|_| {
+</span><span>                                rng</span><span style="color:#f29668;">.</span><span style="color:#f07178;">gen_range</span><span>(</span><span style="color:#f29718;">0</span><span style="color:#f29668;">..</span><span>days </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">u16</span><span>) </span><span style="font-style:italic;color:#5c6773;">// Generate a random day of the year
+</span><span>                            }))</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// add a random birthday to the HashSet
+</span><span>
+</span><span>                            </span><span style="color:#ff7733;">u16</span><span style="color:#f29668;">::</span><span>from(birthdays</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>() </span><span style="color:#f29668;">==</span><span> days)
+</span><span>                        })
+</span><span>                        </span><span style="color:#f29668;">.</span><span>sum</span><span style="color:#f29668;">::</span><span>&lt;</span><span style="color:#ff7733;">u16</span><span>&gt;() </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">f64
+</span><span>                        </span><span style="color:#f29668;">/</span><span> simulations </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">f64 </span><span style="font-style:italic;color:#5c6773;">// sum the results of the simulations
+</span><span>                }</span><span style="color:#bfbab0cc;">,
+</span><span>            )
+</span><span>            </span><span style="color:#f29668;">.</span><span>collect</span><span style="color:#f29668;">::</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="color:#ff7733;">f64</span><span>&gt;&gt;()
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Now, let’s change the main function and the number of simulations to run <code>100,000</code> simulations and test the models:</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">pub trait </span><span style="color:#59c2ff;">Simulation</span><span>: std::fmt::Debug { </span><span style="font-style:italic;color:#5c6773;">// Add Debug trait
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">students</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span>[</span><span style="color:#ff7733;">u16</span><span style="color:#bfbab0cc;">; </span><span style="color:#f29718;">10</span><span>] {
+</span><span>        [</span><span style="color:#f29718;">2366</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">2669</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">3000</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">4000</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">4500</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">5000</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">6000</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">7000</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">8000</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">9000</span><span>]
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">days</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">u16 </span><span>{
+</span><span>        </span><span style="color:#f29718;">365
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">simulations</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">u32 </span><span>{
+</span><span>        </span><span style="color:#f29718;">100_000
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">run</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="color:#ff7733;">f64</span><span>&gt;</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> models</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">Box</span><span>&lt;dyn Simulation&gt;&gt; </span><span style="color:#f29668;">= </span><span style="color:#f07178;">vec!</span><span>[
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">Box</span><span style="color:#f29668;">::</span><span>new(basic</span><span style="color:#f29668;">::</span><span>BasicModel {})</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">Box</span><span style="color:#f29668;">::</span><span>new(parallel</span><span style="color:#f29668;">::</span><span>ParModel {})</span><span style="color:#bfbab0cc;">,
+</span><span>    ]</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">for</span><span> model </span><span style="color:#f29668;">in</span><span> models {
+</span><span>        </span><span style="color:#ff7733;">let</span><span> now </span><span style="color:#f29668;">= </span><span>std</span><span style="color:#f29668;">::</span><span>time</span><span style="color:#f29668;">::</span><span>Instant</span><span style="color:#f29668;">::</span><span>now()</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">let</span><span> results </span><span style="color:#f29668;">=</span><span> model</span><span style="color:#f29668;">.</span><span style="color:#f07178;">run</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Model: </span><span style="color:#f29718;">{:?}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> model)</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">for </span><span>(num</span><span style="color:#bfbab0cc;">,</span><span> result) </span><span style="color:#f29668;">in</span><span> model</span><span style="color:#f29668;">.</span><span style="color:#f07178;">students</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">zip</span><span>(results</span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter</span><span>()) {
+</span><span>            </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Num Students: </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">, Probability: </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> num</span><span style="color:#bfbab0cc;">,</span><span> result)</span><span style="color:#bfbab0cc;">;
+</span><span>        }
+</span><span>        </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Elapsed: </span><span style="color:#f29718;">{:?}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> now</span><span style="color:#f29668;">.</span><span style="color:#f07178;">elapsed</span><span>())</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Surprisingly, it only took <code>2m 40s</code> for both models to run $100000$ simulations, which is pretty fast! Here are the results again:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> cargo run</span><span style="color:#f29718;"> --release
+</span><span style="color:#ffb454;">Model:</span><span> BasicModel
+</span><span style="color:#ffb454;">Num</span><span> Students: 2366, Probability: 0.57235
+</span><span style="color:#ffb454;">Num</span><span> Students: 2669, Probability: 0.7869
+</span><span style="color:#ffb454;">Num</span><span> Students: 3000, Probability: 0.90672
+</span><span style="color:#ffb454;">Num</span><span> Students: 4000, Probability: 0.99357
+</span><span style="color:#ffb454;">Num</span><span> Students: 4500, Probability: 0.99841
+</span><span style="color:#ffb454;">Num</span><span> Students: 5000, Probability: 0.99958
+</span><span style="color:#ffb454;">Num</span><span> Students: 6000, Probability: 0.99997
+</span><span style="color:#ffb454;">Num</span><span> Students: 7000, Probability: 1
+</span><span style="color:#ffb454;">Num</span><span> Students: 8000, Probability: 1
+</span><span style="color:#ffb454;">Num</span><span> Students: 9000, Probability: 1
+</span><span style="color:#ffb454;">Elapsed:</span><span> 141.827488417s
+</span><span style="color:#ffb454;">Model:</span><span> ParModel
+</span><span style="color:#ffb454;">Num</span><span> Students: 2366, Probability: 0.5726
+</span><span style="color:#ffb454;">Num</span><span> Students: 2669, Probability: 0.78389
+</span><span style="color:#ffb454;">Num</span><span> Students: 3000, Probability: 0.90653
+</span><span style="color:#ffb454;">Num</span><span> Students: 4000, Probability: 0.99389
+</span><span style="color:#ffb454;">Num</span><span> Students: 4500, Probability: 0.99826
+</span><span style="color:#ffb454;">Num</span><span> Students: 5000, Probability: 0.99954
+</span><span style="color:#ffb454;">Num</span><span> Students: 6000, Probability: 0.99999
+</span><span style="color:#ffb454;">Num</span><span> Students: 7000, Probability: 1
+</span><span style="color:#ffb454;">Num</span><span> Students: 8000, Probability: 1
+</span><span style="color:#ffb454;">Num</span><span> Students: 9000, Probability: 1
+</span><span style="color:#ffb454;">Elapsed:</span><span> 12.1203835s
+</span></code></pre>
+<p>Clearly, paralleling the model was worth it. In either case, we see that using a Monte Carlo simulation, we can get a good approximation of the probability of seeing all birthdays in a group of students. I don’t like computation, but you gotta admit, this is cool as it matches our work so far! But now, let’s move on to the proof of<sup class="footnote-reference" id="fr-3-1"><a href="#fn-3">3</a></sup>—jk the third model and pretty pictures!</p>
+<h1 id="the-iep-model-and-plots"><a class="zola-anchor" href="#the-iep-model-and-plots" aria-label="Anchor link for: the-iep-model-and-plots">The IEP model and plots!</a></h1>
+<p>Let’s move on to the third model, which uses the Inclusion-Exclusion Principle. Since the IEP is deterministic, we don’t need to run simulations. Instead, we can calculate the probability of seeing all birthdays in a group of students directly. Here is the code for the model:</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">impl </span><span>Simulation </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">IEPModel </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">run</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="color:#ff7733;">f64</span><span>&gt; {
+</span><span>        </span><span style="color:#ff7733;">let </span><span>(days</span><span style="color:#bfbab0cc;">,</span><span> students) </span><span style="color:#f29668;">= </span><span>(</span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">days</span><span>() </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">usize</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">students</span><span>())</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>        students
+</span><span>            </span><span style="color:#f29668;">.</span><span style="color:#f07178;">into_par_iter</span><span>() </span><span style="font-style:italic;color:#5c6773;">// parallelize the outer loop
+</span><span>            </span><span style="color:#f29668;">.</span><span style="color:#f07178;">map</span><span>(|</span><span style="color:#f29718;">num</span><span>| </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">iep</span><span>(days</span><span style="color:#bfbab0cc;">,</span><span> num))
+</span><span>            </span><span style="color:#f29668;">.</span><span>collect</span><span style="color:#f29668;">::</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="color:#ff7733;">f64</span><span>&gt;&gt;()
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">impl </span><span style="color:#59c2ff;">IEPModel </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">iep</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">days</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>, </span><span style="color:#f29718;">students</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u16</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">f64 </span><span>{
+</span><span>        </span><span style="color:#ff7733;">let</span><span> scale </span><span style="color:#f29668;">= </span><span style="color:#f29718;">10</span><span style="color:#ff7733;">u64</span><span style="color:#f29668;">.</span><span style="color:#f07178;">pow</span><span>(</span><span style="color:#f29718;">12</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>        </span><span style="color:#ff7733;">let mut</span><span> sum </span><span style="color:#f29668;">= </span><span>BigInt</span><span style="color:#f29668;">::</span><span>from(</span><span style="color:#f29718;">0</span><span style="color:#ff7733;">i8</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">let mut</span><span> sign </span><span style="color:#f29668;">= </span><span style="color:#f29718;">1</span><span style="color:#ff7733;">i8</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">let</span><span> year </span><span style="color:#f29668;">= </span><span>BigUint</span><span style="color:#f29668;">::</span><span>from(days)</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">let</span><span> power </span><span style="color:#f29668;">= </span><span>BigInt</span><span style="color:#f29668;">::</span><span>from_biguint(num_bigint</span><span style="color:#f29668;">::</span><span>Sign</span><span style="color:#f29668;">::</span><span>Plus</span><span style="color:#bfbab0cc;">,</span><span> year</span><span style="color:#f29668;">.</span><span style="color:#f07178;">pow</span><span>(students</span><span style="color:#f29668;">.</span><span style="color:#f07178;">into</span><span>()))</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>        </span><span style="color:#ff7733;">let</span><span> big_days </span><span style="color:#f29668;">= </span><span>BigUint</span><span style="color:#f29668;">::</span><span>from(days)</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">let mut</span><span> binomial_iter </span><span style="color:#f29668;">= </span><span>IterBinomial</span><span style="color:#f29668;">::</span><span>new(big_days)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>        </span><span style="color:#ff7733;">for </span><span>(m</span><span style="color:#bfbab0cc;">,</span><span> binom) </span><span style="color:#f29668;">in </span><span>(</span><span style="color:#f29718;">0</span><span style="color:#f29668;">..=</span><span>days)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">zip</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> binomial_iter) {
+</span><span>            </span><span style="color:#ff7733;">let</span><span> diff </span><span style="color:#f29668;">= </span><span>(</span><span style="color:#f29668;">&amp;</span><span>year </span><span style="color:#f29668;">- </span><span>BigUint</span><span style="color:#f29668;">::</span><span>from(m))</span><span style="color:#f29668;">.</span><span style="color:#f07178;">pow</span><span>(students</span><span style="color:#f29668;">.</span><span style="color:#f07178;">into</span><span>())</span><span style="color:#bfbab0cc;">;
+</span><span>            </span><span style="color:#ff7733;">let</span><span> iterm </span><span style="color:#f29668;">= </span><span>BigInt</span><span style="color:#f29668;">::</span><span>from_biguint(num_bigint</span><span style="color:#f29668;">::</span><span>Sign</span><span style="color:#f29668;">::</span><span>Plus</span><span style="color:#bfbab0cc;">,</span><span> binom </span><span style="color:#f29668;">*</span><span> diff)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>            </span><span style="color:#ff7733;">match</span><span> sign </span><span style="color:#f29668;">== </span><span style="color:#f29718;">1 </span><span>{
+</span><span>                </span><span style="color:#f29718;">true </span><span style="color:#f29668;">=&gt;</span><span> sum </span><span style="color:#f29668;">+=</span><span> iterm</span><span style="color:#bfbab0cc;">,
+</span><span>                </span><span style="color:#f29718;">false </span><span style="color:#f29668;">=&gt;</span><span> sum </span><span style="color:#f29668;">-=</span><span> iterm</span><span style="color:#bfbab0cc;">,
+</span><span>            }
+</span><span>
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">// Alternate signs
+</span><span>            sign </span><span style="color:#f29668;">*= -</span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">;
+</span><span>        }
+</span><span>
+</span><span>        </span><span style="color:#ff7733;">let</span><span> scaled_probability </span><span style="color:#f29668;">= &amp;</span><span>sum </span><span style="color:#f29668;">* </span><span>BigInt</span><span style="color:#f29668;">::</span><span>from(scale) </span><span style="color:#f29668;">/ &amp;</span><span>power</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// Scaled by 10e12 to allow precision
+</span><span>        </span><span style="color:#ff7733;">let</span><span> actual_probability </span><span style="color:#f29668;">=</span><span> scaled_probability</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_u64_digits</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f29718;">1</span><span>[</span><span style="color:#f29718;">0</span><span>] </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">f64</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>        actual_probability </span><span style="color:#f29668;">/</span><span> scale </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">f64
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Running the model, we get the following results:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">Model:</span><span> IEPModel
+</span><span style="color:#ffb454;">Num</span><span> Students: 2366, Probability: 0.573025123519
+</span><span style="color:#ffb454;">Num</span><span> Students: 2669, Probability: 0.785229207305
+</span><span style="color:#ffb454;">Num</span><span> Students: 3000, Probability: 0.907229336079
+</span><span style="color:#ffb454;">Num</span><span> Students: 4000, Probability: 0.993761854096
+</span><span style="color:#ffb454;">Num</span><span> Students: 4500, Probability: 0.998414022451
+</span><span style="color:#ffb454;">Num</span><span> Students: 5000, Probability: 0.999597463865
+</span><span style="color:#ffb454;">Num</span><span> Students: 6000, Probability: 0.999974093862
+</span><span style="color:#ffb454;">Num</span><span> Students: 7000, Probability: 0.999998333033
+</span><span style="color:#ffb454;">Num</span><span> Students: 8000, Probability: 0.999999892737
+</span><span style="color:#ffb454;">Num</span><span> Students: 9000, Probability: 0.999999993098
+</span><span style="color:#ffb454;">Elapsed:</span><span> 73.884958ms
+</span></code></pre>
+<p>WOW, the IEP model is super fast and accurate! It makes sense since it’s a formula, but I expected something other than $73$ms. With that being said, let’s make some pretty graphs :). First, since this is an exploration, I’ll show the trace graphs of the models (I think it’s really cool). To make these graphs, I used <code>env CARGO_PROFILE_RELEASE_DEBUG=true cargo flamegraph --root -o flamegraph.svg</code> with the <a rel="noreferrer" href="https://github.com/flamegraph-rs/flamegraph">flamegraph crate</a>. You can right-click and open these images in a new tab to explore their traces!</p>
+<p>The basic model:
+<img src="https://seniormars.com/posts/everyday-birthday/./flamegraph0.svg" alt="flamegraph basic" /></p>
+<p>The parallel model:
+<img src="https://seniormars.com/posts/everyday-birthday/./flamegraph1.svg" alt="flamegraph parallel" /></p>
+<p>The IEP model:
+<img src="https://seniormars.com/posts/everyday-birthday/./flamegraph2.svg" alt="flamegraph iep" /></p>
+<p>Now, let’s plot the results<sup class="footnote-reference" id="fr-4-1"><a href="#fn-4">4</a></sup> of the parallel and IEP model to see how they compare. To make these graphs prettier, I decided to map over a range of students, 0 to 9,000, and to run only 10,000 simulations.</p>
+<div class="note-container note-type-default">
+  
+    <button class="note-toggle" aria-expanded="false">
+      
+        <div class="note-icon">
+          
+          <p>Code to generate plots</p>
+
+        </div>
+      
+    </button>
+    <div class="note-content" style="display: none;">
+      <p>First, here is the rust code I used to write the data.</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">for</span><span> model </span><span style="color:#f29668;">in</span><span> models {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> title </span><span style="color:#f29668;">= </span><span style="color:#f07178;">format!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{:?}</span><span style="color:#c2d94c;">.csv&quot;</span><span style="color:#bfbab0cc;">,</span><span> model)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> csv </span><span style="color:#f29668;">= </span><span>File</span><span style="color:#f29668;">::</span><span>create(title)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> bufread </span><span style="color:#f29668;">= </span><span>BufWriter</span><span style="color:#f29668;">::</span><span>new(csv)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> header </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;model,students,probability,time</span><span style="color:#95e6cb;">\n</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">;
+</span><span>    bufread</span><span style="color:#f29668;">.</span><span style="color:#f07178;">write_all</span><span>(header</span><span style="color:#f29668;">.</span><span style="color:#f07178;">as_bytes</span><span>())</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> results </span><span style="color:#f29668;">=</span><span> model</span><span style="color:#f29668;">.</span><span style="color:#f07178;">run</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">for </span><span>(num</span><span style="color:#bfbab0cc;">, </span><span>(result</span><span style="color:#bfbab0cc;">,</span><span> time)) </span><span style="color:#f29668;">in</span><span> results</span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">enumerate</span><span>() {
+</span><span>        </span><span style="color:#ff7733;">let</span><span> line </span><span style="color:#f29668;">= </span><span style="color:#f07178;">format!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{:?}</span><span style="color:#c2d94c;">,</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">,</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">,</span><span style="color:#f29718;">{:?}</span><span style="color:#95e6cb;">\n</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> model</span><span style="color:#bfbab0cc;">,</span><span> num</span><span style="color:#bfbab0cc;">,</span><span> result</span><span style="color:#bfbab0cc;">,</span><span> time)</span><span style="color:#bfbab0cc;">;
+</span><span>        bufread</span><span style="color:#f29668;">.</span><span style="color:#f07178;">write_all</span><span>(line</span><span style="color:#f29668;">.</span><span style="color:#f07178;">as_bytes</span><span>())</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Here is the python code to generate the plots.</p>
+<pre data-lang="python" style="background-color:#0f1419;color:#bfbab0;" class="language-python "><code class="language-python" data-lang="python"><span style="color:#ff7733;">import </span><span>pandas </span><span style="color:#ff7733;">as </span><span>pd
+</span><span style="color:#ff7733;">import </span><span>seaborn </span><span style="color:#ff7733;">as </span><span>sns
+</span><span style="color:#ff7733;">import </span><span>matplotlib</span><span style="color:#f29668;">.</span><span>pyplot </span><span style="color:#ff7733;">as </span><span>plt
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Load your data
+</span><span>df </span><span style="color:#f29668;">= </span><span>pd</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">read_csv</span><span>(</span><span style="color:#c2d94c;">&quot;data.csv&quot;</span><span>)
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Set the overall aesthetics
+</span><span>sns</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">set_theme</span><span>()
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Create the plot
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">figure</span><span>(</span><span style="color:#f29718;">figsize</span><span style="color:#f29668;">=</span><span>(</span><span style="color:#f29718;">14</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">8</span><span>))  </span><span style="font-style:italic;color:#5c6773;"># Larger figure size for better visibility
+</span><span style="font-style:italic;color:#5c6773;"># Define custom colors for each model
+</span><span>palette </span><span style="color:#f29668;">= </span><span>{</span><span style="color:#c2d94c;">&quot;IEPModel&quot;</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;deepskyblue&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;ParModel&quot;</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;coral&quot;</span><span>}
+</span><span>plot </span><span style="color:#f29668;">= </span><span>sns</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">lineplot</span><span>(
+</span><span>    </span><span style="color:#f29718;">x</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&#39;students&#39;</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="color:#f29718;">y</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&#39;probability&#39;</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="color:#f29718;">hue</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&#39;model&#39;</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="color:#f29718;">style</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&#39;model&#39;</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="color:#f29718;">markers</span><span style="color:#f29668;">=</span><span style="color:#f29718;">False</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="color:#f29718;">dashes</span><span style="color:#f29668;">=</span><span style="color:#f29718;">False</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="color:#f29718;">data</span><span style="color:#f29668;">=</span><span>df</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="color:#f29718;">palette</span><span style="color:#f29668;">=</span><span>palette
+</span><span>)
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Customizing x-axis ticks
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">xticks</span><span>(
+</span><span>    [</span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">1000</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">2000</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">3000</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">4000</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">5000</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">6000</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">7000</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">8000</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">9000</span><span>]</span><span style="color:#bfbab0cc;">,
+</span><span>    [</span><span style="color:#c2d94c;">&#39;0&#39;</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&#39;1k&#39;</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&#39;2k&#39;</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&#39;3k&#39;</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&#39;4k&#39;</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&#39;5k&#39;</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&#39;6k&#39;</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&#39;7k&#39;</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&#39;8k&#39;</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&#39;9k&#39;</span><span>]
+</span><span>)
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Adding annotations (customize as needed)
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">axhline</span><span>(</span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">.</span><span style="color:#f29718;">57</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">ls</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&#39;--&#39;</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">color</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&#39;gray&#39;</span><span>)
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">axvline</span><span>(</span><span style="color:#f29718;">2366</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">ls</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&#39;--&#39;</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">color</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&#39;gray&#39;</span><span>)  </span><span style="font-style:italic;color:#5c6773;"># Example vertical line
+</span><span>plot</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">text</span><span>(</span><span style="color:#f29718;">1000</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">.</span><span style="color:#f29718;">55</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&#39;Expected Average&#39;</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">verticalalignment</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&#39;bottom&#39;</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">horizontalalignment</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&#39;right&#39;</span><span>)
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Enhancing the plot
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">title</span><span>(</span><span style="color:#c2d94c;">&#39;Probability Comparison Between Models&#39;</span><span>)
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">xlabel</span><span>(</span><span style="color:#c2d94c;">&#39;Number of Students&#39;</span><span>)
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">ylabel</span><span>(</span><span style="color:#c2d94c;">&#39;Probability&#39;</span><span>)
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">ylim</span><span>(</span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">1</span><span>)  </span><span style="font-style:italic;color:#5c6773;"># Set y-axis limits
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">grid</span><span>(</span><span style="color:#f29718;">True</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">which</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&quot;both&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">ls</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&quot;--&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">linewidth</span><span style="color:#f29668;">=</span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">.</span><span style="color:#f29718;">5</span><span>)
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Legend
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">legend</span><span>(</span><span style="color:#f29718;">title</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&#39;Model&#39;</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">loc</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&#39;upper left&#39;</span><span>)
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Save or show the plot
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">savefig</span><span>(</span><span style="color:#c2d94c;">&#39;comparison_plot.png&#39;</span><span>)
+</span><span style="font-style:italic;color:#5c6773;"># clear plot
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">clf</span><span>()
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Create a violin plot
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">figure</span><span>(</span><span style="color:#f29718;">figsize</span><span style="color:#f29668;">=</span><span>(</span><span style="color:#f29718;">14</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">8</span><span>))
+</span><span>sns</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">violinplot</span><span>(</span><span style="color:#f29718;">x</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&#39;model&#39;</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">y</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&#39;probability&#39;</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">data</span><span style="color:#f29668;">=</span><span>df</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">palette</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&quot;Pastel1&quot;</span><span>)
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Enhancing the plot
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">title</span><span>(</span><span style="color:#c2d94c;">&#39;Probability Distribution by Model&#39;</span><span>)
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">xlabel</span><span>(</span><span style="color:#c2d94c;">&#39;Model&#39;</span><span>)
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">ylabel</span><span>(</span><span style="color:#c2d94c;">&#39;Probability&#39;</span><span>)
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Show the plot
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">savefig</span><span>(</span><span style="color:#c2d94c;">&#39;violin.png&#39;</span><span>)
+</span><span>
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">clf</span><span>()
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Assuming time is in the format &#39;866.458µs&#39; and you want to convert it to milliseconds
+</span><span>df[</span><span style="color:#c2d94c;">&#39;time_ms&#39;</span><span>] </span><span style="color:#f29668;">= </span><span>df[</span><span style="color:#c2d94c;">&#39;time&#39;</span><span>]</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">replace</span><span>({</span><span style="color:#c2d94c;">&#39;µs&#39;</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&#39;*1e-3&#39;</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&#39;ms&#39;</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&#39;*1&#39;</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&#39;s&#39;</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&#39;*1000&#39;</span><span>}</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">regex</span><span style="color:#f29668;">=</span><span style="color:#f29718;">True</span><span>)</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">map</span><span>(pd</span><span style="color:#f29668;">.</span><span>eval)
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Create the scatter plot with regression line
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">figure</span><span>(</span><span style="color:#f29718;">figsize</span><span style="color:#f29668;">=</span><span>(</span><span style="color:#f29718;">14</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">8</span><span>))
+</span><span>sns</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">lmplot</span><span>(</span><span style="color:#f29718;">x</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&#39;students&#39;</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">y</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&#39;time_ms&#39;</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">hue</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&#39;model&#39;</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">data</span><span style="color:#f29668;">=</span><span>df</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">ci</span><span style="color:#f29668;">=</span><span style="color:#f29718;">None</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">palette</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&quot;Set1&quot;</span><span>)
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Enhancing the plot
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">title</span><span>(</span><span style="color:#c2d94c;">&#39;Simulation Time vs Number of Students&#39;</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">pad</span><span style="color:#f29668;">=</span><span style="color:#f29718;">5</span><span>)
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">subplots_adjust</span><span>(</span><span style="color:#f29718;">top</span><span style="color:#f29668;">=</span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">.</span><span style="color:#f29718;">85</span><span>)  </span><span style="font-style:italic;color:#5c6773;"># Adjust the top spacing of the subplot area
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">xlabel</span><span>(</span><span style="color:#c2d94c;">&#39;Number of Students&#39;</span><span>)
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">ylabel</span><span>(</span><span style="color:#c2d94c;">&#39;Time (milliseconds)&#39;</span><span>)
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">grid</span><span>(</span><span style="color:#f29718;">True</span><span>)
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Show the plot
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">savefig</span><span>(</span><span style="color:#c2d94c;">&#39;scatter.png&#39;</span><span>)
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">show</span><span>()
+</span></code></pre>
+
+    </div>
+  
+</div>
+<p>Now, here are our plots:</p>
+<p><img src="https://seniormars.com/posts/everyday-birthday/./comparison_plot.png" alt="comparison" /></p>
+<p><img src="https://seniormars.com/posts/everyday-birthday/./violin.png" alt="violin" /></p>
+<p><img src="https://seniormars.com/posts/everyday-birthday/./scatter.png" alt="scatter" /></p>
+<p>I like graphs because they help us visualize the data and see patterns that might not be immediately obvious from the numbers. In this case, we can see that the IEP model is much faster than the parallel model and that the probability of seeing all birthdays increases as the number of students increases. The violin plot also shows the distribution of probabilities for each model, with the IEP model having a narrower distribution than the parallel model. Finally, we can see that IEP scales linearly with the number of students, while the parallel model scales exponentially. Now, let’s move on to our final section and last model!</p>
+<h1 id="i-read-a-paper-and-found"><a class="zola-anchor" href="#i-read-a-paper-and-found" aria-label="Anchor link for: i-read-a-paper-and-found">I read a paper and found…</a></h1>
+<p>Honestly, I was going to call it a day because although I said we would explore the original question, I didn’t know how to account for the fact that birthdays are not uniformly distributed. I had an idea on how to get the actual probabilities, and the last model (soon btw) was going to implement this based on data I got, but it felt like a cop-out. Or at least it was until I found a paper!</p>
+<p>First, let’s talk about the assumptions we made. The most important thing to note is that birthdays are not uniformly distributed. The most famous blog about this can be found <a rel="noreferrer" href="https://www.panix.com/~murphy/bday.html">here</a> by Roy Murphy. For instance, according to the data he collected, August is the most common month to have a birthday. This means that the probability of seeing all birthdays in a group of students is not simply $1 - \frac{m}{365}$, but rather a more complex function that depends on the distribution of birthdays. Moreover, Rice is a specific group of the general population, so it could have a different distribution of birthdays than the general population. It might be possible to answer the question well if I got specific data like zip code and birthdate, but due to ethical reasons, I totally don’t have that data. So that was a dead end — until I found this <a rel="noreferrer" href="https://doi.org/10.1016/0166-218X(92)90177-C">paper</a>, <cite> Birthday paradox, coupon collectors, caching algorithms and self-organizing search by Philippe Flajolet</cite>.</p>
+<p>So I read the paper (I totally didn’t just read the part that was relevant to my problem 🤧), and it turns out the Coupon Collector’s Problem can be generalized to non-uniform distributions. Specifically, in Theorem $4.1$, Dr. Flajolet gives us the equation:</p>
+<p>$$
+E(T) = \int_0^\infty \left(1 - \prod_{i=1}^m (1 - e^{-p_i t}) \right) dt.
+$$</p>
+<p>This is equal to</p>
+<p>$$
+E(T) = \sum_{q=0}^{m-1} (-1)^{m-1-q} \sum_{|J|=q} \frac{1}{1 - P_J},
+$$</p>
+<p>Where $ m $ denotes the number of coupons to be collected, and $ P_J $ denotes the probability of getting any coupon in the set of coupons $ J $. Let’s prove this!</p>
+<div class="note-container note-type-default">
+  
+    <button class="note-toggle" aria-expanded="false">
+      
+        <div class="note-center">
+          <p>Proof of Theorem 4.1</p>
+
+        </div>
+      
+    </button>
+    <div class="note-content" style="display: none;">
+      <p>I lied to you. While I did understand Dr. Flajolet’s general proof, I am not confident I can provide a great proof here. However, he used generating functions to generalize the Coupon Collector’s Problem to non-uniform distributions, and it’s pretty cool! In either case, if you want proof, please read the paper!</p>
+
+    </div>
+  
+</div>
+<p>With the proof finished 😎, we will allow ourselves to use the theorem. Moreover, we will implement this as our last model. Let’s first talk about the data to generate the probabilities. The SSA (Social Security Administration) records birthdays in the US. Since we want to talk about Rice students, I got the data for 2002 to 2005 (sorry super seniors). I found this data <a rel="noreferrer" href="https://github.com/fivethirtyeight/data/blob/master/births/US_births_2000-2014_SSA.csv">here</a>. Calculating the probabilities for each day was easy:</p>
+<div class="note-container note-type-default">
+  
+    <button class="note-toggle" aria-expanded="false">
+      
+        <div class="note-icon">
+          
+          <p>Code to calculate probabilities</p>
+
+        </div>
+      
+    </button>
+    <div class="note-content" style="display: none;">
+      <p>Note that the original version of this had an error, I have corrected it here. The error was in the <code>day_of_year</code> function, which was not correctly calculating the day of the year standardly.</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">use </span><span>chrono</span><span style="color:#f29668;">::</span><span>{Datelike</span><span style="color:#bfbab0cc;">,</span><span> NaiveDate}</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>{collections</span><span style="color:#f29668;">::</span><span>HashMap</span><span style="color:#bfbab0cc;">, </span><span>fs</span><span style="color:#f29668;">::</span><span>File</span><span style="color:#bfbab0cc;">, </span><span>path</span><span style="color:#f29668;">::</span><span>PathBuf}</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">/// standarized day of year
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">standarized_doy</span><span>(</span><span style="color:#f29718;">year</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u32</span><span>, </span><span style="color:#f29718;">month</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u32</span><span>, </span><span style="color:#f29718;">day</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u32</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Option</span><span>&lt;</span><span style="color:#ff7733;">u32</span><span>&gt; {
+</span><span>    NaiveDate</span><span style="color:#f29668;">::</span><span>from_ymd_opt(year </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">i32</span><span style="color:#bfbab0cc;">,</span><span> month</span><span style="color:#bfbab0cc;">,</span><span> day)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">map</span><span>(|</span><span style="color:#f29718;">d</span><span>| {
+</span><span>        </span><span style="color:#ff7733;">let</span><span> is_leap </span><span style="color:#f29668;">=</span><span> d</span><span style="color:#f29668;">.</span><span style="color:#f07178;">leap_year</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">let</span><span> day </span><span style="color:#f29668;">=</span><span> d</span><span style="color:#f29668;">.</span><span style="color:#f07178;">ordinal</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// to keep it standarized if it&#39;s not a leap year
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// otherwise the ranges will be off
+</span><span>        </span><span style="color:#ff7733;">if </span><span style="color:#f29668;">!</span><span>is_leap </span><span style="color:#f29668;">&amp;&amp;</span><span> day </span><span style="color:#f29668;">&gt;= </span><span style="color:#f29718;">60 </span><span>{
+</span><span>            day </span><span style="color:#f29668;">+ </span><span style="color:#f29718;">1
+</span><span>        } </span><span style="color:#ff7733;">else </span><span>{
+</span><span>            day
+</span><span>        }
+</span><span>    })
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">get_probabilities</span><span>(</span><span style="color:#f29718;">file_path</span><span style="color:#bfbab0cc;">:</span><span> PathBuf) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Option</span><span>&lt;HashMap&lt;</span><span style="color:#ff7733;">u32</span><span>, </span><span style="color:#ff7733;">f64</span><span>&gt;&gt; {
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> total_births</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize </span><span style="color:#f29668;">= </span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> birth_counts</span><span style="color:#bfbab0cc;">: </span><span>HashMap&lt;</span><span style="color:#ff7733;">u32</span><span>, </span><span style="color:#ff7733;">f64</span><span>&gt; </span><span style="color:#f29668;">= </span><span>HashMap</span><span style="color:#f29668;">::</span><span>with_capacity(</span><span style="color:#f29718;">366</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> file </span><span style="color:#f29668;">= </span><span>File</span><span style="color:#f29668;">::</span><span>open(file_path)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">ok</span><span>()</span><span style="color:#f29668;">?</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> rdr </span><span style="color:#f29668;">= </span><span>csv</span><span style="color:#f29668;">::</span><span>Reader</span><span style="color:#f29668;">::</span><span>from_reader(file)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">for</span><span> record </span><span style="color:#f29668;">in</span><span> rdr</span><span style="color:#f29668;">.</span><span style="color:#f07178;">records</span><span>() {
+</span><span>        </span><span style="color:#ff7733;">let</span><span> record </span><span style="color:#f29668;">=</span><span> record</span><span style="color:#f29668;">.</span><span style="color:#f07178;">ok</span><span>()</span><span style="color:#f29668;">?</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">let</span><span> year </span><span style="color:#f29668;">=</span><span> record[</span><span style="color:#f29718;">0</span><span>]</span><span style="color:#f29668;">.</span><span>parse</span><span style="color:#f29668;">::</span><span>&lt;</span><span style="color:#ff7733;">i32</span><span>&gt;()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">ok</span><span>()</span><span style="color:#f29668;">?</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">let</span><span> month </span><span style="color:#f29668;">=</span><span> record[</span><span style="color:#f29718;">1</span><span>]</span><span style="color:#f29668;">.</span><span>parse</span><span style="color:#f29668;">::</span><span>&lt;</span><span style="color:#ff7733;">u32</span><span>&gt;()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">ok</span><span>()</span><span style="color:#f29668;">?</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">let</span><span> day </span><span style="color:#f29668;">=</span><span> record[</span><span style="color:#f29718;">2</span><span>]</span><span style="color:#f29668;">.</span><span>parse</span><span style="color:#f29668;">::</span><span>&lt;</span><span style="color:#ff7733;">u32</span><span>&gt;()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">ok</span><span>()</span><span style="color:#f29668;">?</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">let</span><span> births </span><span style="color:#f29668;">=</span><span> record[</span><span style="color:#f29718;">4</span><span>]</span><span style="color:#f29668;">.</span><span>parse</span><span style="color:#f29668;">::</span><span>&lt;</span><span style="color:#ff7733;">u32</span><span>&gt;()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">ok</span><span>()</span><span style="color:#f29668;">?</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>        total_births </span><span style="color:#f29668;">+=</span><span> births </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">usize</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>        </span><span style="color:#ff7733;">let</span><span> day_index </span><span style="color:#f29668;">= </span><span style="color:#f07178;">standarized_doy</span><span>(year </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">u32</span><span style="color:#bfbab0cc;">,</span><span> month</span><span style="color:#bfbab0cc;">,</span><span> day)</span><span style="color:#f29668;">?</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>        birth_counts
+</span><span>            </span><span style="color:#f29668;">.</span><span style="color:#f07178;">entry</span><span>(day_index)
+</span><span>            </span><span style="color:#f29668;">.</span><span style="color:#f07178;">and_modify</span><span>(|</span><span style="color:#f29718;">b</span><span>| </span><span style="color:#f29668;">*</span><span>b </span><span style="color:#f29668;">+=</span><span> births </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">f64</span><span>)
+</span><span>            </span><span style="color:#f29668;">.</span><span style="color:#f07178;">or_insert</span><span>(births </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">f64</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">for </span><span>(</span><span style="color:#f29668;">_</span><span style="color:#bfbab0cc;">,</span><span> prob) </span><span style="color:#f29668;">in</span><span> birth_counts</span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter_mut</span><span>() {
+</span><span>        </span><span style="color:#f29668;">*</span><span>prob </span><span style="color:#f29668;">/=</span><span> total_births </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">f64</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">Some</span><span>(birth_counts)
+</span><span>}
+</span></code></pre>
+
+    </div>
+  
+</div>
+<p>Now, we just gotta implement the formula to get the expected number of students needed to see all birthdays given the data from 2002 to 2005:</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">pub struct </span><span style="color:#59c2ff;">Flajolet </span><span>{}
+</span><span>
+</span><span style="color:#ff7733;">impl </span><span>Simulation </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">Flajolet </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">run</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="color:#ff7733;">f64</span><span>&gt; {
+</span><span>        </span><span style="color:#ff7733;">let</span><span> probabilities </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">self
+</span><span>            </span><span style="color:#f29668;">.</span><span style="color:#f07178;">get_probabilities</span><span>()
+</span><span>            </span><span style="color:#f29668;">.</span><span style="color:#f07178;">expect</span><span>(</span><span style="color:#c2d94c;">&quot;failed to get probabilities&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">let</span><span> days </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">days</span><span>() </span><span style="color:#f29668;">+ </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// 366 days
+</span><span>        </span><span style="color:#f07178;">vec!</span><span>[</span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">flajolet</span><span>(days</span><span style="color:#bfbab0cc;">,</span><span> probabilities)]
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">impl </span><span style="color:#59c2ff;">Flajolet </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">flajolet</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">days</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u16</span><span>, </span><span style="color:#f29718;">probabilities</span><span style="color:#bfbab0cc;">: </span><span>HashMap&lt;</span><span style="color:#ff7733;">u32</span><span>, </span><span style="color:#ff7733;">f64</span><span>&gt;) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">f64 </span><span>{
+</span><span>
+</span><span>        </span><span style="color:#ff7733;">let</span><span> total_coupons </span><span style="color:#f29668;">=</span><span> days </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">usize</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">let mut</span><span> expected_value </span><span style="color:#f29668;">= </span><span style="color:#f29718;">0.0</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>        </span><span style="color:#ff7733;">let mut</span><span> memo </span><span style="color:#f29668;">= </span><span>HashMap</span><span style="color:#f29668;">::</span><span>new()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>        </span><span style="color:#ff7733;">for</span><span> curr_coupons </span><span style="color:#f29668;">in </span><span style="color:#f29718;">0</span><span style="color:#f29668;">..</span><span>total_coupons {
+</span><span>            </span><span style="color:#ff7733;">let</span><span> sign </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">if </span><span>(total_coupons </span><span style="color:#f29668;">- </span><span style="color:#f29718;">1 </span><span style="color:#f29668;">-</span><span> curr_coupons) </span><span style="color:#f29668;">% </span><span style="color:#f29718;">2 </span><span style="color:#f29668;">== </span><span style="color:#f29718;">0 </span><span>{
+</span><span>                </span><span style="color:#f29718;">1.0
+</span><span>            } </span><span style="color:#ff7733;">else </span><span>{
+</span><span>                </span><span style="color:#f29668;">-</span><span style="color:#f29718;">1.0
+</span><span>            }</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">// we will memorize the product of the probabilities of the subsets
+</span><span>            </span><span style="color:#ff7733;">let</span><span> subset_sum </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">match</span><span> curr_coupons {
+</span><span>                </span><span style="color:#f29718;">0 </span><span style="color:#f29668;">=&gt; </span><span>{
+</span><span>                    </span><span style="font-style:italic;color:#5c6773;">// the probability of getting any coupon in the empty set
+</span><span>                    </span><span style="font-style:italic;color:#5c6773;">// is zero, so (1 - 0) = 1 and 1/1 = 1:
+</span><span>                    </span><span style="color:#f29718;">1</span><span style="color:#ff7733;">f64
+</span><span>                }
+</span><span>                </span><span style="color:#f29718;">1 </span><span style="color:#f29668;">=&gt; </span><span>{
+</span><span>                    </span><span style="color:#ff7733;">let mut</span><span> inner_sum </span><span style="color:#f29668;">= </span><span style="color:#f29718;">0.0</span><span style="color:#bfbab0cc;">;
+</span><span>                    probabilities</span><span style="color:#f29668;">.</span><span style="color:#f07178;">keys</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">for_each</span><span>(|</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">key</span><span>| {
+</span><span>                        </span><span style="color:#ff7733;">let</span><span> val </span><span style="color:#f29668;">= </span><span style="color:#f29718;">1.0 </span><span style="color:#f29668;">-</span><span> probabilities[</span><span style="color:#f29668;">&amp;</span><span>key]</span><span style="color:#bfbab0cc;">;
+</span><span>                        inner_sum </span><span style="color:#f29668;">+= </span><span style="color:#f29718;">1.0 </span><span style="color:#f29668;">/</span><span> val</span><span style="color:#bfbab0cc;">;
+</span><span>                        memo</span><span style="color:#f29668;">.</span><span style="color:#f07178;">insert</span><span>(</span><span style="color:#f07178;">vec!</span><span>[key]</span><span style="color:#bfbab0cc;">,</span><span> val)</span><span style="color:#bfbab0cc;">;
+</span><span>                    })</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>                    inner_sum
+</span><span>                }
+</span><span>                </span><span style="color:#f29668;">_ =&gt; </span><span>{
+</span><span>                    </span><span style="color:#ff7733;">let mut</span><span> inner_sum </span><span style="color:#f29668;">= </span><span style="color:#f29718;">0.0</span><span style="color:#bfbab0cc;">;
+</span><span>                    </span><span style="color:#ff7733;">for</span><span> subset </span><span style="color:#f29668;">in</span><span> probabilities</span><span style="color:#f29668;">.</span><span style="color:#f07178;">keys</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">combinations</span><span>(curr_coupons) {
+</span><span>                        </span><span style="color:#ff7733;">let</span><span> subset </span><span style="color:#f29668;">=</span><span> subset</span><span style="color:#f29668;">.</span><span style="color:#f07178;">into_iter</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">copied</span><span>()</span><span style="color:#f29668;">.</span><span>collect</span><span style="color:#f29668;">::</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="color:#f29668;">_</span><span>&gt;&gt;()</span><span style="color:#bfbab0cc;">;
+</span><span>                        </span><span style="color:#ff7733;">let</span><span> rest </span><span style="color:#f29668;">= &amp;</span><span>subset[</span><span style="color:#f29668;">..</span><span>curr_coupons </span><span style="color:#f29668;">- </span><span style="color:#f29718;">1</span><span>]</span><span style="color:#bfbab0cc;">;
+</span><span>                        </span><span style="color:#ff7733;">let</span><span> new </span><span style="color:#f29668;">= </span><span>[subset[curr_coupons </span><span style="color:#f29668;">- </span><span style="color:#f29718;">1</span><span>]]</span><span style="color:#bfbab0cc;">;
+</span><span>                        </span><span style="color:#ff7733;">let</span><span> product </span><span style="color:#f29668;">=</span><span> memo[rest] </span><span style="color:#f29668;">*</span><span> memo[new</span><span style="color:#f29668;">.</span><span style="color:#f07178;">as_slice</span><span>()]</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>                        </span><span style="color:#ff7733;">let</span><span> val </span><span style="color:#f29668;">= </span><span style="color:#f29718;">1.0 </span><span style="color:#f29668;">/ </span><span>(</span><span style="color:#f29718;">1.0 </span><span style="color:#f29668;">-</span><span> product)</span><span style="color:#bfbab0cc;">;
+</span><span>                        inner_sum </span><span style="color:#f29668;">+=</span><span> val</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>                        memo</span><span style="color:#f29668;">.</span><span style="color:#f07178;">insert</span><span>(subset</span><span style="color:#bfbab0cc;">,</span><span> product)</span><span style="color:#bfbab0cc;">;
+</span><span>                    }
+</span><span>                    inner_sum
+</span><span>                }
+</span><span>            }</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>            expected_value </span><span style="color:#f29668;">+=</span><span> sign </span><span style="color:#f29668;">*</span><span> subset_sum</span><span style="color:#bfbab0cc;">;
+</span><span>        }
+</span><span>
+</span><span>        expected_value
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Now, all we have to do is modify our main function to run the Flajolet model and plot the results:</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">let</span><span> model </span><span style="color:#f29668;">= </span><span>flajolet</span><span style="color:#f29668;">::</span><span>Flajolet {}</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> result </span><span style="color:#f29668;">=</span><span> model</span><span style="color:#f29668;">.</span><span style="color:#f07178;">run</span><span>()[</span><span style="color:#f29718;">0</span><span>]</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;The expected value is: </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">, This took </span><span style="color:#f29718;">{:?}</span><span style="color:#c2d94c;"> to calculate&quot;</span><span style="color:#bfbab0cc;">,</span><span> result</span><span style="color:#f29668;">.</span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">,</span><span> result</span><span style="color:#f29668;">.</span><span style="color:#f29718;">1</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>After I ran it, I found the actual expected number of Rice Owls needed to see all birthdays, including leap days and real birthday distributions, was:</p>
+<div class="note-container note-type-default">
+  
+    <button class="note-toggle" aria-expanded="false">
+      
+        <div class="note-center">
+          <p>Final Answer</p>
+
+        </div>
+      
+    </button>
+    <div class="note-content" style="display: none;">
+      <p>I lied naturally as I breathed. Look, honestly, I ran the model, but there is a <strong>huge</strong> problem! Let’s take a look:</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">for</span><span> subset </span><span style="color:#f29668;">in</span><span> probabilities</span><span style="color:#f29668;">.</span><span style="color:#f07178;">keys</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">combinations</span><span>(curr_coupons) {</span><span style="color:#f29668;">...</span><span>}
+</span></code></pre>
+<p>Which is supposed to implement this part of the formula:</p>
+<p>$$
+\sum_{|J|=q} \frac{1}{1 - P_J}
+$$</p>
+<p>If you know anything about computational complexity, you will immediately realize the problem: combinatorial explosion. The number of subsets of a set of size $n$ is $2^n$, so the number of subsets of a set of size $366$ is $2^{366}$. This is a huge number, and even after all my clever optimizations (I tried, really), the model won’t ever end. I tried it for a small number of days, and it worked as per my calculations; however, the universe would end before I got the answer for $366$ days. So, I am sorry, but I can’t give you the final answer because I will die before I get it. In a way, that’s motivation, honestly. If the $P = NP$ problem is solved, then we can come back to this problem knowing there might be a polynomial time solution. But until then, we need to be content with an approximation.</p>
+
+    </div>
+  
+</div>
+<p>With that, we finally have a good enough answer to our original question 😉! I hope you enjoyed this exploration, and I hope you learned something new. Before we conclude, I wanted to compare an informed Monte Carlo simulation with the parallel model assuming equal probabilities for 366 days. I will use the probabilities we calculated from the data to run the simulation.</p>
+<h1 id="one-last-time-informed-monte-carlo-simulation"><a class="zola-anchor" href="#one-last-time-informed-monte-carlo-simulation" aria-label="Anchor link for: one-last-time-informed-monte-carlo-simulation">One Last Time: Informed Monte Carlo Simulation</a></h1>
+<p>Since we have the data, we can use the probabilities to make a more informed Monte Carlo simulation. I will use the same model as the parallel model, but instead of assuming equal probabilities for each day, I will use the probabilities we calculated from the data. Here is the code for the model:</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">impl </span><span>Simulation </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">InformedModel </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">run</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="color:#ff7733;">f64</span><span>&gt; {
+</span><span>        </span><span style="color:#ff7733;">let </span><span>(days</span><span style="color:#bfbab0cc;">,</span><span> simulations</span><span style="color:#bfbab0cc;">,</span><span> students) </span><span style="color:#f29668;">=
+</span><span>            (</span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">days</span><span>() </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">usize</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">simulations</span><span>()</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">students</span><span>())</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">let</span><span> days </span><span style="color:#f29668;">=</span><span> days </span><span style="color:#f29668;">+ </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// 366 days
+</span><span>        </span><span style="color:#ff7733;">let</span><span> probabilities </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">self
+</span><span>            </span><span style="color:#f29668;">.</span><span style="color:#f07178;">get_probabilities</span><span>()
+</span><span>            </span><span style="color:#f29668;">.</span><span style="color:#f07178;">expect</span><span>(</span><span style="color:#c2d94c;">&quot;failed to get probabilities&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">let </span><span>(keys</span><span style="color:#bfbab0cc;">,</span><span> values)</span><span style="color:#bfbab0cc;">: </span><span>(</span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="color:#ff7733;">u32</span><span>&gt;</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="color:#ff7733;">f64</span><span>&gt;) </span><span style="color:#f29668;">=</span><span> probabilities</span><span style="color:#f29668;">.</span><span style="color:#f07178;">into_iter</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unzip</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// Create a WeightedIndex distribution based on the probabilities
+</span><span>        </span><span style="color:#ff7733;">let</span><span> dist </span><span style="color:#f29668;">= </span><span>WeightedIndex</span><span style="color:#f29668;">::</span><span>new(</span><span style="color:#f29668;">&amp;</span><span>values)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">expect</span><span>(</span><span style="color:#c2d94c;">&quot;Invalid probabilities&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>        students
+</span><span>            </span><span style="color:#f29668;">.</span><span style="color:#f07178;">into_par_iter</span><span>() </span><span style="font-style:italic;color:#5c6773;">// parallelize the outer loop
+</span><span>            </span><span style="color:#f29668;">.</span><span style="color:#f07178;">map_init</span><span>(
+</span><span>                </span><span style="font-style:italic;color:#5c6773;">// init set and rand generator
+</span><span>                </span><span style="color:#f29668;">|| </span><span>(HashSet</span><span style="color:#f29668;">::</span><span>with_capacity(days)</span><span style="color:#bfbab0cc;">, </span><span>rand</span><span style="color:#f29668;">::</span><span>thread_rng())</span><span style="color:#bfbab0cc;">,
+</span><span>                </span><span style="font-style:italic;color:#5c6773;">// for each number of students
+</span><span>                </span><span style="color:#f29668;">|</span><span>(birthdays</span><span style="color:#bfbab0cc;">,</span><span> rng)</span><span style="color:#bfbab0cc;">,</span><span> num</span><span style="color:#f29668;">| </span><span>{
+</span><span>                    (</span><span style="color:#f29718;">0</span><span style="color:#f29668;">..</span><span>simulations)
+</span><span>                        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">map</span><span>(|_| {
+</span><span>                            birthdays</span><span style="color:#f29668;">.</span><span style="color:#f07178;">clear</span><span>()</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// so we don&#39;t have to allocate each time
+</span><span>
+</span><span>                            birthdays</span><span style="color:#f29668;">.</span><span style="color:#f07178;">extend</span><span>((</span><span style="color:#f29718;">0</span><span style="color:#f29668;">..</span><span>num)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">map</span><span>(|_| {
+</span><span>                                keys[dist</span><span style="color:#f29668;">.</span><span style="color:#f07178;">sample</span><span>(rng)] </span><span style="font-style:italic;color:#5c6773;">// Generate a random day based on the probabilities
+</span><span>                            }))</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// add a random birthday to the HashSet
+</span><span>
+</span><span>                            </span><span style="color:#ff7733;">usize</span><span style="color:#f29668;">::</span><span>from(birthdays</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>() </span><span style="color:#f29668;">==</span><span> days)
+</span><span>                        })
+</span><span>                        </span><span style="color:#f29668;">.</span><span>sum</span><span style="color:#f29668;">::</span><span>&lt;</span><span style="color:#ff7733;">usize</span><span>&gt;() </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">f64
+</span><span>                        </span><span style="color:#f29668;">/</span><span> simulations </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">f64 </span><span style="font-style:italic;color:#5c6773;">// sum the results of the simulations
+</span><span>                }</span><span style="color:#bfbab0cc;">,
+</span><span>            )
+</span><span>            </span><span style="color:#f29668;">.</span><span>collect</span><span style="color:#f29668;">::</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="color:#ff7733;">f64</span><span>&gt;&gt;()
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Now, that we are done with everything. I’d like to show you why I implemented the <code>Simulation</code> trait:</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> models</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">Box</span><span>&lt;dyn Simulation&gt;&gt; </span><span style="color:#f29668;">= </span><span style="color:#f07178;">vec!</span><span>[
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">Box</span><span style="color:#f29668;">::</span><span>new(basic</span><span style="color:#f29668;">::</span><span>BasicModel {})</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">Box</span><span style="color:#f29668;">::</span><span>new(parallel</span><span style="color:#f29668;">::</span><span>ParModel {})</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">Box</span><span style="color:#f29668;">::</span><span>new(iep</span><span style="color:#f29668;">::</span><span>IEPModel {})</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">Box</span><span style="color:#f29668;">::</span><span>new(flajolet</span><span style="color:#f29668;">::</span><span>Flajolet {})</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">Box</span><span style="color:#f29668;">::</span><span>new(informed</span><span style="color:#f29668;">::</span><span>InformedModel {})</span><span style="color:#bfbab0cc;">,
+</span><span>    ]</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">for</span><span> model </span><span style="color:#f29668;">in</span><span> models</span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter</span><span>() {
+</span><span>        </span><span style="color:#ff7733;">let</span><span> now </span><span style="color:#f29668;">= </span><span>std</span><span style="color:#f29668;">::</span><span>time</span><span style="color:#f29668;">::</span><span>Instant</span><span style="color:#f29668;">::</span><span>now()</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">let</span><span> results </span><span style="color:#f29668;">=</span><span> model</span><span style="color:#f29668;">.</span><span style="color:#f07178;">run</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Model: </span><span style="color:#f29718;">{:?}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> model)</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">for </span><span>(num</span><span style="color:#bfbab0cc;">,</span><span> result) </span><span style="color:#f29668;">in</span><span> model</span><span style="color:#f29668;">.</span><span style="color:#f07178;">students</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">zip</span><span>(results</span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter</span><span>()) {
+</span><span>            </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Num Students: </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">, Probability: </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> num</span><span style="color:#bfbab0cc;">,</span><span> result)</span><span style="color:#bfbab0cc;">;
+</span><span>        }
+</span><span>        </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Elapsed: </span><span style="color:#f29718;">{:?}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> now</span><span style="color:#f29668;">.</span><span style="color:#f07178;">elapsed</span><span>())</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>See! We can easily run all the models and compare them (even if some won’t ever finish) and another pretty plot:</p>
+<p><img src="https://seniormars.com/posts/everyday-birthday/./last_lineplot.png" alt="last_lineplot" /></p>
+<p><img src="https://seniormars.com/posts/everyday-birthday/./last_scatterplot.png" alt="last_scatterplot" /></p>
+<p><img src="https://seniormars.com/posts/everyday-birthday/./last_boxplot.png" alt="last_boxplot" /></p>
+<p><img src="https://seniormars.com/posts/everyday-birthday/./last_scatterplot2.png" alt="last_scatterplot2" /></p>
+<p><img src="https://seniormars.com/posts/everyday-birthday/./last_violinplot.png" alt="last_violinplot" /></p>
+<p><img src="https://seniormars.com/posts/everyday-birthday/./last_density_scatterplot.png" alt="last_density_scatterplot" /></p>
+<p><img src="https://seniormars.com/posts/everyday-birthday/./last_jointplot.png" alt="last_jointplot" /></p>
+<p><img src="https://seniormars.com/posts/everyday-birthday/./last_pairplot.png" alt="last_pairplot" /></p>
+<div class="note-container note-type-default">
+  
+    <button class="note-toggle" aria-expanded="false">
+      
+        <div class="note-icon">
+          
+          <p>Code to generate plots</p>
+
+        </div>
+      
+    </button>
+    <div class="note-content" style="display: none;">
+      <pre data-lang="python" style="background-color:#0f1419;color:#bfbab0;" class="language-python "><code class="language-python" data-lang="python"><span style="color:#ff7733;">import </span><span>seaborn </span><span style="color:#ff7733;">as </span><span>sns
+</span><span style="color:#ff7733;">import </span><span>matplotlib</span><span style="color:#f29668;">.</span><span>pyplot </span><span style="color:#ff7733;">as </span><span>plt
+</span><span style="color:#ff7733;">import </span><span>pandas </span><span style="color:#ff7733;">as </span><span>pd
+</span><span style="color:#ff7733;">import </span><span>numpy </span><span style="color:#ff7733;">as </span><span>np
+</span><span style="color:#ff7733;">from </span><span>scipy</span><span style="color:#f29668;">.</span><span>ndimage </span><span style="color:#ff7733;">import </span><span>gaussian_filter
+</span><span>
+</span><span>sns</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">set_theme</span><span>()
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Load the data from the uploaded CSV file
+</span><span>data </span><span style="color:#f29668;">= </span><span>pd</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">read_csv</span><span>(</span><span style="color:#c2d94c;">&quot;./final.csv&quot;</span><span>)
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Rename &#39;students&#39; to &#39;Rice Owls&#39;
+</span><span>data</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">rename</span><span>(</span><span style="color:#f29718;">columns</span><span style="color:#f29668;">=</span><span>{</span><span style="color:#c2d94c;">&quot;students&quot;</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;Rice Owls&quot;</span><span>}</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">inplace</span><span style="color:#f29668;">=</span><span style="color:#f29718;">True</span><span>)
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Line plot of average_time_ms by &#39;Rice Owls&#39; for each model
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">figure</span><span>(</span><span style="color:#f29718;">figsize</span><span style="color:#f29668;">=</span><span>(</span><span style="color:#f29718;">10</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">6</span><span>))
+</span><span>sns</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">lineplot</span><span>(</span><span style="color:#f29718;">data</span><span style="color:#f29668;">=</span><span>data</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">x</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&#39;Rice Owls&#39;</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">y</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&#39;average_time_ms&#39;</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">hue</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&#39;model&#39;</span><span>)
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">title</span><span>(</span><span style="color:#c2d94c;">&#39;Average Time (ms) by Number of Rice Owls&#39;</span><span>)
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">xlabel</span><span>(</span><span style="color:#c2d94c;">&#39;Number of Rice Owls&#39;</span><span>)
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">ylabel</span><span>(</span><span style="color:#c2d94c;">&#39;Average Time (ms)&#39;</span><span>)
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">savefig</span><span>(</span><span style="color:#c2d94c;">&#39;last_lineplot.png&#39;</span><span>)
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">clf</span><span>()
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Scatter plot of &#39;Rice Owls&#39; vs. unique_birthday_days
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">figure</span><span>(</span><span style="color:#f29718;">figsize</span><span style="color:#f29668;">=</span><span>(</span><span style="color:#f29718;">10</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">6</span><span>))
+</span><span>sns</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">scatterplot</span><span>(</span><span style="color:#f29718;">data</span><span style="color:#f29668;">=</span><span>data</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">x</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&#39;Rice Owls&#39;</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">y</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&#39;unique_birthday_days&#39;</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">hue</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&#39;model&#39;</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">style</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&#39;model&#39;</span><span>)
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">title</span><span>(</span><span style="color:#c2d94c;">&#39;Rice Owls vs. Unique Birthday Days&#39;</span><span>)
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">xlabel</span><span>(</span><span style="color:#c2d94c;">&#39;Number of Rice Owls&#39;</span><span>)
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">ylabel</span><span>(</span><span style="color:#c2d94c;">&#39;Unique Birthday Days&#39;</span><span>)
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">savefig</span><span>(</span><span style="color:#c2d94c;">&#39;last_scatterplot.png&#39;</span><span>)
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">clf</span><span>()
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Box plot of average_time_ms for each model
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">figure</span><span>(</span><span style="color:#f29718;">figsize</span><span style="color:#f29668;">=</span><span>(</span><span style="color:#f29718;">10</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">6</span><span>))
+</span><span>sns</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">boxplot</span><span>(</span><span style="color:#f29718;">data</span><span style="color:#f29668;">=</span><span>data</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">x</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&#39;model&#39;</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">y</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&#39;average_time_ms&#39;</span><span>)
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">title</span><span>(</span><span style="color:#c2d94c;">&#39;Box Plot of Average Time (ms) by Model&#39;</span><span>)
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">xlabel</span><span>(</span><span style="color:#c2d94c;">&#39;Model&#39;</span><span>)
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">ylabel</span><span>(</span><span style="color:#c2d94c;">&#39;Average Time (ms)&#39;</span><span>)
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">savefig</span><span>(</span><span style="color:#c2d94c;">&#39;last_boxplot.png&#39;</span><span>)
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">clf</span><span>()
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Scatter plot of &#39;Rice Owls&#39; vs. average_time_ms
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">figure</span><span>(</span><span style="color:#f29718;">figsize</span><span style="color:#f29668;">=</span><span>(</span><span style="color:#f29718;">10</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">6</span><span>))
+</span><span>sns</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">scatterplot</span><span>(</span><span style="color:#f29718;">data</span><span style="color:#f29668;">=</span><span>data</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">x</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&#39;Rice Owls&#39;</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">y</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&#39;average_time_ms&#39;</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">hue</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&#39;model&#39;</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">style</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&#39;model&#39;</span><span>)
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">title</span><span>(</span><span style="color:#c2d94c;">&#39;Rice Owls vs. Average Time (ms)&#39;</span><span>)
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">xlabel</span><span>(</span><span style="color:#c2d94c;">&#39;Number of Rice Owls&#39;</span><span>)
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">ylabel</span><span>(</span><span style="color:#c2d94c;">&#39;Average Time (ms)&#39;</span><span>)
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">savefig</span><span>(</span><span style="color:#c2d94c;">&#39;last_scatterplot2.png&#39;</span><span>)
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">clf</span><span>()
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Violin plot of average_time_ms for each model
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">figure</span><span>(</span><span style="color:#f29718;">figsize</span><span style="color:#f29668;">=</span><span>(</span><span style="color:#f29718;">10</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">6</span><span>))
+</span><span>sns</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">violinplot</span><span>(</span><span style="color:#f29718;">data</span><span style="color:#f29668;">=</span><span>data</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">x</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&#39;model&#39;</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">y</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&#39;average_time_ms&#39;</span><span>)
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">title</span><span>(</span><span style="color:#c2d94c;">&#39;Violin Plot of Average Time (ms) by Model&#39;</span><span>)
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">xlabel</span><span>(</span><span style="color:#c2d94c;">&#39;Model&#39;</span><span>)
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">ylabel</span><span>(</span><span style="color:#c2d94c;">&#39;Average Time (ms)&#39;</span><span>)
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">savefig</span><span>(</span><span style="color:#c2d94c;">&#39;last_violinplot.png&#39;</span><span>)
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">clf</span><span>()
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Adjust the plot to only show densities above a certain threshold
+</span><span style="font-style:italic;color:#5c6773;"># Correcting the density sorting and plotting method
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Data preparation
+</span><span>x </span><span style="color:#f29668;">= </span><span>data[</span><span style="color:#c2d94c;">&quot;Rice Owls&quot;</span><span>]
+</span><span>y </span><span style="color:#f29668;">= </span><span>data[</span><span style="color:#c2d94c;">&quot;unique_birthday_days&quot;</span><span>]
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Calculate density using Gaussian filter on the histogram
+</span><span>data_points </span><span style="color:#f29668;">= </span><span>np</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">vstack</span><span>([x</span><span style="color:#bfbab0cc;">, </span><span>y])
+</span><span>density </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">gaussian_filter</span><span>(np</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">histogram2d</span><span>(x</span><span style="color:#bfbab0cc;">, </span><span>y</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">bins</span><span style="color:#f29668;">=</span><span style="color:#f29718;">100</span><span>)[</span><span style="color:#f29718;">0</span><span>]</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">sigma</span><span style="color:#f29668;">=</span><span style="color:#f29718;">1</span><span>)
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Convert histogram to coordinates
+</span><span>x_density, y_density </span><span style="color:#f29668;">= </span><span>np</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">meshgrid</span><span>(
+</span><span>    np</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">linspace</span><span>(x</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">min</span><span>()</span><span style="color:#bfbab0cc;">, </span><span>x</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">max</span><span>()</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">100</span><span>)</span><span style="color:#bfbab0cc;">, </span><span>np</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">linspace</span><span>(y</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">min</span><span>()</span><span style="color:#bfbab0cc;">, </span><span>y</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">max</span><span>()</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">100</span><span>)
+</span><span>)
+</span><span>density </span><span style="color:#f29668;">= </span><span>density</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">ravel</span><span>()
+</span><span>x_density </span><span style="color:#f29668;">= </span><span>x_density</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">ravel</span><span>()
+</span><span>y_density </span><span style="color:#f29668;">= </span><span>y_density</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">ravel</span><span>()
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Sorting points by density (for plotting purposes)
+</span><span>idx </span><span style="color:#f29668;">= </span><span>np</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">argsort</span><span>(density)
+</span><span>x_density, y_density, density </span><span style="color:#f29668;">= </span><span>x_density[idx], y_density[idx], density[idx]
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Define a density threshold
+</span><span>density_threshold </span><span style="color:#f29668;">= </span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">.</span><span style="color:#f29718;">1
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Filter out points below the density threshold
+</span><span>mask </span><span style="color:#f29668;">= </span><span>density </span><span style="color:#f29668;">&gt; </span><span>density_threshold
+</span><span>filtered_x_density </span><span style="color:#f29668;">= </span><span>x_density[mask]
+</span><span>filtered_y_density </span><span style="color:#f29668;">= </span><span>y_density[mask]
+</span><span>filtered_density </span><span style="color:#f29668;">= </span><span>density[mask]
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Plotting with the density threshold
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">figure</span><span>(</span><span style="color:#f29718;">figsize</span><span style="color:#f29668;">=</span><span>(</span><span style="color:#f29718;">14</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">8</span><span>))
+</span><span>sc </span><span style="color:#f29668;">= </span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">scatter</span><span>(
+</span><span>    filtered_x_density</span><span style="color:#bfbab0cc;">, </span><span>filtered_y_density</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">c</span><span style="color:#f29668;">=</span><span>filtered_density</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">cmap</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&quot;viridis&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">s</span><span style="color:#f29668;">=</span><span style="color:#f29718;">50
+</span><span>)
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">colorbar</span><span>(sc</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">label</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&quot;Density&quot;</span><span>)
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">xlabel</span><span>(</span><span style="color:#c2d94c;">&quot;Number of Rice Owls&quot;</span><span>)
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">ylabel</span><span>(</span><span style="color:#c2d94c;">&quot;Unique Birthday Days&quot;</span><span>)
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">title</span><span>(
+</span><span>    </span><span style="color:#c2d94c;">&quot;Filtered Density Scatter Plot of Unique Birthday Days vs. Number of Rice Owls&quot;
+</span><span>)
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">grid</span><span>(</span><span style="color:#f29718;">True</span><span>)
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">savefig</span><span>(</span><span style="color:#c2d94c;">&#39;last_density_scatterplot.png&#39;</span><span>)
+</span><span>
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Hexbin Plot with a Color Bar
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">figure</span><span>(</span><span style="color:#f29718;">figsize</span><span style="color:#f29668;">=</span><span>(</span><span style="color:#f29718;">10</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">6</span><span>))
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Joint Plot with Regression Line
+</span><span>sns</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">jointplot</span><span>(</span><span style="color:#f29718;">x</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&#39;Rice Owls&#39;</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">y</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&#39;unique_birthday_days&#39;</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">data</span><span style="color:#f29668;">=</span><span>data</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">kind</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&#39;reg&#39;</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">color</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&#39;g&#39;</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">height</span><span style="color:#f29668;">=</span><span style="color:#f29718;">8</span><span>)
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">title</span><span>(</span><span style="color:#c2d94c;">&#39;Joint Plot with Regression Line and Distributions&#39;</span><span>)
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">xlabel</span><span>(</span><span style="color:#c2d94c;">&#39;Number of Rice Owls&#39;</span><span>)
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">ylabel</span><span>(</span><span style="color:#c2d94c;">&#39;Unique Birthday Days&#39;</span><span>)
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">tight_layout</span><span>()
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">savefig</span><span>(</span><span style="color:#c2d94c;">&#39;last_jointplot.png&#39;</span><span>)
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Pair Plot
+</span><span>sns</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">pairplot</span><span>(data[[</span><span style="color:#c2d94c;">&#39;Rice Owls&#39;</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&#39;unique_birthday_days&#39;</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&#39;average_time_ms&#39;</span><span>]]</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">height</span><span style="color:#f29668;">=</span><span style="color:#f29718;">3</span><span>)
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">suptitle</span><span>(</span><span style="color:#c2d94c;">&#39;Pair Plot of Rice Owls, Unique Birthday Days, and Average Time (ms)&#39;</span><span>)
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">xlabel</span><span>(</span><span style="color:#c2d94c;">&#39;Number of Rice Owls&#39;</span><span>)
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">ylabel</span><span>(</span><span style="color:#c2d94c;">&#39;Unique Birthday Days&#39;</span><span>)
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">tight_layout</span><span>()
+</span><span>plt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">savefig</span><span>(</span><span style="color:#c2d94c;">&#39;last_pairplot.png&#39;</span><span>)
+</span></code></pre>
+
+    </div>
+  
+</div>
+<p>That said, we are at the end of our journey. In the end, we found a formula that works, but the power of today’s computation is holding me back 😔. While that may disappoint you, the reader, I know how to fix it: give me a polynomial time equation, and I’ll be back with an exact answer 😎. Anyways, I hope everything was clear; I tried my best. If you see any mistakes, know it’s not me who made a mistake; it’s you who needs a check-up/s (email me at seniormars@rice.edu or write a comment below). Have a great year!</p>
+<h1 id="and-then-the-physicst-attacked"><a class="zola-anchor" href="#and-then-the-physicst-attacked" aria-label="Anchor link for: and-then-the-physicst-attacked">And then, the Physicst attacked</a></h1>
+<p>Sometimes, theory can only get us so far (please imagine me saying this while sobbing 😭😭😭). As a math major, I have always been told to pursue the idea of rigorousness, but we NEED an answer. I can’t provide that; however, I know someone who can. A physicist – one that is armed with computational tricks and pragmatism. <a rel="noreferrer" href="https://wisha.page/">Enter Wisha, a rising senior, a rustacean, and Rice’s best physicist</a><sup class="footnote-reference" id="fr-5-1"><a href="#fn-5">5</a></sup>. Overhearing my frustration with the birthday problem, he decided to take matters into his own hands. He has given me a solution, and now it is my job to wrap his argument into a neat little package!</p>
+<h2 id="revisiting-our-formula"><a class="zola-anchor" href="#revisiting-our-formula" aria-label="Anchor link for: revisiting-our-formula">Revisiting our formula</a></h2>
+<p>Remember, we found that a generalized Coupon Collector’s Problem that assumes non-uniform distributions, however, for large $m$ ($366$ in our case), the formula Dr. Flajolet gave us is computationally infeasible. That being said, let’s take a closer look at the the first version of the formula:</p>
+<p>$$
+E(T) = \int_0^\infty \left(1 - \prod_{i=1}^m (1 - e^{-p_i t}) \right) \textrm{dt}.
+$$</p>
+<p>To be finished…</p>
+<h1 id="conclusion"><a class="zola-anchor" href="#conclusion" aria-label="Anchor link for: conclusion">Conclusion</a></h1>
+<p>Throughout this article, I came to realize that I hate stats. Thank you fizz, I’ll probably deregister from MATH 412: Probability Theory now. On a serious note, writing for a public audience – especially for math – is incredibly hard. If you read up to this point, I hope you enjoyed it.</p>
+<footer class="footnotes">
+<ol class="footnotes-list">
+<li id="fn-1">
+<p>This is a very easy proof, so let’s do it. Let $X$ be a random variable, that has a probability between $[0,1]$, then $$
+\begin{align*}
+\mathbb{E}[X] &amp;= \sum_i^\infty i p_x(i) = \sum_i^\infty i (1 - p_x)^{x - 1} p = p \sum_i^\infty i (1 - p)^{i - 1}&amp; &amp; \\
+&amp;= p \sum_i^\infty -\frac{d(1 - p)^i}{dp} &amp; &amp;\text{taking the derivative and } x = 1-p\\
+&amp;= p \frac{d}{dp} \left( -\sum_i^\infty (1 - p)^i \right)&amp; &amp;\text{by linearity of derivative}\\
+&amp;= p \frac{d}{dp} \left( -\frac{1}{1 - (1 - p)} \right)&amp; &amp;\text{by geometric series formula}\\
+&amp;= p \frac{d}{dp} \left( -\frac{1}{p} \right) = \frac{p}{p^2} = \frac{1}{p}&amp; &amp;\text{algebra} \tag*{$\blacksquare$}
+\end{align*}
+$$ <a href="#fr-1-1">↩</a></p>
+</li>
+<li id="fn-2">
+<p>This might be wrong, 😎😎😎. <a href="#fr-2-1">↩</a></p>
+</li>
+<li id="fn-3">
+<p>If I have time I’ll research on how to prove things about Monte Carlo simulations, and update this section. <a href="#fr-3-1">↩</a></p>
+</li>
+<li id="fn-4">
+<p>I was going to plot these graphs in Rust, but I do have a life… <a href="#fr-4-1">↩</a></p>
+</li>
+<li id="fn-5">
+<p>He is also my cool ass friend 😎😎😎. I know, it’s hard to believe, but I HAVE friends! <a href="#fr-5-1">↩</a></p>
+</li>
+</ol>
+</footer>
+
+        </section>
+    </article>
+</main>
+
+
+
+        
+            
+        
+
+        
+        <div class="giscus"></div>
+         <script src="https://giscus.app/client.js"
+        data-repo="SeniorMars/seniormars.com"
+        data-repo-id="R_kgDOJQ6QAQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOJQ6QAc4CgC4Q"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
+        
+    </div>
+</body>
+
+</html>

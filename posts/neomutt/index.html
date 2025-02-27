@@ -1,0 +1,1539 @@
+<!DOCTYPE html>
+<html lang="en" class="dark light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base" content="https:&#x2F;&#x2F;seniormars.com">
+
+    
+
+    
+    
+    
+    <title>
+         A Terminal Email Client As An Alternative To Gmail: The Old Dog Neomutt And Pals
+        
+    </title>
+
+        
+            <meta property="og:title" content="A Terminal Email Client As An Alternative To Gmail: The Old Dog Neomutt And Pals" />
+        
+     
+
+     
+         
+             <meta property="og:description" content="A guy decides that his email workflow is worth writing about." />
+         
+     
+
+     
+         
+             <meta name="description" content="A guy decides that his email workflow is worth writing about." />
+         
+    
+        <meta name="theme-color" media="(prefers-color-scheme: light)" content="#FFFFFF" />
+        <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0E1018" />
+    
+        <link rel="icon" type="image/png" href=&#x2F;icons&#x2F;favicon.ico />
+        
+        
+            <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+            <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+            <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+            <link rel="manifest" href="/icons/site.webmanifest">
+            <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#ff6f3c">
+            <meta name="apple-mobile-web-app-title" content="SeniorMars">
+            <meta name="application-name" content="SeniorMars">
+            <meta name="msapplication-TileColor" content="#333333">
+            <meta name="theme-color" content="#333333">
+        
+    
+
+    
+    
+        <link href=https://seniormars.com/fonts.css rel="stylesheet" />
+    
+
+    
+    
+        
+
+        
+            
+            
+
+            <script data-goatcounter="https://seniormars.goatcounter.com/count" async src="https://seniormars.com/js/count.js"></script>
+            <noscript>
+                
+                <img src="https://seniormars.goatcounter.com//count?p=&#x2F;posts&#x2F;neomutt&#x2F;&t=A Terminal Email Client As An Alternative To Gmail: The Old Dog Neomutt And Pals">
+            </noscript>
+        
+    
+
+    
+    
+        <script src=https://seniormars.com/js/codeblock.js></script>
+    
+
+    
+    
+
+    
+    
+        <script src=https://seniormars.com/js/toc.js></script>
+    
+
+    
+    
+        <script src=https://seniormars.com/js/note.js></script>
+    
+
+    
+        
+        <script>
+            MathJax = {
+              loader: { load: ['input/asciimath'] },
+              output: {
+                  displayOverflow: 'linebreak',
+                      linebreaks: {
+                          inline: true,
+                          width: '100%',
+                          lineleading: .2,
+                          LinebreakVisitor: null,
+                  }
+              },
+              tex: {
+                inlineMath: [['$', '$']],
+                processEscapes: true,
+              },
+              svg: {
+                fontCache: 'global'
+              }
+            };
+        </script>
+        
+        <script type="text/javascript" id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@4.0.0-beta.7/tex-mml-chtml.js">
+        </script>
+    
+
+    
+    
+        <link rel="alternate" type="application/rss+xml" title="SeniorMars" href="https://seniormars.com/rss.xml">
+    
+
+    
+    
+        <link rel="stylesheet" type="text/css" href=https://seniormars.com/theme/light.css />
+        <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://seniormars.com/theme/dark.css" />
+    
+    
+    <!-- Set the correct theme in the script -->
+    <script src=https://seniormars.com/js/themetoggle.js></script>
+    
+        <script>setTheme(getSavedTheme());</script>
+    
+
+    
+    <link rel="stylesheet" type="text/css" media="screen" href=https://seniormars.com/main.css />
+
+    
+
+    
+    
+        <script src=https://seniormars.com/js/mermaid.js></script>
+    
+
+    
+        <script defer src="https://seniormars.com/js/searchElasticlunr.min.js?h=3626c0ef99daa745b31e"></script></head>
+
+
+<body>
+    <div class="content">
+        <header>
+    <div class="main">
+        
+            <a href=https:&#x2F;&#x2F;seniormars.com>SeniorMars</a>
+        
+
+
+        <div class="socials">
+            
+            <a rel="me" href="https:&#x2F;&#x2F;github.com&#x2F;seniormars&#x2F;" class="social">
+                <img alt=github src=https://seniormars.com/social_icons/github.svg>
+            </a>
+            
+            <a rel="me" href="https:&#x2F;&#x2F;www.youtube.com&#x2F;seniormarstries" class="social">
+                <img alt=youtube src=https://seniormars.com/social_icons/youtube.svg>
+            </a>
+            
+            <a rel="me" href="&#x2F;rss.xml" class="social">
+                <img alt=rss src=https://seniormars.com/social_icons/rss.svg>
+            </a>
+            
+        </div>
+    </div>
+
+    <nav>
+        
+            <a href=https://seniormars.com/posts class="nav-item">&#x2F;posts</a>
+        
+            <a href=https://seniormars.com/projects class="nav-item">&#x2F;projects</a>
+        
+            <a href=https://seniormars.com/about class="nav-item">&#x2F;about</a>
+        
+            <a href=https://seniormars.com/etc class="nav-item">&#x2F;etc</a>
+        
+
+        
+            <button 
+                id="search-button"
+                class="search-button"
+                title="$SHORTCUT to open search"
+            >
+                <img 
+                    src="https://seniormars.com/search.svg" 
+                    alt="Search" 
+                    class="search-icon"
+                >
+            </button>
+
+            <div id="searchModal" class="search-modal js" role="dialog" aria-labelledby="modalTitle">
+                <div id="modal-content">
+                    <h1 id="modalTitle" class="page-header">Search</h1>
+                    <div id="searchBar">
+                        <input 
+                            id="searchInput" 
+                            role="combobox" 
+                            autocomplete="off" 
+                            spellcheck="false" 
+                            aria-expanded="false" 
+                            aria-controls="results-container" 
+                            placeholder="Search..."
+                        />
+                        <button 
+                            id="clear-search" 
+                            class="clear-button"
+                            title="Clear search"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                                <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="results-container">
+                        <div id="results-info">
+                            <span id="zero_results" style="display: none;">No results</span>
+                            <span id="one_result" style="display: none;">1 result</span>
+                            <span id="many_results" style="display: none;">$NUMBER results</span>
+                        </div>
+                        <div id="results" role="listbox"></div>
+                    </div>
+                </div>
+            </div>
+        
+
+        
+            <a id="dark-mode-toggle" onclick="toggleTheme(); event.preventDefault();" href="#">
+                <img src=https://seniormars.com/feather/sun.svg id="sun-icon" style="filter: invert(1);" alt="Light" />
+                <img src=https://seniormars.com/feather/moon.svg id="moon-icon" alt="Dark" />
+            </a>
+
+            <!-- Inititialize the theme toggle icons -->
+            <script>updateItemToggleTheme()</script>
+        
+    </nav>
+</header>
+
+
+        
+        
+    
+<main>
+    <article>
+        <div class="title">
+            
+            
+    <div class="page-header">
+        A Terminal Email Client As An Alternative To Gmail: The Old Dog Neomutt And Pals<span class="primary-color" style="font-size: 1.6em">.</span>
+    </div>
+
+
+                <div class="meta">
+                    
+                        Posted on <time>2023-04-02</time>
+                    
+
+                    
+                        :: Updated on <time>2024-06-14</time>
+                    
+
+                    
+                        :: <time>19</time> Min Read
+                    
+
+                    
+                    
+                            <span class="tags-label"> :: Tags:</span>
+                            <span class="tags">
+                                    <a href="https://seniormars.com/tags/tutorial/" class="post-tag">tutorial</a>, 
+                                
+                                    <a href="https://seniormars.com/tags/educational/" class="post-tag">educational</a>
+                                
+                            </span>
+                    
+
+                    
+                    
+
+                        
+                        
+                            
+                        
+
+                        
+                            
+                            :: <a href="https:&#x2F;&#x2F;github.com&#x2F;SeniorMars&#x2F;seniormars.com&#x2F;blob&#x2F;main&#x2F;content&#x2F;posts&#x2F;neomutt&#x2F;index.md" target="_blank" rel="noopener noreferrer"> Source Code</a>
+                        
+                    
+
+                    
+
+                </div>
+        </div>
+
+        
+
+        
+        
+        
+            <div class="toc-container">
+                <h1 class="toc-title">Table of Contents</h1>
+                <ul class="toc-list">
+                    
+                        <li>
+                            <a href="https://seniormars.com/posts/neomutt/#motivation">Motivation</a>
+                            
+                        </li>
+                    
+                        <li>
+                            <a href="https://seniormars.com/posts/neomutt/#neomutt">Neomutt</a>
+                            
+                                <ul>
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/neomutt/#end-goal">End Goal</a>
+                                        </li>
+
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/neomutt/#introduction-and-why">Introduction and WHY?</a>
+                                        </li>
+
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/neomutt/#installation">Installation</a>
+                                        </li>
+
+                                        
+                                            <ul>
+                                                
+                                                    <li>
+                                                        <a href="https://seniormars.com/posts/neomutt/#macos">macOS</a>
+                                                    </li>
+                                                
+                                                    <li>
+                                                        <a href="https://seniormars.com/posts/neomutt/#arch-linux">Arch Linux</a>
+                                                    </li>
+                                                
+                                                    <li>
+                                                        <a href="https://seniormars.com/posts/neomutt/#gentoo">Gentoo</a>
+                                                    </li>
+                                                
+                                                    <li>
+                                                        <a href="https://seniormars.com/posts/neomutt/#ubuntu-and-wsl2-using-ubuntu">Ubuntu and WSL2 using Ubuntu</a>
+                                                    </li>
+                                                
+                                            </ul>
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/neomutt/#running-neomutt-for-the-first-time">Running Neomutt for the first time</a>
+                                        </li>
+
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/neomutt/#initial-mutt-configuration">Initial Mutt Configuration</a>
+                                        </li>
+
+                                        
+                                            <ul>
+                                                
+                                                    <li>
+                                                        <a href="https://seniormars.com/posts/neomutt/#google-gmail-and-app-specific-passwords">Google, Gmail, and App-specific passwords</a>
+                                                    </li>
+                                                
+                                                    <li>
+                                                        <a href="https://seniormars.com/posts/neomutt/#accessing-gmail-with-neomutt">Accessing Gmail with Neomutt</a>
+                                                    </li>
+                                                
+                                            </ul>
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/neomutt/#mailboxes">Mailboxes</a>
+                                        </li>
+
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/neomutt/#settings-i-highly-recommend">Settings I highly recommend</a>
+                                        </li>
+
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/neomutt/#sidebar">Sidebar</a>
+                                        </li>
+
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/neomutt/#signature">Signature</a>
+                                        </li>
+
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/neomutt/#editor">Editor</a>
+                                        </li>
+
+                                        
+                                            <ul>
+                                                
+                                                    <li>
+                                                        <a href="https://seniormars.com/posts/neomutt/#n-vim-and-mail">(N)vim and Mail</a>
+                                                    </li>
+                                                
+                                                    <li>
+                                                        <a href="https://seniormars.com/posts/neomutt/#keybindings">Keybindings</a>
+                                                    </li>
+                                                
+                                            </ul>
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/neomutt/#mailcap">Mailcap</a>
+                                        </li>
+
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/neomutt/#colors">Colors</a>
+                                        </li>
+
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/neomutt/#external-programs">External programs</a>
+                                        </li>
+
+                                        
+                                            <ul>
+                                                
+                                                    <li>
+                                                        <a href="https://seniormars.com/posts/neomutt/#urlscan">Urlscan</a>
+                                                    </li>
+                                                
+                                                    <li>
+                                                        <a href="https://seniormars.com/posts/neomutt/#query">Query</a>
+                                                    </li>
+                                                
+                                                    <li>
+                                                        <a href="https://seniormars.com/posts/neomutt/#encrypt">Encrypt</a>
+                                                    </li>
+                                                
+                                            </ul>
+                                        
+                                    
+                                </ul>
+                            
+                        </li>
+                    
+                        <li>
+                            <a href="https://seniormars.com/posts/neomutt/#update">Update</a>
+                            
+                                <ul>
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/neomutt/#new-tools">New Tools</a>
+                                        </li>
+
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/neomutt/#isync">isync</a>
+                                        </li>
+
+                                        
+                                            <ul>
+                                                
+                                                    <li>
+                                                        <a href="https://seniormars.com/posts/neomutt/#installation-1">Installation</a>
+                                                    </li>
+                                                
+                                                    <li>
+                                                        <a href="https://seniormars.com/posts/neomutt/#configuring-isync">Configuring isync</a>
+                                                    </li>
+                                                
+                                                    <li>
+                                                        <a href="https://seniormars.com/posts/neomutt/#running-isync">Running isync</a>
+                                                    </li>
+                                                
+                                                    <li>
+                                                        <a href="https://seniormars.com/posts/neomutt/#neomutt-integration">Neomutt integration</a>
+                                                    </li>
+                                                
+                                            </ul>
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/neomutt/#msmtp">msmtp</a>
+                                        </li>
+
+                                        
+                                            <ul>
+                                                
+                                                    <li>
+                                                        <a href="https://seniormars.com/posts/neomutt/#installation-2">Installation</a>
+                                                    </li>
+                                                
+                                                    <li>
+                                                        <a href="https://seniormars.com/posts/neomutt/#configuring-msmtp">Configuring msmtp</a>
+                                                    </li>
+                                                
+                                                    <li>
+                                                        <a href="https://seniormars.com/posts/neomutt/#using-msmtp">Using msmtp</a>
+                                                    </li>
+                                                
+                                                    <li>
+                                                        <a href="https://seniormars.com/posts/neomutt/#neomutt-integration-1">Neomutt integration</a>
+                                                    </li>
+                                                
+                                            </ul>
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/neomutt/#notmuch">notmuch</a>
+                                        </li>
+
+                                        
+                                            <ul>
+                                                
+                                                    <li>
+                                                        <a href="https://seniormars.com/posts/neomutt/#installation-3">Installation</a>
+                                                    </li>
+                                                
+                                                    <li>
+                                                        <a href="https://seniormars.com/posts/neomutt/#configuring-notmuch">Configuring notmuch</a>
+                                                    </li>
+                                                
+                                                    <li>
+                                                        <a href="https://seniormars.com/posts/neomutt/#neomutt-integration-2">Neomutt integration</a>
+                                                    </li>
+                                                
+                                            </ul>
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/neomutt/#things-left-desired">Things left desired</a>
+                                        </li>
+
+                                        
+                                    
+                                </ul>
+                            
+                        </li>
+                    
+                        <li>
+                            <a href="https://seniormars.com/posts/neomutt/#conclusion">Conclusion</a>
+                            
+                        </li>
+                    
+                </ul>
+            </div>
+        
+        
+
+        <section class="body">
+            <h1 id="motivation"><a class="zola-anchor" href="#motivation" aria-label="Anchor link for: motivation">Motivation</a></h1>
+<p>In this day and age, every university pairs a student’s email address with their administered Google suite platform.
+Typically, for most students, this default saves them a lot of trouble—that is, if you stay
+within the constraints of what your university considers “normal use”. For instance, if you want to
+use Google domains, Google cloud’s APIs, or customize your Google security options, you are going to have a
+bad time. Don’t get me wrong, I understand why some of these rules are forced upon students, but
+precisely because they are forced, I believe that there should be leeway for students that wish to
+opt out of the default settings. Now, this blog post won’t teach how to petition your university to
+rid of Google, but it will teach you how to set up a terminal alternative to Gmail (most notably
+this blog is for college students that are forced to use Google’s email platform).</p>
+<div class="note-container note-type-default">
+  
+    <button class="note-toggle" aria-expanded="true">
+      
+        <div class="note-icon">
+          
+          <p>Note</p>
+
+        </div>
+      
+    </button>
+    <div class="note-content" style="display: block;">
+      <p>This blog assumes basic terminal maturity. <br><br> Moreover, this blog has now been <strong>updated</strong> to cover isync and more. See the <a href='#update'>update section</a> near the end!</p>
+
+    </div>
+  
+</div>
+<h1 id="neomutt"><a class="zola-anchor" href="#neomutt" aria-label="Anchor link for: neomutt">Neomutt</a></h1>
+<h2 id="end-goal"><a class="zola-anchor" href="#end-goal" aria-label="Anchor link for: end-goal">End Goal</a></h2>
+<p>Before I continue, I would like to show you what the result will look like:</p>
+<p><img src="https://seniormars.com/posts/neomutt/neomutt0.png" alt="Neomutt" /></p>
+<p>Here is an image with an email open:</p>
+<p><img src="https://seniormars.com/posts/neomutt/neomutt1.png" alt="Neomutt" /></p>
+<p>Finally, here is an image with a reply open (also <code>s/crack/cracked</code>):
+<img src="https://seniormars.com/posts/neomutt/reply.png" alt="Neomutt reply" /></p>
+<p>At the end of this blog, I’ll show the configuration we came up with.</p>
+<h2 id="introduction-and-why"><a class="zola-anchor" href="#introduction-and-why" aria-label="Anchor link for: introduction-and-why">Introduction and WHY?</a></h2>
+<p>Ok, you have seen the images, but now you wonder: 1) what am I looking at? And 2) why would I want
+to use this? Let’s start with the first question. These images are of a terminal email client called
+Neomutt and it is my go-to email client. It supports all the basic email features that you would expect
+from an email client, plus way more! The second question is a bit more
+complex, as I cannot speak for everyone, but I will explain why I use Neomutt.</p>
+<ul>
+<li>Auto-image blocking: In the age where everyone is trying to get your attention, it is nice to have
+a client that doesn’t render images by default. Instead of those annoying images, I get a plain
+view of the email, and concentrate on the content of the email.</li>
+<li>Lightweight: Gmail is a resource hog. It takes seconds to load, and a
+pain to use when you have a slow internet connection. Neomutt loads in a fraction of a second and
+allows you filter through your emails quickly.</li>
+<li>Configurable: Neomutt is extremely configurable. You can change the color scheme, the keybindings,
+and even the email client’s behavior. For instance, In my current configuration, I have grammar
+checking, auto-completion for words, and auto-completion for email addresses. Everything is done
+through the keyboard.</li>
+</ul>
+<p>Now, if none of these reasons appeal to you, then Neomutt is not for you. Click the back button.
+But, if you are still here, then let’s get started!</p>
+<h2 id="installation"><a class="zola-anchor" href="#installation" aria-label="Anchor link for: installation">Installation</a></h2>
+<p>For this blog, I’ll be detailing the installation process for Arch Linux, Gentoo, Ubuntu, and macOS.
+Since I know these distributions extremely well, I can provide more detailed instructions. If
+you are using Windows, I recommend using WSL2, and you can follow along with the Ubuntu instructions.</p>
+<h3 id="macos"><a class="zola-anchor" href="#macos" aria-label="Anchor link for: macos">macOS</a></h3>
+<p>I’ll be using Homebrew to install Neomutt:</p>
+<div class="note-container note-type-default">
+  
+    <button class="note-toggle" aria-expanded="true">
+      
+        <div class="note-icon">
+          
+          <p>Note</p>
+
+        </div>
+      
+    </button>
+    <div class="note-content" style="display: block;">
+      <p><code>$</code> is the prompt for a user without root access. You don’t need to type it.</p>
+
+    </div>
+  
+</div>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> /bin/bash</span><span style="color:#f29718;"> -c </span><span style="color:#c2d94c;">&quot;$</span><span>(</span><span style="color:#ffb454;">curl</span><span style="color:#f29718;"> -fsSL</span><span style="color:#c2d94c;"> https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh</span><span>)</span><span style="color:#c2d94c;">&quot;
+</span><span style="color:#ffb454;">$ </span><span style="font-style:italic;color:#5c6773;"># wait for the installation to finish and put homebrew in your path
+</span><span style="color:#ffb454;">$ </span><span style="font-style:italic;color:#5c6773;"># ...
+</span><span style="color:#ffb454;">$</span><span> brew install neomutt
+</span><span style="color:#ffb454;">$ </span><span style="font-style:italic;color:#5c6773;"># additionally, I would recommend installing:
+</span><span style="color:#ffb454;">$</span><span> brew install gnupg
+</span><span style="color:#ffb454;">$ </span><span style="font-style:italic;color:#5c6773;"># I&#39;ll explain why later
+</span></code></pre>
+<h3 id="arch-linux"><a class="zola-anchor" href="#arch-linux" aria-label="Anchor link for: arch-linux">Arch Linux</a></h3>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> sudo pacman</span><span style="color:#f29718;"> -Syu</span><span> neomutt
+</span><span style="color:#ffb454;">$</span><span> sudo pacman</span><span style="color:#f29718;"> -Syu</span><span> gnupg
+</span><span style="color:#ffb454;">$ </span><span style="font-style:italic;color:#5c6773;"># or
+</span><span style="color:#ffb454;">$</span><span> sudo paru</span><span style="color:#f29718;"> -Syu</span><span> neomutt
+</span><span style="color:#ffb454;">$</span><span> sudo paru</span><span style="color:#f29718;"> -Syu</span><span> gnupg
+</span></code></pre>
+<h3 id="gentoo"><a class="zola-anchor" href="#gentoo" aria-label="Anchor link for: gentoo">Gentoo</a></h3>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> sudo emerge</span><span style="color:#f29718;"> --ask</span><span> mail-client/neomutt
+</span><span style="color:#ffb454;">$</span><span> sudo emerge</span><span style="color:#f29718;"> --ask</span><span> app-crypt/gnupg
+</span></code></pre>
+<h3 id="ubuntu-and-wsl2-using-ubuntu"><a class="zola-anchor" href="#ubuntu-and-wsl2-using-ubuntu" aria-label="Anchor link for: ubuntu-and-wsl2-using-ubuntu">Ubuntu and WSL2 using Ubuntu</a></h3>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> sudo apt install neomutt
+</span><span style="color:#ffb454;">$</span><span> sudo apt install gnupg
+</span></code></pre>
+<h2 id="running-neomutt-for-the-first-time"><a class="zola-anchor" href="#running-neomutt-for-the-first-time" aria-label="Anchor link for: running-neomutt-for-the-first-time">Running Neomutt for the first time</a></h2>
+<p>The first time you run Neomutt, you will be greeted with a screen that looks like this that prompts
+you for your email address and password:</p>
+<p><img src="https://seniormars.com/posts/neomutt/after_install.png" alt="fresh" /></p>
+<p>This is the default configuration that Neomutt comes with, but not very useful. We need to customize it first.
+To demonstrate how to configure Neomutt, I’ll have two code blocks for each section.
+The first code block will be the configuration that I use, and the second code block is the one you
+should modify to fit your needs.</p>
+<h2 id="initial-mutt-configuration"><a class="zola-anchor" href="#initial-mutt-configuration" aria-label="Anchor link for: initial-mutt-configuration">Initial Mutt Configuration</a></h2>
+<p>We are going to take configuration step by step. I will explain what each section does, and why.
+The first we need to do is make a <code>muttrc</code> file. This file is where we will store all of our configuration.
+By default, Neomutt will look for a file called <code>muttrc</code> in the following location: <code>XDG_CONFIG_HOME/mutt/muttrc</code>.</p>
+<div class="note-container note-type-default">
+  
+    <button class="note-toggle" aria-expanded="true">
+      
+        <div class="note-icon">
+          
+          <p>Note</p>
+
+        </div>
+      
+    </button>
+    <div class="note-content" style="display: block;">
+      <p><code>$XDG_CONFIG_HOME</code> is an environment variable that points to the location of your configuration files. Read more about it <a href='https://wiki.archlinux.org/title/XDG_Base_Directory'>here</a>.</p>
+
+    </div>
+  
+</div>
+<p>For example, on my machine, the location of my <code>muttrc</code> file is <code>~/.config/mutt/muttrc</code>.</p>
+<p>If this file does not exist, then you can create it by running the following command:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> mkdir</span><span style="color:#f29718;"> -p </span><span style="font-style:italic;color:#39bae6;">~</span><span>/.config/mutt
+</span><span style="color:#ffb454;">$</span><span> touch </span><span style="font-style:italic;color:#39bae6;">~</span><span>/.config/mutt/muttrc
+</span></code></pre>
+<p>Let’s put a hold on this to introduce the next section:</p>
+<h3 id="google-gmail-and-app-specific-passwords"><a class="zola-anchor" href="#google-gmail-and-app-specific-passwords" aria-label="Anchor link for: google-gmail-and-app-specific-passwords">Google, Gmail, and App-specific passwords</a></h3>
+<p>As I said before, this blog is intended for students that are forced to use Google’s email platform. Which
+means I’ll be detailing how to configure Neomutt to work with Gmail. Thus, before we move any further, it is important to get an “app-specific password” from Google.</p>
+<div class="note-container note-type-default">
+  
+    <button class="note-toggle" aria-expanded="true">
+      
+        <div class="note-icon">
+          
+          <p>Note</p>
+
+        </div>
+      
+    </button>
+    <div class="note-content" style="display: block;">
+      <p>An app-specific password is a password for applications that do not support 2-factor authentication or are considered ‘unsecure’. Google wants you to use Gmail &gt;:(</p>
+
+    </div>
+  
+</div>
+<p>To get an app-specific password, follow these steps:</p>
+<ul>
+<li>Go to <a rel="noreferrer" href="https://security.google.com/settings/security/apppasswords">Google’s app-specific password page</a></li>
+<li>Sign in with your Google account</li>
+<li>Select “Mail” as the app or other and select “Other (custom name)” as the device. I use “Mutt” as
+the name.</li>
+<li>Click “Generate” and copy the password that is generated. You will need this password later. Store
+it!</li>
+<li>Profit??!!!</li>
+</ul>
+<p>Here is a screenshot of the result:
+<img src="https://seniormars.com/posts/neomutt/gpass.png" alt="Google app password" /></p>
+<h3 id="accessing-gmail-with-neomutt"><a class="zola-anchor" href="#accessing-gmail-with-neomutt" aria-label="Anchor link for: accessing-gmail-with-neomutt">Accessing Gmail with Neomutt</a></h3>
+<p>Now that we have an app-specific password, we can configure Neomutt to access Gmail. To accomplish this,
+let’s open up our <code>muttrc</code> (i.e., <code>$EDITOR XDG_CONFIG_HOME/mutt/muttrc</code>) file with our favorite editor. I’ll be using <code>nvim</code> for this blog, but
+you can use any editor you want. Now, let’s add the following configuration to our <code>muttrc</code> file:</p>
+<p>Mine:</p>
+<pre data-lang="conf" style="background-color:#0f1419;color:#bfbab0;" class="language-conf "><code class="language-conf" data-lang="conf"><span style="font-style:italic;color:#5c6773;"># User
+</span><span style="color:#f29718;">set </span><span>from </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;cjh16@rice.edu&quot;
+</span><span style="color:#f29718;">set </span><span>realname </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;Charlie Cruz&quot;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Gmail
+</span><span style="color:#f29718;">set </span><span>imap_user </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;cjh16@rice.edu&quot;
+</span><span style="color:#f29718;">set </span><span>smtp_url </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;smtps://cjh16@rice.edu@smtp.gmail.com:465/&quot;
+</span><span style="color:#f29718;">set </span><span>smtp_authenticators </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&#39;gssapi:login&#39;
+</span><span style="color:#f29718;">set </span><span>imap_pass </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;my_app_specific_password&quot;
+</span><span style="color:#f29718;">set </span><span>smtp_pass </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;my_app_specific_password&quot;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Ensure TLS is enforced
+</span><span style="color:#f29718;">set </span><span>ssl_starttls </span><span style="color:#f29668;">= </span><span style="color:#f29718;">yes
+</span><span style="color:#f29718;">set </span><span>ssl_force_tls </span><span style="color:#f29668;">= </span><span style="color:#f29718;">yes
+</span></code></pre>
+<p>Yours:</p>
+<pre data-lang="conf" style="background-color:#0f1419;color:#bfbab0;" class="language-conf "><code class="language-conf" data-lang="conf"><span style="font-style:italic;color:#5c6773;"># User
+</span><span style="color:#f29718;">set </span><span>from </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;your_email_address&quot;
+</span><span style="color:#f29718;">set </span><span>realname </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;Your Name&quot;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Gmail
+</span><span style="color:#f29718;">set </span><span>imap_user </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;your_email_address&quot;
+</span><span style="color:#f29718;">set </span><span>smtp_url </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;smtps://YOUR_EMAIL@smtp.gmail.com:465/&quot;
+</span><span style="color:#f29718;">set </span><span>smtp_authenticators </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&#39;gssapi:login&#39;
+</span><span style="color:#f29718;">set </span><span>imap_pass </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;your_app_specific_password&quot;
+</span><span style="color:#f29718;">set </span><span>smtp_pass </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;your_app_specific_password&quot;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Ensure TLS is enforced
+</span><span style="color:#f29718;">set </span><span>ssl_starttls </span><span style="color:#f29668;">= </span><span style="color:#f29718;">yes
+</span><span style="color:#f29718;">set </span><span>ssl_force_tls </span><span style="color:#f29668;">= </span><span style="color:#f29718;">yes
+</span></code></pre>
+<div class="note-container note-type-default">
+  
+    <button class="note-toggle" aria-expanded="true">
+      
+        <div class="note-icon">
+          
+          <p>Note</p>
+
+        </div>
+      
+    </button>
+    <div class="note-content" style="display: block;">
+      <p>Plain text for passwords is a bad idea. See the encryption section of this blog.</p>
+
+    </div>
+  
+</div>
+<p>Let’s break down this section:
+First, it’s pretty self-explanatory for the first few lines, but for <code>set smtp*</code>, we need to
+explain.</p>
+<p><code>set smtp_url</code> is the URL that Neomutt will use to send emails. The format is as follows:
+<code>smtps://email@server:port</code>. For Gmail, the server is <code>smtp.gmail.com</code> and the port is <code>465</code>. This
+is from the <a rel="noreferrer" href="https://support.google.com/mail/answer/7126229?hl=en">Gmail SMTP server documentation</a>.</p>
+<p><code>set smtp_authenticators</code> is the authentication method that Neomutt will use to send emails. For
+Gmail, we will use <code>gssapi:login</code> as the authentication method.</p>
+<p><code>set imap_pass</code> and <code>set smtp_pass</code> are the passwords that Neomutt will use to access your email.
+Note this is plaintext, we will fix this later.</p>
+<p><code>set ssl_starttls</code> and <code>set ssl_force_tls</code> are used to ensure that Neomutt uses TLS when connecting
+to the server. This is important because Gmail will not allow you to connect to the server without
+these properties.</p>
+<p>After you have added this configuration to your <code>muttrc</code> file, save it, and in theory, you
+can now access your email! But, there are a few more things we need to do to make this more useful.</p>
+<h2 id="mailboxes"><a class="zola-anchor" href="#mailboxes" aria-label="Anchor link for: mailboxes">Mailboxes</a></h2>
+<p>The next step is to specify which mailboxes you want to access. To achieve this, we add:</p>
+<pre data-lang="conf" style="background-color:#0f1419;color:#bfbab0;" class="language-conf "><code class="language-conf" data-lang="conf"><span style="font-style:italic;color:#5c6773;"># My mailboxes
+</span><span style="color:#f29718;">set </span><span>folder </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;imaps://imap.gmail.com:993/[Gmail]&quot;
+</span><span style="color:#f29718;">set </span><span>spoolfile </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;+All Mail&quot;
+</span><span style="color:#f29718;">set </span><span>postponed </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;+Drafts&quot;
+</span><span style="color:#f29718;">set </span><span>record </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;+Sent Mail&quot;
+</span><span style="color:#f29718;">set </span><span>trash </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;+Trash&quot;
+</span><span>
+</span><span style="color:#f29718;">mailboxes </span><span style="color:#f29668;">=</span><span>Important </span><span style="color:#f29668;">=</span><span>Starred </span><span style="color:#f29668;">=</span><span>Drafts </span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&quot;Sent Mail&quot; </span><span style="color:#f29668;">=</span><span>Spam </span><span style="color:#f29668;">=</span><span>Trash
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Where to put the stuff
+</span><span style="color:#f29718;">set </span><span>header_cache </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;$XDG_CACHE_HOME/mutt/headers&quot;
+</span><span style="color:#f29718;">set </span><span>message_cachedir </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;$XDG_CACHE_HOME/mutt/bodies&quot;
+</span><span style="color:#f29718;">set </span><span>certificate_file </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;$XDG_CACHE_HOME/mutt/certificates&quot;
+</span><span style="color:#f29718;">unset </span><span>record
+</span></code></pre>
+<p>Let’s break this down:</p>
+<ul>
+<li><code>set folder</code> is the folder that Neomutt will use to access your emails. 993 is just the port for imap.</li>
+<li><code>set spoolfile</code> is your home inbox. This is the inbox that you see when you log into Gmail. You
+can change this to whatever you want. i.e., <code>set spoolfile = "+Important"</code>. I like to see all my
+emails, so I use <code>+All Mail</code>.</li>
+<li><code>set record</code>, <code>set postponed</code>, and <code>set trash</code> are the folders that Neomutt will use to store
+emails that you have sent, drafts, and trash respectively in Gmail.</li>
+<li><code>mailboxes</code> is a list of mailboxes that you want to access. You can add as many as you want, but I
+keep it simple with just the ones I use.</li>
+<li><code>set header_cache</code> and <code>set message_cachedir</code> are the locations that Neomutt will use to cache
+your emails. This is important because it will make your email client much faster. <code>set certificate_file</code> is similar.</li>
+<li><code>unset record</code> is used to disable the recording of sent emails. This is because Gmail already
+records sent emails, so we don’t need to do it twice.</li>
+</ul>
+<p>At this point, you should be able to access your email! Now, let’s make this even more useful.</p>
+<h2 id="settings-i-highly-recommend"><a class="zola-anchor" href="#settings-i-highly-recommend" aria-label="Anchor link for: settings-i-highly-recommend">Settings I highly recommend</a></h2>
+<p>Alright, so now that we have a basic configuration, but what about modifying how we reply to emails,
+or how we interact with our email client? Let’s add the following to our <code>muttrc</code> file:</p>
+<p>I added comments to explain what each line does.</p>
+<pre data-lang="conf" style="background-color:#0f1419;color:#bfbab0;" class="language-conf "><code class="language-conf" data-lang="conf"><span style="font-style:italic;color:#5c6773;"># settings
+</span><span style="color:#f29718;">set </span><span>pager_index_lines </span><span style="color:#f29668;">= </span><span style="color:#f29718;">10          
+</span><span style="color:#f29718;">set </span><span>pager_context </span><span style="color:#f29668;">= </span><span style="color:#f29718;">3                </span><span style="font-style:italic;color:#5c6773;"># show 3 lines of context
+</span><span style="color:#f29718;">set </span><span>pager_stop                       </span><span style="font-style:italic;color:#5c6773;"># stop at end of message
+</span><span style="color:#f29718;">set </span><span>menu_scroll                      </span><span style="font-style:italic;color:#5c6773;"># scroll menu
+</span><span style="color:#f29718;">set </span><span>tilde                            </span><span style="font-style:italic;color:#5c6773;"># use ~ to pad mutt
+</span><span style="color:#f29718;">set </span><span>move</span><span style="color:#f29668;">=</span><span style="color:#f29718;">no                          </span><span style="font-style:italic;color:#5c6773;"># don&#39;t move messages when marking as read
+</span><span style="color:#f29718;">set </span><span>mail_check </span><span style="color:#f29668;">= </span><span style="color:#f29718;">30                  </span><span style="font-style:italic;color:#5c6773;"># check for new mail every 30 seconds
+</span><span style="color:#f29718;">set </span><span>imap_keepalive </span><span style="color:#f29668;">= </span><span style="color:#f29718;">900             </span><span style="font-style:italic;color:#5c6773;"># 15 minutes
+</span><span style="color:#f29718;">set </span><span>sleep_time </span><span style="color:#f29668;">= </span><span style="color:#f29718;">0                   </span><span style="font-style:italic;color:#5c6773;"># don&#39;t sleep when idle
+</span><span style="color:#f29718;">set </span><span>wait_key </span><span style="color:#f29668;">= </span><span style="color:#f29718;">no		     </span><span style="font-style:italic;color:#5c6773;"># mutt won&#39;t ask &quot;press key to continue&quot;
+</span><span style="color:#f29718;">set </span><span>envelope_from                    </span><span style="font-style:italic;color:#5c6773;"># which from?
+</span><span style="color:#f29718;">set </span><span>edit_headers                     </span><span style="font-style:italic;color:#5c6773;"># show headers when composing
+</span><span style="color:#f29718;">set </span><span>fast_reply                       </span><span style="font-style:italic;color:#5c6773;"># skip to compose when replying
+</span><span style="color:#f29718;">set </span><span>askcc                            </span><span style="font-style:italic;color:#5c6773;"># ask for CC:
+</span><span style="color:#f29718;">set </span><span>fcc_attach                       </span><span style="font-style:italic;color:#5c6773;"># save attachments with the body
+</span><span style="color:#f29718;">set </span><span>forward_format </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;Fwd: %s&quot;       </span><span style="font-style:italic;color:#5c6773;"># format of subject when forwarding
+</span><span style="color:#f29718;">set </span><span>forward_decode                   </span><span style="font-style:italic;color:#5c6773;"># decode when forwarding
+</span><span style="color:#f29718;">set </span><span>forward_quote                    </span><span style="font-style:italic;color:#5c6773;"># include message in forwards
+</span><span style="color:#f29718;">set </span><span>mime_forward                     </span><span style="font-style:italic;color:#5c6773;"># forward attachments as part of body
+</span><span style="color:#f29718;">set </span><span>attribution </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;On %d, %n wrote:&quot; </span><span style="font-style:italic;color:#5c6773;"># format of quoting header
+</span><span style="color:#f29718;">set </span><span>reply_to                         </span><span style="font-style:italic;color:#5c6773;"># reply to Reply to: field
+</span><span style="color:#f29718;">set </span><span>reverse_name                     </span><span style="font-style:italic;color:#5c6773;"># reply as whomever it was to
+</span><span style="color:#f29718;">set </span><span style="color:#ff7733;">include                          </span><span style="font-style:italic;color:#5c6773;"># include message in replies
+</span><span style="color:#f29718;">set </span><span>text_flowed</span><span style="color:#f29668;">=</span><span style="color:#f29718;">yes                  </span><span style="font-style:italic;color:#5c6773;"># correct indentation for plain text
+</span><span style="color:#f29718;">unset </span><span>sig_dashes                     </span><span style="font-style:italic;color:#5c6773;"># no dashes before sig
+</span><span style="color:#f29718;">unset </span><span>markers
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Sort by newest conversation first.
+</span><span style="color:#f29718;">set </span><span>charset </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;utf-8&quot;
+</span><span style="color:#f29718;">set </span><span>uncollapse_jump
+</span><span style="color:#f29718;">set </span><span>sort_re
+</span><span style="color:#f29718;">set </span><span>sort </span><span style="color:#f29668;">=</span><span> reverse</span><span style="color:#f29668;">-</span><span>threads
+</span><span style="color:#f29718;">set </span><span>sort_aux </span><span style="color:#f29668;">=</span><span> last</span><span style="color:#f29668;">-</span><span>date</span><span style="color:#f29668;">-</span><span>received
+</span><span style="font-style:italic;color:#5c6773;"># How we reply and quote emails.
+</span><span style="color:#f29718;">set </span><span>reply_regexp </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*&quot;
+</span><span style="color:#f29718;">set </span><span>quote_regexp </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;^( {0,4}[&gt;|:#%]| {0,4}[a-z0-9]+[&gt;|]+)+&quot;
+</span><span style="color:#f29718;">set </span><span>send_charset </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;utf-8:iso-8859-1:us-ascii&quot; </span><span style="font-style:italic;color:#5c6773;"># send in utf-8
+</span></code></pre>
+<p>I highly recommend these settings, but you may want to change <code>askcc, edit_headers, fast_reply, envelope_from</code>.</p>
+<h2 id="sidebar"><a class="zola-anchor" href="#sidebar" aria-label="Anchor link for: sidebar">Sidebar</a></h2>
+<p>The sidebar is a very useful feature that allows you to see all your mailboxes in a sidebar. Here is
+a screenshot of what it looks like:</p>
+<p><img src="https://seniormars.com/posts/neomutt/sidebar.png" alt="Sidebar" /></p>
+<p>Here is how to add it to your <code>muttrc</code> file:</p>
+<pre data-lang="conf" style="background-color:#0f1419;color:#bfbab0;" class="language-conf "><code class="language-conf" data-lang="conf"><span style="font-style:italic;color:#5c6773;">#sidebar
+</span><span style="color:#f29718;">set </span><span>sidebar_visible </span><span style="font-style:italic;color:#5c6773;"># comment to disable sidebar by default
+</span><span style="color:#f29718;">set </span><span>sidebar_short_path
+</span><span style="color:#f29718;">set </span><span>sidebar_folder_indent
+</span><span style="color:#f29718;">set </span><span>sidebar_format </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;%B %* [%?N?%N / ?%S]&quot;
+</span><span style="color:#f29718;">set </span><span>mail_check_stats
+</span><span style="color:#f29718;">bind </span><span style="color:#ff7733;">index</span><span style="color:#f29668;">,</span><span>pager </span><span style="color:#f29668;">\</span><span style="font-style:italic;color:#f29668;">CJ</span><span> sidebar</span><span style="color:#f29668;">-</span><span>prev
+</span><span style="color:#f29718;">bind </span><span style="color:#ff7733;">index</span><span style="color:#f29668;">,</span><span>pager </span><span style="color:#f29668;">\</span><span style="font-style:italic;color:#f29668;">CK</span><span> sidebar</span><span style="color:#f29668;">-</span><span>next
+</span><span style="color:#f29718;">bind </span><span style="color:#ff7733;">index</span><span style="color:#f29668;">,</span><span>pager </span><span style="color:#f29668;">\</span><span style="font-style:italic;color:#f29668;">CE</span><span> sidebar</span><span style="color:#f29668;">-</span><span>open
+</span><span style="color:#f29718;">bind </span><span style="color:#ff7733;">index</span><span style="color:#f29668;">,</span><span>pager </span><span style="font-style:italic;color:#f29668;">B</span><span> sidebar</span><span style="color:#f29668;">-</span><span>toggle</span><span style="color:#f29668;">-</span><span>visible
+</span></code></pre>
+<p>Now, you should be able to see the sidebar when you open your email client and press <code>&lt;shift-b&gt;</code> to toggle it!</p>
+<h2 id="signature"><a class="zola-anchor" href="#signature" aria-label="Anchor link for: signature">Signature</a></h2>
+<p>The signature is the text that you add to the bottom of your emails. To add it to Neomutt, you need
+to:</p>
+<ol>
+<li>Create a file (call it <code>signature</code> or whatever you prefer)</li>
+<li>Add your signature to the file. For example, here is mine:</li>
+</ol>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> cat signature
+</span><span>
+</span><span style="color:#ffb454;">---
+</span><span style="color:#ffb454;">Charlie</span><span> Cruz</span><span style="color:#f29668;"> --</span><span> changing my legal name!
+</span><span style="color:#ffb454;">Math </span><span style="color:#f29668;">&amp; </span><span style="color:#ffb454;">Linguistics</span><span> @ Rice University </span><span style="color:#c2d94c;">&#39;26
+</span></code></pre>
+<ol start="3">
+<li>link the file to your <code>muttrc</code> file:</li>
+</ol>
+<pre data-lang="conf" style="background-color:#0f1419;color:#bfbab0;" class="language-conf "><code class="language-conf" data-lang="conf"><span style="color:#f29718;">set </span><span>signature </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;$XDG_CONFIG_HOME/mutt/signature&quot;
+</span></code></pre>
+<p>Now, when you send an email, your signature will be added to the bottom of the email.</p>
+<h2 id="editor"><a class="zola-anchor" href="#editor" aria-label="Anchor link for: editor">Editor</a></h2>
+<p>The editor is the program that you use to compose emails. By default, Neomutt uses <code>vi</code> as the editor, but you can change this to whatever you want. For instance, I use <code>nvim</code> as my editor, so I add the following to my <code>muttrc</code> file:</p>
+<pre data-lang="conf" style="background-color:#0f1419;color:#bfbab0;" class="language-conf "><code class="language-conf" data-lang="conf"><span style="color:#f29718;">set </span><span>editor </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;nvim&quot;
+</span></code></pre>
+<div class="note-container note-type-default">
+  
+    <button class="note-toggle" aria-expanded="true">
+      
+        <div class="note-icon">
+          
+          <p>Note</p>
+
+        </div>
+      
+    </button>
+    <div class="note-content" style="display: block;">
+      <p>In (Neo)Vim with patch 6e649224926b and partial 113cb513f76d now include mail.vim, which is a filetype plugin for mail. This plugin provides syntax highlighting, indentation, and other features for mail files.</p>
+
+    </div>
+  
+</div>
+<h3 id="n-vim-and-mail"><a class="zola-anchor" href="#n-vim-and-mail" aria-label="Anchor link for: n-vim-and-mail">(N)vim and Mail</a></h3>
+<p>If you use <code>nvim</code> as your editor, you may want to add the following to your <code>nvim/after/ftplugin/mail.{lua,vim}</code> file:</p>
+<p>Lua:</p>
+<pre data-lang="lua" style="background-color:#0f1419;color:#bfbab0;" class="language-lua "><code class="language-lua" data-lang="lua"><span>vim</span><span style="color:#f29668;">.</span><span>opt_local</span><span style="color:#f29668;">.</span><span>spell </span><span style="color:#f29668;">= </span><span style="color:#f29718;">true
+</span><span>vim</span><span style="color:#f29668;">.</span><span>opt_local</span><span style="color:#f29668;">.</span><span>spelllang </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&#39;en_us&#39;
+</span><span>vim</span><span style="color:#f29668;">.</span><span>opt_local</span><span style="color:#f29668;">.</span><span>fo</span><span style="color:#f29668;">:</span><span style="color:#ffb454;">append</span><span>(</span><span style="color:#c2d94c;">&#39;aw&#39;</span><span>)
+</span><span style="color:#ff7733;">local </span><span>map </span><span style="color:#f29668;">= </span><span>vim</span><span style="color:#f29668;">.</span><span>api</span><span style="color:#f29668;">.</span><span>nvim_buf_set_keymap
+</span><span style="color:#ff7733;">local </span><span>options </span><span style="color:#f29668;">= </span><span>{ </span><span style="color:#c2d94c;">noremap </span><span style="color:#bfbab0cc;">= </span><span style="color:#f29718;">true</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">silent </span><span style="color:#bfbab0cc;">= </span><span style="color:#f29718;">true</span><span>}
+</span><span style="color:#ffb454;">map</span><span>(</span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&#39;n&#39;</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&#39;&lt;leader&gt;x&#39;</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&#39;ZZ&#39;</span><span style="color:#bfbab0cc;">, </span><span>options)
+</span></code></pre>
+<p>Vim:</p>
+<pre data-lang="vim" style="background-color:#0f1419;color:#bfbab0;" class="language-vim "><code class="language-vim" data-lang="vim"><span style="color:#f07178;">setlocal</span><span> spell
+</span><span style="color:#f07178;">setlocal</span><span> spelllang=en_us
+</span><span style="color:#f07178;">setlocal</span><span> fo+=aw
+</span><span style="color:#f07178;">nnoremap </span><span style="font-style:italic;color:#39bae6;">&lt;leader&gt;</span><span>x ZZ
+</span></code></pre>
+<p>These settings will enable spell checking, better paragraph wrapping, and <code>&lt;leader&gt;x</code> will save and quit.</p>
+<h3 id="keybindings"><a class="zola-anchor" href="#keybindings" aria-label="Anchor link for: keybindings">Keybindings</a></h3>
+<p>I highly recommend adding the following keybindings to your <code>muttrc</code> file for more vim-like keybindings:</p>
+<pre data-lang="conf" style="background-color:#0f1419;color:#bfbab0;" class="language-conf "><code class="language-conf" data-lang="conf"><span style="color:#ff7733;">macro index </span><span style="font-style:italic;color:#f29668;">A </span><span style="color:#f29668;">\
+</span><span>    </span><span style="color:#c2d94c;">&quot;&lt;tag-pattern&gt;~N&lt;enter&gt;&lt;tag-prefix&gt;&lt;clear-flag&gt;N&lt;untag-pattern&gt;.&lt;enter&gt;&quot; </span><span style="color:#f29668;">\
+</span><span>    </span><span style="color:#c2d94c;">&quot;mark all new as read&quot;
+</span><span>
+</span><span style="color:#f29718;">bind </span><span style="color:#ff7733;">index</span><span> j next</span><span style="color:#f29668;">-</span><span>entry
+</span><span style="color:#f29718;">bind </span><span style="color:#ff7733;">index</span><span> k previous</span><span style="color:#f29668;">-</span><span>entry
+</span><span style="color:#f29718;">bind </span><span>pager j next</span><span style="color:#f29668;">-</span><span>line
+</span><span style="color:#f29718;">bind </span><span>pager k previous</span><span style="color:#f29668;">-</span><span>line
+</span><span>
+</span><span style="color:#f29718;">bind </span><span>attach</span><span style="color:#f29668;">,</span><span style="color:#ff7733;">index</span><span style="color:#f29668;">,</span><span>pager </span><span style="color:#f29668;">\</span><span style="font-style:italic;color:#f29668;">CD</span><span> next</span><span style="color:#f29668;">-</span><span>page
+</span><span style="color:#f29718;">bind </span><span>attach</span><span style="color:#f29668;">,</span><span style="color:#ff7733;">index</span><span style="color:#f29668;">,</span><span>pager </span><span style="color:#f29668;">\</span><span style="font-style:italic;color:#f29668;">CU</span><span> previous</span><span style="color:#f29668;">-</span><span>page
+</span><span style="color:#f29718;">bind </span><span>pager g top
+</span><span style="color:#f29718;">bind </span><span>pager </span><span style="font-style:italic;color:#f29668;">G</span><span> bottom
+</span><span style="color:#f29718;">bind </span><span>attach</span><span style="color:#f29668;">,</span><span style="color:#ff7733;">index</span><span> g first</span><span style="color:#f29668;">-</span><span>entry
+</span><span style="color:#f29718;">bind </span><span>attach</span><span style="color:#f29668;">,</span><span style="color:#ff7733;">index </span><span style="font-style:italic;color:#f29668;">G</span><span> last</span><span style="color:#f29668;">-</span><span>entry
+</span></code></pre>
+<p>The first marco isn’t very vim-like, but it is very useful. It allows you to mark all new emails as read by pressing <code>A</code> in the index.</p>
+<p>The next set of keybindings are for scrolling. I use <code>j</code> and <code>k</code> to scroll up and down, and <code>g</code> and <code>G</code> to go to the top and bottom of the page.</p>
+<h2 id="mailcap"><a class="zola-anchor" href="#mailcap" aria-label="Anchor link for: mailcap">Mailcap</a></h2>
+<p>The mailcap file is used to determine how to open attachments. For instance, if you have a <code>.pdf</code>
+file, you would want to open it with your prefer PDF viewer. This is most useful for rendering HTML
+in emails.</p>
+<ol>
+<li>Create a file called <code>mailcap</code> in your <code>$XDG_CONFIG_HOME/mutt</code> directory.</li>
+<li>Add the following to the file:</li>
+</ol>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>text/html; firefox %s; test=test -n &quot;$display&quot;; needsterminal;
+</span><span>text/html; lynx -assume_charset=%{charset} -display_charset=utf-8 -dump -width=1024 %s; nametemplate=%s.html; copiousoutput;
+</span><span>text/plain; cat %s; copiousoutput
+</span><span>application/pdf; firefox %s; test=test -n &quot;$display&quot;; needsterminal;
+</span></code></pre>
+<p>Of course, you can change the browser, and pdf viewer to whatever you want. On Mac, you might want
+<code>open -a firefox %s</code> or <code>open -a Preview %s</code>.</p>
+<div class="note-container note-type-default">
+  
+    <button class="note-toggle" aria-expanded="true">
+      
+        <div class="note-icon">
+          
+          <p>Note</p>
+
+        </div>
+      
+    </button>
+    <div class="note-content" style="display: block;">
+      <p>Firefox now supports editing PDFs!</p>
+
+    </div>
+  
+</div>
+<ol start="3">
+<li>Now install <code>lynx</code></li>
+</ol>
+<p>macOS</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> brew install lynx
+</span></code></pre>
+<p>Arch Linux</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> sudo pacman</span><span style="color:#f29718;"> -Syu</span><span> lynx </span><span style="font-style:italic;color:#5c6773;"># or paru -Syu lynx
+</span></code></pre>
+<p>Gentoo</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> sudo emerge</span><span style="color:#f29718;"> -av</span><span> www-client/lynx
+</span></code></pre>
+<p>Ubuntu</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> sudo apt install lynx
+</span></code></pre>
+<ol start="4">
+<li>Link the file to your <code>muttrc</code> file and add the following to your <code>muttrc</code> file:</li>
+</ol>
+<pre data-lang="conf" style="background-color:#0f1419;color:#bfbab0;" class="language-conf "><code class="language-conf" data-lang="conf"><span style="font-style:italic;color:#5c6773;"># link to mailcap file
+</span><span style="color:#f29718;">set </span><span>mailcap_path </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;$XDG_CONFIG_HOME/mutt/mailcap&quot;
+</span><span style="font-style:italic;color:#5c6773;"># open attachments with mailcap with &lt;return&gt;
+</span><span style="color:#f29718;">bind </span><span>attach </span><span style="color:#f29668;">&lt;</span><span>return</span><span style="color:#f29668;">&gt;</span><span> view</span><span style="color:#f29668;">-</span><span>mailcap             
+</span><span style="font-style:italic;color:#5c6773;"># save attachments to a folder
+</span><span style="color:#ff7733;">macro</span><span> attach s </span><span style="color:#c2d94c;">&#39;&lt;save-entry&gt; &lt;bol&gt;~/Documents/attachments/&lt;eol&gt;&#39; &#39;save attachment&#39;
+</span><span style="color:#f29718;">auto_view </span><span style="font-style:italic;color:#39bae6;">text/html		</span><span style="font-style:italic;color:#5c6773;"># automatically show html (mailcap uses lynx)
+</span></code></pre>
+<p>You can see more mailcap examples in my dotfiles <a rel="noreferrer" href="https://github.com/SeniorMars/dotfiles/blob/master/.config/mutt/mailcap">here</a>.</p>
+<p>Now you should be able to open attachments with your prefered program and automatically render HTML in emails! NO PICTURES THOUGH :)</p>
+<h2 id="colors"><a class="zola-anchor" href="#colors" aria-label="Anchor link for: colors">Colors</a></h2>
+<p>You can change the colors of Neomutt by adding the following to your <code>muttrc</code> file:</p>
+<pre data-lang="conf" style="background-color:#0f1419;color:#bfbab0;" class="language-conf "><code class="language-conf" data-lang="conf"><span style="color:#f29718;">color </span><span>status green default
+</span><span style="font-style:italic;color:#5c6773;"># in general, the order is:
+</span><span style="font-style:italic;color:#5c6773;"># color &lt;element&gt; &lt;color&gt; &lt;attr&gt; optional&lt;regex&gt;
+</span></code></pre>
+<p>My theme can be found <a rel="noreferrer" href="https://github.com/SeniorMars/dotfiles/blob/master/.config/mutt/colors.muttrc">here</a>.</p>
+<h2 id="external-programs"><a class="zola-anchor" href="#external-programs" aria-label="Anchor link for: external-programs">External programs</a></h2>
+<p>While, Neomutt is a great email client, it is not perfect. For instance, it doesn’t have a built-in
+query support, urls are not clickable, and it doesn’t encrypt emails. To resolve these issues, we can
+use external programs.</p>
+<h3 id="urlscan"><a class="zola-anchor" href="#urlscan" aria-label="Anchor link for: urlscan">Urlscan</a></h3>
+<p>Let’s take a look at the first issue: urls are not clickable. To fix this, we can use <code>urlscan</code> to make urls clickable.</p>
+<p>The GitHub repo for <code>urlscan</code> is <a rel="noreferrer" href="https://github.com/firecat53/urlscan">here</a>, and you can install it
+via pip:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> pip install</span><span style="color:#f29718;"> --user</span><span> urlscan
+</span></code></pre>
+<p>Now, we need to add the following to our <code>muttrc</code> file:</p>
+<pre data-lang="conf" style="background-color:#0f1419;color:#bfbab0;" class="language-conf "><code class="language-conf" data-lang="conf"><span style="color:#ff7733;">macro index</span><span style="color:#f29668;">,</span><span>pager </span><span style="color:#f29668;">\</span><span>cb </span><span style="color:#c2d94c;">&quot;&lt;pipe-message&gt; urlscan&lt;Enter&gt;&quot; &quot;call urlscan to extract URLs out of a message&quot;
+</span><span style="color:#ff7733;">macro</span><span> attach</span><span style="color:#f29668;">,</span><span>compose </span><span style="color:#f29668;">\</span><span>cb </span><span style="color:#c2d94c;">&quot;&lt;pipe-entry&gt; urlscan&lt;Enter&gt;&quot; &quot;call urlscan to extract URLs out of a message&quot;
+</span></code></pre>
+<p>Now, when you press <code>&lt;Ctrl+b&gt;</code> in the index or pager, <code>urlscan</code> will be called and the urls will be
+extracted. You can then press <code>&lt;Enter&gt;</code> to open the url in your browser.</p>
+<p>See image below:</p>
+<p><img src="https://seniormars.com/posts/neomutt/urls.png" alt="Urls" /></p>
+<h3 id="query"><a class="zola-anchor" href="#query" aria-label="Anchor link for: query">Query</a></h3>
+<p>The next issue is that Neomutt doesn’t have a built-in query support. To fix this, we can use
+<code>goobook</code> to search our contacts or <code>lbdbq</code> to use apple’s address book.</p>
+<p>For goobook, I recommend looking at archlinux’s <a rel="noreferrer" href="https://wiki.archlinux.org/title/Mutt#Goobook">wiki</a> for more information. It basically comes down to getting a token from Google.</p>
+<p>Since, I currently use macOS, I will show you how to use <code>lbdbq</code> to search my contacts.</p>
+<ol>
+<li>Install <code>lbdbq</code>:</li>
+</ol>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> brew install lbdbq
+</span></code></pre>
+<ol start="2">
+<li>Modify <code>lbdbq</code>’s config file (either <code>$HOME/.lbdbrc</code> or <code>/opt/homebrew/Cellar/lbdb/0.51.1/etc/lbdb.rc</code>) to include the following:</li>
+</ol>
+<pre data-lang="conf" style="background-color:#0f1419;color:#bfbab0;" class="language-conf "><code class="language-conf" data-lang="conf"><span style="font-style:italic;color:#f29668;">METHODS</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&quot;m_inmail m_osx_addressbook m_muttalias&quot;
+</span></code></pre>
+<p>You are done!</p>
+<ol start="3">
+<li>Add the following to your <code>muttrc</code> file:</li>
+</ol>
+<pre data-lang="conf" style="background-color:#0f1419;color:#bfbab0;" class="language-conf "><code class="language-conf" data-lang="conf"><span style="color:#f29718;">set </span><span>query_command</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&quot;/opt/homebrew/bin/lbdbq &#39;%s&#39;&quot;
+</span><span style="color:#f29718;">bind </span><span>editor </span><span style="color:#f29668;">&lt;</span><span>Tab</span><span style="color:#f29668;">&gt;</span><span> complete</span><span style="color:#f29668;">-</span><span>query
+</span></code></pre>
+<p>Now, when you press <code>&lt;Tab&gt;</code> in the editor when prompted for an email, you will be able to search your MacBook contacts!</p>
+<div class="note-container note-type-default">
+  
+    <button class="note-toggle" aria-expanded="true">
+      
+        <div class="note-icon">
+          
+          <p>Note</p>
+
+        </div>
+      
+    </button>
+    <div class="note-content" style="display: block;">
+      <p>You can add your Google contacts to your MacBook contacts by linking your Google account to your MacBook contacts. Which is not great, but I still did it.</p>
+
+    </div>
+  
+</div>
+<h3 id="encrypt"><a class="zola-anchor" href="#encrypt" aria-label="Anchor link for: encrypt">Encrypt</a></h3>
+<p>I use <code>gpg</code> to encrypt my emails. This is very useful for GitHub, and other services that require security. This is especially useful on mailing lists where you need to verify information. I find that everyone in the Arch Linux Mailing list uses it!</p>
+<ol>
+<li>We already installed <code>gpg</code> in the beginning, so we are good to go!</li>
+<li>Create a key and follow the instructions that are prompted:</li>
+</ol>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> gpg</span><span style="color:#f29718;"> --full-generate-key
+</span></code></pre>
+<ol start="3">
+<li>Copy your public key:</li>
+</ol>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> gpg</span><span style="color:#f29718;"> --list-secret-keys --keyid-format</span><span style="color:#f29668;">=</span><span>long
+</span></code></pre>
+<p>For instance, my public key is: <code>7C668A6D13D5729989FB126B183357B41320BB2B</code>. You can see the full
+version here: <a rel="noreferrer" href="https://github.com/SeniorMars.gpg">https://github.com/SeniorMars.gpg</a></p>
+<ol start="4">
+<li>Add the following to your <code>muttrc</code> file:</li>
+</ol>
+<pre data-lang="conf" style="background-color:#0f1419;color:#bfbab0;" class="language-conf "><code class="language-conf" data-lang="conf"><span style="font-style:italic;color:#5c6773;"># Use GPGME
+</span><span style="font-style:italic;color:#5c6773;"># Use my key for signing and encrypting
+</span><span style="color:#f29718;">set </span><span>pgp_default_key </span><span style="color:#f29668;">=</span><span> 7C668A6D13D5729989FB126B183357B41320BB2B
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Use GPGME
+</span><span style="color:#f29718;">set </span><span>crypt_use_gpgme </span><span style="color:#f29668;">= </span><span style="color:#f29718;">yes
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Automatically sign all out-going email
+</span><span style="color:#f29718;">set </span><span>crypt_autosign </span><span style="color:#f29668;">= </span><span style="color:#f29718;">yes
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Sign replies to signed emails
+</span><span style="color:#f29718;">set </span><span>crypt_replysign </span><span style="color:#f29668;">= </span><span style="color:#f29718;">yes
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Encrypt replies to encrypted emails
+</span><span style="color:#f29718;">set </span><span>crypt_replyencrypt </span><span style="color:#f29668;">= </span><span style="color:#f29718;">yes
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Encrypt and sign replies to encrypted and signed email
+</span><span style="color:#f29718;">set </span><span>crypt_replysignencrypted </span><span style="color:#f29668;">= </span><span style="color:#f29718;">yes
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Attempt to verify signatures automatically
+</span><span style="color:#f29718;">set </span><span>crypt_verify_sig </span><span style="color:#f29668;">= </span><span style="color:#f29718;">yes
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Attempt to encrypt automatically, if possible
+</span><span style="font-style:italic;color:#5c6773;"># I would recommend setting this to no as university often have spam filters
+</span><span style="font-style:italic;color:#5c6773;"># And this will cause your emails to be marked as spam
+</span><span style="font-style:italic;color:#5c6773;"># as they can&#39;t decrypt your emails LMAO
+</span><span style="color:#f29718;">set </span><span>crypt_opportunistic_encrypt </span><span style="color:#f29668;">= </span><span style="color:#f29718;">no
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># So you can view encrypted emails automatically
+</span><span style="color:#f29718;">auto_view </span><span style="font-style:italic;color:#39bae6;">application/pgp-encrypted
+</span></code></pre>
+<ol start="5">
+<li>Plaintext is a bad idea, which is why we are going to use GPG to encrypt our passwords.</li>
+</ol>
+<p>In your <code>muttrc</code> delete the following lines:</p>
+<pre data-lang="conf" style="background-color:#0f1419;color:#bfbab0;" class="language-conf "><code class="language-conf" data-lang="conf"><span style="color:#f29718;">set </span><span>imap_pass </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;my_app_specific_password&quot;
+</span><span style="color:#f29718;">set </span><span>smtp_pass </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;my_app_specific_password&quot;
+</span></code></pre>
+<p>Now go to your terminal and create a file called <code>passwords</code> in your <code>muttrc</code> directory and add
+the lines you just deleted.
+Now, encrypt the file:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> gpg</span><span style="color:#f29718;"> --encrypt -r</span><span> YOUR_GPG_KEY passwords
+</span></code></pre>
+<p>You should end up with a file called <code>passwords.gpg</code> in your <code>muttrc</code> directory.</p>
+<p>Now, add the following to your <code>muttrc</code> file:</p>
+<pre data-lang="conf" style="background-color:#0f1419;color:#bfbab0;" class="language-conf "><code class="language-conf" data-lang="conf"><span style="color:#f29718;">source </span><span style="color:#c2d94c;">&quot;gpg -dq $XDG_CONFIG_HOME/passwords.gpg |&quot;
+</span></code></pre>
+<p>Remove the plaintext <code>passwords</code> file.</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> shred</span><span style="color:#f29718;"> -u</span><span> passwords
+</span></code></pre>
+<p>Now, you have encrypted your passwords!</p>
+<p>Image below (notice the <code>Good signature</code> and <code> The following data is signed</code>):
+<img src="https://seniormars.com/posts/neomutt/gpg.png" alt="GPG" /></p>
+<p>And that’s it! You should now have a fully functional email client!</p>
+<h1 id="update"><a class="zola-anchor" href="#update" aria-label="Anchor link for: update">Update</a></h1>
+<h2 id="new-tools"><a class="zola-anchor" href="#new-tools" aria-label="Anchor link for: new-tools">New Tools</a></h2>
+<p>Recently, I have changed my setup to use <code>isync</code> and <code>msmtp</code> to handle my email. Before this (and the original blog), we needed to have an open connection to Gmail to check for new emails. This was not ideal, as it would prevent us from reaching the speeds that neomutt can reach. Now, with <code>isync</code> and <code>msmtp</code>, I can browse my emails locally and only connect to Gmail when I want to send an email. This is awesome if you aim to limit your connection to Gmail.</p>
+<h2 id="isync"><a class="zola-anchor" href="#isync" aria-label="Anchor link for: isync">isync</a></h2>
+<p><code>isync</code> is a command-line tool that synchronizes your mailbox in a local directory with a remote IMAP server, allowing you to manage your email locally. This is particularly beneficial for users who prefer not to maintain a constant connection to their email server.</p>
+<h3 id="installation-1"><a class="zola-anchor" href="#installation-1" aria-label="Anchor link for: installation-1">Installation</a></h3>
+<p>As isync requires a constant connection to your email server, you need to again create an app-specific password from google. If you need a reminder on how to do this, see the <a href="https://seniormars.com/posts/neomutt/#google-gmail-and-app-specific-passwords">Google, Gmail, and App-specific passwords</a> section.</p>
+<h4 id="macos-1"><a class="zola-anchor" href="#macos-1" aria-label="Anchor link for: macos-1">macOS</a></h4>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> brew install isync </span><span style="font-style:italic;color:#5c6773;"># or at least we hope this would work
+</span></code></pre>
+<div class="note-container note-type-default">
+  
+    <button class="note-toggle" aria-expanded="true">
+      
+        <div class="note-icon">
+          
+          <p>Correct Mac Installation</p>
+
+        </div>
+      
+    </button>
+    <div class="note-content" style="display: block;">
+      <p>All of this info comes from the <a rel="noreferrer" href="https://github.com/moriyoshi/cyrus-sasl-xoauth2/issues/9#issuecomment-2161796043">com4</a>.</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> brew install cyrus-sasl libtool
+</span><span style="color:#ffb454;">$ </span><span style="font-style:italic;color:#5c6773;"># Build this xoauth2 plugin against cyrus-sasl
+</span><span style="color:#ffb454;">$</span><span> git clone https://github.com/moriyoshi/cyrus-sasl-xoauth2.git
+</span><span style="color:#ffb454;">$</span><span> cd cyrus-sasl-xoauth2
+</span><span style="color:#ffb454;">$</span><span> vim autogen.sh
+</span></code></pre>
+<p>Change <code>libtoolize</code> to <code>glibtoolize</code>, otherwise you’ll get a libtoolize not found error. I’m unsure if this warrants a patch.</p>
+<pre data-lang="diff" style="background-color:#0f1419;color:#bfbab0;" class="language-diff "><code class="language-diff" data-lang="diff"><span style="color:#c594c5;">1c1
+</span><span style="color:#f07178;">&lt; libtoolize
+</span><span style="background-color:#bfbab010;font-weight:bold;color:#5c6773;">---
+</span><span style="color:#c2d94c;">&gt; glibtoolize
+</span></code></pre>
+<p>Then we run the command as normal:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> ./autogen.sh </span><span style="color:#bfbab0cc;">\
+</span><span>  </span><span style="color:#f29668;">&amp;&amp; </span><span style="color:#ffb454;">./configure</span><span style="color:#f29718;"> --with-cyrus-sasl</span><span style="color:#f29668;">=</span><span>/opt/homebrew/opt/cyrus-sasl </span><span style="color:#bfbab0cc;">\
+</span><span>  </span><span style="color:#f29668;">&amp;&amp; </span><span style="color:#ffb454;">make </span><span style="color:#bfbab0cc;">\
+</span><span>  </span><span style="color:#f29668;">&amp;&amp; </span><span style="color:#ffb454;">make</span><span> install 
+</span></code></pre>
+<p>Now we need to install isync properly.  Add <code>, "--with-sasl=/opt/homebrew/opt/cyrus-sasl"</code> to the <code>./configure</code> line in the def install section.  Add a depends_on <code>"cyrus-sasl"</code> below <code>depends_on "openssl@3"</code> but I’m unsure if this is required since it was manually installed. Here is the diff to isync.rb</p>
+<pre data-lang="diff" style="background-color:#0f1419;color:#bfbab0;" class="language-diff "><code class="language-diff" data-lang="diff"><span style="color:#c594c5;">29a30
+</span><span style="color:#c2d94c;">&gt;   depends_on &quot;cyrus-sasl&quot;
+</span><span style="color:#c594c5;">35c36
+</span><span style="color:#f07178;">&lt;     system &quot;./configure&quot;, *std_configure_args, &quot;--disable-silent-rules&quot;
+</span><span style="background-color:#bfbab010;font-weight:bold;color:#5c6773;">---
+</span><span style="color:#c2d94c;">&gt;     system &quot;./configure&quot;, *std_configure_args, &quot;--disable-silent-rules&quot;, &quot;--with-sasl=/opt/homebrew/opt/cyrus-sasl&quot;
+</span></code></pre>
+<p>Finally, we can install isync:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> HOMEBREW_NO_INSTALL_FROM_API=1 brew install</span><span style="color:#f29718;"> -s</span><span> isync
+</span></code></pre>
+<p>Or if you are using fish:</p>
+<pre data-lang="fish" style="background-color:#0f1419;color:#bfbab0;" class="language-fish "><code class="language-fish" data-lang="fish"><span style="color:#ff3333;">$ </span><span>env HOMEBREW_NO_INSTALL_FROM_API=1 brew install </span><span style="color:#f29718;">-s </span><span>isync
+</span></code></pre>
+<p>This should work! I know this is a mess but it works!</p>
+
+    </div>
+  
+</div>
+<h4 id="arch-linux-1"><a class="zola-anchor" href="#arch-linux-1" aria-label="Anchor link for: arch-linux-1">Arch Linux</a></h4>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> sudo pacman</span><span style="color:#f29718;"> -Syu</span><span> isync
+</span><span style="color:#ffb454;">$ </span><span style="font-style:italic;color:#5c6773;"># or
+</span><span style="color:#ffb454;">$</span><span> paru</span><span style="color:#f29718;"> -Syu</span><span> isync
+</span></code></pre>
+<h4 id="gentoo-1"><a class="zola-anchor" href="#gentoo-1" aria-label="Anchor link for: gentoo-1">Gentoo</a></h4>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> sudo emerge</span><span style="color:#f29718;"> --ask</span><span> net-mail/isync
+</span></code></pre>
+<h4 id="ubuntu-and-wsl2-using-ubuntu-1"><a class="zola-anchor" href="#ubuntu-and-wsl2-using-ubuntu-1" aria-label="Anchor link for: ubuntu-and-wsl2-using-ubuntu-1">Ubuntu and WSL2 using Ubuntu</a></h4>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> sudo apt install isync
+</span></code></pre>
+<h3 id="configuring-isync"><a class="zola-anchor" href="#configuring-isync" aria-label="Anchor link for: configuring-isync">Configuring isync</a></h3>
+<p>To start, you need to create a configuration file for <code>isync</code>, typically named <code>.mbsyncrc</code> in your home directory:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> touch </span><span style="font-style:italic;color:#39bae6;">~</span><span>/.mbsyncrc
+</span></code></pre>
+<p>Here’s an example configuration that you might use for Gmail (note that <code>isync.gpg</code> is a file that contains your GPG-encrypted password for isync):</p>
+<pre data-lang="conf" style="background-color:#0f1419;color:#bfbab0;" class="language-conf "><code class="language-conf" data-lang="conf"><span style="color:#f29718;">IMAPAccount </span><span>Gmail
+</span><span style="color:#f29718;">Host </span><span>imap</span><span style="color:#f29668;">.</span><span>gmail</span><span style="color:#f29668;">.</span><span>com
+</span><span style="color:#f29718;">User </span><span>your_email</span><span style="color:#ff7733;">@gmail</span><span style="color:#f29668;">.</span><span>com
+</span><span style="color:#f29718;">PassCmd </span><span style="color:#c2d94c;">&quot;gpg -dq ~/.config/mutt/isync.gpg&quot;
+</span><span style="color:#f29718;">SSLType </span><span style="font-style:italic;color:#f29668;">IMAPS
+</span><span style="color:#f29718;">CertificateFile </span><span style="color:#f29668;">/</span><span>etc</span><span style="color:#f29668;">/</span><span>ssl</span><span style="color:#f29668;">/</span><span>certs</span><span style="color:#f29668;">/</span><span>ca</span><span style="color:#f29668;">-</span><span>certificates</span><span style="color:#f29668;">.</span><span>crt
+</span><span>
+</span><span style="color:#f29718;">IMAPStore </span><span>Gmail</span><span style="color:#f29668;">-</span><span>remote
+</span><span style="color:#f29718;">Account </span><span>Gmail
+</span><span>
+</span><span style="color:#f29718;">MaildirStore </span><span>Gmail</span><span style="color:#f29668;">-</span><span>local
+</span><span style="color:#f29718;">Path </span><span style="color:#f29668;">~/</span><span>Mail</span><span style="color:#f29668;">/</span><span>Gmail</span><span style="color:#f29668;">/
+</span><span style="color:#f29718;">Inbox </span><span style="color:#f29668;">~/</span><span>Mail</span><span style="color:#f29668;">/</span><span>Gmail</span><span style="color:#f29668;">/</span><span style="font-style:italic;color:#f29668;">INBOX
+</span><span>
+</span><span style="color:#f29718;">Channel </span><span>Gmail
+</span><span style="color:#f29718;">Master </span><span style="color:#f29668;">:</span><span>Gmail</span><span style="color:#f29668;">-</span><span>remote</span><span style="color:#f29668;">:
+</span><span style="color:#f29718;">Slave </span><span style="color:#f29668;">:</span><span>Gmail</span><span style="color:#f29668;">-</span><span>local</span><span style="color:#f29668;">:
+</span><span style="color:#f29718;">Patterns </span><span style="color:#c2d94c;">&quot;INBOX&quot;
+</span><span style="color:#f29718;">Expunge </span><span>Both
+</span><span style="color:#f29718;">SyncState </span><span style="color:#f29668;">*
+</span></code></pre>
+<p>Here is my configuration:</p>
+<pre data-lang="conf" style="background-color:#0f1419;color:#bfbab0;" class="language-conf "><code class="language-conf" data-lang="conf"><span style="color:#f29718;">IMAPAccount </span><span>gmail
+</span><span style="color:#f29718;">Host </span><span>imap</span><span style="color:#f29668;">.</span><span>gmail</span><span style="color:#f29668;">.</span><span>com
+</span><span style="color:#f29718;">Port 993
+</span><span style="color:#f29718;">User </span><span>cjh16</span><span style="color:#ff7733;">@rice</span><span style="color:#f29668;">.</span><span>edu
+</span><span style="color:#f29718;">PassCmd </span><span style="color:#c2d94c;">&quot;gpg -dq --for-your-eyes-only --no-tty ~/.config/mutt/isync.gpg&quot;
+</span><span style="color:#f29718;">SSLType </span><span style="font-style:italic;color:#f29668;">IMAPS
+</span><span style="color:#f29718;">CertificateFile  </span><span style="color:#f29668;">/</span><span>opt</span><span style="color:#f29668;">/</span><span>homebrew</span><span style="color:#f29668;">/</span><span>Cellar</span><span style="color:#f29668;">/</span><span>ca</span><span style="color:#f29668;">-</span><span style="font-style:italic;color:#39bae6;">certificates/2024-03-</span><span style="color:#f29718;">11</span><span style="color:#f29668;">/</span><span>share</span><span style="color:#f29668;">/</span><span>ca</span><span style="color:#f29668;">-</span><span style="font-style:italic;color:#39bae6;">certificates/cacert.pem
+</span><span>
+</span><span style="color:#f29718;">IMAPStore </span><span>gmail</span><span style="color:#f29668;">-</span><span>remote
+</span><span style="color:#f29718;">Account </span><span>gmail
+</span><span>
+</span><span style="color:#f29718;">MaildirStore </span><span>gmail</span><span style="color:#f29668;">-</span><span>local
+</span><span style="color:#f29718;">Subfolders </span><span>Verbatim
+</span><span style="color:#f29718;">Path </span><span style="color:#f29668;">~/.</span><span>local</span><span style="color:#f29668;">/</span><span>share</span><span style="color:#f29668;">/</span><span>email</span><span style="color:#f29668;">/</span><span>cjh16</span><span style="color:#f29668;">/
+</span><span style="font-style:italic;color:#f29668;">INBOX </span><span style="color:#f29668;">~/.</span><span>local</span><span style="color:#f29668;">/</span><span>share</span><span style="color:#f29668;">/</span><span>email</span><span style="color:#f29668;">/</span><span>cjh16</span><span style="color:#f29668;">/</span><span style="font-style:italic;color:#f29668;">INBOX
+</span><span style="color:#f29718;">Flatten </span><span style="color:#f29668;">.
+</span><span>
+</span><span style="color:#f29718;">Channel </span><span>gmail
+</span><span style="color:#f29718;">Far </span><span style="color:#f29668;">:</span><span>gmail</span><span style="color:#f29668;">-</span><span>remote</span><span style="color:#f29668;">:
+</span><span style="color:#f29718;">Near </span><span style="color:#f29668;">:</span><span>gmail</span><span style="color:#f29668;">-</span><span>local</span><span style="color:#f29668;">:
+</span><span style="color:#f29718;">Patterns </span><span style="color:#f29668;">*
+</span><span style="font-style:italic;color:#5c6773;"># Automatically create missing mailboxes, both locally and on the server
+</span><span style="color:#f29718;">Create </span><span>Both
+</span><span style="font-style:italic;color:#5c6773;"># Sync the movement of messages between folders and deletions, add after making sure the sync works
+</span><span style="color:#f29718;">Expunge </span><span>Both
+</span><span style="font-style:italic;color:#5c6773;"># Save the synchronization state files in the relevant directory
+</span><span style="color:#f29718;">SyncState </span><span style="color:#f29668;">*
+</span><span style="color:#f29718;">MaxMessages 0
+</span></code></pre>
+<p>This configuration tells <code>isync</code> to sync your Gmail’s INBOX to a local directory. It uses GPG to decrypt your password securely.</p>
+<h3 id="running-isync"><a class="zola-anchor" href="#running-isync" aria-label="Anchor link for: running-isync">Running isync</a></h3>
+<p>To sync your mail, simply run:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> mbsync</span><span style="color:#f29718;"> -a </span><span style="font-style:italic;color:#5c6773;"># or `mbsync gmail`
+</span></code></pre>
+<p>This command will sync all channels defined in your <code>.mbsyncrc</code> file and download your emails to your local machine.</p>
+<div class="note-container note-type-default">
+  
+    <button class="note-toggle" aria-expanded="true">
+      
+        <div class="note-icon">
+          
+          <p>Note</p>
+
+        </div>
+      
+    </button>
+    <div class="note-content" style="display: block;">
+      <p>Homebrew provides a service to run mbsync every 15 minutes.</p>
+<p>You can enable this by running <code>brew services start isync</code>.</p>
+
+    </div>
+  
+</div>
+<h3 id="neomutt-integration"><a class="zola-anchor" href="#neomutt-integration" aria-label="Anchor link for: neomutt-integration">Neomutt integration</a></h3>
+<p>Now that you have <code>isync</code> set up, you can configure Neomutt to use the local mail directory to read your emails. To do this, you need to modify your <code>muttrc</code> file:</p>
+<pre data-lang="conf" style="background-color:#0f1419;color:#bfbab0;" class="language-conf "><code class="language-conf" data-lang="conf"><span style="font-style:italic;color:#5c6773;"># My mailboxes
+</span><span style="color:#f29718;">set </span><span>mbox_type </span><span style="color:#f29668;">=</span><span> Maildir
+</span><span style="color:#f29718;">set </span><span>folder </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;~/.local/share/email/cjh16&quot;
+</span><span style="color:#f29718;">set </span><span>spoolfile </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;+[Gmail].All Mail&quot;
+</span><span style="color:#f29718;">set </span><span>postponed </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;+[Gmail].Drafts&quot;
+</span><span style="color:#f29718;">set </span><span>record </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;+[Gmail].Sent Mail&quot;
+</span><span style="color:#f29718;">set </span><span>trash </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;+[Gmail].Trash&quot;
+</span><span style="color:#f29718;">mailboxes </span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&quot;[Gmail].All Mail&quot; </span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&quot;[Gmail].Starred&quot; </span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&quot;[Gmail].Important&quot; </span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&quot;[Gmail].Drafts&quot; </span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&quot;[Gmail].Sent Mail&quot; </span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&quot;[Gmail].Trash&quot; </span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&quot;[Gmail].Spam&quot; </span><span style="color:#f29668;">=</span><span style="font-style:italic;color:#f29668;">INBOX
+</span></code></pre>
+<p>Notice that we changed the <code>mbox_type</code> to <code>Maildir</code> and set the <code>folder</code> to the path where <code>isync</code> stores your emails. This will allow Neomutt to read your emails from the local directory. Now, the next time you open Neomutt, it will be a bit slow, but after that, it will be lightning fast!</p>
+<h2 id="msmtp"><a class="zola-anchor" href="#msmtp" aria-label="Anchor link for: msmtp">msmtp</a></h2>
+<p><code>msmtp</code> is a simple SMTP client that allows you to send emails from your local computer. When paired with <code>isync</code>, it handles the sending of emails, completing your email setup to work both offline and online. Additionally, you can set up <code>msmtp</code> for multiple email accounts, making it a versatile tool for managing your emails.</p>
+<h3 id="installation-2"><a class="zola-anchor" href="#installation-2" aria-label="Anchor link for: installation-2">Installation</a></h3>
+<h4 id="macos-2"><a class="zola-anchor" href="#macos-2" aria-label="Anchor link for: macos-2">macOS</a></h4>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> brew install msmtp
+</span></code></pre>
+<h4 id="arch-linux-2"><a class="zola-anchor" href="#arch-linux-2" aria-label="Anchor link for: arch-linux-2">Arch Linux</a></h4>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> sudo pacman</span><span style="color:#f29718;"> -Syu</span><span> msmtp
+</span><span style="color:#ffb454;">$ </span><span style="font-style:italic;color:#5c6773;"># or
+</span><span style="color:#ffb454;">$</span><span> paru</span><span style="color:#f29718;"> -Syu</span><span> msmtp
+</span></code></pre>
+<h4 id="gentoo-2"><a class="zola-anchor" href="#gentoo-2" aria-label="Anchor link for: gentoo-2">Gentoo</a></h4>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> sudo emerge</span><span style="color:#f29718;"> --ask</span><span> mail-mta/msmtp
+</span></code></pre>
+<h4 id="ubuntu-and-wsl2-using-ubuntu-2"><a class="zola-anchor" href="#ubuntu-and-wsl2-using-ubuntu-2" aria-label="Anchor link for: ubuntu-and-wsl2-using-ubuntu-2">Ubuntu and WSL2 using Ubuntu</a></h4>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> sudo apt install msmtp
+</span></code></pre>
+<h3 id="configuring-msmtp"><a class="zola-anchor" href="#configuring-msmtp" aria-label="Anchor link for: configuring-msmtp">Configuring msmtp</a></h3>
+<p>Create a configuration file for <code>msmtp</code> in your home directory:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> touch </span><span style="font-style:italic;color:#39bae6;">~</span><span>/.msmtprc </span><span style="font-style:italic;color:#5c6773;"># or $XDG_CONFIG_HOME/msmtprc/config
+</span></code></pre>
+<p>Here’s a basic configuration for Gmail (note that <code>msmtp.gpg</code> is a file that contains your GPG-encrypted password for Gmail):</p>
+<pre data-lang="conf" style="background-color:#0f1419;color:#bfbab0;" class="language-conf "><code class="language-conf" data-lang="conf"><span style="color:#ff7733;">defaults
+</span><span style="color:#f29718;">auth on
+</span><span style="color:#f29718;">tls on
+</span><span style="color:#f29718;">tls_trust_file </span><span style="color:#f29668;">/</span><span>etc</span><span style="color:#f29668;">/</span><span>ssl</span><span style="color:#f29668;">/</span><span>certs</span><span style="color:#f29668;">/</span><span>ca</span><span style="color:#f29668;">-</span><span>certificates</span><span style="color:#f29668;">.</span><span>crt
+</span><span>
+</span><span style="color:#f29718;">account </span><span>gmail
+</span><span style="color:#f29718;">host </span><span>smtp</span><span style="color:#f29668;">.</span><span>gmail</span><span style="color:#f29668;">.</span><span>com
+</span><span style="color:#f29718;">port 465
+</span><span style="color:#f29718;">from </span><span>your_email</span><span style="color:#ff7733;">@gmail</span><span style="color:#f29668;">.</span><span>com
+</span><span style="color:#f29718;">user </span><span>your_email</span><span style="color:#ff7733;">@gmail</span><span style="color:#f29668;">.</span><span>com
+</span><span style="color:#f29718;">password_eval </span><span style="color:#c2d94c;">&quot;gpg -dq ~/.config/mutt/msmtp.gpg&quot;
+</span><span>
+</span><span style="color:#f29718;">account </span><span>default </span><span style="color:#f29668;">:</span><span> gmail
+</span></code></pre>
+<p>This is my configuration:</p>
+<pre data-lang="conf" style="background-color:#0f1419;color:#bfbab0;" class="language-conf "><code class="language-conf" data-lang="conf"><span style="font-style:italic;color:#5c6773;"># Set default values for all following accounts.
+</span><span style="color:#ff7733;">defaults
+</span><span style="color:#f29718;">auth           on
+</span><span style="color:#f29718;">tls on
+</span><span style="color:#f29718;">tls_starttls on
+</span><span style="color:#f29718;">tls_trust_file </span><span style="color:#f29668;">/</span><span>opt</span><span style="color:#f29668;">/</span><span>homebrew</span><span style="color:#f29668;">/</span><span>Cellar</span><span style="color:#f29668;">/</span><span>ca</span><span style="color:#f29668;">-</span><span style="font-style:italic;color:#39bae6;">certificates/2024-03-</span><span style="color:#f29718;">11</span><span style="color:#f29668;">/</span><span>share</span><span style="color:#f29668;">/</span><span>ca</span><span style="color:#f29668;">-</span><span style="font-style:italic;color:#39bae6;">certificates/cacert.pem
+</span><span style="color:#f29718;">logfile        </span><span style="color:#f29668;">~/.</span><span>config</span><span style="color:#f29668;">/</span><span>msmtp</span><span style="color:#f29668;">/</span><span>msmtp</span><span style="color:#f29668;">.</span><span>log
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Gmail
+</span><span style="color:#f29718;">account        </span><span>gmail
+</span><span style="color:#f29718;">host           </span><span>smtp</span><span style="color:#f29668;">.</span><span>gmail</span><span style="color:#f29668;">.</span><span>com
+</span><span style="color:#f29718;">port           465
+</span><span style="color:#f29718;">tls_starttls   off
+</span><span style="color:#f29718;">from           </span><span>cjh16</span><span style="color:#ff7733;">@rice</span><span style="color:#f29668;">.</span><span>edu
+</span><span style="color:#f29718;">user           </span><span>cjh16</span><span style="color:#ff7733;">@rice</span><span style="color:#f29668;">.</span><span>edu
+</span><span style="color:#f29718;">passwordeval   </span><span style="color:#c2d94c;">&quot;gpg -dq ~/.config/mutt/msmtp.gpg&quot;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Set a default account
+</span><span style="color:#f29718;">account </span><span>default</span><span style="color:#f29668;">:</span><span> gmail
+</span></code></pre>
+<p>This configuration will use your Gmail account to send emails through SMTP, using a password fetched securely using GPG.</p>
+<h3 id="using-msmtp"><a class="zola-anchor" href="#using-msmtp" aria-label="Anchor link for: using-msmtp">Using msmtp</a></h3>
+<p>To send an email using <code>msmtp</code>, you can pipe the content of an email file like so:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> cat email.txt </span><span style="color:#f29668;">| </span><span style="color:#ffb454;">msmtp</span><span style="color:#f29718;"> -a</span><span> default recipient@example.com
+</span></code></pre>
+<p>To test you can run:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span>  echo </span><span style="color:#c2d94c;">&quot;hello there username.&quot; </span><span style="color:#f29668;">| </span><span style="color:#ffb454;">msmtp</span><span style="color:#f29718;"> -a</span><span> default random_person@example.com
+</span></code></pre>
+<p>You should email me for fun: <code>$ echo "Hi SeniorMars!" | msmtp -a default cjh16@rice.edu</code></p>
+<h3 id="neomutt-integration-1"><a class="zola-anchor" href="#neomutt-integration-1" aria-label="Anchor link for: neomutt-integration-1">Neomutt integration</a></h3>
+<p>To integrate <code>msmtp</code> with Neomutt, you need to modify your <code>muttrc</code> file:</p>
+<pre data-lang="conf" style="background-color:#0f1419;color:#bfbab0;" class="language-conf "><code class="language-conf" data-lang="conf"><span style="color:#f29718;">set </span><span>sendmail </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;msmtp -a cjh16@rice.edu&quot;
+</span></code></pre>
+<p>That’s it! Now, when you send an email in Neomutt, it will use <code>msmtp</code> to send the email.</p>
+<h2 id="notmuch"><a class="zola-anchor" href="#notmuch" aria-label="Anchor link for: notmuch">notmuch</a></h2>
+<p><code>notmuch</code> is an email indexing tool that provides fast searching capabilities. It is useful when dealing with large volumes of email, helping you to quickly find exactly what you need. Especially when paired with Neomutt and isync, <code>notmuch</code> can significantly improve your email workflow.</p>
+<h3 id="installation-3"><a class="zola-anchor" href="#installation-3" aria-label="Anchor link for: installation-3">Installation</a></h3>
+<h4 id="macos-3"><a class="zola-anchor" href="#macos-3" aria-label="Anchor link for: macos-3">macOS</a></h4>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> brew install notmuch
+</span></code></pre>
+<h4 id="arch-linux-3"><a class="zola-anchor" href="#arch-linux-3" aria-label="Anchor link for: arch-linux-3">Arch Linux</a></h4>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> sudo pacman</span><span style="color:#f29718;"> -Syu</span><span> notmuch
+</span><span style="color:#ffb454;">$ </span><span style="font-style:italic;color:#5c6773;"># or
+</span><span style="color:#ffb454;">$</span><span> paru</span><span style="color:#f29718;"> -Syu</span><span> notmuch
+</span></code></pre>
+<h4 id="gentoo-3"><a class="zola-anchor" href="#gentoo-3" aria-label="Anchor link for: gentoo-3">Gentoo</a></h4>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> sudo emerge</span><span style="color:#f29718;"> --ask</span><span> mail-filter/notmuch
+</span></code></pre>
+<h4 id="ubuntu-and-wsl2-using-ubuntu-3"><a class="zola-anchor" href="#ubuntu-and-wsl2-using-ubuntu-3" aria-label="Anchor link for: ubuntu-and-wsl2-using-ubuntu-3">Ubuntu and WSL2 using Ubuntu</a></h4>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> sudo apt install notmuch
+</span></code></pre>
+<h3 id="configuring-notmuch"><a class="zola-anchor" href="#configuring-notmuch" aria-label="Anchor link for: configuring-notmuch">Configuring notmuch</a></h3>
+<p>First, initialize notmuch:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> notmuch setup
+</span></code></pre>
+<p>Follow the prompts to set up your email directory (for me it is <code>~/.local/share/email/cjh16</code>). Then, you can start searching your emails by using:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> notmuch search </span><span style="color:#c2d94c;">&quot;from:example@example.com&quot;
+</span></code></pre>
+<p>Notmuch will index your emails located in the directory specified during setup, allowing you to use powerful search queries to navigate your mail efficiently.</p>
+<h3 id="neomutt-integration-2"><a class="zola-anchor" href="#neomutt-integration-2" aria-label="Anchor link for: neomutt-integration-2">Neomutt integration</a></h3>
+<p>To integrate <code>notmuch</code> with Neomutt, you need to modify your <code>muttrc</code> file:</p>
+<pre data-lang="conf" style="background-color:#0f1419;color:#bfbab0;" class="language-conf "><code class="language-conf" data-lang="conf"><span style="color:#ff7733;">macro index </span><span style="font-style:italic;color:#f29668;">S </span><span style="color:#c2d94c;">&quot;&lt;shell-escape&gt;mbsync -V gmail&lt;enter&gt;&lt;shell-escape&gt;notmuch new&lt;enter&gt;&quot; &quot;sync email&quot;
+</span><span style="color:#ff7733;">macro index </span><span style="color:#f29668;">\</span><span>Cf </span><span style="color:#c2d94c;">&quot;&lt;enter-command&gt;unset wait_key&lt;enter&gt;&lt;shell-escape&gt;read -p &#39;Enter a search term to find with notmuch: &#39; x; echo \$x &gt;~/.cache/mutt_terms&lt;enter&gt;&lt;limit&gt;~i </span><span style="color:#f29718;">\&quot;</span><span style="color:#c2d94c;">\`notmuch search --output=messages \$(cat ~/.cache/mutt_terms) | head -n 600 | perl -le &#39;@a=&lt;&gt;;s/\^id:// for@a;$,=</span><span style="color:#f29718;">\&quot;</span><span style="color:#c2d94c;">|</span><span style="color:#f29718;">\&quot;</span><span style="color:#c2d94c;">;print@a&#39; | perl -le &#39;@a=&lt;&gt;; chomp@a; s/\\+/\\\\+/ for@a;print@a&#39; \`</span><span style="color:#f29718;">\&quot;</span><span style="color:#c2d94c;">&lt;enter&gt;&quot; &quot;show only messages matching a notmuch pattern&quot;
+</span></code></pre>
+<p>This will allow us to sync our emails and search our emails using <code>notmuch</code> directly from Neomutt. Pretty cool!</p>
+<h2 id="things-left-desired"><a class="zola-anchor" href="#things-left-desired" aria-label="Anchor link for: things-left-desired">Things left desired</a></h2>
+<p>Honestly, I love my setup, but there could always be improvements. Notably:</p>
+<ol>
+<li>I want to not use app-specific passwords. I would like to use OAuth2, but my school blocks us from doing anything technical.</li>
+<li>I would like to auto complete email addresses from my contacts. I have a lot of contacts, and I don’t remember all of their emails.</li>
+<li>Sometimes I want images lmao! I’ve been trying to mess around with Kitty but macos is a pain.</li>
+</ol>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span># text/html; kitty @ launch --type overlay --title neomutt-html w3m -I %{charset} -T text/html -graph -F -no-cookie -o confirm_qq=FALSE -o use_wide=TRUE -o display_link=TRUE -o display_link_number=TRUE -o color=TRUE -o auto_image=TRUE -o display_image=TRUE -o max_load_image=20 -o inline_img_protocol=4  %s; nametemplate=%s.html
+</span><span>text/html; open -a Firefox %s; test=test -n &quot;$DISPLAY&quot;; needsterminal;
+</span><span>text/html; lynx -assume_charset=%{charset} -display_charset=utf-8 -dump -width=1024 %s; nametemplate=%s.html; copiousoutput;
+</span><span>text/plain; cat %s; copiousoutput;
+</span><span>image/*; icat.sh &#39;%s&#39;; test=test -n &quot;$DISPLAY&quot;; needsterminal;
+</span><span>video/*; setsid mpv --quiet %s &amp;; copiousoutput
+</span><span>audio/*; mpv %s ;
+</span><span>application/pdf; open -a Firefox %s; test=test -n &quot;$DISPLAY&quot;; needsterminal;
+</span><span>application/pgp-encrypted; gpg -d &#39;%s&#39;; copiousoutput;
+</span><span>application/pgp-keys; gpg --import &#39;%s&#39;; copiousoutput;
+</span><span>application/x-subrip; $EDITOR %s ;
+</span><span>application/octet-stream; icat.sh &#39;%s&#39;; test=test -n &quot;$DISPLAY&quot;; needsterminal;
+</span></code></pre>
+<ol start="4">
+<li>I want to fix cache contact with <code>lbdbq</code> and <code>notmuch</code>. I have tried, but I can’t get it to work.</li>
+</ol>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="font-style:italic;color:#5c6773;">#!/bin/bash
+</span><span style="font-style:italic;color:#5c6773;"># Query lbdbq and save results to Mutt alias file
+</span><span>
+</span><span style="color:#f07178;">set </span><span style="color:#f29718;">-e
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Mutt aliases file to save results to
+</span><span>ALIASES</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&quot;$</span><span>HOME</span><span style="color:#c2d94c;">/.cache/mutt/aliases&quot;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Only save email addresses from $DOMAIN. Leave empty to save all email addresses
+</span><span>DOMAIN</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&quot;rice.edu&quot;
+</span><span>
+</span><span style="color:#ffb454;">query_and_cache</span><span>() {
+</span><span>    results</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">$</span><span>(</span><span style="color:#ffb454;">lbdbq </span><span style="color:#c2d94c;">&quot;$</span><span style="font-style:italic;color:#39bae6;">@</span><span style="color:#c2d94c;">&quot; </span><span style="color:#f29718;">2</span><span style="color:#f29668;">&gt;</span><span style="color:#c2d94c;">/dev/null</span><span>)
+</span><span>
+</span><span>    </span><span style="color:#f07178;">printf </span><span style="color:#c2d94c;">&#39;%s\n&#39; &quot;$</span><span>results</span><span style="color:#c2d94c;">&quot;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;"># Remove first line from results
+</span><span>    results</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">$</span><span>(</span><span style="color:#ffb454;">sed </span><span style="color:#c2d94c;">&#39;1d&#39; </span><span style="color:#f29668;">&lt;&lt;&lt; </span><span style="color:#c2d94c;">&quot;$</span><span>results</span><span style="color:#c2d94c;">&quot;</span><span>)
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;"># Format results like mutt aliases
+</span><span>    </span><span style="color:#ffb454;">sed</span><span style="color:#f29718;"> -E </span><span style="color:#c2d94c;">$&#39;s/^([[:alnum:]_.]+)@([[:alnum:]_.]+)</span><span style="color:#95e6cb;">\t</span><span style="color:#c2d94c;">([[:alnum:] -]+)/alias </span><span style="color:#95e6cb;">\\</span><span style="color:#c2d94c;">1 </span><span style="color:#95e6cb;">\\</span><span style="color:#c2d94c;">1@</span><span style="color:#95e6cb;">\\</span><span style="color:#c2d94c;">2 (</span><span style="color:#95e6cb;">\\</span><span style="color:#c2d94c;">3)/&#39; </span><span style="color:#f29668;">&lt;&lt;&lt; </span><span style="color:#c2d94c;">&quot;$</span><span>results</span><span style="color:#c2d94c;">&quot; </span><span style="color:#f29668;">| </span><span style="color:#ffb454;">awk</span><span style="color:#f29718;"> -v</span><span> domain=</span><span style="color:#c2d94c;">&quot;$</span><span>DOMAIN</span><span style="color:#c2d94c;">&quot; &#39;$3 ~ domain {$2=tolower($2);print}&#39; </span><span style="color:#f29668;">&gt;&gt; </span><span style="color:#c2d94c;">&quot;$</span><span>ALIASES</span><span style="color:#c2d94c;">&quot;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;"># Sort and remove duplicates
+</span><span>    </span><span style="color:#ffb454;">sort</span><span style="color:#f29718;"> -u -o </span><span style="color:#c2d94c;">&quot;$</span><span>ALIASES</span><span style="color:#c2d94c;">&quot; &quot;$</span><span>ALIASES</span><span style="color:#c2d94c;">&quot;
+</span><span>
+</span><span>}
+</span><span>
+</span><span style="color:#ffb454;">query_and_cache </span><span style="color:#c2d94c;">&quot;$</span><span style="font-style:italic;color:#39bae6;">@</span><span style="color:#c2d94c;">&quot;
+</span></code></pre>
+<p>That being said, I am happy with my setup. I can send and receive emails, and I can search my emails quickly. I can also encrypt my emails, which is a plus.</p>
+<h1 id="conclusion"><a class="zola-anchor" href="#conclusion" aria-label="Anchor link for: conclusion">Conclusion</a></h1>
+<p>I hope you enjoyed this tutorial! If you have any questions, don’t ask /s.</p>
+<p><a rel="noreferrer" href="https://github.com/SeniorMars/dotfiles/blob/182ad5717def463abcc0aebbe0062c48824c3532/.config/mutt/muttrc">Here is my final configuration</a>. And again, here is how my email client looks (lol taxes with github now):</p>
+<p><img src="https://seniormars.com/posts/neomutt/neomutt2.png" alt="Final" /></p>
+<p>I am going to upload a talk I gave on setting up Neovim for non-programmers soon. This talks about
+grammar checking, spell keybinds, and more. So stay tuned!</p>
+<p>Thanks for reading and have a nice day!</p>
+<p>SeniorMars</p>
+
+        </section>
+    </article>
+</main>
+
+
+
+        
+            
+        
+
+        
+        <div class="giscus"></div>
+         <script src="https://giscus.app/client.js"
+        data-repo="SeniorMars/seniormars.com"
+        data-repo-id="R_kgDOJQ6QAQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOJQ6QAc4CgC4Q"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
+        
+    </div>
+</body>
+
+</html>

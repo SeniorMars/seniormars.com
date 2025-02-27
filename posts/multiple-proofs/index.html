@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en" class="dark light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base" content="https:&#x2F;&#x2F;seniormars.com">
+
+    
+
+    
+    
+    
+    <title>
+         The Beauty of Multiplicity: What Proof Complexity Can Teach Mathematicians
+        
+    </title>
+
+        
+            <meta property="og:title" content="The Beauty of Multiplicity: What Proof Complexity Can Teach Mathematicians" />
+        
+     
+
+     
+         
+             <meta property="og:description" content="A guy gives his thoughts on a Reddit thread." />
+         
+     
+
+     
+         
+             <meta name="description" content="A guy gives his thoughts on a Reddit thread." />
+         
+    
+        <meta name="theme-color" media="(prefers-color-scheme: light)" content="#FFFFFF" />
+        <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0E1018" />
+    
+        <link rel="icon" type="image/png" href=&#x2F;icons&#x2F;favicon.ico />
+        
+        
+            <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+            <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+            <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+            <link rel="manifest" href="/icons/site.webmanifest">
+            <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#ff6f3c">
+            <meta name="apple-mobile-web-app-title" content="SeniorMars">
+            <meta name="application-name" content="SeniorMars">
+            <meta name="msapplication-TileColor" content="#333333">
+            <meta name="theme-color" content="#333333">
+        
+    
+
+    
+    
+        <link href=https://seniormars.com/fonts.css rel="stylesheet" />
+    
+
+    
+    
+        
+
+        
+            
+            
+
+            <script data-goatcounter="https://seniormars.goatcounter.com/count" async src="https://seniormars.com/js/count.js"></script>
+            <noscript>
+                
+                <img src="https://seniormars.goatcounter.com//count?p=&#x2F;posts&#x2F;multiple-proofs&#x2F;&t=The Beauty of Multiplicity: What Proof Complexity Can Teach Mathematicians">
+            </noscript>
+        
+    
+
+    
+    
+        <script src=https://seniormars.com/js/codeblock.js></script>
+    
+
+    
+    
+
+    
+    
+        <script src=https://seniormars.com/js/toc.js></script>
+    
+
+    
+    
+        <script src=https://seniormars.com/js/note.js></script>
+    
+
+    
+        
+        <script>
+            MathJax = {
+              loader: { load: ['input/asciimath'] },
+              output: {
+                  displayOverflow: 'linebreak',
+                      linebreaks: {
+                          inline: true,
+                          width: '100%',
+                          lineleading: .2,
+                          LinebreakVisitor: null,
+                  }
+              },
+              tex: {
+                inlineMath: [['$', '$']],
+                processEscapes: true,
+              },
+              svg: {
+                fontCache: 'global'
+              }
+            };
+        </script>
+        
+        <script type="text/javascript" id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@4.0.0-beta.7/tex-mml-chtml.js">
+        </script>
+    
+
+    
+    
+        <link rel="alternate" type="application/rss+xml" title="SeniorMars" href="https://seniormars.com/rss.xml">
+    
+
+    
+    
+        <link rel="stylesheet" type="text/css" href=https://seniormars.com/theme/light.css />
+        <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://seniormars.com/theme/dark.css" />
+    
+    
+    <!-- Set the correct theme in the script -->
+    <script src=https://seniormars.com/js/themetoggle.js></script>
+    
+        <script>setTheme(getSavedTheme());</script>
+    
+
+    
+    <link rel="stylesheet" type="text/css" media="screen" href=https://seniormars.com/main.css />
+
+    
+
+    
+    
+        <script src=https://seniormars.com/js/mermaid.js></script>
+    
+
+    
+        <script defer src="https://seniormars.com/js/searchElasticlunr.min.js?h=3626c0ef99daa745b31e"></script></head>
+
+
+<body>
+    <div class="content">
+        <header>
+    <div class="main">
+        
+            <a href=https:&#x2F;&#x2F;seniormars.com>SeniorMars</a>
+        
+
+
+        <div class="socials">
+            
+            <a rel="me" href="https:&#x2F;&#x2F;github.com&#x2F;seniormars&#x2F;" class="social">
+                <img alt=github src=https://seniormars.com/social_icons/github.svg>
+            </a>
+            
+            <a rel="me" href="https:&#x2F;&#x2F;www.youtube.com&#x2F;seniormarstries" class="social">
+                <img alt=youtube src=https://seniormars.com/social_icons/youtube.svg>
+            </a>
+            
+            <a rel="me" href="&#x2F;rss.xml" class="social">
+                <img alt=rss src=https://seniormars.com/social_icons/rss.svg>
+            </a>
+            
+        </div>
+    </div>
+
+    <nav>
+        
+            <a href=https://seniormars.com/posts class="nav-item">&#x2F;posts</a>
+        
+            <a href=https://seniormars.com/projects class="nav-item">&#x2F;projects</a>
+        
+            <a href=https://seniormars.com/about class="nav-item">&#x2F;about</a>
+        
+            <a href=https://seniormars.com/etc class="nav-item">&#x2F;etc</a>
+        
+
+        
+            <button 
+                id="search-button"
+                class="search-button"
+                title="$SHORTCUT to open search"
+            >
+                <img 
+                    src="https://seniormars.com/search.svg" 
+                    alt="Search" 
+                    class="search-icon"
+                >
+            </button>
+
+            <div id="searchModal" class="search-modal js" role="dialog" aria-labelledby="modalTitle">
+                <div id="modal-content">
+                    <h1 id="modalTitle" class="page-header">Search</h1>
+                    <div id="searchBar">
+                        <input 
+                            id="searchInput" 
+                            role="combobox" 
+                            autocomplete="off" 
+                            spellcheck="false" 
+                            aria-expanded="false" 
+                            aria-controls="results-container" 
+                            placeholder="Search..."
+                        />
+                        <button 
+                            id="clear-search" 
+                            class="clear-button"
+                            title="Clear search"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                                <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="results-container">
+                        <div id="results-info">
+                            <span id="zero_results" style="display: none;">No results</span>
+                            <span id="one_result" style="display: none;">1 result</span>
+                            <span id="many_results" style="display: none;">$NUMBER results</span>
+                        </div>
+                        <div id="results" role="listbox"></div>
+                    </div>
+                </div>
+            </div>
+        
+
+        
+            <a id="dark-mode-toggle" onclick="toggleTheme(); event.preventDefault();" href="#">
+                <img src=https://seniormars.com/feather/sun.svg id="sun-icon" style="filter: invert(1);" alt="Light" />
+                <img src=https://seniormars.com/feather/moon.svg id="moon-icon" alt="Dark" />
+            </a>
+
+            <!-- Inititialize the theme toggle icons -->
+            <script>updateItemToggleTheme()</script>
+        
+    </nav>
+</header>
+
+
+        
+        
+    
+<main>
+    <article>
+        <div class="title">
+            
+            
+    <div class="page-header">
+        The Beauty of Multiplicity: What Proof Complexity Can Teach Mathematicians<span class="primary-color" style="font-size: 1.6em">.</span>
+    </div>
+
+
+                <div class="meta">
+                    
+                        Posted on <time>2025-02-26</time>
+                    
+
+                    
+
+                    
+                        :: <time>9</time> Min Read
+                    
+
+                    
+                    
+                            <span class="tags-label"> :: Tags:</span>
+                            <span class="tags">
+                                    <a href="https://seniormars.com/tags/math/" class="post-tag">math</a>
+                                
+                            </span>
+                    
+
+                    
+                    
+
+                        
+                        
+                            
+                        
+
+                        
+                            
+                            :: <a href="https:&#x2F;&#x2F;github.com&#x2F;SeniorMars&#x2F;seniormars.com&#x2F;blob&#x2F;main&#x2F;content&#x2F;posts&#x2F;multiple_proofs.md" target="_blank" rel="noopener noreferrer"> Source Code</a>
+                        
+                    
+
+                    
+
+                </div>
+        </div>
+
+        
+
+        
+        
+        
+            <div class="toc-container">
+                <h1 class="toc-title">Table of Contents</h1>
+                <ul class="toc-list">
+                    
+                        <li>
+                            <a href="https://seniormars.com/posts/multiple-proofs/#motivation">Motivation</a>
+                            
+                        </li>
+                    
+                        <li>
+                            <a href="https://seniormars.com/posts/multiple-proofs/#proofs-are-programs-the-curry-howard-lens">Proofs Are Programs: The Curry-Howard Lens</a>
+                            
+                        </li>
+                    
+                        <li>
+                            <a href="https://seniormars.com/posts/multiple-proofs/#godel-von-neumann-and-the-birth-of-complexity">Gödel, von Neumann, and the Birth of Complexity</a>
+                            
+                        </li>
+                    
+                        <li>
+                            <a href="https://seniormars.com/posts/multiple-proofs/#a-theorem-is-an-equivalence-class-of-proofs">A Theorem Is an Equivalence Class of Proofs</a>
+                            
+                        </li>
+                    
+                        <li>
+                            <a href="https://seniormars.com/posts/multiple-proofs/#proof-systems-and-axiomatic-differences">Proof Systems and Axiomatic Differences</a>
+                            
+                        </li>
+                    
+                        <li>
+                            <a href="https://seniormars.com/posts/multiple-proofs/#the-pigeonhole-principle-and-proof-complexity">The Pigeonhole Principle and Proof Complexity</a>
+                            
+                        </li>
+                    
+                        <li>
+                            <a href="https://seniormars.com/posts/multiple-proofs/#are-some-proofs-optimal">Are Some Proofs “Optimal”?</a>
+                            
+                        </li>
+                    
+                        <li>
+                            <a href="https://seniormars.com/posts/multiple-proofs/#constructive-vs-non-constructive-proofs">Constructive vs. Non-Constructive Proofs</a>
+                            
+                        </li>
+                    
+                        <li>
+                            <a href="https://seniormars.com/posts/multiple-proofs/#the-computational-future-of-proofs">The Computational Future of Proofs</a>
+                            
+                        </li>
+                    
+                        <li>
+                            <a href="https://seniormars.com/posts/multiple-proofs/#conclusion">Conclusion</a>
+                            
+                        </li>
+                    
+                </ul>
+            </div>
+        
+        
+
+        <section class="body">
+            <h2 id="motivation"><a class="zola-anchor" href="#motivation" aria-label="Anchor link for: motivation">Motivation</a></h2>
+<p>Every mathematician has, at some point, encountered a new proof of a theorem they already knew was true. Why do we do this? Once a result is proven, it’s settled, right? Well, not quite.</p>
+<p>Mathematics isn’t just about knowing whether something is true—it’s about understanding why it’s true. And as it turns out, different proofs often provide different insights. But what if there’s more? What if there exists an optimal proof—a proof that, in some sense, is the best?</p>
+<p>That’s where complexity theory comes in. And before you say, “But I’m not a computer scientist!”, let’s talk about why you, as a mathematician, should care. I was specifically inspired to make this blog by a thread I saw on <a rel="noreferrer" href="https://www.reddit.com/r/math/comments/1ixgz44/what_is_the_importance_of_there_being_multiple/">Reddit</a>, but I wanted to go into more detail about my thoughts.</p>
+<h2 id="proofs-are-programs-the-curry-howard-lens"><a class="zola-anchor" href="#proofs-are-programs-the-curry-howard-lens" aria-label="Anchor link for: proofs-are-programs-the-curry-howard-lens">Proofs Are Programs: The Curry-Howard Lens</a></h2>
+<p>One of the most important ideas in mathematical logic is that proofs can be viewed as programs. The Curry-Howard correspondence tells us:</p>
+<ul>
+<li>A theorem is a type.</li>
+<li>A proof is a program.</li>
+<li>Proof normalization is computation.</li>
+</ul>
+<p>From this perspective, every proof we construct is not just a verification of truth—it’s a computational object. And like any computational object, we can ask: how efficient is it?</p>
+<p>For example, if two different proofs of a theorem correspond to two different algorithms, then one might be more efficient than the other. A proof that constructs a witness explicitly (a constructive proof) might yield an algorithm that runs in polynomial time, while a proof relying on non-constructive methods might encode an exponential search.</p>
+<p>And this isn’t just theoretical. Gödel himself saw this connection.</p>
+<h2 id="godel-von-neumann-and-the-birth-of-complexity"><a class="zola-anchor" href="#godel-von-neumann-and-the-birth-of-complexity" aria-label="Anchor link for: godel-von-neumann-and-the-birth-of-complexity">Gödel, von Neumann, and the Birth of Complexity</a></h2>
+<p>In 1956, Gödel wrote a letter to von Neumann that, in retrospect, essentially anticipated complexity theory before it existed. He asked:</p>
+<blockquote>
+<p>“One can obviously easily construct a Turing machine, which for every formula
+F in first order predicate logic and every natural number n, allows one to
+decide if there is a proof of F of length n. The question is how fast φ(n)
+grows for an optimal machine.”</p>
+</blockquote>
+<p>Gödel goes on to speculate about the implications if certain mathematical problems could be solved much more efficiently than by exhaustive search:</p>
+<blockquote>
+<p>“It would obviously mean that in spite of the undecidability of the
+Entscheidungsproblem, the mental work of a mathematician concerning Yes-or-No
+questions could be completely replaced by a machine.”</p>
+</blockquote>
+<p>Clearly, Gödel was asking something fundamental: Is there a way to measure the complexity of mathematical thought and be able to automate it?</p>
+<p>He was, in essence, formulating what we now recognize as the $\mathcal{P} = \mathcal{N}\mathcal{P}$ problem. If a proof (or algorithm) exists for a problem, how efficiently can we find it? This directly impacts how we think about proofs: If an optimal proof of a theorem exists, how complex is it? How long does it take to verify? Can we systematically find short proofs?</p>
+<h2 id="a-theorem-is-an-equivalence-class-of-proofs"><a class="zola-anchor" href="#a-theorem-is-an-equivalence-class-of-proofs" aria-label="Anchor link for: a-theorem-is-an-equivalence-class-of-proofs">A Theorem Is an Equivalence Class of Proofs</a></h2>
+<p>If there is one thing, I want you to take away from this blog, it’s this:</p>
+<blockquote>
+<p>“A theorem is an equivalence class of all its proofs.”</p>
+</blockquote>
+<p>This is a profound way to think about mathematical truth. A theorem isn’t just a single fact—it’s the collection of all possible ways to derive it. Each proof offers a different perspective, a different computational structure, and sometimes, a different level of efficiency.</p>
+<p>This explains why we care about multiple proofs:</p>
+<ul>
+<li>They expose new techniques that can be applied elsewhere.</li>
+<li>They show connections between different areas of mathematics.</li>
+<li>They reveal computational properties that might not be obvious from a single proof.</li>
+</ul>
+<h2 id="proof-systems-and-axiomatic-differences"><a class="zola-anchor" href="#proof-systems-and-axiomatic-differences" aria-label="Anchor link for: proof-systems-and-axiomatic-differences">Proof Systems and Axiomatic Differences</a></h2>
+<p>Now, we need to remember proofs don’t exist in isolation—they exist within proof systems, which determine what rules of inference are allowed. Different axiomatic systems can lead to different styles of proofs and even different results.</p>
+<p>In some proof systems, a statement might have an elegant, short proof, while in others, it might require pages of complex derivations. Consider (as expressed by Avi Wigderson in $\mathcal{P}, \mathcal{N}\mathcal{P}$ and mathematics – a computational complexity perspective):</p>
+<ul>
+<li>Hilbert’s Nullstellensatz: Theorems are inconsistent sets of polynomial equations. Proofs are linear combinations of polynomials.</li>
+<li>Group theory: Theorems are words that reduce to the identity element. Proofs are sequences of substitutions.</li>
+<li>Reidemeister moves in knot theory: Theorems are knots that can be unknotted. Proofs are sequences of diagram transformations.</li>
+<li>von Neumann’s Minimax theorem: Theorems are optimal strategies in zero-sum games. Proofs are arguments showing the strategies are equivalent.</li>
+</ul>
+<p>Each proof system has its own complexity. Some proof systems require exponentially long proofs for certain theorems that are polynomial-length in others. This is one reason why multiple proofs matter—switching proof systems can dramatically affect proof complexity.</p>
+<h2 id="the-pigeonhole-principle-and-proof-complexity"><a class="zola-anchor" href="#the-pigeonhole-principle-and-proof-complexity" aria-label="Anchor link for: the-pigeonhole-principle-and-proof-complexity">The Pigeonhole Principle and Proof Complexity</a></h2>
+<p>To make this concrete, let’s consider a classic example: the pigeonhole principle.</p>
+<p>The pigeonhole principle states that if you put more pigeons than pigeonholes (say, $ m $ pigeons into $ n $ holes with $ m &gt; n $), then at least one hole must contain multiple pigeons. Trivial, right? But proving this formally can be surprisingly difficult.</p>
+<p>Different proof systems encode this principle differently:</p>
+<ul>
+<li>Algebraic proof: Using polynomials over $ GF(2) $.</li>
+<li>Geometric proof: Framing it as an optimization problem.</li>
+<li>Logical proof: Using Boolean formulas.</li>
+</ul>
+<p>Each of these proof techniques has different proof complexity. For example, in resolution proof systems (used in SAT solvers), the pigeonhole principle requires exponentially long proofs<sup class="footnote-reference" id="fr-1-1"><a href="#fn-1">1</a></sup>. But in other systems, it might have polynomial-length proofs. What does this mean? It means that how we choose to prove a theorem can fundamentally affect its computational efficiency.</p>
+<p>This is not just an esoteric fact. It’s a key issue in theoretical computer science: Do short proofs always exist? If $ \mathcal{P} = \mathcal{N}\mathcal{P} $, then very theorem with a short proof has a short proof that we can find efficiently. If $ \mathcal{P} \neq \mathcal{N}\mathcal{P} $, then some theorems may have short proofs that are computationally infeasible to discover.</p>
+<h2 id="are-some-proofs-optimal"><a class="zola-anchor" href="#are-some-proofs-optimal" aria-label="Anchor link for: are-some-proofs-optimal">Are Some Proofs “Optimal”?</a></h2>
+<p>If every proof corresponds to an algorithm, we can ask whether there exists an optimal proof—the shortest, most efficient proof possible. For some theorems, we suspect there’s an inherent lower bound on proof length. In fact, many results in proof complexity are lower bound arguments: showing that some theorems require long proofs in certain systems.</p>
+<p>For example:</p>
+<ul>
+<li>The Paris-Harrington theorem, a finitary version of Ramsey’s theorem, cannot be proven in Peano arithmetic despite being a simple combinatorial statement<sup class="footnote-reference" id="fr-2-1"><a href="#fn-2">2</a></sup>.</li>
+<li>The Boolean formula complexity of pigeonhole principles suggests that some tautologies require exponentially long proofs in resolution-based proof systems.</li>
+</ul>
+<p>If we had a general method to find the shortest proof of a theorem, we could answer fundamental questions in complexity theory. But this remains an open problem.</p>
+<h2 id="constructive-vs-non-constructive-proofs"><a class="zola-anchor" href="#constructive-vs-non-constructive-proofs" aria-label="Anchor link for: constructive-vs-non-constructive-proofs">Constructive vs. Non-Constructive Proofs</a></h2>
+<p>One of the most practical consequences of proof complexity is the difference between constructive and non-constructive proofs.</p>
+<ul>
+<li>A constructive proof explicitly produces a witness or an algorithm that establishes the truth of the theorem.</li>
+<li>A non-constructive proof shows that a solution must exist but does not necessarily give a method to find it.</li>
+</ul>
+<p>Why does this distinction matter? Because constructive proofs often translate directly into implementable algorithms. If a proof is constructive, it tells us that something is true and gives us a way to compute it. In contrast, a non-constructive proof might establish existence without providing an efficient method of finding a solution.</p>
+<p>For example, the Four Color Theorem was initially proven using a brute-force computer-assisted proof, verifying many cases without providing a human-comprehensible reason for why it holds. In contrast, many number-theoretic theorems have constructive proofs that immediately yield algorithms.</p>
+<p>This distinction ties directly into complexity theory: If a problem is in $\mathcal{N}\mathcal{P}$ , then we can verify solutions quickly—but can we find them efficiently? The existence of a solution does not imply that it can be computed in polynomial time.</p>
+<h2 id="the-computational-future-of-proofs"><a class="zola-anchor" href="#the-computational-future-of-proofs" aria-label="Anchor link for: the-computational-future-of-proofs">The Computational Future of Proofs</a></h2>
+<p>Modern developments in automated theorem proving and interactive proof assistants are pushing mathematics toward a more computational paradigm. Proof assistants like Lean, Coq, and Isabelle formalize mathematical arguments as computational objects. And increasingly, mathematicians are using them.</p>
+<p>Why should this matter? Because if proof search is a computational problem, then questions about proof efficiency become questions about algorithm design.</p>
+<p>Mathematical proof isn’t just about verification—it’s about complexity. The length, structure, and computational cost of proofs aren’t just theoretical curiosities; they reflect fundamental limits of reasoning itself. And in an era where AI-assisted theorem proving is becoming practical, understanding proof complexity isn’t just a curiosity—it’s a necessity.</p>
+<h2 id="conclusion"><a class="zola-anchor" href="#conclusion" aria-label="Anchor link for: conclusion">Conclusion</a></h2>
+<p>So, why do we seek multiple proofs of the same theorem? Not just for elegance. Not just for insight. But because proof complexity is real.</p>
+<p>Mathematicians should care about proof complexity because:</p>
+<ol>
+<li>Proofs encode computation, and different proofs reveal different computational efficiencies.</li>
+<li>Gödel’s insight suggests that understanding proof complexity could help measure mathematical reasoning itself.</li>
+<li>If $ \mathcal{P} \neq \mathcal{N}\mathcal{P} $, then some theorems have short proofs we can’t efficiently find—implying fundamental limits on mathematical knowledge.</li>
+</ol>
+<p>So next time you see a new proof of a theorem, think of it not just as another way to see the truth—but as a different computational path, a different algorithm, and maybe, just maybe, a step toward an optimal proof.</p>
+<p>And if someone ever does prove $ \mathcal{P} = \mathcal{N}\mathcal{P} $, well… we might just be able to automate all of mathematics.</p>
+<footer class="footnotes">
+<ol class="footnotes-list">
+<li id="fn-1">
+<p>Cook, S. (1971). The complexity of theorem-proving procedures. Proceedings of the Third Annual ACM Symposium on Theory of Computing. <a href="#fr-1-1">↩</a></p>
+</li>
+<li id="fn-2">
+<p>Paris, J., and Harrington, L. (1977). A mathematical incompleteness in Peano arithmetic. In Handbook of Mathematical Logic. <a href="#fr-2-1">↩</a></p>
+</li>
+</ol>
+</footer>
+
+        </section>
+    </article>
+</main>
+
+
+
+        
+            
+        
+
+        
+        <div class="giscus"></div>
+         <script src="https://giscus.app/client.js"
+        data-repo="SeniorMars/seniormars.com"
+        data-repo-id="R_kgDOJQ6QAQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOJQ6QAc4CgC4Q"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
+        
+    </div>
+</body>
+
+</html>

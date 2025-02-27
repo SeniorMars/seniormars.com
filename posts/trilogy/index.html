@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<html lang="en" class="dark light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base" content="https:&#x2F;&#x2F;seniormars.com">
+
+    
+
+    
+    
+    
+    <title>
+         The Computational Trilogy: Three Perspectives, One Truth
+        
+    </title>
+
+        
+            <meta property="og:title" content="The Computational Trilogy: Three Perspectives, One Truth" />
+        
+     
+
+     
+         
+             <meta property="og:description" content="A guy explains his area of research." />
+         
+     
+
+     
+         
+             <meta name="description" content="A guy explains his area of research." />
+         
+    
+        <meta name="theme-color" media="(prefers-color-scheme: light)" content="#FFFFFF" />
+        <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0E1018" />
+    
+        <link rel="icon" type="image/png" href=&#x2F;icons&#x2F;favicon.ico />
+        
+        
+            <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+            <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+            <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+            <link rel="manifest" href="/icons/site.webmanifest">
+            <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#ff6f3c">
+            <meta name="apple-mobile-web-app-title" content="SeniorMars">
+            <meta name="application-name" content="SeniorMars">
+            <meta name="msapplication-TileColor" content="#333333">
+            <meta name="theme-color" content="#333333">
+        
+    
+
+    
+    
+        <link href=https://seniormars.com/fonts.css rel="stylesheet" />
+    
+
+    
+    
+        
+
+        
+            
+            
+
+            <script data-goatcounter="https://seniormars.goatcounter.com/count" async src="https://seniormars.com/js/count.js"></script>
+            <noscript>
+                
+                <img src="https://seniormars.goatcounter.com//count?p=&#x2F;posts&#x2F;trilogy&#x2F;&t=The Computational Trilogy: Three Perspectives, One Truth">
+            </noscript>
+        
+    
+
+    
+    
+        <script src=https://seniormars.com/js/codeblock.js></script>
+    
+
+    
+    
+
+    
+    
+        <script src=https://seniormars.com/js/toc.js></script>
+    
+
+    
+    
+        <script src=https://seniormars.com/js/note.js></script>
+    
+
+    
+        
+        <script>
+            MathJax = {
+              loader: { load: ['input/asciimath'] },
+              output: {
+                  displayOverflow: 'linebreak',
+                      linebreaks: {
+                          inline: true,
+                          width: '100%',
+                          lineleading: .2,
+                          LinebreakVisitor: null,
+                  }
+              },
+              tex: {
+                inlineMath: [['$', '$']],
+                processEscapes: true,
+              },
+              svg: {
+                fontCache: 'global'
+              }
+            };
+        </script>
+        
+        <script type="text/javascript" id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@4.0.0-beta.7/tex-mml-chtml.js">
+        </script>
+    
+
+    
+    
+        <link rel="alternate" type="application/rss+xml" title="SeniorMars" href="https://seniormars.com/rss.xml">
+    
+
+    
+    
+        <link rel="stylesheet" type="text/css" href=https://seniormars.com/theme/light.css />
+        <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://seniormars.com/theme/dark.css" />
+    
+    
+    <!-- Set the correct theme in the script -->
+    <script src=https://seniormars.com/js/themetoggle.js></script>
+    
+        <script>setTheme(getSavedTheme());</script>
+    
+
+    
+    <link rel="stylesheet" type="text/css" media="screen" href=https://seniormars.com/main.css />
+
+    
+
+    
+    
+        <script src=https://seniormars.com/js/mermaid.js></script>
+    
+
+    
+        <script defer src="https://seniormars.com/js/searchElasticlunr.min.js?h=3626c0ef99daa745b31e"></script></head>
+
+
+<body>
+    <div class="content">
+        <header>
+    <div class="main">
+        
+            <a href=https:&#x2F;&#x2F;seniormars.com>SeniorMars</a>
+        
+
+
+        <div class="socials">
+            
+            <a rel="me" href="https:&#x2F;&#x2F;github.com&#x2F;seniormars&#x2F;" class="social">
+                <img alt=github src=https://seniormars.com/social_icons/github.svg>
+            </a>
+            
+            <a rel="me" href="https:&#x2F;&#x2F;www.youtube.com&#x2F;seniormarstries" class="social">
+                <img alt=youtube src=https://seniormars.com/social_icons/youtube.svg>
+            </a>
+            
+            <a rel="me" href="&#x2F;rss.xml" class="social">
+                <img alt=rss src=https://seniormars.com/social_icons/rss.svg>
+            </a>
+            
+        </div>
+    </div>
+
+    <nav>
+        
+            <a href=https://seniormars.com/posts class="nav-item">&#x2F;posts</a>
+        
+            <a href=https://seniormars.com/projects class="nav-item">&#x2F;projects</a>
+        
+            <a href=https://seniormars.com/about class="nav-item">&#x2F;about</a>
+        
+            <a href=https://seniormars.com/etc class="nav-item">&#x2F;etc</a>
+        
+
+        
+            <button 
+                id="search-button"
+                class="search-button"
+                title="$SHORTCUT to open search"
+            >
+                <img 
+                    src="https://seniormars.com/search.svg" 
+                    alt="Search" 
+                    class="search-icon"
+                >
+            </button>
+
+            <div id="searchModal" class="search-modal js" role="dialog" aria-labelledby="modalTitle">
+                <div id="modal-content">
+                    <h1 id="modalTitle" class="page-header">Search</h1>
+                    <div id="searchBar">
+                        <input 
+                            id="searchInput" 
+                            role="combobox" 
+                            autocomplete="off" 
+                            spellcheck="false" 
+                            aria-expanded="false" 
+                            aria-controls="results-container" 
+                            placeholder="Search..."
+                        />
+                        <button 
+                            id="clear-search" 
+                            class="clear-button"
+                            title="Clear search"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                                <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="results-container">
+                        <div id="results-info">
+                            <span id="zero_results" style="display: none;">No results</span>
+                            <span id="one_result" style="display: none;">1 result</span>
+                            <span id="many_results" style="display: none;">$NUMBER results</span>
+                        </div>
+                        <div id="results" role="listbox"></div>
+                    </div>
+                </div>
+            </div>
+        
+
+        
+            <a id="dark-mode-toggle" onclick="toggleTheme(); event.preventDefault();" href="#">
+                <img src=https://seniormars.com/feather/sun.svg id="sun-icon" style="filter: invert(1);" alt="Light" />
+                <img src=https://seniormars.com/feather/moon.svg id="moon-icon" alt="Dark" />
+            </a>
+
+            <!-- Inititialize the theme toggle icons -->
+            <script>updateItemToggleTheme()</script>
+        
+    </nav>
+</header>
+
+
+        
+        
+    
+<main>
+    <article>
+        <div class="title">
+            
+            
+    <div class="page-header">
+        The Computational Trilogy: Three Perspectives, One Truth<span class="primary-color" style="font-size: 1.6em">.</span>
+    </div>
+
+
+                <div class="meta">
+                    
+                        Posted on <time>2025-02-27</time>
+                    
+
+                    
+
+                    
+                        :: <time>35</time> Min Read
+                    
+
+                    
+                    
+                            <span class="tags-label"> :: Tags:</span>
+                            <span class="tags">
+                                    <a href="https://seniormars.com/tags/math/" class="post-tag">math</a>
+                                
+                            </span>
+                    
+
+                    
+                    
+
+                        
+                        
+                            
+                        
+
+                        
+                            
+                            :: <a href="https:&#x2F;&#x2F;github.com&#x2F;SeniorMars&#x2F;seniormars.com&#x2F;blob&#x2F;main&#x2F;content&#x2F;posts&#x2F;trilogy&#x2F;index.md" target="_blank" rel="noopener noreferrer"> Source Code</a>
+                        
+                    
+
+                    
+
+                </div>
+        </div>
+
+        
+
+        
+        
+        
+            <div class="toc-container">
+                <h1 class="toc-title">Table of Contents</h1>
+                <ul class="toc-list">
+                    
+                        <li>
+                            <a href="https://seniormars.com/posts/trilogy/#motivation">Motivation</a>
+                            
+                        </li>
+                    
+                        <li>
+                            <a href="https://seniormars.com/posts/trilogy/#the-problem-with-borders">The Problem With Borders</a>
+                            
+                        </li>
+                    
+                        <li>
+                            <a href="https://seniormars.com/posts/trilogy/#a-roadmap">A Roadmap</a>
+                            
+                        </li>
+                    
+                        <li>
+                            <a href="https://seniormars.com/posts/trilogy/#origins-of-the-trilogy">Origins of the Trilogy</a>
+                            
+                        </li>
+                    
+                        <li>
+                            <a href="https://seniormars.com/posts/trilogy/#the-curry-howard-correspondence-proofs-as-programs">The Curry-Howard Correspondence: Proofs as Programs</a>
+                            
+                                <ul>
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/trilogy/#the-isomorphism-beyond-simple-correspondence">The Isomorphism: Beyond Simple Correspondence</a>
+                                        </li>
+
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/trilogy/#inference-rules-as-type-rules-proofs-construct-programs">Inference Rules as Type Rules: Proofs Construct Programs</a>
+                                        </li>
+
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/trilogy/#computation-as-proof-normalization-code-as-proof-execution">Computation as Proof Normalization: Code as Proof Execution</a>
+                                        </li>
+
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/trilogy/#a-concrete-example-function-composition-as-logical-transitivity">A Concrete Example: Function Composition as Logical Transitivity</a>
+                                        </li>
+
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/trilogy/#real-world-applications-from-proof-assistants-to-functional-programming">Real-World Applications: From Proof Assistants to Functional Programming</a>
+                                        </li>
+
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/trilogy/#why-this-matters-computation-as-mathematics">Why This Matters: Computation as Mathematics</a>
+                                        </li>
+
+                                        
+                                    
+                                </ul>
+                            
+                        </li>
+                    
+                        <li>
+                            <a href="https://seniormars.com/posts/trilogy/#lambek-s-categorical-perspective-programs-as-morphisms">Lambek’s Categorical Perspective: Programs as Morphisms</a>
+                            
+                                <ul>
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/trilogy/#definition-category">Definition: Category</a>
+                                        </li>
+
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/trilogy/#typed-lambda-calculus-as-a-category">Typed Lambda Calculus as a Category</a>
+                                        </li>
+
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/trilogy/#the-syntax-semantics-connection">The Syntax-Semantics Connection</a>
+                                        </li>
+
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/trilogy/#correspondence-between-typed-lambda-calculus-and-category-theory">Correspondence Between Typed Lambda Calculus and Category Theory</a>
+                                        </li>
+
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/trilogy/#cartesian-closed-categories-cccs-and-the-structure-of-computation">Cartesian Closed Categories (CCCs) and the Structure of Computation</a>
+                                        </li>
+
+                                        
+                                    
+                                </ul>
+                            
+                        </li>
+                    
+                        <li>
+                            <a href="https://seniormars.com/posts/trilogy/#harper-s-vision-of-computational-trinitarianism-a-unified-perspective-on-computation">Harper’s Vision of Computational Trinitarianism: A Unified Perspective on Computation</a>
+                            
+                                <ul>
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/trilogy/#the-rosetta-stone-of-computation-three-views-one-truth">The Rosetta Stone of Computation: Three Views, One Truth</a>
+                                        </li>
+
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/trilogy/#back-to-the-curry-howard-lambek-correspondence-when-three-worlds-collide">Back to the Curry-Howard-Lambek Correspondence: When Three Worlds Collide</a>
+                                        </li>
+
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/trilogy/#the-dogma-no-concept-exists-in-isolation">The Dogma: No Concept Exists in Isolation</a>
+                                        </li>
+
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/trilogy/#sequent-calculus-and-categorical-structure">Sequent Calculus and Categorical Structure</a>
+                                        </li>
+
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/trilogy/#beyond-classical-structures-the-higher-trinity">Beyond Classical Structures: The Higher Trinity</a>
+                                        </li>
+
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/trilogy/#mathematical-structures-through-the-trinitarian-lens">Mathematical Structures Through the Trinitarian Lens</a>
+                                        </li>
+
+                                        
+                                    
+                                </ul>
+                            
+                        </li>
+                    
+                        <li>
+                            <a href="https://seniormars.com/posts/trilogy/#beyond-the-original-trilogy-the-parametrized-perspective">Beyond the Original Trilogy: The Parametrized Perspective</a>
+                            
+                                <ul>
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/trilogy/#the-enhanced-trinity-a-four-way-correspondence">The Enhanced Trinity: A Four-Way Correspondence</a>
+                                        </li>
+
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/trilogy/#contexts-and-slice-categories">Contexts and Slice Categories</a>
+                                        </li>
+
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/trilogy/#from-categories-to-higher-categories">From Categories to Higher Categories</a>
+                                        </li>
+
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/trilogy/#the-algebraic-topology-connection">The Algebraic Topology Connection</a>
+                                        </li>
+
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/trilogy/#practical-implications-where-theory-meets-practice">Practical Implications: Where Theory Meets Practice</a>
+                                        </li>
+
+                                        
+                                    
+                                </ul>
+                            
+                        </li>
+                    
+                        <li>
+                            <a href="https://seniormars.com/posts/trilogy/#the-univalence-axiom-a-concrete-example">The Univalence Axiom: A Concrete Example</a>
+                            
+                        </li>
+                    
+                        <li>
+                            <a href="https://seniormars.com/posts/trilogy/#the-quantum-trilogy-a-parallel-correspondence">The Quantum Trilogy: A Parallel Correspondence</a>
+                            
+                                <ul>
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/trilogy/#from-classical-to-quantum-three-parallel-transitions">From Classical to Quantum: Three Parallel Transitions</a>
+                                        </li>
+
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/trilogy/#linear-logic-when-resources-matter">Linear Logic: When Resources Matter</a>
+                                        </li>
+
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/trilogy/#quantum-computation-where-no-cloning-is-law">Quantum Computation: Where No-Cloning Is Law</a>
+                                        </li>
+
+                                        
+                                    
+                                </ul>
+                            
+                        </li>
+                    
+                        <li>
+                            <a href="https://seniormars.com/posts/trilogy/#closed-monoidal-categories-the-right-math">Closed Monoidal Categories: The Right Math</a>
+                            
+                        </li>
+                    
+                        <li>
+                            <a href="https://seniormars.com/posts/trilogy/#conclusion-the-tetralogical-universe-of-computation">Conclusion: The Tetralogical Universe of Computation</a>
+                            
+                        </li>
+                    
+                </ul>
+            </div>
+        
+        
+
+        <section class="body">
+            <h2 id="motivation"><a class="zola-anchor" href="#motivation" aria-label="Anchor link for: motivation">Motivation</a></h2>
+<p>Everywhere we look, computation surrounds us—yet confusion about its true nature persists just as universally. Ask a computer scientist about computation, and you’ll hear of algorithms and Turing machines. Pose the same question to a logician, and watch them expound on formal proofs and axioms. A category theorist, meanwhile, might wave their hands toward morphisms and elaborate commutative diagrams.</p>
+<p>Throughout much of the 20th century, these three perspectives seemed to speak entirely different languages, each isolated in its own intellectual silo. Then something remarkable happened. Starting in the late 1900s, a profound realization began to crystallize: programming languages, formal logic, and category theory aren’t separate disciplines at all! Rather, they represent different manifestations of a single underlying structure—interconnected as intimately as electricity, magnetism, and light in Maxwell’s revolutionary equations.</p>
+<p>This insight, sometimes called the Computational Trilogy, builds on a deceptively simple but profound idea:</p>
+<blockquote>
+<p>Proofs are programs.
+Programs are morphisms.
+Types are propositions.</p>
+</blockquote>
+<p>Could anything be more elegant? Formalized as the Curry-Howard-Lambek correspondence, this unification suggests that logic, computation, and mathematical structure aren’t just similar—they’re different expressions of the same fundamental reality. Each domain offers a unique lens for viewing the others; together, they create what John Baez aptly called a “Rosetta Stone” for modern mathematics.</p>
+<p>But why should we care?</p>
+<p>Far beyond its elegant theoretical beauty, this framework has begun transforming everything from how we design programming languages to how we approach automated theorem proving, even reshaping the very foundations of mathematics itself. Where might this lead? Consider the emergence of homotopy type theory, the rising popularity of dependently typed programming languages, and the surprising yet seemingly inevitable convergence of classical and quantum computation—all pointing toward an ever-deeper unification.</p>
+<p>Yet for all its power, the correspondence remains incomplete. How do the intuitive, sometimes messy proofs of human mathematicians fit into this framework? Can we extend it to embrace discrete mathematics, where combinatorial structures often resist elegant formulation? What happens when we venture beyond classical computation into quantum mechanical realms, where the rules of logic themselves appear to shift and transform?</p>
+<p>Through this blog, I hope to explore precisely these questions. My goal isn’t just to explain theoretical curiosities but to demonstrate why this unification of logic, programming, and mathematics holds such transformative potential—not just for specialists, but for anyone fascinated by computation, proof, and mathematical truth. Most importantly, it is to make this link: <a rel="noreferrer" href="https://ncatlab.org/nlab/show/computational+trilogy">https://ncatlab.org/nlab/show/computational+trilogy</a> more accessible to a wider audience. Note: all images are from the same link.</p>
+<h2 id="the-problem-with-borders"><a class="zola-anchor" href="#the-problem-with-borders" aria-label="Anchor link for: the-problem-with-borders">The Problem With Borders</a></h2>
+<p>Our tendency to separate disciplines is a deeply ingrained habit of thought. Mathematicians have long viewed proofs as distinct from computation, even as the rise of proof assistants like Lean and Coq suggests that writing proofs and writing programs are becoming indistinguishable. Likewise, computer scientists often see programming languages as a domain of syntax and algorithms, without recognizing that their very structure is dictated by deep logical principles.</p>
+<p>Category theory, for its part, often seems like an esoteric abstraction, despite the fact that it offers the most general possible language for describing computation. The reluctance to embrace these connections is understandable. Each discipline has its own historical development, its own motivations, its own culture.</p>
+<p>But as we will see, once you adopt the computational trilogy as a guiding principle, the artificial boundaries between these fields dissolve.</p>
+<ul>
+<li>No longer is a proof just a sequence of logical deductions—it becomes an algorithm actively computing its conclusion.</li>
+<li>A function in programming transcends its role as mere instructions—revealing itself as a morphism in a mathematical category.</li>
+<li>And a logical proposition? Far more than a statement about truth—it emerges as a type describing computational possibilities.</li>
+</ul>
+<p>This perspective doesn’t just unify fields—it expands our tools for understanding mathematics itself.</p>
+<h2 id="a-roadmap"><a class="zola-anchor" href="#a-roadmap" aria-label="Anchor link for: a-roadmap">A Roadmap</a></h2>
+<p>In this blog, we will explore:</p>
+<ul>
+<li>Origins of the Trilogy</li>
+<li>The Curry-Howard correspondence: proofs as programs.</li>
+<li>Lambek’s categorical extension: programs as morphisms.</li>
+<li>Harper’s vision of computational trinitarianism.</li>
+<li>The Rosetta Stone of Computation</li>
+<li>Concrete examples of the correspondence.</li>
+<li>Beyond the Trilogy: New Frontiers
+<ul>
+<li>Homotopy type theory: when types behave like spaces.</li>
+<li>The rise of quantum computation: from classical logic to linear logic.</li>
+<li>What comes after proof? Mathematical intuition, unformalized reasoning, and the limits of formalism.</li>
+</ul>
+</li>
+</ul>
+<p>This is a story about unification—but also about boundaries, and where they begin to break down. It is about how computation, once thought to be just a tool, is becoming the very fabric of mathematics itself. All of this while trying to be as accessible as possible, without sacrificing depth.</p>
+<h2 id="origins-of-the-trilogy"><a class="zola-anchor" href="#origins-of-the-trilogy" aria-label="Anchor link for: origins-of-the-trilogy">Origins of the Trilogy</a></h2>
+<p>The discovery that proofs, programs, and mathematical structures are deeply interwoven did not happen all at once. It unfolded in stages, through a series of insights spanning logic, computation, and category theory. What we now call the Computational Trilogy emerged from a confluence of three major developments:</p>
+<ul>
+<li>The Curry-Howard Correspondence – the realization that proofs are programs.</li>
+<li>Lambek’s Categorical Perspective – the generalization that programs are morphisms.</li>
+<li>Harper’s Computational Trinitarianism – the philosophical framework that unites logic, computation, and category theory into a single, interconnected vision.</li>
+</ul>
+<p>Each of these developments transformed its respective field, but together, they form a single, powerful idea: mathematics and computation are not separate; they are two sides of the same coin.</p>
+<h2 id="the-curry-howard-correspondence-proofs-as-programs"><a class="zola-anchor" href="#the-curry-howard-correspondence-proofs-as-programs" aria-label="Anchor link for: the-curry-howard-correspondence-proofs-as-programs">The Curry-Howard Correspondence: Proofs as Programs</a></h2>
+<p>Mathematics is the study of absolute truths, yet for centuries, mathematicians have been unknowingly writing computer programs without ever compiling them.</p>
+<p>A proof is often thought of as a static object, a sequence of logical deductions frozen on the page. But what if we view proofs differently—not as static arguments, but as dynamic computations? This is the heart of the Curry-Howard Correspondence, a discovery that revealed a profound connection between logic and computation.</p>
+<p>This insight wasn’t just a clever academic observation—it fundamentally transformed both fields by establishing that:</p>
+<ul>
+<li>Mathematical proofs and programs share the same underlying structure</li>
+<li>Propositions in logic correspond directly to types in programming</li>
+<li>Proving a theorem is isomorphic to constructing a program of a given type</li>
+</ul>
+<p>When I first encountered this correspondence in high school, it felt like discovering that two languages I had been studying separately were actually dialects of the same underlying structure. It was a moment of profound clarity—suddenly, the boundary between proving theorems and writing code disappeared.</p>
+<p>The story begins in the early 20th century when formal logic underwent a foundational shift. David Hilbert sought to formalize all of mathematics, but this ambition was shattered by Gödel’s incompleteness theorems. Gödel’s work hinted at an intricate relationship between proofs and computation, which was soon made explicit by Alonzo Church and Alan Turing with their independent formalizations of computability.</p>
+<p>But it wasn’t until the work of Haskell Curry and William Howard that the full isomorphism emerged. Their insight laid the groundwork for Per Martin-Löf’s intuitionistic type theory, bridging proof theory and computation. This work eventually led to modern proof assistants like Coq, Lean, and Agda, which allow mathematicians to write proofs that can be checked by a computer—effectively “compiling” mathematics for the first time.</p>
+<h3 id="the-isomorphism-beyond-simple-correspondence"><a class="zola-anchor" href="#the-isomorphism-beyond-simple-correspondence" aria-label="Anchor link for: the-isomorphism-beyond-simple-correspondence">The Isomorphism: Beyond Simple Correspondence</a></h3>
+<p>The Curry-Howard Correspondence tells us that the act of proving a theorem is structurally identical to writing a well-typed functional program. This isn’t a vague metaphor; it is a direct translation between propositional logic, type theory, and programming languages.</p>
+<table><thead><tr><th>Logic (Intuitionistic)</th><th>Type Theory</th><th>Programming</th></tr></thead><tbody>
+<tr><td>Proposition $A$</td><td>Type $A$</td><td>Data type declaration</td></tr>
+<tr><td>Proof of $A$</td><td>Term $t : A$</td><td>Program of type $A$</td></tr>
+<tr><td>Assumption $A$</td><td>Variable $x : A$</td><td>Function parameter</td></tr>
+<tr><td>Implication $A \rightarrow B$</td><td>Function type $A \to B$</td><td>Function declaration</td></tr>
+<tr><td>Conjunction $A \land B$</td><td>Product type $A \times B$</td><td>Tuple/record type (e.g., <code>(A, B)</code> in Haskell)</td></tr>
+<tr><td>Disjunction $A \lor B$</td><td>Sum type $A + B$</td><td>Tagged union/variant (e.g., <code>Either A B</code> in Haskell)</td></tr>
+<tr><td>Universal quantification $\forall x. P(x)$</td><td>Dependent product $\Pi x:A. B(x)$</td><td>Generic/polymorphic function</td></tr>
+<tr><td>Existential quantification $\exists x. P(x)$</td><td>Dependent sum $\Sigma x:A. B(x)$</td><td>Existential type/data hiding</td></tr>
+<tr><td>Falsity $\bot$</td><td>Empty type $\emptyset$</td><td><code>Void</code> type (uninhabited)</td></tr>
+<tr><td>Truth $\top$</td><td>Unit type $()$</td><td><code>Unit</code> type (singleton)</td></tr>
+<tr><td>Negation $\neg A$</td><td>Function $A \to \bot$</td><td>Function to <code>Void</code></td></tr>
+</tbody></table>
+<p>This means that checking a proof for correctness is the same as type-checking a program. Running a program corresponds to simplifying a proof. If a proof contains an inconsistency, it is equivalent to a type error in a program.</p>
+<h3 id="inference-rules-as-type-rules-proofs-construct-programs"><a class="zola-anchor" href="#inference-rules-as-type-rules-proofs-construct-programs" aria-label="Anchor link for: inference-rules-as-type-rules-proofs-construct-programs">Inference Rules as Type Rules: Proofs Construct Programs</a></h3>
+<p>The correspondence extends beyond static structures to inference rules themselves. Every logical deduction rule has a corresponding type rule in lambda calculus.</p>
+<p>Example 1: Implication Introduction (Function Definition)
+In logic:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>  [A]
+</span><span>   ⋮
+</span><span>   B
+</span><span>-------
+</span><span>A → B
+</span></code></pre>
+<p>In typed lambda calculus:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>  x : A ⊢ e : B
+</span><span>-----------------
+</span><span>⊢ λx.e : A → B
+</span></code></pre>
+<p>Interpretation: Assuming $A$ allows us to derive $B$, which corresponds to defining a function that takes an argument of type $A$ and produces a result of type $B$.</p>
+<p>Example 2: Modus Ponens (Function Application)
+In logic:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>A → B    A
+</span><span>-----------
+</span><span>    B
+</span></code></pre>
+<p>In typed lambda calculus:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>f : A → B    x : A
+</span><span>-----------------
+</span><span>    f x : B
+</span></code></pre>
+<p>Interpretation: Applying a function of type $A \to B$ to a value of type $A$ produces a result of type $B$, just as modus ponens allows us to infer $B$ from $A \to B$ and $A$.</p>
+<h3 id="computation-as-proof-normalization-code-as-proof-execution"><a class="zola-anchor" href="#computation-as-proof-normalization-code-as-proof-execution" aria-label="Anchor link for: computation-as-proof-normalization-code-as-proof-execution">Computation as Proof Normalization: Code as Proof Execution</a></h3>
+<p>One of the most striking aspects of the Curry-Howard Correspondence is how program execution relates to proof simplification (also known as normalization).</p>
+<p>Consider this logical proof with an unnecessary detour:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>  A      B
+</span><span>--------- ∧I
+</span><span>   A ∧ B
+</span><span>--------- ∧E₁
+</span><span>    A
+</span></code></pre>
+<p>This corresponds to the Haskell program:</p>
+<pre data-lang="haskell" style="background-color:#0f1419;color:#bfbab0;" class="language-haskell "><code class="language-haskell" data-lang="haskell"><span>fst (a</span><span style="color:#bfbab0cc;">,</span><span> b)
+</span></code></pre>
+<p>When evaluated, it reduces to <code>a</code>. Similarly, in proof theory, we normalize this proof to a simpler one:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>A
+</span></code></pre>
+<p>Thus, evaluating a program is equivalent to simplifying a proof.</p>
+<h3 id="a-concrete-example-function-composition-as-logical-transitivity"><a class="zola-anchor" href="#a-concrete-example-function-composition-as-logical-transitivity" aria-label="Anchor link for: a-concrete-example-function-composition-as-logical-transitivity">A Concrete Example: Function Composition as Logical Transitivity</a></h3>
+<p>Let’s prove the transitivity of implication:</p>
+<p>$$
+(A \rightarrow B) \rightarrow (B \rightarrow C) \rightarrow (A \rightarrow C)
+$$</p>
+<p>Logical proof in natural deduction:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>[A → B]¹    [A]³
+</span><span>----------------- →E
+</span><span>       B         [B → C]²
+</span><span>----------------------------- →E
+</span><span>             C
+</span><span>----------------------------- →I³
+</span><span>           A → C
+</span><span>----------------------------- →I²
+</span><span>      (B → C) → (A → C)
+</span><span>----------------------------- →I¹
+</span><span>(A → B) → (B → C) → (A → C)
+</span></code></pre>
+<p>Corresponding Haskell program:</p>
+<pre data-lang="haskell" style="background-color:#0f1419;color:#bfbab0;" class="language-haskell "><code class="language-haskell" data-lang="haskell"><span style="color:#ffb454;">compose </span><span style="color:#ff7733;">::</span><span> (a </span><span style="color:#ff7733;">-&gt; </span><span>b) </span><span style="color:#ff7733;">-&gt;</span><span> (b </span><span style="color:#ff7733;">-&gt; </span><span>c) </span><span style="color:#ff7733;">-&gt;</span><span> (a </span><span style="color:#ff7733;">-&gt; </span><span>c)
+</span><span>compose f g </span><span style="color:#f29668;">= \</span><span>x </span><span style="color:#f29668;">-&gt;</span><span> g (f x)
+</span></code></pre>
+<p>Or in lambda calculus:
+$$
+\lambda f. \lambda g. \lambda x. g(f(x))
+$$</p>
+<p>The computational content of this proof is function composition.</p>
+<h3 id="real-world-applications-from-proof-assistants-to-functional-programming"><a class="zola-anchor" href="#real-world-applications-from-proof-assistants-to-functional-programming" aria-label="Anchor link for: real-world-applications-from-proof-assistants-to-functional-programming">Real-World Applications: From Proof Assistants to Functional Programming</a></h3>
+<p>The Curry-Howard Correspondence has profoundly shaped both mathematics and computer science:</p>
+<ol>
+<li>
+<p>Proof Assistants &amp; Dependently Typed Languages</p>
+<ul>
+<li>Coq, Agda, and Lean allow us to write proofs as programs.</li>
+<li>Example: Proving composition in Coq:<pre data-lang="coq" style="background-color:#0f1419;color:#bfbab0;" class="language-coq "><code class="language-coq" data-lang="coq"><span>Definition compose {A B C : Type} (f : A -&gt; B) (g : B -&gt; C) (x : A) : C := g (f x).
+</span></code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p>Programming Language Design</p>
+<ul>
+<li>Functional languages like Haskell, Idris, and Scala directly implement Curry-Howard ideas.</li>
+<li>Rust’s borrow checker enforces affine logic (a variant of linear logic).</li>
+</ul>
+</li>
+<li>
+<p>Effect Systems &amp; Modal Logic</p>
+<ul>
+<li>Monads in Haskell correspond to modal logic.</li>
+<li>Continuations implement classical logic.</li>
+</ul>
+</li>
+</ol>
+<h3 id="why-this-matters-computation-as-mathematics"><a class="zola-anchor" href="#why-this-matters-computation-as-mathematics" aria-label="Anchor link for: why-this-matters-computation-as-mathematics">Why This Matters: Computation as Mathematics</a></h3>
+<p>When we write well-typed code, we are constructing mathematical proofs. A type error is a logical inconsistency. A program transformation is a proof transformation.</p>
+<p>This perspective reshapes how we think about programming:</p>
+<ul>
+<li>Proving a theorem is just writing a program.</li>
+<li>Evaluating a program is just simplifying a proof.</li>
+<li>Refactoring code is transforming one proof into another equivalent one.</li>
+</ul>
+<p>As Philip Wadler beautifully put it:</p>
+<blockquote>
+<p>“Proofs are programs, and programs are proofs.”</p>
+</blockquote>
+<p>The Curry-Howard Correspondence gives us our first glimpse into the computational trilogy, but it’s only the beginning. To complete the picture, we need to explore how these programs—these proofs—relate to the mathematical structures of category theory. This brings us to Lambek’s remarkable insight that programs are morphisms in a category.</p>
+<h2 id="lambek-s-categorical-perspective-programs-as-morphisms"><a class="zola-anchor" href="#lambek-s-categorical-perspective-programs-as-morphisms" aria-label="Anchor link for: lambek-s-categorical-perspective-programs-as-morphisms">Lambek’s Categorical Perspective: Programs as Morphisms</a></h2>
+<p>While the Curry-Howard Correspondence established a connection between logic and programming, Joachim Lambek extended this perspective into category theory. His work in the 1970s provided an even more abstract viewpoint: programs are morphisms in a category.</p>
+<p>This insight generalizes the Curry-Howard Correspondence. Not only are proofs equivalent to programs, but programs themselves can be understood as morphisms—structured transformations between objects in a mathematical framework.</p>
+<p>To fully grasp this shift, we must first define what a category is.</p>
+<h3 id="definition-category"><a class="zola-anchor" href="#definition-category" aria-label="Anchor link for: definition-category">Definition: Category</a></h3>
+<p>A category $\mathcal{C}$ consists of:</p>
+<ul>
+<li>A collection of objects (e.g., types in a programming language, propositions in logic).</li>
+<li>A collection of morphisms (arrows) between these objects, representing transformations.</li>
+<li>Two fundamental properties governing these morphisms:
+<ol>
+<li>Composition: If $f : A \to B$ and $g : B \to C$, then there exists a composite morphism $g \circ f : A \to C$.</li>
+<li>Identity: Each object $A$ has an identity morphism $\text{id}_A : A \to A$, which behaves neutrally under composition.</li>
+</ol>
+</li>
+</ul>
+<p>Formally, this means:</p>
+<ol>
+<li>
+<p>Associativity: For all morphisms $f : A \to B$, $g : B \to C$, and $h : C \to D$,</p>
+<p>$$
+h \circ (g \circ f) = (h \circ g) \circ f.
+$$</p>
+</li>
+<li>
+<p>Identity laws: For every morphism $f : A \to B$,</p>
+<p>$$
+\text{id}_B \circ f = f = f \circ \text{id}_A.
+$$</p>
+</li>
+</ol>
+<p>These rules ensure that morphisms behave like structured transformations, forming a robust framework for reasoning about functions, types, and proofs.</p>
+<h3 id="typed-lambda-calculus-as-a-category"><a class="zola-anchor" href="#typed-lambda-calculus-as-a-category" aria-label="Anchor link for: typed-lambda-calculus-as-a-category">Typed Lambda Calculus as a Category</a></h3>
+<p>Lambek’s key insight was that typed lambda calculus naturally forms a category. In this categorical perspective:</p>
+<ul>
+<li>Types correspond to objects in a category.</li>
+<li>Programs (functions) correspond to morphisms between these types.</li>
+<li>Function composition corresponds to morphism composition.</li>
+</ul>
+<p>For example, in typed lambda calculus:</p>
+<ol>
+<li>A function of type $A \to B$ can be interpreted as a morphism $f : A \to B$.</li>
+<li>If we have another function $g : B \to C$, we can compose them to obtain a new function $g \circ f : A \to C$, just as in category theory.</li>
+</ol>
+<p>This correspondence can be visualized as:</p>
+<p>$$
+A \xrightarrow{f} B \xrightarrow{g} C
+$$</p>
+<p>which combines into:</p>
+<p>$$
+A \xrightarrow{g \circ f} C.
+$$</p>
+<h3 id="the-syntax-semantics-connection"><a class="zola-anchor" href="#the-syntax-semantics-connection" aria-label="Anchor link for: the-syntax-semantics-connection">The Syntax-Semantics Connection</a></h3>
+<p>What makes this correspondence profound is that it connects syntax (terms in lambda calculus) with semantics (morphisms in a category). The equivalence classes of lambda terms constitute the morphisms in the induced category.</p>
+<p>More precisely, given a typed lambda calculus L, we construct a category C(L) where:</p>
+<ul>
+<li>Objects are the types of L</li>
+<li>Arrows $A \to B$ are equivalence classes of terms of type B with exactly one free variable of type A</li>
+<li>Arrow equality is defined by beta-eta equivalence: $(x:A, M(x)) = (x’:A, N(x’))$ if and only if $M(x) =_{\beta\eta} N(x)$</li>
+<li>Identity arrow $id_A: A \to A$ is the pair $(x:A, x)$</li>
+<li>Composition of $(x:A, M(x)): A \to B$ and $(y:B, N(y)): B \to C$ is $(x:A, N[M(x)/y]): A \to C$, where $N[M(x)/y]$ means substituting $M(x)$ for $y$ in $N(y)$</li>
+</ul>
+<p>This construction satisfies the category axioms:</p>
+<ol>
+<li>Associativity: $(h \circ g) \circ f = h \circ (g \circ f)$ follows from the associativity of substitution</li>
+<li>Identity: $id_B \circ f = f = f \circ id_A$ follows from the definition of substitution</li>
+</ol>
+<h3 id="correspondence-between-typed-lambda-calculus-and-category-theory"><a class="zola-anchor" href="#correspondence-between-typed-lambda-calculus-and-category-theory" aria-label="Anchor link for: correspondence-between-typed-lambda-calculus-and-category-theory">Correspondence Between Typed Lambda Calculus and Category Theory</a></h3>
+<table><thead><tr><th>Typed Lambda Calculus</th><th>Category Theory</th></tr></thead><tbody>
+<tr><td>Type</td><td>Object in a category</td></tr>
+<tr><td>Function $A \to B$</td><td>Morphism $f : A \to B$</td></tr>
+<tr><td>Lambda abstraction $\lambda x:A.M$</td><td>Currying operation $\Lambda$</td></tr>
+<tr><td>Function application $M(N)$</td><td>Evaluation morphism $eval$</td></tr>
+<tr><td>Identity function $\lambda x. x$</td><td>Identity morphism $\text{id}_A$</td></tr>
+<tr><td>Function composition $g \circ f$</td><td>Morphism composition $g \circ f$</td></tr>
+</tbody></table>
+<p>This perspective expands the Curry-Howard Correspondence: not only are proofs equivalent to programs, but programs themselves can be understood as structured transformations within a category.</p>
+<h3 id="cartesian-closed-categories-cccs-and-the-structure-of-computation"><a class="zola-anchor" href="#cartesian-closed-categories-cccs-and-the-structure-of-computation" aria-label="Anchor link for: cartesian-closed-categories-cccs-and-the-structure-of-computation">Cartesian Closed Categories (CCCs) and the Structure of Computation</a></h3>
+<p>A natural question arises: what kind of category best models typed functional programming? The answer is Cartesian Closed Categories (CCCs).</p>
+<p>A Cartesian Closed Category (CCC) is a category $\mathcal{C}$ that satisfies three conditions:</p>
+<ol>
+<li>
+<p>Terminal Object: There exists an object $1$ such that for every object $A$, there is a unique morphism $!_A: A \to 1$.</p>
+</li>
+<li>
+<p>Products: Every pair of objects $A, B$ has a product $A \times B$ with projection morphisms:
+$$
+\pi_1 : A \times B \to A, \quad \pi_2 : A \times B \to B.
+$$
+Moreover, for any morphisms $f: C \to A$ and $g: C \to B$, there exists a unique morphism $\langle f, g \rangle: C \to A \times B$ such that $\pi_1 \circ \langle f, g \rangle = f$ and $\pi_2 \circ \langle f, g \rangle = g$.</p>
+</li>
+<li>
+<p>Exponential Objects: For every pair of objects $A, B$, there exists an exponential object $B^A$ and an evaluation morphism:
+$$
+eval_{A,B} : B^A \times A \to B
+$$
+such that for any morphism $f : C \times A \to B$, there exists a unique morphism $\Lambda(f) : C \to B^A$ making the following diagram commute:</p>
+<p>$$
+\begin{array}{ccc}
+C \times A &amp; \xrightarrow{f} &amp; B \\
+\lVert\\
+C \times A &amp; \xrightarrow{\Lambda(f) \times id_A} &amp; B^A \times A &amp; \xrightarrow{eval_{A,B}} &amp; B
+\end{array}
+$$</p>
+</li>
+</ol>
+<p>These structures correspond precisely to the computational constructs in typed lambda calculus:</p>
+<ol>
+<li>The terminal object $1$ corresponds to the unit type.</li>
+<li>Products $A \times B$ correspond to pair types.</li>
+<li>Exponentials $B^A$ correspond to function types $A \to B$.</li>
+<li>The evaluation morphism corresponds to function application.</li>
+<li>The currying operation $\Lambda$ corresponds to lambda abstraction.</li>
+</ol>
+<p>The equations governing CCCs correspond exactly to the reductions in lambda calculus, including beta and eta reduction.</p>
+<p>Now that we’ve established the connections between logic and programming (Curry-Howard) and between programming and category theory (Lambek), we can finally see how all three perspectives unite into a single, coherent vision of computation—what Robert Harper calls “Computational Trinitarianism.”</p>
+<h2 id="harper-s-vision-of-computational-trinitarianism-a-unified-perspective-on-computation"><a class="zola-anchor" href="#harper-s-vision-of-computational-trinitarianism-a-unified-perspective-on-computation" aria-label="Anchor link for: harper-s-vision-of-computational-trinitarianism-a-unified-perspective-on-computation">Harper’s Vision of Computational Trinitarianism: A Unified Perspective on Computation</a></h2>
+<p>While Curry-Howard shows us that proofs are programs and Lambek shows that programs are morphisms, Harper’s insight is that these aren’t just correspondences—they are three facets of a single phenomenon. His concept of Computational Trinitarianism is an attempt to express the deep unity between logic, programming languages, and category theory—not as mere correspondences, but as three manifestations of a single mathematical truth.</p>
+<p>Harper’s vision is perhaps best summarized as:</p>
+<blockquote>
+<p>Logic, Programming, and Category Theory are not just similar—they are the same.
+Each provides an essential perspective on the nature of computation.</p>
+</blockquote>
+<p>This view is doctrinal, almost theological in its emphasis on three-in-one unity. In fact, Harper explicitly borrows the language of religious doctrine to frame this insight:</p>
+<blockquote>
+<p>The central dogma of computational trinitarianism holds that Logic,
+Languages, and Categories are but three manifestations of one divine notion
+of computation. There is no preferred route to enlightenment: each aspect
+provides insights that comprise the experience of computation in our lives.
+— Robert Harper, 2011</p>
+</blockquote>
+<p><img src="https://seniormars.com/posts/trilogy/./2025-02-27-03-01-41.png" alt="trilogy" /></p>
+<p>The idea is not just that these fields are connected—but that any computational concept should be meaningful in all three aspects. If you discover something fundamental in one, it must have a counterpart in the other two.</p>
+<p>What makes this perspective so powerful is how it transforms our approach to computational concepts. Rather than viewing a new idea through a single lens, we can triangulate its meaning across all three domains simultaneously. If you discover something fundamental in one realm, its counterparts in the other two realms must exist and offer complementary insights.</p>
+<p>I remember when this unified perspective clicked for me—I was struggling to understand monads (as every functional programmer does at some point), when suddenly seeing the categorical, logical, and programming perspectives simultaneously made everything clear. The three views reinforced each other, like looking at a complex shape from multiple angles.</p>
+<h3 id="the-rosetta-stone-of-computation-three-views-one-truth"><a class="zola-anchor" href="#the-rosetta-stone-of-computation-three-views-one-truth" aria-label="Anchor link for: the-rosetta-stone-of-computation-three-views-one-truth">The Rosetta Stone of Computation: Three Views, One Truth</a></h3>
+<p>In his influential paper “Physics, Topology, Logic and Computation: A Rosetta Stone,” John Baez and Mike Stay explicitly drew the analogy to the ancient Rosetta Stone. Just as that archaeological artifact displayed the same text in three different languages—hieroglyphics, demotic script, and ancient Greek—allowing linguists to decode previously impenetrable language systems, the computational trilogy serves as our modern Rosetta Stone for decoding the languages of mathematics, logic, and computation.</p>
+<p>Harper’s computational trinitarianism is most clearly expressed in the following three-way correspondence between Logic, Programming, and Category Theory:</p>
+<table><thead><tr><th>Logic (Proofs)</th><th>Programming (Types &amp; Terms)</th><th>Category Theory (Morphisms)</th></tr></thead><tbody>
+<tr><td>Proposition $A$</td><td>Type $A$</td><td>Object $A$</td></tr>
+<tr><td>Proof of $A$</td><td>Program of type $A$</td><td>Morphism $f: 1 \to A$</td></tr>
+<tr><td>Assumption $A$</td><td>Variable $x : A$</td><td>Projection $p_A$</td></tr>
+<tr><td>Implication $A \to B$</td><td>Function type $A \to B$</td><td>Exponential object $B^A$</td></tr>
+<tr><td>Conjunction $A \land B$</td><td>Product type $A \times B$</td><td>Cartesian product $A \times B$</td></tr>
+<tr><td>Disjunction $A \lor B$</td><td>Sum type $A + B$</td><td>Coproduct $A + B$</td></tr>
+<tr><td>Falsehood $\bot$</td><td>Empty type $0$</td><td>Initial object $0$</td></tr>
+<tr><td>Truth $\top$</td><td>Unit type $()$</td><td>Terminal object $1$</td></tr>
+<tr><td>Modus Ponens $A, A \to B \vdash B$</td><td>Function application $f(a)$</td><td>Evaluation morphism $\text{eval}$</td></tr>
+<tr><td>Universal quantification $\forall x. P(x)$</td><td>Dependent function $\Pi x:A. B(x)$</td><td>Dependent product $\Pi x:A. B(x)$</td></tr>
+<tr><td>Existential quantification $\exists x. P(x)$</td><td>Dependent pair $\Sigma x:A. B(x)$</td><td>Dependent sum $\Sigma x:A. B(x)$</td></tr>
+</tbody></table>
+<p>This correspondence is more than a metaphor—it’s an equivalence of structures. If you remove the surface-level differences in notation, all three fields are describing the same underlying phenomenon.</p>
+<p><img src="https://seniormars.com/posts/trilogy/./2025-02-27-03-03-01.png" alt="trilogy2" /></p>
+<h3 id="back-to-the-curry-howard-lambek-correspondence-when-three-worlds-collide"><a class="zola-anchor" href="#back-to-the-curry-howard-lambek-correspondence-when-three-worlds-collide" aria-label="Anchor link for: back-to-the-curry-howard-lambek-correspondence-when-three-worlds-collide">Back to the Curry-Howard-Lambek Correspondence: When Three Worlds Collide</a></h3>
+<p>The deeper I’ve ventured into the computational trilogy, the more I’ve come to appreciate the sheer elegance of the Curry-Howard-Lambek correspondence. What began as separate intellectual traditions has crystallized into one of the most beautiful unifications in mathematical science.</p>
+<p>Again, to emphasize this! The Curry-Howard-Lambek correspondence shows us that:</p>
+<ol>
+<li>Logic (proofs)</li>
+<li>Programming (typed lambda calculus)</li>
+<li>Category Theory (cartesian closed categories)</li>
+</ol>
+<p>are three perspectives on the same underlying phenomenon. Consider two fundamental structures:</p>
+<ul>
+<li>The category $\mathbf{Set}$ of sets and functions</li>
+<li>A meet-semilattice $\mathbf{P}$ with implications (a model of propositional logic)</li>
+</ul>
+<p>Both of these turn out to be cartesian closed categories! This gives us a three-way correspondence table that reveals the underlying unity:</p>
+<table><thead><tr><th>Cartesian Closed Category</th><th>$\mathbf{Set}$</th><th>$\mathbf{P}$ (Logic)</th><th>Typed $\lambda$-calculus</th></tr></thead><tbody>
+<tr><td>Objects/1-cells</td><td>Sets</td><td>Propositions</td><td>Types</td></tr>
+<tr><td>Morphisms/2-cells</td><td>Functions</td><td>Entailment</td><td>Terms/Programs</td></tr>
+<tr><td>1-cell composition</td><td>Cartesian product $S \times T$</td><td>Conjunction $A \wedge B$</td><td>Product type</td></tr>
+<tr><td>Identity 1-cell</td><td>One-element set ${*}$</td><td>True proposition $\top$</td><td>Unit type $()$</td></tr>
+<tr><td>Right Kan extension</td><td>Function set $T^S$</td><td>Implication $A \rightarrow B$</td><td>Function type</td></tr>
+<tr><td>Evaluation morphism</td><td>Function application</td><td>Modus ponens</td><td>Term application</td></tr>
+<tr><td>Currying</td><td>$f: C\times A\rightarrow B$ to $\Lambda f: C\rightarrow B^A$</td><td>Deduction theorem</td><td>Lambda abstraction</td></tr>
+</tbody></table>
+<p>I gasped when I first saw this table. It was literally everything I was studying!</p>
+<h3 id="the-dogma-no-concept-exists-in-isolation"><a class="zola-anchor" href="#the-dogma-no-concept-exists-in-isolation" aria-label="Anchor link for: the-dogma-no-concept-exists-in-isolation">The Dogma: No Concept Exists in Isolation</a></h3>
+<p><img src="https://seniormars.com/posts/trilogy/./2025-02-27-03-03-50.png" alt="trilogy3" /></p>
+<p>One of the most powerful aspects of Computational Trinitarianism is how it serves as a research guiding principle. It suggests that:</p>
+<ul>
+<li>If you discover a new logical system, it should have an interpretation in type theory and category theory.</li>
+<li>If you propose a new type system, it should correspond to proof rules and categorical structures.</li>
+<li>If you define a new categorical construction, it should express something in logic and computation.</li>
+</ul>
+<p>I’ve found this principle enormously helpful in my own work. When encountering a difficult concept in one domain, I often seek its “translations” in the other two. This triangulation helps clarify the essence of what I’m studying. This explains why linear logic led to linear types, why modal logic corresponds to monads, and why higher category theory is shaping homotopy type theory.</p>
+<h3 id="sequent-calculus-and-categorical-structure"><a class="zola-anchor" href="#sequent-calculus-and-categorical-structure" aria-label="Anchor link for: sequent-calculus-and-categorical-structure">Sequent Calculus and Categorical Structure</a></h3>
+<p>Logical reasoning in sequent calculus form:</p>
+<p>$$\frac{{\Gamma_i \vdash \Delta_i}_{i\in I}}{\Gamma \vdash \Delta}$$</p>
+<p>directly corresponds to composition rules in a category. The entailment relation $A \vdash B$ (read “B follows from A”) is precisely a morphism in our category!</p>
+<p>This connection transformed how I think about type theory. When I write:</p>
+<pre data-lang="haskell" style="background-color:#0f1419;color:#bfbab0;" class="language-haskell "><code class="language-haskell" data-lang="haskell"><span style="color:#ffb454;">compose </span><span style="color:#ff7733;">::</span><span> (b </span><span style="color:#ff7733;">-&gt; </span><span>c) </span><span style="color:#ff7733;">-&gt;</span><span> (a </span><span style="color:#ff7733;">-&gt; </span><span>b) </span><span style="color:#ff7733;">-&gt;</span><span> (a </span><span style="color:#ff7733;">-&gt; </span><span>c)
+</span><span>compose g f </span><span style="color:#f29668;">= \</span><span>x </span><span style="color:#f29668;">-&gt;</span><span> g (f x)
+</span></code></pre>
+<p>I’m not just defining a function—I’m establishing a categorical composition rule that mirrors logical entailment. The type signature itself is a proposition, and the implementation is a proof!</p>
+<h3 id="beyond-classical-structures-the-higher-trinity"><a class="zola-anchor" href="#beyond-classical-structures-the-higher-trinity" aria-label="Anchor link for: beyond-classical-structures-the-higher-trinity">Beyond Classical Structures: The Higher Trinity</a></h3>
+<p><img src="https://seniormars.com/posts/trilogy/./2025-02-27-03-04-13.png" alt="trilogy4" /></p>
+<p>The Computational Trinity extends naturally into more advanced mathematical domains. Consider how it manifests in higher mathematics:</p>
+<p>Type theory gets enriched to homotopy type theory, categories become higher categories, and the entire framework elevates to what we might call “higher computation.” This evolution allows us to model not just whether proofs exist, but the spaces of possible proofs and transformations between them.</p>
+<p>When I first read about Voevodsky’s univalence axiom, I was fascinated by how it connected homotopy theory, type theory, and higher categories. The idea that equality is path connection in a space, which corresponds to type equivalence in programming and isomorphism in category theory, reveals the trilateral nature of mathematical thought itself.</p>
+<h3 id="mathematical-structures-through-the-trinitarian-lens"><a class="zola-anchor" href="#mathematical-structures-through-the-trinitarian-lens" aria-label="Anchor link for: mathematical-structures-through-the-trinitarian-lens">Mathematical Structures Through the Trinitarian Lens</a></h3>
+<p>Even basic mathematical structures reveal this three-way perspective. Consider the concept of a group:</p>
+<p><img src="https://seniormars.com/posts/trilogy/./2025-02-27-03-04-43.png" alt="group" /></p>
+<p>A group can be viewed as:</p>
+<ol>
+<li>A set with operations satisfying axioms (set-theoretic view)</li>
+<li>A type with operations and proofs of properties (computational view)</li>
+<li>A one-object category with invertible morphisms (categorical view)</li>
+</ol>
+<p>These aren’t just different definitions—they’re different manifestations of the same fundamental structure, each revealing aspects that might be obscured in the others.</p>
+<h2 id="beyond-the-original-trilogy-the-parametrized-perspective"><a class="zola-anchor" href="#beyond-the-original-trilogy-the-parametrized-perspective" aria-label="Anchor link for: beyond-the-original-trilogy-the-parametrized-perspective">Beyond the Original Trilogy: The Parametrized Perspective</a></h2>
+<p>Just when I thought I’d wrapped my head around the computational trinity, the rabbit hole went deeper. It turns out that our lovely trinity was just the beginning of an even more profound unification. The extension into what I call the “parametrized perspective” represents one of those mathematical moments that made me spill my coffee in excitement.</p>
+<p>What happens when we consider that computation doesn’t happen in a vacuum? What if we acknowledge that:</p>
+<ol>
+<li>Computation happens in contexts and is proof relevant</li>
+<li>Categories give rise to systems of slice categories (and are in general $(\infty,1)$-categories)</li>
+<li>Types may depend on other types and are in general homotopy types</li>
+</ol>
+<p>This realization transforms our well-established computational trinity into something richer and more nuanced.</p>
+<h3 id="the-enhanced-trinity-a-four-way-correspondence"><a class="zola-anchor" href="#the-enhanced-trinity-a-four-way-correspondence" aria-label="Anchor link for: the-enhanced-trinity-a-four-way-correspondence">The Enhanced Trinity: A Four-Way Correspondence</a></h3>
+<p>The traditional computational trilogy enhances to a four-way correspondence:</p>
+<table><thead><tr><th>In dependent homotopy type theory</th><th>In programming languages</th><th>In locally cartesian closed $(\infty,1)$-categories</th><th>In non-abelian cohomology</th></tr></thead><tbody>
+<tr><td>A term of some type in context</td><td>A program of some data type in context</td><td>A generalized element of an object in a slice</td><td>A cocycle in twisted cohomology</td></tr>
+</tbody></table>
+<p>Let’s unpack this correspondence with the technical rigor it deserves.</p>
+<h3 id="contexts-and-slice-categories"><a class="zola-anchor" href="#contexts-and-slice-categories" aria-label="Anchor link for: contexts-and-slice-categories">Contexts and Slice Categories</a></h3>
+<p>In dependent type theory, a context $\Gamma$ represents assumptions or variables in scope. When we write a judgment like:</p>
+<p>$\Gamma \vdash t : A$</p>
+<p>We’re saying that term $t$ has type $A$ under assumptions $\Gamma$.</p>
+<p>Categorically, this corresponds to working in a slice category. Given a category $\mathcal{C}$ and an object $X$, the slice category $\mathcal{C}/X$ has:</p>
+<ul>
+<li>Objects: morphisms $f: Y \to X$ in $\mathcal{C}$</li>
+<li>Morphisms: commutative triangles</li>
+</ul>
+<p>The slice category $\mathcal{C}/X$ precisely captures the idea of “computation in context $X$.” This is not just a formal analogy—it’s a deep mathematical equivalence. When I first understood this, it completely changed how I view type checking!</p>
+<h3 id="from-categories-to-higher-categories"><a class="zola-anchor" href="#from-categories-to-higher-categories" aria-label="Anchor link for: from-categories-to-higher-categories">From Categories to Higher Categories</a></h3>
+<p>The connection deepens when we consider that ordinary categories are insufficient for capturing the richness of type theory. We need $(\infty,1)$-categories, which track:</p>
+<ul>
+<li>Objects (types)</li>
+<li>1-morphisms (functions)</li>
+<li>2-morphisms (homotopies between functions)</li>
+<li>3-morphisms (homotopies between homotopies)</li>
+<li>…and so on</li>
+</ul>
+<p>An $(\infty,1)$-category has $n$-morphisms for all $n \geq 1$, and all $k$-morphisms for $k &gt; 1$ are invertible. This structure perfectly captures the notion of proof relevance in type theory.</p>
+<p>In a proof-relevant system, we care not just about whether a proposition is true, but about <em>how</em> it’s proven. The space of all possible proofs forms a higher-dimensional structure, and different proofs can be related by homotopies (paths between proofs). This is precisely what $(\infty,1)$-categories model!</p>
+<h3 id="the-algebraic-topology-connection"><a class="zola-anchor" href="#the-algebraic-topology-connection" aria-label="Anchor link for: the-algebraic-topology-connection">The Algebraic Topology Connection</a></h3>
+<p>The deepest layer of this correspondence connects to algebraic topology through the work of Schreiber, Lurie, and others. This connection reveals that the very structure of computational type theory maps onto cohomology theories.</p>
+<p>The equivalence with algebraic topology opens up a profound connection: a generalized element in an $(\infty,1)$-topos may equivalently be regarded as a cocycle in (non-abelian) cohomology, and in twisted cohomology if in a slice $(\infty,1)$-category.</p>
+<p>For example, in twisted cohomology, the cup product of a 0-cochain $f$ with values in $\text{Hom}(E, F)$ and a 1-cochain $g$ with values in $E$ gives a 1-cochain with values in $F$. This is exactly analogous to function application in dependent type theory!</p>
+<h3 id="practical-implications-where-theory-meets-practice"><a class="zola-anchor" href="#practical-implications-where-theory-meets-practice" aria-label="Anchor link for: practical-implications-where-theory-meets-practice">Practical Implications: Where Theory Meets Practice</a></h3>
+<p>This expanded correspondence isn’t just mathematical abstraction—it provides a unified framework for solving real problems:</p>
+<ol>
+<li>
+<p>Program Verification Through Topology
+When we view programs through the lens of non-abelian cohomology, topological invariants become tools for proving program properties. The fundamental group can detect unreachable states in a program’s execution space.</p>
+</li>
+<li>
+<p>Homotopy Theory Computation
+The type-theoretic perspective allows us to compute topological invariants constructively. For instance, computing the homotopy groups of spheres becomes a matter of constructing specific terms in type theory.</p>
+</li>
+<li>
+<p>Effect Systems as Cohomological Twistings
+Computational effects in programming languages (exceptions, state, IO) can be understood as “twistings” in cohomology. A monadic effect system corresponds to a twisted cohomology theory where the twisting cocycle represents the effect.</p>
+</li>
+</ol>
+<p>Here are the updated sections with the suggested improvements:</p>
+<h2 id="the-univalence-axiom-a-concrete-example"><a class="zola-anchor" href="#the-univalence-axiom-a-concrete-example" aria-label="Anchor link for: the-univalence-axiom-a-concrete-example">The Univalence Axiom: A Concrete Example</a></h2>
+<p>Perhaps the most striking example of this parametrized perspective in action is Voevodsky’s univalence axiom, which states:</p>
+<p>$(A \simeq B) \simeq (A =_{\mathcal{U}} B)$</p>
+<p>This means that equivalence of types is equivalent to equality of types in the universe type $\mathcal{U}$. In programming terms, it says that isomorphic data structures are interchangeable. In categorical terms, it says that equivalent objects in a category should be considered equal. In cohomological terms, it says that cohomologous cocycles represent equivalent structures.</p>
+<p>The univalence axiom is implemented in systems like Cubical Agda, allowing programmers to transport programs along type equivalences, turning type-level isomorphisms into computational paths.</p>
+<h2 id="the-quantum-trilogy-a-parallel-correspondence"><a class="zola-anchor" href="#the-quantum-trilogy-a-parallel-correspondence" aria-label="Anchor link for: the-quantum-trilogy-a-parallel-correspondence">The Quantum Trilogy: A Parallel Correspondence</a></h2>
+<p>While exploring the depths of the computational trilogy, I stumbled upon a parallel framework that completely shifted my understanding. This alternative correspondence—what I’ve dubbed the “quantum trilogy”—connects linear logic, quantum computation, and monoidal categories in a way that’s mathematically elegant and conceptually profound.</p>
+<p>What makes this correspondence so striking is how it mirrors yet transforms the classical trilogy. Where the classical world embraces copying and deletion of information, this quantum realm enforces strict resource management.</p>
+<h3 id="from-classical-to-quantum-three-parallel-transitions"><a class="zola-anchor" href="#from-classical-to-quantum-three-parallel-transitions" aria-label="Anchor link for: from-classical-to-quantum-three-parallel-transitions">From Classical to Quantum: Three Parallel Transitions</a></h3>
+<ol>
+<li>From intuitionistic logic to linear logic</li>
+<li>From classical computation to quantum computation</li>
+<li>From cartesian closed categories to closed monoidal categories</li>
+</ol>
+<p>Each of these transitions represents moving from a world where information can be freely copied and deleted to one where resources must be precisely accounted for.</p>
+<blockquote>
+<p>In the classical world, information can be freely copied and discarded.
+In the quantum world, information must be precisely accounted for.</p>
+</blockquote>
+<h3 id="linear-logic-when-resources-matter"><a class="zola-anchor" href="#linear-logic-when-resources-matter" aria-label="Anchor link for: linear-logic-when-resources-matter">Linear Logic: When Resources Matter</a></h3>
+<p>Girard’s linear logic (1987) revolutionized logical systems by treating propositions as consumable resources. The difference becomes clear when we compare:</p>
+<p>In classical logic:
+$$A \Rightarrow (A \Rightarrow B) \Rightarrow B$$</p>
+<p>This is trivially true because we can use $A$ twice. But in linear logic:
+$$A \multimap (A \multimap B) \multimap B$$</p>
+<p>This isn’t valid—the first use of $A$ depletes it, leaving nothing for the second use!</p>
+<p>The operators of linear logic make this resource-consciousness explicit:</p>
+<ul>
+<li>$A \otimes B$ (tensor): you have <em>both</em> $A$ and $B$</li>
+<li>$A \oplus B$ (plus): you have <em>either</em> $A$ or $B$</li>
+<li>$!A$ (of course): you have <em>as many copies</em> of $A$ as needed</li>
+<li>$A \multimap B$ (linear implication): consuming $A$ produces $B$</li>
+</ul>
+<p>Quantum computation differs from classical computation most notably in the no-cloning theorem: you cannot make a perfect copy of an arbitrary quantum state. This resource-sensitivity mirrors precisely the constraints of linear logic!</p>
+<h3 id="quantum-computation-where-no-cloning-is-law"><a class="zola-anchor" href="#quantum-computation-where-no-cloning-is-law" aria-label="Anchor link for: quantum-computation-where-no-cloning-is-law">Quantum Computation: Where No-Cloning Is Law</a></h3>
+<p>This resource sensitivity perfectly aligns with quantum computation’s fundamental constraints. The no-cloning theorem—the impossibility of creating identical copies of arbitrary quantum states—finds its logical expression in linear logic and its categorical formulation in monoidal categories.</p>
+<p>A quantum circuit demonstrates this linearity visually: each qubit follows a path through gates, transforming but never duplicating (unless explicitly measured). The Bell pair creation circuit exemplifies this resource flow:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>q1 ----H----•----
+</span><span>             |
+</span><span>q2 ---------X----
+</span></code></pre>
+<p>Each qubit is used exactly once—a perfect manifestation of linear logic in action.</p>
+<p>A simple quantum program in a linear type system might look like:</p>
+<pre data-lang="haskell" style="background-color:#0f1419;color:#bfbab0;" class="language-haskell "><code class="language-haskell" data-lang="haskell"><span style="font-style:italic;color:#5c6773;">-- Linear types ensure qubits aren&#39;t duplicated
+</span><span>hadamard </span><span style="color:#f29668;">: </span><span style="color:#f29718;">Qubit</span><span> ⊸ </span><span style="color:#f29718;">Qubit
+</span><span>cnot </span><span style="color:#f29668;">:</span><span> (</span><span style="color:#f29718;">Qubit</span><span> ⊗ </span><span style="color:#f29718;">Qubit</span><span>) ⊸ (</span><span style="color:#f29718;">Qubit</span><span> ⊗ </span><span style="color:#f29718;">Qubit</span><span>)
+</span><span>
+</span><span>bellPair </span><span style="color:#f29668;">: </span><span style="color:#f29718;">Qubit</span><span> ⊸ </span><span style="color:#f29718;">Qubit</span><span> ⊸ (</span><span style="color:#f29718;">Qubit</span><span> ⊗ </span><span style="color:#f29718;">Qubit</span><span>)
+</span><span>bellPair q1 q2 </span><span style="color:#f29668;">=</span><span> cnot (hadamard q1</span><span style="color:#bfbab0cc;">,</span><span> q2)
+</span></code></pre>
+<p>The linear function type <code>⊸</code> ensures each qubit is used exactly once.</p>
+<h2 id="closed-monoidal-categories-the-right-math"><a class="zola-anchor" href="#closed-monoidal-categories-the-right-math" aria-label="Anchor link for: closed-monoidal-categories-the-right-math">Closed Monoidal Categories: The Right Math</a></h2>
+<p>While cartesian closed categories provide the categorical semantics for classical computation, <em>closed symmetric monoidal categories</em> give us the perfect setting for quantum computation and linear logic.</p>
+<p>In a cartesian category, every object $A$ comes with natural morphisms $\Delta_A: A \to A \times A$ (duplication) and $\epsilon_A: A \to 1$ (deletion). But quantum information can’t be duplicated or deleted arbitrarily! What we need instead is a monoidal structure, where:</p>
+<ul>
+<li>We have a tensor product $\otimes$ instead of a cartesian product $\times$</li>
+<li>There’s no general duplication or deletion</li>
+<li>We still have a closed structure giving us internal hom objects $A \multimap B$</li>
+<li>The symmetry isomorphism $\sigma_{A,B}: A \otimes B \cong B \otimes A$ captures the commutativity properties essential for quantum mechanics</li>
+</ul>
+<p>The category FdHilb of finite-dimensional Hilbert spaces with linear maps is the prototype example - it’s symmetric monoidal closed but not cartesian closed, and gives semantics to quantum computation. The symmetry of the tensor product in FdHilb corresponds directly to the physical principle that the joint state space of two quantum systems is invariant under exchange of the systems.</p>
+<h2 id="conclusion-the-tetralogical-universe-of-computation"><a class="zola-anchor" href="#conclusion-the-tetralogical-universe-of-computation" aria-label="Anchor link for: conclusion-the-tetralogical-universe-of-computation">Conclusion: The Tetralogical Universe of Computation</a></h2>
+<p>The journey through these computational correspondences reveals something even more profound than separate trilogies – it unveils what we might call a “computational tetralogy” where the classical and quantum worlds combine with their parametrized perspectives.</p>
+<p>When we merge the classical parametrized trilogy with the quantum trilogy, we arrive at a unified framework that encompasses:</p>
+<ul>
+<li>From classical computation to classically controlled quantum computation on linear spaces of quantum states parametrized over classical data types</li>
+<li>From dependent intuitionistic homotopy type theory to dependent linear type theory of dependent stable homotopy types</li>
+<li>From locally cartesian closed (∞,1)-categories to indexed monoidal (∞,1)-categories of parametrized spectra, which in algebraic topology corresponds to twisted generalized cohomology theory</li>
+</ul>
+<p>This perspective reveals computation not as isolated islands of theory, but as a connected landscape that we can traverse through systematic transformations:</p>
+<p><img src="https://seniormars.com/posts/trilogy/./2025-02-27-04-05-51.png" alt="Final" /></p>
+<p>We begin with the classical computational trilogy in the bottom left – the foundation connecting intuitionistic logic, programming languages, and category theory. From here, we can follow two fundamental transformations:</p>
+<ol>
+<li>
+<p>Topologize: Moving right, we enter the world of contextual computation, where the parametrized perspective takes hold. Here, types become homotopy types, logic becomes dependent, and categories give way to twisted non-abelian cohomology.</p>
+</li>
+<li>
+<p>Quantize: From contextual computation, we can then quantize to reach classically controlled quantum computation, where dependent linear type theory and twisted generalized cohomology theory provide the mathematical foundation.</p>
+</li>
+</ol>
+<p>What continues to amaze me is how these transformations aren’t arbitrary – they follow deep mathematical patterns. The “topologize” operation corresponds to enriching our structures with spatial information, while the “quantize” operation introduces resource sensitivity and linear behavior.</p>
+<p>Each vertex in this tetralogy offers a unique lens for understanding computation:</p>
+<ul>
+<li>The classical trilogy excels at describing functional abstraction</li>
+<li>The parametrized perspective captures context-dependence</li>
+<li>The quantum trilogy handles resource management</li>
+<li>The combined “classically controlled quantum computation” framework brings everything together</li>
+</ul>
+<p>I’ve come to see these connections not just as formal correspondences, but as a roadmap for the future of computation itself. As quantum computing continues to mature and topological data analysis becomes more prevalent, this unified framework will likely serve as the theoretical foundation for the next generation of programming languages and computational systems.</p>
+<p>This tetralogy isn’t a static endpoint – it’s an invitation to explore. What happens when we apply other transformations? What about probabilistic computation, or continuous computation? Each new perspective adds another dimension to our understanding, revealing computation to be not just a tool, but a profound mathematical structure that connects the deepest ideas in mathematics, physics, and logic.</p>
+<p>And perhaps that’s the most beautiful insight of all – that computation, in its essence, isn’t just about algorithms and machines. It’s about the fundamental structure of information and transformation, something that permeates not just computer science, but mathematics and reality itself.</p>
+<div class="note-container note-type-default">
+  
+    <button class="note-toggle" aria-expanded="false">
+      
+        <div class="note-icon">
+          
+          <p>References</p>
+
+        </div>
+      
+    </button>
+    <div class="note-content" style="display: none;">
+      <p>Please tell me if I got the references wrong. My zotero is not working properly.</p>
+<ol>
+<li>Melliès, P.-A. (2006). <em>Functorial boxes in string diagrams</em>. In <em>Proceedings of Computer Science Logic 2006</em>, Szeged, Hungary. <a rel="noreferrer" href="https://hal.archives-ouvertes.fr/hal-00154243">https://hal.archives-ouvertes.fr/hal-00154243</a></li>
+</ol>
+<ul>
+<li>Discusses the extension of string diagrams with functorial boxes, an idea that surfaced in the 1970s.</li>
+</ul>
+<ol start="2">
+<li>Lambek, J., &amp; Scott, P. J. (1986). <em>Introduction to Higher Order Categorical Logic</em>. Cambridge University Press. <a rel="noreferrer" href="https://doi.org/10.1017/CBO9780511525858">https://doi.org/10.1017/CBO9780511525858</a></li>
+</ol>
+<ul>
+<li>Early work on higher-order categorical logic, connecting mathematical logic and category theory.</li>
+</ul>
+<ol start="3">
+<li>Harper, R. (2011). <em>The Holy Trinity</em>. <a rel="noreferrer" href="https://www.cs.cmu.edu/~rwh/talks/hott.pdf">https://www.cs.cmu.edu/~rwh/talks/hott.pdf</a></li>
+</ol>
+<ul>
+<li>Explores the relationship between type theory, category theory, and logic.</li>
+</ul>
+<ol start="4">
+<li>Eades, H. (2012). <em>Type Theory and Applications</em>.</li>
+</ol>
+<ul>
+<li>Provides insights into type theory and its applications.</li>
+</ul>
+<ol start="5">
+<li>Frumin, D. (2014). <em>Computational Trinitarianism</em>. <a rel="noreferrer" href="https://prezi.com/fnz-4wzsygiq/computational-trinitarianism/">https://prezi.com/fnz-4wzsygiq/computational-trinitarianism/</a></li>
+</ol>
+<ul>
+<li>Presentation on the unity of computation, logic, and category theory.</li>
+</ul>
+<ol start="6">
+<li>Baez, J., &amp; Stay, M. (2011). <em>Physics, Topology, Logic and Computation: A Rosetta Stone</em>. In B. Coecke (Ed.), <em>New Structures for Physics</em>, Lecture Notes in Physics, vol 813. Springer. <a rel="noreferrer" href="https://arxiv.org/abs/0903.0340">https://arxiv.org/abs/0903.0340</a></li>
+</ol>
+<ul>
+<li>Connects concepts in physics, topology, logic, and computation.</li>
+</ul>
+<ol start="7">
+<li>Shulman, M. (2018). <em>Homotopical Trinitarianism: A Perspective on Homotopy Type Theory</em>. <a rel="noreferrer" href="https://arxiv.org/abs/1803.00180">https://arxiv.org/abs/1803.00180</a></li>
+</ol>
+<ul>
+<li>Discusses homotopy type theory from a trinitarian perspective.</li>
+</ul>
+<ol start="8">
+<li>Taylor, P. (1999). <em>Practical Foundations of Mathematics</em>. <a rel="noreferrer" href="https://www.paultaylor.eu/Practical_Foundations">https://www.paultaylor.eu/Practical_Foundations</a></li>
+</ol>
+<ul>
+<li>A comprehensive text on the foundations of mathematics.</li>
+</ul>
+<ol start="9">
+<li>Lawvere, F. W., &amp; Rosebrugh, R. (2003). <em>Sets for Mathematics</em>. Cambridge University Press. <a rel="noreferrer" href="https://doi.org/10.1017/CBO9780511810442">https://doi.org/10.1017/CBO9780511810442</a></li>
+</ol>
+<ul>
+<li>Introduces category theory with a focus on sets and their role in mathematics.</li>
+</ul>
+<ol start="10">
+<li>Harper, R. (2016). <em>Practical Foundations for Programming Languages</em> (2nd ed.). Cambridge University Press. <a rel="noreferrer" href="https://doi.org/10.1017/CBO9781316576892">https://doi.org/10.1017/CBO9781316576892</a></li>
+</ol>
+<ul>
+<li>Explores the theoretical underpinnings of programming languages.</li>
+</ul>
+<ol start="11">
+<li>Goguen, J. A. (1991). <em>A Categorical Manifesto</em>. <em>Mathematical Structures in Computer Science, 1</em>(1), 49–67. <a rel="noreferrer" href="https://doi.org/10.1017/S0960129500000050">https://doi.org/10.1017/S0960129500000050</a></li>
+</ol>
+<ul>
+<li>Discusses the role of category theory in computer science.</li>
+</ul>
+<ol start="12">
+<li>Lambek, J. (1980). <em>From λ-calculus to cartesian closed categories</em>. <em>Proceedings of the AMS</em>, 130(10), 3025–3035.</li>
+</ol>
+<ul>
+<li>The Lambek correspondence connecting typed lambda calculus to category theory.</li>
+</ul>
+<ol start="13">
+<li>Voevodsky, V., Kapulkin, C., &amp; Lumsdaine, P. (2013). <em>Homotopy Type Theory: Univalent Foundations of Mathematics</em>.</li>
+</ol>
+<ul>
+<li>Univalence Axiom and Homotopy Type Theory (HoTT).</li>
+</ul>
+<ol start="14">
+<li>Awodey, S. (2010). <em>Category Theory</em>. Oxford University Press.</li>
+</ol>
+<ul>
+<li>Standard reference for categorical foundations of computation.</li>
+</ul>
+<ol start="15">
+<li>Lurie, J. (2009). <em>Higher Topos Theory</em>. Princeton University Press.</li>
+</ol>
+<ul>
+<li>Introduces (∞,1)-categories, which play a key role in parametrized perspectives.</li>
+</ul>
+<ol start="16">
+<li>Shulman, M. (2018). <em>Brouwer’s fixed-point theorem in real-cohesive homotopy type theory</em>. <em>Mathematical Structures in Computer Science, 28</em>(6), 856–941.</li>
+</ol>
+<ul>
+<li>Connections between cohesive homotopy type theory and computation.</li>
+</ul>
+<ol start="17">
+<li>Schreiber, U. (2020). <em>Twisted Non-Abelian Cohomology &amp; Parametrized Homotopy Theory</em>. <em>nLab Preprint</em>.</li>
+</ol>
+<ul>
+<li>Non-abelian cohomology and parametrized homotopy types, relevant to computational tetralogy.</li>
+</ul>
+<ol start="18">
+<li>Girard, J.-Y. (1987). <em>Linear Logic</em>. <em>Theoretical Computer Science, 50</em>(1), 1–102.</li>
+</ol>
+<ul>
+<li>Linear logic and its connection to resource-sensitive computation.</li>
+</ul>
+<ol start="19">
+<li>Abramsky, S., &amp; Coecke, B. (2004). <em>Categorical Quantum Mechanics</em>. In <em>Proceedings of the International Symposium on Logic in Computer Science (LICS)</em>.</li>
+</ol>
+<ul>
+<li>Monoidal categories as a framework for quantum computation.</li>
+</ul>
+<ol start="20">
+<li>Selinger, P. (2004). <em>Towards a quantum programming language</em>. <em>Mathematical Structures in Computer Science, 14</em>(4), 527–586.</li>
+</ol>
+<ul>
+<li>Quantum computation and category theory.</li>
+</ul>
+<ol start="21">
+<li>Lafont, Y. (2003). <em>Towards an algebraic theory of Boolean circuits</em>. <em>Journal of Pure and Applied Algebra, 184</em>(2), 257–310.</li>
+</ol>
+<ul>
+<li>Connections between linear logic and quantum gates.</li>
+</ul>
+<ol start="22">
+<li>Wadler, P. (2015). <em>Propositions as Types</em>. <em>Communications of the ACM, 58</em>(12), 75–84.</li>
+</ol>
+<ul>
+<li>Excellent historical overview of the Curry-Howard isomorphism.</li>
+</ul>
+<ol start="23">
+<li>Harper, R. (2022). <em>Types, Logic, and Computation: A Trinitarian View</em>. <em>Carnegie Mellon Lecture Notes</em>.</li>
+</ol>
+<ul>
+<li>Modern take on Computational Trinitarianism.</li>
+</ul>
+<ol start="24">
+<li>nLab (2024). <em>Computational Trilogy</em>. Available at: <a rel="noreferrer" href="https://ncatlab.org/nlab/show/computational+trilogy">https://ncatlab.org/nlab/show/computational+trilogy</a></li>
+</ol>
+<ul>
+<li>Good for readers who want to dive into formal definitions.</li>
+</ul>
+<ol start="25">
+<li>nLab (2024). <em>Homotopy Type Theory and (∞,1)-Categories</em>. Available at: <a rel="noreferrer" href="https://ncatlab.org/nlab/show/homotopy+type+theory">https://ncatlab.org/nlab/show/homotopy+type+theory</a></li>
+</ol>
+<ul>
+<li>Useful for readers curious about parametrized homotopy types.</li>
+</ul>
+<ol start="26">
+<li>Chakraborty, S. (2011). Curry-Howard-Lambek Correspondence. <a rel="noreferrer" href="https://cspages.ucalgary.ca/~robin/class/617/projects-10/Subashis.pdf">https://cspages.ucalgary.ca/~robin/class/617/projects-10/Subashis.pdf</a></li>
+</ol>
+<ul>
+<li>This paper explores the equivalence between proof systems, typed λ-calculi, and Cartesian closed categories, commonly referred to as the Curry-Howard-Lambek correspondence.</li>
+</ul>
+<ol start="27">
+<li>Category Theory and Diagrammatic Reasoning (2019). <a rel="noreferrer" href="https://ioc.ee/~amar/notes/ct2019_lecture5.pdf">https://ioc.ee/~amar/notes/ct2019_lecture5.pdf</a></li>
+</ol>
+<ul>
+<li>Lecture notes discussing the Curry-Howard-Lambek correspondence, highlighting the relationship between categories, processes, and logic.</li>
+</ul>
+
+    </div>
+  
+</div>
+
+        </section>
+    </article>
+</main>
+
+
+
+        
+            
+        
+
+        
+        <div class="giscus"></div>
+         <script src="https://giscus.app/client.js"
+        data-repo="SeniorMars/seniormars.com"
+        data-repo-id="R_kgDOJQ6QAQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOJQ6QAc4CgC4Q"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
+        
+    </div>
+</body>
+
+</html>

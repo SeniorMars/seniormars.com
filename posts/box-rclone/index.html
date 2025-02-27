@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="en" class="dark light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base" content="https:&#x2F;&#x2F;seniormars.com">
+
+    
+
+    
+    
+    
+    <title>
+         Automated Backups Using rclone + Box
+        
+    </title>
+
+        
+            <meta property="og:title" content="Automated Backups Using rclone + Box" />
+        
+     
+
+     
+         
+             <meta property="og:description" content="A guy decides to share his backup setup" />
+         
+     
+
+     
+         
+             <meta name="description" content="A guy decides to share his backup setup" />
+         
+    
+        <meta name="theme-color" media="(prefers-color-scheme: light)" content="#FFFFFF" />
+        <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0E1018" />
+    
+        <link rel="icon" type="image/png" href=&#x2F;icons&#x2F;favicon.ico />
+        
+        
+            <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+            <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+            <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+            <link rel="manifest" href="/icons/site.webmanifest">
+            <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#ff6f3c">
+            <meta name="apple-mobile-web-app-title" content="SeniorMars">
+            <meta name="application-name" content="SeniorMars">
+            <meta name="msapplication-TileColor" content="#333333">
+            <meta name="theme-color" content="#333333">
+        
+    
+
+    
+    
+        <link href=https://seniormars.com/fonts.css rel="stylesheet" />
+    
+
+    
+    
+        
+
+        
+            
+            
+
+            <script data-goatcounter="https://seniormars.goatcounter.com/count" async src="https://seniormars.com/js/count.js"></script>
+            <noscript>
+                
+                <img src="https://seniormars.goatcounter.com//count?p=&#x2F;posts&#x2F;box-rclone&#x2F;&t=Automated Backups Using rclone + Box">
+            </noscript>
+        
+    
+
+    
+    
+        <script src=https://seniormars.com/js/codeblock.js></script>
+    
+
+    
+    
+
+    
+    
+        <script src=https://seniormars.com/js/toc.js></script>
+    
+
+    
+    
+        <script src=https://seniormars.com/js/note.js></script>
+    
+
+    
+        
+        <script>
+            MathJax = {
+              loader: { load: ['input/asciimath'] },
+              output: {
+                  displayOverflow: 'linebreak',
+                      linebreaks: {
+                          inline: true,
+                          width: '100%',
+                          lineleading: .2,
+                          LinebreakVisitor: null,
+                  }
+              },
+              tex: {
+                inlineMath: [['$', '$']],
+                processEscapes: true,
+              },
+              svg: {
+                fontCache: 'global'
+              }
+            };
+        </script>
+        
+        <script type="text/javascript" id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@4.0.0-beta.7/tex-mml-chtml.js">
+        </script>
+    
+
+    
+    
+        <link rel="alternate" type="application/rss+xml" title="SeniorMars" href="https://seniormars.com/rss.xml">
+    
+
+    
+    
+        <link rel="stylesheet" type="text/css" href=https://seniormars.com/theme/light.css />
+        <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://seniormars.com/theme/dark.css" />
+    
+    
+    <!-- Set the correct theme in the script -->
+    <script src=https://seniormars.com/js/themetoggle.js></script>
+    
+        <script>setTheme(getSavedTheme());</script>
+    
+
+    
+    <link rel="stylesheet" type="text/css" media="screen" href=https://seniormars.com/main.css />
+
+    
+
+    
+    
+        <script src=https://seniormars.com/js/mermaid.js></script>
+    
+
+    
+        <script defer src="https://seniormars.com/js/searchElasticlunr.min.js?h=3626c0ef99daa745b31e"></script></head>
+
+
+<body>
+    <div class="content">
+        <header>
+    <div class="main">
+        
+            <a href=https:&#x2F;&#x2F;seniormars.com>SeniorMars</a>
+        
+
+
+        <div class="socials">
+            
+            <a rel="me" href="https:&#x2F;&#x2F;github.com&#x2F;seniormars&#x2F;" class="social">
+                <img alt=github src=https://seniormars.com/social_icons/github.svg>
+            </a>
+            
+            <a rel="me" href="https:&#x2F;&#x2F;www.youtube.com&#x2F;seniormarstries" class="social">
+                <img alt=youtube src=https://seniormars.com/social_icons/youtube.svg>
+            </a>
+            
+            <a rel="me" href="&#x2F;rss.xml" class="social">
+                <img alt=rss src=https://seniormars.com/social_icons/rss.svg>
+            </a>
+            
+        </div>
+    </div>
+
+    <nav>
+        
+            <a href=https://seniormars.com/posts class="nav-item">&#x2F;posts</a>
+        
+            <a href=https://seniormars.com/projects class="nav-item">&#x2F;projects</a>
+        
+            <a href=https://seniormars.com/about class="nav-item">&#x2F;about</a>
+        
+            <a href=https://seniormars.com/etc class="nav-item">&#x2F;etc</a>
+        
+
+        
+            <button 
+                id="search-button"
+                class="search-button"
+                title="$SHORTCUT to open search"
+            >
+                <img 
+                    src="https://seniormars.com/search.svg" 
+                    alt="Search" 
+                    class="search-icon"
+                >
+            </button>
+
+            <div id="searchModal" class="search-modal js" role="dialog" aria-labelledby="modalTitle">
+                <div id="modal-content">
+                    <h1 id="modalTitle" class="page-header">Search</h1>
+                    <div id="searchBar">
+                        <input 
+                            id="searchInput" 
+                            role="combobox" 
+                            autocomplete="off" 
+                            spellcheck="false" 
+                            aria-expanded="false" 
+                            aria-controls="results-container" 
+                            placeholder="Search..."
+                        />
+                        <button 
+                            id="clear-search" 
+                            class="clear-button"
+                            title="Clear search"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                                <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="results-container">
+                        <div id="results-info">
+                            <span id="zero_results" style="display: none;">No results</span>
+                            <span id="one_result" style="display: none;">1 result</span>
+                            <span id="many_results" style="display: none;">$NUMBER results</span>
+                        </div>
+                        <div id="results" role="listbox"></div>
+                    </div>
+                </div>
+            </div>
+        
+
+        
+            <a id="dark-mode-toggle" onclick="toggleTheme(); event.preventDefault();" href="#">
+                <img src=https://seniormars.com/feather/sun.svg id="sun-icon" style="filter: invert(1);" alt="Light" />
+                <img src=https://seniormars.com/feather/moon.svg id="moon-icon" alt="Dark" />
+            </a>
+
+            <!-- Inititialize the theme toggle icons -->
+            <script>updateItemToggleTheme()</script>
+        
+    </nav>
+</header>
+
+
+        
+        
+    
+<main>
+    <article>
+        <div class="title">
+            
+            
+    <div class="page-header">
+        Automated Backups Using rclone + Box<span class="primary-color" style="font-size: 1.6em">.</span>
+    </div>
+
+
+                <div class="meta">
+                    
+                        Posted on <time>2025-02-25</time>
+                    
+
+                    
+
+                    
+                        :: <time>11</time> Min Read
+                    
+
+                    
+                    
+                            <span class="tags-label"> :: Tags:</span>
+                            <span class="tags">
+                                    <a href="https://seniormars.com/tags/tutorial/" class="post-tag">tutorial</a>
+                                
+                            </span>
+                    
+
+                    
+                    
+
+                        
+                        
+                            
+                        
+
+                        
+                            
+                            :: <a href="https:&#x2F;&#x2F;github.com&#x2F;SeniorMars&#x2F;seniormars.com&#x2F;blob&#x2F;main&#x2F;content&#x2F;posts&#x2F;box_rclone.md" target="_blank" rel="noopener noreferrer"> Source Code</a>
+                        
+                    
+
+                    
+
+                </div>
+        </div>
+
+        
+
+        
+        
+        
+            <div class="toc-container">
+                <h1 class="toc-title">Table of Contents</h1>
+                <ul class="toc-list">
+                    
+                        <li>
+                            <a href="https://seniormars.com/posts/box-rclone/#motivation">Motivation</a>
+                            
+                        </li>
+                    
+                        <li>
+                            <a href="https://seniormars.com/posts/box-rclone/#what-is-rclone">What is rclone?</a>
+                            
+                        </li>
+                    
+                        <li>
+                            <a href="https://seniormars.com/posts/box-rclone/#installation">Installation</a>
+                            
+                                <ul>
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/box-rclone/#windows">Windows</a>
+                                        </li>
+
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/box-rclone/#macos">macOS</a>
+                                        </li>
+
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/box-rclone/#linux">Linux</a>
+                                        </li>
+
+                                        
+                                    
+                                </ul>
+                            
+                        </li>
+                    
+                        <li>
+                            <a href="https://seniormars.com/posts/box-rclone/#setting-up-rclone-with-box">Setting Up rclone with Box</a>
+                            
+                                <ul>
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/box-rclone/#initial-configuration">Initial Configuration</a>
+                                        </li>
+
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/box-rclone/#testing-the-connection">Testing the Connection</a>
+                                        </li>
+
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/box-rclone/#creating-a-backup-script">Creating a Backup Script</a>
+                                        </li>
+
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/box-rclone/#creating-an-exclude-file">Creating an Exclude File</a>
+                                        </li>
+
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/box-rclone/#making-the-script-executable">Making the Script Executable</a>
+                                        </li>
+
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/box-rclone/#enhancing-your-backup-script">Enhancing Your Backup Script</a>
+                                        </li>
+
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/box-rclone/#automating-backups">Automating Backups</a>
+                                        </li>
+
+                                        
+                                            <ul>
+                                                
+                                                    <li>
+                                                        <a href="https://seniormars.com/posts/box-rclone/#using-cron-macos-linux">Using cron (macOS&#x2F;Linux):</a>
+                                                    </li>
+                                                
+                                                    <li>
+                                                        <a href="https://seniormars.com/posts/box-rclone/#using-launchd-macos">Using launchd (macOS)</a>
+                                                    </li>
+                                                
+                                                    <li>
+                                                        <a href="https://seniormars.com/posts/box-rclone/#using-task-scheduler-windows">Using Task Scheduler (Windows)</a>
+                                                    </li>
+                                                
+                                            </ul>
+                                        
+                                    
+                                </ul>
+                            
+                        </li>
+                    
+                        <li>
+                            <a href="https://seniormars.com/posts/box-rclone/#advanced-rclone-features">Advanced rclone Features</a>
+                            
+                                <ul>
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/box-rclone/#bandwidth-limiting">Bandwidth Limiting</a>
+                                        </li>
+
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/box-rclone/#encryption">Encryption</a>
+                                        </li>
+
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/box-rclone/#fast-listing">Fast Listing</a>
+                                        </li>
+
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/box-rclone/#mount">Mount</a>
+                                        </li>
+
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/box-rclone/#serve">Serve</a>
+                                        </li>
+
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/box-rclone/#filtering-options">Filtering Options</a>
+                                        </li>
+
+                                        
+                                    
+                                </ul>
+                            
+                        </li>
+                    
+                        <li>
+                            <a href="https://seniormars.com/posts/box-rclone/#troubleshooting">Troubleshooting</a>
+                            
+                                <ul>
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/box-rclone/#authentication-errors">Authentication Errors</a>
+                                        </li>
+
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/box-rclone/#connection-timeouts">Connection Timeouts</a>
+                                        </li>
+
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/box-rclone/#path-issues-on-windows">Path Issues on Windows</a>
+                                        </li>
+
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/box-rclone/#sync-taking-too-long">Sync Taking Too Long</a>
+                                        </li>
+
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/box-rclone/#windows-specific-performance-tips">Windows-Specific Performance Tips</a>
+                                        </li>
+
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/box-rclone/#logging-and-debugging">Logging and Debugging</a>
+                                        </li>
+
+                                        
+                                    
+                                        <li>
+                                            <a href="https://seniormars.com/posts/box-rclone/#windows-event-log-integration">Windows Event Log Integration</a>
+                                        </li>
+
+                                        
+                                    
+                                </ul>
+                            
+                        </li>
+                    
+                        <li>
+                            <a href="https://seniormars.com/posts/box-rclone/#conclusion">Conclusion</a>
+                            
+                        </li>
+                    
+                </ul>
+            </div>
+        
+        
+
+        <section class="body">
+            <h2 id="motivation"><a class="zola-anchor" href="#motivation" aria-label="Anchor link for: motivation">Motivation</a></h2>
+<p>As a college student, I’ve had my fair share of data loss nightmares. From the time my final project got corrupted right before finals week to accidentally deleting important files, I’ve learned the hard way that <strong>regular backups are non-negotiable</strong>. Fortunately, most universities provide students with cloud storage – in my case, Rice University gives each student a generous 2TB of Box storage. But how do we efficiently use this resource for automatic, reliable backups? Enter rclone, the command-line Swiss Army knife for cloud storage.</p>
+<h2 id="what-is-rclone"><a class="zola-anchor" href="#what-is-rclone" aria-label="Anchor link for: what-is-rclone">What is rclone?</a></h2>
+<p>Rclone is a command-line program that allows you to sync files between your local machine and various cloud storage providers. Think of it as rsync for the cloud, but with Windows support built-in! It supports dozens of cloud storage systems including Box, Google Drive, Dropbox, and OneDrive. The beauty of rclone is that it’s:</p>
+<ul>
+<li>Free and open-source</li>
+<li>Feature-rich (encryption, filtering, mounting, etc.)</li>
+<li>Incredibly efficient with bandwidth and resources</li>
+<li>Cross-platform (works on Windows, macOS, Linux, and more)</li>
+<li>No GUI required (though GUI wrappers exist for those who prefer them)</li>
+<li>Scriptable for easy automation</li>
+</ul>
+<p>Here’s what my Box storage usage looks like after using rclone for over a year:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>Storage Used
+</span><span>764.9 GB of 2.0 TB
+</span><span>Max File Size
+</span><span>50.0 GB
+</span></code></pre>
+<p>While rclone is a command-line tool, don’t let that intimidate you if you have never used your terrminal! I’ll provide detailed instructions for all platforms! Let’s get started with setting up your own automated backup system!</p>
+<h2 id="installation"><a class="zola-anchor" href="#installation" aria-label="Anchor link for: installation">Installation</a></h2>
+<p>First, we need to install rclone on your machine. The process varies slightly depending on your operating system.</p>
+<h3 id="windows"><a class="zola-anchor" href="#windows" aria-label="Anchor link for: windows">Windows</a></h3>
+<p>For Windows users, there are several installation methods:</p>
+<p>Method 1: Installer (Recommended for most users)</p>
+<ol>
+<li>Download the installer from the <a rel="noreferrer" href="https://rclone.org/downloads/">rclone downloads page</a></li>
+<li>Run the <code>.exe</code> file</li>
+<li>Follow the installation wizard</li>
+<li>The installer will add rclone to your PATH automatically</li>
+</ol>
+<p>Method 2: Portable zip file</p>
+<ol>
+<li>Download the zip file from the <a rel="noreferrer" href="https://rclone.org/downloads/">rclone downloads page</a></li>
+<li>Extract the zip file to a location of your choice (e.g., <code>C:\Program Files\rclone</code>)</li>
+<li>Add the folder to your PATH:
+<ul>
+<li>Right-click on “This PC” or “My Computer” and select “Properties”</li>
+<li>Click on “Advanced system settings”</li>
+<li>Click the “Environment Variables” button</li>
+<li>In the “System variables” section, find and select the “Path” variable</li>
+<li>Click “Edit”</li>
+<li>Click “New” and add the path to your rclone folder</li>
+<li>Click “OK” on all dialogs to save the changes</li>
+</ul>
+</li>
+</ol>
+<p>Method 3: Using Scoop
+If you use the <a rel="noreferrer" href="https://scoop.sh/">Scoop</a> package manager for Windows:</p>
+<pre data-lang="powershell" style="background-color:#0f1419;color:#bfbab0;" class="language-powershell "><code class="language-powershell" data-lang="powershell"><span>scoop install rclone
+</span></code></pre>
+<p>Method 4: WSL (Windows Subsystem for Linux)
+If you use WSL, you can follow the Linux instructions below within your WSL environment.</p>
+<h3 id="macos"><a class="zola-anchor" href="#macos" aria-label="Anchor link for: macos">macOS</a></h3>
+<p>If you’re using macOS (as I am), the easiest way to install rclone is with Homebrew:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> brew install rclone flock
+</span></code></pre>
+<h3 id="linux"><a class="zola-anchor" href="#linux" aria-label="Anchor link for: linux">Linux</a></h3>
+<p>On most Linux distributions, you can install rclone using your package manager:</p>
+<p>Debian/Ubuntu:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> sudo apt install rclone
+</span></code></pre>
+<p>Arch Linux</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> sudo pacman</span><span style="color:#f29718;"> -S</span><span> rclone
+</span></code></pre>
+<h2 id="setting-up-rclone-with-box"><a class="zola-anchor" href="#setting-up-rclone-with-box" aria-label="Anchor link for: setting-up-rclone-with-box">Setting Up rclone with Box</a></h2>
+<p>Now that rclone is installed, we need to configure it to work with our Box account.</p>
+<h3 id="initial-configuration"><a class="zola-anchor" href="#initial-configuration" aria-label="Anchor link for: initial-configuration">Initial Configuration</a></h3>
+<p>Run the following command to start the configuration process:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> rclone config
+</span></code></pre>
+<p>This interactive setup will walk you through creating a new remote connection. Here’s what to expect:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>No remotes found, make a new one?
+</span><span>n) New remote
+</span><span>s) Set configuration password
+</span><span>q) Quit config
+</span><span>n/s/q&gt; n
+</span><span>name&gt; box
+</span></code></pre>
+<p>Enter <code>n</code> to create a new remote, and name it <code>box</code> (or whatever you prefer).</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>Type of storage to configure.
+</span><span>Choose a number from below, or type in your own value
+</span><span>[list of storage types]
+</span><span>XX / Box
+</span><span>   \ &quot;box&quot;
+</span><span>[more options]
+</span><span>Storage&gt; box
+</span></code></pre>
+<p>Choose <code>box</code> from the list of storage types.</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>Box App Client Id - leave blank normally.
+</span><span>client_id&gt; 
+</span><span>
+</span><span>Box App Client Secret - leave blank normally.
+</span><span>client_secret&gt;
+</span></code></pre>
+<p>Unless you’ve created your own Box App (I’ll show you how later), leave these blank and press Enter.</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>Box App config.json location
+</span><span>Leave blank normally.
+</span><span>Enter a string value. Press Enter for the default (&quot;&quot;).
+</span><span>box_config_file&gt;
+</span><span>
+</span><span>Box App Primary Access Token
+</span><span>Leave blank normally.
+</span><span>Enter a string value. Press Enter for the default (&quot;&quot;).
+</span><span>access_token&gt;
+</span></code></pre>
+<p>Again, leave these blank and press Enter.</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>Enter a string value. Press Enter for the default (&quot;user&quot;).
+</span><span>Choose a number from below, or type in your own value
+</span><span> 1 / Rclone should act on behalf of a user
+</span><span>   \ &quot;user&quot;
+</span><span> 2 / Rclone should act on behalf of a service account
+</span><span>   \ &quot;enterprise&quot;
+</span><span>box_sub_type&gt;
+</span></code></pre>
+<p>Press Enter to select the default option (<code>user</code>).</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>Remote config
+</span><span>Use web browser to automatically authenticate rclone with remote?
+</span><span> * Say Y if the machine running rclone has a web browser you can use
+</span><span> * Say N if running rclone on a (remote) machine without web browser access
+</span><span>If not sure try Y. If Y failed, try N.
+</span><span>y) Yes
+</span><span>n) No
+</span><span>y/n&gt; y
+</span></code></pre>
+<p>Type <code>y</code> and press Enter to authenticate via your web browser.</p>
+<p>A browser window should open automatically. Log in to your Box account and authorize rclone for access. Once authorized, the browser window will display a success message, and you can close it and return to the terminal.</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>If your browser doesn&#39;t open automatically go to the following link: http://127.0.0.1:53682/auth?state=XXXXXXXXXXXXXXXXXXXXXX
+</span><span>Log in and authorize rclone for access
+</span><span>Waiting for code...
+</span><span>Got code
+</span><span>Configuration complete.
+</span><span>Options:
+</span><span>- type: box
+</span><span>- client_id:
+</span><span>- client_secret:
+</span><span>- token: {&quot;access_token&quot;:&quot;XXX&quot;,&quot;token_type&quot;:&quot;bearer&quot;,&quot;refresh_token&quot;:&quot;XXX&quot;,&quot;expiry&quot;:&quot;XXX&quot;}
+</span><span>Keep this &quot;remote&quot; remote?
+</span><span>y) Yes this is OK
+</span><span>e) Edit this remote
+</span><span>d) Delete this remote
+</span><span>y/e/d&gt; y
+</span></code></pre>
+<p>Type <code>y</code> and press Enter to save the configuration.</p>
+<h3 id="testing-the-connection"><a class="zola-anchor" href="#testing-the-connection" aria-label="Anchor link for: testing-the-connection">Testing the Connection</a></h3>
+<p>Let’s make sure our connection works by listing the files in your Box account:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> rclone ls box:
+</span></code></pre>
+<p>This command should list all files at the root of your Box account. If you see the file listing, congratulations – your rclone configuration is working correctly!</p>
+<h3 id="creating-a-backup-script"><a class="zola-anchor" href="#creating-a-backup-script" aria-label="Anchor link for: creating-a-backup-script">Creating a Backup Script</a></h3>
+<p>Now that rclone is configured, let’s create a backup script to automate the process. The script will synchronize specified directories from your local machine to Box.</p>
+<p>Here’s a basic example:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="font-style:italic;color:#5c6773;">#!/bin/bash
+</span><span>SOURCE</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&quot;$</span><span>HOME</span><span style="color:#c2d94c;">&quot;
+</span><span>DEST</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&quot;box:backup&quot;
+</span><span>EXCLUDE_FILE</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&quot;$</span><span>HOME</span><span style="color:#c2d94c;">/.config/rclone/exclude_backup&quot;
+</span><span>
+</span><span style="color:#ffb454;">rclone</span><span> sync</span><span style="color:#f29718;"> --update --verbose --transfers</span><span> 30</span><span style="color:#f29718;"> --checkers</span><span> 8 </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">  --contimeout</span><span> 60s</span><span style="color:#f29718;"> --timeout</span><span> 300s</span><span style="color:#f29718;"> --retries</span><span> 3</span><span style="color:#f29718;"> --low-level-retries</span><span> 10 </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">  --stats</span><span> 30s</span><span style="color:#f29718;"> --exclude-from </span><span style="color:#c2d94c;">&quot;$</span><span>EXCLUDE_FILE</span><span style="color:#c2d94c;">&quot; </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">  --delete-excluded </span><span style="color:#c2d94c;">&quot;$</span><span>SOURCE</span><span style="color:#c2d94c;">&quot; &quot;$</span><span>DEST</span><span style="color:#c2d94c;">&quot;
+</span></code></pre>
+<p>Let’s break down what this script does:</p>
+<ul>
+<li><code>SOURCE="$HOME"</code> - Sets the source directory to your home directory.</li>
+<li><code>DEST="box:backup"</code> - Sets the destination to a folder called “backup” in your Box account.</li>
+<li><code>EXCLUDE_FILE="$HOME/.config/rclone/exclude_backup"</code> - Specifies a file containing patterns of files/directories to exclude.</li>
+<li><code>rclone sync</code> - Synchronizes the source directory to the destination.
+<ul>
+<li><code>--update</code> - Skip files that are newer on the destination.</li>
+<li><code>--verbose</code> - Show detailed progress.</li>
+<li><code>--transfers 30</code> - Number of file transfers to run in parallel.</li>
+<li><code>--checkers 8</code> - Number of checkers to run in parallel.</li>
+<li><code>--contimeout 60s</code> - Connect timeout.</li>
+<li><code>--timeout 300s</code> - I/O timeout.</li>
+<li><code>--retries 3</code> - Number of retries if a file transfer fails.</li>
+<li><code>--low-level-retries 10</code> - Number of low-level retries.</li>
+<li><code>--stats 30s</code> - Print stats every 30 seconds.</li>
+<li><code>--exclude-from "$EXCLUDE_FILE"</code> - Read exclude patterns from the specified file.</li>
+<li><code>--delete-excluded</code> - Delete files from the destination that are excluded.</li>
+</ul>
+</li>
+</ul>
+<h3 id="creating-an-exclude-file"><a class="zola-anchor" href="#creating-an-exclude-file" aria-label="Anchor link for: creating-an-exclude-file">Creating an Exclude File</a></h3>
+<p>The exclude file is crucial for efficient backups. It prevents unnecessary files from being backed up, saving both time and storage space.</p>
+<p>For macOS/Linux:</p>
+<p>Create the exclude file:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> mkdir</span><span style="color:#f29718;"> -p </span><span style="font-style:italic;color:#39bae6;">~</span><span>/.config/rclone
+</span><span style="color:#ffb454;">$</span><span> touch </span><span style="font-style:italic;color:#39bae6;">~</span><span>/.config/rclone/exclude_backup
+</span></code></pre>
+<p>For Windows:</p>
+<p>Create the exclude file:</p>
+<pre data-lang="bat" style="background-color:#0f1419;color:#bfbab0;" class="language-bat "><code class="language-bat" data-lang="bat"><span style="color:#ff7733;">mkdir </span><span style="color:#c2d94c;">&quot;C:\Users\YourUsername\rclone&quot;
+</span><span style="color:#ff7733;">echo</span><span>. </span><span style="color:#f29668;">&gt; </span><span style="color:#c2d94c;">&quot;C:\Users\YourUsername\rclone\exclude_backup.txt&quot;
+</span></code></pre>
+<p>Now edit this file with your favorite text editor and add patterns for files and directories you want to exclude from your backups.</p>
+<p>Example for macOS:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span># Temporary files
+</span><span>*.tmp
+</span><span>*.temp
+</span><span>.DS_Store
+</span><span>
+</span><span># Cache directories
+</span><span>/Users/*/Library/Caches/**
+</span><span>/Users/*/Library/Application Support/Google/Chrome/Default/Cache/**
+</span><span>/Users/*/Library/Containers/com.docker.docker/**
+</span><span>
+</span><span># Package managers
+</span><span>/Users/*/node_modules/**
+</span><span>/Users/*/.npm/**
+</span><span>/Users/*/.cargo/**
+</span><span>/Users/*/.rustup/**
+</span><span>
+</span><span># Virtual environments
+</span><span>/Users/*/venv/**
+</span><span>/Users/*/.venv/**
+</span><span>/Users/*/env/**
+</span><span>/Users/*/.env/**
+</span><span>
+</span><span># Large data and logs
+</span><span>*.log
+</span><span>*.iso
+</span><span>*.dmg
+</span></code></pre>
+<p>Example for Windows:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span># Temporary files
+</span><span>*.tmp
+</span><span>*.temp
+</span><span>Thumbs.db
+</span><span>
+</span><span># Cache directories
+</span><span>C:\Users\*\AppData\Local\Temp\**
+</span><span>C:\Users\*\AppData\Local\Google\Chrome\User Data\Default\Cache\**
+</span><span>C:\Users\*\AppData\Local\Docker\**
+</span><span>
+</span><span># Package managers
+</span><span>C:\Users\*\node_modules\**
+</span><span>C:\Users\*\AppData\Roaming\npm\**
+</span><span>C:\Users\*\.cargo\**
+</span><span>C:\Users\*\.rustup\**
+</span><span>
+</span><span># Virtual environments
+</span><span>C:\Users\*\venv\**
+</span><span>C:\Users\*\.venv\**
+</span><span>C:\Users\*\env\**
+</span><span>C:\Users\*\.env\**
+</span><span>
+</span><span># Large data and logs
+</span><span>*.log
+</span><span>*.iso
+</span><span>*.wim
+</span></code></pre>
+<p>Feel free to customize this list according to your needs. The patterns follow the same format as <code>.gitignore</code> files, with a few additions:</p>
+<ul>
+<li><code>*</code> matches any sequence of non-separator characters</li>
+<li><code>**</code> matches any sequence of characters including separators</li>
+<li><code>?</code> matches any single non-separator character</li>
+<li><code>[chars]</code> matches any character in the set</li>
+<li><code>{alt1,alt2}</code> matches any of the alternatives</li>
+</ul>
+<h3 id="making-the-script-executable"><a class="zola-anchor" href="#making-the-script-executable" aria-label="Anchor link for: making-the-script-executable">Making the Script Executable</a></h3>
+<p>Save your backup script to a file, e.g., <code>~/bin/backup_to_box.sh</code>, and make it executable:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> mkdir</span><span style="color:#f29718;"> -p </span><span style="font-style:italic;color:#39bae6;">~</span><span>/bin
+</span><span style="color:#ffb454;">$</span><span> nano </span><span style="font-style:italic;color:#39bae6;">~</span><span>/bin/backup_to_box.sh
+</span><span style="font-style:italic;color:#5c6773;"># Paste the script content and save
+</span><span style="color:#ffb454;">$</span><span> chmod +x </span><span style="font-style:italic;color:#39bae6;">~</span><span>/bin/backup_to_box.sh
+</span></code></pre>
+<h3 id="enhancing-your-backup-script"><a class="zola-anchor" href="#enhancing-your-backup-script" aria-label="Anchor link for: enhancing-your-backup-script">Enhancing Your Backup Script</a></h3>
+<p>Let’s improve our basic script with some additional features. I’ll provide examples for both macOS/Linux and Windows.</p>
+<p>For macOS/Linux:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="font-style:italic;color:#5c6773;">#!/bin/bash
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Configuration
+</span><span>SOURCE</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&quot;$</span><span>HOME</span><span style="color:#c2d94c;">&quot;
+</span><span>DEST</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&quot;box:backup&quot;
+</span><span>EXCLUDE_FILE</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&quot;$</span><span>HOME</span><span style="color:#c2d94c;">/.config/rclone/exclude_backup&quot;
+</span><span>LOG_FILE</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&quot;$</span><span>HOME</span><span style="color:#c2d94c;">/.local/share/backup/rclone_backup.log&quot;
+</span><span>LOCK_FILE</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&quot;/tmp/box_backup.lock&quot;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Create log directory if it doesn&#39;t exist
+</span><span style="color:#ffb454;">mkdir</span><span style="color:#f29718;"> -p </span><span style="color:#c2d94c;">&quot;$</span><span>(</span><span style="color:#ffb454;">dirname </span><span style="color:#c2d94c;">&quot;$</span><span>LOG_FILE</span><span style="color:#c2d94c;">&quot;</span><span>)</span><span style="color:#c2d94c;">&quot;
+</span><span style="color:#ffb454;">mkdir</span><span style="color:#f29718;"> -p </span><span style="color:#c2d94c;">&quot;$</span><span>HOME</span><span style="color:#c2d94c;">/.local/share/backup&quot;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Save a list of installed packages before backup
+</span><span style="color:#ff7733;">if </span><span style="color:#f07178;">command </span><span style="color:#f29718;">-v</span><span> brew </span><span style="color:#f29668;">&gt;</span><span>/dev/null </span><span style="color:#f29718;">2</span><span style="color:#f29668;">&gt;&amp;</span><span style="color:#f29718;">1</span><span style="color:#f29668;">; </span><span style="color:#ff7733;">then
+</span><span>    </span><span style="color:#ffb454;">/opt/homebrew/bin/brew</span><span> list </span><span style="color:#f29668;">&gt; </span><span style="color:#c2d94c;">&quot;$</span><span>HOME</span><span style="color:#c2d94c;">/.local/share/backup/brew_list.txt&quot;
+</span><span style="color:#ff7733;">fi
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Use flock to ensure only one instance runs at a time
+</span><span style="color:#ff7733;">if </span><span style="color:#f07178;">command </span><span style="color:#f29718;">-v</span><span> flock </span><span style="color:#f29668;">&gt;</span><span>/dev/null </span><span style="color:#f29718;">2</span><span style="color:#f29668;">&gt;&amp;</span><span style="color:#f29718;">1</span><span style="color:#f29668;">; </span><span style="color:#ff7733;">then
+</span><span>    </span><span style="color:#f07178;">exec</span><span> /opt/homebrew/bin/flock -n </span><span style="color:#c2d94c;">&quot;$</span><span>LOCK_FILE</span><span style="color:#c2d94c;">&quot;</span><span> rclone sync </span><span style="color:#bfbab0cc;">\
+</span><span>        --update --verbose --transfers 30 --checkers 8 </span><span style="color:#bfbab0cc;">\
+</span><span>        --contimeout 60s --timeout 300s --retries 3 </span><span style="color:#bfbab0cc;">\
+</span><span>        --low-level-retries 10 --stats 30s </span><span style="color:#bfbab0cc;">\
+</span><span>        --exclude-from </span><span style="color:#c2d94c;">&quot;$</span><span>EXCLUDE_FILE</span><span style="color:#c2d94c;">&quot;</span><span> --delete-excluded </span><span style="color:#bfbab0cc;">\
+</span><span>        </span><span style="color:#c2d94c;">&quot;$</span><span>SOURCE</span><span style="color:#c2d94c;">&quot; &quot;$</span><span>DEST</span><span style="color:#c2d94c;">&quot; </span><span style="color:#f29718;">2</span><span style="color:#f29668;">&gt;&amp;</span><span style="color:#f29718;">1 </span><span style="color:#f29668;">| </span><span style="color:#ffb454;">tee</span><span style="color:#f29718;"> -a </span><span style="color:#c2d94c;">&quot;$</span><span>LOG_FILE</span><span style="color:#c2d94c;">&quot;
+</span><span style="color:#ff7733;">else
+</span><span>    </span><span style="font-style:italic;color:#5c6773;"># If flock is not available, just run rclone
+</span><span>    </span><span style="color:#ffb454;">rclone</span><span> sync</span><span style="color:#f29718;"> --update --verbose --transfers</span><span> 30</span><span style="color:#f29718;"> --checkers</span><span> 8 </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">        --contimeout</span><span> 60s</span><span style="color:#f29718;"> --timeout</span><span> 300s</span><span style="color:#f29718;"> --retries</span><span> 3 </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">        --low-level-retries</span><span> 10</span><span style="color:#f29718;"> --stats</span><span> 30s </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">        --exclude-from </span><span style="color:#c2d94c;">&quot;$</span><span>EXCLUDE_FILE</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;"> --delete-excluded </span><span style="color:#bfbab0cc;">\
+</span><span>        </span><span style="color:#c2d94c;">&quot;$</span><span>SOURCE</span><span style="color:#c2d94c;">&quot; &quot;$</span><span>DEST</span><span style="color:#c2d94c;">&quot; </span><span style="color:#f29718;">2</span><span style="color:#f29668;">&gt;&amp;</span><span style="color:#f29718;">1 </span><span style="color:#f29668;">| </span><span style="color:#ffb454;">tee</span><span style="color:#f29718;"> -a </span><span style="color:#c2d94c;">&quot;$</span><span>LOG_FILE</span><span style="color:#c2d94c;">&quot;
+</span><span style="color:#ff7733;">fi
+</span></code></pre>
+<p>For Windows:</p>
+<pre data-lang="bat" style="background-color:#0f1419;color:#bfbab0;" class="language-bat "><code class="language-bat" data-lang="bat"><span style="color:#f29668;">@</span><span style="color:#ff7733;">echo</span><span> off
+</span><span style="color:#ff7733;">setlocal</span><span> enabledelayedexpansion
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">:: Configuration
+</span><span style="color:#ff7733;">set </span><span style="color:#c2d94c;">&quot;</span><span>SOURCE</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">C:\Users\YourUsername&quot;
+</span><span style="color:#ff7733;">set </span><span style="color:#c2d94c;">&quot;</span><span>DEST</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">box:windows_backup&quot;
+</span><span style="color:#ff7733;">set </span><span style="color:#c2d94c;">&quot;</span><span>EXCLUDE_FILE</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">C:\Users\YourUsername\rclone\exclude_backup.txt&quot;
+</span><span style="color:#ff7733;">set </span><span style="color:#c2d94c;">&quot;</span><span>LOG_FILE</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">C:\Users\YourUsername\rclone\logs\rclone_backup.log&quot;
+</span><span style="color:#ff7733;">set </span><span style="color:#c2d94c;">&quot;</span><span>LOCK_FILE</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">C:\Users\YourUsername\rclone\backup.lock&quot;
+</span><span style="color:#ff7733;">set </span><span style="color:#c2d94c;">&quot;</span><span>DATE_TIME</span><span style="color:#f29668;">=</span><span>%date</span><span style="color:#bfbab0cc;">:~</span><span style="color:#f29718;">-4</span><span style="color:#bfbab0cc;">,</span><span style="color:#f29718;">4</span><span>%%date</span><span style="color:#bfbab0cc;">:~</span><span style="color:#f29718;">-7</span><span style="color:#bfbab0cc;">,</span><span style="color:#f29718;">2</span><span>%%date</span><span style="color:#bfbab0cc;">:~</span><span style="color:#f29718;">-10</span><span style="color:#bfbab0cc;">,</span><span style="color:#f29718;">2</span><span>%</span><span style="color:#c2d94c;">_</span><span>%time</span><span style="color:#bfbab0cc;">:~</span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">,</span><span style="color:#f29718;">2</span><span>%%time</span><span style="color:#bfbab0cc;">:~</span><span style="color:#f29718;">3</span><span style="color:#bfbab0cc;">,</span><span style="color:#f29718;">2</span><span>%%time</span><span style="color:#bfbab0cc;">:~</span><span style="color:#f29718;">6</span><span style="color:#bfbab0cc;">,</span><span style="color:#f29718;">2</span><span>%</span><span style="color:#c2d94c;">&quot;
+</span><span style="color:#ff7733;">set </span><span style="color:#c2d94c;">&quot;</span><span>DATE_TIME</span><span style="color:#f29668;">=</span><span>!DATE_TIME</span><span style="color:#bfbab0cc;">: =</span><span style="color:#c2d94c;">0</span><span>!</span><span style="color:#c2d94c;">&quot;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">:: Create log directory if it doesn&#39;t exist
+</span><span style="color:#ff7733;">if </span><span style="color:#f29668;">not </span><span style="color:#ff7733;">exist </span><span style="color:#c2d94c;">&quot;C:\Users\YourUsername\rclone\logs&quot; </span><span style="color:#ff7733;">mkdir </span><span style="color:#c2d94c;">&quot;C:\Users\YourUsername\rclone\logs&quot;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">:: Save a list of installed programs before backup (using PowerShell)
+</span><span>powershell -Command </span><span style="color:#c2d94c;">&quot;Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName | Sort-Object -Property DisplayName | Out-File -FilePath &#39;C:\Users\YourUsername\rclone\installed_programs.txt&#39;&quot;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">:: Check if another instance is already running
+</span><span style="color:#ff7733;">if exist </span><span style="color:#c2d94c;">&quot;</span><span>%LOCK_FILE%</span><span style="color:#c2d94c;">&quot; </span><span>(
+</span><span>    </span><span style="color:#ff7733;">echo</span><span> Another backup is already in progress. Exiting... </span><span style="color:#f29668;">&gt;&gt; </span><span style="color:#c2d94c;">&quot;</span><span>%LOG_FILE%</span><span style="color:#c2d94c;">&quot;
+</span><span>    </span><span style="color:#ff7733;">exit</span><span> /b </span><span style="color:#f29718;">1
+</span><span>)
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">:: Create the lock file
+</span><span style="color:#ff7733;">echo </span><span>%DATE_TIME% </span><span style="color:#f29668;">&gt; </span><span style="color:#c2d94c;">&quot;</span><span>%LOCK_FILE%</span><span style="color:#c2d94c;">&quot;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">:: Start the backup
+</span><span style="color:#ff7733;">echo</span><span> Starting backup at %DATE_TIME% </span><span style="color:#f29668;">&gt;&gt; </span><span style="color:#c2d94c;">&quot;</span><span>%LOG_FILE%</span><span style="color:#c2d94c;">&quot;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">:: Run rclone
+</span><span style="color:#c2d94c;">&quot;C:\Program Files\rclone\rclone.exe&quot;</span><span> sync </span><span style="color:#95e6cb;">^
+</span><span>    --update --verbose --transfers </span><span style="color:#f29718;">30</span><span> --checkers </span><span style="color:#f29718;">8 </span><span style="color:#95e6cb;">^
+</span><span>    --contimeout 60s --</span><span style="color:#ff7733;">timeout</span><span> 300s --retries </span><span style="color:#f29718;">3 </span><span style="color:#95e6cb;">^
+</span><span>    --low-level-retries </span><span style="color:#f29718;">10</span><span> --stats 30s </span><span style="color:#95e6cb;">^
+</span><span>    --exclude-from </span><span style="color:#c2d94c;">&quot;</span><span>%EXCLUDE_FILE%</span><span style="color:#c2d94c;">&quot;</span><span> --delete-excluded </span><span style="color:#95e6cb;">^
+</span><span>    </span><span style="color:#c2d94c;">&quot;</span><span>%SOURCE%</span><span style="color:#c2d94c;">&quot; &quot;</span><span>%DEST%</span><span style="color:#c2d94c;">&quot; </span><span style="color:#f29668;">&gt;&gt; </span><span style="color:#c2d94c;">&quot;</span><span>%LOG_FILE%</span><span style="color:#c2d94c;">&quot; </span><span style="color:#f29718;">2</span><span style="color:#f29668;">&gt;&amp;</span><span style="color:#f29718;">1
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">:: Remove the lock file
+</span><span style="color:#ff7733;">del </span><span style="color:#c2d94c;">&quot;</span><span>%LOCK_FILE%</span><span style="color:#c2d94c;">&quot;
+</span><span>
+</span><span style="color:#ff7733;">echo</span><span> Backup completed at %date% %time% </span><span style="color:#f29668;">&gt;&gt; </span><span style="color:#c2d94c;">&quot;</span><span>%LOG_FILE%</span><span style="color:#c2d94c;">&quot;
+</span><span style="color:#ff7733;">echo</span><span>. </span><span style="color:#f29668;">&gt;&gt; </span><span style="color:#c2d94c;">&quot;</span><span>%LOG_FILE%</span><span style="color:#c2d94c;">&quot;
+</span></code></pre>
+<p>The Windows script includes:</p>
+<ol>
+<li>Proper path handling for Windows file systems</li>
+<li>Lock file mechanism to prevent multiple instances</li>
+<li>Capturing installed programs using PowerShell</li>
+<li>Detailed logging with timestamps</li>
+</ol>
+<p>This enhanced script adds:</p>
+<ol>
+<li>Logging to a file for easier troubleshooting</li>
+<li>A lock mechanism to prevent multiple instances from running simultaneously</li>
+<li>Automatic saving of installed packages (in this case, Homebrew packages)</li>
+</ol>
+<h3 id="automating-backups"><a class="zola-anchor" href="#automating-backups" aria-label="Anchor link for: automating-backups">Automating Backups</a></h3>
+<p>Now that we have our script, let’s set it up to run automatically at regular intervals.</p>
+<h4 id="using-cron-macos-linux"><a class="zola-anchor" href="#using-cron-macos-linux" aria-label="Anchor link for: using-cron-macos-linux">Using cron (macOS/Linux):</a></h4>
+<p>On macOS and Linux, cron is the traditional way to schedule recurring tasks.</p>
+<p>Edit your crontab file:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> crontab</span><span style="color:#f29718;"> -e
+</span></code></pre>
+<p>Here’s my personal crontab setup that runs the backup twice daily (8 AM and 8 PM) and logs the output:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>0 8 * * * /Users/charlie/.local/bin/backup-rclone &amp;&gt; /Users/charlie/.config/rclone/backup-rclone.log
+</span><span>0 20 * * * /Users/charlie/.local/bin/backup-rclone &amp;&gt; /Users/charlie/.config/rclone/backup-rclone.log
+</span></code></pre>
+<p>Here’s what the numbers mean:</p>
+<ul>
+<li><code>0</code> - minute (0-59)</li>
+<li><code>8/20</code> - hour (0-23), running at 8 AM and 8 PM</li>
+<li><code>*</code> - day of month (1-31)</li>
+<li><code>*</code> - month (1-12)</li>
+<li><code>*</code> - day of week (0-7, both 0 and 7 represent Sunday)</li>
+</ul>
+<div class="note-container note-type-default">
+  
+    <button class="note-toggle" aria-expanded="true">
+      
+        <div class="note-icon">
+          
+          <p>Note</p>
+
+        </div>
+      
+    </button>
+    <div class="note-content" style="display: block;">
+      <p>The cron job runs in a limited environment, so you might need to use full paths to all executables in your script. Notice how I’ve used absolute paths in my example above.</p>
+
+    </div>
+  
+</div>
+<h4 id="using-launchd-macos"><a class="zola-anchor" href="#using-launchd-macos" aria-label="Anchor link for: using-launchd-macos">Using launchd (macOS)</a></h4>
+<p>On macOS, you can also use launchd, which offers more flexibility than cron.</p>
+<p>Create a plist file at <code>~/Library/LaunchAgents/com.user.box-backup.plist</code>:</p>
+<pre data-lang="xml" style="background-color:#0f1419;color:#bfbab0;" class="language-xml "><code class="language-xml" data-lang="xml"><span style="color:#39bae690;">&lt;?</span><span style="color:#59c2ff;">xml </span><span style="color:#ffb454;">version</span><span style="color:#bfbab0cc;">=</span><span style="color:#c2d94c;">&quot;1.0&quot; </span><span style="color:#ffb454;">encoding</span><span style="color:#bfbab0cc;">=</span><span style="color:#c2d94c;">&quot;UTF-8&quot;</span><span style="color:#39bae690;">?&gt;
+</span><span style="color:#39bae690;">&lt;!</span><span style="color:#ff7733;">DOCTYPE </span><span>plist </span><span style="color:#ff7733;">PUBLIC </span><span style="color:#c2d94c;">&quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;</span><span style="color:#39bae690;">&gt;
+</span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">plist </span><span style="color:#ffb454;">version</span><span style="color:#bfbab0cc;">=</span><span style="color:#c2d94c;">&quot;1.0&quot;</span><span style="color:#39bae690;">&gt;
+</span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">dict</span><span style="color:#39bae690;">&gt;
+</span><span>    </span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">key</span><span style="color:#39bae690;">&gt;</span><span>Label</span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">key</span><span style="color:#39bae690;">&gt;
+</span><span>    </span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">string</span><span style="color:#39bae690;">&gt;</span><span>com.user.box-backup</span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">string</span><span style="color:#39bae690;">&gt;
+</span><span>    </span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">key</span><span style="color:#39bae690;">&gt;</span><span>Program</span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">key</span><span style="color:#39bae690;">&gt;
+</span><span>    </span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">string</span><span style="color:#39bae690;">&gt;</span><span>/Users/YOUR_USERNAME/bin/backup_to_box.sh</span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">string</span><span style="color:#39bae690;">&gt;
+</span><span>    </span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">key</span><span style="color:#39bae690;">&gt;</span><span>StartCalendarInterval</span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">key</span><span style="color:#39bae690;">&gt;
+</span><span>    </span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">dict</span><span style="color:#39bae690;">&gt;
+</span><span>        </span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">key</span><span style="color:#39bae690;">&gt;</span><span>Hour</span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">key</span><span style="color:#39bae690;">&gt;
+</span><span>        </span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">integer</span><span style="color:#39bae690;">&gt;</span><span>2</span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">integer</span><span style="color:#39bae690;">&gt;
+</span><span>        </span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">key</span><span style="color:#39bae690;">&gt;</span><span>Minute</span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">key</span><span style="color:#39bae690;">&gt;
+</span><span>        </span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">integer</span><span style="color:#39bae690;">&gt;</span><span>0</span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">integer</span><span style="color:#39bae690;">&gt;
+</span><span>    </span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">dict</span><span style="color:#39bae690;">&gt;
+</span><span>    </span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">key</span><span style="color:#39bae690;">&gt;</span><span>StandardOutPath</span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">key</span><span style="color:#39bae690;">&gt;
+</span><span>    </span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">string</span><span style="color:#39bae690;">&gt;</span><span>/Users/YOUR_USERNAME/.local/share/backup/stdout.log</span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">string</span><span style="color:#39bae690;">&gt;
+</span><span>    </span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">key</span><span style="color:#39bae690;">&gt;</span><span>StandardErrorPath</span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">key</span><span style="color:#39bae690;">&gt;
+</span><span>    </span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">string</span><span style="color:#39bae690;">&gt;</span><span>/Users/YOUR_USERNAME/.local/share/backup/stderr.log</span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">string</span><span style="color:#39bae690;">&gt;
+</span><span>    </span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">key</span><span style="color:#39bae690;">&gt;</span><span>RunAtLoad</span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">key</span><span style="color:#39bae690;">&gt;
+</span><span>    </span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">false</span><span style="color:#39bae690;">/&gt;
+</span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">dict</span><span style="color:#39bae690;">&gt;
+</span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">plist</span><span style="color:#39bae690;">&gt;
+</span></code></pre>
+<p>Replace <code>YOUR_USERNAME</code> with your actual username. Then load the job:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> launchctl load </span><span style="font-style:italic;color:#39bae6;">~</span><span>/Library/LaunchAgents/com.user.box-backup.plist
+</span></code></pre>
+<h4 id="using-task-scheduler-windows"><a class="zola-anchor" href="#using-task-scheduler-windows" aria-label="Anchor link for: using-task-scheduler-windows">Using Task Scheduler (Windows)</a></h4>
+<p>Windows users can use Task Scheduler for automated backups. Here’s a detailed guide:</p>
+<ol>
+<li>First, create a batch file for your rclone command. Create a new file called <code>backup_to_box.bat</code> in an appropriate location (e.g., <code>C:\Users\YourUsername\Scripts\</code>):</li>
+</ol>
+<pre data-lang="bat" style="background-color:#0f1419;color:#bfbab0;" class="language-bat "><code class="language-bat" data-lang="bat"><span style="color:#f29668;">@</span><span style="color:#ff7733;">echo</span><span> off
+</span><span style="color:#ff7733;">echo</span><span> Starting Box backup at %date% %time% </span><span style="color:#f29668;">&gt;&gt; </span><span style="color:#c2d94c;">&quot;C:\Users\YourUsername\backup_logs.txt&quot;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">:: Set paths with quotes to handle spaces in filenames
+</span><span style="color:#ff7733;">set </span><span>SOURCE</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&quot;C:\Users\YourUsername&quot;
+</span><span style="color:#ff7733;">set </span><span>DEST</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&quot;box:windows_backup&quot;
+</span><span style="color:#ff7733;">set </span><span>EXCLUDE_FILE</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&quot;C:\Users\YourUsername\rclone\exclude_backup.txt&quot;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">:: Create directories if they don&#39;t exist
+</span><span style="color:#ff7733;">if </span><span style="color:#f29668;">not </span><span style="color:#ff7733;">exist </span><span style="color:#c2d94c;">&quot;C:\Users\YourUsername\rclone&quot; </span><span style="color:#ff7733;">mkdir </span><span style="color:#c2d94c;">&quot;C:\Users\YourUsername\rclone&quot;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">:: Run rclone with appropriate parameters
+</span><span style="color:#c2d94c;">&quot;C:\Program Files\rclone\rclone.exe&quot;</span><span> sync --update --verbose --transfers </span><span style="color:#f29718;">30 </span><span style="color:#95e6cb;">^
+</span><span>  --checkers </span><span style="color:#f29718;">8</span><span> --contimeout 60s --</span><span style="color:#ff7733;">timeout</span><span> 300s --retries </span><span style="color:#f29718;">3 </span><span style="color:#95e6cb;">^
+</span><span>  --low-level-retries </span><span style="color:#f29718;">10</span><span> --stats 30s </span><span style="color:#95e6cb;">^
+</span><span>  --exclude-from </span><span style="color:#c2d94c;">&quot;</span><span>%EXCLUDE_FILE%</span><span style="color:#c2d94c;">&quot;</span><span> --delete-excluded </span><span style="color:#95e6cb;">^
+</span><span>  </span><span style="color:#c2d94c;">&quot;</span><span>%SOURCE%</span><span style="color:#c2d94c;">&quot; &quot;</span><span>%DEST%</span><span style="color:#c2d94c;">&quot; </span><span style="color:#f29668;">&gt;&gt; </span><span style="color:#c2d94c;">&quot;C:\Users\YourUsername\backup_logs.txt&quot; </span><span style="color:#f29718;">2</span><span style="color:#f29668;">&gt;&amp;</span><span style="color:#f29718;">1
+</span><span>
+</span><span style="color:#ff7733;">echo</span><span> Backup completed at %date% %time% </span><span style="color:#f29668;">&gt;&gt; </span><span style="color:#c2d94c;">&quot;C:\Users\YourUsername\backup_logs.txt&quot;
+</span><span style="color:#ff7733;">echo</span><span>. </span><span style="color:#f29668;">&gt;&gt; </span><span style="color:#c2d94c;">&quot;C:\Users\YourUsername\backup_logs.txt&quot;
+</span></code></pre>
+<ol start="2">
+<li>
+<p>Now set up the task:</p>
+<ul>
+<li>
+<p>Open Task Scheduler (search for it in the Start menu)</p>
+</li>
+<li>
+<p>Click “Create Task” (not “Create Basic Task” for more options)</p>
+</li>
+<li>
+<p>On the General tab:</p>
+<ul>
+<li>Enter a Name (e.g., “Box Backup”)</li>
+<li>Select “Run whether user is logged on or not” for unattended operation</li>
+<li>Check “Run with highest privileges”</li>
+</ul>
+</li>
+<li>
+<p>On the Triggers tab:</p>
+<ul>
+<li>Click “New” to add a trigger</li>
+<li>Select “Daily” and set it to run at your preferred time(s)</li>
+<li>You can add multiple triggers for morning and evening backups</li>
+</ul>
+</li>
+<li>
+<p>On the Actions tab:</p>
+<ul>
+<li>Click “New”</li>
+<li>Action: “Start a program”</li>
+<li>Program/script: Browse to your batch file (<code>C:\Users\YourUsername\Scripts\backup_to_box.bat</code>)</li>
+</ul>
+</li>
+<li>
+<p>On the Conditions tab:</p>
+<ul>
+<li>Uncheck “Start the task only if the computer is on AC power” if you want it to run on battery</li>
+<li>Consider checking “Start only if the following network connection is available” if you want it to run only on certain networks</li>
+</ul>
+</li>
+<li>
+<p>On the Settings tab:</p>
+<ul>
+<li>Check “Run task as soon as possible after a scheduled start is missed”</li>
+<li>Set “If the task fails, restart every:” to handle temporary failures</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Click “OK” and enter your password when prompted.</p>
+</li>
+</ol>
+<div class="note-container note-type-default">
+  
+    <button class="note-toggle" aria-expanded="true">
+      
+        <div class="note-icon">
+          
+          <p>Note</p>
+
+        </div>
+      
+    </button>
+    <div class="note-content" style="display: block;">
+      <p>Windows paths use backslashes (\) instead of forward slashes. Make sure all your paths use the correct format. Also, if you install rclone in a non-standard location, adjust the path to rclone.exe accordingly.</p>
+
+    </div>
+  
+</div>
+<h2 id="advanced-rclone-features"><a class="zola-anchor" href="#advanced-rclone-features" aria-label="Anchor link for: advanced-rclone-features">Advanced rclone Features</a></h2>
+<h3 id="bandwidth-limiting"><a class="zola-anchor" href="#bandwidth-limiting" aria-label="Anchor link for: bandwidth-limiting">Bandwidth Limiting</a></h3>
+<p>If you don’t want your backups to saturate your internet connection, you can limit the bandwidth:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">rclone</span><span> sync</span><span style="color:#f29718;"> --bwlimit</span><span> 1M ...
+</span></code></pre>
+<p>This limits the transfer to 1 megabyte per second. You can also specify a time schedule:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">rclone</span><span> sync</span><span style="color:#f29718;"> --bwlimit </span><span style="color:#c2d94c;">&quot;08:00,512k 12:00,1M 18:00,512k 23:00,2M&quot;</span><span> ...
+</span></code></pre>
+<p>This sets different limits throughout the day.</p>
+<p>Windows Example:</p>
+<pre data-lang="bat" style="background-color:#0f1419;color:#bfbab0;" class="language-bat "><code class="language-bat" data-lang="bat"><span>rclone sync --bwlimit </span><span style="color:#c2d94c;">&quot;08:00,512k 12:00,1M 18:00,512k 23:00,2M&quot; </span><span style="color:#95e6cb;">^
+</span><span>  </span><span style="color:#c2d94c;">&quot;C:\Users\YourUsername&quot;</span><span> box:</span><span style="color:#ff7733;">backup
+</span></code></pre>
+<h3 id="encryption"><a class="zola-anchor" href="#encryption" aria-label="Anchor link for: encryption">Encryption</a></h3>
+<p>If you’re concerned about the privacy of your data in the cloud, rclone supports encryption:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="font-style:italic;color:#5c6773;"># Create an encrypted remote
+</span><span style="color:#ffb454;">$</span><span> rclone config
+</span><span style="color:#ffb454;">n</span><span>) </span><span style="color:#ffb454;">New</span><span> remote
+</span><span style="color:#ffb454;">...
+</span><span style="color:#ffb454;">name</span><span style="color:#f29668;">&gt;</span><span> box-crypt
+</span><span style="color:#ffb454;">...
+</span><span style="color:#ffb454;">Type</span><span> of storage</span><span style="color:#f29668;">&gt;</span><span> crypt
+</span><span style="color:#ffb454;">Remote</span><span> to encrypt/decrypt</span><span style="color:#f29668;">&gt;</span><span> box:encrypted
+</span><span style="color:#ffb454;">...
+</span></code></pre>
+<p>Then use <code>box-crypt:</code> as your destination in your backup script.</p>
+<h3 id="fast-listing"><a class="zola-anchor" href="#fast-listing" aria-label="Anchor link for: fast-listing">Fast Listing</a></h3>
+<p>For large directories with many files, you can speed up operations with fast list:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">rclone</span><span> sync</span><span style="color:#f29718;"> --fast-list</span><span> ...
+</span></code></pre>
+<p>This uses more memory but can significantly speed up the listing process.</p>
+<h3 id="mount"><a class="zola-anchor" href="#mount" aria-label="Anchor link for: mount">Mount</a></h3>
+<p>One of my favorite features is the ability to mount your Box storage as a local filesystem:</p>
+<p>For macOS/Linux:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> rclone mount box: </span><span style="font-style:italic;color:#39bae6;">~</span><span>/box</span><span style="color:#f29718;"> --vfs-cache-mode</span><span> writes </span><span style="color:#f29668;">&amp;
+</span></code></pre>
+<p>For Windows:</p>
+<pre data-lang="bat" style="background-color:#0f1419;color:#bfbab0;" class="language-bat "><code class="language-bat" data-lang="bat"><span>rclone mount box: X: --vfs-cache-</span><span style="color:#ff7733;">mode</span><span> writes
+</span></code></pre>
+<p>This mounts your entire Box account at <code>~/box</code> on macOS/Linux or as drive <code>X:</code> on Windows. You can then browse it like any local directory.</p>
+<div class="note-container note-type-default">
+  
+    <button class="note-toggle" aria-expanded="true">
+      
+        <div class="note-icon">
+          
+          <p>Note</p>
+
+        </div>
+      
+    </button>
+    <div class="note-content" style="display: block;">
+      <p>For Windows users, the mount command requires WinFsp to be installed. Download it from <a href='https://winfsp.dev/'>https://winfsp.dev/</a> and install it before attempting to mount.</p>
+
+    </div>
+  
+</div>
+<h3 id="serve"><a class="zola-anchor" href="#serve" aria-label="Anchor link for: serve">Serve</a></h3>
+<p>Rclone can also serve your files over HTTP, WebDAV, FTP, or SFTP:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> rclone serve http box:</span><span style="color:#f29718;"> --addr</span><span> :8080
+</span></code></pre>
+<p>This allows you to access your Box files through a web browser at <code>http://localhost:8080</code>.</p>
+<h3 id="filtering-options"><a class="zola-anchor" href="#filtering-options" aria-label="Anchor link for: filtering-options">Filtering Options</a></h3>
+<p>Rclone offers powerful filtering beyond the exclude file:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">rclone</span><span> sync</span><span style="color:#f29718;"> --min-size</span><span> 100k</span><span style="color:#f29718;"> --max-size</span><span> 5M ... </span><span style="font-style:italic;color:#5c6773;"># Only files between 100KB and 5MB
+</span><span style="color:#ffb454;">rclone</span><span> sync</span><span style="color:#f29718;"> --include </span><span style="color:#c2d94c;">&quot;*.jpg&quot;</span><span style="color:#f29718;"> --include </span><span style="color:#c2d94c;">&quot;*.png&quot;</span><span> ... </span><span style="font-style:italic;color:#5c6773;"># Only include JPGs and PNGs
+</span><span style="color:#ffb454;">rclone</span><span> sync</span><span style="color:#f29718;"> --exclude-if-present</span><span> .norclone ... </span><span style="font-style:italic;color:#5c6773;"># Skip directories with .norclone file
+</span></code></pre>
+<h2 id="troubleshooting"><a class="zola-anchor" href="#troubleshooting" aria-label="Anchor link for: troubleshooting">Troubleshooting</a></h2>
+<h3 id="authentication-errors"><a class="zola-anchor" href="#authentication-errors" aria-label="Anchor link for: authentication-errors">Authentication Errors</a></h3>
+<p>If you encounter authentication errors, you may need to reauthorize rclone:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> rclone config reconnect box:
+</span></code></pre>
+<h3 id="connection-timeouts"><a class="zola-anchor" href="#connection-timeouts" aria-label="Anchor link for: connection-timeouts">Connection Timeouts</a></h3>
+<p>For unreliable internet connections, increase the timeout values:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">rclone</span><span> sync</span><span style="color:#f29718;"> --contimeout</span><span> 120s</span><span style="color:#f29718;"> --timeout</span><span> 600s ...
+</span></code></pre>
+<h3 id="path-issues-on-windows"><a class="zola-anchor" href="#path-issues-on-windows" aria-label="Anchor link for: path-issues-on-windows">Path Issues on Windows</a></h3>
+<p>Windows users might encounter issues with path formats:</p>
+<ol>
+<li>
+<p>Backslash vs. Forward Slash: Windows uses backslashes (<code>\</code>) in file paths, but you need to escape them in batch files with another backslash or use caret (<code>^</code>) before special characters.</p>
+</li>
+<li>
+<p>Long Path Names: If you encounter “path too long” errors, you can prefix your paths with <code>\\?\</code> to enable long path support:</p>
+<pre data-lang="bat" style="background-color:#0f1419;color:#bfbab0;" class="language-bat "><code class="language-bat" data-lang="bat"><span>rclone sync </span><span style="color:#c2d94c;">&quot;\\?\C:\Very Long Path\...&quot;</span><span> box:</span><span style="color:#ff7733;">backup
+</span></code></pre>
+</li>
+<li>
+<p>Spaces in Paths: Always enclose paths with spaces in quotes:</p>
+<pre data-lang="bat" style="background-color:#0f1419;color:#bfbab0;" class="language-bat "><code class="language-bat" data-lang="bat"><span>rclone sync </span><span style="color:#c2d94c;">&quot;C:\Users\Your Name\Documents&quot;</span><span> box:</span><span style="color:#ff7733;">backup
+</span></code></pre>
+</li>
+</ol>
+<h3 id="sync-taking-too-long"><a class="zola-anchor" href="#sync-taking-too-long" aria-label="Anchor link for: sync-taking-too-long">Sync Taking Too Long</a></h3>
+<p>If syncs are taking too long, consider:</p>
+<ul>
+<li>Refining your exclude list</li>
+<li>Using <code>--max-age</code> to only sync recent files</li>
+<li>Using <code>--size-only</code> to compare file sizes instead of modification times</li>
+<li>Using <code>--transfers</code> to adjust concurrent transfers (higher for fast connections)</li>
+</ul>
+<h3 id="windows-specific-performance-tips"><a class="zola-anchor" href="#windows-specific-performance-tips" aria-label="Anchor link for: windows-specific-performance-tips">Windows-Specific Performance Tips</a></h3>
+<p>Windows users can improve performance with:</p>
+<ol>
+<li>
+<p>Disable Virus Scanning for rclone: Add exclusions in your antivirus for rclone.exe and your backup directories.</p>
+</li>
+<li>
+<p>Adjust Priorities: Run rclone with higher priority:</p>
+<pre data-lang="bat" style="background-color:#0f1419;color:#bfbab0;" class="language-bat "><code class="language-bat" data-lang="bat"><span style="color:#ff7733;">start</span><span> /b /high rclone sync ...
+</span></code></pre>
+</li>
+<li>
+<p>Disable Indexing: Disable Windows Search indexing on your backup directories.</p>
+</li>
+</ol>
+<h3 id="logging-and-debugging"><a class="zola-anchor" href="#logging-and-debugging" aria-label="Anchor link for: logging-and-debugging">Logging and Debugging</a></h3>
+<p>For detailed troubleshooting, add the <code>-vv</code> flag for very verbose output:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> rclone sync</span><span style="color:#f29718;"> -vv</span><span> ...
+</span></code></pre>
+<p>For even more detailed logs:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">rclone</span><span> sync</span><span style="color:#f29718;"> --dump</span><span> headers</span><span style="color:#f29718;"> --dump</span><span> bodies ...
+</span></code></pre>
+<p>This will dump all HTTP headers and response bodies to the log.</p>
+<h3 id="windows-event-log-integration"><a class="zola-anchor" href="#windows-event-log-integration" aria-label="Anchor link for: windows-event-log-integration">Windows Event Log Integration</a></h3>
+<p>Windows users can log to the Windows Event Log:</p>
+<pre data-lang="bat" style="background-color:#0f1419;color:#bfbab0;" class="language-bat "><code class="language-bat" data-lang="bat"><span>rclone sync ... --log-file=eventlog:rclone
+</span></code></pre>
+<p>You can then view these logs in the Windows Event Viewer.</p>
+<h2 id="conclusion"><a class="zola-anchor" href="#conclusion" aria-label="Anchor link for: conclusion">Conclusion</a></h2>
+<p>Setting up automated backups to Box using rclone is a powerful way to ensure your important data is safely stored in the cloud. The initial setup might seem a bit technical, but once configured, your backup system will run reliably with minimal maintenance.</p>
+<p>Remember that a good backup strategy follows the “3-2-1 rule”:</p>
+<ul>
+<li>3 copies of your data</li>
+<li>2 different storage types</li>
+<li>1 copy offsite</li>
+</ul>
+<p>Box with rclone helps you satisfy the offsite requirement, but consider combining it with local backups for a comprehensive strategy.</p>
+<p>I hope this guide helps you keep your data safe! Let me know in the comments if you have any questions or suggestions for improving this backup system.</p>
+
+        </section>
+    </article>
+</main>
+
+
+
+        
+            
+        
+
+        
+        <div class="giscus"></div>
+         <script src="https://giscus.app/client.js"
+        data-repo="SeniorMars/seniormars.com"
+        data-repo-id="R_kgDOJQ6QAQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOJQ6QAc4CgC4Q"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
+        
+    </div>
+</body>
+
+</html>

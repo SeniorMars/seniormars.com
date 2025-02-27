@@ -1,0 +1,265 @@
+\documentclass{report}
+
+\input{preamble}
+\input{macros}
+\input{letterfonts}
+\usetikzlibrary{cd}
+
+\title{\Huge{Math 354}\\Notes}
+\author{\huge{Charlie Cruz}}
+\date{}
+
+\begin{document}
+
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{toc}
+\tableofcontents
+\pagebreak
+
+
+\begin{tikzcd}
+A \arrow[r, "\phi"] \arrow[d, red]
+& B \arrow[d, "\psi" red] \\
+C \arrow[r, red, "\eta" blue]
+& D
+\end{tikzcd}
+
+
+\mclm{Information about the class}{
+
+	\parinf
+
+	Math 354 Honors Linear Algebra.
+
+	Professor Varilly-Alvarado (Dr. V.) with his email being \href{varilly@rice.edu}{varilly@rice.edu}.
+
+	Office: HBH 222
+
+	Office Hours: Monday 3:30 – 5:00 pm, F 3-4PM (to be confirmed)
+
+	We will be using the book \textit{Linear Algebra Done Right} by Sheldon Axler.
+}
+
+\begin{table}[htpb]
+	\centering
+	% \caption{}
+	\label{tab:notation}
+	\begin{tabular}{|c|c|}
+		\hline
+		\textbf{Notation} & \textbf{Definition}                                                          \\
+		\hline
+		$\NN$             & The set of natural numbers $= \{1, 2, 3, 4, \ldots\}$                        \\
+		$\ZZ$             & The set of integers $= \{\ldots, -2, -1, 0, 1, 2 \ldots\}$                   \\
+		$\QQ$             & The set of rational numbers $= \{\frac{a}{b} \mid a, b \in \ZZ, b \neq 0 \}$ \\
+		$\RR$             & The set of real numbers                                                      \\
+		$\CC$             & The set of complex numbers $= \{a + bi \mid a, b \in \RR, i^2 = -1\}$        \\
+		$\in$             & The symbol $\in$ means ``is an element of'' or ``belongs to''                \\
+		$\notin$          & The symbol $\notin$ means ``is not an element of'' or ``does not belong to'' \\
+		$\subset$         & The symbol $\subset$ means ``is a subset of''                                \\
+		$\subseteq$       & The symbol $\subseteq$ means ``is a subset of or equal to''                  \\
+		$\cap$            & The symbol $\cap$ means ``intersection of''                                  \\
+		$\cup$            & The symbol $\cup$ means ``union of''                                         \\
+		$\setminus$       & The symbol $\setminus$ means ``set difference of''                           \\
+		$\emptyset$       & The symbol $\emptyset$ means ``the empty set''                               \\
+		$\forall$         & The symbol $\forall$ means ``for all''                                       \\
+		$\exists$         & The symbol $\exists$ means ``there exists''                                  \\
+		$\mid$            & The symbol $\mid$ in $\{ a \mid a \in \RR\}$ means ``such that''             \\
+		$\implies$        & The symbol $\implies$ means ``implies''                                      \\
+		$\iff$            & The symbol $\iff$ means ``if and only if''                                   \\
+		$\vec{a}$         & The symbol $\vec{a}$ means ``the vector $a$''                                \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\mclm{Mathematical Induction}{
+
+	Set of Natural Numbers
+
+	\begin{enumerate}[label=(\alph*)]
+		\item \(\NN = \left\{ 1, 2, 3, 4, \ldots \right\} \) Natural Numbers
+		\item \(\ZZ = \left\{ \ldots, -2, -1, 0, 1, 2, \ldots \right\} \) Integers
+	\end{enumerate}
+
+	Mathematical Induction is a technique of proof that allows you to verify statements
+
+	indexed by \(\NN\) or a subset of \(\ZZ\).
+
+	\ex{}{
+
+		For all \(n \in \NN\), it is true that:
+
+		\[
+			1 + 2 + 3 + \ldots + n = \frac{n(n+1)}{2}
+		\]
+
+		e.g.: \(n = q \quad 1 = \frac{1 \cdot 2}{2}\), and so on for \(n = 2, 3, \ldots\).
+	}
+
+	\mclm{Induction}{
+
+		\(P(n)\) is a statement depending on \(n \in \NN\).
+
+		e.g. "\(1 + 2 + 3 + \ldots + n = \frac{n(n+1)}{2}\)"
+
+		\parinf
+		Now suppose that
+
+		\begin{enumerate}[label=(\roman*)]
+			\item \(P(1)\) is true (base case)
+			\item If \(P(k)\) is true for some \(k \in \NN\), then \(P(k+1)\) is true (inductive step)
+		\end{enumerate}
+
+		Then \(P(n)\) is true for all \(n \in \NN\).
+
+		\nt{Think about this as a domino effect.}
+
+	}
+
+	\pf{Example}{
+
+		Let \(P(n): 1 + 2 + \ldots + n = \frac{n(n+1)}{2}\).
+
+		\begin{enumerate}[label=(\roman*)]
+			\item \(P(1)\) is true because \(1 = \frac{1(1+1)}{2}\).
+			\item Suppose \(P(k)\) is true for some \(k \in \NN\). Then
+
+			      \begin{align*}
+				      1 + 2 + \ldots + k + (k+1) & = \frac{k(k+1)}{2} + (k+1)                \\
+				                                 & = \frac{k(k+1) + 2(k+1)}{2}               \\
+				                                 & = \frac{(k+1)(k+2)}{2}                    \\
+				                                 & = \frac{(k+1)((k+1)+1)}{2}                \\
+				                                 & = \frac{n(n+1)}{2} \text{ where } n = k+1
+			      \end{align*}
+
+			      Therefore, \(P(k+1)\) is true.
+		\end{enumerate}
+
+	}
+
+	\nt{
+		Baby Version
+		Let \(A \subseteq \NN\)  be a subset. Suppose that
+		\begin{enumerate}[label=(\roman*)]
+			\item \( 1 \in A\)
+			\item If \(k \in A\), then \(k + 1 \in A\)
+		\end{enumerate}
+
+		Then \(A = \NN\)
+
+		Baby version \(\implies\) PMI (let \(A \left\{ n \in \NN \colon p(n) \text{ is true}\right\} \))
+	}
+}
+
+\ex{Same proof in two different ways}{
+	Let \(p(n) \colon \frac{1}{1 *2} + \frac{1}{2 *3} + \frac{1}{n(n+1)} = \frac{n}{n+1}\)  for all \(n \in \NN\).
+
+	\pf{Proof 1.0}{
+		For \(n \in  \NN\), let \(p(n)\) be the statement:
+
+		\[
+			\frac{1}{1 *2} + \frac{1}{2 *3} + \frac{1}{n(n+1)} = \frac{n}{n+1}.
+		\]
+
+		We show that \(p(n)\)  is true for all \(n \in \NN\)  by induction.
+
+		\mclm{Base Case}{
+			\(p(1)\) is true because \(\frac{1}{1 *2} = \frac{1}{2} = \frac{1}{1+1}\).
+		}
+		\mclm{Inductive Step}{
+			Assume that \(p(k)\) is true for some \(k \in \NN\). Then
+
+			\[
+				\frac{1}{1 *2} + \frac{1}{2 *3} + \ldots + \frac{1}{k(k+1)} = \frac{k}{k+1} \quad (1)
+			\]
+
+			We want to deduce that \(p(k+1)\) is true i.e.
+
+			\[
+				\frac{1}{1 *2} + \frac{1}{2 *3} + \ldots + \frac{1}{k(k+1)} + \frac{1}{(k+1)(k+2)} = \frac{k+1}{k+2} \quad (2)
+			\]
+
+			To do this, add \(\frac{1}{(k+1)(k+2)}\) to both sides of \((1)\).
+
+			\[
+				\frac{1}{1 * 2} + \frac{1}{2 * 3} + \ldots + \frac{1}{k(k+1)} + \frac{1}{(k+1)(k+2)} = \frac{k}{k+1} + \frac{1}{(k+1)(k+2)}.
+			\]
+
+			The RHS of this equation is:
+
+			\[
+				\frac{k}{k+1} + \frac{1}{(k+1)(k+2)} = \frac{k(k+2) + 1}{(k+1)(k+2)} = \frac{k^2 + 2k + 1}{(k+1)(k+2)} = \frac{(k+1)^2}{(k+1)(k+2)} = \frac{k+1}{k+2}
+			\]
+
+			This shows that \(p(k+1)\) true, completing the induction step.
+
+			Therefore, \(p(n)\) is true for all \(n \in \NN\).
+		}
+	}
+
+	\pf{Proof 2.0}{
+
+		We prove the statement by induction on \(n\).
+
+		The base case, when \(n = 1\), is true because \(\frac{1}{1 *2} = \frac{1}{2} = \frac{1}{1+1}\).
+
+		For the inductive step, assume the claim is the true for some \(k \in \NN\).
+
+		\[
+			\frac{1}{1 *2} + \frac{1}{2 *3} + \ldots + \frac{1}{k(k+1)} = \frac{k}{k+1}
+		\]
+
+		Add \(\frac{1}{(k+1)(k+2)}\) to both sides of the equation to obtain
+
+		\begin{align*}
+			\frac{1}{1*2} + \frac{1}{2*3} + \ldots + \frac{1}{k(k+1)} + \frac{1}{(k+1)(k+2)} & = \frac{k}{k+1} + \frac{1}{(k+1)(k+2)} \\
+			                                                                                 & = \frac{k(k+2) + 1}{(k+1)(k+2)}        \\
+			                                                                                 & = \frac{k^2 + 2k + 1}{(k+1)(k+2)}      \\
+			                                                                                 & = \frac{(k+1)^2}{(k+1)(k+2)}           \\
+			                                                                                 & = \frac{k+1}{k+2}
+		\end{align*}
+
+		Then, the claim is true for \(k+1\), completing the inductive step.
+
+		We deduce that the claim is true for all \(n \in \NN\) by induction.
+	}
+}
+
+% chapter 1
+\input{chapter1}
+
+% chapter 2
+\input{chapter2}
+
+% chapter 3
+\input{chapter3}
+
+% chapter 4
+\input{chapter4}
+
+% chapter 5
+\input{chapter5}
+
+% chapter 6
+\input{chapter6}
+
+% chapter 7
+\input{chapter7}
+
+% chapter 8
+\input{chapter8}
+
+% chapter 9
+\input{chapter9}
+
+% chapter 10
+\input{chapter10}
+
+
+Consider the group:
+
+\[
+	\Gamma = \left< \begin{bmatrix} 0 & -1 \\ 1 & 1 \end{bmatrix}, \begin{bmatrix} -1 & -\sqrt{2} \\ \sqrt{2} + 1 & \sqrt{2} + 1\end{bmatrix} \right>
+\] 
+
+\end{document}

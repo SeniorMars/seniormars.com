@@ -1,0 +1,410 @@
+\chapter{Polynomials}
+
+\dfn{}{
+	Let \(z = a + bi\) where \(a, b \in \RR\). Then:
+
+	\begin{enumerate}[label=(\roman*)]
+		\item The real part of \(z\) is \(a\), denoted \(\Re(z)\) or \(\text{Re}(z)\).
+		\item The imaginary part of \(z\) is \(b\), denoted \(\Im(z)\) or \(\text{Im}(z)\).
+	\end{enumerate}
+
+	Hence, \(z = \Re(z) + i\Im(z)\).
+}
+
+
+\dfn{}{
+	Let \(z \in \CC\), then
+
+	The complex conjugate of \(z\) is \(\overline{z} = \Re(z) - \Im(z)i\).
+
+	The absolute value of \(z\) is \(\abs{z} = \sqrt{\Re(z)^2 + \Im(z)^2}\).
+}
+
+\mclm{Properties of Complex numbers}{
+	Let \(w, z \in \CC\), where:
+
+	\begin{align*}
+		z            & = a + bi \\
+		w            & = c + di \\
+		\overline{z} & = a - bi \\
+		\overline{w} & = c - di
+	\end{align*}
+
+	\begin{enumerate}[label=(\roman*)]
+		\item Sum of \(z\) and \(\overline{z}\): \(z + \overline{z} = 2\Re(z)\)
+
+		      \pf{Proof}{
+
+			      \begin{align*}
+				      z + \overline{z} & = (a + bi) + (a - bi) \\
+				                       & = 2a                  \\
+				                       & = 2\Re(z)
+			      \end{align*}
+
+		      }
+		\item Difference of \(z\) and \(\overline{z}\): \(z - \overline{z} = 2i\Im(z)\)
+
+		      \pf{Proof}{
+
+			      \begin{align*}
+				      z - \overline{z} & = (a + bi) - (a - bi) \\
+				                       & = 2bi                 \\
+				                       & = 2\Im(z)i
+			      \end{align*}
+
+		      }
+
+		\item Product of \(z\) and \(\overline{z}\): \(z\overline{z} = \abs{z}^2\)
+
+		      \pf{Proof}{
+
+			      \begin{align*}
+				      z\overline{z} & = (a + bi)(a - bi)         \\
+				                    & = a^2 - abi + abi - b^2i^2 \\
+				                    & = a^2 + b^2                \\
+				                    & = \abs{z}^2
+			      \end{align*}
+
+		      }
+		\item Additivity of complex conjugate: \(\overline{w + z} = \overline{w} + \overline{z}\)
+
+		      \pf{Proof}{
+
+			      \begin{align*}
+				      \overline{z} + \overline{w} & = (a - bi) + (c - di) \\
+				                                  & = (a + c) - (b + d)i  \\
+				                                  & = \overline{w + z}
+			      \end{align*}
+
+		      }
+
+		\item Multiplicativity of complex conjugate: \(\overline{wz} = \overline{w} \cdot \overline{z}\)
+
+		      \pf{Proof}{
+
+			      \begin{align*}
+				      \overline{w} \cdot \overline{z} & = (c - di)(a - bi)       \\
+				                                      & = ac - adi - bci - bdi^2 \\
+				                                      & = ac - adi - bci + bd    \\
+				                                      & = (ac + bd) - (ad + bc)i \\
+				                                      & = \overline{wz}
+			      \end{align*}
+
+		      }
+
+		\item Conjugate of a conjugate: \(\overline{\overline{z}} = z\)
+
+		      \pf{Proof}{
+
+			      \begin{align*}
+				      \overline{\overline{z}} & = \overline{a - bi} \\
+				                              & = a + bi            \\
+				                              & = z
+			      \end{align*}
+
+		      }
+
+		\item Real and imaginary parts are bounded by \(\left\lvert z \right\rvert \):
+
+		      \pf{Proof}{
+
+			      \begin{align*}
+				      \abs{z}^2 & = z\overline{z}    \\
+				                & = (a + bi)(a - bi) \\
+				                & = a^2 + b^2        \\
+				      \abs{z}^2 & \geq a^2           \\
+				      \abs{z}^2 & \geq b^2           \\
+				      \abs{z}   & \geq a             \\
+				      \abs{z}   & \geq b
+			      \end{align*}
+		      }
+
+		\item Absolute value of the complex conjugate: \(\abs{\overline{z}} = \abs{z}\)
+
+		      \pf{Proof}{
+
+			      \begin{align*}
+				      \abs{\overline{z}} & = \abs{a - bi}     \\
+				                         & = \sqrt{a^2 + b^2} \\
+				                         & = \abs{z}
+			      \end{align*}
+
+		      }
+
+		\item Multiplicativity of absolute value: \(\abs{wz} = \abs{w}\abs{z}\)
+
+		      \pf{Proof}{
+
+			      \begin{align*}
+				      \abs{wz}^{2} & = (wz)(\overline{wz})                      \\
+				      \abs{wz}     & = \sqrt{(wz)(\overline{wz})}               \\
+				                   & = \sqrt{(w\overline{w})(z\overline{z})}    \\
+				                   & = \sqrt{w\overline{w}}\sqrt{z\overline{z}} \\
+				                   & = \abs{w}\abs{z}
+			      \end{align*}
+		      }
+		\item Triangle Equality: \(\abs{w + z} \leq \abs{w} + \abs{z}\)
+
+
+
+
+		      \pf{Proof}{
+
+			      \begin{align*}
+				      \left\lvert w + z \right\rvert^{2} & = (w + z)(\overline{w} + \overline{z})                                                                                                     \\
+				                                         & = w\overline{w} + w\overline{z} + z\overline{w} + z\overline{z}                                                                            \\
+				                                         & = \left\lvert w \right\rvert^{2} + w\overline{z} + \overline{\overline{w}z} + \left\lvert z \right\rvert^{2}                               \\
+				                                         & = \left\lvert w \right\rvert^{2} +  \left\lvert z \right\rvert^{2} + 2 \Re(w\overline{z})                                                  \\
+				                                         & \leq \left\lvert w \right\rvert^{2} +  \left\lvert z \right\rvert^{2} + 2 \left\lvert w\overline{z} \right\rvert                           \\
+				                                         & \leq \left\lvert w \right\rvert^{2} +  \left\lvert z \right\rvert^{2} + 2 \left\lvert w \right\rvert \left\lvert \overline{z} \right\rvert \\
+				                                         & = \left(\left\lvert w \right\rvert + \left\lvert z \right\rvert\right)^{2}                                                                 \\
+			      \end{align*}
+
+		      }
+
+	\end{enumerate}
+}
+
+\dfn{}{
+	Geometric interpretation of complex numbers:
+
+	Let \(w, z \in \CC\), \(\theta, \phi \in \RR\).
+
+	Let's write \(z = \left\lvert z \right\rvert (\cos(\theta) + i\sin(\theta))\),
+
+	And \(w = \left\lvert w \right\rvert (\cos(\phi) + i\sin(\phi))\).
+
+
+	Then:
+
+	\[
+		zw = \left\lvert z \right\rvert \left\lvert w \right\rvert (\cos(\theta + \phi) + i\sin(\theta + \phi))
+	\]
+
+	\pf{Proof}{
+
+		Let's use trig identities:
+
+		\begin{align*}
+			zw & = (r(\cos(\theta) + i\sin(\theta)))(s(\cos(\phi) + i\sin(\phi)))                                           \\
+			   & = rs(\cos(\theta)\cos(\phi) - \sin(\theta)\sin(\phi) + i(\cos(\theta)\sin(\phi) + \sin(\theta)\cos(\phi))) \\
+			   & = rs(\cos(\theta + \phi) + i\sin(\theta + \phi))
+		\end{align*}
+
+		We used the following trig identities:
+
+		\begin{align*}
+			\cos(\alpha + \beta) & = \cos(\alpha)\cos(\beta) - \sin(\alpha)\sin(\beta) \\
+			\sin(\alpha + \beta) & = \cos(\alpha)\sin(\beta) + \sin(\alpha)\cos(\beta)
+		\end{align*}
+
+	}
+
+}
+
+\thm{}{
+Let \(a_{0}, \ldots, a_{m} \in \FF\). If:
+
+\[
+	a_{0} + a_{1}x + \ldots + a_{m}x^{m} = 0
+\]
+
+For every \(x \in \FF\), then \(a_{0} = \ldots = a_{m} = 0\).
+
+\pf{Proof}{
+
+Assume the contrapositive. Let our polynomial be given by
+
+\[ p(x) = a_0 + a_1x + \dots + a_mx^m \]
+
+If this polynomial is not the zero function, then there exists some coefficient \(a_k \neq 0\).
+
+Without loss of generality, let's assume that \( a_m \) is that coefficient.
+
+We want to show that there exists some value \(x = z\) for which the polynomial does not evaluate to zero.
+
+Specifically, we'll show that the term \(a_mz^m\) will dominate all other terms for a sufficiently large \(z\),
+
+such that the polynomial cannot evaluate to zero.
+
+To do this, let's choose \(z\) such that
+
+\[ z > \frac{\sum_{j=0}^{m-1} \abs{a_j}}{\abs{a_m}} \]
+
+Given this choice of \(z\), the magnitude of the term \(a_mz^m\) will exceed the combined magnitudes of all the other terms:
+
+\[ |a_mz^m| > |a_0| + |a_1z| + \dots + |a_{m-1}z^{m-1}| \]
+
+Now, when we evaluate \(p(z)\):
+
+\[ p(z) = a_0 + a_1z + \dots + a_{m-1}z^{m-1} + a_mz^m
+\]
+
+Given our choice of \(z\), it's clear that \(p(z) \neq 0\).
+
+This completes the proof by contrapositive.
+
+Thus, if a polynomial is the zero function, all of its coefficients must be zero.
+
+}
+}
+
+\qs{}{
+	Fix a real number \(c\).
+
+	\begin{enumerate}[label=(\alph*)]
+		\item Show that if \(p\) has degree \(n>0\), then there is some monomial \(q\) such that \(p-(x-c) q\) is a polynomial of degree less than \(n\). (A monomial is a polynomial that has only one non-zero term.)
+		\item Suppose that \(p\) is a polynomial with a root at \(x=\) i.e., \(p(c)=0\). Show that \((x-c)\) is a factor of \(p\) (that is, there is some polynomial \(r\) such that \(p=(x-c) r\) ).
+	\end{enumerate}
+
+}
+
+\pf{Proof of \(a\)}{Given polynomial \(p\) with degree \(n>0\), and the form \(p(x)=a_0+a_1 x+a_2 x^2+\ldots+a_n x^n\), for \(a_{i} \in \RR\).
+
+	Let's fix \(c\), now, we want to show that there is some monomial \(q\)
+
+	such that \(p-(x-c) q\) is a polynomial of degree less than \(n\).
+
+	Let's proceed by induction on \(n \in \NN\),
+
+	\mclm{Base Case}{
+		Let \(n = 1\), which means that \(p(x)\) has a degree of \(1\).
+
+		\[
+			p(x) = a_0 + a_1 x
+		\]
+
+		Clearly, we can pick \(q = a_1\) (as it is a monomial).
+
+		Moreover, if we solve for \(p - (x-c)q\), we get
+
+		\begin{align*}
+			p - (x-c)q & = (a_0 + a_1 x) - (x-c)(a_1)  \\
+			           & = a_0 + a_1 x - a_1 x + a_1 c \\
+			           & = a_0 + a_1 c
+		\end{align*}
+
+		Notice, that \(a_0 + a_1 c\) is a constant polynomial, meaning that its degree is \(0\), which is less than \(1\).
+
+		Hence, the base case holds.
+	}
+
+	\mclm{Inductive Step}{
+		Assume the statement holds for all polynomials \(p\) with degree less than \(n\).
+
+		Thus, for all \(k < n, k \in \NN\), we have a monomial \(q\) s.t. \(p-(x-c) q\) is a polynomial of degree less than \(k\).
+
+		Now, we want to show that the statement holds for \(n\).
+
+		Let's consider a polynomial \(p\) with degree \(n\), then we can write:
+
+		\[
+			p(x) = a_{n} x^{n} + p_{n-1}(x) \text{, where } p_{n-1}(x) \text{ is a polynomial of degree less than } n
+		\]
+
+		By our inductive hypothesis, we know that there is some monomial \(q_{n-1}(x)\)
+
+		such that  \(p_{n-1} - (x-c)q_{n-1}\) is a polynomial of degree less than \(n-1\).
+
+		Combining this information, let's pick \(q(x) = a_n x^{n-1}\). Clearly, \(q(x)\) is a monomial.
+
+		Thus, we have:
+
+		\begin{align*}
+			p - (x-c)q & = (a_{n} x^{n} + p_{n-1}(x)) - (x-c)(a_n x^{n-1})                                            \\
+			           & = a_{n} x^{n} + p_{n-1}(x) - a_n x^{n} + a_n c x^{n-1} \quad\text{ leading term cancels out} \\
+			           & = p_{n-1}(x) + a_n c x^{n-1}
+		\end{align*}
+
+		Notice that the degree of \(p_{n-1}(x) + a_n c x^{n-1}\) is less than \(n\).
+
+		This holds as the degree of \(p_{n-1}(x)\) is less than \(n-1\) and \(a_n c x^{n-1}\) is a term of degree \(n-1\).
+
+		Which means the polynomial \(p - (x-c)q\) is a polynomial of degree less than \(n\).
+
+		Therefore, the inductive step holds.
+	}
+
+	\parinf
+	Thus, by the principle of mathematical induction, we have shown that if \(p\) has degree \(n>0\),
+
+	then there is some monomial \(q\) such that \(p-(x-c) q\) is a polynomial of degree less than \(n\) for all \(n \in \NN\).
+}
+
+\pf{Proof of \(b\)}{
+	Assume that \(p\) is a polynomial with a root at \(x=c\), i.e., \(p(c)=0\).
+
+	We want to show that \((x-c)\) is a factor of \(p\), i.e., there is some polynomial \(r\) such that \(p=(x-c) r\).
+
+	Let's proceed by induction on \(n \in \NN\) for the degree of \(p\).
+
+	Note that if \(n = 0\), then it is trivially true that \(p = (x-c) r\).
+
+	\mclm{Base Case}{
+		If \(n = 1\), then \(p(x) = a_0 + a_1 x\).
+
+		As \(p(c) = 0\), this implies that \(a_0 + a_1 c = 0\) and \(a_0 = -a_1 c\).
+
+		Hence, \(p(x) = a_1(x - c)\) and \((x - c)\) is a factor of \(p\).
+
+		Notice that \(r = a_1\), so the base case holds.
+	}
+
+	\mclm{Inductive Step}{
+		Assume that the statement holds for some \(k \in \NN\), then
+
+		for any polynomial \(p\) of degree \(k\) with \(p(c) = 0\), \((x - c)\) is a factor of \(p\).
+
+		Now, let's consider a polynomial \(p\) of degree \(k+1\).
+
+		By part (a), there exists a monomial \(q\) such that
+
+		\[
+			p - (x-c)q \text{ is a polynomial of degree less than }k+1
+		\]
+
+		Hence, we can write \(p\) as:
+
+		\[
+			p(x) = (x-c)q(x) + s(x)
+		\]
+
+		Where \(s(x)\) is the difference of the two polynomials with degree less than \(k+1\).
+
+		Now substituting \(x = c\) into \(p(x)\), we get:
+
+		\begin{align*}
+			p(c)          & = (c-c)q(c) + s(c) \\
+			              & = 0 + s(c)         \\
+			              & = 0                \\
+			\implies s(c) & = 0
+		\end{align*}
+
+		Thus, by our inductive hypothesis, we know that \((x-c)\) is a factor of \(s(x)\).
+
+		Which means we can write:
+
+		\[
+			s(x) = (x-c)t(x)
+		\]
+
+		Substituting this into our original equation, we get:
+
+		\begin{align*}
+			p(x) & = (x-c)q(x) + s(x)      \\
+			     & = (x-c)q(x) + (x-c)t(x) \\
+			     & = (x-c)(q(x) + t(x))
+		\end{align*}
+
+		Thus, \((x-c)\) is a factor of \(p\) with some polynomial \(r = q(x) + t(x)\).
+
+		Completing the inductive step.
+	}
+
+	\parinf
+	Thus, through the principle of mathematical induction,
+
+	we have shown that if \(p\) is a polynomial with a root at \(x=c\), i.e., \(p(c)=0\),
+
+	then \((x-c)\) is a factor of \(p\), i.e., there is some polynomial \(r\) such that \(p=(x-c) r\).
+}

@@ -1,0 +1,755 @@
+\chapter{Eigenvalues, Eigenvectors, and Invariant Subspaces}
+
+\section{Invariant subspaces (5.A + 5.B)}
+
+\nt{
+	Goal: understand the building blocks / internal structure of \(T \in \sL(V)\), especially when \(V\) is finite-dimensional.
+
+	Idea: Maybe \(V = \bigoplus_{i = 1}^{m} U_{i}\)
+
+	Restrict attention to \(T \mid_{U_{i}} : U_{i} \to V\).
+}
+
+\dfn{}{
+	Let \(U \subseteq V\) is an invariant subspace under \(T\) if
+
+	\[
+		u \in U \implies T(u) \in U
+	\]
+
+	in other words, if \(Im(T\mid_{U}) \subseteq U\),
+
+	or \(T\mid_{U} : U \to U\), i.e., \(T\mid_{u} \in \sL(U)\) where \(T: V \to V\).
+}
+
+\ex{}{
+	What does a \(1\) dimensional invariant subspace under \(T\) look like?
+
+	\(U = \operatorname{span}\left( v \right) \). Then \(T(v) \in U\), so \(T(v) = \lambda v\) for some \(\lambda \in \FF\).
+
+	Conversely, if \(v \neq \vec{0_{v}} \) and \(T(v) = \lambda v\) for some \(\lambda \in \FF\),
+
+	then \(U = \operatorname{span}\left( v \right) \) is \(1\)-dimensional invariant subspace under \(T\).
+
+	We call \(\lambda\) an eigenvalue of \(T\).
+
+	If \(v \neq \vec{0_{v}} \), then \(v\) is an eigenvector for the eigenvalue \(\lambda\).
+}
+
+\mprop{}{
+	Suppose that \(V\) is a finite-dimensional vector space over \(\FF\) and \(T \in \sL(V)\).
+
+
+	Then the following are equivalent:
+
+	\begin{enumerate}[label=(\alph*), wide]
+		\item \(\lambda \in \FF\) is an eigenvalue of \(T\).
+		\item \(T - \lambda Id\) is not injective.
+		\item \(T - \lambda Id\) is not surjective.
+		\item \(T - \lambda Id\) is not invertible.
+	\end{enumerate}
+
+	Where \(T - \lambda Id \in \sL(V)\):
+
+	\begin{align*}
+		(T - \lambda Id)(v) & = T(v) - \lambda Id(v) \\
+		                    & = T(v) - \lambda v
+	\end{align*}
+
+	And given \(T, S \in \sL(V, W)\), \((T + S)(v) = T(v) + S(v)\) for all \(v \in V\).
+
+	Thus, \(T, \lambda Id \in \sL(V, V)\), so \(T - \lambda Id \in \sL(V, V)\).
+
+	\pf{Proof of \(1 \iff 2\) } {
+		I didn't get this :sob:
+	}
+
+
+	Before we continue, let's prove a claim:
+}
+
+\clm{}{}{
+Eigenvectors corresponding to distinct eigenvalues are linearly independent.
+
+Let \(T \in \sL(V)\), and let \(\lambda_{1}, \ldots, \lambda_{m}\) be distinct eigenvalues of \(T\),
+
+with eigenvectors \(v_{1}, \ldots, v_{m}\) respectively.
+
+Then \(v_{1}, \ldots, v_{m}\) are linearly independent.
+
+\pf{Proof}{
+	Suppose for contradiction that \(v_{1}, \ldots, v_{m}\) are linearly dependent.
+
+	Then by the linear dependence lemma, there exists a (smallest) \(k \in \left\{ 1, \ldots, m \right\} \) such that
+
+	\[
+		v_{k} \in \operatorname{span}\left( v_{1}, \ldots, v_{k-1} \right) \text{ (so } v_1, \ldots, v_{k-1} \text{ are linearly independent)}
+	\]
+
+	This implies that \(v_{k} = a_1 v_1 + \ldots + a_{k-1} v_{k-1}\) for some \(a_1, \ldots, a_{k-1} \in \FF\).
+
+	Now apply \(T\):
+
+	\begin{align*}
+		T(v_{k})                & = T(a_1 v_1 + \ldots + a_{k-1} v_{k-1})                        \\
+		                        & = a_1 T(v_1) + \ldots + a_{k-1} T(v_{k-1})                     \\
+		                        & = a_1 \lambda_{1} v_1 + \ldots + a_{k-1} \lambda_{k-1} v_{k-1} \\
+		\lambda_{k} \cdot v_{k} & = a_1 \lambda_1 v_1 + \ldots + a_{k-1} \lambda_{k-1} v_{k-1}
+	\end{align*}
+
+	Now take: \(v_{k} \cdot (a_1  v_1 + \ldots + a_{k-1} v_{k-1}) - (a_1 \lambda_1 v_1 + \ldots + a_{k-1} \lambda_{k-1} v_{k-1})\):
+
+	\[
+		\vec{0_{v}}  = a_1 (\lambda_{k} - \lambda_{1}) v_1 + \ldots + a_{k-1} (\lambda_{k} - \lambda_{k-1}) v_{k-1}
+	\]
+
+	Since \(v_1, \ldots, v_{k-1}\) are linearly independent, this implies that:
+
+	\[
+		a_1 (\lambda_{k} - \lambda_{1}) = \ldots = a_{k-1} (\lambda_{k} - \lambda_{k-1}) = 0
+	\]
+
+	Since we are given that \(\lambda_{1}, \ldots, \lambda_{m}\) are distinct, we have that \(\lambda_{k} - \lambda_{i} \neq 0\) for all \(i \in \left\{ 1, \ldots, k-1 \right\} \).
+
+	This means that \(a_1 = \ldots = a_{k-1} = 0_{\FF}\).
+
+			Thus, \(v_{k} = \vec{0_{v}} \) thus \(v_{k}\) is not an eigenvector.
+
+			Which is a contradiction!
+
+		}
+
+	Thus, the claim holds.
+}
+
+\mclm{Last Time}{
+	Let \(V\) be a finite-dimensional vector space over \(\FF\) and \(T \in \sL(V)\).
+
+	i., \(T: v \to V\) is linear.
+
+	WE know that \(V \cong \FF^{n}\) for some \(n \in \NN\).
+
+	Think \(T: \FF^{n} \to \FF^{n}\).
+
+
+	Let \(A = \mcM(T, (e_1, \ldots, e_{n}))\), where \(e_1, \ldots, e_{n}\) is the standard basis for \(V\).
+
+
+	We defined the characteristic polynomial of \(T\) to be:
+
+	\[
+		\det(A - x I_{n}) \in P_{n}(\FF)
+	\]
+
+	We showed \(\lambda \in \FF\) is an eigenvalue for \(T \iff \det(A - \lambda I_{n}) = 0\).
+
+	The first part shows that there exists \(v \neq \vec{0_{v}}, T(v) = \lambda \cdot v\)
+}
+
+\thm{}{
+	Let \(v \neq \left\{ \vec{0_{v}}  \right\} \) be a finite-dimensional vector space over \(\CC\).
+
+	Let \(T \in \sL(V)\).
+
+	Then \(T\) has at least one eigenvalue.
+
+	\pf{Proof}{
+		Let \(n = \dim V\). Note \(n \geq 1\), since \(v \neq \left\{ \vec{0_{v}}  \right\} \) .
+
+		Then \(\det(A - x I_{n})\) is a polynomial of degree \(n\) with complex coefficients.
+
+		By the fundamental theorem of algebra (proved in Math 427),
+
+		a non-constant polynomial with complex coefficients has a root in \(\CC\).
+
+		Thus, there exists \(\lambda \in \CC\) such that \(\det(A - \lambda I_{n}) = 0\).
+	}
+}
+
+\ex{}{
+
+	Let
+
+	\[
+		A = \begin{pmatrix} 1 & 4 & 5 \\ 0 & 2 & 6 \\ 0 & 0 & 3 \end{pmatrix}
+	\]
+
+	Let:
+
+	\[
+		\det(A - x \cdot I_{3}) = \det\left(\begin{pmatrix} 1 & 4 & 5 \\ 0 & 2 & 6 \\ 0 & 0 & 3 \end{pmatrix} - \begin{pmatrix} x & 0 & 0 \\ 0 & x & 0 \\ 0 & 0 & x \end{pmatrix}\right)
+	\]
+
+	Thus, we get the following:
+
+	\[
+		\det\left(\begin{pmatrix} 1 - x & 4 & 5 \\ 0 & 2 - x & 6 \\ 0 & 0 & 3 - x \end{pmatrix}\right) = (1 - x)(2 - x)(3 - x)
+	\]
+
+	Roots of characteristic polynomial are \(x = 1, 2, \text{ or} 3\).
+
+}
+
+\mclm{Change of basis}{
+
+Does the characteristic polynomial depend on \(A\), or does it depend only on \(T\)?
+
+\[
+	T: \FF^{n} \to \FF^{n}
+\]
+
+We can have:
+
+\begin{align*}
+	A          & = \mcM(T, (e_1, \ldots, e_{n}))        \\
+	A^{\prime} & = \mcM(T, (f_1, \ldots, f_{n}))
+	f_{j}      & = a_{1,j} e_1 + \ldots + a_{n,j} e_{n}
+\end{align*}
+
+Which means our polynomial looks like:
+
+\[
+	P = \begin{pmatrix} a_{1,1} & \ldots & a_{1,n} \\ \vdots & \ddots & \vdots \\ a_{n,1} & \ldots & a_{n,n} \end{pmatrix}
+\]
+
+Where we get a new basis in terms of old basis.
+
+To get from \(A\) to \(A^{\prime}\):
+
+\[
+	A^{\prime} = \underbrace{P^{-1}}_{\text{converts e's to f's}} \cdot \underbrace{A}_{\text{apply T WRT e's}} \cdot \underbrace{P}_{\text{converts f's to e's}}
+\]
+}
+
+\mclm{What does this mean for our characteristic polynomial?}{
+
+	We have that:
+
+	\[
+		P^{-1}(A - x I_{n}) P = P^{-1} A P - \underbrace{P^{-1} x I_{n} P}_{x \cdot I_{n}} = P^{-1} A P - x I_{n}
+	\]
+
+	Thus, we can write our characteristic polynomial with respect to \(f\)'s as:
+
+	\begin{align*}
+		\det(A^{\prime} - x I_{n}) & = \det(P^{-1} A P - x I_{n})                                                           \\
+		                           & = \det(P^{-1} A P - x P^{-1} I_{n} P)                                                  \\
+		                           & = \det(P^{-1}(A - x I_{n}) P)                                                          \\
+		                           & = \det(p^{-1}) \cdot \det(A - x I_{n}) \cdot \det(P)                                   \\
+		                           & = \frac{1}{\det(P)} \cdot \det(A - x I_{n}) \cdot \det(P)                              \\
+		                           & = \det(A - x I_{n}) \text{ which is our characteristic polynomial with respect to E's}
+	\end{align*}
+
+	Our next foal is to find basis of \(V\) such that \(\mcM{T}\) has many zeros!
+
+	Makes computing determinants + eigenvalues easier.
+}
+
+\dfn{}{
+	\(\mcM(T)\) is upper triangular if every entry below the diagonal is \(0\).
+
+	For instance:
+
+	\[
+		\begin{pmatrix} 1 & 2 & 3 \\ 0 & 4 & 5 \\ 0 & 0 & 6 \end{pmatrix}
+	\]
+}
+
+\mprop{}{
+
+	Let \(T \in \sL(V)\). \(V\) is a finite-dimensional vector space over \(\FF\).
+
+	Let \(\vec{v_1}, \ldots, \vec{v_n} \) be a basis for \(V\).
+
+	The following are equivalent:
+
+	\begin{enumerate}[wide]
+		\item \(\mcM(T, (v_1, \ldots, v_n))\) is upper triangular.
+		\item \( T(v_{j}) \in \operatorname{span}\left( v_1, \ldots, v_{j} \right) \) for all \(j \in \left\{ 1, \ldots, n \right\} \).
+		\item For all \(j \in \left\{ 1, \ldots, n \right\}, \operatorname{span}\left( v_1, \ldots, v_{j} \right) \) is invariant subspace for \(T\).
+
+		      This means that \(T(\operatorname{span}\left( v_1, \ldots, v_{j} \right)) \subseteq \operatorname{span}\left( v_1, \ldots, v_{j} \right)\).
+	\end{enumerate}
+
+	\pf{Proof of \(1 \iff 2\) }{
+		Definition of \(\mcM(T)\).
+	}
+
+	\pf{Proof of \(2 \implies 3\) }{
+
+		Definition of invariant subspace.
+	}
+
+	\pf{Proof of \(2 \implies 3\) }{
+		Fix \(j \ge 1\).
+
+		Then:
+
+		\begin{align*}
+			T(v_1) & \in \operatorname{span}\left( v_1 \right) \subseteq \operatorname{span}\left( v_1, \ldots, v_{j} \right)      \\
+			T(v_2) & \in \operatorname{span}\left( v_1, v_2 \right) \subseteq \operatorname{span}\left( v_1, \ldots, v_{j} \right) \\
+			       & \vdots                                                                                                        \\
+			T(v_j) & \in \operatorname{span}\left( v_1, \ldots, v_{j} \right)
+		\end{align*}
+
+		Since \(T\) is linear.
+
+		Then this implies that \(T(a_1 v_1 + \ldots + a_{j} v_{j}) = a_1 T(v_1) + \ldots + a_{j} T(v_{j}) \in \operatorname{span}\left( v_1, \ldots, v_{j} \right)\).
+
+		Hence, \(T(\operatorname{span}\left( v_1, \ldots, v_{j} \right)) \subseteq \operatorname{span}\left( v_1, \ldots, v_{j} \right)\).
+	}
+
+}
+
+\thm{}{
+	Let \(V\) be a finite-dimensional vector space over \(\CC\) and \(T \in \sL(V)\).
+
+	Then there exists a basis \(\vec{v_1}, \ldots, \vec{v_n} \) of \(V\) such that \(\mcM(T, (v_1, \ldots, v_n))\) is upper triangular (UT).
+
+	For this, we need the above proposition.
+
+	\pf{Proof}{
+		Let's proceed on induction on \(n = \dim V\).
+
+		\mclm{Base Claim}{
+			Let \(n = 1\), then clearly every \(1 \times 1\) matrix is upper triangular.
+		}
+
+		\mclm{Inductive Step}{
+			Assume that the statement holds for all \(S \in \sL(W)\) with \(\dim W < \dim V\).
+
+			Let \(\lambda \in \CC\) be an eigenvalue for \(T\). This means it exists such that \(v \neq \vec{0_{v}} \).
+
+			Now consider \((T - \lambda \cdot Id : V \to V)\).
+
+			Set \(W  = Im(T - \lambda \cdot Id) \subseteq V\).
+
+			\mclm{Claim}{
+				\(W\) is an invariant subspace under \(T\).
+
+				\pf{Proof of claim}{
+					Let \(w \in W\). Then:
+
+					\begin{align*}
+						T(w) & = T(w) - \lambda \cdot w + \lambda \cdot w                                                                    \\
+						     & = \underbrace{(T - \lambda \cdot Id)(w)}_{\in W \text{ by definition}} + \underbrace{\lambda \cdot w}_{\in W} \\
+						     & \in W \text{ since \(W\) is closed under addition}
+					\end{align*}
+				}
+
+			}
+
+			Since \(\lambda\) is an eigenvalue, we know that \( T - \lambda \cdot Id \) is not surjective.
+
+			Which implies that \(W \subsetneq V\), thus \(\dim W < \dim V\).
+
+			With the claim, we can write:
+
+			\[
+				T \mid_{W} : W \to W
+			\]
+
+			This implies that \(T \mid_{W} \in \sL(W)\).
+
+			By our inductive hypothesis, there exists a basis \(\vec{w_1}, \ldots, \vec{w_m} \) of \(W\) such that
+
+			\(\mcM(T \mid_{W}, (w_1, \ldots, w_m))\) is upper triangular.
+
+			By our proposition, \(T(w_{j}) \in \operatorname{span}\left( w_1, \ldots, w_{j} \right) \) for some \(j\).
+
+			Extend to a basis for \(V\): \(\vec{w_1}, \ldots, \vec{w_m}, \vec{v_{1}}, \ldots, \vec{v_{n-m}} \).
+
+			Then, for \( k = 1, \ldots, n - m\), we have:
+
+			\begin{align*}
+				T(v_{k}) & = T(v_{k}) - \lambda \cdot v_{k} + \lambda \cdot v_{k}                                                                                               \\
+				         & = \underbrace{(T - \lambda \cdot Id)(v_{k})}_{\in W = \operatorname{span}\left( \vec{w_1}, \ldots, \vec{w_m}  \right) } + \lambda \cdot v_{k}        \\
+				         & \in \operatorname{span}\left( w_1, \ldots, w_{m}, v_{k} \right) \subseteq \operatorname{span}\left( w_1, \ldots, w_{m}, v_{1}, \ldots, v_{k} \right)
+			\end{align*}
+
+			By the proposition, \(\mcM(T, (v_1, \ldots, v_n))\) is upper triangular.
+
+		}
+
+		Thus, through the principle of strong mathematical induction, the statement holds for all finite-dimensional vector spaces over \(\CC\).
+	}
+}
+
+\clm{Upper triangular + invertibility}{}{
+	Let \(V\) be a finite-dimensional vector space over \(\FF\) and \(T \in \sL(V)\).
+
+	Now suppose there exists a basis for \(V\) such that \(\mcM(T)\) is UT (e.g., \(\FF = \CC\)).
+
+	Then \(T\) is invertible \(\iff\) all diagonal entries of \(\mcM(T)\) are non-zero.
+
+	\pf{Proof}{
+		By hypothesis, there exists a basis \(\vec{v_1}, \ldots, \vec{v_n} \) of \(V\) such that:
+
+		\[
+			\mcM(T, (v_1, \ldots, v_n)) = \begin{pmatrix} \lambda_{1} & & \star \\ & \ddots & \\ 0 & & \lambda_{n} \end{pmatrix}
+		\]
+
+		Now, we proofed with the biconditional.
+
+		\mclm{\(\impliedby\)}{
+
+			Suppose \(\lambda_{i} \neq 0\) for all \(i \in \left\{ 1, \ldots, n \right\} \).
+
+			Then \(T(v_1) = \lambda_{1} v_1\).
+
+			Which means that if \(\lambda_{1} \neq 0 \implies\):
+
+			\[
+				v_1 = \frac{1}{\lambda_{1}} T(v_1) = T\left( \frac{1}{\lambda_{1}} v_1 \right)
+			\]
+
+			Which means that \(v_1 \in Im(T)\).
+
+			\(T(v_2) = a_{1,2} v_1 + \lambda_{2} v_2\).
+
+			If \(\lambda_{2} \neq 0\), then:
+
+			\[
+				v_2 = \frac{1}{\lambda_{2}} T(v_2) - \frac{a_{1,2}}{\lambda_{2}} v_1 = \underbrace{\underbrace{T\left(\frac{1}{\lambda_{2}} v_2\right)}_{\in Im(T)} - \frac{a_{1,2}}{\lambda_{2}} \underbrace{v_1}_{\in Im(T)}}_{\in Im(T) \text{ as it is a subspace}}
+			\]
+
+			Now, induct on \(n\), to show \(v_{n} \in Im(T)\).
+
+			This means that \(\operatorname{span}\left( v_1, \ldots, v_{n} \right) \subseteq Im(T)\).
+
+			Which means that \(V \subseteq Im(T) \subseteq V\).
+
+			Thus, \(T\) is surjective.
+
+			Which means that \(T\) is invertible since we are working in a finite dimensional vector space.
+		}
+
+		\pf{Proof}{
+			Suppose the converse i.e., \(\exists j \in \left\{ 1, \ldots, n \right\} \) such that \(\lambda_{j} = 0\).
+
+			Then \(T(v_{j}) = a_{1,j} v_1 + \ldots + a_{j-1,j} v_{j-1} + \lambda_{j} v_{j}\).
+
+			Notice that the last term is \(0\), so \(T(v_{j}) \in \operatorname{span}\left( v_1, \ldots, v_{j-1} \right) \).
+
+			Thus, \( T(\operatorname{span}\left( v_1, \ldots, v_{j} \right)) \subseteq \operatorname{span}\left( v_1, \ldots, v_{j-1} \right) \).
+
+			But the latter is dim \(j\) and the latter is dim \(j - 1\).
+
+			Which means that \(T \mid_{\operatorname{span}\left( v_1, \ldots, v_{j} \right) }\) is not surjective.
+
+			As:
+
+			\[
+				T \mid_{\operatorname{span}\left( v_1, \ldots, v_{j} \right) } : \operatorname{span}\left( v_1, \ldots, v_{j} \right) \to \operatorname{span}\left( v_1, \ldots, v_{j-1} \right)
+			\]
+
+			Which means that \(T\) is not surjective, and thus not invertible.
+
+			Hence, the converse holds.
+
+		}
+	}
+}
+
+\thm{}{
+	If \(\mcM(T)\) is UT then the eigenvalues of \(T\) are the diagonal entries of \(\mcM(T)\).
+
+	\pf{Proof}{
+		Say:
+
+		\[
+			\mcM(T, (v_1, \ldots, v_n)) = \begin{pmatrix} \lambda_{1} & & \star \\ & \ddots & \\ 0 & & \lambda_{n} \end{pmatrix}
+		\]
+
+
+		Let \(\lambda \in \FF\), then \(\mcM(T - \lambda \cdot Id)\) is UT.
+
+		\[
+			\mcM(T - \lambda \cdot Id, (v_1, \ldots, v_n)) = \begin{pmatrix} \lambda_{1} - \lambda & & \star \\ & \ddots & \\ 0 & & \lambda_{n} - \lambda \end{pmatrix}
+		\]
+
+		Hence:
+
+		\begin{align*}
+			\lambda \in \FF \text{ is an eigenvalue for }T & \iff T - \lambda \cdot Id \text{ not invertible}       \\
+			                                               & \iff \mcM(T - \lambda \cdot Id) \text{ not invertible} \\
+			                                               & \iff \lambda_{i} - \lambda = 0 \text{ for some } i
+		\end{align*}
+	}
+}
+
+\section{Eigenspaces}
+
+\dfn{Eigenspaces}{
+	Let \(V\) be a finite-dimensional vector space over \(\FF\) and \(T \in \sL(V)\).
+
+	With \(\lambda \in \FF\).
+
+	Then the eigenspace corresponding to \(\lambda\) is:
+
+	\[
+		E(\lambda, T) \coloneq \ker (T - \lambda \cdot Id)
+	\]
+
+	As:
+
+	\begin{align*}
+		(T - \lambda \cdot Id)(v)    & = 0               \\
+		T(v) - (\lambda \cdot Id)(v) & = 0               \\
+		T(v)                         & = \lambda \cdot v
+	\end{align*}
+
+	i.e., this is the set of eigenvectors corresponding to \(\lambda\) together with \(\vec{0_{v}} \).
+
+	\nt{
+		\(\lambda\) is an eigenvalue for \(T \iff E(\lambda, T) \neq \left\{ \vec{0_{v}}  \right\} \).
+	}
+}
+
+\mprop{}{
+	Let \(V\) be a finite-dimensional vector space over \(\FF\) and \(T \in \sL(V)\).
+
+	Let \(\lambda_{1}, \ldots, \lambda_{m}\) be distinct eigenvalues.
+
+	Then \(E(\lambda_{1}, T), \ldots, E(\lambda_{m}, T) \subseteq V\) is a direct sum.
+
+	Moreover:
+
+	\[
+		\dim E(\lambda_{1}, T) + \ldots + \dim E(\lambda_{m}, T) \leq \dim V
+	\]
+
+	\pf{Proof}{
+		Let \(u_{i} \in E(\lambda_{i}, T)\) for \(i = 1, \ldots, m\).
+
+		Suppose that \(u_{1} + \ldots + u_{m} = \vec{0_{v}} \).
+
+		Recall that eigenvectors for distinct eigenvalues are linearly independent.
+
+		Which implies that \(u_{i} = \vec{0_{v}} \) for all \(i\).
+
+		Thus, \(E(\lambda_{1}, T), \ldots, E(\lambda_{m}, T)\) is a direct sum.
+
+		Thus:
+
+		\[
+			\dim E(\lambda_{1}, T) + \ldots + \dim E(\lambda_{m}, T) = \dim \left( E(\lambda_{1}, T) + \ldots + E(\lambda_{m}, T) \right) \leq \dim V
+		\] 
+	}
+}
+
+\dfn{}{
+	Diagonal matrix: \(A \in \FF^{n,n}\):
+
+	\[
+		A = \begin{pmatrix} \lambda_{1} & & 0 \\ & \ddots & \\ 0 & & \lambda_{n} \end{pmatrix}
+	\] 
+
+	Then, \(T \in \sL(V)\) is diagonalizable if there is a basis \(v_1, \ldots, v_n\) of \(V\) such that:
+
+	\(\mcM(T, (v_1, \ldots, v_n))\) is diagonal.
+}
+
+\ex{}{
+	\(T: \RR^{3} \to \RR^{3}\) with \(\mcM(T, (e_1, e_2, e_3)\) is:
+
+	\[
+		\begin{pmatrix} 5 & 0 & 0 \\ 0 & 8 & 0 \\ 0 & 0 & 8 \end{pmatrix}
+	\] 
+
+	Then \(T(x, y, z) = (5x, 8y, 8z)\).
+
+	With \(T(e_1) = 5 e_1, T(e_2) = 8 e_2, T(e_3) = 8 e_3\).
+
+	Then \(E(5, T) = \operatorname{span}\left( e_1 \right) \), \(E(8, T) = \operatorname{span}\left( e_2, e_3 \right) \), and \(E(0, T) = \RR^{3}\).
+
+	Thus:
+
+	\[
+	\dim E(5, T) + \dim E(8, T) \le \dim \RR^{3}
+	\] 
+}
+
+\ex{}{
+	Let \(T: \RR^{2} \to \RR^{3}\) with \((x, y) \mapsto (41x + 7y, -20x + 74y\)
+
+	Use standard basis: \(e_1 = (1, 0), e_2 = (0, 1)\)
+
+	\begin{align*}
+		T(e_1) & = (41, -20)  = 41 e_1 - 20 e_2 \\
+		T(e_2) & = (7, 74) = 7 e_1 + 74 e_2
+	\end{align*}
+
+	Thus:
+
+	\[
+		\mcM(T, (e_1, e_2)) = \begin{pmatrix} 41 & 7 \\ -20 & 74 \end{pmatrix}
+	\] 
+
+	Now try \(v_1 = (1, 4), v_2 = (7, 5)\).
+	
+	We claim that \(v_1, v_2\) is a basis for \(\RR^{2}\).
+
+	\begin{align*}
+		T(v_1) &= (69, 276) = 69 v_1 + 0 v_2 \\
+		T(v_2) &= (322, 230) = 0 v_1 + 46 v_2
+	\end{align*}
+
+	Thus, we get:
+
+	\[
+		\mcM(T, (v_1, v_2)) = \begin{pmatrix} 69 & 0 \\ 0 & 46 \end{pmatrix}
+	\] 
+
+	So \(T\) is diagonalizable.
+
+	\begin{align*}
+		E(69, T) &\supseteq \operatorname{span}\left( v_1 \right) \\
+		E(46, T) &\supseteq \operatorname{span}\left( v_2 \right)
+	\end{align*}
+
+	Hence:
+
+	\[
+		1 + 1 \le \dim E(69, T) + \dim E(46, T) \le \dim \RR^{2} = 2
+	\] 
+
+	Which implies that \(E(69, T) = \operatorname{span}\left( v_1 \right) \) and \(E(46, T) = \operatorname{span}\left( v_2 \right) \).
+	
+}
+
+\thm{}{
+	Let \(V\) be a finite-dimensional vector space over \(\FF\) and \(T \in \sL(V)\).
+
+	Let \(\lambda_{1}, \ldots, \lambda_{m}\) be a complete list of the distinct eigenvalues of \(T\).
+
+	The following are equivalent:
+
+	\begin{enumerate}[wide]
+		\item \(T\) is diagonalizable.
+		\item \(V\) has a basis consisting of eigenvectors of \(T\).
+		\item \(V = E(\lambda_{1}, T) \oplus \ldots \oplus E(\lambda_{m}, T)\).
+		\item \(\dim V = \dim E(\lambda_{1}, T) + \ldots + \dim E(\lambda_{m}, T)\).
+	\end{enumerate}
+
+	\pf{Proof}{
+
+		We want to show:
+
+		\begin{align*}
+			1 &\iff 2\\
+			2 &\implies 3\\
+			3 &\implies 4\\
+			4 &\implies 2
+		\end{align*}
+
+		Let's start:
+
+		\mclm{Proof of \(1 \iff 2\) }{
+			This is trivial.
+
+			If \(\mcM(T, (v_1, \ldots, v_n))\) is diagonal, then
+
+			\[
+			T(v_{i}) = \mu_{i} v_{i} \text{ for some } \mu_{i} \in \FF, i = 1, \ldots, n
+			\] 
+		}
+
+		\mclm{Proof of \(2 \implies 3\) }{
+			Say \(V\) has a basis consisting of eigenvectors of \(T\).
+
+			This means that all \(v \in V\) are linear combinations of eigenvectors.
+
+			Which means that \(V \subseteq E(\lambda_{1}, T) + \ldots + E(\lambda_{m}, T) \subseteq V\).
+
+			Thus, \(V = E(\lambda_{1}, T) + \ldots + E(\lambda_{m}, T)\).
+		}
+
+		\mclm{Proof of \(3 \implies 4\) }{
+			We showed this in \(3.E\), where we showed that the sum of direct sums is less than or equal to the dimension of the vector space.
+		}
+
+		\mclm{Proof of \(4 \implies 2\) }{
+
+			Choose bases for each \(E(\lambda_{i}, T)\) for \(i = 1, \ldots, m\).
+
+			Concatenate to get a list \(v_1, \ldots, v_n\) of \(V\) 
+
+			\mclm{Claim}{
+				\(v_1, \ldots, v_{n}\) is a basis for \(V\).
+
+				\pf{Proof of claim}{
+
+					We need to show span and linear independence.
+
+					Linearly independence:
+
+					Suppose that \(a_1 v_1 + \ldots + a_{n} v_{n} = \vec{0_{v}} \).
+
+					In other words, \(\sum_{k=1}^{n} a_{k} v_{k} = \vec{0_{v}} \).
+
+					Reorganize as \(u_1 + \ldots + u_{m} = \vec{0_{v}} \) where \(u_{i} \in E(\lambda_{i}, T)\).
+
+					By taking \(u_{i} = \sum_{k \in K_{i}} a_{k} v_{k}\),
+
+					where \(K_{i} = \left\{ k \mid v_{k} \in E(\lambda_{i}, T) \right\} \).
+
+					Note: \(u_{i} \in E(\lambda_{i}, T)\).
+
+					The \(u_{i}\) are either \(0\), or eigenvectors for distinct eigenvalues.
+
+					Such eigenvectors would be LI, as otherwise it would contradict \(u_1 + \ldots + u_{m} = \vec{0_{v}} \).
+
+					Hence, \(u_{i} = \vec{0_{v}} \) for \(i = 1, \ldots, m\).
+
+					But \(u_{i} = \sum_{k \in K_{i}} a_{k} v_{k}\).
+
+					Since these \(v_{k}\)'s are LI (they are all in \(E(\lambda_{i}, T)\)).
+
+					Which implies that \(a_{k} = 0\) for \(k \in K_{i}\) and \(i = 1, \ldots, m\).
+
+
+					Thus, \(v_1, \ldots, v_{n}\) is linearly independent.
+
+					Now, our condition says that \(\dim V = \dim E(\lambda_{1}, T) + \ldots + \dim E(\lambda_{m}, T)\).
+
+					Let's denote this as \(n\), which is the dimension of \(V\).
+
+					Hence, it's a linearly independent list with an appropriate dimension, which implies that it is a basis for \(V\).
+
+
+				}
+
+			}
+				Thus, the implication holds.
+
+		}
+
+		Hence, we have shown all the implications; thus the statement holds.
+
+	}
+}
+
+\ex{}{
+	Let \(T : \CC^{2} \to \CC^{2}\) with \(T(w, z) = (z, 0)\).
+
+	Standard basis \(e_1, e_2\), then \(\mcM(T, (e_1, e_2)) = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}\).
+
+	\begin{align*}
+		T(e_1) & = (0, 0) = 0 e_1 + 0 e_2 \\
+		T(e_2) & = (1, 0) = e_1 + 0 e_2
+	\end{align*}
+
+	We know the eigenvalues are \(0\) and \(0\). What is \(E(0, T)\)?
+
+	\begin{align*}
+		E(0, T) & = \left\{ v \in \CC^{2} \mid T(v) = 0 \right\} \\
+		        & = \left\{ (w, z) \in \CC^{2} \mid (z, 0) = (0, 0) \right\} \\
+			&= \operatorname{span}\left( (1, 0) \right)\\
+			\implies &\dim E(0, T) = 1
+	\end{align*}
+
+	Thus, you will never be able to find a basis of eigenvectors for \(T\) that makes \(\mcM(T)\) diagonal.
+
+	Since \(2 = \dim \CC^{2} \neq \dim E(0, T) = 1\), we conclude that \(T\) is not diagonalizable.
+}

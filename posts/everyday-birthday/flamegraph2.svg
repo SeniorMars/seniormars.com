@@ -1,0 +1,491 @@
+<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg version="1.1" width="1200" height="470" onload="init(evt)" viewBox="0 0 1200 470" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:fg="http://github.com/jonhoo/inferno"><!--Flame graph stack visualization. See https://github.com/brendangregg/FlameGraph for latest version, and http://www.brendangregg.com/flamegraphs.html for examples.--><!--NOTES: --><defs><linearGradient id="background" y1="0" y2="1" x1="0" x2="0"><stop stop-color="#eeeeee" offset="5%"/><stop stop-color="#eeeeb0" offset="95%"/></linearGradient></defs><style type="text/css">
+text { font-family:monospace; font-size:12px }
+#title { text-anchor:middle; font-size:17px; }
+#matched { text-anchor:end; }
+#search { text-anchor:end; opacity:0.1; cursor:pointer; }
+#search:hover, #search.show { opacity:1; }
+#subtitle { text-anchor:middle; font-color:rgb(160,160,160); }
+#unzoom { cursor:pointer; }
+#frames > *:hover { stroke:black; stroke-width:0.5; cursor:pointer; }
+.hide { display:none; }
+.parent { opacity:0.5; }
+</style><script type="text/ecmascript"><![CDATA[
+        var nametype = 'Function:';
+        var fontsize = 12;
+        var fontwidth = 0.59;
+        var xpad = 10;
+        var inverted = false;
+        var searchcolor = 'rgb(230,0,230)';
+        var fluiddrawing = true;
+        var truncate_text_right = false;
+    ]]><![CDATA["use strict";
+var details, searchbtn, unzoombtn, matchedtxt, svg, searching, frames, known_font_width;
+function init(evt) {
+    details = document.getElementById("details").firstChild;
+    searchbtn = document.getElementById("search");
+    unzoombtn = document.getElementById("unzoom");
+    matchedtxt = document.getElementById("matched");
+    svg = document.getElementsByTagName("svg")[0];
+    frames = document.getElementById("frames");
+    known_font_width = get_monospace_width(frames);
+    total_samples = parseInt(frames.attributes.total_samples.value);
+    searching = 0;
+
+    // Use GET parameters to restore a flamegraph's state.
+    var restore_state = function() {
+        var params = get_params();
+        if (params.x && params.y)
+            zoom(find_group(document.querySelector('[*|x="' + params.x + '"][y="' + params.y + '"]')));
+        if (params.s)
+            search(params.s);
+    };
+
+    if (fluiddrawing) {
+        // Make width dynamic so the SVG fits its parent's width.
+        svg.removeAttribute("width");
+        // Edge requires us to have a viewBox that gets updated with size changes.
+        var isEdge = /Edge\/\d./i.test(navigator.userAgent);
+        if (!isEdge) {
+            svg.removeAttribute("viewBox");
+        }
+        var update_for_width_change = function() {
+            if (isEdge) {
+                svg.attributes.viewBox.value = "0 0 " + svg.width.baseVal.value + " " + svg.height.baseVal.value;
+            }
+
+            // Keep consistent padding on left and right of frames container.
+            frames.attributes.width.value = svg.width.baseVal.value - xpad * 2;
+
+            // Text truncation needs to be adjusted for the current width.
+            update_text_for_elements(frames.children);
+
+            // Keep search elements at a fixed distance from right edge.
+            var svgWidth = svg.width.baseVal.value;
+            searchbtn.attributes.x.value = svgWidth - xpad;
+            matchedtxt.attributes.x.value = svgWidth - xpad;
+        };
+        window.addEventListener('resize', function() {
+            update_for_width_change();
+        });
+        // This needs to be done asynchronously for Safari to work.
+        setTimeout(function() {
+            unzoom();
+            update_for_width_change();
+            restore_state();
+        }, 0);
+    } else {
+        restore_state();
+    }
+}
+// event listeners
+window.addEventListener("click", function(e) {
+    var target = find_group(e.target);
+    if (target) {
+        if (target.nodeName == "a") {
+            if (e.ctrlKey === false) return;
+            e.preventDefault();
+        }
+        if (target.classList.contains("parent")) unzoom();
+        zoom(target);
+
+        // set parameters for zoom state
+        var el = target.querySelector("rect");
+        if (el && el.attributes && el.attributes.y && el.attributes["fg:x"]) {
+            var params = get_params()
+            params.x = el.attributes["fg:x"].value;
+            params.y = el.attributes.y.value;
+            history.replaceState(null, null, parse_params(params));
+        }
+    }
+    else if (e.target.id == "unzoom") {
+        unzoom();
+
+        // remove zoom state
+        var params = get_params();
+        if (params.x) delete params.x;
+        if (params.y) delete params.y;
+        history.replaceState(null, null, parse_params(params));
+    }
+    else if (e.target.id == "search") search_prompt();
+}, false)
+// mouse-over for info
+// show
+window.addEventListener("mouseover", function(e) {
+    var target = find_group(e.target);
+    if (target) details.nodeValue = nametype + " " + g_to_text(target);
+}, false)
+// clear
+window.addEventListener("mouseout", function(e) {
+    var target = find_group(e.target);
+    if (target) details.nodeValue = ' ';
+}, false)
+// ctrl-F for search
+window.addEventListener("keydown",function (e) {
+    if (e.keyCode === 114 || (e.ctrlKey && e.keyCode === 70)) {
+        e.preventDefault();
+        search_prompt();
+    }
+}, false)
+// functions
+function get_params() {
+    var params = {};
+    var paramsarr = window.location.search.substr(1).split('&');
+    for (var i = 0; i < paramsarr.length; ++i) {
+        var tmp = paramsarr[i].split("=");
+        if (!tmp[0] || !tmp[1]) continue;
+        params[tmp[0]]  = decodeURIComponent(tmp[1]);
+    }
+    return params;
+}
+function parse_params(params) {
+    var uri = "?";
+    for (var key in params) {
+        uri += key + '=' + encodeURIComponent(params[key]) + '&';
+    }
+    if (uri.slice(-1) == "&")
+        uri = uri.substring(0, uri.length - 1);
+    if (uri == '?')
+        uri = window.location.href.split('?')[0];
+    return uri;
+}
+function find_child(node, selector) {
+    var children = node.querySelectorAll(selector);
+    if (children.length) return children[0];
+    return;
+}
+function find_group(node) {
+    var parent = node.parentElement;
+    if (!parent) return;
+    if (parent.id == "frames") return node;
+    return find_group(parent);
+}
+function orig_save(e, attr, val) {
+    if (e.attributes["fg:orig_" + attr] != undefined) return;
+    if (e.attributes[attr] == undefined) return;
+    if (val == undefined) val = e.attributes[attr].value;
+    e.setAttribute("fg:orig_" + attr, val);
+}
+function orig_load(e, attr) {
+    if (e.attributes["fg:orig_"+attr] == undefined) return;
+    e.attributes[attr].value = e.attributes["fg:orig_" + attr].value;
+    e.removeAttribute("fg:orig_" + attr);
+}
+function g_to_text(e) {
+    var text = find_child(e, "title").firstChild.nodeValue;
+    return (text)
+}
+function g_to_func(e) {
+    var func = g_to_text(e);
+    // if there's any manipulation we want to do to the function
+    // name before it's searched, do it here before returning.
+    return (func);
+}
+function get_monospace_width(frames) {
+    // Given the id="frames" element, return the width of text characters if
+    // this is a monospace font, otherwise return 0.
+    text = find_child(frames.children[0], "text");
+    originalContent = text.textContent;
+    text.textContent = "!";
+    bangWidth = text.getComputedTextLength();
+    text.textContent = "W";
+    wWidth = text.getComputedTextLength();
+    text.textContent = originalContent;
+    if (bangWidth === wWidth) {
+        return bangWidth;
+    } else {
+        return 0;
+    }
+}
+function update_text_for_elements(elements) {
+    // In order to render quickly in the browser, you want to do one pass of
+    // reading attributes, and one pass of mutating attributes. See
+    // https://web.dev/avoid-large-complex-layouts-and-layout-thrashing/ for details.
+
+    // Fall back to inefficient calculation, if we're variable-width font.
+    // TODO This should be optimized somehow too.
+    if (known_font_width === 0) {
+        for (var i = 0; i < elements.length; i++) {
+            update_text(elements[i]);
+        }
+        return;
+    }
+
+    var textElemNewAttributes = [];
+    for (var i = 0; i < elements.length; i++) {
+        var e = elements[i];
+        var r = find_child(e, "rect");
+        var t = find_child(e, "text");
+        var w = parseFloat(r.attributes.width.value) * frames.attributes.width.value / 100 - 3;
+        var txt = find_child(e, "title").textContent.replace(/\([^(]*\)$/,"");
+        var newX = format_percent((parseFloat(r.attributes.x.value) + (100 * 3 / frames.attributes.width.value)));
+
+        // Smaller than this size won't fit anything
+        if (w < 2 * known_font_width) {
+            textElemNewAttributes.push([newX, ""]);
+            continue;
+        }
+
+        // Fit in full text width
+        if (txt.length * known_font_width < w) {
+            textElemNewAttributes.push([newX, txt]);
+            continue;
+        }
+
+        var substringLength = Math.floor(w / known_font_width) - 2;
+        if (truncate_text_right) {
+            // Truncate the right side of the text.
+            textElemNewAttributes.push([newX, txt.substring(0, substringLength) + ".."]);
+            continue;
+        } else {
+            // Truncate the left side of the text.
+            textElemNewAttributes.push([newX, ".." + txt.substring(txt.length - substringLength, txt.length)]);
+            continue;
+        }
+    }
+
+    console.assert(textElemNewAttributes.length === elements.length, "Resize failed, please file a bug at https://github.com/jonhoo/inferno/");
+
+    // Now that we know new textContent, set it all in one go so we don't refresh a bazillion times.
+    for (var i = 0; i < elements.length; i++) {
+        var e = elements[i];
+        var values = textElemNewAttributes[i];
+        var t = find_child(e, "text");
+        t.attributes.x.value = values[0];
+        t.textContent = values[1];
+    }
+}
+
+function update_text(e) {
+    var r = find_child(e, "rect");
+    var t = find_child(e, "text");
+    var w = parseFloat(r.attributes.width.value) * frames.attributes.width.value / 100 - 3;
+    var txt = find_child(e, "title").textContent.replace(/\([^(]*\)$/,"");
+    t.attributes.x.value = format_percent((parseFloat(r.attributes.x.value) + (100 * 3 / frames.attributes.width.value)));
+
+    // Smaller than this size won't fit anything
+    if (w < 2 * fontsize * fontwidth) {
+        t.textContent = "";
+        return;
+    }
+    t.textContent = txt;
+    // Fit in full text width
+    if (t.getComputedTextLength() < w)
+        return;
+    if (truncate_text_right) {
+        // Truncate the right side of the text.
+        for (var x = txt.length - 2; x > 0; x--) {
+            if (t.getSubStringLength(0, x + 2) <= w) {
+                t.textContent = txt.substring(0, x) + "..";
+                return;
+            }
+        }
+    } else {
+        // Truncate the left side of the text.
+        for (var x = 2; x < txt.length; x++) {
+            if (t.getSubStringLength(x - 2, txt.length) <= w) {
+                t.textContent = ".." + txt.substring(x, txt.length);
+                return;
+            }
+        }
+    }
+    t.textContent = "";
+}
+// zoom
+function zoom_reset(e) {
+    if (e.tagName == "rect") {
+        e.attributes.x.value = format_percent(100 * parseInt(e.attributes["fg:x"].value) / total_samples);
+        e.attributes.width.value = format_percent(100 * parseInt(e.attributes["fg:w"].value) / total_samples);
+    }
+    if (e.childNodes == undefined) return;
+    for(var i = 0, c = e.childNodes; i < c.length; i++) {
+        zoom_reset(c[i]);
+    }
+}
+function zoom_child(e, x, zoomed_width_samples) {
+    if (e.tagName == "text") {
+        var parent_x = parseFloat(find_child(e.parentNode, "rect[x]").attributes.x.value);
+        e.attributes.x.value = format_percent(parent_x + (100 * 3 / frames.attributes.width.value));
+    } else if (e.tagName == "rect") {
+        e.attributes.x.value = format_percent(100 * (parseInt(e.attributes["fg:x"].value) - x) / zoomed_width_samples);
+        e.attributes.width.value = format_percent(100 * parseInt(e.attributes["fg:w"].value) / zoomed_width_samples);
+    }
+    if (e.childNodes == undefined) return;
+    for(var i = 0, c = e.childNodes; i < c.length; i++) {
+        zoom_child(c[i], x, zoomed_width_samples);
+    }
+}
+function zoom_parent(e) {
+    if (e.attributes) {
+        if (e.attributes.x != undefined) {
+            e.attributes.x.value = "0.0%";
+        }
+        if (e.attributes.width != undefined) {
+            e.attributes.width.value = "100.0%";
+        }
+    }
+    if (e.childNodes == undefined) return;
+    for(var i = 0, c = e.childNodes; i < c.length; i++) {
+        zoom_parent(c[i]);
+    }
+}
+function zoom(node) {
+    var attr = find_child(node, "rect").attributes;
+    var width = parseInt(attr["fg:w"].value);
+    var xmin = parseInt(attr["fg:x"].value);
+    var xmax = xmin + width;
+    var ymin = parseFloat(attr.y.value);
+    unzoombtn.classList.remove("hide");
+    var el = frames.children;
+    var to_update_text = [];
+    for (var i = 0; i < el.length; i++) {
+        var e = el[i];
+        var a = find_child(e, "rect").attributes;
+        var ex = parseInt(a["fg:x"].value);
+        var ew = parseInt(a["fg:w"].value);
+        // Is it an ancestor
+        if (!inverted) {
+            var upstack = parseFloat(a.y.value) > ymin;
+        } else {
+            var upstack = parseFloat(a.y.value) < ymin;
+        }
+        if (upstack) {
+            // Direct ancestor
+            if (ex <= xmin && (ex+ew) >= xmax) {
+                e.classList.add("parent");
+                zoom_parent(e);
+                to_update_text.push(e);
+            }
+            // not in current path
+            else
+                e.classList.add("hide");
+        }
+        // Children maybe
+        else {
+            // no common path
+            if (ex < xmin || ex >= xmax) {
+                e.classList.add("hide");
+            }
+            else {
+                zoom_child(e, xmin, width);
+                to_update_text.push(e);
+            }
+        }
+    }
+    update_text_for_elements(to_update_text);
+}
+function unzoom() {
+    unzoombtn.classList.add("hide");
+    var el = frames.children;
+    for(var i = 0; i < el.length; i++) {
+        el[i].classList.remove("parent");
+        el[i].classList.remove("hide");
+        zoom_reset(el[i]);
+    }
+    update_text_for_elements(el);
+}
+// search
+function reset_search() {
+    var el = document.querySelectorAll("#frames rect");
+    for (var i = 0; i < el.length; i++) {
+        orig_load(el[i], "fill")
+    }
+    var params = get_params();
+    delete params.s;
+    history.replaceState(null, null, parse_params(params));
+}
+function search_prompt() {
+    if (!searching) {
+        var term = prompt("Enter a search term (regexp " +
+            "allowed, eg: ^ext4_)", "");
+        if (term != null) {
+            search(term)
+        }
+    } else {
+        reset_search();
+        searching = 0;
+        searchbtn.classList.remove("show");
+        searchbtn.firstChild.nodeValue = "Search"
+        matchedtxt.classList.add("hide");
+        matchedtxt.firstChild.nodeValue = ""
+    }
+}
+function search(term) {
+    var re = new RegExp(term);
+    var el = frames.children;
+    var matches = new Object();
+    var maxwidth = 0;
+    for (var i = 0; i < el.length; i++) {
+        var e = el[i];
+        // Skip over frames which are either not visible, or below the zoomed-to frame
+        if (e.classList.contains("hide") || e.classList.contains("parent")) {
+            continue;
+        }
+        var func = g_to_func(e);
+        var rect = find_child(e, "rect");
+        if (func == null || rect == null)
+            continue;
+        // Save max width. Only works as we have a root frame
+        var w = parseInt(rect.attributes["fg:w"].value);
+        if (w > maxwidth)
+            maxwidth = w;
+        if (func.match(re)) {
+            // highlight
+            var x = parseInt(rect.attributes["fg:x"].value);
+            orig_save(rect, "fill");
+            rect.attributes.fill.value = searchcolor;
+            // remember matches
+            if (matches[x] == undefined) {
+                matches[x] = w;
+            } else {
+                if (w > matches[x]) {
+                    // overwrite with parent
+                    matches[x] = w;
+                }
+            }
+            searching = 1;
+        }
+    }
+    if (!searching)
+        return;
+    var params = get_params();
+    params.s = term;
+    history.replaceState(null, null, parse_params(params));
+
+    searchbtn.classList.add("show");
+    searchbtn.firstChild.nodeValue = "Reset Search";
+    // calculate percent matched, excluding vertical overlap
+    var count = 0;
+    var lastx = -1;
+    var lastw = 0;
+    var keys = Array();
+    for (k in matches) {
+        if (matches.hasOwnProperty(k))
+            keys.push(k);
+    }
+    // sort the matched frames by their x location
+    // ascending, then width descending
+    keys.sort(function(a, b){
+        return a - b;
+    });
+    // Step through frames saving only the biggest bottom-up frames
+    // thanks to the sort order. This relies on the tree property
+    // where children are always smaller than their parents.
+    for (var k in keys) {
+        var x = parseInt(keys[k]);
+        var w = matches[keys[k]];
+        if (x >= lastx + lastw) {
+            count += w;
+            lastx = x;
+            lastw = w;
+        }
+    }
+    // display matched percent
+    matchedtxt.classList.remove("hide");
+    var pct = 100 * count / maxwidth;
+    if (pct != 100) pct = pct.toFixed(1);
+    matchedtxt.firstChild.nodeValue = "Matched: " + pct + "%";
+}
+function format_percent(n) {
+    return n.toFixed(4) + "%";
+}
+]]></script><rect x="0" y="0" width="100%" height="470" fill="url(#background)"/><text id="title" fill="rgb(0,0,0)" x="50.0000%" y="24.00">Flame Graph</text><text id="details" fill="rgb(0,0,0)" x="10" y="453.00"> </text><text id="unzoom" class="hide" fill="rgb(0,0,0)" x="10" y="24.00">Reset Zoom</text><text id="search" fill="rgb(0,0,0)" x="1190" y="24.00">Search</text><text id="matched" fill="rgb(0,0,0)" x="1190" y="453.00"> </text><svg id="frames" x="10" width="1180" total_samples="327"><g><title>libsystem_kernel.dylib`__exit (1 samples, 0.31%)</title><rect x="0.0000%" y="405" width="0.3058%" height="15" fill="rgb(227,0,7)" fg:x="0" fg:w="1"/><text x="0.2500%" y="415.50"></text></g><g><title>everyday_birthday`&lt;num_integer::IterBinomial&lt;T&gt; as core::iter::traits::iterator::Iterator&gt;::next (1 samples, 0.31%)</title><rect x="0.3058%" y="245" width="0.3058%" height="15" fill="rgb(217,0,24)" fg:x="1" fg:w="1"/><text x="0.5558%" y="255.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::subtraction::_&lt;impl core::ops::arith::SubAssign&lt;&amp;num_bigint::biguint::BigUint&gt; for num_bigint::biguint::BigUint&gt;::sub_assign (1 samples, 0.31%)</title><rect x="0.3058%" y="229" width="0.3058%" height="15" fill="rgb(221,193,54)" fg:x="1" fg:w="1"/><text x="0.5558%" y="239.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (1 samples, 0.31%)</title><rect x="17.1254%" y="101" width="0.3058%" height="15" fill="rgb(248,212,6)" fg:x="56" fg:w="1"/><text x="17.3754%" y="111.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (28 samples, 8.56%)</title><rect x="9.1743%" y="133" width="8.5627%" height="15" fill="rgb(208,68,35)" fg:x="30" fg:w="28"/><text x="9.4243%" y="143.50">everyday_bir..</text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (15 samples, 4.59%)</title><rect x="13.1498%" y="117" width="4.5872%" height="15" fill="rgb(232,128,0)" fg:x="43" fg:w="15"/><text x="13.3998%" y="127.50">every..</text></g><g><title>everyday_birthday`num_bigint::biguint::subtraction::sub2 (1 samples, 0.31%)</title><rect x="17.4312%" y="101" width="0.3058%" height="15" fill="rgb(207,160,47)" fg:x="57" fg:w="1"/><text x="17.6812%" y="111.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (50 samples, 15.29%)</title><rect x="3.0581%" y="149" width="15.2905%" height="15" fill="rgb(228,23,34)" fg:x="10" fg:w="50"/><text x="3.3081%" y="159.50">everyday_birthday`num_b..</text></g><g><title>libsystem_platform.dylib`_platform_memset (2 samples, 0.61%)</title><rect x="17.7370%" y="133" width="0.6116%" height="15" fill="rgb(218,30,26)" fg:x="58" fg:w="2"/><text x="17.9870%" y="143.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::_&lt;impl core::ops::arith::MulAssign&lt;&amp;num_bigint::biguint::BigUint&gt; for num_bigint::biguint::BigUint&gt;::mul_assign (59 samples, 18.04%)</title><rect x="0.6116%" y="213" width="18.0428%" height="15" fill="rgb(220,122,19)" fg:x="2" fg:w="59"/><text x="0.8616%" y="223.50">everyday_birthday`num_bigint..</text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mul3 (59 samples, 18.04%)</title><rect x="0.6116%" y="197" width="18.0428%" height="15" fill="rgb(250,228,42)" fg:x="2" fg:w="59"/><text x="0.8616%" y="207.50">everyday_birthday`num_bigint..</text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (59 samples, 18.04%)</title><rect x="0.6116%" y="181" width="18.0428%" height="15" fill="rgb(240,193,28)" fg:x="2" fg:w="59"/><text x="0.8616%" y="191.50">everyday_birthday`num_bigint..</text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (55 samples, 16.82%)</title><rect x="1.8349%" y="165" width="16.8196%" height="15" fill="rgb(216,20,37)" fg:x="6" fg:w="55"/><text x="2.0849%" y="175.50">everyday_birthday`num_bigi..</text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::sub_sign (1 samples, 0.31%)</title><rect x="18.3486%" y="149" width="0.3058%" height="15" fill="rgb(206,188,39)" fg:x="60" fg:w="1"/><text x="18.5986%" y="159.50"></text></g><g><title>everyday_birthday`num_bigint::bigint::addition::_&lt;impl core::ops::arith::Add for num_bigint::bigint::BigInt&gt;::add (1 samples, 0.31%)</title><rect x="19.8777%" y="181" width="0.3058%" height="15" fill="rgb(217,207,13)" fg:x="65" fg:w="1"/><text x="20.1277%" y="191.50"></text></g><g><title>libsystem_malloc.dylib`free_small (1 samples, 0.31%)</title><rect x="19.8777%" y="165" width="0.3058%" height="15" fill="rgb(231,73,38)" fg:x="65" fg:w="1"/><text x="20.1277%" y="175.50"></text></g><g><title>everyday_birthday`num_bigint::bigint::subtraction::_&lt;impl core::ops::arith::Sub&lt;&amp;num_bigint::bigint::BigInt&gt; for &amp;num_bigint::bigint::BigInt&gt;::sub (1 samples, 0.31%)</title><rect x="20.1835%" y="181" width="0.3058%" height="15" fill="rgb(225,20,46)" fg:x="66" fg:w="1"/><text x="20.4335%" y="191.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::addition::add2 (1 samples, 0.31%)</title><rect x="20.4893%" y="181" width="0.3058%" height="15" fill="rgb(210,31,41)" fg:x="67" fg:w="1"/><text x="20.7393%" y="191.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (2 samples, 0.61%)</title><rect x="22.3242%" y="101" width="0.6116%" height="15" fill="rgb(221,200,47)" fg:x="73" fg:w="2"/><text x="22.5742%" y="111.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (7 samples, 2.14%)</title><rect x="21.1009%" y="117" width="2.1407%" height="15" fill="rgb(226,26,5)" fg:x="69" fg:w="7"/><text x="21.3509%" y="127.50">e..</text></g><g><title>libsystem_malloc.dylib`szone_malloc_should_clear (1 samples, 0.31%)</title><rect x="22.9358%" y="101" width="0.3058%" height="15" fill="rgb(249,33,26)" fg:x="75" fg:w="1"/><text x="23.1858%" y="111.50"></text></g><g><title>libsystem_malloc.dylib`tiny_malloc_from_free_list (1 samples, 0.31%)</title><rect x="22.9358%" y="85" width="0.3058%" height="15" fill="rgb(235,183,28)" fg:x="75" fg:w="1"/><text x="23.1858%" y="95.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::_&lt;impl core::ops::arith::Mul for num_bigint::biguint::BigUint&gt;::mul (9 samples, 2.75%)</title><rect x="20.7951%" y="181" width="2.7523%" height="15" fill="rgb(221,5,38)" fg:x="68" fg:w="9"/><text x="21.0451%" y="191.50">ev..</text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mul3 (9 samples, 2.75%)</title><rect x="20.7951%" y="165" width="2.7523%" height="15" fill="rgb(247,18,42)" fg:x="68" fg:w="9"/><text x="21.0451%" y="175.50">ev..</text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (9 samples, 2.75%)</title><rect x="20.7951%" y="149" width="2.7523%" height="15" fill="rgb(241,131,45)" fg:x="68" fg:w="9"/><text x="21.0451%" y="159.50">ev..</text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (9 samples, 2.75%)</title><rect x="20.7951%" y="133" width="2.7523%" height="15" fill="rgb(249,31,29)" fg:x="68" fg:w="9"/><text x="21.0451%" y="143.50">ev..</text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::sub_sign (1 samples, 0.31%)</title><rect x="23.2416%" y="117" width="0.3058%" height="15" fill="rgb(225,111,53)" fg:x="76" fg:w="1"/><text x="23.4916%" y="127.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (13 samples, 3.98%)</title><rect x="27.8287%" y="149" width="3.9755%" height="15" fill="rgb(238,160,17)" fg:x="91" fg:w="13"/><text x="28.0787%" y="159.50">ever..</text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::sub_sign (1 samples, 0.31%)</title><rect x="31.8043%" y="149" width="0.3058%" height="15" fill="rgb(214,148,48)" fg:x="104" fg:w="1"/><text x="32.0543%" y="159.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::subtraction::sub2 (1 samples, 0.31%)</title><rect x="32.1101%" y="149" width="0.3058%" height="15" fill="rgb(232,36,49)" fg:x="105" fg:w="1"/><text x="32.3601%" y="159.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (27 samples, 8.26%)</title><rect x="24.4648%" y="165" width="8.2569%" height="15" fill="rgb(209,103,24)" fg:x="80" fg:w="27"/><text x="24.7148%" y="175.50">everyday_bi..</text></g><g><title>libsystem_malloc.dylib`_nanov2_free (1 samples, 0.31%)</title><rect x="32.4159%" y="149" width="0.3058%" height="15" fill="rgb(229,88,8)" fg:x="106" fg:w="1"/><text x="32.6659%" y="159.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (31 samples, 9.48%)</title><rect x="23.5474%" y="181" width="9.4801%" height="15" fill="rgb(213,181,19)" fg:x="77" fg:w="31"/><text x="23.7974%" y="191.50">everyday_birth..</text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::sub_sign (1 samples, 0.31%)</title><rect x="32.7217%" y="165" width="0.3058%" height="15" fill="rgb(254,191,54)" fg:x="107" fg:w="1"/><text x="32.9717%" y="175.50"></text></g><g><title>libsystem_malloc.dylib`szone_malloc_should_clear (1 samples, 0.31%)</title><rect x="32.7217%" y="149" width="0.3058%" height="15" fill="rgb(241,83,37)" fg:x="107" fg:w="1"/><text x="32.9717%" y="159.50"></text></g><g><title>libsystem_malloc.dylib`tiny_malloc_should_clear (1 samples, 0.31%)</title><rect x="32.7217%" y="133" width="0.3058%" height="15" fill="rgb(233,36,39)" fg:x="107" fg:w="1"/><text x="32.9717%" y="143.50"></text></g><g><title>libsystem_malloc.dylib`tiny_malloc_from_free_list (1 samples, 0.31%)</title><rect x="32.7217%" y="117" width="0.3058%" height="15" fill="rgb(226,3,54)" fg:x="107" fg:w="1"/><text x="32.9717%" y="127.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (15 samples, 4.59%)</title><rect x="33.9450%" y="133" width="4.5872%" height="15" fill="rgb(245,192,40)" fg:x="111" fg:w="15"/><text x="34.1950%" y="143.50">every..</text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (4 samples, 1.22%)</title><rect x="37.3089%" y="117" width="1.2232%" height="15" fill="rgb(238,167,29)" fg:x="122" fg:w="4"/><text x="37.5589%" y="127.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::sub_sign (1 samples, 0.31%)</title><rect x="38.5321%" y="133" width="0.3058%" height="15" fill="rgb(232,182,51)" fg:x="126" fg:w="1"/><text x="38.7821%" y="143.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (19 samples, 5.81%)</title><rect x="33.3333%" y="149" width="5.8104%" height="15" fill="rgb(231,60,39)" fg:x="109" fg:w="19"/><text x="33.5833%" y="159.50">everyda..</text></g><g><title>everyday_birthday`num_bigint::biguint::subtraction::sub2 (1 samples, 0.31%)</title><rect x="38.8379%" y="133" width="0.3058%" height="15" fill="rgb(208,69,12)" fg:x="127" fg:w="1"/><text x="39.0879%" y="143.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::sub_sign (1 samples, 0.31%)</title><rect x="39.1437%" y="149" width="0.3058%" height="15" fill="rgb(235,93,37)" fg:x="128" fg:w="1"/><text x="39.3937%" y="159.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (22 samples, 6.73%)</title><rect x="33.0275%" y="165" width="6.7278%" height="15" fill="rgb(213,116,39)" fg:x="108" fg:w="22"/><text x="33.2775%" y="175.50">everyday_..</text></g><g><title>libsystem_malloc.dylib`free_tiny (1 samples, 0.31%)</title><rect x="39.4495%" y="149" width="0.3058%" height="15" fill="rgb(222,207,29)" fg:x="129" fg:w="1"/><text x="39.6995%" y="159.50"></text></g><g><title>libsystem_malloc.dylib`tiny_free_no_lock (1 samples, 0.31%)</title><rect x="39.4495%" y="133" width="0.3058%" height="15" fill="rgb(206,96,30)" fg:x="129" fg:w="1"/><text x="39.6995%" y="143.50"></text></g><g><title>libsystem_malloc.dylib`tiny_free_list_add_ptr (1 samples, 0.31%)</title><rect x="39.4495%" y="117" width="0.3058%" height="15" fill="rgb(218,138,4)" fg:x="129" fg:w="1"/><text x="39.6995%" y="127.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mul3 (23 samples, 7.03%)</title><rect x="33.0275%" y="181" width="7.0336%" height="15" fill="rgb(250,191,14)" fg:x="108" fg:w="23"/><text x="33.2775%" y="191.50">everyday_..</text></g><g><title>libsystem_malloc.dylib`szone_malloc_should_clear (1 samples, 0.31%)</title><rect x="39.7554%" y="165" width="0.3058%" height="15" fill="rgb(239,60,40)" fg:x="130" fg:w="1"/><text x="40.0054%" y="175.50"></text></g><g><title>libsystem_malloc.dylib`rack_get_thread_index (1 samples, 0.31%)</title><rect x="39.7554%" y="149" width="0.3058%" height="15" fill="rgb(206,27,48)" fg:x="130" fg:w="1"/><text x="40.0054%" y="159.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::sub_sign (1 samples, 0.31%)</title><rect x="40.0612%" y="181" width="0.3058%" height="15" fill="rgb(225,35,8)" fg:x="131" fg:w="1"/><text x="40.3112%" y="191.50"></text></g><g><title>libsystem_malloc.dylib`szone_malloc_should_clear (1 samples, 0.31%)</title><rect x="40.0612%" y="165" width="0.3058%" height="15" fill="rgb(250,213,24)" fg:x="131" fg:w="1"/><text x="40.3112%" y="175.50"></text></g><g><title>libsystem_malloc.dylib`tiny_malloc_should_clear (1 samples, 0.31%)</title><rect x="40.0612%" y="149" width="0.3058%" height="15" fill="rgb(247,123,22)" fg:x="131" fg:w="1"/><text x="40.3112%" y="159.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mul3 (72 samples, 22.02%)</title><rect x="18.6544%" y="213" width="22.0183%" height="15" fill="rgb(231,138,38)" fg:x="61" fg:w="72"/><text x="18.9044%" y="223.50">everyday_birthday`num_bigint::bigui..</text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (72 samples, 22.02%)</title><rect x="18.6544%" y="197" width="22.0183%" height="15" fill="rgb(231,145,46)" fg:x="61" fg:w="72"/><text x="18.9044%" y="207.50">everyday_birthday`num_bigint::bigui..</text></g><g><title>libsystem_malloc.dylib`_free (1 samples, 0.31%)</title><rect x="40.3670%" y="181" width="0.3058%" height="15" fill="rgb(251,118,11)" fg:x="132" fg:w="1"/><text x="40.6170%" y="191.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::BigUint::pow (132 samples, 40.37%)</title><rect x="0.6116%" y="245" width="40.3670%" height="15" fill="rgb(217,147,25)" fg:x="2" fg:w="132"/><text x="0.8616%" y="255.50">everyday_birthday`num_bigint::biguint::BigUint::pow</text></g><g><title>everyday_birthday`num_bigint::biguint::power::_&lt;impl num_traits::pow::Pow&lt;u32&gt; for num_bigint::biguint::BigUint&gt;::pow (132 samples, 40.37%)</title><rect x="0.6116%" y="229" width="40.3670%" height="15" fill="rgb(247,81,37)" fg:x="2" fg:w="132"/><text x="0.8616%" y="239.50">everyday_birthday`num_bigint::biguint::power::_&lt;impl num_traits::p..</text></g><g><title>libsystem_malloc.dylib`szone_calloc (1 samples, 0.31%)</title><rect x="40.6728%" y="213" width="0.3058%" height="15" fill="rgb(209,12,38)" fg:x="133" fg:w="1"/><text x="40.9228%" y="223.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mul3 (7 samples, 2.14%)</title><rect x="40.9786%" y="245" width="2.1407%" height="15" fill="rgb(227,1,9)" fg:x="134" fg:w="7"/><text x="41.2286%" y="255.50">e..</text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (7 samples, 2.14%)</title><rect x="40.9786%" y="229" width="2.1407%" height="15" fill="rgb(248,47,43)" fg:x="134" fg:w="7"/><text x="41.2286%" y="239.50">e..</text></g><g><title>everyday_birthday`core::ops::function::impls::_&lt;impl core::ops::function::FnOnce&lt;A&gt; for &amp;mut F&gt;::call_once (141 samples, 43.12%)</title><rect x="0.3058%" y="261" width="43.1193%" height="15" fill="rgb(221,10,30)" fg:x="1" fg:w="141"/><text x="0.5558%" y="271.50">everyday_birthday`core::ops::function::impls::_&lt;impl core::ops::functio..</text></g><g><title>everyday_birthday`num_bigint::biguint::power::_&lt;impl num_traits::pow::Pow&lt;u32&gt; for num_bigint::biguint::BigUint&gt;::pow (1 samples, 0.31%)</title><rect x="43.1193%" y="245" width="0.3058%" height="15" fill="rgb(210,229,1)" fg:x="141" fg:w="1"/><text x="43.3693%" y="255.50"></text></g><g><title>everyday_birthday`&lt;num_integer::IterBinomial&lt;T&gt; as core::iter::traits::iterator::Iterator&gt;::next (1 samples, 0.31%)</title><rect x="43.4251%" y="197" width="0.3058%" height="15" fill="rgb(222,148,37)" fg:x="142" fg:w="1"/><text x="43.6751%" y="207.50"></text></g><g><title>everyday_birthday`alloc::raw_vec::RawVec&lt;T,A&gt;::grow_one (3 samples, 0.92%)</title><rect x="43.7309%" y="197" width="0.9174%" height="15" fill="rgb(234,67,33)" fg:x="143" fg:w="3"/><text x="43.9809%" y="207.50"></text></g><g><title>everyday_birthday`alloc::raw_vec::finish_grow (3 samples, 0.92%)</title><rect x="43.7309%" y="181" width="0.9174%" height="15" fill="rgb(247,98,35)" fg:x="143" fg:w="3"/><text x="43.9809%" y="191.50"></text></g><g><title>libsystem_malloc.dylib`nanov2_allocate_outlined (3 samples, 0.92%)</title><rect x="43.7309%" y="165" width="0.9174%" height="15" fill="rgb(247,138,52)" fg:x="143" fg:w="3"/><text x="43.9809%" y="175.50"></text></g><g><title>everyday_birthday`num_bigint::bigint::addition::_&lt;impl core::ops::arith::Add for num_bigint::bigint::BigInt&gt;::add (2 samples, 0.61%)</title><rect x="47.0948%" y="117" width="0.6116%" height="15" fill="rgb(213,79,30)" fg:x="154" fg:w="2"/><text x="47.3448%" y="127.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::addition::_&lt;impl core::ops::arith::Add&lt;&amp;num_bigint::biguint::BigUint&gt; for num_bigint::biguint::BigUint&gt;::add (2 samples, 0.61%)</title><rect x="47.0948%" y="101" width="0.6116%" height="15" fill="rgb(246,177,23)" fg:x="154" fg:w="2"/><text x="47.3448%" y="111.50"></text></g><g><title>everyday_birthday`num_bigint::bigint::subtraction::_&lt;impl core::ops::arith::Sub for num_bigint::bigint::BigInt&gt;::sub (1 samples, 0.31%)</title><rect x="47.7064%" y="117" width="0.3058%" height="15" fill="rgb(230,62,27)" fg:x="156" fg:w="1"/><text x="47.9564%" y="127.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::subtraction::_&lt;impl core::ops::arith::Sub&lt;&amp;num_bigint::biguint::BigUint&gt; for num_bigint::biguint::BigUint&gt;::sub (1 samples, 0.31%)</title><rect x="47.7064%" y="101" width="0.3058%" height="15" fill="rgb(216,154,8)" fg:x="156" fg:w="1"/><text x="47.9564%" y="111.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::subtraction::_&lt;impl core::ops::arith::Sub&lt;&amp;num_bigint::biguint::BigUint&gt; for num_bigint::biguint::BigUint&gt;::sub (1 samples, 0.31%)</title><rect x="48.0122%" y="101" width="0.3058%" height="15" fill="rgb(244,35,45)" fg:x="157" fg:w="1"/><text x="48.2622%" y="111.50"></text></g><g><title>everyday_birthday`num_bigint::bigint::subtraction::_&lt;impl core::ops::arith::Sub&lt;&amp;num_bigint::bigint::BigInt&gt; for &amp;num_bigint::bigint::BigInt&gt;::sub (2 samples, 0.61%)</title><rect x="48.0122%" y="117" width="0.6116%" height="15" fill="rgb(251,115,12)" fg:x="157" fg:w="2"/><text x="48.2622%" y="127.50"></text></g><g><title>libsystem_malloc.dylib`szone_malloc_should_clear (1 samples, 0.31%)</title><rect x="48.3180%" y="101" width="0.3058%" height="15" fill="rgb(240,54,50)" fg:x="158" fg:w="1"/><text x="48.5680%" y="111.50"></text></g><g><title>libsystem_malloc.dylib`small_malloc_should_clear (1 samples, 0.31%)</title><rect x="48.3180%" y="85" width="0.3058%" height="15" fill="rgb(233,84,52)" fg:x="158" fg:w="1"/><text x="48.5680%" y="95.50"></text></g><g><title>libsystem_malloc.dylib`small_malloc_from_free_list (1 samples, 0.31%)</title><rect x="48.3180%" y="69" width="0.3058%" height="15" fill="rgb(207,117,47)" fg:x="158" fg:w="1"/><text x="48.5680%" y="79.50"></text></g><g><title>libsystem_malloc.dylib`small_free_list_add_ptr (1 samples, 0.31%)</title><rect x="48.3180%" y="53" width="0.3058%" height="15" fill="rgb(249,43,39)" fg:x="158" fg:w="1"/><text x="48.5680%" y="63.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::addition::add2 (2 samples, 0.61%)</title><rect x="48.6239%" y="117" width="0.6116%" height="15" fill="rgb(209,38,44)" fg:x="159" fg:w="2"/><text x="48.8739%" y="127.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (10 samples, 3.06%)</title><rect x="49.5413%" y="53" width="3.0581%" height="15" fill="rgb(236,212,23)" fg:x="162" fg:w="10"/><text x="49.7913%" y="63.50">eve..</text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (8 samples, 2.45%)</title><rect x="50.1529%" y="37" width="2.4465%" height="15" fill="rgb(242,79,21)" fg:x="164" fg:w="8"/><text x="50.4029%" y="47.50">ev..</text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::_&lt;impl core::ops::arith::Mul for num_bigint::biguint::BigUint&gt;::mul (12 samples, 3.67%)</title><rect x="49.2355%" y="117" width="3.6697%" height="15" fill="rgb(211,96,35)" fg:x="161" fg:w="12"/><text x="49.4855%" y="127.50">ever..</text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mul3 (12 samples, 3.67%)</title><rect x="49.2355%" y="101" width="3.6697%" height="15" fill="rgb(253,215,40)" fg:x="161" fg:w="12"/><text x="49.4855%" y="111.50">ever..</text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (12 samples, 3.67%)</title><rect x="49.2355%" y="85" width="3.6697%" height="15" fill="rgb(211,81,21)" fg:x="161" fg:w="12"/><text x="49.4855%" y="95.50">ever..</text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (12 samples, 3.67%)</title><rect x="49.2355%" y="69" width="3.6697%" height="15" fill="rgb(208,190,38)" fg:x="161" fg:w="12"/><text x="49.4855%" y="79.50">ever..</text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::sub_sign (1 samples, 0.31%)</title><rect x="52.5994%" y="53" width="0.3058%" height="15" fill="rgb(235,213,38)" fg:x="172" fg:w="1"/><text x="52.8494%" y="63.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (17 samples, 5.20%)</title><rect x="58.7156%" y="85" width="5.1988%" height="15" fill="rgb(237,122,38)" fg:x="192" fg:w="17"/><text x="58.9656%" y="95.50">everyd..</text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (1 samples, 0.31%)</title><rect x="63.6086%" y="69" width="0.3058%" height="15" fill="rgb(244,218,35)" fg:x="208" fg:w="1"/><text x="63.8586%" y="79.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (32 samples, 9.79%)</title><rect x="54.4343%" y="101" width="9.7859%" height="15" fill="rgb(240,68,47)" fg:x="178" fg:w="32"/><text x="54.6843%" y="111.50">everyday_birth..</text></g><g><title>libsystem_platform.dylib`_platform_memset (1 samples, 0.31%)</title><rect x="63.9144%" y="85" width="0.3058%" height="15" fill="rgb(210,16,53)" fg:x="209" fg:w="1"/><text x="64.1644%" y="95.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::sub_sign (1 samples, 0.31%)</title><rect x="64.2202%" y="101" width="0.3058%" height="15" fill="rgb(235,124,12)" fg:x="210" fg:w="1"/><text x="64.4702%" y="111.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::subtraction::sub2 (1 samples, 0.31%)</title><rect x="64.5260%" y="101" width="0.3058%" height="15" fill="rgb(224,169,11)" fg:x="211" fg:w="1"/><text x="64.7760%" y="111.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (40 samples, 12.23%)</title><rect x="52.9052%" y="117" width="12.2324%" height="15" fill="rgb(250,166,2)" fg:x="173" fg:w="40"/><text x="53.1552%" y="127.50">everyday_birthday`..</text></g><g><title>libsystem_malloc.dylib`szone_malloc_should_clear (1 samples, 0.31%)</title><rect x="64.8318%" y="101" width="0.3058%" height="15" fill="rgb(242,216,29)" fg:x="212" fg:w="1"/><text x="65.0818%" y="111.50"></text></g><g><title>libsystem_malloc.dylib`tiny_malloc_should_clear (1 samples, 0.31%)</title><rect x="64.8318%" y="85" width="0.3058%" height="15" fill="rgb(230,116,27)" fg:x="212" fg:w="1"/><text x="65.0818%" y="95.50"></text></g><g><title>libsystem_malloc.dylib`tiny_malloc_from_free_list (1 samples, 0.31%)</title><rect x="64.8318%" y="69" width="0.3058%" height="15" fill="rgb(228,99,48)" fg:x="212" fg:w="1"/><text x="65.0818%" y="79.50"></text></g><g><title>everyday_birthday`alloc::vec::Vec&lt;T,A&gt;::resize (1 samples, 0.31%)</title><rect x="67.2783%" y="53" width="0.3058%" height="15" fill="rgb(253,11,6)" fg:x="220" fg:w="1"/><text x="67.5283%" y="63.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (12 samples, 3.67%)</title><rect x="67.5841%" y="53" width="3.6697%" height="15" fill="rgb(247,143,39)" fg:x="221" fg:w="12"/><text x="67.8341%" y="63.50">ever..</text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::sub_sign (1 samples, 0.31%)</title><rect x="71.2538%" y="53" width="0.3058%" height="15" fill="rgb(236,97,10)" fg:x="233" fg:w="1"/><text x="71.5038%" y="63.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::subtraction::sub2 (1 samples, 0.31%)</title><rect x="71.5596%" y="53" width="0.3058%" height="15" fill="rgb(233,208,19)" fg:x="234" fg:w="1"/><text x="71.8096%" y="63.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (21 samples, 6.42%)</title><rect x="65.7492%" y="69" width="6.4220%" height="15" fill="rgb(216,164,2)" fg:x="215" fg:w="21"/><text x="65.9992%" y="79.50">everyday..</text></g><g><title>libsystem_malloc.dylib`_malloc_zone_malloc (1 samples, 0.31%)</title><rect x="71.8654%" y="53" width="0.3058%" height="15" fill="rgb(220,129,5)" fg:x="235" fg:w="1"/><text x="72.1154%" y="63.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::subtraction::sub2 (1 samples, 0.31%)</title><rect x="72.1713%" y="69" width="0.3058%" height="15" fill="rgb(242,17,10)" fg:x="236" fg:w="1"/><text x="72.4213%" y="79.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (25 samples, 7.65%)</title><rect x="65.1376%" y="85" width="7.6453%" height="15" fill="rgb(242,107,0)" fg:x="213" fg:w="25"/><text x="65.3876%" y="95.50">everyday_b..</text></g><g><title>libsystem_malloc.dylib`free_tiny (1 samples, 0.31%)</title><rect x="72.4771%" y="69" width="0.3058%" height="15" fill="rgb(251,28,31)" fg:x="237" fg:w="1"/><text x="72.7271%" y="79.50"></text></g><g><title>libsystem_malloc.dylib`tiny_free_no_lock (1 samples, 0.31%)</title><rect x="72.4771%" y="53" width="0.3058%" height="15" fill="rgb(233,223,10)" fg:x="237" fg:w="1"/><text x="72.7271%" y="63.50"></text></g><g><title>libsystem_malloc.dylib`tiny_free_list_remove_ptr (1 samples, 0.31%)</title><rect x="72.4771%" y="37" width="0.3058%" height="15" fill="rgb(215,21,27)" fg:x="237" fg:w="1"/><text x="72.7271%" y="47.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::sub_sign (2 samples, 0.61%)</title><rect x="72.7829%" y="85" width="0.6116%" height="15" fill="rgb(232,23,21)" fg:x="238" fg:w="2"/><text x="73.0329%" y="95.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mul3 (28 samples, 8.56%)</title><rect x="65.1376%" y="117" width="8.5627%" height="15" fill="rgb(244,5,23)" fg:x="213" fg:w="28"/><text x="65.3876%" y="127.50">everyday_bir..</text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (28 samples, 8.56%)</title><rect x="65.1376%" y="101" width="8.5627%" height="15" fill="rgb(226,81,46)" fg:x="213" fg:w="28"/><text x="65.3876%" y="111.50">everyday_bir..</text></g><g><title>libsystem_platform.dylib`_platform_memset (1 samples, 0.31%)</title><rect x="73.3945%" y="85" width="0.3058%" height="15" fill="rgb(247,70,30)" fg:x="240" fg:w="1"/><text x="73.6445%" y="95.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::sub_sign (1 samples, 0.31%)</title><rect x="73.7003%" y="117" width="0.3058%" height="15" fill="rgb(212,68,19)" fg:x="241" fg:w="1"/><text x="73.9503%" y="127.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::shift::biguint_shl2 (1 samples, 0.31%)</title><rect x="74.0061%" y="117" width="0.3058%" height="15" fill="rgb(240,187,13)" fg:x="242" fg:w="1"/><text x="74.2561%" y="127.50"></text></g><g><title>libsystem_malloc.dylib`szone_malloc_should_clear (1 samples, 0.31%)</title><rect x="74.0061%" y="101" width="0.3058%" height="15" fill="rgb(223,113,26)" fg:x="242" fg:w="1"/><text x="74.2561%" y="111.50"></text></g><g><title>libsystem_malloc.dylib`small_malloc_should_clear (1 samples, 0.31%)</title><rect x="74.0061%" y="85" width="0.3058%" height="15" fill="rgb(206,192,2)" fg:x="242" fg:w="1"/><text x="74.2561%" y="95.50"></text></g><g><title>libsystem_malloc.dylib`small_malloc_from_free_list (1 samples, 0.31%)</title><rect x="74.0061%" y="69" width="0.3058%" height="15" fill="rgb(241,108,4)" fg:x="242" fg:w="1"/><text x="74.2561%" y="79.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::subtraction::sub2 (1 samples, 0.31%)</title><rect x="74.3119%" y="117" width="0.3058%" height="15" fill="rgb(247,173,49)" fg:x="243" fg:w="1"/><text x="74.5619%" y="127.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mul3 (99 samples, 30.28%)</title><rect x="44.6483%" y="149" width="30.2752%" height="15" fill="rgb(224,114,35)" fg:x="146" fg:w="99"/><text x="44.8983%" y="159.50">everyday_birthday`num_bigint::biguint::multiplica..</text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (99 samples, 30.28%)</title><rect x="44.6483%" y="133" width="30.2752%" height="15" fill="rgb(245,159,27)" fg:x="146" fg:w="99"/><text x="44.8983%" y="143.50">everyday_birthday`num_bigint::biguint::multiplica..</text></g><g><title>libsystem_malloc.dylib`_free (1 samples, 0.31%)</title><rect x="74.6177%" y="117" width="0.3058%" height="15" fill="rgb(245,172,44)" fg:x="244" fg:w="1"/><text x="74.8677%" y="127.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::_&lt;impl core::ops::arith::MulAssign&lt;&amp;num_bigint::biguint::BigUint&gt; for num_bigint::biguint::BigUint&gt;::mul_assign (100 samples, 30.58%)</title><rect x="44.6483%" y="165" width="30.5810%" height="15" fill="rgb(236,23,11)" fg:x="146" fg:w="100"/><text x="44.8983%" y="175.50">everyday_birthday`num_bigint::biguint::multiplica..</text></g><g><title>libsystem_malloc.dylib`szone_calloc (1 samples, 0.31%)</title><rect x="74.9235%" y="149" width="0.3058%" height="15" fill="rgb(205,117,38)" fg:x="245" fg:w="1"/><text x="75.1735%" y="159.50"></text></g><g><title>everyday_birthday`num_bigint::bigint::subtraction::_&lt;impl core::ops::arith::Sub for num_bigint::bigint::BigInt&gt;::sub (1 samples, 0.31%)</title><rect x="76.4526%" y="133" width="0.3058%" height="15" fill="rgb(237,72,25)" fg:x="250" fg:w="1"/><text x="76.7026%" y="143.50"></text></g><g><title>libsystem_malloc.dylib`_szone_free (1 samples, 0.31%)</title><rect x="76.4526%" y="117" width="0.3058%" height="15" fill="rgb(244,70,9)" fg:x="250" fg:w="1"/><text x="76.7026%" y="127.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::_&lt;impl core::ops::arith::Mul for num_bigint::biguint::BigUint&gt;::mul (2 samples, 0.61%)</title><rect x="76.7584%" y="133" width="0.6116%" height="15" fill="rgb(217,125,39)" fg:x="251" fg:w="2"/><text x="77.0084%" y="143.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mul3 (2 samples, 0.61%)</title><rect x="76.7584%" y="117" width="0.6116%" height="15" fill="rgb(235,36,10)" fg:x="251" fg:w="2"/><text x="77.0084%" y="127.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (2 samples, 0.61%)</title><rect x="76.7584%" y="101" width="0.6116%" height="15" fill="rgb(251,123,47)" fg:x="251" fg:w="2"/><text x="77.0084%" y="111.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (2 samples, 0.61%)</title><rect x="76.7584%" y="85" width="0.6116%" height="15" fill="rgb(221,13,13)" fg:x="251" fg:w="2"/><text x="77.0084%" y="95.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (2 samples, 0.61%)</title><rect x="76.7584%" y="69" width="0.6116%" height="15" fill="rgb(238,131,9)" fg:x="251" fg:w="2"/><text x="77.0084%" y="79.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (8 samples, 2.45%)</title><rect x="80.1223%" y="101" width="2.4465%" height="15" fill="rgb(211,50,8)" fg:x="262" fg:w="8"/><text x="80.3723%" y="111.50">ev..</text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (16 samples, 4.89%)</title><rect x="77.9817%" y="117" width="4.8930%" height="15" fill="rgb(245,182,24)" fg:x="255" fg:w="16"/><text x="78.2317%" y="127.50">everyd..</text></g><g><title>libsystem_malloc.dylib`free_tiny (1 samples, 0.31%)</title><rect x="82.5688%" y="101" width="0.3058%" height="15" fill="rgb(242,14,37)" fg:x="270" fg:w="1"/><text x="82.8188%" y="111.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::sub_sign (1 samples, 0.31%)</title><rect x="82.8746%" y="117" width="0.3058%" height="15" fill="rgb(246,228,12)" fg:x="271" fg:w="1"/><text x="83.1246%" y="127.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::subtraction::sub2 (2 samples, 0.61%)</title><rect x="83.1804%" y="117" width="0.6116%" height="15" fill="rgb(213,55,15)" fg:x="272" fg:w="2"/><text x="83.4304%" y="127.50"></text></g><g><title>libsystem_malloc.dylib`_nanov2_free (1 samples, 0.31%)</title><rect x="83.7920%" y="117" width="0.3058%" height="15" fill="rgb(209,9,3)" fg:x="274" fg:w="1"/><text x="84.0420%" y="127.50"></text></g><g><title>libsystem_malloc.dylib`nanov2_malloc (1 samples, 0.31%)</title><rect x="84.0979%" y="117" width="0.3058%" height="15" fill="rgb(230,59,30)" fg:x="275" fg:w="1"/><text x="84.3479%" y="127.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (24 samples, 7.34%)</title><rect x="77.3700%" y="133" width="7.3394%" height="15" fill="rgb(209,121,21)" fg:x="253" fg:w="24"/><text x="77.6200%" y="143.50">everyday_b..</text></g><g><title>libsystem_malloc.dylib`szone_malloc_should_clear (1 samples, 0.31%)</title><rect x="84.4037%" y="117" width="0.3058%" height="15" fill="rgb(220,109,13)" fg:x="276" fg:w="1"/><text x="84.6537%" y="127.50"></text></g><g><title>libsystem_malloc.dylib`tiny_malloc_should_clear (1 samples, 0.31%)</title><rect x="84.4037%" y="101" width="0.3058%" height="15" fill="rgb(232,18,1)" fg:x="276" fg:w="1"/><text x="84.6537%" y="111.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mul3 (1 samples, 0.31%)</title><rect x="84.7095%" y="133" width="0.3058%" height="15" fill="rgb(215,41,42)" fg:x="277" fg:w="1"/><text x="84.9595%" y="143.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (1 samples, 0.31%)</title><rect x="84.7095%" y="117" width="0.3058%" height="15" fill="rgb(224,123,36)" fg:x="277" fg:w="1"/><text x="84.9595%" y="127.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::BigUint::pow (133 samples, 40.67%)</title><rect x="44.6483%" y="197" width="40.6728%" height="15" fill="rgb(240,125,3)" fg:x="146" fg:w="133"/><text x="44.8983%" y="207.50">everyday_birthday`num_bigint::biguint::BigUint::pow</text></g><g><title>everyday_birthday`num_bigint::biguint::power::_&lt;impl num_traits::pow::Pow&lt;u32&gt; for num_bigint::biguint::BigUint&gt;::pow (133 samples, 40.67%)</title><rect x="44.6483%" y="181" width="40.6728%" height="15" fill="rgb(205,98,50)" fg:x="146" fg:w="133"/><text x="44.8983%" y="191.50">everyday_birthday`num_bigint::biguint::power::_&lt;impl num_traits::p..</text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mul3 (33 samples, 10.09%)</title><rect x="75.2294%" y="165" width="10.0917%" height="15" fill="rgb(205,185,37)" fg:x="246" fg:w="33"/><text x="75.4794%" y="175.50">everyday_birthd..</text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (32 samples, 9.79%)</title><rect x="75.5352%" y="149" width="9.7859%" height="15" fill="rgb(238,207,15)" fg:x="247" fg:w="32"/><text x="75.7852%" y="159.50">everyday_birth..</text></g><g><title>libsystem_platform.dylib`_platform_memmove (1 samples, 0.31%)</title><rect x="85.0153%" y="133" width="0.3058%" height="15" fill="rgb(213,199,42)" fg:x="278" fg:w="1"/><text x="85.2653%" y="143.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::addition::_&lt;impl core::ops::arith::Add&lt;&amp;num_bigint::biguint::BigUint&gt; for num_bigint::biguint::BigUint&gt;::add (1 samples, 0.31%)</title><rect x="85.3211%" y="197" width="0.3058%" height="15" fill="rgb(235,201,11)" fg:x="279" fg:w="1"/><text x="85.5711%" y="207.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mul3 (4 samples, 1.22%)</title><rect x="85.6269%" y="197" width="1.2232%" height="15" fill="rgb(207,46,11)" fg:x="280" fg:w="4"/><text x="85.8769%" y="207.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (4 samples, 1.22%)</title><rect x="85.6269%" y="181" width="1.2232%" height="15" fill="rgb(241,35,35)" fg:x="280" fg:w="4"/><text x="85.8769%" y="191.50"></text></g><g><title>everyday_birthday`core::ops::function::impls::_&lt;impl core::ops::function::FnOnce&lt;A&gt; for &amp;mut F&gt;::call_once (143 samples, 43.73%)</title><rect x="43.4251%" y="213" width="43.7309%" height="15" fill="rgb(243,32,47)" fg:x="142" fg:w="143"/><text x="43.6751%" y="223.50">everyday_birthday`core::ops::function::impls::_&lt;impl core::ops::function..</text></g><g><title>everyday_birthday`num_bigint::biguint::shift::biguint_shr2 (1 samples, 0.31%)</title><rect x="86.8502%" y="197" width="0.3058%" height="15" fill="rgb(247,202,23)" fg:x="284" fg:w="1"/><text x="87.1002%" y="207.50"></text></g><g><title>everyday_birthday`&lt;num_integer::IterBinomial&lt;T&gt; as core::iter::traits::iterator::Iterator&gt;::next (1 samples, 0.31%)</title><rect x="87.1560%" y="149" width="0.3058%" height="15" fill="rgb(219,102,11)" fg:x="285" fg:w="1"/><text x="87.4060%" y="159.50"></text></g><g><title>everyday_birthday`alloc::raw_vec::RawVec&lt;T,A&gt;::grow_one (1 samples, 0.31%)</title><rect x="87.4618%" y="149" width="0.3058%" height="15" fill="rgb(243,110,44)" fg:x="286" fg:w="1"/><text x="87.7118%" y="159.50"></text></g><g><title>everyday_birthday`alloc::raw_vec::finish_grow (1 samples, 0.31%)</title><rect x="87.4618%" y="133" width="0.3058%" height="15" fill="rgb(222,74,54)" fg:x="286" fg:w="1"/><text x="87.7118%" y="143.50"></text></g><g><title>libsystem_malloc.dylib`nanov2_allocate_outlined (1 samples, 0.31%)</title><rect x="87.4618%" y="117" width="0.3058%" height="15" fill="rgb(216,99,12)" fg:x="286" fg:w="1"/><text x="87.7118%" y="127.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::_&lt;impl core::ops::arith::MulAssign&lt;&amp;num_bigint::biguint::BigUint&gt; for num_bigint::biguint::BigUint&gt;::mul_assign (14 samples, 4.28%)</title><rect x="87.7676%" y="117" width="4.2813%" height="15" fill="rgb(226,22,26)" fg:x="287" fg:w="14"/><text x="88.0176%" y="127.50">every..</text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mul3 (14 samples, 4.28%)</title><rect x="87.7676%" y="101" width="4.2813%" height="15" fill="rgb(217,163,10)" fg:x="287" fg:w="14"/><text x="88.0176%" y="111.50">every..</text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (14 samples, 4.28%)</title><rect x="87.7676%" y="85" width="4.2813%" height="15" fill="rgb(213,25,53)" fg:x="287" fg:w="14"/><text x="88.0176%" y="95.50">every..</text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (14 samples, 4.28%)</title><rect x="87.7676%" y="69" width="4.2813%" height="15" fill="rgb(252,105,26)" fg:x="287" fg:w="14"/><text x="88.0176%" y="79.50">every..</text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (14 samples, 4.28%)</title><rect x="87.7676%" y="53" width="4.2813%" height="15" fill="rgb(220,39,43)" fg:x="287" fg:w="14"/><text x="88.0176%" y="63.50">every..</text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (9 samples, 2.75%)</title><rect x="89.2966%" y="37" width="2.7523%" height="15" fill="rgb(229,68,48)" fg:x="292" fg:w="9"/><text x="89.5466%" y="47.50">ev..</text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (3 samples, 0.92%)</title><rect x="93.2722%" y="53" width="0.9174%" height="15" fill="rgb(252,8,32)" fg:x="305" fg:w="3"/><text x="93.5222%" y="63.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (5 samples, 1.53%)</title><rect x="92.9664%" y="69" width="1.5291%" height="15" fill="rgb(223,20,43)" fg:x="304" fg:w="5"/><text x="93.2164%" y="79.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::subtraction::sub2 (1 samples, 0.31%)</title><rect x="94.1896%" y="53" width="0.3058%" height="15" fill="rgb(229,81,49)" fg:x="308" fg:w="1"/><text x="94.4396%" y="63.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::BigUint::pow (23 samples, 7.03%)</title><rect x="87.7676%" y="149" width="7.0336%" height="15" fill="rgb(236,28,36)" fg:x="287" fg:w="23"/><text x="88.0176%" y="159.50">everyday_..</text></g><g><title>everyday_birthday`num_bigint::biguint::power::_&lt;impl num_traits::pow::Pow&lt;u32&gt; for num_bigint::biguint::BigUint&gt;::pow (23 samples, 7.03%)</title><rect x="87.7676%" y="133" width="7.0336%" height="15" fill="rgb(249,185,26)" fg:x="287" fg:w="23"/><text x="88.0176%" y="143.50">everyday_..</text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mul3 (9 samples, 2.75%)</title><rect x="92.0489%" y="117" width="2.7523%" height="15" fill="rgb(249,174,33)" fg:x="301" fg:w="9"/><text x="92.2989%" y="127.50">ev..</text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (9 samples, 2.75%)</title><rect x="92.0489%" y="101" width="2.7523%" height="15" fill="rgb(233,201,37)" fg:x="301" fg:w="9"/><text x="92.2989%" y="111.50">ev..</text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (7 samples, 2.14%)</title><rect x="92.6606%" y="85" width="2.1407%" height="15" fill="rgb(221,78,26)" fg:x="303" fg:w="7"/><text x="92.9106%" y="95.50">e..</text></g><g><title>libsystem_malloc.dylib`szone_malloc_should_clear (1 samples, 0.31%)</title><rect x="94.4954%" y="69" width="0.3058%" height="15" fill="rgb(250,127,30)" fg:x="309" fg:w="1"/><text x="94.7454%" y="79.50"></text></g><g><title>libsystem_malloc.dylib`tiny_malloc_should_clear (1 samples, 0.31%)</title><rect x="94.4954%" y="53" width="0.3058%" height="15" fill="rgb(230,49,44)" fg:x="309" fg:w="1"/><text x="94.7454%" y="63.50"></text></g><g><title>libsystem_malloc.dylib`tiny_malloc_from_free_list (1 samples, 0.31%)</title><rect x="94.4954%" y="37" width="0.3058%" height="15" fill="rgb(229,67,23)" fg:x="309" fg:w="1"/><text x="94.7454%" y="47.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::addition::_&lt;impl core::ops::arith::Add&lt;&amp;num_bigint::biguint::BigUint&gt; for num_bigint::biguint::BigUint&gt;::add (1 samples, 0.31%)</title><rect x="94.8012%" y="149" width="0.3058%" height="15" fill="rgb(249,83,47)" fg:x="310" fg:w="1"/><text x="95.0512%" y="159.50"></text></g><g><title>everyday_birthday`rayon::iter::plumbing::bridge_producer_consumer::helper (313 samples, 95.72%)</title><rect x="0.3058%" y="277" width="95.7187%" height="15" fill="rgb(215,43,3)" fg:x="1" fg:w="313"/><text x="0.5558%" y="287.50">everyday_birthday`rayon::iter::plumbing::bridge_producer_consumer::helper</text></g><g><title>everyday_birthday`rayon_core::registry::in_worker (172 samples, 52.60%)</title><rect x="43.4251%" y="261" width="52.5994%" height="15" fill="rgb(238,154,13)" fg:x="142" fg:w="172"/><text x="43.6751%" y="271.50">everyday_birthday`rayon_core::registry::in_worker</text></g><g><title>everyday_birthday`rayon_core::join::join_context::_{{closure}} (172 samples, 52.60%)</title><rect x="43.4251%" y="245" width="52.5994%" height="15" fill="rgb(219,56,2)" fg:x="142" fg:w="172"/><text x="43.6751%" y="255.50">everyday_birthday`rayon_core::join::join_context::_{{closure}}</text></g><g><title>everyday_birthday`rayon::iter::plumbing::bridge_producer_consumer::helper (172 samples, 52.60%)</title><rect x="43.4251%" y="229" width="52.5994%" height="15" fill="rgb(233,0,4)" fg:x="142" fg:w="172"/><text x="43.6751%" y="239.50">everyday_birthday`rayon::iter::plumbing::bridge_producer_consumer::helper</text></g><g><title>everyday_birthday`rayon_core::registry::in_worker (29 samples, 8.87%)</title><rect x="87.1560%" y="213" width="8.8685%" height="15" fill="rgb(235,30,7)" fg:x="285" fg:w="29"/><text x="87.4060%" y="223.50">everyday_birt..</text></g><g><title>everyday_birthday`rayon_core::join::join_context::_{{closure}} (29 samples, 8.87%)</title><rect x="87.1560%" y="197" width="8.8685%" height="15" fill="rgb(250,79,13)" fg:x="285" fg:w="29"/><text x="87.4060%" y="207.50">everyday_birt..</text></g><g><title>everyday_birthday`rayon::iter::plumbing::bridge_producer_consumer::helper (29 samples, 8.87%)</title><rect x="87.1560%" y="181" width="8.8685%" height="15" fill="rgb(211,146,34)" fg:x="285" fg:w="29"/><text x="87.4060%" y="191.50">everyday_birt..</text></g><g><title>everyday_birthday`core::ops::function::impls::_&lt;impl core::ops::function::FnOnce&lt;A&gt; for &amp;mut F&gt;::call_once (29 samples, 8.87%)</title><rect x="87.1560%" y="165" width="8.8685%" height="15" fill="rgb(228,22,38)" fg:x="285" fg:w="29"/><text x="87.4060%" y="175.50">everyday_birt..</text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mul3 (3 samples, 0.92%)</title><rect x="95.1070%" y="149" width="0.9174%" height="15" fill="rgb(235,168,5)" fg:x="311" fg:w="3"/><text x="95.3570%" y="159.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (3 samples, 0.92%)</title><rect x="95.1070%" y="133" width="0.9174%" height="15" fill="rgb(221,155,16)" fg:x="311" fg:w="3"/><text x="95.3570%" y="143.50"></text></g><g><title>everyday_birthday`&lt;num_integer::IterBinomial&lt;T&gt; as core::iter::traits::iterator::Iterator&gt;::next (2 samples, 0.61%)</title><rect x="96.0245%" y="133" width="0.6116%" height="15" fill="rgb(215,215,53)" fg:x="314" fg:w="2"/><text x="96.2745%" y="143.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::shift::biguint_shr2 (1 samples, 0.31%)</title><rect x="96.3303%" y="117" width="0.3058%" height="15" fill="rgb(223,4,10)" fg:x="315" fg:w="1"/><text x="96.5803%" y="127.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (3 samples, 0.92%)</title><rect x="96.6361%" y="69" width="0.9174%" height="15" fill="rgb(234,103,6)" fg:x="316" fg:w="3"/><text x="96.8861%" y="79.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (3 samples, 0.92%)</title><rect x="96.6361%" y="53" width="0.9174%" height="15" fill="rgb(227,97,0)" fg:x="316" fg:w="3"/><text x="96.8861%" y="63.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::_&lt;impl core::ops::arith::MulAssign&lt;&amp;num_bigint::biguint::BigUint&gt; for num_bigint::biguint::BigUint&gt;::mul_assign (4 samples, 1.22%)</title><rect x="96.6361%" y="101" width="1.2232%" height="15" fill="rgb(234,150,53)" fg:x="316" fg:w="4"/><text x="96.8861%" y="111.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mul3 (4 samples, 1.22%)</title><rect x="96.6361%" y="85" width="1.2232%" height="15" fill="rgb(228,201,54)" fg:x="316" fg:w="4"/><text x="96.8861%" y="95.50"></text></g><g><title>libsystem_malloc.dylib`nanov2_allocate_outlined (1 samples, 0.31%)</title><rect x="97.5535%" y="69" width="0.3058%" height="15" fill="rgb(222,22,37)" fg:x="319" fg:w="1"/><text x="97.8035%" y="79.50"></text></g><g><title>everyday_birthday`rayon::iter::plumbing::bridge_producer_consumer::helper (9 samples, 2.75%)</title><rect x="96.0245%" y="261" width="2.7523%" height="15" fill="rgb(237,53,32)" fg:x="314" fg:w="9"/><text x="96.2745%" y="271.50">ev..</text></g><g><title>everyday_birthday`rayon_core::registry::in_worker (9 samples, 2.75%)</title><rect x="96.0245%" y="245" width="2.7523%" height="15" fill="rgb(233,25,53)" fg:x="314" fg:w="9"/><text x="96.2745%" y="255.50">ev..</text></g><g><title>everyday_birthday`rayon_core::join::join_context::_{{closure}} (9 samples, 2.75%)</title><rect x="96.0245%" y="229" width="2.7523%" height="15" fill="rgb(210,40,34)" fg:x="314" fg:w="9"/><text x="96.2745%" y="239.50">ev..</text></g><g><title>everyday_birthday`rayon::iter::plumbing::bridge_producer_consumer::helper (9 samples, 2.75%)</title><rect x="96.0245%" y="213" width="2.7523%" height="15" fill="rgb(241,220,44)" fg:x="314" fg:w="9"/><text x="96.2745%" y="223.50">ev..</text></g><g><title>everyday_birthday`rayon_core::registry::in_worker (9 samples, 2.75%)</title><rect x="96.0245%" y="197" width="2.7523%" height="15" fill="rgb(235,28,35)" fg:x="314" fg:w="9"/><text x="96.2745%" y="207.50">ev..</text></g><g><title>everyday_birthday`rayon_core::join::join_context::_{{closure}} (9 samples, 2.75%)</title><rect x="96.0245%" y="181" width="2.7523%" height="15" fill="rgb(210,56,17)" fg:x="314" fg:w="9"/><text x="96.2745%" y="191.50">ev..</text></g><g><title>everyday_birthday`rayon::iter::plumbing::bridge_producer_consumer::helper (9 samples, 2.75%)</title><rect x="96.0245%" y="165" width="2.7523%" height="15" fill="rgb(224,130,29)" fg:x="314" fg:w="9"/><text x="96.2745%" y="175.50">ev..</text></g><g><title>everyday_birthday`core::ops::function::impls::_&lt;impl core::ops::function::FnOnce&lt;A&gt; for &amp;mut F&gt;::call_once (9 samples, 2.75%)</title><rect x="96.0245%" y="149" width="2.7523%" height="15" fill="rgb(235,212,8)" fg:x="314" fg:w="9"/><text x="96.2745%" y="159.50">ev..</text></g><g><title>everyday_birthday`num_bigint::biguint::BigUint::pow (7 samples, 2.14%)</title><rect x="96.6361%" y="133" width="2.1407%" height="15" fill="rgb(223,33,50)" fg:x="316" fg:w="7"/><text x="96.8861%" y="143.50">e..</text></g><g><title>everyday_birthday`num_bigint::biguint::power::_&lt;impl num_traits::pow::Pow&lt;u32&gt; for num_bigint::biguint::BigUint&gt;::pow (7 samples, 2.14%)</title><rect x="96.6361%" y="117" width="2.1407%" height="15" fill="rgb(219,149,13)" fg:x="316" fg:w="7"/><text x="96.8861%" y="127.50">e..</text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mul3 (3 samples, 0.92%)</title><rect x="97.8593%" y="101" width="0.9174%" height="15" fill="rgb(250,156,29)" fg:x="320" fg:w="3"/><text x="98.1093%" y="111.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (3 samples, 0.92%)</title><rect x="97.8593%" y="85" width="0.9174%" height="15" fill="rgb(216,193,19)" fg:x="320" fg:w="3"/><text x="98.1093%" y="95.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (3 samples, 0.92%)</title><rect x="97.8593%" y="69" width="0.9174%" height="15" fill="rgb(216,135,14)" fg:x="320" fg:w="3"/><text x="98.1093%" y="79.50"></text></g><g><title>everyday_birthday`num_bigint::biguint::multiplication::mac3 (3 samples, 0.92%)</title><rect x="97.8593%" y="53" width="0.9174%" height="15" fill="rgb(241,47,5)" fg:x="320" fg:w="3"/><text x="98.1093%" y="63.50"></text></g><g><title>everyday_birthday`&lt;rayon_core::job::StackJob&lt;L,F,R&gt; as rayon_core::job::Job&gt;::execute (323 samples, 98.78%)</title><rect x="0.3058%" y="293" width="98.7768%" height="15" fill="rgb(233,42,35)" fg:x="1" fg:w="323"/><text x="0.5558%" y="303.50">everyday_birthday`&lt;rayon_core::job::StackJob&lt;L,F,R&gt; as rayon_core::job::Job&gt;::execute</text></g><g><title>everyday_birthday`rayon_core::join::join_context::_{{closure}} (10 samples, 3.06%)</title><rect x="96.0245%" y="277" width="3.0581%" height="15" fill="rgb(231,13,6)" fg:x="314" fg:w="10"/><text x="96.2745%" y="287.50">eve..</text></g><g><title>everyday_birthday`rayon_core::registry::WorkerThread::wait_until_cold (1 samples, 0.31%)</title><rect x="98.7768%" y="261" width="0.3058%" height="15" fill="rgb(207,181,40)" fg:x="323" fg:w="1"/><text x="99.0268%" y="271.50"></text></g><g><title>libsystem_kernel.dylib`swtch_pri (1 samples, 0.31%)</title><rect x="98.7768%" y="245" width="0.3058%" height="15" fill="rgb(254,173,49)" fg:x="323" fg:w="1"/><text x="99.0268%" y="255.50"></text></g><g><title>all (327 samples, 100%)</title><rect x="0.0000%" y="421" width="100.0000%" height="15" fill="rgb(221,1,38)" fg:x="0" fg:w="327"/><text x="0.2500%" y="431.50"></text></g><g><title>libsystem_pthread.dylib`thread_start (326 samples, 99.69%)</title><rect x="0.3058%" y="405" width="99.6942%" height="15" fill="rgb(206,124,46)" fg:x="1" fg:w="326"/><text x="0.5558%" y="415.50">libsystem_pthread.dylib`thread_start</text></g><g><title>libsystem_pthread.dylib`_pthread_start (326 samples, 99.69%)</title><rect x="0.3058%" y="389" width="99.6942%" height="15" fill="rgb(249,21,11)" fg:x="1" fg:w="326"/><text x="0.5558%" y="399.50">libsystem_pthread.dylib`_pthread_start</text></g><g><title>everyday_birthday`std::sys::pal::unix::thread::Thread::new::thread_start (326 samples, 99.69%)</title><rect x="0.3058%" y="373" width="99.6942%" height="15" fill="rgb(222,201,40)" fg:x="1" fg:w="326"/><text x="0.5558%" y="383.50">everyday_birthday`std::sys::pal::unix::thread::Thread::new::thread_start</text></g><g><title>everyday_birthday`core::ops::function::FnOnce::call_once{{vtable.shim}} (326 samples, 99.69%)</title><rect x="0.3058%" y="357" width="99.6942%" height="15" fill="rgb(235,61,29)" fg:x="1" fg:w="326"/><text x="0.5558%" y="367.50">everyday_birthday`core::ops::function::FnOnce::call_once{{vtable.shim}}</text></g><g><title>everyday_birthday`std::sys_common::backtrace::__rust_begin_short_backtrace (326 samples, 99.69%)</title><rect x="0.3058%" y="341" width="99.6942%" height="15" fill="rgb(219,207,3)" fg:x="1" fg:w="326"/><text x="0.5558%" y="351.50">everyday_birthday`std::sys_common::backtrace::__rust_begin_short_backtrace</text></g><g><title>everyday_birthday`rayon_core::registry::ThreadBuilder::run (326 samples, 99.69%)</title><rect x="0.3058%" y="325" width="99.6942%" height="15" fill="rgb(222,56,46)" fg:x="1" fg:w="326"/><text x="0.5558%" y="335.50">everyday_birthday`rayon_core::registry::ThreadBuilder::run</text></g><g><title>everyday_birthday`rayon_core::registry::WorkerThread::wait_until_cold (326 samples, 99.69%)</title><rect x="0.3058%" y="309" width="99.6942%" height="15" fill="rgb(239,76,54)" fg:x="1" fg:w="326"/><text x="0.5558%" y="319.50">everyday_birthday`rayon_core::registry::WorkerThread::wait_until_cold</text></g><g><title>libsystem_kernel.dylib`swtch_pri (3 samples, 0.92%)</title><rect x="99.0826%" y="293" width="0.9174%" height="15" fill="rgb(231,124,27)" fg:x="324" fg:w="3"/><text x="99.3326%" y="303.50"></text></g></svg></svg>
