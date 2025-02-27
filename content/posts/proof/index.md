@@ -438,7 +438,6 @@ expressive tactic language, allowing for the formalization of complex
 mathematical proofs in a way that is both rigorous and (with practice)
 intuitive to mathematicians.
 
-
 # Formal Verification of Partial Differential Equations
 
 Partial Differential Equations (PDEs) are central to many areas of

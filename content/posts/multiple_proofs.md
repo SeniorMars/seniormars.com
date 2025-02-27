@@ -1,5 +1,5 @@
 +++
-title = "The Beauty of Multiplicity: What Proof Complexity Can Teach Mathematicians"
+title = "What Complexity Theory Can Teach Mathematicians"
 date = "2025-02-26"
 description = "A guy gives his thoughts on a Reddit thread." 
 

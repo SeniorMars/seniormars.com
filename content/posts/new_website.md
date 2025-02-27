@@ -169,20 +169,88 @@ We can't call another shortcode inside a shortcode, but this is good enough.
 
 Here is the raw markdown:
 
-```markdown
+````markdown
 {{/* note(clickable=true, header="Quiz!") */}}
 
 # Hello this is markdown inside a note shortcode
 
-\`\`\`rust
+```rust
 fn main() {
     println!("Hello World");
 }
-\`\`\`
+```
 
 We can't call another shortcode inside a shortcode, but this is good enough.
 
 {{/* end */}}
-```
+````
+
+
+
+| Cartesian Closed Category | $\mathbf{Set}$ | $\mathbf{P}$ (Logic) | Typed $\lambda$-calculus |
+|---------------------------|---------|---------------|------------------|
+| Objects/1-cells | Sets | Propositions | Types |
+| Morphisms/2-cells | Functions | Entailment | Terms/Programs |
+| 1-cell composition | Cartesian product $S \times T$ | Conjunction $A \wedge B$ | Product type |
+| Identity 1-cell | One-element set $\{*\}$ | True proposition $\top$ | Unit type $()$ |
+| Right Kan extension | Function set $T^S$ | Implication $A \rightarrow B$ | Function type |
+| Evaluation morphism | Function application | Modus ponens | Term application |
+| Currying | $f: C\times A\rightarrow B$ to $\Lambda f: C\rightarrow B^A$ | Deduction theorem | Lambda abstraction |
+
+### Basic Note Types
+
+{{ note(type="default", header="Default Note", body="This is a standard note with default styling.") }}
+
+{{ note(type="info", header="Information Note", body="This note contains important information you should know.") }}
+
+{{ note(type="warning", header="Warning Note", body="Be careful! This note warns you about something important.") }}
+
+{{ note(type="success", header="Success Note", body="Congratulations! This operation was successful.") }}
+
+{{ note(type="danger", header="Danger Note", body="Critical error! Something went seriously wrong.") }}
+
+{{ note(type="tip", header="Tip Note", body="Here's a useful tip to make your work easier.") }}
+
+### Custom Icons
+
+{{ note(type="info", icon="📌", header="Custom Icon", body="This note uses a custom pin icon instead of the default info icon.") }}
+
+{{ note(type="warning", icon="🔥", header="Fire Warning", body="This warning uses a fire emoji as its custom icon.") }}
+
+{{ note(type="success", icon="🌟", header="Star Success", body="A star icon celebrates this success message.") }}
+
+### Clickable Notes (Collapsible)
+
+{{ note(clickable=true, header="Click to Expand", body="This content can be toggled by clicking the header.") }}
+
+{{ note(clickable=true, hidden=true, header="Hidden Content (Click to Show)", body="This content is initially hidden but can be revealed.") }}
+
+{{ note(clickable=true, type="tip", header="Expandable Tip", body="This tip is in a collapsible block.") }}
+
+### Center Alignment
+
+{{ note(center=true, header="Centered Header", body="This note has a centered header.") }}
+
+{{ note(center=true, type="success", header="Centered Success", body="This success note has a centered header.") }}
+
+{{ note(clickable=true, center=true, header="Centered & Clickable", body="This note has both center alignment and is clickable.") }}
+
+### Rich Content Examples
+
+{{ note(type="info", header="Rich Content", body="This note includes **bold text**, *italic text*, and `inline code`.") }}
+
+{{ note(type="warning", header="Warning with List", body="Things to watch out for:\n\n1. First issue\n2. Second issue\n3. Third issue") }}
+
+### Tables Inside Notes
+
+{% note(type="info", header="Data Table!") %}
+
+| Name | Age | Role | Height |
+|------|-----|------|--------|
+| Alice | 28 | Developer | 5'6" |
+| Bob | 34 | Designer | 6'1" |
+| Carol | 42 | Manager | 5'8" |
+
+{% end %}
 
 It works good enough for me!
