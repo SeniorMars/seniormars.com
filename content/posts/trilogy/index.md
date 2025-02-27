@@ -704,6 +704,7 @@ And perhaps that's the most beautiful insight of all – that computation, in it
 
 
 {% note(header="References", clickable=true, hidden=true) %}
+
 Please tell me if I got the references wrong. My zotero is not working properly.
 
 1. Melliès, P.-A. (2006). *Functorial boxes in string diagrams*. In *Proceedings of Computer Science Logic 2006*, Szeged, Hungary. [https://hal.archives-ouvertes.fr/hal-00154243](https://hal.archives-ouvertes.fr/hal-00154243)  
