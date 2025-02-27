@@ -65,7 +65,7 @@ This explains why we care about multiple proofs:
 
 Now, we need to remember proofs don’t exist in isolation—they exist within proof systems, which determine what rules of inference are allowed. Different axiomatic systems can lead to different styles of proofs and even different results.
 
-In some proof systems, a statement might have an elegant, short proof, while in others, it might require pages of complex derivations. Consider:
+In some proof systems, a statement might have an elegant, short proof, while in others, it might require pages of complex derivations. Consider (as expressed by Avi Wigderson in $\mathcal{P}, \mathcal{N}\mathcal{P}$ and mathematics – a computational complexity perspective):
 
 - Hilbert’s Nullstellensatz: Theorems are inconsistent sets of polynomial equations. Proofs are linear combinations of polynomials.
 - Group theory: Theorems are words that reduce to the identity element. Proofs are sequences of substitutions.
