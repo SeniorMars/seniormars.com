@@ -35,9 +35,7 @@ Max File Size
 50.0 GB
 ```
 
-While rclone is a command-line tool, don't let that intimidate you if you're a Windows user! I'll provide detailed instructions for all platforms, with special attention to Windows-specific considerations throughout this guide.
-
-Let's get started with setting up your own automated backup system!
+While rclone is a command-line tool, don't let that intimidate you if you have never used your terrminal! I'll provide detailed instructions for all platforms! Let's get started with setting up your own automated backup system!
 
 ## Installation
 
