@@ -9,7 +9,7 @@ repo_view = true
 read_time = true
 
 [taxonomies] 
-tags=["math", "education"] 
+tags=["math"] 
 +++
 
 ## Motivation
@@ -37,15 +37,21 @@ And this isn't just theoretical. Gödel himself saw this connection.
 ## Gödel, von Neumann, and the Birth of Complexity
 
 In 1956, Gödel wrote a letter to von Neumann that, in retrospect, essentially anticipated complexity theory before it existed. He asked:
-> "One can obviously easily construct a Turing machine, which for every formula F in first order predicate logic and every natural number n, allows one to decide if there is a proof of F of length n. The question is how fast φ(n) grows for an optimal machine."
+
+> "One can obviously easily construct a Turing machine, which for every formula
+> F in first order predicate logic and every natural number n, allows one to
+> decide if there is a proof of F of length n. The question is how fast φ(n)
+> grows for an optimal machine."
 
 Gödel goes on to speculate about the implications if certain mathematical problems could be solved much more efficiently than by exhaustive search:
 
-> "It would obviously mean that in spite of the undecidability of the Entscheidungsproblem, the mental work of a mathematician concerning Yes-or-No questions could be completely replaced by a machine."
+> "It would obviously mean that in spite of the undecidability of the
+> Entscheidungsproblem, the mental work of a mathematician concerning Yes-or-No
+> questions could be completely replaced by a machine."
 
 Clearly, Gödel was asking something fundamental: Is there a way to measure the complexity of mathematical thought and be able to automate it?
 
-He was, in essence, formulating what we now recognize as the $\mathcal{P} = \mathcal{N}\mathcal{P}$  problem. If a proof (or algorithm) exists for a problem, how efficiently can we find it? This directly impacts how we think about proofs: If an optimal proof of a theorem exists, how complex is it? How long does it take to verify? Can we systematically find short proofs?
+He was, in essence, formulating what we now recognize as the $\mathcal{P} = \mathcal{N}\mathcal{P}$ problem. If a proof (or algorithm) exists for a problem, how efficiently can we find it? This directly impacts how we think about proofs: If an optimal proof of a theorem exists, how complex is it? How long does it take to verify? Can we systematically find short proofs?
 
 ## A Theorem Is an Equivalence Class of Proofs
 
