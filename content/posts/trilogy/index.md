@@ -590,7 +590,6 @@ This means that equivalence of types is equivalent to equality of types in the u
 
 The univalence axiom is implemented in systems like Cubical Agda, allowing programmers to transport programs along type equivalences, turning type-level isomorphisms into computational paths.
 
-
 ## The Quantum Trilogy: A Parallel Correspondence
 
 While exploring the depths of the computational trilogy, I stumbled upon a parallel framework that completely shifted my understanding. This alternative correspondence—what I've dubbed the "quantum trilogy"—connects linear logic, quantum computation, and monoidal categories in a way that's mathematically elegant and conceptually profound.
