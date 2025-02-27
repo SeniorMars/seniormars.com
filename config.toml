@@ -1,4 +1,3 @@
-# The URL the site will be built for
 base_url = "https://seniormars.com"
 title = "SeniorMars"
 description = "A blog about math, extremely niche interests, and a guy having fun."
@@ -67,7 +66,7 @@ socials = [
 custom_css = []
 
 [extra.analytics]
-enabled = false
+enabled = true
 
 [extra.analytics.goatcounter]
 user = "seniormars"
