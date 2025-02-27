@@ -44,6 +44,7 @@ mathjax = true
 mathjax_extra = true
 fancy_code = true
 dynamic_note = true
+mobile = true
 theme = "toggle"
 favicon = "/icons/favicon.ico"
 favicon_extra = true
@@ -66,7 +67,7 @@ socials = [
 custom_css = []
 
 [extra.analytics]
-enabled = true
+enabled = false
 
 [extra.analytics.goatcounter]
 user = "seniormars"
