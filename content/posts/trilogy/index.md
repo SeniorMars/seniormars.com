@@ -578,8 +578,6 @@ This expanded correspondence isn't just mathematical abstraction—it provides a
 3. Effect Systems as Cohomological Twistings
    Computational effects in programming languages (exceptions, state, IO) can be understood as "twistings" in cohomology. A monadic effect system corresponds to a twisted cohomology theory where the twisting cocycle represents the effect.
 
- Here are the updated sections with the suggested improvements:
-
 ## The Univalence Axiom: A Concrete Example
 
 Perhaps the most striking example of this parametrized perspective in action is Voevodsky's univalence axiom, which states:
