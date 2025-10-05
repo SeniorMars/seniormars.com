@@ -7,6 +7,7 @@ date = "2024-11-06"
 comment = true
 repo_view = true
 read_time = true
+draft = true
 
 [taxonomies]
 tags=["math", "educational", "essay"]
