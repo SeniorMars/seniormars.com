@@ -2,12 +2,12 @@
 title = "A Critique Of The Mathematical Proof: What Happens Now?"
 description = "A guy describes the fallacy of proofs in mathematics."
 date = "2024-11-06"
+draft = true
 
 [extra]
 comment = true
 repo_view = true
 read_time = true
-draft = true
 
 [taxonomies]
 tags=["math", "educational", "essay"]

@@ -16,9 +16,9 @@ tags=["math"]
 
 Everywhere we look, computation surrounds us—yet confusion about its true nature persists just as universally. Ask a computer scientist about computation, and you'll hear of algorithms and Turing machines. Pose the same question to a logician, and watch them expound on formal proofs and axioms. A category theorist, meanwhile, might wave their hands toward morphisms and elaborate commutative diagrams.
 
-Throughout much of the 20th century, these three perspectives seemed to speak entirely different languages, each isolated in its own intellectual silo. Then something remarkable happened. Starting in the late 1900s, a profound realization began to crystallize: programming languages, formal logic, and category theory aren't separate disciplines at all! Rather, they represent different manifestations of a single underlying structure—interconnected as intimately as electricity, magnetism, and light in Maxwell's revolutionary equations.
+Throughout much of the 20th century, these three perspectives seemed to speak entirely different languages, each isolated in its own intellectual silo. Then something remarkable happened. Starting in the late 1900s, a realization began to crystallize: programming languages, formal logic, and category theory aren't separate disciplines at all! Rather, they represent different manifestations of a single underlying structure—interconnected as intimately as electricity, magnetism, and light in Maxwell's revolutionary equations.
 
-This insight, sometimes called the Computational Trilogy, builds on a deceptively simple but profound idea:
+This insight, sometimes called the Computational Trilogy, builds on a deceptively simple but idea:
 
 > Proofs are programs.
 > Programs are morphisms.
@@ -33,6 +33,8 @@ Far beyond its elegant theoretical beauty, this framework has begun transforming
 Yet for all its power, the correspondence remains incomplete. How do the intuitive, sometimes messy proofs of human mathematicians fit into this framework? Can we extend it to embrace discrete mathematics, where combinatorial structures often resist elegant formulation? What happens when we venture beyond classical computation into quantum mechanical realms, where the rules of logic themselves appear to shift and transform?
 
 Through this blog, I hope to explore precisely these questions. My goal isn't just to explain theoretical curiosities but to demonstrate why this unification of logic, programming, and mathematics holds such transformative potential—not just for specialists, but for anyone fascinated by computation, proof, and mathematical truth. Most importantly, it is to make this link: [https://ncatlab.org/nlab/show/computational+trilogy](https://ncatlab.org/nlab/show/computational+trilogy) more accessible to a wider audience. Note: all images are from the same link.
+
+Note: Some parts of the original blog was grammar-checked by GPT-4. I have changed my opinion about AI tools since, and will updated this blog soon to reflect my current views. The main ideas remain mine.
 
 ## The Problem With Borders
 
@@ -79,7 +81,7 @@ Each of these developments transformed its respective field, but together, they 
 
 Mathematics is the study of absolute truths, yet for centuries, mathematicians have been unknowingly writing computer programs without ever compiling them.
 
-A proof is often thought of as a static object, a sequence of logical deductions frozen on the page. But what if we view proofs differently—not as static arguments, but as dynamic computations? This is the heart of the Curry-Howard Correspondence, a discovery that revealed a profound connection between logic and computation.
+A proof is often thought of as a static object, a sequence of logical deductions frozen on the page. But what if we view proofs differently—not as static arguments, but as dynamic computations? This is the heart of the Curry-Howard Correspondence, a discovery that revealed a connection between logic and computation.
 
 This insight wasn't just a clever academic observation—it fundamentally transformed both fields by establishing that:
 
@@ -87,7 +89,7 @@ This insight wasn't just a clever academic observation—it fundamentally transf
 - Propositions in logic correspond directly to types in programming
 - Proving a theorem is isomorphic to constructing a program of a given type
 
-When I first encountered this correspondence in high school, it felt like discovering that two languages I had been studying separately were actually dialects of the same underlying structure. It was a moment of profound clarity—suddenly, the boundary between proving theorems and writing code disappeared.
+When I first encountered this correspondence in high school, it felt like discovering that two languages I had been studying separately were actually dialects of the same underlying structure. It was a moment of clarity—suddenly, the boundary between proving theorems and writing code disappeared.
 
 The story begins in the early 20th century when formal logic underwent a foundational shift. David Hilbert sought to formalize all of mathematics, but this ambition was shattered by Gödel's incompleteness theorems. Gödel's work hinted at an intricate relationship between proofs and computation, which was soon made explicit by Alonzo Church and Alan Turing with their independent formalizations of computability.
 
@@ -216,7 +218,7 @@ The computational content of this proof is function composition.
 
 ### Real-World Applications: From Proof Assistants to Functional Programming
 
-The Curry-Howard Correspondence has profoundly shaped both mathematics and computer science:
+The Curry-Howard Correspondence has shaped both mathematics and computer science:
 
 1. Proof Assistants & Dependently Typed Languages  
    - Coq, Agda, and Lean allow us to write proofs as programs.
@@ -309,7 +311,7 @@ $$
 
 ### The Syntax-Semantics Connection
 
-What makes this correspondence profound is that it connects syntax (terms in lambda calculus) with semantics (morphisms in a category). The equivalence classes of lambda terms constitute the morphisms in the induced category.
+What makes this correspondence is that it connects syntax (terms in lambda calculus) with semantics (morphisms in a category). The equivalence classes of lambda terms constitute the morphisms in the induced category.
 
 More precisely, given a typed lambda calculus L, we construct a category C(L) where:
 
@@ -509,7 +511,7 @@ These aren't just different definitions—they're different manifestations of th
 
 ## Beyond the Original Trilogy: The Parametrized Perspective
 
-Just when I thought I'd wrapped my head around the computational trinity, the rabbit hole went deeper. It turns out that our lovely trinity was just the beginning of an even more profound unification. The extension into what I call the "parametrized perspective" represents one of those mathematical moments that made me spill my coffee in excitement.
+Just when I thought I'd wrapped my head around the computational trinity, the rabbit hole went deeper. It turns out that our lovely trinity was just the beginning of an even more unification. The extension into what I call the "parametrized perspective" represents one of those mathematical moments that made me spill my coffee in excitement.
 
 What happens when we consider that computation doesn't happen in a vacuum? What if we acknowledge that:
 
@@ -561,7 +563,7 @@ In a proof-relevant system, we care not just about whether a proposition is true
 
 The deepest layer of this correspondence connects to algebraic topology through the work of Schreiber, Lurie, and others. This connection reveals that the very structure of computational type theory maps onto cohomology theories.
 
-The equivalence with algebraic topology opens up a profound connection: a generalized element in an $(\infty,1)$-topos may equivalently be regarded as a cocycle in (non-abelian) cohomology, and in twisted cohomology if in a slice $(\infty,1)$-category.
+The equivalence with algebraic topology opens up a connection: a generalized element in an $(\infty,1)$-topos may equivalently be regarded as a cocycle in (non-abelian) cohomology, and in twisted cohomology if in a slice $(\infty,1)$-category.
 
 For example, in twisted cohomology, the cup product of a 0-cochain $f$ with values in $\text{Hom}(E, F)$ and a 1-cochain $g$ with values in $E$ gives a 1-cochain with values in $F$. This is exactly analogous to function application in dependent type theory!
 
@@ -590,7 +592,7 @@ The univalence axiom is implemented in systems like Cubical Agda, allowing progr
 
 ## The Quantum Trilogy: A Parallel Correspondence
 
-While exploring the depths of the computational trilogy, I stumbled upon a parallel framework that completely shifted my understanding. This alternative correspondence—what I've dubbed the "quantum trilogy"—connects linear logic, quantum computation, and monoidal categories in a way that's mathematically elegant and conceptually profound.
+While exploring the depths of the computational trilogy, I stumbled upon a parallel framework that completely shifted my understanding. This alternative correspondence—what I've dubbed the "quantum trilogy"—connects linear logic, quantum computation, and monoidal categories in a way that's mathematically elegant and conceptually .
 
 What makes this correspondence so striking is how it mirrors yet transforms the classical trilogy. Where the classical world embraces copying and deletion of information, this quantum realm enforces strict resource management.
 
@@ -668,7 +670,7 @@ The category FdHilb of finite-dimensional Hilbert spaces with linear maps is the
 
 ## Conclusion: The Tetralogical Universe of Computation
 
-The journey through these computational correspondences reveals something even more profound than separate trilogies – it unveils what we might call a "computational tetralogy" where the classical and quantum worlds combine with their parametrized perspectives.
+The journey through these computational correspondences reveals something even more than separate trilogies – it unveils what we might call a "computational tetralogy" where the classical and quantum worlds combine with their parametrized perspectives.
 
 When we merge the classical parametrized trilogy with the quantum trilogy, we arrive at a unified framework that encompasses:
 
@@ -696,7 +698,7 @@ Each vertex in this tetralogy offers a unique lens for understanding computation
 
 I've come to see these connections not just as formal correspondences, but as a roadmap for the future of computation itself. As quantum computing continues to mature and topological data analysis becomes more prevalent, this unified framework will likely serve as the theoretical foundation for the next generation of programming languages and computational systems.
 
-This tetralogy isn't a static endpoint – it's an invitation to explore. What happens when we apply other transformations? What about probabilistic computation, or continuous computation? Each new perspective adds another dimension to our understanding, revealing computation to be not just a tool, but a profound mathematical structure that connects the deepest ideas in mathematics, physics, and logic.
+This tetralogy isn't a static endpoint – it's an invitation to explore. What happens when we apply other transformations? What about probabilistic computation, or continuous computation? Each new perspective adds another dimension to our understanding, revealing computation to be not just a tool, but a mathematical structure that connects the deepest ideas in mathematics, physics, and logic.
 
 And perhaps that's the most beautiful insight of all – that computation, in its essence, isn't just about algorithms and machines. It's about the fundamental structure of information and transformation, something that permeates not just computer science, but mathematics and reality itself.
 
