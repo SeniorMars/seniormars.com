@@ -2,7 +2,6 @@
 title = "Scratch Paper"
 description = "A guy writes a poem about his struggles with math homework."
 date = "2024-11-06"
-draft = true
 
 [taxonomies]
 tags=["math", "poetry"]
