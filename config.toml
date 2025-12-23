@@ -10,7 +10,11 @@ build_search_index = true
 generate_feeds = true
 compile_sass = true
 feed_filenames = ["rss.xml"]
-taxonomies = [{ name = "tags", feed = true, paginate_by = 10 } ]
+taxonomies = [
+    { name = "tags", feed = true, paginate_by = 10 } ,
+    { name = "authors", feed = true, paginate_by = 10 } ,
+]
+
 
 [search]
 include_title = true
@@ -63,7 +67,14 @@ socials = [
     { name = "rss", url = "/rss.xml", icon = "rss" },
 ]
 
+cards_columns = 3
+card_media_height = 200
+
 custom_css = []
+
+[extra.taxonomies]
+sort_by = "page_count"         # e.g. name, page_count
+reverse = true
 
 [extra.analytics]
 enabled = true
