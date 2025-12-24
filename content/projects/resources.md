@@ -7,6 +7,7 @@ updated = "2024-09-04"
 [extra]
 comment = true
 repo_view = true
+remote_image = "https://www.afge.org/link/143cb0a4808d40a7a324a8aca6378a51.aspx"
 +++
 
 # Motivation

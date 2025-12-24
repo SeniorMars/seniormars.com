@@ -2,6 +2,9 @@
 title = "Notes and Homework"
 description = "Select Notes/Homework for classes at Rice University"
 weight = 1
+
+[extra]
+remote_image = "https://galvingao.com/content/images/2021/01/796d82fb1754faf9d6cf49842eb7191b.png"
 +++
 
 # Math 354: Honors Linear Algebra
