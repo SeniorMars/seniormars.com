@@ -6,10 +6,10 @@ description = "A blog about math, extremely niche interests, and a guy having fu
 theme = "redux"
 author = "SeniorMars"
 default_language = "en"
-build_search_index = true
 generate_feeds = true
 compile_sass = true
 feed_filenames = ["rss.xml"]
+build_search_index = true
 taxonomies = [
     { name = "tags", feed = true, paginate_by = 10 } ,
     { name = "authors", feed = true, paginate_by = 10 } ,
