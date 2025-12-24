@@ -19,32 +19,4 @@ Heyo! SeniorMars here. It's honestly weird to think that people will spend their
 
 # Meme of the Week!
 
-![Meme of the week](https://i.redd.it/qjo442jc9jt91.jpg)
-
-<details>
-<summary>Previous Memes</summary>
-<p>
-<ul>
-    <li>
-        Week of 7-[14-20]:<br>
-        <img src="https://i.redd.it/ry2qxsjtt5cd1.jpeg" alt="Meme of the Week">
-    </li>
-    <li>
-        Week of 7-[06-13]:<br>
-        <img src="https://i.redd.it/g2nvq2b8ck7d1.png" alt="Meme of the Week">
-    </li>
-    <li>
-        Week of 06-[30] to 7-[06]:<br>
-        <img src="https://i.redd.it/8o9ag3tgxk9d1.jpeg" alt="Meme of the Week">
-    </li>
-    <li>
-        Week of 06-[23-29]:<br>
-        <img src="https://i.redd.it/kcwdh5q3qy7d1.jpeg" alt="Meme of the Week">
-    </li>
-    <li>
-        Week of 06-[16-22]:<br>
-        <img src="https://preview.redd.it/7oxqtby67c5d1.jpeg?auto=webp&amp;s=823b14d3440286b409cc3d34e7495aed20ecee63" alt="Meme of the Week">
-    </li>
-</ul>
-</p>
-</details>
+![All time meme](https://i.redd.it/qjo442jc9jt91.jpg)
