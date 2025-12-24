@@ -55,5 +55,4 @@ Github: [https://github.com/seniormars](https://github.com/seniormars)
 Youtube: [https://www.youtube.com/seniormarstries](https://www.youtube.com/seniormarstries)  
 Email: seniormars@riseup.net
 Discord: seniormars
-Resume: [here!](/assets/old_resume.pdf)  
 RSS: [subscribe](/rss.xml)
