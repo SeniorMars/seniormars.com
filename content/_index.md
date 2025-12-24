@@ -17,6 +17,6 @@ Heyo! SeniorMars here. It's honestly weird to think that people will spend their
 - <time>2024-06-01</time>: Started to work on some videos for SOME!
 - <time>2024-05-06</time>: First day back at gym in a while. We are aiming high!
 
-# Meme of the Week!
+# All time meme!
 
 ![All time meme](https://i.redd.it/qjo442jc9jt91.jpg)

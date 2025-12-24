@@ -253,10 +253,6 @@ The zoo isn't a mess. It's a toolkit. Yay.
 
 ## Conclusion
 
-I went into this summer thinking I'd measure one thing: #SAT phase transitions. Answer: yes, they exist. Paper coming.
-
-But I learned something bigger: "how hard is this problem?" has a dozen answers depending on what you mean by "hard."
-
 As I'm applying to PhD programs, I'm looking for advisors who think about complexity from multiple angles. Who don't just say "P vs NP" but understand hardness is structural, informational, communicational, logical, computational all at once.
 
 If you're navigating the complexity landscape (literally), I hope this taxonomy helps. Next time someone says "communication-complex" or "high proof complexity," you'll know what lens they're using.
