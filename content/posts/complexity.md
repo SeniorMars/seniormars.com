@@ -21,7 +21,7 @@ Yes, the phase transition extends to counting. Paper coming soon.
 
 But here's what happened while I was running experiments. I kept measuring different things without realizing they were *different*. Circuit size would explode at one density. Solver runtime would spike somewhere else. The number of random XOR constraints needed would climb in a third region. And I'd think "okay, the problem is getting complex here," without being precise about what "complex" meant.
 
-Then PhD application season hit. I started reading papers from professors I wanted to work with. One paper would talk about "proof complexity lower bounds." Another about "circuit complexity barriers." A third about "communication complexity of distributed protocols." And I realized something annoying: they were all using the word "complexity" to mean completely different things. [I know this sounds obvious, but it hadn't clicked before how broad exlity complexity is.]
+Then PhD application season hit. I started reading papers from professors I wanted to work with. One paper would talk about "proof complexity lower bounds." Another about "circuit complexity barriers." A third about "communication complexity of distributed protocols." And I realized something annoying: they were all using the word "complexity" to mean completely different things. [I know this sounds obvious, but it hadn't clicked before how broad complexity is.]
 
 Time complexity (how long does it take) is different from circuit complexity (how many gates do you need). Both are different from query complexity (how many input bits must you read). All three are different from proof complexity (how long is the certificate). And none of them are Kolmogorov complexity (how compressible is this object).
 
