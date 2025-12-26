@@ -44,7 +44,7 @@ For a Turing machine solving problem $A$, time complexity $T(n)$ is the maximum 
 
 This gives us the standard hierarchy. **P** is polynomial time (the "tractable" class). **NP** is nondeterministic polynomial time (or equivalently, polynomial-time verifiable). **PSPACE** is polynomial space. And so on.
 
-For #SAT (counting satisfying assignments), we know it's **#P-complete**. This means it's at least as hard as any NP problem, probably harder. Toda's Theorem tells us the entire polynomial hierarchy collapses to $\text{P}^{\\#\text{P}}$ (if you can count, you can solve anything in PH) [^9]. Counting is powerful.
+For #SAT (counting satisfying assignments), we know it's **#P-complete**. Again, this means it's at least as hard as any NP problem, probably harder. Toda's Theorem tells us the entire polynomial hierarchy collapses to $\text{P}^{\\#\text{P}}$ (if you can count, you can solve anything in PH) [^9]. Counting is powerful.
 
 But time complexity doesn't tell you *why* something is hard. It just says "this takes a long time." When my #SAT solver was slow at the phase transition, time complexity told me "yep, it's slow," but not *what structural property of the formula* caused that slowness.
 
