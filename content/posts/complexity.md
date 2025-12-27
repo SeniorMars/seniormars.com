@@ -102,7 +102,7 @@ Ben-Sasson and Wigderson formalized this with the **width-size tradeoff** [^4]: 
 
 This is a different kind of hardness than "the circuit is big" or "you need many queries." It's about the *logical certificates* themselves.
 
-And here's the kicker: Cook-Reckhow (1979) proved that if there exists a proof system where every tautology has polynomial-size proofs, then $\text{NP} = \text{coNP}$ [^5]. So proving lower bounds for increasingly strong proof systems is a path toward separating complexity classes. We've done it for Resolution, Cutting Planes, bounded-depth Frege. For general Frege (standard propositional logic)? Still open.
+MOreover, Cook-Reckhow (1979) proved that if there exists a proof system where every tautology has polynomial-size proofs, then $\text{NP} = \text{coNP}$ [^5]. So proving lower bounds for increasingly strong proof systems is a path toward separating complexity classes. We've done it for Resolution, Cutting Planes, bounded-depth Frege. For general Frege (standard propositional logic)? Still open.
 
 ## Kolmogorov Complexity
 
