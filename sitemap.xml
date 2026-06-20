@@ -7,6 +7,9 @@
         <loc>https://seniormars.com/about/</loc>
     </url>
     <url>
+        <loc>https://seniormars.com/authors/</loc>
+    </url>
+    <url>
         <loc>https://seniormars.com/etc/</loc>
     </url>
     <url>
@@ -26,6 +29,14 @@
     <url>
         <loc>https://seniormars.com/posts/braille-math/</loc>
         <lastmod>2024-12-31</lastmod>
+    </url>
+    <url>
+        <loc>https://seniormars.com/posts/complexity/</loc>
+        <lastmod>2025-12-24</lastmod>
+    </url>
+    <url>
+        <loc>https://seniormars.com/posts/conflicted/</loc>
+        <lastmod>2025-12-26</lastmod>
     </url>
     <url>
         <loc>https://seniormars.com/posts/everyday-birthday/</loc>
@@ -52,12 +63,18 @@
         <lastmod>2024-06-15</lastmod>
     </url>
     <url>
-        <loc>https://seniormars.com/posts/proof/</loc>
-        <lastmod>2024-11-06</lastmod>
+        <loc>https://seniormars.com/posts/page/1/</loc>
+    </url>
+    <url>
+        <loc>https://seniormars.com/posts/page/2/</loc>
     </url>
     <url>
         <loc>https://seniormars.com/posts/puss-thelastwish/</loc>
         <lastmod>2023-04-01</lastmod>
+    </url>
+    <url>
+        <loc>https://seniormars.com/posts/scrach-paper/</loc>
+        <lastmod>2025-11-06</lastmod>
     </url>
     <url>
         <loc>https://seniormars.com/posts/short-stories-one/</loc>
@@ -66,6 +83,10 @@
     <url>
         <loc>https://seniormars.com/posts/spiderman-across/</loc>
         <lastmod>2023-06-20</lastmod>
+    </url>
+    <url>
+        <loc>https://seniormars.com/posts/terminal/</loc>
+        <lastmod>2025-01-04</lastmod>
     </url>
     <url>
         <loc>https://seniormars.com/posts/tooling/</loc>
@@ -79,20 +100,26 @@
         <loc>https://seniormars.com/projects/</loc>
     </url>
     <url>
-        <loc>https://seniormars.com/projects/blender/</loc>
+        <loc>https://seniormars.com/projects/dotfiles/</loc>
     </url>
     <url>
         <loc>https://seniormars.com/projects/notes/</loc>
-    </url>
-    <url>
-        <loc>https://seniormars.com/projects/project-1/</loc>
     </url>
     <url>
         <loc>https://seniormars.com/projects/resources/</loc>
         <lastmod>2024-09-04</lastmod>
     </url>
     <url>
+        <loc>https://seniormars.com/projects/wip/</loc>
+    </url>
+    <url>
         <loc>https://seniormars.com/tags/</loc>
+    </url>
+    <url>
+        <loc>https://seniormars.com/tags/academia/</loc>
+    </url>
+    <url>
+        <loc>https://seniormars.com/tags/academia/page/1/</loc>
     </url>
     <url>
         <loc>https://seniormars.com/tags/educational/</loc>
@@ -101,16 +128,16 @@
         <loc>https://seniormars.com/tags/educational/page/1/</loc>
     </url>
     <url>
-        <loc>https://seniormars.com/tags/essay/</loc>
-    </url>
-    <url>
-        <loc>https://seniormars.com/tags/essay/page/1/</loc>
-    </url>
-    <url>
         <loc>https://seniormars.com/tags/essays/</loc>
     </url>
     <url>
         <loc>https://seniormars.com/tags/essays/page/1/</loc>
+    </url>
+    <url>
+        <loc>https://seniormars.com/tags/ethics/</loc>
+    </url>
+    <url>
+        <loc>https://seniormars.com/tags/ethics/page/1/</loc>
     </url>
     <url>
         <loc>https://seniormars.com/tags/life/</loc>
@@ -137,6 +164,12 @@
         <loc>https://seniormars.com/tags/meta/page/1/</loc>
     </url>
     <url>
+        <loc>https://seniormars.com/tags/poetry/</loc>
+    </url>
+    <url>
+        <loc>https://seniormars.com/tags/poetry/page/1/</loc>
+    </url>
+    <url>
         <loc>https://seniormars.com/tags/review/</loc>
     </url>
     <url>
@@ -147,6 +180,12 @@
     </url>
     <url>
         <loc>https://seniormars.com/tags/rust/page/1/</loc>
+    </url>
+    <url>
+        <loc>https://seniormars.com/tags/theory-of-computation/</loc>
+    </url>
+    <url>
+        <loc>https://seniormars.com/tags/theory-of-computation/page/1/</loc>
     </url>
     <url>
         <loc>https://seniormars.com/tags/tutorial/</loc>

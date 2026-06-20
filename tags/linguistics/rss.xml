@@ -124,10 +124,11 @@ Then, there exists a point $ c \in [a, b] $ such that $ f(c) = 0 $.&lt;&#x2F;p&g
       
     &lt;&#x2F;div&gt;
     &lt;div class=&quot;note-content&quot;&gt;
-      &lt;p&gt;Check this out! &lt;a rel=&quot;noreferrer&quot; href=&quot;https:&#x2F;&#x2F;www.tug.org&#x2F;tug2021&#x2F;assets&#x2F;pdf&#x2F;Andreas-Papasalouros-slides.pdf&quot;&gt;latex2nemeth&lt;&#x2F;a&gt;. I geeked out when I found this – it’s a LaTeX package that converts LaTeX math expressions into Nemeth Braille. The fact that someone thought to create this shows the incredible creativity and dedication of the accessibility community.&lt;&#x2F;p&gt;
+      &lt;p&gt;Check this out! &lt;a rel=&quot;noreferrer external&quot; href=&quot;https:&#x2F;&#x2F;www.tug.org&#x2F;tug2021&#x2F;assets&#x2F;pdf&#x2F;Andreas-Papasalouros-slides.pdf&quot;&gt;latex2nemeth&lt;&#x2F;a&gt;. I geeked out when I found this – it’s a LaTeX package that converts LaTeX math expressions into Nemeth Braille. The fact that someone thought to create this shows the incredible creativity and dedication of the accessibility community.&lt;&#x2F;p&gt;
 &lt;p&gt;Also, there is this cool video: &lt;div &gt;
 &lt;iframe
         src=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;embed&#x2F;94swlF55tVc&quot;
+        loading=&quot;lazy&quot;
         webkitallowfullscreen
         mozallowfullscreen
         allowfullscreen&gt;

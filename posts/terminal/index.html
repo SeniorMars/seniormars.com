@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en" class="dark light">
+
+<head>
+    <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="base" content="https:&#x2F;&#x2F;seniormars.com">
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <title>
+         A Terminal Workflow for Productivity
+        
+    </title>
+    
+        <meta property="og:title" content="A Terminal Workflow for Productivity" />
+    
+
+
+
+
+    
+        <meta name="description" content="A guy shows you how a fast terminal workflow looks like." />
+    
+
+
+
+
+    
+        <meta property="og:description" content="A guy shows you how a fast terminal workflow looks like." />
+    
+
+
+
+
+    <meta property="og:type" content="website" />
+
+
+
+
+    <meta property="og:url" content="https:&#x2F;&#x2F;seniormars.com&#x2F;posts&#x2F;terminal&#x2F;" />
+    <link rel="canonical" href="https:&#x2F;&#x2F;seniormars.com&#x2F;posts&#x2F;terminal&#x2F;" />
+
+
+
+<meta property="og:site_name" content="SeniorMars" />
+
+
+
+    
+
+
+
+
+    
+        <meta name="twitter:card" content="summary" />
+    
+
+    
+
+    
+
+    <meta name="twitter:title" content="A Terminal Workflow for Productivity" />
+
+    
+        <meta name="twitter:description" content="A guy shows you how a fast terminal workflow looks like." />
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#FFFFFF" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0E1018" />
+
+    <link rel="icon" type="image/png" href="https://seniormars.com/icons/favicon.ico" />
+    
+    
+        <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+        <link rel="manifest" href="/icons/site.webmanifest">
+        <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#ff6f3c">
+        <meta name="apple-mobile-web-app-title" content="SeniorMars">
+        <meta name="application-name" content="SeniorMars">
+        <meta name="msapplication-TileColor" content="#333333">
+        <meta name="theme-color" content="#333333">
+    
+
+
+
+
+    <link href="https://seniormars.com/fonts.css" rel="stylesheet" />
+
+
+
+
+    
+        
+        <link rel="alternate"
+              type="application/rss+xml"
+              title="SeniorMars"
+              href="https://seniormars.com/rss.xml" />
+        
+    
+
+
+    
+
+
+
+    
+
+    
+        
+        
+
+        <script
+            defer
+            src="https://seniormars.com/js/count-loader.min.js"
+            data-count-src="https://seniormars.com/js/count.js"
+            data-goatcounter="https://seniormars.goatcounter.com/count">
+        </script>
+        <noscript>
+            
+            <img
+                src="https://seniormars.goatcounter.com//count?p=&#x2F;posts&#x2F;terminal&#x2F;&t=A Terminal Workflow for Productivity"
+                alt=""
+                aria-hidden="true"
+                width="1"
+                height="1"
+                loading="lazy"
+                decoding="async">
+        </noscript>
+    
+
+
+    
+
+    <script defer src="https://seniormars.com/js/codeblock.js"></script>
+
+
+
+
+    <script defer src="https://seniormars.com/js/note.js"></script>
+
+
+
+
+    <script src="https://seniormars.com/js/mobile.js"></script>
+
+
+
+
+    <script defer src="https://seniormars.com/js/toc.js"></script>
+
+
+
+    
+    
+    
+        
+    
+    
+    
+    
+    <script>
+        window.MathJax = {
+          startup: {
+            typeset: false
+          },
+          options: {
+            enableMenu: false,
+            enableEnrichment: false,
+            enableSpeech: false,
+            enableBraille: false,
+            enableExplorer: false,
+            menuOptions: {
+              settings: {
+                enrich: false,
+                speech: false,
+                braille: false,
+                assistiveMml: false
+              }
+            }
+          },
+          loader: { load: ['input/asciimath'] },
+          
+          output: {
+              displayOverflow: 'linebreak',
+                  linebreaks: {
+                      inline: true,
+                      width: '100%',
+                      lineleading: .2,
+                      LinebreakVisitor: null,
+              }
+          },
+          
+          
+          tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            processEscapes: true,
+          },
+          
+          svg: {
+            fontCache: 'global'
+          }
+        };
+    </script>
+    <script
+        defer
+        src="https://seniormars.com/js/mathjax-loader.min.js"
+        data-mathjax-src="https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;mathjax@4.1&#x2F;tex-mml-chtml.js"
+        data-dollar-inline="true"
+        data-load-strategy="idle">
+    </script>
+
+
+
+
+    
+    <script
+        defer
+        src="https://seniormars.com/js/mermaid-loader.min.js"
+        data-mermaid-src="https://seniormars.com/js/mermaid.js"
+        data-load-strategy="visible">
+    </script>
+
+
+    
+
+    <link rel="stylesheet" type="text/css" href="https://seniormars.com/theme/light.css" />
+    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://seniormars.com/theme/dark.css" />
+
+
+
+
+<script src="https://seniormars.com/js/themetoggle.js" data-theme="toggle"></script>
+
+
+<link rel="stylesheet" type="text/css" media="screen" href="https://seniormars.com/main.css" />
+
+
+
+    <script
+        defer
+        src="https://seniormars.com/js/search-loader.min.js?h=8feda18ea48839bc2701"
+        data-elasticlunr-src="https://seniormars.com/js/searchElasticlunr.min.js?h=0c7e247119f11f54fb5c"
+        data-search-src="https://seniormars.com/js/search.min.js?h=3241b22be083522f86a3"
+        >
+    </script>
+</head>
+
+
+<body>
+    <div class="left-content">
+        
+        
+    </div>
+
+    <div class="content">
+        <nav>
+    <div class="left-nav">
+        
+            <a href="https:&#x2F;&#x2F;seniormars.com">SeniorMars</a>
+        
+
+
+        <div class="socials">
+            
+                <a rel="me" href="https:&#x2F;&#x2F;github.com&#x2F;seniormars&#x2F;" class="social">
+                    <img alt="github" src="https://seniormars.com/icons/social/github.svg">
+                </a>
+            
+                <a rel="me" href="https:&#x2F;&#x2F;www.youtube.com&#x2F;seniormarstries" class="social">
+                    <img alt="youtube" src="https://seniormars.com/icons/social/youtube.svg">
+                </a>
+            
+                <a rel="me" href="&#x2F;rss.xml" class="social">
+                    <img alt="rss" src="https://seniormars.com/icons/social/rss.svg">
+                </a>
+            
+        </div>
+    </div>
+
+    <div class="right-nav">
+        
+            <a href="https://seniormars.com/posts" style="margin-right: 0.5em">&#x2F;posts</a>
+        
+            <a href="https://seniormars.com/projects" style="margin-right: 0.5em">&#x2F;projects</a>
+        
+            <a href="https://seniormars.com/about" style="margin-right: 0.5em">&#x2F;about</a>
+        
+            <a href="https://seniormars.com/etc" style="margin-right: 0.5em">&#x2F;etc</a>
+        
+
+        
+            <button id="search-button"
+                    class="search-button"
+                    title="$SHORTCUT to open search"
+                    aria-label="$SHORTCUT to open search"
+                    aria-haspopup="dialog"
+                    aria-controls="searchModal"
+                    aria-expanded="false">
+                <img src="https://seniormars.com/icons/search.svg"
+                    alt=""
+                    class="search-icon">
+            </button>
+
+            <div id="searchModal"
+                class="search-modal js"
+                role="dialog"
+                aria-labelledby="modalTitle"
+                aria-modal="true"
+                aria-hidden="true">
+                <div id="modal-content">
+                    <h1 id="modalTitle" class="page-header">Search</h1>
+                    <div id="searchBar">
+                        <input id="searchInput"
+                            role="combobox"
+                            autocomplete="off"
+                            spellcheck="false"
+                            aria-expanded="false"
+                            aria-controls="results-container"
+                            placeholder="Search..." />
+                        <button id="clear-search" class="clear-button" title="Clear search" aria-label="Clear search">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                                <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="results-container">
+                            <div id="results-info" role="status" aria-live="polite">
+                                <span id="loading_results" style="display:none;">Searching...</span>
+                                <span id="error_results" style="display:none;">Search unavailable</span>
+                                <span id="zero_results" style="display:none;">No results</span>
+                                <span id="one_result" style="display:none;">1 result</span>
+                                <span id="two_results" style="display:none;">$NUMBER results</span>
+                                <span id="few_results" style="display:none;">$NUMBER results</span>
+                                <span id="many_results" style="display:none;">$NUMBER results</span>
+                                <span id="limited_results" style="display:none;">Showing first $LIMIT of $NUMBER results</span>
+                            </div>
+                        <div id="results" role="listbox"></div>
+                    </div>
+                </div>
+            </div>
+        
+
+        
+            <button id="dark-mode-toggle"
+                    type="button"
+                    aria-label="Toggle color theme"
+                    aria-pressed="false"
+                    title="Toggle color theme">
+                <img src="https://seniormars.com/icons/sun.svg"
+                    id="sun-icon"
+                    style="filter: invert(1)"
+                    alt=""
+                    aria-hidden="true" />
+                <img src="https://seniormars.com/icons/moon.svg"
+                    id="moon-icon"
+                    alt=""
+                    aria-hidden="true" />
+            </button>
+        
+    </div>
+</nav>
+
+
+        
+        
+    
+<div class="visible-element-observer-root" data-selector="main article p">
+<main>
+    <article>
+        <div class="title">
+            
+    <div class="page-header">
+        A Terminal Workflow for Productivity<span class="primary-color" style="font-size: 1.6em">.</span>
+    </div>
+
+
+                <div class="meta">
+                    
+                        Posted on <time>2025-01-04</time>
+                    
+
+                    
+
+                    
+                        :: <time>7</time> Min Read
+                    
+
+                    
+
+                    
+                    
+
+                        
+                        
+                            
+                        
+
+                        
+                            
+                            :: <a href="https:&#x2F;&#x2F;github.com&#x2F;SeniorMars&#x2F;seniormars.com&#x2F;blob&#x2F;main&#x2F;content&#x2F;posts&#x2F;terminal&#x2F;index.md" target="_blank" rel="noopener noreferrer" aria-label="View source code for A Terminal Workflow for Productivity"> Source Code</a>
+                        
+                    
+
+                    
+                    
+
+                    
+                    
+                            <span class="tags-label"> :: Tags:</span>
+                            <span class="tags">
+                                    <a href="https://seniormars.com/tags/tutorial/" class="post-tag">tutorial</a>, 
+                                
+                                    <a href="https://seniormars.com/tags/educational/" class="post-tag">educational</a>
+                                
+                            </span>
+                    
+
+                    
+
+                </div>
+        </div>
+
+        
+
+
+        
+        
+        
+            <div class="toc-container">
+                <h1 class="toc-title">Table of Contents</h1>
+                
+    <ul class="toc-list">
+        
+            <li class="parent">
+                <a href="https://seniormars.com/posts/terminal/#motivation">Motivation</a>
+
+                
+            </li>
+        
+    </ul>
+
+            </div>
+        
+
+        <section class="body">
+            <h1 id="motivation"><a class="zola-anchor" href="#motivation" aria-label="Anchor link for: motivation">Motivation</a></h1>
+<blockquote>
+<p>“The enjoyment of one’s tools is an essential ingredient of successful work.”</p>
+<ul>
+<li><cite>Donald Knuth</cite></li>
+</ul>
+</blockquote>
+<p>Let’s try something different: a persuasion-style blog post. Look, I’m sure that if you have been using a computer for a while, you probably have some setup you are comfortable with. Perhaps, it’s slow or perhaps it’s fast, but it’s yours. I’m not here to tell you that you are wrong, but I am here to tell how I created a setup that I love. One that is fast, efficient, and most importantly, mine. Believe or not the last point is extremely important: you will be spending a lot of time in front of your computer, so why not make it a place you love to be in? This is the first post in a series where I will be showing you how I use my tools and how I have optimized my workflow to be as efficient as possible. You can find the full series here: <a href="/posts/tooling.md">SeniorMars’s Workflow</a>. Now, before we get any further let me show you some screenshots:
+<img src="https://github.com/SeniorMars/dotfiles/raw/main/images/scrot-region-20210501-164757.png" alt="Editing Rust" />
+<img src="https://github.com/SeniorMars/dotfiles/raw/main/images/neofetch.png" alt="Neofetch" /></p>
+<div class="note-container note-type-default">
+  
+    <button class="note-toggle" aria-expanded="true">
+      
+        <div class="note-center">
+          <p>Important Note!</p>
+
+        </div>
+      
+    </button>
+    <div class="note-content" style="display: block;">
+      <p>With that introduction out of the way, if you are a comfortable beginner, I’d prefer you spend your time creating and then learning. You will learn something new from this post, but you will learn more from failing and exploring. While I enjoy customizing my setup, I wish I spent more time creating when I was younger. Your setup will evolve as you do, so don’t worry about getting it perfect the first time.
+Finally, here are my dotfiles: <a rel="noreferrer external" href="https://github.com/SeniorMars/dotfiles">SeniorMars’s Dotfiles</a>.</p>
+
+    </div>
+  
+</div>
+<!-- # Terminal Emulator: Kitty -->
+<!---->
+<!-- The terminal is a powerful tool -- no, it would be unfair to call it just a tool; it's a whole powerset. Not only is it a gateway to your kernel, but it's analogous to a home of productivity for some. I hate the phrase "power user" or "pro," but I have been living in the terminal for quite some time now, and now I want to make it my goal that you know what this environment can do for you. I will assume you know the basics of the terminal, and we will get into the nitty-gritty of how I use it. Remember, a great setup isn't just about speed; it's about creating a harmonious environment where your tools feel like extensions of your thoughts. This brings us to our first tool: Kitty. -->
+<!---->
+<!-- ![Kitty](../../../assets/kitty.png) -->
+<!---->
+<!-- I know, I said I would get into the nitty-gritty, but in order to do that I need you to be aware why having an optimized terminal emulator is important. Kitty is a fast, featureful, GPU-based terminal emulator: it's feature-packed. To many state this is an awful thing, but let's talk in depth on these features.  -->
+<!---->
+<!---->
+<!-- ## Speed and Font Rendering -->
+<!---->
+<!-- First things first: Kitty is fast.  While most terminal emulators render text using CPU-based rasterization, kitty leverages the GPU. This might seem like overkill (why use a gaming-grade GPU to render monospace text? However, this GPU-accelerated pipeline means Kitty can handle: -->
+<!---->
+<!-- - Smooth scrolling through massive log files (try `tail -f` on a busy system) -->
+<!-- - Complex Unicode rendering without breaking a sweat -->
+<!-- - Multiple splits and windows without performance degradation -->
+<!---->
+<!-- Now, let’s talk about something even more exciting – font rendering.  If you've ever tried using fancy fonts, ligatures (for those unfamiliar, ligatures are special character combinations that render as a single glyph), or patched icon fonts in other terminals, you know how quickly things can slow down. Rendering ligatures – those beautiful combined characters like `!=` becoming `≠` – can tank performance in some emulators.  Not Kitty.  Kitty handles ligatures gracefully without sacrificing speed. If you, like me, enjoy the aesthetic (and functional) elegance of ligatures, Kitty won’t let you down.   -->
+<!---->
+<!-- ![Ligatures](../../../assets/lig.png) -->
+<!---->
+<!-- But it doesn’t stop there.  Kitty lets you mix and match fonts without needing to patch them manually. You can extend the symbol map of a font, meaning if your primary monospace font lacks certain icons, you can pull them from another font.   -->
+<!---->
+<!-- ```bash -->
+<!-- kitty +list-fonts -->
+<!-- ```   -->
+<!-- This command gives you a curated list of all installed fonts, making font selection and testing as painless as possible.  No more font-patching marathons. Just clean, crisp, beautiful text.   -->
+<!---->
+<!---->
+<!-- ## Paging and Custom Output   -->
+<!---->
+<!-- One of my favorite hidden gems? Kitty lets you use a custom pager.  I’ve set up Neovim to handle command output directly. Instead of sifting through long scrollbacks or struggling with `less`, I pipe output straight into an editable buffer. See the image above and notice I'm using Neovim as a pager. Need to filter logs, manipulate data, or annotate some output on the fly? Boom – you’re already in your editor.  Remmeber this means I can use Vim motions to navigate through command output, search with `/`, and even edit the buffer if needed. It's particularly useful for long man pages: -->
+<!---->
+<!-- ## Goodbye, Tmux?   -->
+<!---->
+<!-- I never thought I’d say this, but… Kitty replaces most of my tmux use.  I know, tmux has a cult following – and for good reason. It’s invaluable for SSH sessions and persistent workflows. But let’s be honest: tmux introduces its own share of headaches. CPU overhead, weird rendering issues, and app conflicts? Yep, been there.   -->
+<!---->
+<!-- Kitty’s built-in panes and windows eliminate much of that pain. You get:   -->
+<!-- - Panes: Split your terminal like you would in tmux, without dealing with arcane tmux config files.   -->
+<!-- - Tabs/Windows: Manage multiple sessions in a lightweight, intuitive way.   -->
+<!---->
+<!-- And the best part? Kitty doesn’t choke your CPU like tmux often does.   -->
+<!---->
+<!-- The creator of Kitty isn’t shy about criticizing tmux’s inefficiencies – and they’ve backed it up by delivering a solution that just *works*.   -->
+<!---->
+<!-- ### Images in the Terminal   -->
+<!---->
+<!-- This one feels almost like cheating – Kitty has an image protocol.  Sure, Sixel exists for other terminals, but Kitty’s image handling feels native and seamless. Need to view images or GIFs directly in the terminal? Done.   -->
+<!---->
+<!-- ```bash -->
+<!-- kitty icat image.png -->
+<!-- ```   -->
+<!---->
+<!-- It might sound like a gimmick, but if you’re working with image-heavy documentation or want to preview assets while writing scripts, this feature is a game-changer. In fact, I've been able to read pdfs in the terminal using this feature.  -->
+<!---->
+<!---->
+<!-- <div class="note-container note-type-default">
+  
+    <button class="note-toggle" aria-expanded="true">
+      
+        <div class="note-icon">
+          
+          <p>Personal Goal.</p>
+
+        </div>
+      
+    </button>
+    <div class="note-content" style="display: block;">
+      <p>It has always been one of my goals to get latex rendering inside neovim. Using kitty’s image protocol I’ve been able to hack this in.</p>
+
+    </div>
+  
+</div>
+ -->
+<!---->
+<!-- ## Scripting and Remote Control   -->
+<!---->
+<!-- Now for the real nerdy part – Kitty is insanely scriptable.   -->
+<!---->
+<!-- You can control Kitty remotely via its command-line interface, automating window layouts, session launches, and more. Imagine scripting your entire terminal workspace – launching specific splits, attaching SSH sessions, and setting up workflows in a single script.   -->
+<!---->
+<!-- ```bash -->
+<!-- kitty @ launch --type=tab --cwd ~/projects "nvim" -->
+<!-- ```   -->
+<!-- It’s like i3 for your terminal.   -->
+<!---->
+<!-- ## Final Thoughts   -->
+<!---->
+<!-- If you’re still living in `gnome-terminal` or `alacritty` and wondering what the fuss is about, do yourself a favor:   -->
+<!-- ```bash -->
+<!-- brew install kitty  # Or your distro's package manager -->
+<!-- ```   -->
+<!-- Try it for a week. Tweak it, break it, and make it yours.   -->
+<!---->
+<!-- Your future terminal-self will thank you. -->
+<!---->
+<!-- Here is my kitty config (notice how easy it is to customize, and how much you can do with it): -->
+<!---->
+<!-- ```config -->
+<!-- # vim:fileencoding=utf-8:foldmethod=marker -->
+<!-- # general -->
+<!-- shell                   /opt/homebrew/bin/fish --login --interactive -->
+<!-- shell_integration no-title no-cwd -->
+<!-- allow_remote_control yes -->
+<!-- listen_on unix:/tmp/mykitty -->
+<!-- enable_audio_bell no -->
+<!-- scrollback_pager nvim -u NONE -c "set nonumber nolist showtabline=0 foldcolumn=0" -c 'vnoremap ,y "*y :let @+=@*<cr>' -c "autocmd TermOpen * normal G" -c "silent write! /tmp/kitty_scrollback_buffer | te cat /tmp/kitty_scrollback_buffer - " -->
+<!---->
+<!-- # font -->
+<!-- font_size               15.0 -->
+<!-- font_family      family='Fira Code' variable_name=FiraCodeRoman style=FiraCodeRoman-SemiBold features='cv02 zero ss03 ss05 ss07 ss09 calt ss01' -->
+<!-- bold_font        family='Fira Code' variable_name=FiraCodeRoman features='cv02 zero ss03 ss05 ss07 ss09 calt ss01' wght=650.838 -->
+<!-- italic_font      family='Fira Code' variable_name=FiraCodeRoman features='cv02 zero ss03 ss05 ss07 ss09 calt ss01' wght=619.553 -->
+<!-- bold_italic_font family='Fira Code' variable_name=FiraCodeRoman style=FiraCodeRoman-Bold features='cv02 zero ss03 ss05 ss07 ss09 calt ss01' -->
+<!-- symbol_map U+e000-U+e00a,U+ea60-U+ebeb,U+e0a0-U+e0c8,U+e0ca,U+e0cc-U+e0d7,U+e200-U+e2a9,U+e300-U+e3e3,U+e5fa-U+e6b1,U+e700-U+e7c5,U+ed00-U+efc1,U+f000-U+f2ff,U+f000-U+f2e0,U+f300-U+f372,U+f400-U+f533,U+f0001-U+f1af0 Symbols Nerd Font Mono -->
+<!-- disable_ligatures cursor -->
+<!---->
+<!-- # cursor -->
+<!-- cursor_shape block -->
+<!-- editor /opt/homebrew/bin/nvim -->
+<!-- cursor #ebdbb2 -->
+<!-- cursor_shape block -->
+<!-- cursor_blink_interval 0 -->
+<!-- scrollback_lines 5000 -->
+<!-- remember_window_size  yes -->
+<!-- hide_window_decorations titlebar-only -->
+<!-- confirm_os_window_close 0 -->
+<!---->
+<!-- # tabs style -->
+<!-- enabled_layouts splits:split_axis=horizontal -->
+<!-- tab_bar_edge bottom -->
+<!-- tab_bar_style separator -->
+<!-- tab_separator " | " -->
+<!-- tab_title_template "{fmt.fg._f64832}{index}:{fmt.fg.tab}{title.split()[0]}" -->
+<!---->
+<!-- # active_tab_title_template -->
+<!-- active_tab_foreground   #ffffff -->
+<!-- active_tab_background   #0e1018 -->
+<!-- active_tab_font_style   bold-italic -->
+<!-- inactive_tab_foreground #a0a0a0 -->
+<!-- inactive_tab_background #0e1018 -->
+<!-- inactive_tab_font_style normal -->
+<!---->
+<!-- # colors -->
+<!-- foreground #ebdbb2 -->
+<!-- background #0e1018 -->
+<!-- selection_foreground #665b53 -->
+<!-- selection_background #ebdbb2 -->
+<!-- color0 #282828 -->
+<!-- color8 #928374 -->
+<!-- color1 #cc241d -->
+<!-- color9 #fb4934 -->
+<!-- color2  #98971a -->
+<!-- color10 #b8bb26 -->
+<!-- color3  #d79921 -->
+<!-- color11 #fabd2f -->
+<!-- color4  #458588 -->
+<!-- color12 #83a598 -->
+<!-- color5  #b16286 -->
+<!-- color13 #d3869b -->
+<!-- color6  #689d6a -->
+<!-- color14 #8ec07c -->
+<!-- color7  #dfaf87 -->
+<!-- color15 #ebdbb2 -->
+<!---->
+<!-- # macos -->
+<!-- macos_thicken_font 0.4 -->
+<!-- macos_titlebar_color #0E1018 -->
+<!-- macos_option_as_alt yes -->
+<!-- macos_show_window_title_in all -->
+<!-- macos_colorspace displayp3 -->
+<!---->
+<!-- # keybindings -->
+<!-- map opt+s launch --location=hsplit --cwd=current -->
+<!-- map opt+v launch --location=vsplit --cwd=current -->
+<!-- map kitty_mod+n no_op -->
+<!-- map opt+k next_window -->
+<!-- map opt+j previous_window -->
+<!-- map opt+1 previous_tab -->
+<!-- map kitty_mod+right no_op -->
+<!-- map shift+cmd+]     no_op -->
+<!-- map ctrl+tab        no_op -->
+<!-- map opt+2 next_tab -->
+<!-- map kitty_mod+left no_op -->
+<!-- map shift+cmd+[    no_op -->
+<!-- map ctrl+shift+tab no_op -->
+<!-- map opt+c new_tab_with_cwd -->
+<!-- map kitty_mod+t no_op -->
+<!-- map opt+x close_tab -->
+<!-- map opt+, set_tab_title -->
+<!-- map ctrl+l clear_terminal to_cursor_scroll active -->
+<!---->
+<!-- map opt+left resize_window narrower -->
+<!-- map opt+right resize_window wider -->
+<!-- map opt+up resize_window taller -->
+<!-- map opt+down resize_window shorter 3 -->
+<!-- ``` -->
+
+        </section>
+    </article>
+</main>
+</div>
+
+
+
+        
+            
+        
+
+        
+        <div class="giscus"></div>
+         <script src="https://giscus.app/client.js"
+        data-repo="SeniorMars/seniormars.com"
+        data-repo-id="R_kgDOJQ6QAQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOJQ6QAc4CgC4Q"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
+        
+    </div>
+
+     <div class="right-content">
+        
+
+
+
+    <div class="toc">
+    <div class="heading">
+        Table of Contents
+    </div>
+    
+    <ul class="toc-list">
+        
+            <li class="parent">
+                <a href="https://seniormars.com/posts/terminal/#motivation">Motivation</a>
+
+                
+            </li>
+        
+    </ul>
+
+</div>
+
+
+
+    </div>
+</body>
+
+</html>

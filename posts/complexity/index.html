@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en" class="dark light">
+
+<head>
+    <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="base" content="https:&#x2F;&#x2F;seniormars.com">
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <title>
+         When “Complexity” Means Twelve Different Things: A Map of the Chaos
+        
+    </title>
+    
+        <meta property="og:title" content="When “Complexity” Means Twelve Different Things: A Map of the Chaos" />
+    
+
+
+
+
+    
+        <meta name="description" content="A guy explains complexity from multiple angles." />
+    
+
+
+
+
+    
+        <meta property="og:description" content="A guy explains complexity from multiple angles." />
+    
+
+
+
+
+    <meta property="og:type" content="website" />
+
+
+
+
+    <meta property="og:url" content="https:&#x2F;&#x2F;seniormars.com&#x2F;posts&#x2F;complexity&#x2F;" />
+    <link rel="canonical" href="https:&#x2F;&#x2F;seniormars.com&#x2F;posts&#x2F;complexity&#x2F;" />
+
+
+
+<meta property="og:site_name" content="SeniorMars" />
+
+
+
+    
+
+
+
+
+    
+        <meta name="twitter:card" content="summary" />
+    
+
+    
+
+    
+
+    <meta name="twitter:title" content="When “Complexity” Means Twelve Different Things: A Map of the Chaos" />
+
+    
+        <meta name="twitter:description" content="A guy explains complexity from multiple angles." />
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#FFFFFF" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0E1018" />
+
+    <link rel="icon" type="image/png" href="https://seniormars.com/icons/favicon.ico" />
+    
+    
+        <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+        <link rel="manifest" href="/icons/site.webmanifest">
+        <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#ff6f3c">
+        <meta name="apple-mobile-web-app-title" content="SeniorMars">
+        <meta name="application-name" content="SeniorMars">
+        <meta name="msapplication-TileColor" content="#333333">
+        <meta name="theme-color" content="#333333">
+    
+
+
+
+
+    <link href="https://seniormars.com/fonts.css" rel="stylesheet" />
+
+
+
+
+    
+        
+        <link rel="alternate"
+              type="application/rss+xml"
+              title="SeniorMars"
+              href="https://seniormars.com/rss.xml" />
+        
+    
+
+
+    
+
+
+
+    
+
+    
+        
+        
+
+        <script
+            defer
+            src="https://seniormars.com/js/count-loader.min.js"
+            data-count-src="https://seniormars.com/js/count.js"
+            data-goatcounter="https://seniormars.goatcounter.com/count">
+        </script>
+        <noscript>
+            
+            <img
+                src="https://seniormars.goatcounter.com//count?p=&#x2F;posts&#x2F;complexity&#x2F;&t=When “Complexity” Means Twelve Different Things: A Map of the Chaos"
+                alt=""
+                aria-hidden="true"
+                width="1"
+                height="1"
+                loading="lazy"
+                decoding="async">
+        </noscript>
+    
+
+
+    
+
+    <script defer src="https://seniormars.com/js/codeblock.js"></script>
+
+
+
+
+    <script defer src="https://seniormars.com/js/note.js"></script>
+
+
+
+
+    <script src="https://seniormars.com/js/mobile.js"></script>
+
+
+
+
+    <script defer src="https://seniormars.com/js/toc.js"></script>
+
+
+
+    
+    
+    
+        
+    
+    
+    
+    
+    <script>
+        window.MathJax = {
+          startup: {
+            typeset: false
+          },
+          options: {
+            enableMenu: false,
+            enableEnrichment: false,
+            enableSpeech: false,
+            enableBraille: false,
+            enableExplorer: false,
+            menuOptions: {
+              settings: {
+                enrich: false,
+                speech: false,
+                braille: false,
+                assistiveMml: false
+              }
+            }
+          },
+          loader: { load: ['input/asciimath'] },
+          
+          output: {
+              displayOverflow: 'linebreak',
+                  linebreaks: {
+                      inline: true,
+                      width: '100%',
+                      lineleading: .2,
+                      LinebreakVisitor: null,
+              }
+          },
+          
+          
+          tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            processEscapes: true,
+          },
+          
+          svg: {
+            fontCache: 'global'
+          }
+        };
+    </script>
+    <script
+        defer
+        src="https://seniormars.com/js/mathjax-loader.min.js"
+        data-mathjax-src="https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;mathjax@4.1&#x2F;tex-mml-chtml.js"
+        data-dollar-inline="true"
+        data-load-strategy="idle">
+    </script>
+
+
+
+
+    
+    <script
+        defer
+        src="https://seniormars.com/js/mermaid-loader.min.js"
+        data-mermaid-src="https://seniormars.com/js/mermaid.js"
+        data-load-strategy="visible">
+    </script>
+
+
+    
+
+    <link rel="stylesheet" type="text/css" href="https://seniormars.com/theme/light.css" />
+    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://seniormars.com/theme/dark.css" />
+
+
+
+
+<script src="https://seniormars.com/js/themetoggle.js" data-theme="toggle"></script>
+
+
+<link rel="stylesheet" type="text/css" media="screen" href="https://seniormars.com/main.css" />
+
+
+
+    <script
+        defer
+        src="https://seniormars.com/js/search-loader.min.js?h=8feda18ea48839bc2701"
+        data-elasticlunr-src="https://seniormars.com/js/searchElasticlunr.min.js?h=0c7e247119f11f54fb5c"
+        data-search-src="https://seniormars.com/js/search.min.js?h=3241b22be083522f86a3"
+        >
+    </script>
+</head>
+
+
+<body>
+    <div class="left-content">
+        
+        
+    </div>
+
+    <div class="content">
+        <nav>
+    <div class="left-nav">
+        
+            <a href="https:&#x2F;&#x2F;seniormars.com">SeniorMars</a>
+        
+
+
+        <div class="socials">
+            
+                <a rel="me" href="https:&#x2F;&#x2F;github.com&#x2F;seniormars&#x2F;" class="social">
+                    <img alt="github" src="https://seniormars.com/icons/social/github.svg">
+                </a>
+            
+                <a rel="me" href="https:&#x2F;&#x2F;www.youtube.com&#x2F;seniormarstries" class="social">
+                    <img alt="youtube" src="https://seniormars.com/icons/social/youtube.svg">
+                </a>
+            
+                <a rel="me" href="&#x2F;rss.xml" class="social">
+                    <img alt="rss" src="https://seniormars.com/icons/social/rss.svg">
+                </a>
+            
+        </div>
+    </div>
+
+    <div class="right-nav">
+        
+            <a href="https://seniormars.com/posts" style="margin-right: 0.5em">&#x2F;posts</a>
+        
+            <a href="https://seniormars.com/projects" style="margin-right: 0.5em">&#x2F;projects</a>
+        
+            <a href="https://seniormars.com/about" style="margin-right: 0.5em">&#x2F;about</a>
+        
+            <a href="https://seniormars.com/etc" style="margin-right: 0.5em">&#x2F;etc</a>
+        
+
+        
+            <button id="search-button"
+                    class="search-button"
+                    title="$SHORTCUT to open search"
+                    aria-label="$SHORTCUT to open search"
+                    aria-haspopup="dialog"
+                    aria-controls="searchModal"
+                    aria-expanded="false">
+                <img src="https://seniormars.com/icons/search.svg"
+                    alt=""
+                    class="search-icon">
+            </button>
+
+            <div id="searchModal"
+                class="search-modal js"
+                role="dialog"
+                aria-labelledby="modalTitle"
+                aria-modal="true"
+                aria-hidden="true">
+                <div id="modal-content">
+                    <h1 id="modalTitle" class="page-header">Search</h1>
+                    <div id="searchBar">
+                        <input id="searchInput"
+                            role="combobox"
+                            autocomplete="off"
+                            spellcheck="false"
+                            aria-expanded="false"
+                            aria-controls="results-container"
+                            placeholder="Search..." />
+                        <button id="clear-search" class="clear-button" title="Clear search" aria-label="Clear search">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                                <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="results-container">
+                            <div id="results-info" role="status" aria-live="polite">
+                                <span id="loading_results" style="display:none;">Searching...</span>
+                                <span id="error_results" style="display:none;">Search unavailable</span>
+                                <span id="zero_results" style="display:none;">No results</span>
+                                <span id="one_result" style="display:none;">1 result</span>
+                                <span id="two_results" style="display:none;">$NUMBER results</span>
+                                <span id="few_results" style="display:none;">$NUMBER results</span>
+                                <span id="many_results" style="display:none;">$NUMBER results</span>
+                                <span id="limited_results" style="display:none;">Showing first $LIMIT of $NUMBER results</span>
+                            </div>
+                        <div id="results" role="listbox"></div>
+                    </div>
+                </div>
+            </div>
+        
+
+        
+            <button id="dark-mode-toggle"
+                    type="button"
+                    aria-label="Toggle color theme"
+                    aria-pressed="false"
+                    title="Toggle color theme">
+                <img src="https://seniormars.com/icons/sun.svg"
+                    id="sun-icon"
+                    style="filter: invert(1)"
+                    alt=""
+                    aria-hidden="true" />
+                <img src="https://seniormars.com/icons/moon.svg"
+                    id="moon-icon"
+                    alt=""
+                    aria-hidden="true" />
+            </button>
+        
+    </div>
+</nav>
+
+
+        
+        
+    
+<div class="visible-element-observer-root" data-selector="main article p">
+<main>
+    <article>
+        <div class="title">
+            
+    <div class="page-header">
+        When “Complexity” Means Twelve Different Things: A Map of the Chaos<span class="primary-color" style="font-size: 1.6em">.</span>
+    </div>
+
+
+                <div class="meta">
+                    
+                        Posted on <time>2025-12-24</time>
+                    
+
+                    
+
+                    
+                        :: <time>21</time> Min Read
+                    
+
+                    
+
+                    
+                    
+
+                    
+                    
+
+                    
+                    
+                            <span class="tags-label"> :: Tags:</span>
+                            <span class="tags">
+                                    <a href="https://seniormars.com/tags/math/" class="post-tag">math</a>, 
+                                
+                                    <a href="https://seniormars.com/tags/theory-of-computation/" class="post-tag">theory of computation</a>
+                                
+                            </span>
+                    
+
+                    
+
+                </div>
+        </div>
+
+        
+
+
+        
+        
+        
+            <div class="toc-container">
+                <h1 class="toc-title">Table of Contents</h1>
+                
+    <ul class="toc-list">
+        
+            <li class="parent">
+                <a href="https://seniormars.com/posts/complexity/#motivation">Motivation</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                <a href="https://seniormars.com/posts/complexity/#time-space">Time &amp; Space</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                <a href="https://seniormars.com/posts/complexity/#circuit-complexity">Circuit Complexity</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                <a href="https://seniormars.com/posts/complexity/#query-complexity">Query Complexity</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                <a href="https://seniormars.com/posts/complexity/#proof-complexity">Proof Complexity</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                <a href="https://seniormars.com/posts/complexity/#kolmogorov-complexity">Kolmogorov Complexity</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                <a href="https://seniormars.com/posts/complexity/#communication-complexity">Communication Complexity</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                <a href="https://seniormars.com/posts/complexity/#algebraic-complexity">Algebraic Complexity</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                <a href="https://seniormars.com/posts/complexity/#descriptive-complexity">Descriptive Complexity</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                <a href="https://seniormars.com/posts/complexity/#parameterized-complexity">Parameterized Complexity</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                <a href="https://seniormars.com/posts/complexity/#data-vs-expression-complexity">Data vs Expression Complexity</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                <a href="https://seniormars.com/posts/complexity/#and-there-are-more">And There Are More</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                <a href="https://seniormars.com/posts/complexity/#why-this-actually-matters">Why This Actually Matters</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                <a href="https://seniormars.com/posts/complexity/#general-resources">General Resources</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                <a href="https://seniormars.com/posts/complexity/#conclusion">Conclusion</a>
+
+                
+            </li>
+        
+    </ul>
+
+            </div>
+        
+
+        <section class="body">
+            <h2 id="motivation"><a class="zola-anchor" href="#motivation" aria-label="Anchor link for: motivation">Motivation</a></h2>
+<p>For the last six months, I’ve been doing research on SAT solvers. More specifically, model counting. I’m a math major, so naturally I thought “let’s count things” sounded like a good summer project. The question was simple: does the phase transition phenomenon (where SAT instances go from easy to hard to easy again as you increase constraints) extend to counting solutions?</p>
+<p>Quick primer: the #SAT problem asks “given a Boolean formula $\phi$, how many assignments make it true?” It’s #P-complete, which means it’s at least as hard as NP-complete problems, probably harder.</p>
+<p>Yes, the phase transition extends to counting. Paper coming soon.</p>
+<p>But here’s what happened while I was running experiments. I kept measuring different things without realizing they were <em>different</em>. Circuit size would explode at one density. Solver runtime would spike somewhere else. The number of random XOR constraints needed would climb in a third region. And I’d think “okay, the problem is getting complex here,” without being precise about what “complex” meant.</p>
+<p>Then PhD application season hit. I started reading papers from professors I wanted to work with. One paper would talk about “proof complexity lower bounds.” Another about “circuit complexity barriers.” A third about “communication complexity of distributed protocols.” And I realized something annoying: they were all using the word “complexity” to mean completely different things. [I know this sounds obvious, but it hadn’t clicked before how broad complexity is.]</p>
+<p>Time complexity (how long does it take) is different from circuit complexity (how many gates do you need). Both are different from query complexity (how many input bits must you read). All three are different from proof complexity (how long is the certificate). And none of them are Kolmogorov complexity (how compressible is this object).</p>
+<p>Wait, what?</p>
+<p>This post is me trying to make sense of that mess. Not comprehensively (that would take a textbook I’m not qualified to write), but enough so that when someone says “oh that’s communication-complex” or “the query complexity is too high,” you’ll know what lens they’re using to measure hardness.</p>
+<p>Because here’s the thing: when I was measuring #SAT difficulty this summer, I was simultaneously measuring like five different complexity types without realizing it. They all spiked at roughly the same place (the phase transition), but for different structural reasons. Understanding <em>why</em> requires knowing what each complexity measure actually captures.</p>
+<p>So let’s map the zoo.</p>
+<h2 id="time-space"><a class="zola-anchor" href="#time-space" aria-label="Anchor link for: time-space">Time &amp; Space</a></h2>
+<p>Let’s start with the classics, the ones everyone learns first.</p>
+<p><a rel="noreferrer external" href="https://en.wikipedia.org/wiki/Time_complexity"><strong>Time complexity</strong></a>: how many steps does the algorithm take?
+<a rel="noreferrer external" href="https://en.wikipedia.org/wiki/Space_complexity"><strong>Space complexity</strong></a>: how much memory does it use?</p>
+<p>For a Turing machine solving problem $A$, time complexity $T(n)$ is the maximum number of steps on any input of length $n$. Space complexity $S(n)$ is the maximum number of tape cells used. Both are measured in the worst case (usually).</p>
+<p>This gives us the standard hierarchy. <strong>P</strong> is polynomial time (the “tractable” class). <strong>NP</strong> is nondeterministic polynomial time (or equivalently, polynomial-time verifiable). <strong>PSPACE</strong> is polynomial space. And so on.</p>
+<p>For #SAT (counting satisfying assignments), we know it’s <strong>#P-complete</strong>. Again, this means it’s at least as hard as any NP problem, probably harder. Toda’s Theorem tells us the entire polynomial hierarchy collapses to $\text{P}^{\#\text{P}}$ (if you can count, you can solve anything in PH) <sup class="footnote-reference" id="fr-9-1"><a href="#fn-9">1</a></sup>. Counting is powerful.</p>
+<p>But time complexity doesn’t tell you <em>why</em> something is hard. It just says “this takes a long time.” When my #SAT solver was slow at the phase transition, time complexity told me “yep, it’s slow,” but not <em>what structural property of the formula</em> caused that slowness.</p>
+<p>For that, I needed different lenses.</p>
+<h2 id="circuit-complexity"><a class="zola-anchor" href="#circuit-complexity" aria-label="Anchor link for: circuit-complexity">Circuit Complexity</a></h2>
+<p>When I compiled CNF formulas to d-DNNF (decision diagrams for model counting), I was measuring <a rel="noreferrer external" href="https://en.wikipedia.org/wiki/Circuit_complexity"><strong>circuit complexity</strong></a>: how many logical gates (AND, OR, NOT) does it take to represent this Boolean function?</p>
+<p>Two main measures exist here. <strong>Size</strong> is the total number of gates. <strong>Depth</strong> is the longest path from input to output (this measures parallelizability).</p>
+<p>Classes like <strong>NC</strong> (polylog depth, polynomial size) capture “efficiently parallelizable” problems. <strong>AC$^0$</strong> is constant-depth circuits with unbounded fan-in. <strong>P/poly</strong> is polynomial-size circuits, the most general non-uniform class.</p>
+<p>Here’s the interesting part: we can’t prove <em>any</em> superlinear lower bounds for explicit functions. Shannon proved in 1949 that most functions need exponential circuits (by counting) <sup class="footnote-reference" id="fr-1-1"><a href="#fn-1">2</a></sup>, but we can’t point to a specific function and prove it needs more than $O(n)$ gates. The best result is Ryan Williams’ 2011 breakthrough: NEXP is not in ACC$^0$ (<a rel="noreferrer external" href="https://en.wikipedia.org/wiki/ACC0">circuits with modular counting gates</a>) <sup class="footnote-reference" id="fr-2-1"><a href="#fn-2">3</a></sup>.</p>
+<p>That’s it. That’s all we have. We think 3SAT needs exponential circuits, but we can’t prove it. If we could, P would not equal NP.</p>
+<p>For my #SAT experiments, the compiled circuits exploded in size at the phase transition. Why? Because the solution space fragments. The circuit has to branch on many variables before determining satisfiability. The formula has high “treewidth” (a graph measure of branching structure). This structural complexity <em>causes</em> the circuit blow-up.</p>
+<p>But size isn’t the only way to think about accessing information.</p>
+<h2 id="query-complexity"><a class="zola-anchor" href="#query-complexity" aria-label="Anchor link for: query-complexity">Query Complexity</a></h2>
+<p><a rel="noreferrer external" href="https://en.wikipedia.org/wiki/Decision_tree_model"><strong>Query complexity</strong></a> (also called decision tree complexity) asks a purer question: ignoring computation entirely, how many input bits must you examine to compute the answer?</p>
+<p>Model: you have input $x \in {0,1}^n$. You can query “what is $x_i$?” The <strong>deterministic query complexity</strong> $D(f)$ is the minimum number of queries needed in the worst case to determine $f(x)$. There are also randomized ($R(f)$) and quantum ($Q(f)$) versions.</p>
+<p>Example: the OR function (is there a 1 in the input?). Deterministically, you need $D(\text{OR}) = n$ queries because the 1 might be in the last position you check. But Grover’s algorithm gives $Q(\text{OR}) = O(\sqrt{n})$ with a quantum computer <sup class="footnote-reference" id="fr-8-1"><a href="#fn-8">4</a></sup>. This quadratic speedup is the canonical quantum search advantage.</p>
+<p>Another example: sorting $n$ items requires $\Omega(n \log n)$ comparisons in the comparison model. This is a query complexity lower bound (each comparison is a query), and it immediately implies that no comparison-based sorting algorithm can be faster than $O(n \log n)$.</p>
+<p>Now, how does this relate to #SAT? Strictly speaking, my XOR-constraint approach isn’t classical query complexity (which queries input bits). Instead, it’s more like <strong>sampling complexity</strong> or <strong>solution space probing</strong>: we’re adding random XOR constraints and observing how the solution count changes. Each XOR constraint gives us one “query” into the structure of the solution space. The number of constraints needed to get an $(\epsilon, \delta)$-approximation is, in spirit, a query-like measure.</p>
+<p>At the phase transition, we need more XOR constraints because the solution distribution is neither uniform nor sparse. It’s structured in this weird fragmented way that requires more samples to characterize accurately.</p>
+<p>One of my favorite results in query complexity is Hao Huang’s 2019 proof of the <a rel="noreferrer external" href="https://en.wikipedia.org/wiki/Sensitivity_theorem"><strong>Sensitivity Conjecture</strong></a>. Sensitivity $s(f)$ measures how many bits you can flip in an input to change the output. Block sensitivity $bs(f)$ is similar but for blocks of bits. For 25 years, people wondered if $bs(f)$ was polynomially bounded by $s(f)$. Huang proved $bs(f) \leq s(f)^4$ with a two-page argument <sup class="footnote-reference" id="fr-7-1"><a href="#fn-7">5</a></sup> using spectral graph theory and the Cauchy Interlace Theorem.</p>
+<p>Two pages. 25-year-old problem. That’s the kind of math that makes you spill coffee.</p>
+<h2 id="proof-complexity"><a class="zola-anchor" href="#proof-complexity" aria-label="Anchor link for: proof-complexity">Proof Complexity</a></h2>
+<p>Here’s where things get weird. <a rel="noreferrer external" href="https://en.wikipedia.org/wiki/Proof_complexity"><strong>Proof complexity</strong></a> asks: how many steps does it take to <em>prove</em> something is unsatisfiable?</p>
+<p>Most modern SAT solvers use CDCL (Conflict-Driven Clause Learning), which is essentially doing <a rel="noreferrer external" href="https://en.wikipedia.org/wiki/Resolution_(logic)"><strong>Resolution</strong></a>: a proof system where you derive new clauses from existing ones.</p>
+<p>Rule: from clauses $(A \vee x)$ and $(B \vee \neg x)$, derive $(A \vee B)$.</p>
+<p>To prove a CNF is unsatisfiable, derive the empty clause (contradiction). The <strong>proof complexity</strong> is the number of clauses in the shortest derivation.</p>
+<p>Haken’s 1985 result: the Pigeonhole Principle ($n+1$ pigeons in $n$ holes) requires exponential-size Resolution proofs <sup class="footnote-reference" id="fr-3-1"><a href="#fn-3">6</a></sup>. This means CDCL solvers <em>must</em> take exponential time on these formulas. The hardness isn’t in the problem (easy to state), it’s in the <em>structure of reasoning required</em>.</p>
+<p>For random 3-CNF at the critical density, Resolution proofs are also hard. The unsatisfiable core is hidden deep. You can’t find a small, easily refutable subformula. The refutation requires reasoning about many clauses simultaneously, leading to exponential blow-up.</p>
+<p>Ben-Sasson and Wigderson formalized this with the <strong>width-size tradeoff</strong> <sup class="footnote-reference" id="fr-4-1"><a href="#fn-4">7</a></sup>: if a Resolution proof has small width (short clauses), then it’s short. But if every proof requires wide clauses (mentioning many variables), then every proof is long. Random 3-CNF at the critical density has high proof width, hence high proof complexity, hence hard for CDCL.</p>
+<p>This is a different kind of hardness than “the circuit is big” or “you need many queries.” It’s about the <em>logical certificates</em> themselves.</p>
+<p>MOreover, Cook-Reckhow (1979) proved that if there exists a proof system where every tautology has polynomial-size proofs, then $\text{NP} = \text{coNP}$ <sup class="footnote-reference" id="fr-5-1"><a href="#fn-5">8</a></sup>. So proving lower bounds for increasingly strong proof systems is a path toward separating complexity classes. We’ve done it for Resolution, Cutting Planes, bounded-depth Frege. For general Frege (standard propositional logic)? Still open.</p>
+<h2 id="kolmogorov-complexity"><a class="zola-anchor" href="#kolmogorov-complexity" aria-label="Anchor link for: kolmogorov-complexity">Kolmogorov Complexity</a></h2>
+<p>Okay, curveball time. <a rel="noreferrer external" href="https://en.wikipedia.org/wiki/Kolmogorov_complexity"><strong>Kolmogorov complexity</strong></a> measures something completely different: information content, independent of computation time.</p>
+<p>Definition: $K(x)$ is the length of the shortest program that outputs $x$. Random strings have $K(x) \approx |x|$ (incompressible). Structured strings like “0000…0” have low $K(x)$ (program is “print ‘0’ $n$ times”).</p>
+<p>This is uncomputable. You can’t write an algorithm that takes $x$ and outputs $K(x)$. Proof: Berry’s paradox (“the smallest number not definable in under sixty characters” defines itself in under sixty characters, contradiction).</p>
+<p>Why does this matter for SAT? Because time-bounded Kolmogorov complexity connects to cryptography.</p>
+<p>Levin’s <strong>Kt complexity</strong> measures program length plus log runtime:</p>
+<p>$$Kt(x) = \min { |p| + \log t \mid U(p) = x \text{ in } t \text{ steps} }$$</p>
+<p>Liu and Pass (2020) proved: <strong>one-way functions exist if and only if Kt complexity is hard to compute on average</strong> <sup class="footnote-reference" id="fr-6-1"><a href="#fn-6">9</a></sup>. This connects cryptographic hardness to meta-complexity (the complexity of computing complexity).</p>
+<p>For SAT at the phase transition, formulas are neither maximally random nor maximally structured. They’re in a weird middle ground where their Kolmogorov complexity is interesting and hard to compute. I’m not saying this directly impacts my experiments (it doesn’t), but it’s a reminder that “complexity” can mean “information content” rather than “computational cost.”</p>
+<h2 id="communication-complexity"><a class="zola-anchor" href="#communication-complexity" aria-label="Anchor link for: communication-complexity">Communication Complexity</a></h2>
+<p>What if the input isn’t all in one place?</p>
+<p><a rel="noreferrer external" href="https://en.wikipedia.org/wiki/Communication_complexity"><strong>Communication complexity</strong></a>: Alice has $x$, Bob has $y$, they want to compute $f(x, y)$. They exchange bits. The <strong>communication complexity</strong> $D(f)$ is the minimum number of bits needed in the worst case.</p>
+<p>Example: Equality (is $x = y$?). Any deterministic protocol needs $n$ bits. Essentially, one party sends their entire input. But with randomness, you can do it in $O(\log n)$ bits (hash functions!).</p>
+<p>The canonical hard problem is <strong>Set Disjointness</strong>: Alice has set $A$, Bob has set $B$, are they disjoint? This needs $\Omega(n)$ communication. Proof uses a “fooling set” argument (a set of input pairs forcing the protocol to distinguish them all).</p>
+<p>Why does this matter? Because communication lower bounds imply circuit lower bounds. The <strong>Karchmer-Wigderson relation</strong> connects circuit depth to communication complexity: the depth of a circuit computing $f$ equals the communication complexity of a certain two-party game about $f$ <sup class="footnote-reference" id="fr-13-1"><a href="#fn-13">10</a></sup>. This is how we prove AC$^0$ lower bounds.</p>
+<p>For distributed model counting (formula split across machines), communication is the bottleneck. You can’t send the whole formula (too big). You need protocols that minimize communication while getting accurate counts. Active research area.</p>
+<h2 id="algebraic-complexity"><a class="zola-anchor" href="#algebraic-complexity" aria-label="Anchor link for: algebraic-complexity">Algebraic Complexity</a></h2>
+<p>Here’s where things get elegant. <a rel="noreferrer external" href="https://en.wikipedia.org/wiki/Arithmetic_circuit_complexity"><strong>Algebraic complexity</strong></a> (also called arithmetic complexity) studies computation over fields instead of bits. Instead of Boolean circuits with AND/OR/NOT gates, we have arithmetic circuits with $+, -, \times$ gates over fields like $\mathbb{R}$ or $\mathbb{C}$.</p>
+<p>Leslie Valiant defined two classes to mirror P and NP <sup class="footnote-reference" id="fr-14-1"><a href="#fn-14">11</a></sup>:</p>
+<p><strong>VP</strong> (Valiant’s P): families of polynomials ${f_n}$ computable by arithmetic circuits of polynomial size and polynomial degree.</p>
+<p>Example: The <strong>determinant</strong> of an $n \times n$ matrix. It’s computable in $O(n^3)$ operations (Gaussian elimination) or $O(\log^2 n)$ depth (Berkowitz’s algorithm). Determinant is in VP.</p>
+<p><strong>VNP</strong> (Valiant’s NP): polynomials definable as a sum over exponentially many terms, where each term is efficiently computable.</p>
+<p>Example: The <strong>permanent</strong> of a matrix:</p>
+<p>$$\text{Perm}(X) = \sum_{\sigma \in S_n} \prod_{i=1}^n x_{i,\sigma(i)}$$</p>
+<p>This looks almost identical to the determinant (which has $(-1)^{\text{sgn}(\sigma)}$ terms), but without the sign. Computing permanents is #P-complete in the Boolean world. In the algebraic world, permanent is complete for VNP.</p>
+<p><strong>Valiant’s Hypothesis</strong>: $\text{VP} \neq \text{VNP}$.</p>
+<p>This is the algebraic analog of $\text{P} \neq \text{NP}$. If VP = VNP, then the permanent has polynomial-size arithmetic circuits, which would imply $\text{P}^{\#\text{P}} \subseteq \text{P/poly}$, collapsing the polynomial hierarchy. So algebraically proving VP $\neq$ VNP would be huge.</p>
+<p>Why is this “cleaner” than Boolean complexity? Because the algebraic setting has more structure. We can use tools from algebraic geometry, representation theory, and commutative algebra. The <a rel="noreferrer external" href="https://en.wikipedia.org/wiki/Geometric_complexity_theory"><strong>Geometric Complexity Theory</strong></a> (GCT) program, launched by Mulmuley and Sohoni, tries to prove VP $\neq$ VNP using representation-theoretic obstructions.</p>
+<p>The core idea: frame permanent vs determinant as a question about orbit closures in representation theory. Can the permanent be approximated by a linear projection of a slightly larger determinant? GCT tries to prove “no” by finding representations that appear in the permanent’s orbit but not the determinant’s.</p>
+<p>It hasn’t succeeded yet (and recent results show simple “occurrence obstructions” don’t work), but the program drives deep research connecting complexity to algebraic geometry.</p>
+<p>For my work, this is tangential. But it’s a reminder that choosing the right mathematical setting matters. Boolean complexity is stuck on lower bounds. Algebraic complexity has more tools available. Sometimes the right lens makes all the difference.</p>
+<h2 id="descriptive-complexity"><a class="zola-anchor" href="#descriptive-complexity" aria-label="Anchor link for: descriptive-complexity">Descriptive Complexity</a></h2>
+<p>Completely different angle. <a rel="noreferrer external" href="https://en.wikipedia.org/wiki/Descriptive_complexity_theory"><strong>Descriptive complexity</strong></a> measures problems by the <em>logical formulas</em> needed to describe them.</p>
+<p>Fagin’s Theorem (1974): <strong>NP = Existential Second-Order Logic</strong> <sup class="footnote-reference" id="fr-10-1"><a href="#fn-10">12</a></sup>. A problem is in NP iff it’s expressible as “there exists a relation $R$ such that $\phi(R)$ holds” for some first-order $\phi$.</p>
+<p>Example: 3-colorability. “There exist three sets of vertices (Red, Green, Blue) such that every vertex is in one set, and no two adjacent vertices share a set.” The existential quantification is the “guessing” in NP. The first-order part is the “verification.”</p>
+<p>This extends:</p>
+<ul>
+<li><strong>AC$^0$</strong> = First-Order Logic</li>
+<li><strong>P</strong> = First-Order + Least Fixed Point (on ordered structures) <sup class="footnote-reference" id="fr-11-1"><a href="#fn-11">13</a></sup></li>
+<li><strong>NP</strong> = Existential Second-Order</li>
+<li><strong>PH</strong> = Full Second-Order</li>
+<li><strong>PSPACE</strong> = First-Order + Partial Fixed Point</li>
+</ul>
+<p>So P vs NP becomes: is FO + LFP equal to Existential Second-Order?</p>
+<p>This is a question about <em>expressive power of logical languages</em>, not Turing machines. Same question, different lens.</p>
+<p>I find this beautiful but not directly useful for experiments. It’s more philosophical: “What kind of logic expresses this problem?” But it’s a reminder that complexity isn’t just about machines. It’s about languages, logic, expressiveness.</p>
+<h2 id="parameterized-complexity"><a class="zola-anchor" href="#parameterized-complexity" aria-label="Anchor link for: parameterized-complexity">Parameterized Complexity</a></h2>
+<p><a rel="noreferrer external" href="https://en.wikipedia.org/wiki/Parameterized_complexity"><strong>Parameterized complexity</strong></a> refines P vs NP by acknowledging inputs have structure.</p>
+<p>Instead of measuring complexity as just $f(n)$, pick a parameter $k$ (solution size, treewidth, number of variables) and ask: is it solvable in $f(k) \cdot \text{poly}(n)$ time?</p>
+<p>If yes, it’s <strong>Fixed-Parameter Tractable (FPT)</strong>. Exponential blow-up is confined to $k$, not $n$.</p>
+<p>Example: Vertex Cover. Find $k$ vertices covering all edges. Brute force: $O(n^k)$, not FPT. But branching algorithm: pick an edge, one endpoint must be in the cover, branch on both. Recursion depth $k$, each level $O(n)$. Total: $O(2^k \cdot n)$. This is FPT.</p>
+<p>For SAT parameterized by treewidth, the problem becomes FPT. Low-treewidth formulas are easier.</p>
+<p>At the #SAT phase transition, treewidth explodes. The constraint graph becomes highly interconnected. This is <em>why</em> compilation struggles: dynamic programming over the constraint graph has exponential blow-up with high treewidth.</p>
+<p>Parameterized complexity gives vocabulary to say “this problem is hard because this parameter is large.” More fine-grained than P vs NP.</p>
+<h2 id="data-vs-expression-complexity"><a class="zola-anchor" href="#data-vs-expression-complexity" aria-label="Anchor link for: data-vs-expression-complexity">Data vs Expression Complexity</a></h2>
+<p>So here is the thing: Dr. Vardi is my undergraduate advisor, and it so happens that I had to read one of papers to lecture for a class he teaches where he talks about another type of complexity. In his 1982 paper “The Complexity of Relational Query Languages,” he made a distinction that should have been obvious but somehow wasn’t standard at the time <sup class="footnote-reference" id="fr-12-1"><a href="#fn-12">14</a></sup>.</p>
+<p>Vardi asked: when we talk about the complexity of a <a rel="noreferrer external" href="https://en.wikipedia.org/wiki/Database_theory">query language</a>, what are we actually measuring?</p>
+<p>He split it into two types:</p>
+<p><strong>Data complexity</strong>: Fix a specific query. How hard is it to evaluate that query as a function of the database size? This measures “how difficult are the individual questions asked in this language?”</p>
+<p><strong>Expression complexity</strong>: Fix a specific database. How hard is it to evaluate arbitrary queries (represented by expressions in the language) on that database, as a function of the expression size? This measures “how difficult is answering different questions in this language?”</p>
+<p>Same query language. Two completely different complexity measures. And they’re not just different by a constant factor. Vardi showed that expression complexity is typically <strong>one exponential higher</strong> than data complexity.</p>
+<p>Example: First-order logic (relational calculus). Data complexity? LOGSPACE. Expression complexity? PSPACE. That’s not a small gap.</p>
+<p>For fixed-point queries (related to my #SAT work), data complexity is PTIME, but expression complexity jumps to EXPTIME. The pattern holds across multiple query languages: the expression complexity hierarchy mirrors the data complexity hierarchy, shifted up by one exponential.</p>
+<p>This matters because when database people say “this query language is complex,” you have to ask: complex for users who run the same query repeatedly on growing data? Or complex for users who run many different queries on fixed-size data? Different questions, different answers, same word.</p>
+<p>It’s the same confusion I had with #SAT, just in a different domain. And it reinforces the point: “complexity” without context is meaningless.</p>
+<h2 id="and-there-are-more"><a class="zola-anchor" href="#and-there-are-more" aria-label="Anchor link for: and-there-are-more">And There Are More</a></h2>
+<p>I could keep going. <strong>Topological complexity</strong> (robot controller modes). <strong>Instance complexity</strong> (how hard is <em>this specific input</em>). <strong>Logical depth</strong> (computation time for near-shortest programs). <strong>State complexity</strong> (automata states for regular languages). <strong>Learning complexity</strong> (VC dimension vs Rademacher complexity).</p>
+<p>Each isolates a different resource or structural property.</p>
+<h2 id="why-this-actually-matters"><a class="zola-anchor" href="#why-this-actually-matters" aria-label="Anchor link for: why-this-actually-matters">Why This Actually Matters</a></h2>
+<p>Back to my summer experiments. When measuring #SAT hardness, I was simultaneously measuring:</p>
+<ul>
+<li><strong>Time complexity</strong>: solver runtime</li>
+<li><strong>Circuit complexity</strong>: compiled decision diagram size</li>
+<li><strong>Query/Sampling complexity</strong>: XOR constraints needed</li>
+<li><strong>Proof complexity</strong>: Resolution width (implicitly)</li>
+<li><strong>Parameterized complexity</strong>: formula treewidth</li>
+</ul>
+<p>These all spike at the same place (phase transition) because they measure different facets of the same structure. The formula at critical density is hard in <em>multiple senses</em>. Not just slow, but structurally complicated.</p>
+<p>That’s why the phase transition is interesting. It’s not “solvers are slow here.” It’s “the formula itself, in multiple formal senses, is complex here.”</p>
+<p>And that’s the broader lesson. When someone says “this problem is complex,” the first question should be: complex in what sense? Time? Space? Communication? Proof length? Circuit size? Information content?</p>
+<p>Each lens reveals something different. The real breakthroughs happen when you connect them. Communication lower bounds imply circuit lower bounds. Kolmogorov complexity connects to one-way functions. Query complexity connects to spectral graph theory (Huang’s sensitivity proof). Proof complexity connects to solver runtime.</p>
+<p>The zoo isn’t a mess. It’s a toolkit. Yay.</p>
+<h2 id="general-resources"><a class="zola-anchor" href="#general-resources" aria-label="Anchor link for: general-resources">General Resources</a></h2>
+<p>For readers wanting to dive deeper into complexity theory broadly:</p>
+<p><strong>Textbooks:</strong></p>
+<ul>
+<li>Arora, S., &amp; Barak, B. (2009). <em>Computational Complexity: A Modern Approach</em>. [Free draft available online]</li>
+<li>Goldreich, O. (2008). <em>Computational Complexity: A Conceptual Perspective</em>. Cambridge University Press.</li>
+<li>Papadimitriou, C. H. (1994). <em>Computational Complexity</em>. Addison-Wesley.</li>
+<li>Jukna, S. (2012). <em>Boolean Function Complexity: Advances and Frontiers</em>. Springer. [Comprehensive modern treatment]</li>
+<li>Vollmer, H. (1999). <em>Introduction to Circuit Complexity: A Uniform Approach</em>. Springer. [Classic introduction]</li>
+<li>Krajíček, J. (1995). <em>Bounded Arithmetic, Propositional Logic and Complexity Theory</em>. Cambridge University Press. [Deep dive into proof complexity]</li>
+<li>Kushilevitz, E., &amp; Nisan, N. (1997). <em>Communication Complexity</em>. Cambridge University Press. [Classic textbook]</li>
+<li>Li, M., &amp; Vitányi, P. (2008). <em>An Introduction to Kolmogorov Complexity and Its Applications</em> (3rd ed.). Springer. [The definitive textbook]</li>
+<li>Bürgisser, P., Clausen, M., &amp; Shokrollahi, M. A. (1997). <em>Algebraic Complexity Theory</em>. Springer. [Comprehensive reference]</li>
+<li>Immerman, N. (1999). <em>Descriptive Complexity</em>. Springer. [The authoritative textbook]</li>
+<li>Downey, R. G., &amp; Fellows, M. R. (2013). <em>Fundamentals of Parameterized Complexity</em>. Springer. [Modern comprehensive treatment]</li>
+<li>Abiteboul, S., Hull, R., &amp; Vianu, V. (1995). <em>Foundations of Databases</em>. Addison-Wesley. [Chapter 17 covers complexity]</li>
+</ul>
+<p><strong>Surveys:</strong></p>
+<ul>
+<li>Fortnow, L., &amp; Homer, S. (2003). “A short history of computational complexity.” <em>Bulletin of the EATCS</em>, 80, 95-133.</li>
+<li><a rel="noreferrer external" href="https://complexityzoo.net/Complexity_Zoo">Complexity Zoo</a> - Comprehensive catalog of complexity classes</li>
+<li>Buhrman, H., &amp; de Wolf, R. (2002). “Complexity measures and decision tree complexity: a survey.” <em>Theoretical Computer Science</em>, 288(1), 21-43. [Excellent survey of the field]</li>
+</ul>
+<p><strong>Blogs:</strong></p>
+<ul>
+<li><a rel="noreferrer external" href="https://blog.computationalcomplexity.org/">Computational Complexity Blog</a> by Lance Fortnow and Bill Gasarch</li>
+<li><a rel="noreferrer external" href="https://rjlipton.wpcomstaging.com/">Gödel’s Lost Letter</a> by Dick Lipton and Ken Regan</li>
+<li><a rel="noreferrer external" href="https://scottaaronson.blog/">Scott Aaronson’s Shtetl-Optimized</a></li>
+</ul>
+<p><strong>Video Lectures:</strong></p>
+<ul>
+<li><a rel="noreferrer external" href="https://www.youtube.com/playlist?list=PLm3J0oaFux3YL5vLXpzOyJiLtqLp6dCW2">Ryan O’Donnell’s course on Analysis of Boolean Functions</a></li>
+<li><a rel="noreferrer external" href="https://www.youtube.com/channel/UCW_GKczW8HnejSJLuGGoBlw">Boaz Barak’s complexity theory lectures</a></li>
+</ul>
+<h2 id="conclusion"><a class="zola-anchor" href="#conclusion" aria-label="Anchor link for: conclusion">Conclusion</a></h2>
+<p>As I’m applying to PhD programs, I’m looking for advisors who think about complexity from multiple angles. Who don’t just say “P vs NP” but understand hardness is structural, informational, communicational, logical, computational all at once.</p>
+<p>If you’re navigating the complexity landscape (literally), I hope this taxonomy helps. Next time someone says “communication-complex” or “high proof complexity,” you’ll know what lens they’re using.</p>
+<p>And maybe you’ll start seeing connections. That’s where it gets fun.</p>
+<hr />
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn-9">
+<p>Toda, S. (1991). “PP is as hard as the polynomial-time hierarchy.” <em>SIAM Journal on Computing</em>, 20(5), 865-877. Shows that counting witnesses (even approximately) is remarkably powerful. <a href="#fr-9-1">↩</a></p>
+</li>
+<li id="fn-1">
+<p>Shannon, C. E. (1949). “The synthesis of two-terminal switching circuits.” <em>Bell System Technical Journal</em>, 28(1), 59-98. Shannon showed that almost all Boolean functions require circuits of size at least 2^n/n, though the proof is non-constructive. <a href="#fr-1-1">↩</a></p>
+</li>
+<li id="fn-2">
+<p>Williams, R. (2014). “Non-uniform ACC circuit lower bounds.” <em>Journal of the ACM</em>, 61(1), 2:1-2:32. This breakthrough showed NEXP ⊄ ACC^0, the first major circuit lower bound progress since the 1980s. <a href="#fr-2-1">↩</a></p>
+</li>
+<li id="fn-8">
+<p>Grover, L. K. (1996). “A fast quantum mechanical algorithm for database search.” <em>Proceedings of STOC</em>, 212-219. The canonical quantum speedup, achieving quadratic improvement over classical search. <a href="#fr-8-1">↩</a></p>
+</li>
+<li id="fn-7">
+<p>Huang, H. (2019). “Induced subgraphs of hypercubes and a proof of the Sensitivity Conjecture.” <em>Annals of Mathematics</em>, 190(3), 949-955. A remarkably concise proof using spectral graph theory and the Cauchy Interlace Theorem. <a href="#fr-7-1">↩</a></p>
+</li>
+<li id="fn-3">
+<p>Haken, A. (1985). “The intractability of resolution.” <em>Theoretical Computer Science</em>, 39(2-3), 297-308. The first exponential lower bound for a natural proof system. <a href="#fr-3-1">↩</a></p>
+</li>
+<li id="fn-4">
+<p>Ben-Sasson, E., &amp; Wigderson, A. (2001). “Short proofs are narrow—resolution made simple.” <em>Journal of the ACM</em>, 48(2), 149-169. Established the fundamental width-size tradeoff for resolution proofs. <a href="#fr-4-1">↩</a></p>
+</li>
+<li id="fn-5">
+<p>Cook, S. A., &amp; Reckhow, R. A. (1979). “The relative efficiency of propositional proof systems.” <em>The Journal of Symbolic Logic</em>, 44(1), 36-50. Foundational paper connecting proof complexity to computational complexity. <a href="#fr-5-1">↩</a></p>
+</li>
+<li id="fn-6">
+<p>Liu, Y., &amp; Pass, R. (2020). “On one-way functions and Kolmogorov complexity.” <em>Proceedings of FOCS</em>, 1243-1254. Proved the equivalence between OWF existence and average-case hardness of time-bounded Kolmogorov complexity. <a href="#fr-6-1">↩</a></p>
+</li>
+<li id="fn-13">
+<p>Karchmer, M., &amp; Wigderson, A. (1990). “Monotone circuits for connectivity require super-logarithmic depth.” <em>SIAM Journal on Discrete Mathematics</em>, 3(2), 255-265. Established the fundamental connection between circuit depth and communication complexity. <a href="#fr-13-1">↩</a></p>
+</li>
+<li id="fn-14">
+<p>Valiant, L. G. (1979). “Completeness classes in algebra.” <em>Proceedings of STOC</em>, 249-261. Introduced VP and VNP as algebraic analogs of P and NP, along with Valiant’s Hypothesis. <a href="#fr-14-1">↩</a></p>
+</li>
+<li id="fn-10">
+<p>Fagin, R. (1974). “Generalized first-order spectra and polynomial-time recognizable sets.” <em>Complexity of Computation</em>, 7, 43-73. The foundational result of descriptive complexity theory. <a href="#fr-10-1">↩</a></p>
+</li>
+<li id="fn-11">
+<p>Immerman, N. (1986). “Relational queries computable in polynomial time.” <em>Information and Control</em>, 68(1-3), 86-104. And independently: Vardi, M. Y. (1982). “The complexity of relational query languages.” <em>Proceedings of STOC</em>, 137-146. Together these prove the Immerman-Vardi Theorem characterizing P in logic. <a href="#fr-11-1">↩</a></p>
+</li>
+<li id="fn-12">
+<p>Vardi, M. Y. (1982). “The complexity of relational query languages.” <em>Proceedings of the 14th Annual ACM Symposium on Theory of Computing</em>, 137-146. First systematic distinction between data and expression complexity, showing expression complexity is typically one exponential higher. <a href="#fr-12-1">↩</a></p>
+</li>
+</ol>
+</section>
+
+        </section>
+    </article>
+</main>
+</div>
+
+
+
+        
+            
+        
+
+        
+        <div class="giscus"></div>
+         <script src="https://giscus.app/client.js"
+        data-repo="SeniorMars/seniormars.com"
+        data-repo-id="R_kgDOJQ6QAQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOJQ6QAc4CgC4Q"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
+        
+    </div>
+
+     <div class="right-content">
+        
+
+
+
+    <div class="toc">
+    <div class="heading">
+        Table of Contents
+    </div>
+    
+    <ul class="toc-list">
+        
+            <li class="parent">
+                <a href="https://seniormars.com/posts/complexity/#motivation">Motivation</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                <a href="https://seniormars.com/posts/complexity/#time-space">Time &amp; Space</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                <a href="https://seniormars.com/posts/complexity/#circuit-complexity">Circuit Complexity</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                <a href="https://seniormars.com/posts/complexity/#query-complexity">Query Complexity</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                <a href="https://seniormars.com/posts/complexity/#proof-complexity">Proof Complexity</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                <a href="https://seniormars.com/posts/complexity/#kolmogorov-complexity">Kolmogorov Complexity</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                <a href="https://seniormars.com/posts/complexity/#communication-complexity">Communication Complexity</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                <a href="https://seniormars.com/posts/complexity/#algebraic-complexity">Algebraic Complexity</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                <a href="https://seniormars.com/posts/complexity/#descriptive-complexity">Descriptive Complexity</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                <a href="https://seniormars.com/posts/complexity/#parameterized-complexity">Parameterized Complexity</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                <a href="https://seniormars.com/posts/complexity/#data-vs-expression-complexity">Data vs Expression Complexity</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                <a href="https://seniormars.com/posts/complexity/#and-there-are-more">And There Are More</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                <a href="https://seniormars.com/posts/complexity/#why-this-actually-matters">Why This Actually Matters</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                <a href="https://seniormars.com/posts/complexity/#general-resources">General Resources</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                <a href="https://seniormars.com/posts/complexity/#conclusion">Conclusion</a>
+
+                
+            </li>
+        
+    </ul>
+
+</div>
+
+
+
+    </div>
+</body>
+
+</html>
