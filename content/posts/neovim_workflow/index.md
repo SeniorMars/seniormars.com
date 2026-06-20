@@ -632,7 +632,7 @@ These settings remove the banner, open the file explorer in a vertical split, us
 
 ## Git Integration
 
-Now, I made a video about this ([here](https://www.youtube.com/watch?v=57x4ZzzCr2Y)), so I won't go into too much detail. However, I will show you how I set it up:
+Now, I made a [video about this Git workflow](https://www.youtube.com/watch?v=57x4ZzzCr2Y), so I won't go into too much detail. However, I will show you how I set it up:
 
 ```lua
 {"tpope/vim-fugitive"}, -- Git control for vim

@@ -1,0 +1,12 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Redirect</title>
+<script>
+  const target = "{{ url | safe }}";
+  const hash = window.location.hash || "";
+  window.location.replace(target + hash);
+</script>
+<noscript>
+  <meta http-equiv="refresh" content="0; url={{ url | safe }}">
+</noscript>
+<p><a href="{{ url | safe }}">Continue to {{ url | safe }}</a>.</p>

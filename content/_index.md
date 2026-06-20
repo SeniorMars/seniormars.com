@@ -3,7 +3,7 @@ title= "Welcome To My Blog!"
 description = "A blog about math, extremely niche interests, and a guy having fun."
 +++
 
-Heyo! SeniorMars here. It's honestly weird to think that people will spend their time reading things I wrote (I'm usually on the other side), but I hope you enjoy your stay here. You can learn more about me [here](/about) or explore the links up top. Frankly, I'm not sure what I want to make this site about--I like countless things, so I guess we'll see where this goes. In either case, this is a blog about math, extremely niche interests, and a guy having fun!
+Heyo! SeniorMars here. It's honestly weird to think that people will spend their time reading things I wrote (I'm usually on the other side), but I hope you enjoy your stay here. You can learn more about me on the [about page](/about) or explore the links up top. Frankly, I'm not sure what I want to make this site about--I like countless things, so I guess we'll see where this goes. In either case, this is a blog about math, extremely niche interests, and a guy having fun!
 
 
 # News
@@ -19,4 +19,10 @@ Heyo! SeniorMars here. It's honestly weird to think that people will spend their
 
 # All time meme!
 
-![All time meme](https://i.redd.it/qjo442jc9jt91.jpg)
+<img
+  src="/images/all-time-meme.webp"
+  alt="All time meme"
+  width="480"
+  height="471"
+  loading="lazy"
+  decoding="async">

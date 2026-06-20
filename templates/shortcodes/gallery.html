@@ -2,8 +2,9 @@
 {% for asset in page.assets -%}
   {%- if asset is matching("[.](jpg|png)$") -%}
     {% set image = resize_image(path=asset, width=240, height=180) %}
-    <a href="{{ get_url(path=asset) }}" target="_blank">
-      <img src="{{ image.url }}" />
+    {% set image_name = asset | split(pat="/") | last | split(pat=".") | first | replace(from="_", to=" ") | replace(from="-", to=" ") %}
+    <a href="{{ get_url(path=asset) }}" target="_blank" aria-label="Open {{ image_name }} image">
+      <img src="{{ image.url }}" alt="{{ image_name }} image" width="240" height="180" />
     </a>
   {%- endif %}
 {%- endfor %}

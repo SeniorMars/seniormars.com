@@ -132,7 +132,7 @@ We are going to take configuration step by step. I will explain what each sectio
 The first we need to do is make a `muttrc` file. This file is where we will store all of our configuration.
 By default, Neomutt will look for a file called `muttrc` in the following location: `XDG_CONFIG_HOME/mutt/muttrc`.
 
-{{note(clickable=true, header="Note", body="`$XDG_CONFIG_HOME` is an environment variable that points to the location of your configuration files. Read more about it <a href='https://wiki.archlinux.org/title/XDG_Base_Directory'>here</a>.")}}
+{{note(clickable=true, header="Note", body="`$XDG_CONFIG_HOME` is an environment variable that points to the location of your configuration files. Read the <a href='https://wiki.archlinux.org/title/XDG_Base_Directory'>Arch Wiki page on the XDG Base Directory</a>.")}}
 
 For example, on my machine, the location of my `muttrc` file is `~/.config/mutt/muttrc`.
 
@@ -475,7 +475,7 @@ macro attach s '<save-entry> <bol>~/Documents/attachments/<eol>' 'save attachmen
 auto_view text/html		# automatically show html (mailcap uses lynx)
 ```
 
-You can see more mailcap examples in my dotfiles [here](https://github.com/SeniorMars/dotfiles/blob/master/.config/mutt/mailcap).
+You can see more mailcap examples in [my dotfiles mailcap file](https://github.com/SeniorMars/dotfiles/blob/master/.config/mutt/mailcap).
 
 Now you should be able to open attachments with your prefered program and automatically render HTML in emails! NO PICTURES THOUGH :)
 
@@ -487,7 +487,7 @@ color status green default
 # in general, the order is:
 # color <element> <color> <attr> optional<regex>
 ```
-My theme can be found [here](https://github.com/SeniorMars/dotfiles/blob/master/.config/mutt/colors.muttrc).
+My theme can be found in [my Neomutt colors file](https://github.com/SeniorMars/dotfiles/blob/master/.config/mutt/colors.muttrc).
 
 ## External programs
 
@@ -500,7 +500,7 @@ use external programs.
 
 Let's take a look at the first issue: urls are not clickable. To fix this, we can use `urlscan` to make urls clickable.
 
-The GitHub repo for `urlscan` is [here](https://github.com/firecat53/urlscan), and you can install it
+The [`urlscan` GitHub repository](https://github.com/firecat53/urlscan) has installation details, and you can install it
 via pip:
 
 ```bash
