@@ -61,7 +61,7 @@ This section is specifically for Rice students. If you are not a Rice student, y
 ## Financial (Aid around campus):
 
 - Rice Mutual Aid: [linktr.ee / ricemutualaid](https://linktr.ee/ricemutualaid/)
-- Mutual aid Houston: [mutualaidhou.com](https://www.mutualaidhou.com/)
+- Mutual aid Houston
 - Not a fund, but you can ask OIT for a loaner device like a laptop or tablet, as well as request a tablet with a hotspot if you don’t have consistent WiFi connection
 
 ## General Resources:
@@ -98,14 +98,14 @@ This section is specifically for Rice students. If you are not a Rice student, y
 - Funding for co-pays or upfront costs associated with emergency surgery
 
 ## Questbridge Emergency Fund:
-- [questbridge.org / application](https://www.questbridge.org/emergency-fund/application)
+- [questbridge.org / emergency fund](https://www.questbridge.org/thrive/give-back/emergency-fund)
 - “The purpose of the fund is to help support Scholars and Alumni who are struggling with unexpected emergency costs, such as an ER visit or a trip home for a family crisis. The fund does not grant money for costs that Scholars’ colleges may cover through financial aid, such as books or regular travel.”
 - Applicants are eligible to receive a grant once per year.
 - Grant turnaround is four weeks or less, with the idea that applicants should not have to take out additional loans in order to attend to an immediate issue
     * What is considered an emergency?
     “We define an emergency as an unplanned expense that puts significant financial pressure on QuestBridge Scholars or Alumni, and threatens their health, security, or ability to continue attending school. 
     * A non-exhaustive list of emergency expenses includes: urgent medical expenses not covered by insurance; eyeglass replacement; hearing aids; transportation for emergency (medical or domestic), transportation to travel to an immediate family member in a dire situation; insurance deductibles; emergency childcare; replacing or replenishing basic necessities due to natural disaster, fire, flood or theft; safety related costs due to domestic violence or natural disaster.”
-Other FAQs: [questbridge.org / faq](https://www.questbridge.org/emergency-fund/faq#Q10)
+Other FAQs: [questbridge.org / emergency fund FAQ](https://www.questbridge.org/thrive/give-back/emergency-fund)
 
 ## College Magister’s Fund/Residential college accessibility funds: 
 - Dependent on your college, but here’s the general description:
@@ -153,13 +153,11 @@ Request anyway!!! - if the ask exceeds what we can provide, we will do our best 
         - [SEI form](https://docs.google.com/forms/d/e/1FAIpQLSfXUTkDQQKmFZgkuCQkoPmhuHPwqIdAfLdGotfAwUoLAXpt4Q/viewform)
     * Brown: [browncollege.org / financial resources](https://www.browncollege.org/financial-resources)
         - [SEI form](https://docs.google.com/forms/d/e/1FAIpQLSecQxmolLz5YW-l9FLZaSjz4QBNG2oaXJJHvU9mbcwQTbUcpA/viewform?edit_requested=true)
-    * Baker: [baker-college.com / low income accessibility form](https://www.baker-college.com/low-income-accessibility-form)
-        - [SEI form](https://www.baker-college.com/low-income-accessibility-form)
+    * Baker: [baker-college.com](https://baker-college.com/)
     * Lovett: [lovettcollege.github.io / accessibility forms](https://lovettcollege.github.io/lovettcollege/accessibility-forms.html)
-        - [SEI form](https://docs.google.com/forms/d/e/1FAIpQLSfqYxQ81eWrBSGJ71RKSlG4scPfxfRK2ofcKhmTdw4k8YKmXA/viewform)
     * Will Rice: [willrice.rice.edu / finances](https://willrice.rice.edu/pages/finances.html)
         - [SEI form](https://docs.google.com/forms/d/e/1FAIpQLSeyfsUhSL3uE04xBhw3_rhijYqfCpXU8dCKD3mciANnVf6uzg/viewform)
-    * Sid Richardson: [sidrich.rice.edu / resources](https://sidrich.rice.edu/resources)
+    * Sid Richardson: [sidrich.rice.edu](https://sidrich.rice.edu/)
         - [SEI form](https://docs.google.com/forms/d/e/1FAIpQLScKfSIrAzXySObHGPPBHeHCL9fuGxVJc_tK_eZFBApCykkocA/viewform)
     * Hanszen: [hanszen.rice.edu / forms](https://hanszen.rice.edu/forms)
         - [SEI form](https://riceuniversity.co1.qualtrics.com/jfe/form/SV_cAUrHpQm4ZzLp5z)
@@ -170,13 +168,13 @@ Request anyway!!! - if the ask exceeds what we can provide, we will do our best 
 - Food pantry [success.rice.edu / pantry](https://success.rice.edu/accessibility-resources/pantry)
     * Available by walk in Monday-Friday, 9:00 am to 5:00 pm
     * Visitors will have access to non-perishable food and hygiene products.
-- Dress For Success [ccd.rice.edu / dfs career gear](https://ccd.rice.edu/students/career-resources/dfs-career-gear#:~:text=You%20may%20contact%20Dress%20for,obtain%20a%20referral%20for%20services).
+- Dress For Success [ccd.rice.edu / dfs career gear](https://ccd.rice.edu/students/career-resources/dfs-career-gear).
     * A referral is no longer required, but you can go through the CCD for one
     * [dfshouston.org](https://www.dfshouston.org/)
     * Free professional attire for job interviews, job fairs, or just jobs in general
 
 ## Research/Fellowships: 
-- SER Scholars [ouri.rice.edu / ser](https://ouri.rice.edu/ser)
+- SER Scholars [ouri.rice.edu / ser](https://ouri.rice.edu/research-programs/ser)
     * For freshman and sophomores in STEM
     * Regular mentoring meetings with program staff
     * Paired with a Natural Sciences or Engineering lab either within Rice or the Texas Medical Center, 
@@ -198,7 +196,7 @@ Request anyway!!! - if the ask exceeds what we can provide, we will do our best 
 - Basic first aid: College RHAs
 - Medical bills: try AOP first, they may refer you to Wellbeing, who may help cover some
 - Dental: 
-    * [tdasmiles.org / texas mission of mercy](https://www.tdasmiles.org/texas-mission-of-mercy/)
+    * [tdasf.org](https://www.tdasf.org/)
         - Free clinic at different locations in Texas a couple of times per year, be prepared to have a very long wait, but they do completely free dental work including extractions and fillings
         - Next clinics this year: Sep 9-10, Luling TX, Nov 4-5, Dallas TX
         - Will most likely have another Houston Clinic Next Year

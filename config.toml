@@ -25,6 +25,23 @@ index_format = "elasticlunr_json"
 
 [link_checker]
 internal_level = "warn"
+skip_prefixes = [
+    "https://docs.google.com/forms/d/e/1FAIpQLSekACo8-ahyVBJ_u_fTlXm2Xm6C9iOmyG2doVcsDl5uYDLugw/viewform",
+    "https://docs.google.com/forms/d/e/1FAIpQLSeyfsUhSL3uE04xBhw3_rhijYqfCpXU8dCKD3mciANnVf6uzg/viewform",
+    "https://docs.google.com/forms/d/e/1FAIpQLScKfSIrAzXySObHGPPBHeHCL9fuGxVJc_tK_eZFBApCykkocA/viewform",
+    "https://aop.rice.edu/application",
+    "https://aop.rice.edu/making-textbook-aop-request",
+    "https://aop.rice.edu/dou-emergency-funding",
+    "https://daca.rice.edu/undocumented-students-faq",
+    "https://ouri.rice.edu/research-programs/ser",
+    "https://ouri.rice.edu/research-programs/rusp",
+    "https://ouri.rice.edu/research-and-campus-resources/for-students",
+    "https://success.rice.edu/first-generation-and-low-income/fli-ambassadors",
+    "https://ccd.rice.edu/students/career-resources/dfs-career-gear",
+    "https://ccd.rice.edu/students/on-campus_employment",
+    "https://dining.rice.edu/meal-plans-and-tetra",
+    "https://github.com/corollari/linusrants",
+]
 skip_anchor_prefixes = [
     "https://github.com/",
 ]
