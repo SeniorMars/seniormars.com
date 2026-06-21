@@ -17,7 +17,6 @@ For the last three months, I've been preparing applications to graduate schools 
 
 This post is an attempt to articulate my conflicted feelings; maybe get some answers from people who've thought about these things longer than I have. What follows is filled with anecdotal observations and personal experiences, so take it with however many grains of salt you need. But I hope it sparks something worth discussing.
 
-
 # The culture of Mathematics
 
 One of the PhD programs I'm applying to lists where their current graduate students did their undergraduate work. I went through the list, then looked up their profiles. The pattern was immediate: top-tier universities, nearly all of them. MIT, Harvard, Berkeley, a few international equivalents; maybe one or two state schools if you squint. I go to Rice, which has a solid math program: I can take graduate courses as an undergrad, work with professors on research. I'm extremely lucky. But scrolling through those names made something sit wrong in my stomach, and it's not just me being insecure about my chances. I can't prove this, but I find it hard to believe that someone from a "weaker" school would implcitly have less mathematical ability than these students. So why does the list look like this?

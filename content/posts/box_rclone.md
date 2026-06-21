@@ -649,7 +649,7 @@ rclone mount box: X: --vfs-cache-mode writes
 
 This mounts your entire Box account at `~/box` on macOS/Linux or as drive `X:` on Windows. You can then browse it like any local directory.
 
-{{ note(clickable=true, header="Note", body="For Windows users, the mount command requires WinFsp to be installed. Download it from <a href='https://winfsp.dev/'>https://winfsp.dev/</a> and install it before attempting to mount.") }}
+{{ note(clickable=true, header="Note", body="For Windows users, the mount command requires WinFsp to be installed. Download the WinFsp installer from <a href='https://winfsp.dev/'>winfsp.dev</a> and install it before attempting to mount.") }}
 
 ### Serve
 

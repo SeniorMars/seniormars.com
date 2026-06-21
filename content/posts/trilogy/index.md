@@ -32,7 +32,7 @@ Far beyond its elegant theoretical beauty, this framework has begun transforming
 
 Yet for all its power, the correspondence remains incomplete. How do the intuitive, sometimes messy proofs of human mathematicians fit into this framework? Can we extend it to embrace discrete mathematics, where combinatorial structures often resist elegant formulation? What happens when we venture beyond classical computation into quantum mechanical realms, where the rules of logic themselves appear to shift and transform?
 
-Through this blog, I hope to explore precisely these questions. My goal isn't just to explain theoretical curiosities but to demonstrate why this unification of logic, programming, and mathematics holds such transformative potential—not just for specialists, but for anyone fascinated by computation, proof, and mathematical truth. Most importantly, it is to make this link: [https://ncatlab.org/nlab/show/computational+trilogy](https://ncatlab.org/nlab/show/computational+trilogy) more accessible to a wider audience. Note: all images are from the same link.
+Through this blog, I hope to explore precisely these questions. My goal isn't just to explain theoretical curiosities but to demonstrate why this unification of logic, programming, and mathematics holds such transformative potential—not just for specialists, but for anyone fascinated by computation, proof, and mathematical truth. Most importantly, it is to make this link: [ncatlab.org / computational+trilogy](https://ncatlab.org/nlab/show/computational+trilogy) more accessible to a wider audience. Note: all images are from the same link.
 
 Note: Some parts of the original blog was grammar-checked by GPT-4. I have changed my opinion about AI tools since, and will updated this blog soon to reflect my current views. The main ideas remain mine.
 
@@ -396,7 +396,7 @@ This view is doctrinal, almost theological in its emphasis on three-in-one unity
 > — Robert Harper, 2011
 
 
-![trilogy](./2025-02-27-03-01-41.png)
+<img src="./2025-02-27-03-01-41.png" alt="trilogy" width="976" height="470" loading="lazy" decoding="async" />
 
 The idea is not just that these fields are connected—but that any computational concept should be meaningful in all three aspects. If you discover something fundamental in one, it must have a counterpart in the other two.
 
@@ -426,7 +426,7 @@ Harper's computational trinitarianism is most clearly expressed in the following
 
 This correspondence is more than a metaphor—it's an equivalence of structures. If you remove the surface-level differences in notation, all three fields are describing the same underlying phenomenon.
 
-![trilogy2](./2025-02-27-03-03-01.png)
+<img src="./2025-02-27-03-03-01.png" alt="trilogy2" width="994" height="494" loading="lazy" decoding="async" />
 
 ### Back to the Curry-Howard-Lambek Correspondence: When Three Worlds Collide
 
@@ -459,7 +459,7 @@ I gasped when I first saw this table. It was literally everything I was studying
 
 ### The Dogma: No Concept Exists in Isolation
 
-![trilogy3](./2025-02-27-03-03-50.png)
+<img src="./2025-02-27-03-03-50.png" alt="trilogy3" width="1806" height="1140" loading="lazy" decoding="async" />
 
 One of the most powerful aspects of Computational Trinitarianism is how it serves as a research guiding principle. It suggests that:
 
@@ -488,7 +488,7 @@ I'm not just defining a function—I'm establishing a categorical composition ru
 
 ### Beyond Classical Structures: The Higher Trinity
 
-![trilogy4](./2025-02-27-03-04-13.png)
+<img src="./2025-02-27-03-04-13.png" alt="trilogy4" width="1616" height="880" loading="lazy" decoding="async" />
 
 The Computational Trinity extends naturally into more advanced mathematical domains. Consider how it manifests in higher mathematics:
 
@@ -500,7 +500,7 @@ When I first read about Voevodsky's univalence axiom, I was fascinated by how it
 
 Even basic mathematical structures reveal this three-way perspective. Consider the concept of a group:
 
-![group](./2025-02-27-03-04-43.png)
+<img src="./2025-02-27-03-04-43.png" alt="group" width="1728" height="834" loading="lazy" decoding="async" />
 
 A group can be viewed as:
 1. A set with operations satisfying axioms (set-theoretic view)
@@ -680,7 +680,7 @@ When we merge the classical parametrized trilogy with the quantum trilogy, we ar
 
 This perspective reveals computation not as isolated islands of theory, but as a connected landscape that we can traverse through systematic transformations:
 
-![Final](./2025-02-27-04-05-51.png)
+<img src="./2025-02-27-04-05-51.png" alt="Final" width="1076" height="249" loading="lazy" decoding="async" />
 
 We begin with the classical computational trilogy in the bottom left – the foundation connecting intuitionistic logic, programming languages, and category theory. From here, we can follow two fundamental transformations:
 
@@ -707,27 +707,27 @@ And perhaps that's the most beautiful insight of all – that computation, in it
 
 Please tell me if I got the references wrong. My zotero is not working properly.
 
-1. Melliès, P.-A. (2006). *Functorial boxes in string diagrams*. In *Proceedings of Computer Science Logic 2006*, Szeged, Hungary. [https://hal.archives-ouvertes.fr/hal-00154243](https://hal.archives-ouvertes.fr/hal-00154243)  
+1. Melliès, P.-A. (2006). *Functorial boxes in string diagrams*. In *Proceedings of Computer Science Logic 2006*, Szeged, Hungary. [hal.archives-ouvertes.fr / hal 00154243](https://hal.archives-ouvertes.fr/hal-00154243)  
 - Discusses the extension of string diagrams with functorial boxes, an idea that surfaced in the 1970s.
-2. Lambek, J., & Scott, P. J. (1986). *Introduction to Higher Order Categorical Logic*. Cambridge University Press. [https://doi.org/10.1017/CBO9780511525858](https://doi.org/10.1017/CBO9780511525858)  
+2. Lambek, J., & Scott, P. J. (1986). *Introduction to Higher Order Categorical Logic*. Cambridge University Press. [DOI CBO9780511525858](https://doi.org/10.1017/CBO9780511525858)  
 - Early work on higher-order categorical logic, connecting mathematical logic and category theory.
-3. Harper, R. (2011). *The Holy Trinity*. [https://www.cs.cmu.edu/~rwh/talks/hott.pdf](https://www.cs.cmu.edu/~rwh/talks/hott.pdf)  
+3. Harper, R. (2011). *The Holy Trinity*. [cs.cmu.edu / hott](https://www.cs.cmu.edu/~rwh/talks/hott.pdf)  
 - Explores the relationship between type theory, category theory, and logic.
 4. Eades, H. (2012). *Type Theory and Applications*.
 - Provides insights into type theory and its applications.
-5. Frumin, D. (2014). *Computational Trinitarianism*. [https://prezi.com/fnz-4wzsygiq/computational-trinitarianism/](https://prezi.com/fnz-4wzsygiq/computational-trinitarianism/)  
+5. Frumin, D. (2014). *Computational Trinitarianism*. [prezi.com / computational trinitarianism](https://prezi.com/fnz-4wzsygiq/computational-trinitarianism/)  
 - Presentation on the unity of computation, logic, and category theory.
-6. Baez, J., & Stay, M. (2011). *Physics, Topology, Logic and Computation: A Rosetta Stone*. In B. Coecke (Ed.), *New Structures for Physics*, Lecture Notes in Physics, vol 813. Springer. [https://arxiv.org/abs/0903.0340](https://arxiv.org/abs/0903.0340)  
+6. Baez, J., & Stay, M. (2011). *Physics, Topology, Logic and Computation: A Rosetta Stone*. In B. Coecke (Ed.), *New Structures for Physics*, Lecture Notes in Physics, vol 813. Springer. [arxiv.org / 0903](https://arxiv.org/abs/0903.0340)  
 - Connects concepts in physics, topology, logic, and computation.
-7. Shulman, M. (2018). *Homotopical Trinitarianism: A Perspective on Homotopy Type Theory*. [https://arxiv.org/abs/1803.00180](https://arxiv.org/abs/1803.00180)  
+7. Shulman, M. (2018). *Homotopical Trinitarianism: A Perspective on Homotopy Type Theory*. [arxiv.org / 1803](https://arxiv.org/abs/1803.00180)  
 - Discusses homotopy type theory from a trinitarian perspective.
-8. Taylor, P. (1999). *Practical Foundations of Mathematics*. [https://www.paultaylor.eu/Practical_Foundations](https://www.paultaylor.eu/Practical_Foundations)  
+8. Taylor, P. (1999). *Practical Foundations of Mathematics*. [paultaylor.eu / Practical Foundations](https://www.paultaylor.eu/Practical_Foundations)  
 - A comprehensive text on the foundations of mathematics.
-9. Lawvere, F. W., & Rosebrugh, R. (2003). *Sets for Mathematics*. Cambridge University Press. [https://doi.org/10.1017/CBO9780511810442](https://doi.org/10.1017/CBO9780511810442)  
+9. Lawvere, F. W., & Rosebrugh, R. (2003). *Sets for Mathematics*. Cambridge University Press. [DOI CBO9780511810442](https://doi.org/10.1017/CBO9780511810442)  
 - Introduces category theory with a focus on sets and their role in mathematics.
-10. Harper, R. (2016). *Practical Foundations for Programming Languages* (2nd ed.). Cambridge University Press. [https://doi.org/10.1017/CBO9781316576892](https://doi.org/10.1017/CBO9781316576892)  
+10. Harper, R. (2016). *Practical Foundations for Programming Languages* (2nd ed.). Cambridge University Press. [DOI CBO9781316576892](https://doi.org/10.1017/CBO9781316576892)  
 - Explores the theoretical underpinnings of programming languages.
-11. Goguen, J. A. (1991). *A Categorical Manifesto*. *Mathematical Structures in Computer Science, 1*(1), 49–67. [https://doi.org/10.1017/S0960129500000050](https://doi.org/10.1017/S0960129500000050)  
+11. Goguen, J. A. (1991). *A Categorical Manifesto*. *Mathematical Structures in Computer Science, 1*(1), 49–67. [DOI S0960129500000050](https://doi.org/10.1017/S0960129500000050)  
 - Discusses the role of category theory in computer science.
 12. Lambek, J. (1980). *From λ-calculus to cartesian closed categories*. *Proceedings of the AMS*, 130(10), 3025–3035.  
 - The Lambek correspondence connecting typed lambda calculus to category theory.
@@ -753,13 +753,13 @@ Please tell me if I got the references wrong. My zotero is not working properly.
 - Excellent historical overview of the Curry-Howard isomorphism.
 23. Harper, R. (2022). *Types, Logic, and Computation: A Trinitarian View*. *Carnegie Mellon Lecture Notes*.  
 - Modern take on Computational Trinitarianism.
-24. nLab (2024). *Computational Trilogy*. Available at: [https://ncatlab.org/nlab/show/computational+trilogy](https://ncatlab.org/nlab/show/computational+trilogy)  
+24. nLab (2024). *Computational Trilogy*. Available at: [ncatlab.org / computational+trilogy](https://ncatlab.org/nlab/show/computational+trilogy)  
 - Good for readers who want to dive into formal definitions.
-25. nLab (2024). *Homotopy Type Theory and (∞,1)-Categories*. Available at: [https://ncatlab.org/nlab/show/homotopy+type+theory](https://ncatlab.org/nlab/show/homotopy+type+theory)  
+25. nLab (2024). *Homotopy Type Theory and (∞,1)-Categories*. Available at: [ncatlab.org / homotopy+type+theory](https://ncatlab.org/nlab/show/homotopy+type+theory)  
 - Useful for readers curious about parametrized homotopy types.
-26. Chakraborty, S. (2011). Curry-Howard-Lambek Correspondence. [https://cspages.ucalgary.ca/~robin/class/617/projects-10/Subashis.pdf](https://cspages.ucalgary.ca/~robin/class/617/projects-10/Subashis.pdf)
+26. Chakraborty, S. (2011). Curry-Howard-Lambek Correspondence. [cspages.ucalgary.ca / Subashis](https://cspages.ucalgary.ca/~robin/class/617/projects-10/Subashis.pdf)
 - This paper explores the equivalence between proof systems, typed λ-calculi, and Cartesian closed categories, commonly referred to as the Curry-Howard-Lambek correspondence.
-27. Category Theory and Diagrammatic Reasoning (2019). [https://ioc.ee/~amar/notes/ct2019_lecture5.pdf](https://ioc.ee/~amar/notes/ct2019_lecture5.pdf)
+27. Category Theory and Diagrammatic Reasoning (2019). [ioc.ee / ct2019 lecture5](https://ioc.ee/~amar/notes/ct2019_lecture5.pdf)
 - Lecture notes discussing the Curry-Howard-Lambek correspondence, highlighting the relationship between categories, processes, and logic.
 
 {% end %}

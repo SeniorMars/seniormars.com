@@ -60,12 +60,12 @@ This section is specifically for Rice students. If you are not a Rice student, y
 
 ## Financial (Aid around campus):
 
-- Rice Mutual Aid: [https://linktr.ee/ricemutualaid/](https://linktr.ee/ricemutualaid/])
-- Mutual aid Houston: [https://www.mutualaidhou.com/](https://www.mutualaidhou.com/)
+- Rice Mutual Aid: [linktr.ee / ricemutualaid](https://linktr.ee/ricemutualaid/)
+- Mutual aid Houston: [mutualaidhou.com](https://www.mutualaidhou.com/)
 - Not a fund, but you can ask OIT for a loaner device like a laptop or tablet, as well as request a tablet with a hotspot if you don’t have consistent WiFi connection
 
 ## General Resources:
-- Rice AOP: [https://aop.rice.edu/application](https://aop.rice.edu/application):
+- Rice AOP: [aop.rice.edu / application](https://aop.rice.edu/application):
     * The Access & Opportunity Portal supports the following:
     * Will sometimes help with car trouble expenses, groceries, and medical bills
     * Academic and course related fees not covered by financial aid
@@ -87,25 +87,25 @@ This section is specifically for Rice students. If you are not a Rice student, y
     * No limit to number of requests
     * Response time: 72 hours
     * Small “interview”/discussion with SSI required. 
--  [https://aop.rice.edu/making-textbook-aop-request](https://aop.rice.edu/making-textbook-aop-request)
-    * [https://aop.rice.edu/sites/g/files/bxs3226/files/inline-files/SSI%20AOP%20Textbook%20Form.pdf](https://aop.rice.edu/sites/g/files/bxs3226/files/inline-files/SSI%20AOP%20Textbook%20Form.pdf)
+-  [aop.rice.edu / making textbook aop request](https://aop.rice.edu/making-textbook-aop-request)
+    * [aop.rice.edu / SSI AOP Textbook Form](https://aop.rice.edu/sites/g/files/bxs3226/files/inline-files/SSI%20AOP%20Textbook%20Form.pdf)
     * Textbooks and course pack purchases
 
 ## Dean of undergraduates emergency funds:
-- [https://aop.rice.edu/dou-emergency-funding](https://aop.rice.edu/dou-emergency-funding)
+- [aop.rice.edu / dou emergency funding](https://aop.rice.edu/dou-emergency-funding)
 - Emergency Funding Requests should be made to the Dean of Undergraduates office for those financial needs which require urgent, immediate attention and in which the undergraduate student requesting support is actively in crisis. Because these requests will be reviewed immediately upon receipt, only those requests requiring same day resolution will be considered. Although not an exhaustive list, requests that could be considered to be an emergency and eligible for funding include:
 - Request for rent needed immediately due to impending eviction
 - Funding for co-pays or upfront costs associated with emergency surgery
 
 ## Questbridge Emergency Fund:
-- [https://www.questbridge.org/emergency-fund/application](https://www.questbridge.org/emergency-fund/application)
+- [questbridge.org / application](https://www.questbridge.org/emergency-fund/application)
 - “The purpose of the fund is to help support Scholars and Alumni who are struggling with unexpected emergency costs, such as an ER visit or a trip home for a family crisis. The fund does not grant money for costs that Scholars’ colleges may cover through financial aid, such as books or regular travel.”
 - Applicants are eligible to receive a grant once per year.
 - Grant turnaround is four weeks or less, with the idea that applicants should not have to take out additional loans in order to attend to an immediate issue
     * What is considered an emergency?
     “We define an emergency as an unplanned expense that puts significant financial pressure on QuestBridge Scholars or Alumni, and threatens their health, security, or ability to continue attending school. 
     * A non-exhaustive list of emergency expenses includes: urgent medical expenses not covered by insurance; eyeglass replacement; hearing aids; transportation for emergency (medical or domestic), transportation to travel to an immediate family member in a dire situation; insurance deductibles; emergency childcare; replacing or replenishing basic necessities due to natural disaster, fire, flood or theft; safety related costs due to domestic violence or natural disaster.”
-Other FAQs: [https://www.questbridge.org/emergency-fund/faq#Q10](https://www.questbridge.org/emergency-fund/faq#Q10)
+Other FAQs: [questbridge.org / faq](https://www.questbridge.org/emergency-fund/faq#Q10)
 
 ## College Magister’s Fund/Residential college accessibility funds: 
 - Dependent on your college, but here’s the general description:
@@ -143,89 +143,89 @@ Request anyway!!! - if the ask exceeds what we can provide, we will do our best 
 {% end %}
 
 - College SEI/Magisters fund links:
-    * McMurtry: [https://mcmurtry.rice.edu/about/financialinclusivity](https://mcmurtry.rice.edu/about/financialinclusivity)
+    * McMurtry: [mcmurtry.rice.edu / financialinclusivity](https://mcmurtry.rice.edu/about/financialinclusivity)
         - [SEI form](https://docs.google.com/forms/u/2/d/e/1FAIpQLSdumVBi5BTTePDHXPLip0LylDZZeB3DGrmSDVUVRWeoXaVdGQ/viewform?c=0&w=1&usp=send_form)
-    * Duncan: [https://www.duncan-college.com/forms](https://www.duncan-college.com/forms)
+    * Duncan: [duncan-college.com / forms](https://www.duncan-college.com/forms)
         - [SEI form](https://docs.google.com/forms/d/e/1FAIpQLSfPtS7lDkWtbTHsUV-aupZiiakKVlNEqIv-9efDAfWGk3Bz1Q/viewform)
-    * Martel: [http://www.martel.rice.edu/resources/financial-accessibility/](http://www.martel.rice.edu/resources/financial-accessibility/)
+    * Martel: [martel.rice.edu / financial accessibility](http://www.martel.rice.edu/resources/financial-accessibility/)
         - [SEI form](https://docs.google.com/forms/d/e/1FAIpQLSekACo8-ahyVBJ_u_fTlXm2Xm6C9iOmyG2doVcsDl5uYDLugw/viewform)
-    * Jones: [http://jones.rice.edu/forms](http://jones.rice.edu/forms)
+    * Jones: [jones.rice.edu / forms](http://jones.rice.edu/forms)
         - [SEI form](https://docs.google.com/forms/d/e/1FAIpQLSfXUTkDQQKmFZgkuCQkoPmhuHPwqIdAfLdGotfAwUoLAXpt4Q/viewform)
-    * Brown: [https://www.browncollege.org/financial-resources](https://www.browncollege.org/financial-resources)
+    * Brown: [browncollege.org / financial resources](https://www.browncollege.org/financial-resources)
         - [SEI form](https://docs.google.com/forms/d/e/1FAIpQLSecQxmolLz5YW-l9FLZaSjz4QBNG2oaXJJHvU9mbcwQTbUcpA/viewform?edit_requested=true)
-    * Baker: [https://www.baker-college.com/low-income-accessibility-form](https://www.baker-college.com/low-income-accessibility-form)
+    * Baker: [baker-college.com / low income accessibility form](https://www.baker-college.com/low-income-accessibility-form)
         - [SEI form](https://www.baker-college.com/low-income-accessibility-form)
-    * Lovett: [https://lovettcollege.github.io/lovettcollege/accessibility-forms.html](https://lovettcollege.github.io/lovettcollege/accessibility-forms.html)
+    * Lovett: [lovettcollege.github.io / accessibility forms](https://lovettcollege.github.io/lovettcollege/accessibility-forms.html)
         - [SEI form](https://docs.google.com/forms/d/e/1FAIpQLSfqYxQ81eWrBSGJ71RKSlG4scPfxfRK2ofcKhmTdw4k8YKmXA/viewform)
-    * Will Rice: [https://willrice.rice.edu/pages/finances.html](https://willrice.rice.edu/pages/finances.html)
+    * Will Rice: [willrice.rice.edu / finances](https://willrice.rice.edu/pages/finances.html)
         - [SEI form](https://docs.google.com/forms/d/e/1FAIpQLSeyfsUhSL3uE04xBhw3_rhijYqfCpXU8dCKD3mciANnVf6uzg/viewform)
-    * Sid Richardson: [https://sidrich.rice.edu/resources](https://sidrich.rice.edu/resources)
+    * Sid Richardson: [sidrich.rice.edu / resources](https://sidrich.rice.edu/resources)
         - [SEI form](https://docs.google.com/forms/d/e/1FAIpQLScKfSIrAzXySObHGPPBHeHCL9fuGxVJc_tK_eZFBApCykkocA/viewform)
-    * Hanszen: [https://hanszen.rice.edu/forms](https://hanszen.rice.edu/forms)
+    * Hanszen: [hanszen.rice.edu / forms](https://hanszen.rice.edu/forms)
         - [SEI form](https://riceuniversity.co1.qualtrics.com/jfe/form/SV_cAUrHpQm4ZzLp5z)
-    * Wiess: [http://teamwiess.com/forms](http://teamwiess.com/forms)
+    * Wiess: [teamwiess.com / forms](http://teamwiess.com/forms)
         - [SEI form](https://docs.google.com/forms/d/e/1FAIpQLSc9FTdt14fM9h35KYJmRewswqbi536S7WnxPDVDumUNPDA3Qg/viewform)
 
 ## SSI and CCD:
-- Food pantry [https://success.rice.edu/accessibility-resources/pantry](https://success.rice.edu/accessibility-resources/pantry)
+- Food pantry [success.rice.edu / pantry](https://success.rice.edu/accessibility-resources/pantry)
     * Available by walk in Monday-Friday, 9:00 am to 5:00 pm
     * Visitors will have access to non-perishable food and hygiene products.
-- Dress For Success [https://ccd.rice.edu/students/career-resources/dfs-career-gear#:~:text=You%20may%20contact%20Dress%20for,obtain%20a%20referral%20for%20services](https://ccd.rice.edu/students/career-resources/dfs-career-gear#:~:text=You%20may%20contact%20Dress%20for,obtain%20a%20referral%20for%20services).
+- Dress For Success [ccd.rice.edu / dfs career gear](https://ccd.rice.edu/students/career-resources/dfs-career-gear#:~:text=You%20may%20contact%20Dress%20for,obtain%20a%20referral%20for%20services).
     * A referral is no longer required, but you can go through the CCD for one
-    * [https://www.dfshouston.org/](https://www.dfshouston.org/)
+    * [dfshouston.org](https://www.dfshouston.org/)
     * Free professional attire for job interviews, job fairs, or just jobs in general
 
 ## Research/Fellowships: 
-- SER Scholars [https://ouri.rice.edu/ser](https://ouri.rice.edu/ser)
+- SER Scholars [ouri.rice.edu / ser](https://ouri.rice.edu/ser)
     * For freshman and sophomores in STEM
     * Regular mentoring meetings with program staff
     * Paired with a Natural Sciences or Engineering lab either within Rice or the Texas Medical Center, 
     * $10.00 per hour for the first 150 hours of their work
     * Will pay for you to go to conferences
     * Will pay for you to do summer internships
-- Biosciences opportunities canvas - research and fellowship opportunities are often posted: [https://catalog.rice.edu/browse/biosciences-opportunities/courses/biosciences-opportunities](https://catalog.rice.edu/browse/biosciences-opportunities/courses/biosciences-opportunities)
-- Fellowships resources canvas - literally a compiled canvas of available fellowships and their requirements and deadlines: [https://ccl.rice.edu/fellowships-overview](https://ccl.rice.edu/fellowships-overview)
+- Biosciences opportunities canvas - research and fellowship opportunities are often posted: [catalog.rice.edu / biosciences opportunities](https://catalog.rice.edu/browse/biosciences-opportunities/courses/biosciences-opportunities)
+- Fellowships resources canvas - literally a compiled canvas of available fellowships and their requirements and deadlines: [ccl.rice.edu / fellowships overview](https://ccl.rice.edu/fellowships-overview)
 
 ## Work study:
-- CCD has an explanation of how to find on campus jobs here: [https://ccd.rice.edu/students/on-campus_employment](https://ccd.rice.edu/students/on-campus_employment)
-- FLI Ambassador Program: [https://success.rice.edu/first-generation-and-low-income/fli-ambassadors](https://success.rice.edu/first-generation-and-low-income/fli-ambassadors)
+- CCD has an explanation of how to find on campus jobs here: [ccd.rice.edu / on campus employment](https://ccd.rice.edu/students/on-campus_employment)
+- FLI Ambassador Program: [success.rice.edu / fli ambassadors](https://success.rice.edu/first-generation-and-low-income/fli-ambassadors)
     * Work study eligible students only
 - Most jobs on campus will work with your work study! Just ask! Even lab or department specific jobs could be covered.
-- [https://library.rice.edu/jobs](https://library.rice.edu/jobs)
+- [library.rice.edu / jobs](https://library.rice.edu/jobs)
     * Fondy doesn’t list specific jobs, it’s just one application and you mark what you’re interested in doing
 
 ## Medical: 
 - Basic first aid: College RHAs
 - Medical bills: try AOP first, they may refer you to Wellbeing, who may help cover some
 - Dental: 
-    * [https://www.tdasmiles.org/texas-mission-of-mercy/](https://www.tdasmiles.org/texas-mission-of-mercy/)
+    * [tdasmiles.org / texas mission of mercy](https://www.tdasmiles.org/texas-mission-of-mercy/)
         - Free clinic at different locations in Texas a couple of times per year, be prepared to have a very long wait, but they do completely free dental work including extractions and fillings
         - Next clinics this year: Sep 9-10, Luling TX, Nov 4-5, Dallas TX
         - Will most likely have another Houston Clinic Next Year
         - (If you need someone to drive you, reach out to me and I will find a way to the locations (yes even the ones 4 hours away), dental health is so important and should be more accessible)
-    * UT Dental School Clinics [https://dentistry.uth.edu/patients/student-clinics/](https://dentistry.uth.edu/patients/student-clinics/)
+    * UT Dental School Clinics [dentistry.uth.edu / student clinics](https://dentistry.uth.edu/patients/student-clinics/)
         - A bit of a waitlist, get on it ASAP
-    * Fresh Dental Care Houston [https://www.freshdentalcare.com/](https://www.freshdentalcare.com/)
+    * Fresh Dental Care Houston [freshdentalcare.com](https://www.freshdentalcare.com/)
         - Free consultations for wisdom teeth estimates
     * Sliding Scale based healthcare (including vision and dental) based on income:
-        - Legacy Community health: [https://www.legacycommunityhealth.org/patient-center/eligibility/](https://www.legacycommunityhealth.org/patient-center/eligibility/)
+        - Legacy Community health: [legacycommunityhealth.org / eligibility](https://www.legacycommunityhealth.org/patient-center/eligibility/)
             - You’ll need to do an eligibility appointment, and the waitlist can be long, so get on the waitlist ASAP
-        - Lone Star Circle of Care: [https://lonestarcares.org/patients/your-first-visit/what-to-expect/](https://lonestarcares.org/patients/your-first-visit/what-to-expect/)
+        - Lone Star Circle of Care: [lonestarcares.org / what to expect](https://lonestarcares.org/patients/your-first-visit/what-to-expect/)
             - One location in Houston, on UH campus
     * Houston Methodist Hospital
         - Offers financial assistance and payment plans
-        - [https://www.houstonmethodist.org/pay-your-bill/new-policies/](https://www.houstonmethodist.org/pay-your-bill/new-policies/)
+        - [houstonmethodist.org / new policies](https://www.houstonmethodist.org/pay-your-bill/new-policies/)
         - (Any hospital that receives federal funding should offer financial assistance, this one is just one that is nearby that I am familiar with)
 
 ## Mental Health: 
 - wellbeing + counseling - FREE SERVICE
 - Montrose Center (specialize in LGBTQ+ care but anyone is welcome to use their services)
-- [https://openpathcollective.org/city/houston/](https://openpathcollective.org/city/houston/)
+- [openpathcollective.org / houston](https://openpathcollective.org/city/houston/)
 - With aetna student health, online psychiatrists and therapists are an option and should be around $20 through MDLive. This won't work for controlled substances (so some anxiety medication, ADHD meds) but can be helpful for other things
 
 ## Undocumented students:
 - REU programs: [Programs for undocumented students](https://reufinder.com/research-programs-for-undocumented-students/)
-- Rice’s FAQ: [https://daca.rice.edu/undocumented-students-faq](https://daca.rice.edu/undocumented-students-faq)
+- Rice’s FAQ: [daca.rice.edu / undocumented students faq](https://daca.rice.edu/undocumented-students-faq)
 - Undocumented Students Support Services (USSS) Task Force. Please email me at cjh16@rice.edu.
 - Beyond Daca: [More resources](https://www.higheredimmigrationportal.org/effective_practice/beyond-daca-a-directory-of-resources-for-undocumented-students-individuals/)
 
@@ -258,7 +258,7 @@ Request anyway!!! - if the ask exceeds what we can provide, we will do our best 
 
 - Email for the link. You can find a lot of books here.
 
-4) Ask AOP for the book. [https://aop.rice.edu/making-textbook-aop-request](https://aop.rice.edu/making-textbook-aop-request)
+4) Ask AOP for the book. [aop.rice.edu / making textbook aop request](https://aop.rice.edu/making-textbook-aop-request)
 
 # Research and Academic Tips
 
@@ -288,21 +288,21 @@ If you are a junior or senior, then you should apply to the [Rusp: Rice Undergra
     - [How to prep for Grad school if you are poor](https://docs.google.com/document/d/1WfoMVkEbsn03Xz0Q2_YQPlWy2YrS0m4R2vK2nsekvcQ/edit).
     - [Alex Leng's NSF fellowship](https://www.alexhunterlang.com/nsf-fellowship)
     - [Google Research Mentorship](https://research.google/programs-and-events/csrmp/)
-    - [https://graduate.dartmouth.edu/student-support/career-services/interview-practice-techniques/interviewing-academic-job](https://graduate.dartmouth.edu/student-support/career-services/interview-practice-techniques/interviewing-academic-job)
+    - [graduate.dartmouth.edu / interviewing academic job](https://graduate.dartmouth.edu/student-support/career-services/interview-practice-techniques/interviewing-academic-job)
     - [Tips for Writing Technical Papers](https://cs.stanford.edu/people/widom/paper-writing.html)
-    - [https://shomir.net/advice.html](https://shomir.net/advice.html)
-    - [https://www.cs.jhu.edu/~jason/advice/](https://www.cs.jhu.edu/~jason/advice/)
-    - [https://github.com/TheShadow29/research-advice-list](https://github.com/TheShadow29/research-advice-list)
-    - [https://homes.cs.washington.edu/~mernst/advice/](https://homes.cs.washington.edu/~mernst/advice/)
-    - [https://www.cs.cmu.edu/~harchol/gradschooltalk.pdf](https://www.cs.cmu.edu/~harchol/gradschooltalk.pdf)
-    - [https://benhoyt.com/writings/how-to-apply/](https://benhoyt.com/writings/how-to-apply/)
-    - [https://sites.northwestern.edu/causeway/about/](https://sites.northwestern.edu/causeway/about/)
-    - [http://www.cs.ucr.edu/~eamonn/public/SDM_How_to_do_Research_Keogh.pdf](http://www.cs.ucr.edu/~eamonn/public/SDM_How_to_do_Research_Keogh.pdf)
+    - [shomir.net / advice](https://shomir.net/advice.html)
+    - [cs.jhu.edu / advice](https://www.cs.jhu.edu/~jason/advice/)
+    - [github.com / research advice list](https://github.com/TheShadow29/research-advice-list)
+    - [homes.cs.washington.edu / advice](https://homes.cs.washington.edu/~mernst/advice/)
+    - [cs.cmu.edu / gradschooltalk](https://www.cs.cmu.edu/~harchol/gradschooltalk.pdf)
+    - [benhoyt.com / how to apply](https://benhoyt.com/writings/how-to-apply/)
+    - [sites.northwestern.edu / about](https://sites.northwestern.edu/causeway/about/)
+    - [cs.ucr.edu / SDM How to do Research Keogh](http://www.cs.ucr.edu/~eamonn/public/SDM_How_to_do_Research_Keogh.pdf)
     - [Resources for Students & Scholars ](https://people.csail.mit.edu/fredo/student.html)
-    - [https://github.com/SimplifyJobs/Summer2025-Internships](https://github.com/SimplifyJobs/Summer2025-Internships)
-    - [https://ouri.rice.edu/research-and-campus-resources/for-students](https://ouri.rice.edu/research-and-campus-resources/for-students)
+    - [github.com / Summer2025 Internships](https://github.com/SimplifyJobs/Summer2025-Internships)
+    - [ouri.rice.edu / for students](https://ouri.rice.edu/research-and-campus-resources/for-students)
 - TALK TO ME ABOUT MORE TIPS LOL
-- My friend made this notion Template: [https://incominvalkyrie.notion.site/w-e-e-k-l-y-copy-c48a5890bfdb42689002f6eccef2cd14](https://incominvalkyrie.notion.site/w-e-e-k-l-y-copy-c48a5890bfdb42689002f6eccef2cd14)
+- My friend made this notion Template: [incominvalkyrie.notion.site / w e e k l y copy c48a5890bfdb42689002f6eccef2cd14](https://incominvalkyrie.notion.site/w-e-e-k-l-y-copy-c48a5890bfdb42689002f6eccef2cd14)
 - TAing is a great way to get involved in research. You can ask your professors if they need a TA. This is a great way to get involved in research and get paid for it.
 - There are so tutoring opportunities on campus. 
 
@@ -313,7 +313,7 @@ If you are a junior or senior, then you should apply to the [Rusp: Rice Undergra
 - I didn’t get a 1098-T but have to file taxes. What do I do? You can email the Cashier’s office (cashier@rice.edu) and ask for a breakdown of what would’ve been on the form.
 - Do I have to report my scholarship money on my taxes? (for ~legal~ reasons, these are just student suggestions and not official solutions) If you report your scholarship, anything that covers more than tuition and fees, including money for room and board, you may be taxed on. The money that exceeds tuition and fees is considered taxable income. Some students choose to not file taxes, which is an option if you make less than the cut-off requirements for annual income from any jobs you may have had. Some students choose to file taxes and just report their W2s from their jobs and not their scholarships.
 - I wasn’t able to use the IRS data retrieval tool so I have to submit my tax return instead. Where do I submit that?: Emailed financial aid (fina@rice.edu) and they will add a section for you to upload it on Esther
-- Check out the Questbridge finance page! [https://www.questbridge.org/resources/finances](https://www.questbridge.org/resources/finances)
+- Check out the Questbridge finance page! [questbridge.org / finances](https://www.questbridge.org/resources/finances)
 
 ## General Questions
 
@@ -346,7 +346,7 @@ If you are a junior or senior, then you should apply to the [Rusp: Rice Undergra
 
 * What about meal plans?
 
-    If you live on campus you need to get a meal plan, however, if you don't then it is optional. You can see the plans here: [https://dining.rice.edu/meal-plans-and-tetra](https://dining.rice.edu/meal-plans-and-tetra))
+    If you live on campus you need to get a meal plan, however, if you don't then it is optional. You can see the plans here: [dining.rice.edu / meal plans and tetra](https://dining.rice.edu/meal-plans-and-tetra))
 
 * How does our aetna insurance work?
 

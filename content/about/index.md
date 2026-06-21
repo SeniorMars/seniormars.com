@@ -8,7 +8,12 @@ Before I talk about myself, you must know my life's goal. I consider myself luck
 I am filled with rage when I think how many individuals who are deviations smarter than me have existed but ended up killing their passion because they didn't have time, luck, or the resources needed to succeed. Imagine what kind of books, papers, and projects those individuals would have created. It hurts to think about it, and I refuse to let it happen anymore. I was lucky -- I fell into a group currently being oppressed, but I managed to overcome it with luck. But that's bullshit. Both my parents never completed middle school, and my sisters are way more intelligent than I am, but I was the only one blessed with luck. I refuse any reason to understand why this is the case. Anyone who wants to learn, do their best, or prove themselves should be able to. I want to read and learn from their work, but life prevents them from doing their best. I want to change that. I will ignite change so that education is genuinely seen as a basic need. Please look forward to my work and proving my words.
 
 # General
-<img src="/images/me.jpg" style="max-width: 25%; max-height: 25%;"/>
+<img
+  src="/images/me.jpg"
+  alt="SeniorMars profile photo"
+  width="2316"
+  height="3088"
+  style="max-width: 25%; max-height: 25%;" />
 
 Guten Tag! My name is SeniorMars, and I'm studying Mathematics and Linguistics at [Rice
 University](https://www.rice.edu/). I may also be pursuing a minor in Creative Writing. In my spare
@@ -17,9 +22,9 @@ the Rust programming language.
 
 I'm interested in:
 - Mathematics
+    - Logic
     - Category Theory
     - Lambda Calculus
-    - Logic
     - Discrete Mathematics
     - Combinatorics
     - Optimization
@@ -51,8 +56,8 @@ I'm interested in:
 {{ gallery() }}
 
 # Contact
-Github: [https://github.com/seniormars](https://github.com/seniormars)  
-Youtube: [https://www.youtube.com/seniormarstries](https://www.youtube.com/seniormarstries)  
+Github: [GitHub](https://github.com/seniormars)  
+Youtube: [YouTube](https://www.youtube.com/seniormarstries)  
 Email: seniormars@riseup.net
 Discord: seniormars
 RSS: [subscribe](/rss.xml)

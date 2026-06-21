@@ -141,7 +141,7 @@ wilder.set_option("renderer", wilder.popupmenu_renderer({
 
 Wilder is a fuzzy finder for Ex commands, search history, and command history. It is a must-have plugin for me because it allows me to search for commands and history in a more efficient way. 
 
-![Wilder](wilder.png)
+<img src="wilder.png" alt="Wilder" width="3024" height="1896" loading="lazy" decoding="async" />
 
 # Undo and Redo
 
@@ -165,7 +165,7 @@ keyset("n", "<leader>u", ":UndotreeToggle<cr>")
 
 ```
 
-![Undo Tree](undotree.png)
+<img src="undotree.png" alt="Undo Tree" width="3024" height="1894" loading="lazy" decoding="async" />
 
 This allows you to see your undo tree and navigate it with diffs -- extremely useful when you want to see what you have done and what you can undo.
 
@@ -273,7 +273,7 @@ autopairs.get_rules("'")[1].not_filetypes = {"tex", "latex", "rust"}
 
 This allows me to repeat commands, add more targets like `[]`, and auto complete pairs like `()`. Moreover, with nvim-surround, I can surround text objects with different characters like quotes, brackets, and braces. Finally with vim-matchup, I can see the matching pair of brackets, braces, and quotes. If the code is very long it also shows the top matching pair in a popup window.
 
-![Matchup](matchup.png)
+<img src="matchup.png" alt="Matchup" width="2078" height="1396" loading="lazy" decoding="async" />
 
 ## Better quickfix
 
@@ -589,11 +589,11 @@ vim.wo.fillchars = "eob:~" -- fillchars of windows
 
 This is my status line. It shows the current mode, language, branch name, file path, git status, word count, line number, column number, file size, and file type. It is a lot, but I hope my documentation helps you understand what each part does. It is extremely minimum but provides me with all the information I require depending on my current state.
 
-![Status Line](status1.png)
+<img src="status1.png" alt="Status Line" width="3024" height="76" loading="lazy" decoding="async" />
 
-![Status Line](status2.png)
+<img src="status2.png" alt="Status Line" width="1500" height="62" loading="lazy" decoding="async" />
 
-![Status Line](status3.png)
+<img src="status3.png" alt="Status Line" width="3024" height="80" loading="lazy" decoding="async" />
 
 ## Formatting
 
@@ -627,7 +627,7 @@ vim.g.netrw_browsex_viewer = "open -a firefox"
 
 These settings remove the banner, open the file explorer in a vertical split, use the tree style, and set the size of the file explorer. Moreover, I can open files in the browser with `gx`.
 
-![Netrw](tree.png)
+<img src="tree.png" alt="Netrw" width="3018" height="1880" loading="lazy" decoding="async" />
 
 
 ## Git Integration
@@ -684,7 +684,7 @@ I then use `diffget` and `diffput` to merge my files with `git mergetool`
 vim.opt.diffopt:append("linematch:50")
 ```
 
-![Fugitive](merge.png)
+<img src="merge.png" alt="Fugitive" width="3024" height="1894" loading="lazy" decoding="async" />
 
 With this, we have completed all the fundamentals! 
 
@@ -700,7 +700,7 @@ However, if this were the only benefit, I would just shrug off the tool. It's a 
 
 Treesitter is a tool for a programmer to do more with their code editor and I believe it brings more power to editing, reviewing, and writing code. Let's take a look at how I write these blogs; I often have Rust, Markdown, and LaTeX:
 
-![Treesitter](treesitter.png)
+<img src="treesitter.png" alt="Treesitter" width="3016" height="1888" loading="lazy" decoding="async" />
 
 Notice, that treesitter can highlight the syntax of all three languages in the same file!
 
@@ -827,7 +827,7 @@ vim.opt.laststatus = 3
 
 Combined, this allows me to focus on one window and have a terminal that is always available:
 
-![Toggleterm](toggleterm.png)
+<img src="toggleterm.png" alt="Toggleterm" width="3018" height="1886" loading="lazy" decoding="async" />
 
 In fact, I can combine this with [LazyGit](https://github.com/jesseduffield/lazygit) to have a terminal that can run `lazygit` and `nvim` at the same time. Let's have a look:
 
@@ -926,7 +926,7 @@ end
 
 Telescope is one of those Neovim plugins that transform how you interact with virtually everything in your development environment—from files, code, documentation, to even running tasks and previewing media. Its extensible and customizable nature makes it a powerhouse for creating a truly personalized development environment. For instance, this is telescope in action with man pages:
 
-![Telescope](man.png)
+<img src="man.png" alt="Telescope" width="3022" height="1896" loading="lazy" decoding="async" />
 
 Now, let's set up telescope:
 

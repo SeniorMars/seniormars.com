@@ -31,7 +31,7 @@ At its core, Braille consists of cells – small rectangular units containing up
 
 Below is a visual representation of the basic Braille alphabet:
 
-![Braille english letters from wikipeida](basic_letters.png)
+<img src="basic_letters.png" alt="Braille english letters from wikipeida" width="1444" height="848" loading="lazy" decoding="async" />
 
 But what makes Braille fascinating isn't just its tactile nature – it's how it has evolved into different grades of complexity to serve different needs.
 
@@ -55,9 +55,9 @@ Nemeth's brilliance lies in how it repurposes the lower part of the Braille cell
 
 Here are some examples of Nemeth Code in action:
 
-![Newman example](./newmeth_example0.png)
+<img src="./newmeth_example0.png" alt="Newman example" width="1196" height="886" loading="lazy" decoding="async" />
 
-![Another Newman example](./newman_example1.png)
+<img src="./newman_example1.png" alt="Another Newman example" width="784" height="402" loading="lazy" decoding="async" />
 
 ## Unified English Braille (UEB): The All-in-One Approach  
 UEB, adopted officially in the United States in 2016, strives to standardize Braille across all contexts – including literature, science, and mathematics. UEB technical notation integrates math within the general Braille code, avoiding the need to switch between different systems (like literary Braille and Nemeth). However, this comes at a cost: UEB often requires more cells to represent mathematical expressions.  
@@ -65,10 +65,10 @@ UEB, adopted officially in the United States in 2016, strives to standardize Bra
 Consider a basic equation like \(2 + 2 = 4\). In UEB, each operator (like "+" and "=") typically takes two cells to convey, whereas Nemeth can express the same equation more compactly. UEB prioritizes consistency over efficiency, making it more intuitive for individuals who prefer seamless transitions between math and text.  
 
 
-![UEB Example](./ueb_example0.png)
+<img src="./ueb_example0.png" alt="UEB Example" width="1392" height="752" loading="lazy" decoding="async" />
 
 
-![Another UEB Example](./ueb2.png)
+<img src="./ueb2.png" alt="Another UEB Example" width="1168" height="1480" loading="lazy" decoding="async" />
 
 ## The U.S. Approach: A Dual-System Landscape  
 
@@ -127,9 +127,9 @@ MathJax marks a major leap forward. Known for rendering LaTeX and MathML on web 
 
 The flexibility is remarkable – the same equation that appears visually stunning to one user can be explored in tactile form by another. This multimodal approach not only enhances accessibility but also promotes deeper engagement with mathematical content.  
 
-![MathJax](./mathjax4.png)
+<img src="./mathjax4.png" alt="MathJax" width="1448" height="670" loading="lazy" decoding="async" />
 
-![Another MathJax](./mathjax2.png)
+<img src="./mathjax2.png" alt="Another MathJax" width="1862" height="670" loading="lazy" decoding="async" />
 
 ## The Role of Screen Readers: JAWS and Math Navigation  
 

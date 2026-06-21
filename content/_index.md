@@ -19,10 +19,15 @@ Heyo! SeniorMars here. It's honestly weird to think that people will spend their
 
 # All time meme!
 
-<img
-  src="/images/all-time-meme.webp"
-  alt="All time meme"
-  width="480"
-  height="471"
-  loading="lazy"
-  decoding="async">
+<picture>
+  <source srcset="/images/all-time-meme.avif" type="image/avif">
+  <source srcset="/images/all-time-meme.webp" type="image/webp">
+  <img
+    src="/images/all-time-meme.webp"
+    alt="All time meme"
+    width="480"
+    height="471"
+    loading="eager"
+    fetchpriority="high"
+    decoding="async">
+</picture>

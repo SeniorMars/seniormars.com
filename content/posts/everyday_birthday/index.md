@@ -568,13 +568,13 @@ Elapsed: 73.884958ms
 WOW, the IEP model is super fast and accurate! It makes sense since it's a formula, but I expected something other than $73$ms. With that being said, let's make some pretty graphs :). First, since this is an exploration, I'll show the trace graphs of the models (I think it's really cool). To make these graphs, I used `env CARGO_PROFILE_RELEASE_DEBUG=true cargo flamegraph --root -o flamegraph.svg` with the [flamegraph crate](https://github.com/flamegraph-rs/flamegraph). You can right-click and open these images in a new tab to explore their traces!
 
 The basic model:
-![flamegraph basic](./flamegraph0.svg)
+<img src="./flamegraph0.svg" alt="flamegraph basic" width="1200" height="278" loading="lazy" decoding="async" />
 
 The parallel model:
-![flamegraph parallel](./flamegraph1.svg)
+<img src="./flamegraph1.svg" alt="flamegraph parallel" width="1200" height="438" loading="lazy" decoding="async" />
 
 The IEP model:
-![flamegraph iep](./flamegraph2.svg)
+<img src="./flamegraph2.svg" alt="flamegraph iep" width="1200" height="470" loading="lazy" decoding="async" />
 
 Now, let's plot the results[^4] of the parallel and IEP model to see how they compare. To make these graphs prettier, I decided to map over a range of students, 0 to 9,000, and to run only 10,000 simulations.
 
@@ -685,11 +685,11 @@ plt.show()
 
 Now, here are our plots:
 
-![comparison](./comparison_plot.png)
+<img src="./comparison_plot.png" alt="comparison" width="1400" height="800" loading="lazy" decoding="async" />
 
-![violin](./violin.png)
+<img src="./violin.png" alt="violin" width="1400" height="800" loading="lazy" decoding="async" />
 
-![scatter](./scatter.png)
+<img src="./scatter.png" alt="scatter" width="621" height="500" loading="lazy" decoding="async" />
 
 I like graphs because they help us visualize the data and see patterns that might not be immediately obvious from the numbers. In this case, we can see that the IEP model is much faster than the parallel model and that the probability of seeing all birthdays increases as the number of students increases. The violin plot also shows the distribution of probabilities for each model, with the IEP model having a narrower distribution than the parallel model. Finally, we can see that IEP scales linearly with the number of students, while the parallel model scales exponentially. Now, let's move on to our final section and last model!
 
@@ -953,21 +953,21 @@ fn main() {
 ```
 See! We can easily run all the models and compare them (even if some won't ever finish) and another pretty plot:
 
-![last_lineplot](./last_lineplot.png)
+<img src="./last_lineplot.png" alt="last_lineplot" width="1000" height="600" loading="lazy" decoding="async" />
 
-![last_scatterplot](./last_scatterplot.png)
+<img src="./last_scatterplot.png" alt="last_scatterplot" width="1000" height="600" loading="lazy" decoding="async" />
 
-![last_boxplot](./last_boxplot.png)
+<img src="./last_boxplot.png" alt="last_boxplot" width="1000" height="600" loading="lazy" decoding="async" />
 
-![last_scatterplot2](./last_scatterplot2.png)
+<img src="./last_scatterplot2.png" alt="last_scatterplot2" width="1000" height="600" loading="lazy" decoding="async" />
 
-![last_violinplot](./last_violinplot.png)
+<img src="./last_violinplot.png" alt="last_violinplot" width="1000" height="600" loading="lazy" decoding="async" />
 
-![last_density_scatterplot](./last_density_scatterplot.png)
+<img src="./last_density_scatterplot.png" alt="last_density_scatterplot" width="1400" height="800" loading="lazy" decoding="async" />
 
-![last_jointplot](./last_jointplot.png)
+<img src="./last_jointplot.png" alt="last_jointplot" width="800" height="800" loading="lazy" decoding="async" />
 
-![last_pairplot](./last_pairplot.png)
+<img src="./last_pairplot.png" alt="last_pairplot" width="900" height="900" loading="lazy" decoding="async" />
 
 {% note(clickable=true, hidden=true, header="Code to generate plots") %}
 ```python

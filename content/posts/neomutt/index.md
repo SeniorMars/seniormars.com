@@ -32,14 +32,14 @@ this blog is for college students that are forced to use Google's email platform
 ## End Goal
 Before I continue, I would like to show you what the result will look like:
 
-![Neomutt](neomutt0.png)
+<img src="neomutt0.png" alt="Neomutt" width="3024" height="1964" loading="lazy" decoding="async" />
 
 Here is an image with an email open:
 
-![Neomutt](neomutt1.png)
+<img src="neomutt1.png" alt="Neomutt" width="3024" height="1964" loading="lazy" decoding="async" />
 
 Finally, here is an image with a reply open (also `s/crack/cracked`):
-![Neomutt reply](reply.png)
+<img src="reply.png" alt="Neomutt reply" width="3024" height="1962" loading="lazy" decoding="async" />
 
 At the end of this blog, I'll show the configuration we came up with.
 
@@ -118,7 +118,7 @@ $ sudo apt install gnupg
 The first time you run Neomutt, you will be greeted with a screen that looks like this that prompts
 you for your email address and password:
 
-![fresh](after_install.png)
+<img src="after_install.png" alt="fresh" width="3024" height="1900" loading="lazy" decoding="async" />
 
 This is the default configuration that Neomutt comes with, but not very useful. We need to customize it first. 
 To demonstrate how to configure Neomutt, I'll have two code blocks for each section.
@@ -162,7 +162,7 @@ To get an app-specific password, follow these steps:
 - Profit??!!!
 
 Here is a screenshot of the result:
-![Google app password](gpass.png)
+<img src="gpass.png" alt="Google app password" width="3024" height="1632" loading="lazy" decoding="async" />
 
 ### Accessing Gmail with Neomutt
 
@@ -322,7 +322,7 @@ I highly recommend these settings, but you may want to change `askcc, edit_heade
 The sidebar is a very useful feature that allows you to see all your mailboxes in a sidebar. Here is
 a screenshot of what it looks like:
 
-![Sidebar](sidebar.png)
+<img src="sidebar.png" alt="Sidebar" width="3024" height="1902" loading="lazy" decoding="async" />
 
 Here is how to add it to your `muttrc` file:
 
@@ -519,7 +519,7 @@ extracted. You can then press `<Enter>` to open the url in your browser.
 
 See image below:
 
-![Urls](urls.png)
+<img src="urls.png" alt="Urls" width="3020" height="1942" loading="lazy" decoding="async" />
 
 ### Query
 
@@ -566,7 +566,7 @@ $ gpg --list-secret-keys --keyid-format=long
 ```
 
 For instance, my public key is: `7C668A6D13D5729989FB126B183357B41320BB2B`. You can see the full
-version here: [https://github.com/SeniorMars.gpg](https://github.com/SeniorMars.gpg)
+version here: [github.com / SeniorMars](https://github.com/SeniorMars.gpg)
 
 4. Add the following to your `muttrc` file:
 ```conf
@@ -629,7 +629,7 @@ $ shred -u passwords
 Now, you have encrypted your passwords!
 
 Image below (notice the `Good signature` and ` The following data is signed`):
-![GPG](gpg.png)
+<img src="gpg.png" alt="GPG" width="3024" height="1964" loading="lazy" decoding="async" />
 
 
 And that's it! You should now have a fully functional email client!
@@ -1056,7 +1056,7 @@ I hope you enjoyed this tutorial! If you have any questions, don't ask /s.
 
 [Here is my final configuration](https://github.com/SeniorMars/dotfiles/blob/182ad5717def463abcc0aebbe0062c48824c3532/.config/mutt/muttrc). And again, here is how my email client looks (lol taxes with github now):
 
-![Final](neomutt2.png)
+<img src="neomutt2.png" alt="Final" width="3022" height="1890" loading="lazy" decoding="async" />
 
 I am going to upload a talk I gave on setting up Neovim for non-programmers soon. This talks about
 grammar checking, spell keybinds, and more. So stay tuned!
