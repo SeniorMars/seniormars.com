@@ -6,6 +6,7 @@ description = "A guy gets nerdsniped by a Reddit thread."
 [extra]
 comment = true
 read_time = true
+mathjax = true
 
 [taxonomies] 
 tags=["math", "theory of computation"] 

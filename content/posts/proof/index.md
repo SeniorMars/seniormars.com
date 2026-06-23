@@ -8,6 +8,7 @@ draft = true
 comment = true
 repo_view = true
 read_time = true
+mathjax = true
 
 [taxonomies]
 tags=["math", "educational", "essay"]

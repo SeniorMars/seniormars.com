@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">The computational trilogy</title>
+  <desc id="desc">A triangle connecting logic, programming languages, and category theory. Curry–Howard connects logic and programming, Lambek connects programming and category theory, and categorical semantics connects category theory and logic.</desc>
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#0f172a" flood-opacity="0.14"/>
+    </filter>
+    <style>
+      .heading { font: 700 38px ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+      .label { font: 700 25px ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+      .body { font: 500 19px ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #334155; }
+      .edge { font: 600 18px ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #475569; }
+      .center { font: 700 21px ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #4c1d95; }
+    </style>
+  </defs>
+
+  <rect x="18" y="18" width="1164" height="724" rx="34" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
+  <text x="600" y="72" text-anchor="middle" class="heading">The computational trilogy</text>
+
+  <path d="M 600 248 L 348 535" fill="none" stroke="#64748b" stroke-width="4" stroke-linecap="round"/>
+  <path d="M 600 248 L 852 535" fill="none" stroke="#64748b" stroke-width="4" stroke-linecap="round"/>
+  <path d="M 415 592 L 785 592" fill="none" stroke="#64748b" stroke-width="4" stroke-linecap="round"/>
+
+  <rect x="423" y="112" width="354" height="166" rx="25" fill="#fff7ed" stroke="#e76f51" stroke-width="3" filter="url(#shadow)"/>
+  <circle cx="474" cy="163" r="23" fill="#e76f51"/>
+  <path d="M463 163 l8 8 15 -18" fill="none" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="513" y="169" class="label">Logic</text>
+  <text x="600" y="215" text-anchor="middle" class="body">propositions · proofs · normalization</text>
+  <text x="600" y="244" text-anchor="middle" class="body">assumptions become derivations</text>
+
+  <rect x="78" y="520" width="374" height="168" rx="25" fill="#eff6ff" stroke="#2a6f97" stroke-width="3" filter="url(#shadow)"/>
+  <circle cx="130" cy="572" r="23" fill="#2a6f97"/>
+  <path d="M119 565 l11 8 -11 8 M137 581 h13" fill="none" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="170" y="578" class="label">Programming languages</text>
+  <text x="265" y="624" text-anchor="middle" class="body">types · terms · evaluation</text>
+  <text x="265" y="653" text-anchor="middle" class="body">inputs become outputs</text>
+
+  <rect x="748" y="520" width="374" height="168" rx="25" fill="#ecfdf5" stroke="#2a9d8f" stroke-width="3" filter="url(#shadow)"/>
+  <circle cx="800" cy="572" r="23" fill="#2a9d8f"/>
+  <circle cx="789" cy="572" r="5" fill="white"/>
+  <circle cx="811" cy="558" r="5" fill="white"/>
+  <circle cx="811" cy="586" r="5" fill="white"/>
+  <path d="M794 569 L806 561 M794 575 L806 583" stroke="white" stroke-width="4" stroke-linecap="round"/>
+  <text x="840" y="578" class="label">Category theory</text>
+  <text x="935" y="624" text-anchor="middle" class="body">objects · morphisms · composition</text>
+  <text x="935" y="653" text-anchor="middle" class="body">structure becomes universal</text>
+
+  <rect x="445" y="355" width="310" height="112" rx="56" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="3"/>
+  <text x="600" y="403" text-anchor="middle" class="center">one compositional</text>
+  <text x="600" y="434" text-anchor="middle" class="center">pattern, three languages</text>
+
+  <rect x="305" y="338" width="182" height="40" rx="20" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="396" y="365" text-anchor="middle" class="edge">Curry–Howard</text>
+
+  <rect x="713" y="338" width="168" height="40" rx="20" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="797" y="365" text-anchor="middle" class="edge">categorical logic</text>
+
+  <rect x="521" y="570" width="158" height="42" rx="21" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="600" y="598" text-anchor="middle" class="edge">Lambek</text>
+</svg>

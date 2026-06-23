@@ -8,6 +8,7 @@ updated = "2024-06-29"
 comment = true
 repo_view = true
 read_time = true
+mathjax = true
 
 [taxonomies]
 tags=["math", "rust", "educational"]

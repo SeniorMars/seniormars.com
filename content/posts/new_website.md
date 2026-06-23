@@ -6,6 +6,7 @@ updated = "2024-06-15"
 
 [extra]
 comment = true
+mathjax = true
 
 [taxonomies]
 tags=["meta"]

@@ -6,6 +6,7 @@ description = "A guy explains complexity from multiple angles."
 [extra]
 comment = true
 read_time = true
+mathjax = true
 
 [taxonomies] 
 tags=["math", "theory of computation"] 

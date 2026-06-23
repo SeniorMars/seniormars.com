@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Structural rules and substructural logics</title>
+  <desc id="desc">A two-by-two grid classifies intuitionistic, affine, relevant, and linear logic according to whether weakening and contraction are allowed.</desc>
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="6" stdDeviation="9" flood-color="#0f172a" flood-opacity="0.11"/></filter>
+    <style>
+      .heading { font:700 36px ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#0f172a; }
+      .axis { font:700 20px ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#334155; }
+      .name { font:700 26px ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#0f172a; }
+      .body { font:500 17px ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#334155; }
+      .rule { font:700 17px ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#475569; }
+      .formula { font:600 21px "DejaVu Sans",Arial,sans-serif;fill:#0f172a; }
+    </style>
+  </defs>
+  <rect x="18" y="18" width="1164" height="724" rx="34" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
+  <text x="600" y="70" text-anchor="middle" class="heading">What happens when assumptions become resources?</text>
+
+  <text x="675" y="119" text-anchor="middle" class="axis">Contraction: may copy an assumption</text>
+  <text x="396" y="153" text-anchor="middle" class="axis">No</text>
+  <text x="846" y="153" text-anchor="middle" class="axis">Yes</text>
+
+  <g transform="translate(85,450) rotate(-90)">
+    <text x="0" y="0" text-anchor="middle" class="axis">Weakening: may discard an assumption</text>
+  </g>
+  <text x="136" y="327" text-anchor="middle" class="axis">Yes</text>
+  <text x="136" y="590" text-anchor="middle" class="axis">No</text>
+
+  <rect x="188" y="177" width="382" height="225" rx="24" fill="#eff6ff" stroke="#2a6f97" stroke-width="3" filter="url(#shadow)"/>
+  <text x="379" y="222" text-anchor="middle" class="name">Affine</text>
+  <text x="379" y="257" text-anchor="middle" class="rule">discard: yes · copy: no</text>
+  <text x="379" y="305" text-anchor="middle" class="body">A value may go unused, but it cannot</text>
+  <text x="379" y="331" text-anchor="middle" class="body">be duplicated without explicit structure.</text>
+  <text x="379" y="372" text-anchor="middle" class="formula">Rust ownership has this flavor.</text>
+
+  <rect x="630" y="177" width="382" height="225" rx="24" fill="#fff7ed" stroke="#e76f51" stroke-width="3" filter="url(#shadow)"/>
+  <text x="821" y="222" text-anchor="middle" class="name">Intuitionistic</text>
+  <text x="821" y="257" text-anchor="middle" class="rule">discard: yes · copy: yes</text>
+  <text x="821" y="305" text-anchor="middle" class="body">Assumptions may be ignored or reused.</text>
+  <text x="821" y="331" text-anchor="middle" class="body">This is the ordinary Curry–Howard setting.</text>
+  <text x="821" y="372" text-anchor="middle" class="formula">A → A ∧ A is provable.</text>
+
+  <rect x="188" y="440" width="382" height="225" rx="24" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="3" filter="url(#shadow)"/>
+  <text x="379" y="485" text-anchor="middle" class="name">Linear</text>
+  <text x="379" y="520" text-anchor="middle" class="rule">discard: no · copy: no</text>
+  <text x="379" y="568" text-anchor="middle" class="body">Every resource must be accounted for</text>
+  <text x="379" y="594" text-anchor="middle" class="body">exactly once unless a modality says otherwise.</text>
+  <text x="379" y="635" text-anchor="middle" class="formula">A ⊸ A ⊗ A is not automatic.</text>
+
+  <rect x="630" y="440" width="382" height="225" rx="24" fill="#ecfdf5" stroke="#2a9d8f" stroke-width="3" filter="url(#shadow)"/>
+  <text x="821" y="485" text-anchor="middle" class="name">Relevant</text>
+  <text x="821" y="520" text-anchor="middle" class="rule">discard: no · copy: yes</text>
+  <text x="821" y="568" text-anchor="middle" class="body">Every assumption must contribute, but it</text>
+  <text x="821" y="594" text-anchor="middle" class="body">may be used more than once.</text>
+  <text x="821" y="635" text-anchor="middle" class="formula">Premises cannot be irrelevant.</text>
+
+  <text x="600" y="710" text-anchor="middle" class="body">Exchange is assumed throughout: the order of assumptions may still be rearranged.</text>
+</svg>

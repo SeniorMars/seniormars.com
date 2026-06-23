@@ -6,6 +6,7 @@ date = "2024-12-31"
 [extra]
 comment = true
 read_time = true
+mathjax = true
 
 [taxonomies]
 tags=["math", "linguistics", "educational"]
